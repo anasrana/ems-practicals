@@ -1,0 +1,25 @@
+
+bookdown::bs4_book:
+  css: style.css
+  theme:
+    primary: "#ef9f76"
+    base_font:
+      google: Manrope
+    heading_font:
+      google:
+        family: Spectral
+        wght: 200
+    code_font:
+      google:
+        # arguments to sass::font_google()
+        family: Fira Code
+        wght: 200
+        local: false
+  repo: https://github.com/anasrana/ems-practical
+Bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  latex_engine: xelatex
+  citation_package: natbib
+  keep_tex: yes
+bookdown::epub_book: default

@@ -1,0 +1,42 @@
+% !TEX program = xelatex
+
+\documentclass{article}
+\include{preview}
+\usepackage[pdftex,active,tightpage]{preview}
+% \usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{pgf-pie}
+\usetikzlibrary{arrows,automata, calc}
+\tikzset{node distance=4.5cm, % Minimum distance between two nodes. Change if necessary.
+         every state/.style={ % Sets the properties for each state
+           semithick,
+           fill=gray!10},
+         initial text={},     % No label on start arrow
+         double distance=4pt, % Adjust appearance of accept states
+         every edge/.style={  % Sets the properties for each transition
+         draw,
+           ->,>=stealth',     % Makes edges directed with bold arrowheads
+           auto,
+           semithick}}
+
+           \def\myfrac#1{\expandafter\expandafter\expandafter\expandafter\expandafter%
+           \expandafter\expandafter\myfracaux\expandafter\expandafter\expandafter#1}
+         \def\myfracaux#1/#2\relax{{\Huge\color{white}$\piestyle\frac{#1}{#2}$}}
+         \def\piestyle{\textstyle}
+% \usetikzlibrary{matrix}
+%% INSERT YOUR OWN CODE HERE
+\begin{document}
+\begin{preview}
+  \begin{tikzpicture}
+    \begin{axis}[domain=0:10, samples=100,
+    axis lines*=left, xlabel=\(x\), ylabel=\(p(x)\), title={N$(1, 2)$},
+    height=6cm, width=10cm,
+    xtick={-5,  0, 1, 3, 5}, ytick=\empty,
+    enlargelimits=false, clip=false, axis on top,
+    grid = major]
+    \addplot [fill=cyan!20, draw=none, domain=1:3] {gauss(1,2)} \closedcycle;
+    \addplot [very thick,cyan!50!black, domain=-7:9] {gauss(1,2)};
+    \end{axis}
+    \end{tikzpicture}
+\end{preview}
+\end{document}
