@@ -73,13 +73,9 @@
 <span class="header-section-number">0.3</span> Creating an R script<a class="anchor" aria-label="anchor" href="#creating-an-r-script"><i class="fas fa-link"></i></a>
 </h2>
 <p>It is easy to create a new script in RStudio. You can open a new empty script by clicking the New File icon in the upper left of the main RStudio toolbar. This icon looks like a white square with a white plus sign in a green circle. Clicking the icon opens the New File Menu. Click the R Script menu option and the script editor will open with an empty script.</p>
-<div class="inline-figure">
-<img src="images/rs-new-file.png"><!-- -->
-</div>
+<div class="inline-figure"><img src="images/rs-new-file.png" width="80%" style="display: block; margin: auto;"></div>
 <p>Once the new script opens in the Script Editor panel, the script is ready for text entry, and your RStudio session will look like this.</p>
-<div class="inline-figure">
-<img src="images/rs-file-open.png"><!-- -->
-</div>
+<div class="inline-figure"><img src="images/rs-file-open.png" width="80%" style="display: block; margin: auto;"></div>
 <p>Here is an easy example to familiarize you with the Script Editor interface. Type the following code into your new script <em>(later topics will explain the specific code components do)</em>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>    <span class="co"># this is my first R script</span></span>
@@ -100,9 +96,7 @@
 <span>    <span class="va">y</span></span>
 <span>    <span class="va">z</span></span>
 <span>    <span class="va">w</span></span></code></pre></div>
-<div class="inline-figure">
-<img src="images/rs-file-content.png"><!-- -->
-</div>
+<div class="inline-figure"><img src="images/rs-file-content.png" width="80%" style="display: block; margin: auto;"></div>
 <p>There, you now have your first R script. Notice how the editor places a number in front of each line of code. The line numbers can be helpful as you work with your code. Before proceeding on to executing this code, it would be a good idea to learn how to save your script.</p>
 </div>
 <div id="saving-an-r-script" class="section level2" number="0.4">
@@ -110,9 +104,7 @@
 <span class="header-section-number">0.4</span> Saving an R script<a class="anchor" aria-label="anchor" href="#saving-an-r-script"><i class="fas fa-link"></i></a>
 </h2>
 <p>You can save your script by clicking on the Save icon at the top of the Script Editor panel. When you do that, a Save File dialog will open.</p>
-<div class="inline-figure">
-<img src="images/rs-save.png"><!-- -->
-</div>
+<div class="inline-figure"><img src="images/rs-save.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
 <div id="executing-code-in-an-r-script" class="section level2" number="0.5">
 <h2>
@@ -121,18 +113,14 @@
 <p>You can run the code in your R script easily. The Run button in the Script Editor panel toolbar will run either the current line of code or any block of selected code. You can use your First script.R code to gain familiarity with this functionality.</p>
 <p>Place the cursor anywhere in line 3 of your script <span class="math display">\[x = 34\]</span>. Now press the Run button in the Script Editor panel toolbar. Three things happen: 1) the code is transferred to the command console, 2) the code is executed, and 3) the cursor moves to the next line in your script. Press the Run button three more times. RStudio executes lines 4, 5, and 6 of your script.</p>
 <p>Now you will run a set of code commands all at once. Highlight lines 8, 9, 10, and 11 in the script.</p>
-<div class="inline-figure">
-<img src="images/rs-run.png"><!-- -->
-</div>
+<div class="inline-figure"><img src="images/rs-run.png" width="80%" style="display: block; margin: auto;"></div>
 <p>Highlighting is accomplished similar to what you may be familiar with in word processor applications. You click your left mouse button and the beginning of the text you want to highlight, you hold the mouse button and drag the cursor to the end of the text and release the button. With those four lines of code highlighted, click the editor Run button. All four lines of code are executed in the command console. That is all it takes to run script code in RStudio.</p>
 <div id="comments-in-an-r-script-documenting-your-code" class="section level3" number="0.5.1">
 <h3>
 <span class="header-section-number">0.5.1</span> Comments in an R script (documenting your code)<a class="anchor" aria-label="anchor" href="#comments-in-an-r-script-documenting-your-code"><i class="fas fa-link"></i></a>
 </h3>
 <p>Before finishing this topic, there is one final concept you should understand. It is always a good idea to place comments in your code. They will help you understand what your code is meant to do. This will become helpful when you reopen code you wrote weeks ago and are trying to work with again. The saying, “Real programmers do not document their code. If it was hard to write, it should be hard to understand” is meant to be a dark joke, not a coding style guide.</p>
-<div class="inline-figure">
-<img src="images/rs-comment.png"><!-- -->
-</div>
+<div class="inline-figure"><img src="images/rs-comment.png" width="80%" style="display: block; margin: auto;"></div>
 <p>A comment in R code begins with the <code>#</code> symbol. Your code in First <code>script.R</code> contains several examples of comments. Lines <code>1</code>, <code>2</code>, <code>7</code>, <code>12</code>, and <code>14</code> in the image above are all comment lines. Any line of text that starts with <code>#</code> will be treated as a comment and will be ignored during code execution. Lines <code>5</code> and <code>6</code> in this image contain comments at the end. All text after the <code>#</code> is treated as a comment and is ignored during execution.</p>
 <p>Notice how the RStudio editor shows these comments colored green. The green color helps you focus on the code and not get confused by the comments.</p>
 <p>Besides using comments to help make your <code>R</code> code more easily understood, you can use the <code>#</code> symbol to ignore lines of code while you are developing your code stream. Simply place a <code>#</code> in front of any line that you want to ignore. <code>R</code> will treat those lines as comments and ignore them. When you want to include those lines again in the code execution, remove the <code>#</code> symbols and the code is executable again. This technique allows you to change what code you execute without having to retype deleted code.</p>
