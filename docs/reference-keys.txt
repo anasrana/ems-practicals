@@ -1,0 +1,12 @@
+how-to-use-these-resources
+r-scripts
+creating-an-r-script
+saving-an-r-script
+executing-code-in-an-r-script
+comments-in-an-r-script-documenting-your-code
+simulating-random-numbers
+markov-chains
+a-monopoly-simulation
+moving-around-the-board
+going-to-jail
+further-exercises
