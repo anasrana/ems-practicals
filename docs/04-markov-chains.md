@@ -18,7 +18,7 @@ A Markov Chain is defined by three properties:
 
 Consider the following example where we have two states describing the weather on any particular day: (i) Sunny and (ii) Rainy. Each arrow denotes the probability of going from one state to itself or another over the course of a day. For example, if it is currently sunny, the probability of it raining the next day is 0.6. Conversely, if it is raining, the probability that it will become sunny the next day is 0.7 and 0.3 that it will continue raining.
 
-<img src="04-markov-chains_files/figure-html/unnamed-chunk-1-1.png" width="90%" />
+<img src="04-markov-chains_files/figure-html/unnamed-chunk-1-1.png" width="90%" style="display: block; margin: auto;" />
 
 The transition matrix can be written as the following in R:
 
@@ -50,8 +50,8 @@ for (day in 1:30) { # simulate for 30 days
 
 # print the simulated weather sequence
 print(weather_sequence)
-#>  [1] 1 2 1 1 1 2 1 1 2 1 2 2 2 1 2 1 2 1 1 2 2 1 2 1 1 2 1 2
-#> [29] 2 1
+#>  [1] 2 2 1 2 1 2 1 1 1 2 1 2 1 1 1 2 1 2 2 1 1 2 2 1 1 1 1 2
+#> [29] 2 2
 ```
 
 
@@ -59,7 +59,7 @@ print(weather_sequence)
 
 > Can you extend this example to a three-state model?
 
-<img src="04-markov-chains_files/figure-html/unnamed-chunk-4-1.png" width="90%" />
+<img src="04-markov-chains_files/figure-html/unnamed-chunk-4-1.png" width="90%" style="display: block; margin: auto;" />
 
 Note, the diagram (intentionally) misses out the self-transitions. You should be able to infer this because the probabilities given would otherwise not add up to one!
 
@@ -97,7 +97,7 @@ for (day in 1:30) {
   weather_sequence[day] <- state # store the sampled state
 }
 print(weather_sequence)
-#>  [1] 1 1 1 1 2 1 1 1 2 3 1 1 3 1 1 1 2 2 3 1 1 2 1 1 2 3 3 1
+#>  [1] 1 2 2 1 1 1 2 3 3 3 3 1 1 3 2 2 1 1 1 1 1 1 1 2 2 3 1 1
 #> [29] 1 1
 ```
 
@@ -151,7 +151,7 @@ By increasing the number of turns taken, what distribution does the set of simul
 hist(positions_visited, breaks = seq(0, 40, len = 41), right = FALSE)
 ```
 
-<img src="04-markov-chains_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="04-markov-chains_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;" />
 
 ## Going to Jail
 
@@ -203,7 +203,7 @@ for (turn in 1:num_turns) {
 hist(positions_visited, breaks = seq(0, 40, len = 41), right = FALSE)
 ```
 
-<img src="04-markov-chains_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="04-markov-chains_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 
@@ -278,7 +278,7 @@ for (turn in 1:num_turns) {
 hist(positions_visited, breaks = seq(0, 40, len = 41), right = FALSE)
 ```
 
-<img src="04-markov-chains_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="04-markov-chains_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;" />
 
 Adding the rolling doubles feature doesn't seem to change much. We might expect this since rolling three doubles is a very unlikely event!
 
@@ -373,4 +373,4 @@ for (game in 1:num_games) {
 hist(time_to_buy_all_properties, breaks = 20)
 ```
 
-<img src="04-markov-chains_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="04-markov-chains_files/figure-html/unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;" />

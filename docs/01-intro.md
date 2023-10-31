@@ -11,11 +11,11 @@ While entering and running your code at the R command line is effective and simp
 
 It is easy to create a new script in RStudio. You can open a new empty script by clicking the New File icon in the upper left of the main RStudio toolbar. This icon looks like a white square with a white plus sign in a green circle. Clicking the icon opens the New File Menu. Click the R Script menu option and the script editor will open with an empty script.
 
-![](images/rs-new-file.png)<!-- -->
+<img src="images/rs-new-file.png" width="80%" style="display: block; margin: auto;" />
 
 Once the new script opens in the Script Editor panel, the script is ready for text entry, and your RStudio session will look like this.
 
-![](images/rs-file-open.png)<!-- -->
+<img src="images/rs-file-open.png" width="80%" style="display: block; margin: auto;" />
 
 Here is an easy example to familiarize you with the Script Editor interface. Type the following code into your new script *(later topics will explain the specific code components do)*.
 
@@ -41,7 +41,7 @@ Here is an easy example to familiarize you with the Script Editor interface. Typ
     w
 ```
 
-![](images/rs-file-content.png)<!-- -->
+<img src="images/rs-file-content.png" width="80%" style="display: block; margin: auto;" />
 
 There, you now have your first R script. Notice how the editor places a number in front of each line of code. The line numbers can be helpful as you work with your code. Before proceeding on to executing this code, it would be a good idea to learn how to save your script.
 
@@ -49,7 +49,7 @@ There, you now have your first R script. Notice how the editor places a number i
 
 You can save your script by clicking on the Save icon at the top of the Script Editor panel. When you do that, a Save File dialog will open.
 
-![](images/rs-save.png)<!-- -->
+<img src="images/rs-save.png" width="80%" style="display: block; margin: auto;" />
 
 ## Executing code in an R script
 
@@ -59,7 +59,7 @@ Place the cursor anywhere in line 3 of your script \[x = 34\]. Now press the Run
 
 Now you will run a set of code commands all at once. Highlight lines 8, 9, 10, and 11 in the script.
 
-![](images/rs-run.png)<!-- -->
+<img src="images/rs-run.png" width="80%" style="display: block; margin: auto;" />
 
 Highlighting is accomplished similar to what you may be familiar with in word processor applications. You click your left mouse button and the beginning of the text you want to highlight, you hold the mouse button and drag the cursor to the end of the text and release the button. With those four lines of code highlighted, click the editor Run button. All four lines of code are executed in the command console. That is all it takes to run script code in RStudio.
 
@@ -67,7 +67,7 @@ Highlighting is accomplished similar to what you may be familiar with in word pr
 
 Before finishing this topic, there is one final concept you should understand. It is always a good idea to place comments in your code. They will help you understand what your code is meant to do. This will become helpful when you reopen code you wrote weeks ago and are trying to work with again. The saying, "Real programmers do not document their code. If it was hard to write, it should be hard to understand" is meant to be a dark joke, not a coding style guide.
 
-![](images/rs-comment.png)<!-- -->
+<img src="images/rs-comment.png" width="80%" style="display: block; margin: auto;" />
 
 A comment in R code begins with the `#` symbol. Your code in First `script.R` contains several examples of comments. Lines `1`, `2`, `7`, `12`, and `14` in the image above are all comment lines. Any line of text that starts with `#` will be treated as a comment and will be ignored during code execution. Lines `5` and `6` in this image contain comments at the end. All text after the `#` is treated as a comment and is ignored during execution.
 

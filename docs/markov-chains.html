@@ -73,7 +73,7 @@
 <li><p>A current state probability distribution: defines the probability of being in any one of the states at the start of the process</p></li>
 </ol>
 <p>Consider the following example where we have two states describing the weather on any particular day: (i) Sunny and (ii) Rainy. Each arrow denotes the probability of going from one state to itself or another over the course of a day. For example, if it is currently sunny, the probability of it raining the next day is 0.6. Conversely, if it is raining, the probability that it will become sunny the next day is 0.7 and 0.3 that it will continue raining.</p>
-<div class="inline-figure"><img src="04-markov-chains_files/figure-html/unnamed-chunk-1-1.png" width="90%"></div>
+<div class="inline-figure"><img src="04-markov-chains_files/figure-html/unnamed-chunk-1-1.png" width="90%" style="display: block; margin: auto;"></div>
 <p>The transition matrix can be written as the following in R:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">transitionMatrix</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.3</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">2</span>, ncol<span class="op">=</span><span class="fl">2</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
@@ -97,13 +97,13 @@
 <span></span>
 <span><span class="co"># print the simulated weather sequence</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">weather_sequence</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] 1 2 1 1 1 2 1 1 2 1 2 2 2 1 2 1 2 1 1 2 2 1 2 1 1 2 1 2</span></span>
-<span><span class="co">#&gt; [29] 2 1</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] 2 2 1 2 1 2 1 1 1 2 1 2 1 1 1 2 1 2 2 1 1 2 2 1 1 1 1 2</span></span>
+<span><span class="co">#&gt; [29] 2 2</span></span></code></pre></div>
 <p><strong>Problem</strong></p>
 <blockquote>
 <p>Can you extend this example to a three-state model?</p>
 </blockquote>
-<div class="inline-figure"><img src="04-markov-chains_files/figure-html/unnamed-chunk-4-1.png" width="90%"></div>
+<div class="inline-figure"><img src="04-markov-chains_files/figure-html/unnamed-chunk-4-1.png" width="90%" style="display: block; margin: auto;"></div>
 <p>Note, the diagram (intentionally) misses out the self-transitions. You should be able to infer this because the probabilities given would otherwise not add up to one!</p>
 <div id="model-answers-3-state-markov-chain" class="section level2 unnumbered">
 <h2>Model answers 3 state Markov Chain<a class="anchor" aria-label="anchor" href="#model-answers-3-state-markov-chain"><i class="fas fa-link"></i></a>
@@ -134,7 +134,7 @@
 <span>  <span class="va">weather_sequence</span><span class="op">[</span><span class="va">day</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">state</span> <span class="co"># store the sampled state</span></span>
 <span><span class="op">}</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">weather_sequence</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] 1 1 1 1 2 1 1 1 2 3 1 1 3 1 1 1 2 2 3 1 1 2 1 1 2 3 3 1</span></span>
+<span><span class="co">#&gt;  [1] 1 2 2 1 1 1 2 3 3 3 3 1 1 3 2 2 1 1 1 1 1 1 1 2 2 3 1 1</span></span>
 <span><span class="co">#&gt; [29] 1 1</span></span></code></pre></div>
 </div>
 <div id="a-monopoly-simulation" class="section level2" number="2.1">
@@ -181,7 +181,7 @@
 <p>By increasing the number of turns taken, what distribution does the set of simulated board positions converge towards? Show this graphically using the histogram function.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">positions_visited</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">40</span>, len <span class="op">=</span> <span class="fl">41</span><span class="op">)</span>, right <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="04-markov-chains_files/figure-html/unnamed-chunk-8-1.png" width="672"></div>
+<div class="inline-figure"><img src="04-markov-chains_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
 <div id="going-to-jail" class="section level2" number="2.3">
 <h2>
@@ -229,7 +229,7 @@
 </blockquote>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">positions_visited</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">40</span>, len <span class="op">=</span> <span class="fl">41</span><span class="op">)</span>, right <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="04-markov-chains_files/figure-html/unnamed-chunk-10-1.png" width="672"></div>
+<div class="inline-figure"><img src="04-markov-chains_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;"></div>
 <blockquote>
 <p>Can you explain this result qualitatively?</p>
 </blockquote>
@@ -297,7 +297,7 @@
 <span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">positions_visited</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">40</span>, len <span class="op">=</span> <span class="fl">41</span><span class="op">)</span>, right <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="04-markov-chains_files/figure-html/unnamed-chunk-11-1.png" width="672"></div>
+<div class="inline-figure"><img src="04-markov-chains_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>Adding the rolling doubles feature doesn’t seem to change much. We might expect this since rolling three doubles is a very unlikely event!</p>
 </div>
 <div id="further-exercises" class="section level2" number="2.4">
@@ -388,7 +388,7 @@
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">time_to_buy_all_properties</span>, breaks <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="04-markov-chains_files/figure-html/unnamed-chunk-12-1.png" width="672"></div>
+<div class="inline-figure"><img src="04-markov-chains_files/figure-html/unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;"></div>
 
 </div>
 </div>

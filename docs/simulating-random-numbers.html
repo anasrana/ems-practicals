@@ -74,7 +74,7 @@
 <p>Lets plot a histogram of the values picked:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hist_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">out</span>, main <span class="op">=</span> <span class="st">''</span>, xlab <span class="op">=</span> <span class="st">'Values'</span>, ylab <span class="op">=</span> <span class="st">'Frequency'</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="03-simulation_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
+<div class="inline-figure"><img src="03-simulation_files/figure-html/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>We picked each number with equal probability so the histogram shows each number is equally likely to have been chosen.</p>
 <p><strong>Problem</strong></p>
 <div class="rmdnote">
@@ -101,12 +101,12 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">rolls_from_sample</span><span class="op">)</span></span>
 <span><span class="co">#&gt; rolls_from_sample</span></span>
 <span><span class="co">#&gt;   1   2   3   4   5   6 </span></span>
-<span><span class="co">#&gt; 806 833 815 852 850 844</span></span></code></pre></div>
+<span><span class="co">#&gt; 832 821 794 873 849 831</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">rolls_from_sample.int</span><span class="op">)</span></span>
 <span><span class="co">#&gt; rolls_from_sample.int</span></span>
 <span><span class="co">#&gt;   1   2   3   4   5   6 </span></span>
-<span><span class="co">#&gt; 813 864 825 813 832 853</span></span></code></pre></div>
+<span><span class="co">#&gt; 816 853 842 876 811 802</span></span></code></pre></div>
 <p>Both gives a uniform distribution over the numbers 1-6. The function <code>sample.int</code> is a specialised version of sample for sampling integers. Many <code>R</code> libraries have specialised versions of more general functions to do specific tasks under certain conditions.</p>
 
 </div>
