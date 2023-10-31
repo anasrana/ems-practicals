@@ -1,0 +1,14 @@
+# Data sets {-}
+
+For each practical there are some datasets required, you will find all data required for week two of practicals in the data folder [here](https://github.com/anasrana/module1-practical_Bham/tree/master/data). Links to individual datasets requried can be found at the beginning of each practical or on Canvas.
+<!-- # About
+
+This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports; for example, a math equation $a^2 + b^2 = c^2$.
+
+## Usage
+
+Each **bookdown** chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter *must* start with a first-level heading: `# A good chapter`, and can contain one (and only one) first-level heading.
+
+Use second-level and higher headings within chapters like: `## A short section` or `### An even shorter section`.
+
+The `index.Rmd` file is required, and is also your first book chapter. It will be the homepage when you render the book.
