@@ -26,6 +26,9 @@ The transition matrix can be written as the following in R:
 ```r
 transitionMatrix = matrix(c(0.4, 0.6, 0.7, 0.3), nrow=2, ncol=2, byrow=TRUE)
 print(transitionMatrix)
+```
+
+```{.bg-info}
 #>      [,1] [,2]
 #> [1,]  0.4  0.6
 #> [2,]  0.7  0.3
@@ -50,8 +53,11 @@ for (day in 1:30) { # simulate for 30 days
 
 # print the simulated weather sequence
 print(weather_sequence)
-#>  [1] 2 2 1 2 1 2 1 1 1 2 1 2 1 1 1 2 1 2 2 1 1 2 2 1 1 1 1 2
-#> [29] 2 2
+```
+
+```{.bg-info}
+#>  [1] 2 1 2 1 2 1 2 1 2 2 1 2 1 2 1 1 2 1 2 1 1 2 2 1 2 1 1 2
+#> [29] 1 2
 ```
 
 
@@ -75,6 +81,9 @@ transitionMatrix = matrix(c(0.7, 0.2, 0.1,
 
 # Check matrix set-up correctly
 print(transitionMatrix)
+```
+
+```{.bg-info}
 #>      [,1] [,2] [,3]
 #> [1,]  0.7  0.2  0.1
 #> [2,]  0.3  0.3  0.4
@@ -97,7 +106,10 @@ for (day in 1:30) {
   weather_sequence[day] <- state # store the sampled state
 }
 print(weather_sequence)
-#>  [1] 1 2 2 1 1 1 2 3 3 3 3 1 1 3 2 2 1 1 1 1 1 1 1 2 2 3 1 1
+```
+
+```{.bg-info}
+#>  [1] 1 3 1 1 1 3 3 1 1 1 1 1 1 1 1 1 2 3 2 1 1 2 2 3 3 2 1 1
 #> [29] 1 1
 ```
 
@@ -151,7 +163,7 @@ By increasing the number of turns taken, what distribution does the set of simul
 hist(positions_visited, breaks = seq(0, 40, len = 41), right = FALSE)
 ```
 
-<img src="04-markov-chains_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="04-markov-chains_files/figure-html/unnamed-chunk-8-1.png" width="95%" style="display: block; margin: auto;" />
 
 ## Going to Jail
 
@@ -203,7 +215,7 @@ for (turn in 1:num_turns) {
 hist(positions_visited, breaks = seq(0, 40, len = 41), right = FALSE)
 ```
 
-<img src="04-markov-chains_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="04-markov-chains_files/figure-html/unnamed-chunk-10-1.png" width="95%" style="display: block; margin: auto;" />
 
 
 
@@ -278,7 +290,7 @@ for (turn in 1:num_turns) {
 hist(positions_visited, breaks = seq(0, 40, len = 41), right = FALSE)
 ```
 
-<img src="04-markov-chains_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="04-markov-chains_files/figure-html/unnamed-chunk-11-1.png" width="95%" style="display: block; margin: auto;" />
 
 Adding the rolling doubles feature doesn't seem to change much. We might expect this since rolling three doubles is a very unlikely event!
 
@@ -373,4 +385,4 @@ for (game in 1:num_games) {
 hist(time_to_buy_all_properties, breaks = 20)
 ```
 
-<img src="04-markov-chains_files/figure-html/unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="04-markov-chains_files/figure-html/unnamed-chunk-12-1.png" width="95%" style="display: block; margin: auto;" />

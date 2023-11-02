@@ -1,1 +1,2 @@
 [![renderbook](https://github.com/anasrana/ems-practicals/actions/workflows/deploy_bookdown.yml/badge.svg)](https://github.com/anasrana/ems-practicals/actions/workflows/deploy_bookdown.yml)
+[![pages-build-deployment](https://github.com/anasrana/ems-practicals/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/anasrana/ems-practicals/actions/workflows/pages/pages-build-deployment)

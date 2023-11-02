@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@700&display=swap');
+
 p.caption {
   color: #777;
   margin-top: 10px;
@@ -11,4 +13,34 @@ pre {
 }
 pre code {
   white-space: inherit;
+  font-size: 0.85rem;
+}
+.inline-figure {
+  border: solid 0px #f1f1f1;
+  margin-bottom: 1rem;
+}
+.bg-info {
+  background-color: #17a2b8 !important;
+  color: #919191;
+}
+.infobox {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  border: 1px solid orange;
+  border-radius: 0.1em;
+  background: #fdfcfc 5px center/3em no-repeat;
+}
+.button {
+  background-color: #a6e3a1;
+  font-family: Oxygen;
+  border: none;
+  color: rgb(197, 195, 195);
+  padding: 7px 8px;
+  border-radius: 0.2em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
 }
