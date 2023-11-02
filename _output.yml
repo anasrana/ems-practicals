@@ -2,7 +2,7 @@
 bookdown::bs4_book:
   css: style.css
   theme:
-    primary: "#ef9f76"
+    primary: "#fab387"
     base_font:
       google: Manrope
     heading_font:
@@ -13,7 +13,7 @@ bookdown::bs4_book:
       google:
         # arguments to sass::font_google()
         family: Fira Code
-        wght: 200
+        wght: 100
         local: false
   repo: https://github.com/anasrana/ems-practicals
 Bookdown::pdf_book:

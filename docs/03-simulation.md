@@ -28,7 +28,7 @@ Lets plot a histogram of the values picked:
 hist_out <- hist(out, main = '', xlab = 'Values', ylab = 'Frequency')
 ```
 
-<img src="03-simulation_files/figure-html/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="03-simulation_files/figure-html/unnamed-chunk-3-1.png" width="95%" style="display: block; margin: auto;" />
 
 We picked each number with equal probability so the histogram shows each number is equally likely to have been chosen.
 
@@ -62,17 +62,23 @@ rolls_from_sample = sample(c(1:6), size=5000, replace=TRUE)
 rolls_from_sample.int = sample(6, size=5000, replace=TRUE)
 
 table(rolls_from_sample)
+```
+
+```{.bg-info}
 #> rolls_from_sample
 #>   1   2   3   4   5   6 
-#> 832 821 794 873 849 831
+#> 803 837 888 826 836 810
 ```
 
 
 ```r
 table(rolls_from_sample.int)
+```
+
+```{.bg-info}
 #> rolls_from_sample.int
 #>   1   2   3   4   5   6 
-#> 816 853 842 876 811 802
+#> 773 868 839 860 843 817
 ```
 
 Both gives a uniform distribution over the numbers 1-6. The function `sample.int` is a specialised version of sample for sampling integers. Many `R` libraries have specialised versions of more general functions to do specific tasks under certain conditions.
