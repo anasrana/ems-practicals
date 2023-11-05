@@ -8,6 +8,7 @@ p code {
   white-space: inherit;
 }
 pre {
+  font-family: 'Fira Code', 'Courier New', Courier, monospace;
   word-break: normal;
   word-wrap: normal;
 }

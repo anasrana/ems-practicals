@@ -72,7 +72,7 @@ table(rolls_from_sample)
 ```{.bg-info}
 #> rolls_from_sample
 #>   1   2   3   4   5   6 
-#> 794 829 873 811 849 844
+#> 802 826 812 874 835 851
 ```
 
 
@@ -83,7 +83,7 @@ table(rolls_from_sample.int)
 ```{.bg-info}
 #> rolls_from_sample.int
 #>   1   2   3   4   5   6 
-#> 856 885 778 805 802 874
+#> 817 823 847 812 842 859
 ```
 
 Both gives a uniform distribution over the numbers 1-6. The function `sample.int` is a specialised version of sample for sampling integers. Many `R` libraries have specialised versions of more general functions to do specific tasks under certain conditions.

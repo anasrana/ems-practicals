@@ -49,7 +49,7 @@ print(mc_integral)
 ```
 
 ```{.bg-info}
-#> [1] 0.355
+#> [1] 0.338
 ```
 
 <!-- TODO: Add some context about sims and mc_integral -->
@@ -129,7 +129,7 @@ print(pr_greater_than_three)
 ```
 
 ```{.bg-info}
-#> [1] 0.77
+#> [1] 0.82
 ```
 
 which we can compare to R’s built-in Binomial distribution function:
@@ -290,8 +290,8 @@ print(accuracy)
 ```
 
 ```{.bg-info}
-#> [1] -0.0023447461  0.0080552539  0.0004552539 -0.0033047461
-#> [5]  0.0021552539 -0.0021347461
+#> [1]  0.0166552539  0.0080552539  0.0038552539 -0.0013047461
+#> [5] -0.0013047461 -0.0004747461
 ```
 
 ```{.r .numberLines}
@@ -299,8 +299,8 @@ print(accuracy_sd)
 ```
 
 ```{.bg-info}
-#> [1] 0.14900003 0.06333844 0.04613069 0.03057163 0.02291729
-#> [6] 0.01700701
+#> [1] 0.16828307 0.07160244 0.04738580 0.02876864 0.02068715
+#> [6] 0.01497921
 ```
 
 ```{.r .numberLines}
@@ -308,8 +308,8 @@ print(accuracy + accuracy_sd)
 ```
 
 ```{.bg-info}
-#> [1] 0.14665529 0.07139369 0.04658594 0.02726689 0.02507254
-#> [6] 0.01487226
+#> [1] 0.18493832 0.07965769 0.05124105 0.02746390 0.01938240
+#> [6] 0.01450447
 ```
 
 Next, we will plot the results. Here we will make use of `ggplot2` a library to create nice plots without much effort. The input need to be a `data.frame` so we will need to create one based on the data.
@@ -327,12 +327,12 @@ print(df)
 
 ```{.bg-info}
 #>   sample_sizes      accuracy accuracy_sd
-#> 1           10 -0.0023447461  0.14900003
-#> 2           50  0.0080552539  0.06333844
-#> 3          100  0.0004552539  0.04613069
-#> 4          250 -0.0033047461  0.03057163
-#> 5          500  0.0021552539  0.02291729
-#> 6         1000 -0.0021347461  0.01700701
+#> 1           10  0.0166552539  0.16828307
+#> 2           50  0.0080552539  0.07160244
+#> 3          100  0.0038552539  0.04738580
+#> 4          250 -0.0013047461  0.02876864
+#> 5          500 -0.0013047461  0.02068715
+#> 6         1000 -0.0004747461  0.01497921
 ```
 
 ```{.r .numberLines}
@@ -382,7 +382,7 @@ print(expected_score)
 ```
 
 ```{.bg-info}
-#> [1] 14.91
+#> [1] 14.45
 ```
 <button class="button">
   [Back to Exercise](#mc-expectation-1)
@@ -417,7 +417,7 @@ print(mean(game_score))
 ```
 
 ```{.bg-info}
-#> [1] 8.43
+#> [1] 9.03
 ```
 
 ```{.r .numberLines}
