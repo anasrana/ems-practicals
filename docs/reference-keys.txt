@@ -38,3 +38,9 @@ the-likelihood-function
 optimisation
 two-parameter-estimation
 ex-mle
+confidence-intervals
+setup
+simulating-data
+constructing-the-confidence-interval
+experiment
+problem-confidence-interval
