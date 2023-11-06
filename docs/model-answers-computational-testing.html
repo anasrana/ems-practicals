@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Model Answers: Computational Testing | Essentials of Mathematics and Statistics</title>
+<meta name="author" content="Anas A Rana">
+<meta name="description" content="7.9 Solution: Exercise 1 The data is: x &lt;- c(263.9, 266.2, 266.3, 266.8, 265.0) Now construct some summary statistics and define some given parameters: x_bar &lt;- mean(x) # compute sample mean sigma...">
+<meta name="generator" content="bookdown 0.36 with bs4_book()">
+<meta property="og:title" content="Model Answers: Computational Testing | Essentials of Mathematics and Statistics">
+<meta property="og:type" content="book">
+<meta property="og:description" content="7.9 Solution: Exercise 1 The data is: x &lt;- c(263.9, 266.2, 266.3, 266.8, 265.0) Now construct some summary statistics and define some given parameters: x_bar &lt;- mean(x) # compute sample mean sigma...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Model Answers: Computational Testing | Essentials of Mathematics and Statistics">
+<meta name="twitter:description" content="7.9 Solution: Exercise 1 The data is: x &lt;- c(263.9, 266.2, 266.3, 266.8, 265.0) Now construct some summary statistics and define some given parameters: x_bar &lt;- mean(x) # compute sample mean sigma...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Manrope-0.4.7/font.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira%20Code:wght@100&amp;display=swap" rel="stylesheet">
+<link href="libs/Spectral-0.4.7/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Essentials of Mathematics and Statistics</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introduction to the Practical</a></li>
+<li><a class="" href="getting-started-in-r-and-rstudio.html">Getting started in R and Rstudio</a></li>
+<li><a class="" href="data-sets.html">Data sets</a></li>
+<li><a class="" href="simulating-random-numbers.html"><span class="header-section-number">1</span> Simulating random numbers</a></li>
+<li><a class="" href="markov-chains.html"><span class="header-section-number">2</span> Markov Chains</a></li>
+<li><a class="" href="mc-solution.html">Solution: 3 state Markov Chain</a></li>
+<li><a class="" href="a-monopoly-simulation.html"><span class="header-section-number">3</span> A Monopoly simulation</a></li>
+<li><a class="" href="monopolySol.html">Solutions: Monopoly</a></li>
+<li><a class="" href="monte-carlo-methods.html"><span class="header-section-number">4</span> Monte Carlo Methods</a></li>
+<li><a class="" href="solution-monte-carlo.html">Solution: Monte Carlo</a></li>
+<li><a class="" href="maximum-likelihood.html"><span class="header-section-number">5</span> Maximum Likelihood</a></li>
+<li><a class="" href="sol-mle.html">Solution: Model Answers: MLE</a></li>
+<li><a class="" href="confidence-intervals.html"><span class="header-section-number">6</span> Confidence Intervals</a></li>
+<li><a class="" href="sol-ex-CI.html">Model Answer: Confidence Interval</a></li>
+<li><a class="" href="computational-testing-techniques.html"><span class="header-section-number">7</span> Computational Testing Techniques</a></li>
+<li><a class="active" href="model-answers-computational-testing.html">Model Answers: Computational Testing</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/anasrana/ems-practicals">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="model-answers-computational-testing" class="section level1 unnumbered">
+<h1>Model Answers: Computational Testing<a class="anchor" aria-label="anchor" href="#model-answers-computational-testing"><i class="fas fa-link"></i></a>
+</h1>
+<div id="ht-sol-ex1" class="section level2" number="7.9">
+<h2>
+<span class="header-section-number">7.9</span> Solution: Exercise 1<a class="anchor" aria-label="anchor" href="#ht-sol-ex1"><i class="fas fa-link"></i></a>
+</h2>
+<p>The data is:</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb103-1"><a href="model-answers-computational-testing.html#cb103-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">263.9</span>, <span class="fl">266.2</span>, <span class="fl">266.3</span>, <span class="fl">266.8</span>, <span class="fl">265.0</span>)</span></code></pre></div>
+<p>Now construct some summary statistics and define some given parameters:</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb104-1"><a href="model-answers-computational-testing.html#cb104-1"></a>x_bar <span class="ot">&lt;-</span> <span class="fu">mean</span>(x) <span class="co"># compute sample mean</span></span>
+<span id="cb104-2"><a href="model-answers-computational-testing.html#cb104-2"></a>sigma <span class="ot">&lt;-</span> <span class="fl">1.65</span> <span class="co"># population standard deviation is given</span></span>
+<span id="cb104-3"><a href="model-answers-computational-testing.html#cb104-3"></a>mu <span class="ot">&lt;-</span> <span class="dv">260</span> <span class="co"># population mean to be tested against</span></span>
+<span id="cb104-4"><a href="model-answers-computational-testing.html#cb104-4"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(x) <span class="co"># number of samples</span></span></code></pre></div>
+<p>Construct the z-statistic:</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb105-1"><a href="model-answers-computational-testing.html#cb105-1"></a>z <span class="ot">&lt;-</span> (x_bar <span class="sc">-</span> mu) <span class="sc">/</span> (sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
+<span id="cb105-2"><a href="model-answers-computational-testing.html#cb105-2"></a><span class="fu">print</span>(z)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 7.643287</code></pre>
+<p>Check if the z-statistic is in the critical range. First, work out what the z-value at the edge of the critical region is:</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb107-1"><a href="model-answers-computational-testing.html#cb107-1"></a>z_threshold <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.01</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb107-2"><a href="model-answers-computational-testing.html#cb107-2"></a><span class="fu">print</span>(z_threshold)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 2.326348</code></pre>
+<p>Thus, the z-statistic is much greater than the threshold and there is evidence to suggest the cartons are overfilled.</p>
+<button class="button">
+<a href="computational-testing-techniques.html#ht-ex1">Back to exercise</a>
+</button>
+</div>
+<div id="ht-sol-ex2" class="section level2" number="7.10">
+<h2>
+<span class="header-section-number">7.10</span> Solution: Exercise 2<a class="anchor" aria-label="anchor" href="#ht-sol-ex2"><i class="fas fa-link"></i></a>
+</h2>
+<p>Parameters given by the problem:</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb109-1"><a href="model-answers-computational-testing.html#cb109-1"></a>x_bar <span class="ot">&lt;-</span> <span class="fl">103.11</span></span>
+<span id="cb109-2"><a href="model-answers-computational-testing.html#cb109-2"></a>s <span class="ot">&lt;-</span> <span class="fl">53.5</span></span>
+<span id="cb109-3"><a href="model-answers-computational-testing.html#cb109-3"></a>mu <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb109-4"><a href="model-answers-computational-testing.html#cb109-4"></a>n <span class="ot">&lt;-</span> <span class="dv">45</span></span></code></pre></div>
+<p>Compute the z-statistic assuming large sample assumptions apply:</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb110-1"><a href="model-answers-computational-testing.html#cb110-1"></a>z <span class="ot">&lt;-</span> ( x_bar <span class="sc">-</span> mu )<span class="sc">/</span>(s<span class="sc">/</span><span class="fu">sqrt</span>(n))</span>
+<span id="cb110-2"><a href="model-answers-computational-testing.html#cb110-2"></a><span class="fu">print</span>(z)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 0.3899535</code></pre>
+<p>Now, work out the thresholds of the critical regions:</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb112-1"><a href="model-answers-computational-testing.html#cb112-1"></a>z_upper <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.025</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb112-2"><a href="model-answers-computational-testing.html#cb112-2"></a><span class="fu">print</span>(z_upper)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 1.959964</code></pre>
+<div class="sourceCode" id="cb114"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb114-1"><a href="model-answers-computational-testing.html#cb114-1"></a>z_lower <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fl">0.025</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb114-2"><a href="model-answers-computational-testing.html#cb114-2"></a><span class="fu">print</span>(z_lower)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] -1.959964</code></pre>
+<p>The z-statistic is outside the critical regions and therefore we do not reject the null hypothesis.</p>
+<button class="button">
+<a href="computational-testing-techniques.html#ht-ex2">Back to exercise</a>
+</button>
+</div>
+<div id="ht-sol-ex3" class="section level2" number="7.11">
+<h2>
+<span class="header-section-number">7.11</span> Solution: Exercise 3<a class="anchor" aria-label="anchor" href="#ht-sol-ex3"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb116"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb116-1"><a href="model-answers-computational-testing.html#cb116-1"></a>z_test <span class="ot">&lt;-</span> <span class="cf">function</span>(x, mu, popvar){</span>
+<span id="cb116-2"><a href="model-answers-computational-testing.html#cb116-2"></a></span>
+<span id="cb116-3"><a href="model-answers-computational-testing.html#cb116-3"></a>  one_tail_p <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb116-4"><a href="model-answers-computational-testing.html#cb116-4"></a></span>
+<span id="cb116-5"><a href="model-answers-computational-testing.html#cb116-5"></a>  z_score <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">mean</span>(x) <span class="sc">-</span> mu) <span class="sc">/</span> (popvar <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">length</span>(x))), <span class="dv">3</span>)</span>
+<span id="cb116-6"><a href="model-answers-computational-testing.html#cb116-6"></a></span>
+<span id="cb116-7"><a href="model-answers-computational-testing.html#cb116-7"></a>  one_tail_p <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">pnorm</span>(<span class="fu">abs</span>(z_score),<span class="at">lower.tail =</span> <span class="cn">FALSE</span>), <span class="dv">3</span>)</span>
+<span id="cb116-8"><a href="model-answers-computational-testing.html#cb116-8"></a></span>
+<span id="cb116-9"><a href="model-answers-computational-testing.html#cb116-9"></a>  <span class="fu">cat</span>(<span class="st">" z ="</span>, z_score, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb116-10"><a href="model-answers-computational-testing.html#cb116-10"></a>    <span class="st">"one-tailed probability ="</span>, one_tail_p, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb116-11"><a href="model-answers-computational-testing.html#cb116-11"></a>    <span class="st">"two-tailed probability ="</span>, <span class="dv">2</span> <span class="sc">*</span> one_tail_p)</span>
+<span id="cb116-12"><a href="model-answers-computational-testing.html#cb116-12"></a></span>
+<span id="cb116-13"><a href="model-answers-computational-testing.html#cb116-13"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">z =</span> z_score, <span class="at">one_p =</span> one_tail_p, <span class="at">two_p =</span> <span class="dv">2</span> <span class="sc">*</span> one_tail_p))</span>
+<span id="cb116-14"><a href="model-answers-computational-testing.html#cb116-14"></a>}</span>
+<span id="cb116-15"><a href="model-answers-computational-testing.html#cb116-15"></a></span>
+<span id="cb116-16"><a href="model-answers-computational-testing.html#cb116-16"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># generate some artificial data from a N(0, 1)</span></span>
+<span id="cb116-17"><a href="model-answers-computational-testing.html#cb116-17"></a>out <span class="ot">&lt;-</span> <span class="fu">z_test</span>(x, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># null should not be rejected!</span></span></code></pre></div>
+<pre class="bg-info"><code>#&gt;  z = -1.43 
+#&gt;  one-tailed probability = 0.076 
+#&gt;  two-tailed probability = 0.152</code></pre>
+<div class="sourceCode" id="cb118"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb118-1"><a href="model-answers-computational-testing.html#cb118-1"></a><span class="fu">print</span>(out)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; $z
+#&gt; [1] -1.43
+#&gt; 
+#&gt; $one_p
+#&gt; [1] 0.076
+#&gt; 
+#&gt; $two_p
+#&gt; [1] 0.152</code></pre>
+<div class="sourceCode" id="cb120"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb120-1"><a href="model-answers-computational-testing.html#cb120-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># generate some artificial data from a N(1, 1)</span></span>
+<span id="cb120-2"><a href="model-answers-computational-testing.html#cb120-2"></a>out <span class="ot">&lt;-</span> <span class="fu">z_test</span>(x, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># null should be rejected!</span></span></code></pre></div>
+<pre class="bg-info"><code>#&gt;  z = 3.356 
+#&gt;  one-tailed probability = 0 
+#&gt;  two-tailed probability = 0</code></pre>
+<div class="sourceCode" id="cb122"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb122-1"><a href="model-answers-computational-testing.html#cb122-1"></a><span class="fu">print</span>(out)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; $z
+#&gt; [1] 3.356
+#&gt; 
+#&gt; $one_p
+#&gt; [1] 0
+#&gt; 
+#&gt; $two_p
+#&gt; [1] 0</code></pre>
+<button class="button">
+<a href="computational-testing-techniques.html#ht-ex3">Back to exercise</a>
+</button>
+<button class="button">
+<a href="computational-testing-techniques.html#ht-ex3">Back to exercise</a>
+</button>
+</div>
+<div id="ht-sol-ex4" class="section level2" number="7.12">
+<h2>
+<span class="header-section-number">7.12</span> Solution: Exercise 4<a class="anchor" aria-label="anchor" href="#ht-sol-ex4"><i class="fas fa-link"></i></a>
+</h2>
+<p>Define some parameters</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb124-1"><a href="model-answers-computational-testing.html#cb124-1"></a>mu <span class="ot">&lt;-</span> <span class="fl">5.4</span></span>
+<span id="cb124-2"><a href="model-answers-computational-testing.html#cb124-2"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb124-3"><a href="model-answers-computational-testing.html#cb124-3"></a>x_bar <span class="ot">&lt;-</span> <span class="fl">5.64</span></span>
+<span id="cb124-4"><a href="model-answers-computational-testing.html#cb124-4"></a>s2 <span class="ot">&lt;-</span> <span class="fl">0.05</span></span></code></pre></div>
+<p>Compute the t-statistic:</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb125-1"><a href="model-answers-computational-testing.html#cb125-1"></a>t <span class="ot">&lt;-</span> (x_bar <span class="sc">-</span> mu) <span class="sc">/</span> <span class="fu">sqrt</span>(s2 <span class="sc">/</span> n)</span>
+<span id="cb125-2"><a href="model-answers-computational-testing.html#cb125-2"></a><span class="fu">print</span>(t)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 2.4</code></pre>
+<p>Work out the thresholds of the critical regions:</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb127-1"><a href="model-answers-computational-testing.html#cb127-1"></a>t_upper <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.025</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb127-2"><a href="model-answers-computational-testing.html#cb127-2"></a><span class="fu">print</span>(t_upper)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 2.776445</code></pre>
+<div class="sourceCode" id="cb129"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb129-1"><a href="model-answers-computational-testing.html#cb129-1"></a>t_lower <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.025</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb129-2"><a href="model-answers-computational-testing.html#cb129-2"></a><span class="fu">print</span>(t_lower)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] -2.776445</code></pre>
+<p>The t-statistic is outside of the critical regions so we do not reject the null hypothesis.</p>
+<button class="button">
+<a href="computational-testing-techniques.html#ht-ex4">Back to exercise</a>
+</button>
+</div>
+<div id="ht-sol-ex5" class="section level2" number="7.13">
+<h2>
+<span class="header-section-number">7.13</span> Solution: Exercise 5<a class="anchor" aria-label="anchor" href="#ht-sol-ex5"><i class="fas fa-link"></i></a>
+</h2>
+<p>Define the parameters:</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb131-1"><a href="model-answers-computational-testing.html#cb131-1"></a>x_bar_a <span class="ot">&lt;-</span> <span class="dv">88</span></span>
+<span id="cb131-2"><a href="model-answers-computational-testing.html#cb131-2"></a>s2_a <span class="ot">&lt;-</span> <span class="fl">4.5</span></span>
+<span id="cb131-3"><a href="model-answers-computational-testing.html#cb131-3"></a>n_a <span class="ot">&lt;-</span> <span class="dv">72</span></span>
+<span id="cb131-4"><a href="model-answers-computational-testing.html#cb131-4"></a>x_bar_b <span class="ot">&lt;-</span> <span class="dv">79</span></span>
+<span id="cb131-5"><a href="model-answers-computational-testing.html#cb131-5"></a>s2_b <span class="ot">&lt;-</span> <span class="fl">4.2</span></span>
+<span id="cb131-6"><a href="model-answers-computational-testing.html#cb131-6"></a>n_b <span class="ot">&lt;-</span> <span class="dv">48</span></span>
+<span id="cb131-7"><a href="model-answers-computational-testing.html#cb131-7"></a>mu_a <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb131-8"><a href="model-answers-computational-testing.html#cb131-8"></a>mu_b <span class="ot">&lt;-</span> <span class="dv">0</span></span></code></pre></div>
+<p>Compute the z-statistic:</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb132-1"><a href="model-answers-computational-testing.html#cb132-1"></a>z <span class="ot">&lt;-</span> ((x_bar_a <span class="sc">-</span> x_bar_b) <span class="sc">-</span> (mu_a <span class="sc">-</span> mu_b)) <span class="sc">/</span> <span class="fu">sqrt</span>(s2_a <span class="sc">/</span> n_a <span class="sc">+</span> s2_b <span class="sc">/</span> n_b)</span>
+<span id="cb132-2"><a href="model-answers-computational-testing.html#cb132-2"></a><span class="fu">print</span>(z)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 23.2379</code></pre>
+<p>Work out for the 5% significance level, the critical values:</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb134-1"><a href="model-answers-computational-testing.html#cb134-1"></a>z_upper <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb134-2"><a href="model-answers-computational-testing.html#cb134-2"></a><span class="fu">print</span>(z_upper)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 1.644854</code></pre>
+<p>There is evidence to support the claim that process <span class="math inline">\(A\)</span> yields higher pressurisation.</p>
+<button class="button">
+<a href="computational-testing-techniques.html#ht-ex5">Back to exercise</a>
+</button>
+</div>
+<div id="ht-sol-ex6" class="section level2" number="7.14">
+<h2>
+<span class="header-section-number">7.14</span> Solution: Exercise 6<a class="anchor" aria-label="anchor" href="#ht-sol-ex6"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb136"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb136-1"><a href="model-answers-computational-testing.html#cb136-1"></a><span class="co"># Data vectors</span></span>
+<span id="cb136-2"><a href="model-answers-computational-testing.html#cb136-2"></a>x_A <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">91.50</span>, <span class="fl">94.18</span>, <span class="fl">92.18</span>, <span class="fl">95.39</span>, <span class="fl">91.79</span>, <span class="fl">89.07</span>, <span class="fl">94.72</span>, <span class="fl">89.21</span>)</span>
+<span id="cb136-3"><a href="model-answers-computational-testing.html#cb136-3"></a>x_B <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">89.19</span>, <span class="fl">90.95</span>, <span class="fl">90.46</span>, <span class="fl">93.21</span>, <span class="fl">97.19</span>, <span class="fl">97.04</span>, <span class="fl">91.07</span>, <span class="fl">92.75</span>)</span>
+<span id="cb136-4"><a href="model-answers-computational-testing.html#cb136-4"></a></span>
+<span id="cb136-5"><a href="model-answers-computational-testing.html#cb136-5"></a><span class="co"># parameters based on data</span></span>
+<span id="cb136-6"><a href="model-answers-computational-testing.html#cb136-6"></a>x_bar_A <span class="ot">&lt;-</span> <span class="fu">mean</span>(x_A)</span>
+<span id="cb136-7"><a href="model-answers-computational-testing.html#cb136-7"></a>s2_A <span class="ot">&lt;-</span> <span class="fu">var</span>(x_A)</span>
+<span id="cb136-8"><a href="model-answers-computational-testing.html#cb136-8"></a>n_A <span class="ot">&lt;-</span> <span class="fu">length</span>(x_A)</span>
+<span id="cb136-9"><a href="model-answers-computational-testing.html#cb136-9"></a>x_bar_B <span class="ot">&lt;-</span> <span class="fu">mean</span>(x_B)</span>
+<span id="cb136-10"><a href="model-answers-computational-testing.html#cb136-10"></a>s2_B <span class="ot">&lt;-</span> <span class="fu">var</span>(x_B)</span>
+<span id="cb136-11"><a href="model-answers-computational-testing.html#cb136-11"></a>n_B <span class="ot">&lt;-</span> <span class="fu">length</span>(x_B)</span></code></pre></div>
+<p>Compute the pooled variance estimator:</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb137-1"><a href="model-answers-computational-testing.html#cb137-1"></a>s2_p <span class="ot">&lt;-</span> ((n_A <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> s2_A <span class="sc">+</span> (n_B <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> s2_B) <span class="sc">/</span> (n_A <span class="sc">+</span> n_B <span class="sc">-</span> <span class="dv">2</span>)</span>
+<span id="cb137-2"><a href="model-answers-computational-testing.html#cb137-2"></a><span class="fu">print</span>(s2_p)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 7.294654</code></pre>
+<p>Compute the t-statistic:</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb139-1"><a href="model-answers-computational-testing.html#cb139-1"></a>t <span class="ot">=</span> ( x_bar_A <span class="sc">-</span> x_bar_B ) <span class="sc">/</span> <span class="fu">sqrt</span>( s2_p<span class="sc">*</span>(<span class="dv">1</span><span class="sc">/</span>n_A <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>n_B) )</span>
+<span id="cb139-2"><a href="model-answers-computational-testing.html#cb139-2"></a><span class="fu">print</span>(t)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] -0.3535909</code></pre>
+<p>Work out the critical values:</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb141-1"><a href="model-answers-computational-testing.html#cb141-1"></a>t_upper <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.025</span>, <span class="at">df =</span> n_A <span class="sc">+</span> n_B <span class="sc">-</span> <span class="dv">2</span>)</span>
+<span id="cb141-2"><a href="model-answers-computational-testing.html#cb141-2"></a><span class="fu">print</span>(t_upper)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 2.144787</code></pre>
+<div class="sourceCode" id="cb143"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb143-1"><a href="model-answers-computational-testing.html#cb143-1"></a>t_lower <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.025</span>, <span class="at">df =</span> n_A <span class="sc">+</span> n_B <span class="sc">-</span> <span class="dv">2</span>)</span>
+<span id="cb143-2"><a href="model-answers-computational-testing.html#cb143-2"></a><span class="fu">print</span>(t_lower)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] -2.144787</code></pre>
+<p>Since <span class="math inline">\(|t|&lt;2.14\)</span> we have no evidence to reject the null hypothesis that the mean yields are equal.</p>
+<p>Now, let us use the built-in <code>t.test</code> command:</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb145-1"><a href="model-answers-computational-testing.html#cb145-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">t.test</span>(<span class="at">x =</span> x_A, <span class="at">y =</span> x_B, <span class="at">paired =</span> <span class="cn">FALSE</span>, <span class="at">var.equal =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb145-2"><a href="model-answers-computational-testing.html#cb145-2"></a>    <span class="at">conf.level =</span> <span class="fl">0.95</span>, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
+<span id="cb145-3"><a href="model-answers-computational-testing.html#cb145-3"></a>  <span class="fu">print</span>(out)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; 
+#&gt;  Two Sample t-test
+#&gt; 
+#&gt; data:  x_A and x_B
+#&gt; t = -0.35359, df = 14, p-value = 0.7289
+#&gt; alternative hypothesis: true difference in means is not equal to 0
+#&gt; 95 percent confidence interval:
+#&gt;  -3.373886  2.418886
+#&gt; sample estimates:
+#&gt; mean of x mean of y 
+#&gt;   92.2550   92.7325</code></pre>
+<p>The options <code>paired=FALSE</code> means this is an unpaired t-test, <code>var.equal=TRUE</code> forces the estimated variances to be the same (i.e. we are using a pooled variance estimator) and we are testing at 95% confidence level with an alternative hypothesis that the true difference in means is non-zero.</p>
+<p>The p-value for the t-test is between 0 and 1. In this case, the value is around 0.72 which means the hypothesis should not be reject.</p>
+<button class="button">
+<a href="computational-testing-techniques.html#ht-ex6">Back to exercise</a>
+</button>
+</div>
+<div id="ht-sol-ex7" class="section level2" number="7.15">
+<h2>
+<span class="header-section-number">7.15</span> Solution: Exercise 7<a class="anchor" aria-label="anchor" href="#ht-sol-ex7"><i class="fas fa-link"></i></a>
+</h2>
+<p>Define parameters:</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb147-1"><a href="model-answers-computational-testing.html#cb147-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">36</span>, <span class="dv">31</span>)</span>
+<span id="cb147-2"><a href="model-answers-computational-testing.html#cb147-2"></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>, <span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>, <span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>)</span>
+<span id="cb147-3"><a href="model-answers-computational-testing.html#cb147-3"></a>n <span class="ot">&lt;-</span> <span class="fu">sum</span>(x)</span>
+<span id="cb147-4"><a href="model-answers-computational-testing.html#cb147-4"></a>K <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span></code></pre></div>
+<p>Compute the expected counts:</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb148-1"><a href="model-answers-computational-testing.html#cb148-1"></a>Ex <span class="ot">=</span> p<span class="sc">*</span>n</span></code></pre></div>
+<p>Compute the chi-squared statistic:</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb149-1"><a href="model-answers-computational-testing.html#cb149-1"></a>chi2 <span class="ot">&lt;-</span> <span class="fu">sum</span>((x <span class="sc">-</span> Ex)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> Ex)</span>
+<span id="cb149-2"><a href="model-answers-computational-testing.html#cb149-2"></a><span class="fu">print</span>(chi2)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 2.866667</code></pre>
+<p>Compute the critical value form the chi-squared distribution:</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb151-1"><a href="model-answers-computational-testing.html#cb151-1"></a>chi_upper <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span>, <span class="at">df =</span> K<span class="dv">-1</span>)</span>
+<span id="cb151-2"><a href="model-answers-computational-testing.html#cb151-2"></a><span class="fu">print</span>(chi_upper)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 5.991465</code></pre>
+<p>Thus there is no evidence to reject the null hypothesis. The data provides no reason to suggest a preference for a particular door.</p>
+<p>Now, we could have done this in <code>R</code>:</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb153-1"><a href="model-answers-computational-testing.html#cb153-1"></a>out <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(x, <span class="at">p =</span> <span class="fu">c</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>, <span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>, <span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>))</span>
+<span id="cb153-2"><a href="model-answers-computational-testing.html#cb153-2"></a><span class="fu">print</span>(out)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; 
+#&gt;  Chi-squared test for given probabilities
+#&gt; 
+#&gt; data:  x
+#&gt; X-squared = 2.8667, df = 2, p-value = 0.2385</code></pre>
+<button class="button">
+<a href="computational-testing-techniques.html#ht-ex7">Back to exercise</a>
+</button>
+</div>
+<div id="ht-sol-ex8" class="section level2" number="7.16">
+<h2>
+<span class="header-section-number">7.16</span> Solution: Exercise 8<a class="anchor" aria-label="anchor" href="#ht-sol-ex8"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb155"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb155-1"><a href="model-answers-computational-testing.html#cb155-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span> )</span>
+<span id="cb155-2"><a href="model-answers-computational-testing.html#cb155-2"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">32</span>, <span class="dv">12</span>, <span class="dv">6</span> )</span></code></pre></div>
+<p>You will need the <code>vcdExtra</code> package to use the <code>expand.dft</code> command. If you are using BearPortal you don’t need to install it, but if you are running the practical on your own computer you will need to install the package <code>install.packages("vcdExtra")</code>.</p>
+<p>Now before we can use the <code>expand.dft()</code> function we need to load the package containing this function. The <code>expand.dft</code> command allows one to convert the frequency table into a vector of samples:</p>
+<div class="sourceCode" id="cb156"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb156-1"><a href="model-answers-computational-testing.html#cb156-1"></a><span class="fu">library</span>(vcdExtra)</span></code></pre></div>
+<pre><code>#&gt; Loading required package: vcd</code></pre>
+<pre><code>#&gt; Loading required package: grid</code></pre>
+<pre><code>#&gt; Loading required package: gnm</code></pre>
+<div class="sourceCode" id="cb160"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb160-1"><a href="model-answers-computational-testing.html#cb160-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">expand.dft</span>(<span class="fu">data.frame</span>(y,<span class="at">Frequency =</span> x), <span class="at">freq =</span> <span class="st">"Frequency"</span>)</span></code></pre></div>
+<p>Now we can use the <code>fitdistr</code> function in the <code>MASS</code> package to estimate the MLE of the Poisson distribution</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb161-1"><a href="model-answers-computational-testing.html#cb161-1"></a><span class="co"># loading the MASS package</span></span>
+<span id="cb161-2"><a href="model-answers-computational-testing.html#cb161-2"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb161-3"><a href="model-answers-computational-testing.html#cb161-3"></a></span>
+<span id="cb161-4"><a href="model-answers-computational-testing.html#cb161-4"></a><span class="co"># fitting a Poisson distribution using maximum-likelihood</span></span>
+<span id="cb161-5"><a href="model-answers-computational-testing.html#cb161-5"></a>lambda_hat <span class="ot">&lt;-</span> <span class="fu">fitdistr</span>(samples<span class="sc">$</span>y, <span class="at">densfun =</span> <span class="st">'Poisson'</span>)</span></code></pre></div>
+<p>Let just solve this directly using R built in function. First compute the expected probabilities under the Poisson distribution using <code>dpois</code> to compute the Poisson pdf:</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb162-1"><a href="model-answers-computational-testing.html#cb162-1"></a>pr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb162-2"><a href="model-answers-computational-testing.html#cb162-2"></a>pr[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">dpois</span>(<span class="dv">0</span>, <span class="at">lambda =</span> lambda_hat<span class="sc">$</span>estimate)</span>
+<span id="cb162-3"><a href="model-answers-computational-testing.html#cb162-3"></a>pr[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fu">dpois</span>(<span class="dv">1</span>, <span class="at">lambda =</span> lambda_hat<span class="sc">$</span>estimate)</span>
+<span id="cb162-4"><a href="model-answers-computational-testing.html#cb162-4"></a>pr[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">sum</span>(pr[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span></code></pre></div>
+<p>Then apply <code>chisq.test</code>:</p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb163-1"><a href="model-answers-computational-testing.html#cb163-1"></a>out <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(x, <span class="at">p =</span> pr)</span></code></pre></div>
+<pre><code>#&gt; Warning in chisq.test(x, p = pr): Chi-squared approximation
+#&gt; may be incorrect</code></pre>
+<div class="sourceCode" id="cb165"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb165-1"><a href="model-answers-computational-testing.html#cb165-1"></a><span class="fu">print</span>(out)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; 
+#&gt;  Chi-squared test for given probabilities
+#&gt; 
+#&gt; data:  x
+#&gt; X-squared = 1.3447, df = 2, p-value = 0.5105</code></pre>
+<p>Actually, in this case the answer is wrong(!), we need to apply an additional loss of degree of freedom to account for the use of the MLE. However, we can re-use values already computed by <code>chisq.test</code>:</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb167-1"><a href="model-answers-computational-testing.html#cb167-1"></a>chi2 <span class="ot">&lt;-</span> out<span class="sc">$</span>statistic</span>
+<span id="cb167-2"><a href="model-answers-computational-testing.html#cb167-2"></a><span class="fu">print</span>(chi2)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; X-squared 
+#&gt;   1.34466</code></pre>
+<div class="sourceCode" id="cb169"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb169-1"><a href="model-answers-computational-testing.html#cb169-1"></a>chi2_lower <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.01</span>, <span class="at">df =</span> <span class="dv">1</span>)</span>
+<span id="cb169-2"><a href="model-answers-computational-testing.html#cb169-2"></a><span class="fu">print</span>(chi2_lower)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 6.634897</code></pre>
+<p>Hence, there is no evidence to reject the null hypothesis. There is no reason to suppose that the Poisson distribution is not a plausible model for the number of accidents per week at this junction.</p>
+<button class="button">
+<a href="computational-testing-techniques.html#ht-ex8">Back to exercise</a>
+</button>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="computational-testing-techniques.html"><span class="header-section-number">7</span> Computational Testing Techniques</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#model-answers-computational-testing">Model Answers: Computational Testing</a></li>
+<li><a class="nav-link" href="#ht-sol-ex1"><span class="header-section-number">7.9</span> Solution: Exercise 1</a></li>
+<li><a class="nav-link" href="#ht-sol-ex2"><span class="header-section-number">7.10</span> Solution: Exercise 2</a></li>
+<li><a class="nav-link" href="#ht-sol-ex3"><span class="header-section-number">7.11</span> Solution: Exercise 3</a></li>
+<li><a class="nav-link" href="#ht-sol-ex4"><span class="header-section-number">7.12</span> Solution: Exercise 4</a></li>
+<li><a class="nav-link" href="#ht-sol-ex5"><span class="header-section-number">7.13</span> Solution: Exercise 5</a></li>
+<li><a class="nav-link" href="#ht-sol-ex6"><span class="header-section-number">7.14</span> Solution: Exercise 6</a></li>
+<li><a class="nav-link" href="#ht-sol-ex7"><span class="header-section-number">7.15</span> Solution: Exercise 7</a></li>
+<li><a class="nav-link" href="#ht-sol-ex8"><span class="header-section-number">7.16</span> Solution: Exercise 8</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/anasrana/ems-practicals/blob/master/12-CompTesting.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/anasrana/ems-practicals/edit/master/12-CompTesting.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2023-11-06.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

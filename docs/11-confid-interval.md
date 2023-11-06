@@ -78,9 +78,12 @@ print(interval)
 ```
 
 ```{.bg-info}
-#> [1] 1.700999 2.700999
+#> [1] 2.016986 3.016986
 ```
-> **Q: Does the confidence interval contain the true parameter?**
+::: {.infobox}
+## Exercise
+Does the confidence interval contain the true parameter?
+:::
 
 ## Experiment
 
@@ -194,7 +197,8 @@ print(2 * 1.65 * sigma / sqrt(n))
 
 The Monte Carlo estimate matches up with the theory!
 
-## Problem: Confidence Interval
+::: {.infobox}
+## Exercise: Confidence Interval {#ex-confidence-interval}
 
 > Can you devise a way to compute a confidence interval for the population standard deviation?
 
@@ -206,7 +210,22 @@ You can make use of the following as a point estimate of the sample variance:
 
 which can be calculated using the `sd` function in `R`, remember the relationship between the standard deviation and variance.
 
-# Model Answer: Confidence Interval {-}
+<button class="button">
+  [Show Solution](#sol-ex-CI)
+</button>
+:::
+
+# Model Answer: Confidence Interval {- #sol-ex-CI}
+
+> Can you devise a way to compute a confidence interval for the population standard deviation?
+
+You can make use of the following as a point estimate of the sample variance:
+
+\[
+  s^2 = \frac{1}{n - 1}\sum_{i = 1}^n (x - \bar{x})^2
+\]
+
+which can be calculated using the `sd` function in `R`, remember the relationship between the standard deviation and variance.
 
 
 ```{.r .numberLines}
@@ -259,14 +278,18 @@ print(df)
 
 ```{.bg-info}
 #>    interval_width probability_var_contained
-#> 1             0.1                     0.306
-#> 2             0.2                     0.554
-#> 3             0.3                     0.741
-#> 4             0.4                     0.864
-#> 5             0.5                     0.939
-#> 6             0.6                     0.981
-#> 7             0.7                     0.994
+#> 1             0.1                     0.297
+#> 2             0.2                     0.557
+#> 3             0.3                     0.752
+#> 4             0.4                     0.885
+#> 5             0.5                     0.951
+#> 6             0.6                     0.983
+#> 7             0.7                     0.993
 #> 8             0.8                     0.999
 #> 9             0.9                     0.999
 #> 10            1.0                     1.000
 ```
+
+<button class="button">
+  [Return to Exercise](#ex-confidence-interval)
+</button>
