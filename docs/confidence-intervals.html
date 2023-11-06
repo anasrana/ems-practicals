@@ -59,7 +59,9 @@
 <li><a class="" href="maximum-likelihood.html"><span class="header-section-number">5</span> Maximum Likelihood</a></li>
 <li><a class="" href="sol-mle.html">Solution: Model Answers: MLE</a></li>
 <li><a class="active" href="confidence-intervals.html"><span class="header-section-number">6</span> Confidence Intervals</a></li>
-<li><a class="" href="model-answer-confidence-interval.html">Model Answer: Confidence Interval</a></li>
+<li><a class="" href="sol-ex-CI.html">Model Answer: Confidence Interval</a></li>
+<li><a class="" href="computational-testing-techniques.html"><span class="header-section-number">7</span> Computational Testing Techniques</a></li>
+<li><a class="" href="model-answers-computational-testing.html">Model Answers: Computational Testing</a></li>
 </ul>
 
         <div class="book-extra">
@@ -113,14 +115,17 @@
 <div class="sourceCode" id="cb86"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb86-1"><a href="confidence-intervals.html#cb86-1"></a>interval <span class="ot">&lt;-</span> <span class="fu">c</span>(x_bar <span class="sc">-</span> interval_width <span class="sc">/</span> <span class="dv">2</span>, x_bar <span class="sc">+</span> interval_width <span class="sc">/</span> <span class="dv">2</span>)</span></code></pre></div>
 <p>Let’s look at this interval:</p>
 <div class="sourceCode" id="cb87"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb87-1"><a href="confidence-intervals.html#cb87-1"></a><span class="fu">print</span>(interval)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 1.700999 2.700999</code></pre>
-<blockquote>
-<p><strong>Q: Does the confidence interval contain the true parameter?</strong></p>
-</blockquote>
+<pre class="bg-info"><code>#&gt; [1] 2.016986 3.016986</code></pre>
 </div>
-<div id="experiment" class="section level2" number="6.4">
+<div id="exercise-4" class="section level2 infobox" number="6.4">
 <h2>
-<span class="header-section-number">6.4</span> Experiment<a class="anchor" aria-label="anchor" href="#experiment"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.4</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-4"><i class="fas fa-link"></i></a>
+</h2>
+<p>Does the confidence interval contain the true parameter?</p>
+</div>
+<div id="experiment" class="section level2" number="6.5">
+<h2>
+<span class="header-section-number">6.5</span> Experiment<a class="anchor" aria-label="anchor" href="#experiment"><i class="fas fa-link"></i></a>
 </h2>
 <p>The previous experiment only examined one simulated dataset so we cannot fully understand the probabilistic interpretation of the confidence interval just yet. At the moment, the interval you have calculated will either contain the population mean or not.</p>
 <p>In order to understand the probabilistic interpretation, we will need to generate many data sets, construct confidence intervals as we have for each and then see across all generated data sets, how often those intervals cover the true population mean.</p>
@@ -181,9 +186,9 @@
 <pre class="bg-info"><code>#&gt; [1] 0.6024948</code></pre>
 <p>The Monte Carlo estimate matches up with the theory!</p>
 </div>
-<div id="problem-confidence-interval" class="section level2" number="6.5">
+<div id="ex-confidence-interval" class="section level2 infobox" number="6.6">
 <h2>
-<span class="header-section-number">6.5</span> Problem: Confidence Interval<a class="anchor" aria-label="anchor" href="#problem-confidence-interval"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.6</span> Exercise: Confidence Interval<a class="anchor" aria-label="anchor" href="#ex-confidence-interval"><i class="fas fa-link"></i></a>
 </h2>
 <blockquote>
 <p>Can you devise a way to compute a confidence interval for the population standard deviation?</p>
@@ -193,11 +198,14 @@
   s^2 = \frac{1}{n - 1}\sum_{i = 1}^n (x - \bar{x})^2
 \]</span></p>
 <p>which can be calculated using the <code>sd</code> function in <code>R</code>, remember the relationship between the standard deviation and variance.</p>
+<button class="button">
+<a href="sol-ex-CI.html#sol-ex-CI">Show Solution</a>
+</button>
 </div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="sol-mle.html">Solution: Model Answers: MLE</a></div>
-<div class="next"><a href="model-answer-confidence-interval.html">Model Answer: Confidence Interval</a></div>
+<div class="next"><a href="sol-ex-CI.html">Model Answer: Confidence Interval</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -205,8 +213,9 @@
 <li><a class="nav-link" href="#setup"><span class="header-section-number">6.1</span> Setup</a></li>
 <li><a class="nav-link" href="#simulating-data"><span class="header-section-number">6.2</span> Simulating data</a></li>
 <li><a class="nav-link" href="#constructing-the-confidence-interval"><span class="header-section-number">6.3</span> Constructing the confidence interval</a></li>
-<li><a class="nav-link" href="#experiment"><span class="header-section-number">6.4</span> Experiment</a></li>
-<li><a class="nav-link" href="#problem-confidence-interval"><span class="header-section-number">6.5</span> Problem: Confidence Interval</a></li>
+<li><a class="nav-link" href="#exercise-4"><span class="header-section-number">6.4</span> Exercise</a></li>
+<li><a class="nav-link" href="#experiment"><span class="header-section-number">6.5</span> Experiment</a></li>
+<li><a class="nav-link" href="#ex-confidence-interval"><span class="header-section-number">6.6</span> Exercise: Confidence Interval</a></li>
 </ul>
 
       <div class="book-extra">
@@ -224,7 +233,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2023-11-05.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2023-11-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
