@@ -62,3 +62,14 @@ ht-sol-ex5
 ht-sol-ex6
 ht-sol-ex7
 ht-sol-ex8
+practical-linear-regression
+data
+simulating-data-1
+fitting-simple-linear-regression-model
+least-squared-estimation
+maximum-likelihood-estimation
+effect-of-variance
+LR-ex1
+LR-ex2
+LR-ex3
+comparison-of-data

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Solutions: Linear regression and Correlation | Essentials of Mathematics and Statistics</title>
+<meta name="author" content="Anas A Rana">
+<meta name="description" content="Exercise I: Correlation Read in the data in stork.txt, compute the correlation and comment on it. The data represents no of storks (column 1) in Oldenburg Germany from \(1930 - 1939\) and the...">
+<meta name="generator" content="bookdown 0.36 with bs4_book()">
+<meta property="og:title" content="Solutions: Linear regression and Correlation | Essentials of Mathematics and Statistics">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Exercise I: Correlation Read in the data in stork.txt, compute the correlation and comment on it. The data represents no of storks (column 1) in Oldenburg Germany from \(1930 - 1939\) and the...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Solutions: Linear regression and Correlation | Essentials of Mathematics and Statistics">
+<meta name="twitter:description" content="Exercise I: Correlation Read in the data in stork.txt, compute the correlation and comment on it. The data represents no of storks (column 1) in Oldenburg Germany from \(1930 - 1939\) and the...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Manrope-0.4.7/font.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira%20Code:wght@100&amp;display=swap" rel="stylesheet">
+<link href="libs/Spectral-0.4.7/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Essentials of Mathematics and Statistics</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introduction to the Practical</a></li>
+<li><a class="" href="getting-started-in-r-and-rstudio.html">Getting started in R and Rstudio</a></li>
+<li><a class="" href="data-sets.html">Data sets</a></li>
+<li><a class="" href="simulating-random-numbers.html"><span class="header-section-number">1</span> Simulating random numbers</a></li>
+<li><a class="" href="markov-chains.html"><span class="header-section-number">2</span> Markov Chains</a></li>
+<li><a class="" href="mc-solution.html">Solution: 3 state Markov Chain</a></li>
+<li><a class="" href="a-monopoly-simulation.html"><span class="header-section-number">3</span> A Monopoly simulation</a></li>
+<li><a class="" href="monopolySol.html">Solutions: Monopoly</a></li>
+<li><a class="" href="monte-carlo-methods.html"><span class="header-section-number">4</span> Monte Carlo Methods</a></li>
+<li><a class="" href="solution-monte-carlo.html">Solution: Monte Carlo</a></li>
+<li><a class="" href="maximum-likelihood.html"><span class="header-section-number">5</span> Maximum Likelihood</a></li>
+<li><a class="" href="sol-mle.html">Solution: Model Answers: MLE</a></li>
+<li><a class="" href="confidence-intervals.html"><span class="header-section-number">6</span> Confidence Intervals</a></li>
+<li><a class="" href="sol-ex-CI.html">Model Answer: Confidence Interval</a></li>
+<li><a class="" href="computational-testing-techniques.html"><span class="header-section-number">7</span> Computational Testing Techniques</a></li>
+<li><a class="" href="model-answers-computational-testing.html">Model Answers: Computational Testing</a></li>
+<li><a class="" href="practical-linear-regression.html"><span class="header-section-number">8</span> Practical: Linear regression</a></li>
+<li><a class="active" href="solutions-linear-regression-and-correlation.html">Solutions: Linear regression and Correlation</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/anasrana/ems-practicals">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="solutions-linear-regression-and-correlation" class="section level1 unnumbered">
+<h1>Solutions: Linear regression and Correlation<a class="anchor" aria-label="anchor" href="#solutions-linear-regression-and-correlation"><i class="fas fa-link"></i></a>
+</h1>
+<div id="LR-sol1" class="section level2 unnumbered">
+<h2>Exercise I: Correlation<a class="anchor" aria-label="anchor" href="#LR-sol1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Read in the data in <code>stork.txt</code>, compute the correlation and comment on it.</p>
+<p>The data represents <code>no of storks</code> (column 1) in Oldenburg Germany from <span class="math inline">\(1930 - 1939\)</span> and the number of people (column 2).</p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb202-1"><a href="solutions-linear-regression-and-correlation.html#cb202-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb202-2"><a href="solutions-linear-regression-and-correlation.html#cb202-2"></a><span class="fu">library</span>(reshape2)</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb203-1"><a href="solutions-linear-regression-and-correlation.html#cb203-1"></a>stork_dat <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"stork.txt"</span>, <span class="at">hedaer =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb204-1"><a href="solutions-linear-regression-and-correlation.html#cb204-1"></a><span class="fu">ggplot</span>(stork_dat, <span class="fu">aes</span>(<span class="at">x =</span> no_storks, <span class="at">y =</span> people)) <span class="sc">+</span></span>
+<span id="cb204-2"><a href="solutions-linear-regression-and-correlation.html#cb204-2"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="inline-figure"><img src="14-LR-solutions_files/figure-html/unnamed-chunk-4-1.png" width="95%" style="display: block; margin: auto;"></div>
+<p>This is a plot of number of people in Oldenburg (Germany) against the number of storks. We can calculate the correlation in <code>R</code></p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb205-1"><a href="solutions-linear-regression-and-correlation.html#cb205-1"></a><span class="fu">cor</span>(stork_dat<span class="sc">$</span>no_storks, stork_dat<span class="sc">$</span>peopl)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 0.9443965</code></pre>
+<p>This is a very high correlation, and obviously there is no causation. Think about why there would be a correlation between these two random variables.</p>
+<button class="button">
+<a href="practical-linear-regression.html#LR-ex1">Return to Exercise</a>
+</button>
+</div>
+<div id="LR-sol2" class="section level2 unnumbered">
+<h2>Solution Exercise II<a class="anchor" aria-label="anchor" href="#LR-sol2"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb207"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb207-1"><a href="solutions-linear-regression-and-correlation.html#cb207-1"></a><span class="co"># load first data set and create data.frame</span></span>
+<span id="cb207-2"><a href="solutions-linear-regression-and-correlation.html#cb207-2"></a><span class="fu">load</span>(<span class="st">"lr_data1.Rdata"</span>)</span>
+<span id="cb207-3"><a href="solutions-linear-regression-and-correlation.html#cb207-3"></a>sim_data1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)</span>
+<span id="cb207-4"><a href="solutions-linear-regression-and-correlation.html#cb207-4"></a></span>
+<span id="cb207-5"><a href="solutions-linear-regression-and-correlation.html#cb207-5"></a><span class="co"># load second data set and create data.frame</span></span>
+<span id="cb207-6"><a href="solutions-linear-regression-and-correlation.html#cb207-6"></a><span class="fu">load</span>(<span class="st">"lr_data2.Rdata"</span>)</span>
+<span id="cb207-7"><a href="solutions-linear-regression-and-correlation.html#cb207-7"></a>sim_data2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)</span>
+<span id="cb207-8"><a href="solutions-linear-regression-and-correlation.html#cb207-8"></a></span>
+<span id="cb207-9"><a href="solutions-linear-regression-and-correlation.html#cb207-9"></a>lr_fit1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> sim_data1)</span>
+<span id="cb207-10"><a href="solutions-linear-regression-and-correlation.html#cb207-10"></a>lr_fit2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> sim_data2)</span></code></pre></div>
+<div id="comparison-of-data" class="section level3" number="8.7.1">
+<h3>
+<span class="header-section-number">8.7.1</span> Comparison of data<a class="anchor" aria-label="anchor" href="#comparison-of-data"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb208"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb208-1"><a href="solutions-linear-regression-and-correlation.html#cb208-1"></a><span class="fu">ggplot</span>(sim_data1, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb208-2"><a href="solutions-linear-regression-and-correlation.html#cb208-2"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb208-3"><a href="solutions-linear-regression-and-correlation.html#cb208-3"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> sim_data2, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">shape =</span> <span class="dv">18</span>)</span></code></pre></div>
+<div class="inline-figure"><img src="14-LR-solutions_files/figure-html/comp-scatter-1.png" width="95%" style="display: block; margin: auto;"></div>
+<p>If we plot the data on top of each other, the first data set in black and the second one in red, we can see a small number of points are different between the two data sets.</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb209-1"><a href="solutions-linear-regression-and-correlation.html#cb209-1"></a><span class="fu">summary</span>(lr_fit1)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; 
+#&gt; Call:
+#&gt; lm(formula = y ~ x, data = sim_data1)
+#&gt; 
+#&gt; Residuals:
+#&gt;     Min      1Q  Median      3Q     Max 
+#&gt; -2.8309 -0.6910  0.0296  0.7559  3.3703 
+#&gt; 
+#&gt; Coefficients:
+#&gt;             Estimate Std. Error t value Pr(&gt;|t|)    
+#&gt; (Intercept) -20.1876     0.1250 -161.46   &lt;2e-16 ***
+#&gt; x             2.8426     0.1138   24.98   &lt;2e-16 ***
+#&gt; ---
+#&gt; Signif. codes:  
+#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt; 
+#&gt; Residual standard error: 1.229 on 98 degrees of freedom
+#&gt; Multiple R-squared:  0.8643, Adjusted R-squared:  0.8629 
+#&gt; F-statistic: 624.2 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb211"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb211-1"><a href="solutions-linear-regression-and-correlation.html#cb211-1"></a><span class="fu">summary</span>(lr_fit2)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; 
+#&gt; Call:
+#&gt; lm(formula = y ~ x, data = sim_data2)
+#&gt; 
+#&gt; Residuals:
+#&gt;     Min      1Q  Median      3Q     Max 
+#&gt; -11.386  -1.960  -1.084  -0.206  54.516 
+#&gt; 
+#&gt; Coefficients:
+#&gt;             Estimate Std. Error t value Pr(&gt;|t|)    
+#&gt; (Intercept) -18.9486     0.8006 -23.669  &lt; 2e-16 ***
+#&gt; x             2.1620     0.7285   2.968  0.00377 ** 
+#&gt; ---
+#&gt; Signif. codes:  
+#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt; 
+#&gt; Residual standard error: 7.87 on 98 degrees of freedom
+#&gt; Multiple R-squared:  0.08245,    Adjusted R-squared:  0.07309 
+#&gt; F-statistic: 8.806 on 1 and 98 DF,  p-value: 0.003772</code></pre>
+<p>From the summary data we can see a discrepancy between the two estimates in the regression coefficients (<span class="math inline">\(\approx 1\)</span>), though the error in the estimate is quite large. The other thing to notice is that the summary of the residuals look quite different. If we investigate further and plot them we see:</p>
+<div class="sourceCode" id="cb213"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb213-1"><a href="solutions-linear-regression-and-correlation.html#cb213-1"></a><span class="fu">plot</span>(<span class="fu">residuals</span>(lr_fit1))</span></code></pre></div>
+<div class="inline-figure"><img src="14-LR-solutions_files/figure-html/resid-1.png" width="95%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb214-1"><a href="solutions-linear-regression-and-correlation.html#cb214-1"></a><span class="fu">plot</span>(<span class="fu">residuals</span>(lr_fit2))</span></code></pre></div>
+<div class="inline-figure"><img src="14-LR-solutions_files/figure-html/resid-2.png" width="95%" style="display: block; margin: auto;"></div>
+<p>Here we can once again see the outliers in the second data set which affect the estimation. We now plot the histogram and boxplots for comparison:</p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb215-1"><a href="solutions-linear-regression-and-correlation.html#cb215-1"></a><span class="fu">hist</span>(<span class="fu">residuals</span>(lr_fit1))</span></code></pre></div>
+<div class="inline-figure"><img src="14-LR-solutions_files/figure-html/hist-resid-1.png" width="95%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb216-1"><a href="solutions-linear-regression-and-correlation.html#cb216-1"></a><span class="fu">hist</span>(<span class="fu">residuals</span>(lr_fit2))</span></code></pre></div>
+<div class="inline-figure"><img src="14-LR-solutions_files/figure-html/hist-resid-2.png" width="95%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb217-1"><a href="solutions-linear-regression-and-correlation.html#cb217-1"></a><span class="fu">boxplot</span>(<span class="fu">residuals</span>(lr_fit2), <span class="fu">residuals</span>(lr_fit1))</span></code></pre></div>
+<div class="inline-figure"><img src="14-LR-solutions_files/figure-html/hist-resid-3.png" width="95%" style="display: block; margin: auto;"></div>
+<p>Her we can see that the distribution of the residuals has significantly changed in data set 2.</p>
+<p>A change in only 4 data points was sufficient to change the regression coefficients.</p>
+<button class="button">
+<a href="practical-linear-regression.html#LR-ex2">Return to Exercise</a>
+</button>
+</div>
+</div>
+<div id="LR-sol3" class="section level2 unnumbered">
+<h2>Solution Exercise II<a class="anchor" aria-label="anchor" href="#LR-sol3"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb218"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb218-1"><a href="solutions-linear-regression-and-correlation.html#cb218-1"></a>b0 <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># regression coefficient for intercept</span></span>
+<span id="cb218-2"><a href="solutions-linear-regression-and-correlation.html#cb218-2"></a>b1 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">8</span> <span class="co"># regression coefficient for slope</span></span>
+<span id="cb218-3"><a href="solutions-linear-regression-and-correlation.html#cb218-3"></a>sigma2 <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="co"># noise variance</span></span>
+<span id="cb218-4"><a href="solutions-linear-regression-and-correlation.html#cb218-4"></a></span>
+<span id="cb218-5"><a href="solutions-linear-regression-and-correlation.html#cb218-5"></a><span class="co"># number of simulations for each sample size</span></span>
+<span id="cb218-6"><a href="solutions-linear-regression-and-correlation.html#cb218-6"></a>n_simulations <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb218-7"><a href="solutions-linear-regression-and-correlation.html#cb218-7"></a></span>
+<span id="cb218-8"><a href="solutions-linear-regression-and-correlation.html#cb218-8"></a><span class="co"># A vector of sample sizes to try</span></span>
+<span id="cb218-9"><a href="solutions-linear-regression-and-correlation.html#cb218-9"></a>sample_size_v <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">5</span>, <span class="dv">20</span>, <span class="dv">40</span>, <span class="dv">80</span>, <span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">500</span>, <span class="dv">750</span>, <span class="dv">1000</span> )</span>
+<span id="cb218-10"><a href="solutions-linear-regression-and-correlation.html#cb218-10"></a></span>
+<span id="cb218-11"><a href="solutions-linear-regression-and-correlation.html#cb218-11"></a>n_sample_size <span class="ot">&lt;-</span> <span class="fu">length</span>(sample_size_v)</span>
+<span id="cb218-12"><a href="solutions-linear-regression-and-correlation.html#cb218-12"></a></span>
+<span id="cb218-13"><a href="solutions-linear-regression-and-correlation.html#cb218-13"></a><span class="co"># Create a matrix to store results</span></span>
+<span id="cb218-14"><a href="solutions-linear-regression-and-correlation.html#cb218-14"></a>mse_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> n_simulations, <span class="at">ncol =</span> n_sample_size)</span>
+<span id="cb218-15"><a href="solutions-linear-regression-and-correlation.html#cb218-15"></a></span>
+<span id="cb218-16"><a href="solutions-linear-regression-and-correlation.html#cb218-16"></a><span class="co"># name row and column</span></span>
+<span id="cb218-17"><a href="solutions-linear-regression-and-correlation.html#cb218-17"></a><span class="fu">rownames</span>(mse_matrix) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>n_simulations)</span>
+<span id="cb218-18"><a href="solutions-linear-regression-and-correlation.html#cb218-18"></a><span class="fu">colnames</span>(mse_matrix) <span class="ot">&lt;-</span> sample_size_v</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb219-1"><a href="solutions-linear-regression-and-correlation.html#cb219-1"></a><span class="co"># loop over sample size</span></span>
+<span id="cb219-2"><a href="solutions-linear-regression-and-correlation.html#cb219-2"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sample_size) {</span>
+<span id="cb219-3"><a href="solutions-linear-regression-and-correlation.html#cb219-3"></a>  N <span class="ot">&lt;-</span> sample_size_v[i]</span>
+<span id="cb219-4"><a href="solutions-linear-regression-and-correlation.html#cb219-4"></a></span>
+<span id="cb219-5"><a href="solutions-linear-regression-and-correlation.html#cb219-5"></a>  <span class="co"># for each simulation</span></span>
+<span id="cb219-6"><a href="solutions-linear-regression-and-correlation.html#cb219-6"></a>  <span class="cf">for</span> (it <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_simulations) {</span>
+<span id="cb219-7"><a href="solutions-linear-regression-and-correlation.html#cb219-7"></a></span>
+<span id="cb219-8"><a href="solutions-linear-regression-and-correlation.html#cb219-8"></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb219-9"><a href="solutions-linear-regression-and-correlation.html#cb219-9"></a>    e <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fu">sqrt</span>(sigma2))</span>
+<span id="cb219-10"><a href="solutions-linear-regression-and-correlation.html#cb219-10"></a>    y <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> x <span class="sc">+</span> e</span>
+<span id="cb219-11"><a href="solutions-linear-regression-and-correlation.html#cb219-11"></a></span>
+<span id="cb219-12"><a href="solutions-linear-regression-and-correlation.html#cb219-12"></a>    <span class="co"># set up a data frame and run lm()</span></span>
+<span id="cb219-13"><a href="solutions-linear-regression-and-correlation.html#cb219-13"></a>    sim_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)</span>
+<span id="cb219-14"><a href="solutions-linear-regression-and-correlation.html#cb219-14"></a>    lm_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> sim_data)</span>
+<span id="cb219-15"><a href="solutions-linear-regression-and-correlation.html#cb219-15"></a></span>
+<span id="cb219-16"><a href="solutions-linear-regression-and-correlation.html#cb219-16"></a>    <span class="co"># compute the mean squared error between the fit and the actual y's</span></span>
+<span id="cb219-17"><a href="solutions-linear-regression-and-correlation.html#cb219-17"></a>    y_hat <span class="ot">&lt;-</span> <span class="fu">fitted</span>(lm_fit)</span>
+<span id="cb219-18"><a href="solutions-linear-regression-and-correlation.html#cb219-18"></a>    mse_matrix[it, i] <span class="ot">&lt;-</span> <span class="fu">mean</span>((y_hat <span class="sc">-</span> y)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb219-19"><a href="solutions-linear-regression-and-correlation.html#cb219-19"></a></span>
+<span id="cb219-20"><a href="solutions-linear-regression-and-correlation.html#cb219-20"></a>  }</span>
+<span id="cb219-21"><a href="solutions-linear-regression-and-correlation.html#cb219-21"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb220-1"><a href="solutions-linear-regression-and-correlation.html#cb220-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb220-2"><a href="solutions-linear-regression-and-correlation.html#cb220-2"></a></span>
+<span id="cb220-3"><a href="solutions-linear-regression-and-correlation.html#cb220-3"></a>mse_df <span class="ot">=</span> <span class="fu">melt</span>(mse_matrix) <span class="co"># convert the matrix into a data frame for ggplot</span></span>
+<span id="cb220-4"><a href="solutions-linear-regression-and-correlation.html#cb220-4"></a><span class="fu">names</span>(mse_df) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Simulation"</span>, <span class="st">"Sample_Size"</span>, <span class="st">"MSE"</span>) <span class="co"># rename the columns</span></span>
+<span id="cb220-5"><a href="solutions-linear-regression-and-correlation.html#cb220-5"></a></span>
+<span id="cb220-6"><a href="solutions-linear-regression-and-correlation.html#cb220-6"></a><span class="co"># now use a boxplot to look at the relationship between mean-squared prediction error and sample size</span></span>
+<span id="cb220-7"><a href="solutions-linear-regression-and-correlation.html#cb220-7"></a>mse_plt <span class="ot">=</span> <span class="fu">ggplot</span>(mse_df, <span class="fu">aes</span>(<span class="at">x=</span>Sample_Size, <span class="at">y=</span>MSE))</span>
+<span id="cb220-8"><a href="solutions-linear-regression-and-correlation.html#cb220-8"></a>mse_plt <span class="ot">=</span> mse_plt <span class="sc">+</span> <span class="fu">geom_boxplot</span>( <span class="fu">aes</span>(<span class="at">group=</span>Sample_Size) )</span>
+<span id="cb220-9"><a href="solutions-linear-regression-and-correlation.html#cb220-9"></a><span class="fu">print</span>(mse_plt)</span></code></pre></div>
+<div class="inline-figure"><img src="14-LR-solutions_files/figure-html/effect-plot-answ-1.png" width="95%" style="display: block; margin: auto;"></div>
+<p>You should see that the variance of the mean-squared error goes down as the sample size goes up and converges towards a limiting value. Larger sample sizes help reduce the variance in our estimators but do not make the estimates more accurate.</p>
+<p>Can you do something similar to work out the relationship between how accurate the regression coefficient estimates are as a function of sample size?</p>
+<button class="button">
+<a href="practical-linear-regression.html#LR-ex3">Return to Exercise</a>
+</button>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="practical-linear-regression.html"><span class="header-section-number">8</span> Practical: Linear regression</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#solutions-linear-regression-and-correlation">Solutions: Linear regression and Correlation</a></li>
+<li><a class="nav-link" href="#LR-sol1">Exercise I: Correlation</a></li>
+<li>
+<a class="nav-link" href="#LR-sol2">Solution Exercise II</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#comparison-of-data"><span class="header-section-number">8.7.1</span> Comparison of data</a></li></ul>
+</li>
+<li><a class="nav-link" href="#LR-sol3">Solution Exercise II</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/anasrana/ems-practicals/blob/master/14-LR-solutions.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/anasrana/ems-practicals/edit/master/14-LR-solutions.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2023-11-09.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

@@ -62,6 +62,8 @@
 <li><a class="" href="sol-ex-CI.html">Model Answer: Confidence Interval</a></li>
 <li><a class="" href="computational-testing-techniques.html"><span class="header-section-number">7</span> Computational Testing Techniques</a></li>
 <li><a class="" href="model-answers-computational-testing.html">Model Answers: Computational Testing</a></li>
+<li><a class="" href="practical-linear-regression.html"><span class="header-section-number">8</span> Practical: Linear regression</a></li>
+<li><a class="" href="solutions-linear-regression-and-correlation.html">Solutions: Linear regression and Correlation</a></li>
 </ul>
 
         <div class="book-extra">
@@ -86,28 +88,28 @@
 <p>Consider the following example where we have two states describing the weather on any particular day: (i) Sunny and (ii) Rainy. Each arrow denotes the probability of going from one state to itself or another over the course of a day. For example, if it is currently sunny, the probability of it raining the next day is 0.6. Conversely, if it is raining, the probability that it will become sunny the next day is 0.7 and 0.3 that it will continue raining.</p>
 <div class="inline-figure"><img src="05-markov-chains_files/figure-html/unnamed-chunk-1-1.png" width="90%" style="display: block; margin: auto;"></div>
 <p>The transition matrix can be written as the following in R:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb10-1"><a href="markov-chains.html#cb10-1"></a>transitionMatrix <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.3</span>), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
-<span id="cb10-2"><a href="markov-chains.html#cb10-2"></a><span class="fu">print</span>(transitionMatrix)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb13-1"><a href="markov-chains.html#cb13-1"></a>transitionMatrix <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.3</span>), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb13-2"><a href="markov-chains.html#cb13-2"></a><span class="fu">print</span>(transitionMatrix)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;      [,1] [,2]
 #&gt; [1,]  0.4  0.6
 #&gt; [2,]  0.7  0.3</code></pre>
 <p>which creates a 2 x 2 matrix consisting of the transition probabilities shown in the diagram.</p>
 <p>Suppose I want to simulate a sequence of 30 days and the weather patterns over those days. Assuming that on day 0 it is currently sunny, I can do the following:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb12-1"><a href="markov-chains.html#cb12-1"></a><span class="co"># initial state - it is [1] sunny or [2] rainy</span></span>
-<span id="cb12-2"><a href="markov-chains.html#cb12-2"></a>state <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb12-3"><a href="markov-chains.html#cb12-3"></a>weather_sequence <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">30</span>) <span class="co"># vector to store simulated values</span></span>
-<span id="cb12-4"><a href="markov-chains.html#cb12-4"></a><span class="cf">for</span> (day <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>) { <span class="co"># simulate for 30 days</span></span>
-<span id="cb12-5"><a href="markov-chains.html#cb12-5"></a>  pr <span class="ot">&lt;-</span> transitionMatrix[state, ] <span class="co"># select the row of transition probabilities</span></span>
-<span id="cb12-6"><a href="markov-chains.html#cb12-6"></a></span>
-<span id="cb12-7"><a href="markov-chains.html#cb12-7"></a>  <span class="co"># sample [1] or [2] based on the probs pr</span></span>
-<span id="cb12-8"><a href="markov-chains.html#cb12-8"></a>  state <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> pr)</span>
-<span id="cb12-9"><a href="markov-chains.html#cb12-9"></a>  weather_sequence[day] <span class="ot">&lt;-</span> state <span class="co"># store the sampled state</span></span>
-<span id="cb12-10"><a href="markov-chains.html#cb12-10"></a>}</span>
-<span id="cb12-11"><a href="markov-chains.html#cb12-11"></a></span>
-<span id="cb12-12"><a href="markov-chains.html#cb12-12"></a><span class="co"># print the simulated weather sequence</span></span>
-<span id="cb12-13"><a href="markov-chains.html#cb12-13"></a><span class="fu">print</span>(weather_sequence)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  [1] 2 1 2 2 1 2 1 1 2 1 2 1 1 2 1 1 2 1 2 1 1 2 2 1 1 1 1 1
-#&gt; [29] 2 1</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb15-1"><a href="markov-chains.html#cb15-1"></a><span class="co"># initial state - it is [1] sunny or [2] rainy</span></span>
+<span id="cb15-2"><a href="markov-chains.html#cb15-2"></a>state <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb15-3"><a href="markov-chains.html#cb15-3"></a>weather_sequence <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">30</span>) <span class="co"># vector to store simulated values</span></span>
+<span id="cb15-4"><a href="markov-chains.html#cb15-4"></a><span class="cf">for</span> (day <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>) { <span class="co"># simulate for 30 days</span></span>
+<span id="cb15-5"><a href="markov-chains.html#cb15-5"></a>  pr <span class="ot">&lt;-</span> transitionMatrix[state, ] <span class="co"># select the row of transition probabilities</span></span>
+<span id="cb15-6"><a href="markov-chains.html#cb15-6"></a></span>
+<span id="cb15-7"><a href="markov-chains.html#cb15-7"></a>  <span class="co"># sample [1] or [2] based on the probs pr</span></span>
+<span id="cb15-8"><a href="markov-chains.html#cb15-8"></a>  state <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> pr)</span>
+<span id="cb15-9"><a href="markov-chains.html#cb15-9"></a>  weather_sequence[day] <span class="ot">&lt;-</span> state <span class="co"># store the sampled state</span></span>
+<span id="cb15-10"><a href="markov-chains.html#cb15-10"></a>}</span>
+<span id="cb15-11"><a href="markov-chains.html#cb15-11"></a></span>
+<span id="cb15-12"><a href="markov-chains.html#cb15-12"></a><span class="co"># print the simulated weather sequence</span></span>
+<span id="cb15-13"><a href="markov-chains.html#cb15-13"></a><span class="fu">print</span>(weather_sequence)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;  [1] 2 1 2 1 2 1 1 1 1 2 1 2 2 1 2 1 1 2 1 1 1 2 1 2 1 2 1 1
+#&gt; [29] 1 2</code></pre>
 <div id="exercise-mc" class="section level2 infobox" number="2.1">
 <h2>
 <span class="header-section-number">2.1</span> Exercise MC<a class="anchor" aria-label="anchor" href="#exercise-mc"><i class="fas fa-link"></i></a>
@@ -148,7 +150,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2023-11-06.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2023-11-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

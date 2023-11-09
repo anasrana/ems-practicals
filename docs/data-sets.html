@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Data sets | Essentials of Mathematics and Statistics</title>
 <meta name="author" content="Anas A Rana">
-<meta name="description" content="For each practical there are some datasets required, you will find all data required for week two of practicals in the data folder here. Links to individual datasets requried can be found at the...">
+<meta name="description" content="For some of the practical sessions we will make use of pre-prepared data. You will find all data required for the second phase of the practicals in the data folder here and you can download here....">
 <meta name="generator" content="bookdown 0.36 with bs4_book()">
 <meta property="og:title" content="Data sets | Essentials of Mathematics and Statistics">
 <meta property="og:type" content="book">
-<meta property="og:description" content="For each practical there are some datasets required, you will find all data required for week two of practicals in the data folder here. Links to individual datasets requried can be found at the...">
+<meta property="og:description" content="For some of the practical sessions we will make use of pre-prepared data. You will find all data required for the second phase of the practicals in the data folder here and you can download here....">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Data sets | Essentials of Mathematics and Statistics">
-<meta name="twitter:description" content="For each practical there are some datasets required, you will find all data required for week two of practicals in the data folder here. Links to individual datasets requried can be found at the...">
+<meta name="twitter:description" content="For some of the practical sessions we will make use of pre-prepared data. You will find all data required for the second phase of the practicals in the data folder here and you can download here....">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Manrope-0.4.7/font.css" rel="stylesheet">
@@ -62,6 +62,8 @@
 <li><a class="" href="sol-ex-CI.html">Model Answer: Confidence Interval</a></li>
 <li><a class="" href="computational-testing-techniques.html"><span class="header-section-number">7</span> Computational Testing Techniques</a></li>
 <li><a class="" href="model-answers-computational-testing.html">Model Answers: Computational Testing</a></li>
+<li><a class="" href="practical-linear-regression.html"><span class="header-section-number">8</span> Practical: Linear regression</a></li>
+<li><a class="" href="solutions-linear-regression-and-correlation.html">Solutions: Linear regression and Correlation</a></li>
 </ul>
 
         <div class="book-extra">
@@ -72,33 +74,60 @@
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="data-sets" class="section level1 unnumbered">
 <h1>Data sets<a class="anchor" aria-label="anchor" href="#data-sets"><i class="fas fa-link"></i></a>
 </h1>
-<p>For each practical there are some datasets required, you will find all data required for week two of practicals in the data folder <a href="https://github.com/anasrana/module1-practical_Bham/tree/master/data">here</a>. Links to individual datasets requried can be found at the beginning of each practical or on Canvas.
-<!-- # About
+<p>For some of the practical sessions we will make use of pre-prepared data. You will find all data required for the second phase of the practicals in the data folder <a href="https://github.com/anasrana/module1-practical_Bham/tree/master/data">here</a> and you can download <a href="https://github.com/anasrana/ems-practicals/raw/main/data.zip">here</a>.</p>
+<p>You can download files individually from the website, or using bash commands by either going to the terminal tab on <code>RStudio</code> or by opening a dedicated terminal. You can either copy all data Navigate to the folder you want to download your data into, and use the following commands:</p>
+<div id="data-lr" class="section level2 unnumbered">
+<h2>Data: Linear regression<a class="anchor" aria-label="anchor" href="#data-lr"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb2-1"><a href="data-sets.html#cb2-1"></a><span class="co"># Stork download</span></span>
+<span id="cb2-2"><a href="data-sets.html#cb2-2"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/stork.txt</span>
+<span id="cb2-3"><a href="data-sets.html#cb2-3"></a></span>
+<span id="cb2-4"><a href="data-sets.html#cb2-4"></a><span class="co"># lr_data1</span></span>
+<span id="cb2-5"><a href="data-sets.html#cb2-5"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/lr_data1.Rdata</span>
+<span id="cb2-6"><a href="data-sets.html#cb2-6"></a></span>
+<span id="cb2-7"><a href="data-sets.html#cb2-7"></a><span class="co"># lr_data2</span></span>
+<span id="cb2-8"><a href="data-sets.html#cb2-8"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/lr_data2.Rdata</span></code></pre></div>
+</div>
+<div id="data-pca" class="section level2 unnumbered">
+<h2>Data: PCA<a class="anchor" aria-label="anchor" href="#data-pca"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb3-1"><a href="data-sets.html#cb3-1"></a><span class="co"># Pollen2014 data</span></span>
+<span id="cb3-2"><a href="data-sets.html#cb3-2"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/Pollen2014.txt</span>
+<span id="cb3-3"><a href="data-sets.html#cb3-3"></a></span>
+<span id="cb3-4"><a href="data-sets.html#cb3-4"></a><span class="co"># Supplementary Labels</span></span>
+<span id="cb3-5"><a href="data-sets.html#cb3-5"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/SupplementaryLabels.txt</span></code></pre></div>
+</div>
+<div id="data-glm" class="section level2 unnumbered">
+<h2>Data: Generalised linear models<a class="anchor" aria-label="anchor" href="#data-glm"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb4-1"><a href="data-sets.html#cb4-1"></a><span class="co"># gwas-cc-ex1.Rdata</span></span>
+<span id="cb4-2"><a href="data-sets.html#cb4-2"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/gwas-cc-ex1.Rdata</span>
+<span id="cb4-3"><a href="data-sets.html#cb4-3"></a></span>
+<span id="cb4-4"><a href="data-sets.html#cb4-4"></a><span class="co"># gwas-cc-ex2.Rdata</span></span>
+<span id="cb4-5"><a href="data-sets.html#cb4-5"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/gwas-cc-ex2.Rdata</span>
+<span id="cb4-6"><a href="data-sets.html#cb4-6"></a></span>
+<span id="cb4-7"><a href="data-sets.html#cb4-7"></a><span class="co"># nb_data.Rdata</span></span>
+<span id="cb4-8"><a href="data-sets.html#cb4-8"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/nb_data.Rdata</span></code></pre></div>
 
-This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports; for example, a math equation $a^2 + b^2 = c^2$.
 
-## Usage
-
-Each **bookdown** chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter *must* start with a first-level heading: `# A good chapter`, and can contain one (and only one) first-level heading.
-
-Use second-level and higher headings within chapters like: `## A short section` or `### An even shorter section`.
-
-The `index.Rmd` file is required, and is also your first book chapter. It will be the homepage when you render the book.
-
-<!--chapter:end:02-data.Rmd--></p>
-
+</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="getting-started-in-r-and-rstudio.html">Getting started in R and Rstudio</a></div>
 <div class="next"><a href="simulating-random-numbers.html"><span class="header-section-number">1</span> Simulating random numbers</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#data-sets">Data sets</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#data-sets">Data sets</a></li>
+<li><a class="nav-link" href="#data-lr">Data: Linear regression</a></li>
+<li><a class="nav-link" href="#data-pca">Data: PCA</a></li>
+<li><a class="nav-link" href="#data-glm">Data: Generalised linear models</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/anasrana/ems-practicals/blob/master/03-using-practical.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/anasrana/ems-practicals/edit/master/03-using-practical.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/anasrana/ems-practicals/blob/master/02-data.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/anasrana/ems-practicals/edit/master/02-data.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -110,7 +139,7 @@ The `index.Rmd` file is required, and is also your first book chapter. It will b
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2023-11-06.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2023-11-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
