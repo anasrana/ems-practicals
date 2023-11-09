@@ -62,6 +62,8 @@
 <li><a class="" href="sol-ex-CI.html">Model Answer: Confidence Interval</a></li>
 <li><a class="" href="computational-testing-techniques.html"><span class="header-section-number">7</span> Computational Testing Techniques</a></li>
 <li><a class="" href="model-answers-computational-testing.html">Model Answers: Computational Testing</a></li>
+<li><a class="" href="practical-linear-regression.html"><span class="header-section-number">8</span> Practical: Linear regression</a></li>
+<li><a class="" href="solutions-linear-regression-and-correlation.html">Solutions: Linear regression and Correlation</a></li>
 </ul>
 
         <div class="book-extra">
@@ -80,68 +82,68 @@
 <p>You can also go to jail, if you roll three doubles (both dice having the same value) in a row. Update your code to allow for the possibility of going to Jail with three doubles. How does the distribution of board positions change?</p>
 </blockquote>
 <p>The best process is to add the new feature to the existing code. This way we can compare the results with and without the new feature.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb22-1"><a href="monopolySol.html#cb22-1"></a>num_turns <span class="ot">&lt;-</span> <span class="dv">100000</span> <span class="co"># number of turns to take</span></span>
-<span id="cb22-2"><a href="monopolySol.html#cb22-2"></a></span>
-<span id="cb22-3"><a href="monopolySol.html#cb22-3"></a>current_board_position <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># start on the GO space</span></span>
-<span id="cb22-4"><a href="monopolySol.html#cb22-4"></a>go_to_jail_position  <span class="ot">&lt;-</span> <span class="dv">30</span> <span class="co"># the go to jail space</span></span>
-<span id="cb22-5"><a href="monopolySol.html#cb22-5"></a>jail_position <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># jail space</span></span>
-<span id="cb22-6"><a href="monopolySol.html#cb22-6"></a></span>
-<span id="cb22-7"><a href="monopolySol.html#cb22-7"></a>move_size <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, num_turns)</span>
-<span id="cb22-8"><a href="monopolySol.html#cb22-8"></a>positions_visited <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, num_turns)</span>
-<span id="cb22-9"><a href="monopolySol.html#cb22-9"></a></span>
-<span id="cb22-10"><a href="monopolySol.html#cb22-10"></a><span class="co"># use a for loop to simulate a number of turns</span></span>
-<span id="cb22-11"><a href="monopolySol.html#cb22-11"></a><span class="cf">for</span> (turn <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>num_turns) {</span>
-<span id="cb22-12"><a href="monopolySol.html#cb22-12"></a></span>
-<span id="cb22-13"><a href="monopolySol.html#cb22-13"></a>  <span class="co"># set double counter to zero</span></span>
-<span id="cb22-14"><a href="monopolySol.html#cb22-14"></a>  double_counter <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb22-15"><a href="monopolySol.html#cb22-15"></a></span>
-<span id="cb22-16"><a href="monopolySol.html#cb22-16"></a>  <span class="co"># roll (max) three times</span></span>
-<span id="cb22-17"><a href="monopolySol.html#cb22-17"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>){</span>
-<span id="cb22-18"><a href="monopolySol.html#cb22-18"></a></span>
-<span id="cb22-19"><a href="monopolySol.html#cb22-19"></a>    <span class="co"># roll two dice</span></span>
-<span id="cb22-20"><a href="monopolySol.html#cb22-20"></a>    die_values <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="dv">2</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb22-21"><a href="monopolySol.html#cb22-21"></a></span>
-<span id="cb22-22"><a href="monopolySol.html#cb22-22"></a>    <span class="co"># if we have rolled a double for the third time, we proceed straight to jail</span></span>
-<span id="cb22-23"><a href="monopolySol.html#cb22-23"></a>    <span class="cf">if</span> ((die_values[<span class="dv">1</span>] <span class="sc">==</span> die_values[<span class="dv">2</span>]) <span class="sc">&amp;</span> (double_counter <span class="sc">==</span> <span class="dv">2</span> )) {</span>
-<span id="cb22-24"><a href="monopolySol.html#cb22-24"></a>      current_board_position <span class="ot">&lt;-</span> jail_position</span>
-<span id="cb22-25"><a href="monopolySol.html#cb22-25"></a>      <span class="cf">break</span></span>
-<span id="cb22-26"><a href="monopolySol.html#cb22-26"></a>    }</span>
-<span id="cb22-27"><a href="monopolySol.html#cb22-27"></a></span>
-<span id="cb22-28"><a href="monopolySol.html#cb22-28"></a>    <span class="co"># otherwise</span></span>
-<span id="cb22-29"><a href="monopolySol.html#cb22-29"></a></span>
-<span id="cb22-30"><a href="monopolySol.html#cb22-30"></a>    <span class="co"># move player position</span></span>
-<span id="cb22-31"><a href="monopolySol.html#cb22-31"></a></span>
-<span id="cb22-32"><a href="monopolySol.html#cb22-32"></a>    <span class="co"># number of positions to move</span></span>
-<span id="cb22-33"><a href="monopolySol.html#cb22-33"></a>    plus_move <span class="ot">&lt;-</span> <span class="fu">sum</span>(die_values)</span>
-<span id="cb22-34"><a href="monopolySol.html#cb22-34"></a></span>
-<span id="cb22-35"><a href="monopolySol.html#cb22-35"></a>    <span class="co"># compute new board position</span></span>
-<span id="cb22-36"><a href="monopolySol.html#cb22-36"></a>    new_board_position <span class="ot">&lt;-</span> current_board_position <span class="sc">+</span> plus_move</span>
-<span id="cb22-37"><a href="monopolySol.html#cb22-37"></a></span>
-<span id="cb22-38"><a href="monopolySol.html#cb22-38"></a>    <span class="co"># if land on GO TO JAIL square, then go backwards to the JAIL square</span></span>
-<span id="cb22-39"><a href="monopolySol.html#cb22-39"></a>    <span class="cf">if</span> (new_board_position <span class="sc">==</span> go_to_jail_position) {</span>
-<span id="cb22-40"><a href="monopolySol.html#cb22-40"></a>      new_board_position <span class="ot">&lt;-</span> jail_position</span>
-<span id="cb22-41"><a href="monopolySol.html#cb22-41"></a>    }</span>
-<span id="cb22-42"><a href="monopolySol.html#cb22-42"></a></span>
-<span id="cb22-43"><a href="monopolySol.html#cb22-43"></a>    <span class="co"># update board position (this corrects for the fact the board is circular)</span></span>
-<span id="cb22-44"><a href="monopolySol.html#cb22-44"></a>    current_board_position <span class="ot">&lt;-</span> (new_board_position <span class="sc">%%</span> <span class="dv">40</span>)</span>
-<span id="cb22-45"><a href="monopolySol.html#cb22-45"></a></span>
-<span id="cb22-46"><a href="monopolySol.html#cb22-46"></a>    <span class="co"># break out of loop if we roll a non-double</span></span>
-<span id="cb22-47"><a href="monopolySol.html#cb22-47"></a>    <span class="cf">if</span> (die_values[<span class="dv">1</span>] <span class="sc">!=</span> die_values[<span class="dv">2</span>]) {</span>
-<span id="cb22-48"><a href="monopolySol.html#cb22-48"></a>      <span class="cf">break</span></span>
-<span id="cb22-49"><a href="monopolySol.html#cb22-49"></a>    } <span class="cf">else</span> { <span class="co"># increment double counter</span></span>
-<span id="cb22-50"><a href="monopolySol.html#cb22-50"></a>      double_counter <span class="ot">&lt;-</span> double_counter <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb22-51"><a href="monopolySol.html#cb22-51"></a>    }</span>
-<span id="cb22-52"><a href="monopolySol.html#cb22-52"></a></span>
-<span id="cb22-53"><a href="monopolySol.html#cb22-53"></a>  }</span>
-<span id="cb22-54"><a href="monopolySol.html#cb22-54"></a></span>
-<span id="cb22-55"><a href="monopolySol.html#cb22-55"></a>  <span class="co"># store final position visited</span></span>
-<span id="cb22-56"><a href="monopolySol.html#cb22-56"></a>  positions_visited[turn] <span class="ot">&lt;-</span> current_board_position</span>
-<span id="cb22-57"><a href="monopolySol.html#cb22-57"></a></span>
-<span id="cb22-58"><a href="monopolySol.html#cb22-58"></a></span>
-<span id="cb22-59"><a href="monopolySol.html#cb22-59"></a>}</span>
-<span id="cb22-60"><a href="monopolySol.html#cb22-60"></a></span>
-<span id="cb22-61"><a href="monopolySol.html#cb22-61"></a></span>
-<span id="cb22-62"><a href="monopolySol.html#cb22-62"></a><span class="fu">hist</span>(positions_visited, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">40</span>, <span class="at">len =</span> <span class="dv">41</span>), <span class="at">right =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb25-1"><a href="monopolySol.html#cb25-1"></a>num_turns <span class="ot">&lt;-</span> <span class="dv">100000</span> <span class="co"># number of turns to take</span></span>
+<span id="cb25-2"><a href="monopolySol.html#cb25-2"></a></span>
+<span id="cb25-3"><a href="monopolySol.html#cb25-3"></a>current_board_position <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># start on the GO space</span></span>
+<span id="cb25-4"><a href="monopolySol.html#cb25-4"></a>go_to_jail_position  <span class="ot">&lt;-</span> <span class="dv">30</span> <span class="co"># the go to jail space</span></span>
+<span id="cb25-5"><a href="monopolySol.html#cb25-5"></a>jail_position <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># jail space</span></span>
+<span id="cb25-6"><a href="monopolySol.html#cb25-6"></a></span>
+<span id="cb25-7"><a href="monopolySol.html#cb25-7"></a>move_size <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, num_turns)</span>
+<span id="cb25-8"><a href="monopolySol.html#cb25-8"></a>positions_visited <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, num_turns)</span>
+<span id="cb25-9"><a href="monopolySol.html#cb25-9"></a></span>
+<span id="cb25-10"><a href="monopolySol.html#cb25-10"></a><span class="co"># use a for loop to simulate a number of turns</span></span>
+<span id="cb25-11"><a href="monopolySol.html#cb25-11"></a><span class="cf">for</span> (turn <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>num_turns) {</span>
+<span id="cb25-12"><a href="monopolySol.html#cb25-12"></a></span>
+<span id="cb25-13"><a href="monopolySol.html#cb25-13"></a>  <span class="co"># set double counter to zero</span></span>
+<span id="cb25-14"><a href="monopolySol.html#cb25-14"></a>  double_counter <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb25-15"><a href="monopolySol.html#cb25-15"></a></span>
+<span id="cb25-16"><a href="monopolySol.html#cb25-16"></a>  <span class="co"># roll (max) three times</span></span>
+<span id="cb25-17"><a href="monopolySol.html#cb25-17"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>){</span>
+<span id="cb25-18"><a href="monopolySol.html#cb25-18"></a></span>
+<span id="cb25-19"><a href="monopolySol.html#cb25-19"></a>    <span class="co"># roll two dice</span></span>
+<span id="cb25-20"><a href="monopolySol.html#cb25-20"></a>    die_values <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="dv">2</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb25-21"><a href="monopolySol.html#cb25-21"></a></span>
+<span id="cb25-22"><a href="monopolySol.html#cb25-22"></a>    <span class="co"># if we have rolled a double for the third time, we proceed straight to jail</span></span>
+<span id="cb25-23"><a href="monopolySol.html#cb25-23"></a>    <span class="cf">if</span> ((die_values[<span class="dv">1</span>] <span class="sc">==</span> die_values[<span class="dv">2</span>]) <span class="sc">&amp;</span> (double_counter <span class="sc">==</span> <span class="dv">2</span> )) {</span>
+<span id="cb25-24"><a href="monopolySol.html#cb25-24"></a>      current_board_position <span class="ot">&lt;-</span> jail_position</span>
+<span id="cb25-25"><a href="monopolySol.html#cb25-25"></a>      <span class="cf">break</span></span>
+<span id="cb25-26"><a href="monopolySol.html#cb25-26"></a>    }</span>
+<span id="cb25-27"><a href="monopolySol.html#cb25-27"></a></span>
+<span id="cb25-28"><a href="monopolySol.html#cb25-28"></a>    <span class="co"># otherwise</span></span>
+<span id="cb25-29"><a href="monopolySol.html#cb25-29"></a></span>
+<span id="cb25-30"><a href="monopolySol.html#cb25-30"></a>    <span class="co"># move player position</span></span>
+<span id="cb25-31"><a href="monopolySol.html#cb25-31"></a></span>
+<span id="cb25-32"><a href="monopolySol.html#cb25-32"></a>    <span class="co"># number of positions to move</span></span>
+<span id="cb25-33"><a href="monopolySol.html#cb25-33"></a>    plus_move <span class="ot">&lt;-</span> <span class="fu">sum</span>(die_values)</span>
+<span id="cb25-34"><a href="monopolySol.html#cb25-34"></a></span>
+<span id="cb25-35"><a href="monopolySol.html#cb25-35"></a>    <span class="co"># compute new board position</span></span>
+<span id="cb25-36"><a href="monopolySol.html#cb25-36"></a>    new_board_position <span class="ot">&lt;-</span> current_board_position <span class="sc">+</span> plus_move</span>
+<span id="cb25-37"><a href="monopolySol.html#cb25-37"></a></span>
+<span id="cb25-38"><a href="monopolySol.html#cb25-38"></a>    <span class="co"># if land on GO TO JAIL square, then go backwards to the JAIL square</span></span>
+<span id="cb25-39"><a href="monopolySol.html#cb25-39"></a>    <span class="cf">if</span> (new_board_position <span class="sc">==</span> go_to_jail_position) {</span>
+<span id="cb25-40"><a href="monopolySol.html#cb25-40"></a>      new_board_position <span class="ot">&lt;-</span> jail_position</span>
+<span id="cb25-41"><a href="monopolySol.html#cb25-41"></a>    }</span>
+<span id="cb25-42"><a href="monopolySol.html#cb25-42"></a></span>
+<span id="cb25-43"><a href="monopolySol.html#cb25-43"></a>    <span class="co"># update board position (this corrects for the fact the board is circular)</span></span>
+<span id="cb25-44"><a href="monopolySol.html#cb25-44"></a>    current_board_position <span class="ot">&lt;-</span> (new_board_position <span class="sc">%%</span> <span class="dv">40</span>)</span>
+<span id="cb25-45"><a href="monopolySol.html#cb25-45"></a></span>
+<span id="cb25-46"><a href="monopolySol.html#cb25-46"></a>    <span class="co"># break out of loop if we roll a non-double</span></span>
+<span id="cb25-47"><a href="monopolySol.html#cb25-47"></a>    <span class="cf">if</span> (die_values[<span class="dv">1</span>] <span class="sc">!=</span> die_values[<span class="dv">2</span>]) {</span>
+<span id="cb25-48"><a href="monopolySol.html#cb25-48"></a>      <span class="cf">break</span></span>
+<span id="cb25-49"><a href="monopolySol.html#cb25-49"></a>    } <span class="cf">else</span> { <span class="co"># increment double counter</span></span>
+<span id="cb25-50"><a href="monopolySol.html#cb25-50"></a>      double_counter <span class="ot">&lt;-</span> double_counter <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb25-51"><a href="monopolySol.html#cb25-51"></a>    }</span>
+<span id="cb25-52"><a href="monopolySol.html#cb25-52"></a></span>
+<span id="cb25-53"><a href="monopolySol.html#cb25-53"></a>  }</span>
+<span id="cb25-54"><a href="monopolySol.html#cb25-54"></a></span>
+<span id="cb25-55"><a href="monopolySol.html#cb25-55"></a>  <span class="co"># store final position visited</span></span>
+<span id="cb25-56"><a href="monopolySol.html#cb25-56"></a>  positions_visited[turn] <span class="ot">&lt;-</span> current_board_position</span>
+<span id="cb25-57"><a href="monopolySol.html#cb25-57"></a></span>
+<span id="cb25-58"><a href="monopolySol.html#cb25-58"></a></span>
+<span id="cb25-59"><a href="monopolySol.html#cb25-59"></a>}</span>
+<span id="cb25-60"><a href="monopolySol.html#cb25-60"></a></span>
+<span id="cb25-61"><a href="monopolySol.html#cb25-61"></a></span>
+<span id="cb25-62"><a href="monopolySol.html#cb25-62"></a><span class="fu">hist</span>(positions_visited, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">40</span>, <span class="at">len =</span> <span class="dv">41</span>), <span class="at">right =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <div class="inline-figure"><img src="08-monopoly-solution_files/figure-html/unnamed-chunk-1-1.png" width="95%" style="display: block; margin: auto;"></div>
 <p>Adding the rolling doubles feature doesn’t seem to change much. We might expect this since rolling three doubles is a very unlikely event!</p>
 </div>
@@ -150,75 +152,75 @@
 <span class="header-section-number">3.7</span> Solution Exercise 2: Monopoly Extension<a class="anchor" aria-label="anchor" href="#monopolyExtSol"><i class="fas fa-link"></i></a>
 </h2>
 <p>For example, the following simple extension of the previous example adds some features to record properties being purchased. This simulation is constructed based on the assumption that a players always buys any free property that land on.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb23-1"><a href="monopolySol.html#cb23-1"></a>num_games <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co"># number of games to play</span></span>
-<span id="cb23-2"><a href="monopolySol.html#cb23-2"></a>num_turns <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co"># number of turns to take</span></span>
-<span id="cb23-3"><a href="monopolySol.html#cb23-3"></a></span>
-<span id="cb23-4"><a href="monopolySol.html#cb23-4"></a>current_board_position <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># start on the GO space</span></span>
-<span id="cb23-5"><a href="monopolySol.html#cb23-5"></a>go_to_jail_position <span class="ot">&lt;-</span> <span class="dv">30</span> <span class="co"># the go to jail space</span></span>
-<span id="cb23-6"><a href="monopolySol.html#cb23-6"></a>jail_position <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># jail space</span></span>
-<span id="cb23-7"><a href="monopolySol.html#cb23-7"></a><span class="co"># vector of squares containing properties</span></span>
-<span id="cb23-8"><a href="monopolySol.html#cb23-8"></a>properties_that_can_be_bought <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">15</span>, <span class="dv">16</span>,</span>
-<span id="cb23-9"><a href="monopolySol.html#cb23-9"></a>   <span class="dv">18</span>, <span class="dv">19</span>, <span class="dv">21</span>, <span class="dv">23</span>, <span class="dv">24</span>, <span class="dv">25</span>, <span class="dv">26</span>, <span class="dv">27</span>, <span class="dv">28</span>, <span class="dv">29</span>, <span class="dv">31</span>, <span class="dv">32</span>, <span class="dv">34</span>, <span class="dv">35</span>, <span class="dv">37</span>, <span class="dv">39</span>)</span>
-<span id="cb23-10"><a href="monopolySol.html#cb23-10"></a></span>
-<span id="cb23-11"><a href="monopolySol.html#cb23-11"></a></span>
-<span id="cb23-12"><a href="monopolySol.html#cb23-12"></a><span class="co"># vector to store number of turns to buy all properties</span></span>
-<span id="cb23-13"><a href="monopolySol.html#cb23-13"></a>time_to_buy_all_properties <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, num_games)</span>
-<span id="cb23-14"><a href="monopolySol.html#cb23-14"></a></span>
-<span id="cb23-15"><a href="monopolySol.html#cb23-15"></a><span class="co"># simulate multiple games</span></span>
-<span id="cb23-16"><a href="monopolySol.html#cb23-16"></a><span class="cf">for</span> (game <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>num_games) {</span>
-<span id="cb23-17"><a href="monopolySol.html#cb23-17"></a></span>
-<span id="cb23-18"><a href="monopolySol.html#cb23-18"></a>  positions_visited <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, num_turns)</span>
-<span id="cb23-19"><a href="monopolySol.html#cb23-19"></a>  positions_purchased <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">40</span>)</span>
-<span id="cb23-20"><a href="monopolySol.html#cb23-20"></a>  properties_bought <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, num_turns)</span>
-<span id="cb23-21"><a href="monopolySol.html#cb23-21"></a></span>
-<span id="cb23-22"><a href="monopolySol.html#cb23-22"></a>  <span class="co"># use a for loop to simulate a number of turns</span></span>
-<span id="cb23-23"><a href="monopolySol.html#cb23-23"></a>  <span class="cf">for</span> (turn <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>num_turns) {</span>
-<span id="cb23-24"><a href="monopolySol.html#cb23-24"></a></span>
-<span id="cb23-25"><a href="monopolySol.html#cb23-25"></a>    <span class="co"># roll two dice</span></span>
-<span id="cb23-26"><a href="monopolySol.html#cb23-26"></a>    die_values <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="dv">2</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb23-27"><a href="monopolySol.html#cb23-27"></a></span>
-<span id="cb23-28"><a href="monopolySol.html#cb23-28"></a>    <span class="co"># move player position</span></span>
-<span id="cb23-29"><a href="monopolySol.html#cb23-29"></a></span>
-<span id="cb23-30"><a href="monopolySol.html#cb23-30"></a>    <span class="co"># number of positions to move</span></span>
-<span id="cb23-31"><a href="monopolySol.html#cb23-31"></a>    plus_move <span class="ot">&lt;-</span> <span class="fu">sum</span>(die_values)</span>
-<span id="cb23-32"><a href="monopolySol.html#cb23-32"></a></span>
-<span id="cb23-33"><a href="monopolySol.html#cb23-33"></a>    <span class="co"># compute new board position</span></span>
-<span id="cb23-34"><a href="monopolySol.html#cb23-34"></a>    new_board_position <span class="ot">&lt;-</span> current_board_position <span class="sc">+</span> plus_move</span>
-<span id="cb23-35"><a href="monopolySol.html#cb23-35"></a></span>
-<span id="cb23-36"><a href="monopolySol.html#cb23-36"></a>    <span class="co"># if land on GO TO JAIL square, then go backwards to the JAIL square</span></span>
-<span id="cb23-37"><a href="monopolySol.html#cb23-37"></a>    <span class="cf">if</span> (new_board_position <span class="sc">==</span> go_to_jail_position) {</span>
-<span id="cb23-38"><a href="monopolySol.html#cb23-38"></a>      new_board_position <span class="ot">&lt;-</span> jail_position</span>
-<span id="cb23-39"><a href="monopolySol.html#cb23-39"></a>    }</span>
-<span id="cb23-40"><a href="monopolySol.html#cb23-40"></a></span>
-<span id="cb23-41"><a href="monopolySol.html#cb23-41"></a>    <span class="co"># update board position (this corrects for the fact the board is circular)</span></span>
-<span id="cb23-42"><a href="monopolySol.html#cb23-42"></a>    current_board_position <span class="ot">&lt;-</span> (new_board_position <span class="sc">%%</span> <span class="dv">40</span>)</span>
-<span id="cb23-43"><a href="monopolySol.html#cb23-43"></a></span>
-<span id="cb23-44"><a href="monopolySol.html#cb23-44"></a>    <span class="co"># if we can on a square that can be purchased and which has not been</span></span>
-<span id="cb23-45"><a href="monopolySol.html#cb23-45"></a>    <span class="co"># purchased (note R uses 1-indexing for arrays)</span></span>
-<span id="cb23-46"><a href="monopolySol.html#cb23-46"></a>    <span class="cf">if</span> (positions_purchased[current_board_position<span class="sc">+</span><span class="dv">1</span>] <span class="sc">==</span> <span class="dv">0</span>) {</span>
-<span id="cb23-47"><a href="monopolySol.html#cb23-47"></a>      <span class="cf">if</span> (current_board_position <span class="sc">%in%</span> properties_that_can_be_bought) {</span>
-<span id="cb23-48"><a href="monopolySol.html#cb23-48"></a>        positions_purchased[current_board_position <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb23-49"><a href="monopolySol.html#cb23-49"></a>      }</span>
-<span id="cb23-50"><a href="monopolySol.html#cb23-50"></a>    }</span>
-<span id="cb23-51"><a href="monopolySol.html#cb23-51"></a></span>
-<span id="cb23-52"><a href="monopolySol.html#cb23-52"></a>    <span class="co"># store position visited</span></span>
-<span id="cb23-53"><a href="monopolySol.html#cb23-53"></a>    positions_visited[turn] <span class="ot">&lt;-</span> current_board_position</span>
-<span id="cb23-54"><a href="monopolySol.html#cb23-54"></a></span>
-<span id="cb23-55"><a href="monopolySol.html#cb23-55"></a>    <span class="co"># store number of properties bought</span></span>
-<span id="cb23-56"><a href="monopolySol.html#cb23-56"></a>    properties_bought[turn] <span class="ot">&lt;-</span> <span class="fu">sum</span>(positions_purchased)</span>
-<span id="cb23-57"><a href="monopolySol.html#cb23-57"></a></span>
-<span id="cb23-58"><a href="monopolySol.html#cb23-58"></a>    <span class="co"># check if all properties are gone</span></span>
-<span id="cb23-59"><a href="monopolySol.html#cb23-59"></a>    <span class="cf">if</span> (properties_bought[turn] <span class="sc">==</span> <span class="fu">length</span>(properties_that_can_be_bought)) {</span>
-<span id="cb23-60"><a href="monopolySol.html#cb23-60"></a>      time_to_buy_all_properties[game] <span class="ot">&lt;-</span> turn</span>
-<span id="cb23-61"><a href="monopolySol.html#cb23-61"></a>      <span class="cf">break</span></span>
-<span id="cb23-62"><a href="monopolySol.html#cb23-62"></a>    }</span>
-<span id="cb23-63"><a href="monopolySol.html#cb23-63"></a></span>
-<span id="cb23-64"><a href="monopolySol.html#cb23-64"></a></span>
-<span id="cb23-65"><a href="monopolySol.html#cb23-65"></a>  }</span>
-<span id="cb23-66"><a href="monopolySol.html#cb23-66"></a></span>
-<span id="cb23-67"><a href="monopolySol.html#cb23-67"></a>}</span>
-<span id="cb23-68"><a href="monopolySol.html#cb23-68"></a></span>
-<span id="cb23-69"><a href="monopolySol.html#cb23-69"></a><span class="fu">hist</span>(time_to_buy_all_properties, <span class="at">breaks =</span> <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb26-1"><a href="monopolySol.html#cb26-1"></a>num_games <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co"># number of games to play</span></span>
+<span id="cb26-2"><a href="monopolySol.html#cb26-2"></a>num_turns <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co"># number of turns to take</span></span>
+<span id="cb26-3"><a href="monopolySol.html#cb26-3"></a></span>
+<span id="cb26-4"><a href="monopolySol.html#cb26-4"></a>current_board_position <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># start on the GO space</span></span>
+<span id="cb26-5"><a href="monopolySol.html#cb26-5"></a>go_to_jail_position <span class="ot">&lt;-</span> <span class="dv">30</span> <span class="co"># the go to jail space</span></span>
+<span id="cb26-6"><a href="monopolySol.html#cb26-6"></a>jail_position <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># jail space</span></span>
+<span id="cb26-7"><a href="monopolySol.html#cb26-7"></a><span class="co"># vector of squares containing properties</span></span>
+<span id="cb26-8"><a href="monopolySol.html#cb26-8"></a>properties_that_can_be_bought <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">15</span>, <span class="dv">16</span>,</span>
+<span id="cb26-9"><a href="monopolySol.html#cb26-9"></a>   <span class="dv">18</span>, <span class="dv">19</span>, <span class="dv">21</span>, <span class="dv">23</span>, <span class="dv">24</span>, <span class="dv">25</span>, <span class="dv">26</span>, <span class="dv">27</span>, <span class="dv">28</span>, <span class="dv">29</span>, <span class="dv">31</span>, <span class="dv">32</span>, <span class="dv">34</span>, <span class="dv">35</span>, <span class="dv">37</span>, <span class="dv">39</span>)</span>
+<span id="cb26-10"><a href="monopolySol.html#cb26-10"></a></span>
+<span id="cb26-11"><a href="monopolySol.html#cb26-11"></a></span>
+<span id="cb26-12"><a href="monopolySol.html#cb26-12"></a><span class="co"># vector to store number of turns to buy all properties</span></span>
+<span id="cb26-13"><a href="monopolySol.html#cb26-13"></a>time_to_buy_all_properties <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, num_games)</span>
+<span id="cb26-14"><a href="monopolySol.html#cb26-14"></a></span>
+<span id="cb26-15"><a href="monopolySol.html#cb26-15"></a><span class="co"># simulate multiple games</span></span>
+<span id="cb26-16"><a href="monopolySol.html#cb26-16"></a><span class="cf">for</span> (game <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>num_games) {</span>
+<span id="cb26-17"><a href="monopolySol.html#cb26-17"></a></span>
+<span id="cb26-18"><a href="monopolySol.html#cb26-18"></a>  positions_visited <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, num_turns)</span>
+<span id="cb26-19"><a href="monopolySol.html#cb26-19"></a>  positions_purchased <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">40</span>)</span>
+<span id="cb26-20"><a href="monopolySol.html#cb26-20"></a>  properties_bought <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, num_turns)</span>
+<span id="cb26-21"><a href="monopolySol.html#cb26-21"></a></span>
+<span id="cb26-22"><a href="monopolySol.html#cb26-22"></a>  <span class="co"># use a for loop to simulate a number of turns</span></span>
+<span id="cb26-23"><a href="monopolySol.html#cb26-23"></a>  <span class="cf">for</span> (turn <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>num_turns) {</span>
+<span id="cb26-24"><a href="monopolySol.html#cb26-24"></a></span>
+<span id="cb26-25"><a href="monopolySol.html#cb26-25"></a>    <span class="co"># roll two dice</span></span>
+<span id="cb26-26"><a href="monopolySol.html#cb26-26"></a>    die_values <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="dv">2</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb26-27"><a href="monopolySol.html#cb26-27"></a></span>
+<span id="cb26-28"><a href="monopolySol.html#cb26-28"></a>    <span class="co"># move player position</span></span>
+<span id="cb26-29"><a href="monopolySol.html#cb26-29"></a></span>
+<span id="cb26-30"><a href="monopolySol.html#cb26-30"></a>    <span class="co"># number of positions to move</span></span>
+<span id="cb26-31"><a href="monopolySol.html#cb26-31"></a>    plus_move <span class="ot">&lt;-</span> <span class="fu">sum</span>(die_values)</span>
+<span id="cb26-32"><a href="monopolySol.html#cb26-32"></a></span>
+<span id="cb26-33"><a href="monopolySol.html#cb26-33"></a>    <span class="co"># compute new board position</span></span>
+<span id="cb26-34"><a href="monopolySol.html#cb26-34"></a>    new_board_position <span class="ot">&lt;-</span> current_board_position <span class="sc">+</span> plus_move</span>
+<span id="cb26-35"><a href="monopolySol.html#cb26-35"></a></span>
+<span id="cb26-36"><a href="monopolySol.html#cb26-36"></a>    <span class="co"># if land on GO TO JAIL square, then go backwards to the JAIL square</span></span>
+<span id="cb26-37"><a href="monopolySol.html#cb26-37"></a>    <span class="cf">if</span> (new_board_position <span class="sc">==</span> go_to_jail_position) {</span>
+<span id="cb26-38"><a href="monopolySol.html#cb26-38"></a>      new_board_position <span class="ot">&lt;-</span> jail_position</span>
+<span id="cb26-39"><a href="monopolySol.html#cb26-39"></a>    }</span>
+<span id="cb26-40"><a href="monopolySol.html#cb26-40"></a></span>
+<span id="cb26-41"><a href="monopolySol.html#cb26-41"></a>    <span class="co"># update board position (this corrects for the fact the board is circular)</span></span>
+<span id="cb26-42"><a href="monopolySol.html#cb26-42"></a>    current_board_position <span class="ot">&lt;-</span> (new_board_position <span class="sc">%%</span> <span class="dv">40</span>)</span>
+<span id="cb26-43"><a href="monopolySol.html#cb26-43"></a></span>
+<span id="cb26-44"><a href="monopolySol.html#cb26-44"></a>    <span class="co"># if we can on a square that can be purchased and which has not been</span></span>
+<span id="cb26-45"><a href="monopolySol.html#cb26-45"></a>    <span class="co"># purchased (note R uses 1-indexing for arrays)</span></span>
+<span id="cb26-46"><a href="monopolySol.html#cb26-46"></a>    <span class="cf">if</span> (positions_purchased[current_board_position<span class="sc">+</span><span class="dv">1</span>] <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb26-47"><a href="monopolySol.html#cb26-47"></a>      <span class="cf">if</span> (current_board_position <span class="sc">%in%</span> properties_that_can_be_bought) {</span>
+<span id="cb26-48"><a href="monopolySol.html#cb26-48"></a>        positions_purchased[current_board_position <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb26-49"><a href="monopolySol.html#cb26-49"></a>      }</span>
+<span id="cb26-50"><a href="monopolySol.html#cb26-50"></a>    }</span>
+<span id="cb26-51"><a href="monopolySol.html#cb26-51"></a></span>
+<span id="cb26-52"><a href="monopolySol.html#cb26-52"></a>    <span class="co"># store position visited</span></span>
+<span id="cb26-53"><a href="monopolySol.html#cb26-53"></a>    positions_visited[turn] <span class="ot">&lt;-</span> current_board_position</span>
+<span id="cb26-54"><a href="monopolySol.html#cb26-54"></a></span>
+<span id="cb26-55"><a href="monopolySol.html#cb26-55"></a>    <span class="co"># store number of properties bought</span></span>
+<span id="cb26-56"><a href="monopolySol.html#cb26-56"></a>    properties_bought[turn] <span class="ot">&lt;-</span> <span class="fu">sum</span>(positions_purchased)</span>
+<span id="cb26-57"><a href="monopolySol.html#cb26-57"></a></span>
+<span id="cb26-58"><a href="monopolySol.html#cb26-58"></a>    <span class="co"># check if all properties are gone</span></span>
+<span id="cb26-59"><a href="monopolySol.html#cb26-59"></a>    <span class="cf">if</span> (properties_bought[turn] <span class="sc">==</span> <span class="fu">length</span>(properties_that_can_be_bought)) {</span>
+<span id="cb26-60"><a href="monopolySol.html#cb26-60"></a>      time_to_buy_all_properties[game] <span class="ot">&lt;-</span> turn</span>
+<span id="cb26-61"><a href="monopolySol.html#cb26-61"></a>      <span class="cf">break</span></span>
+<span id="cb26-62"><a href="monopolySol.html#cb26-62"></a>    }</span>
+<span id="cb26-63"><a href="monopolySol.html#cb26-63"></a></span>
+<span id="cb26-64"><a href="monopolySol.html#cb26-64"></a></span>
+<span id="cb26-65"><a href="monopolySol.html#cb26-65"></a>  }</span>
+<span id="cb26-66"><a href="monopolySol.html#cb26-66"></a></span>
+<span id="cb26-67"><a href="monopolySol.html#cb26-67"></a>}</span>
+<span id="cb26-68"><a href="monopolySol.html#cb26-68"></a></span>
+<span id="cb26-69"><a href="monopolySol.html#cb26-69"></a><span class="fu">hist</span>(time_to_buy_all_properties, <span class="at">breaks =</span> <span class="dv">20</span>)</span></code></pre></div>
 <div class="inline-figure"><img src="08-monopoly-solution_files/figure-html/unnamed-chunk-2-1.png" width="95%" style="display: block; margin: auto;"></div>
 
 </div>
@@ -249,7 +251,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2023-11-06.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2023-11-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

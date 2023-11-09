@@ -1,14 +1,47 @@
-# Data sets {-}
+# Data sets {- #data-sets}
 
-For each practical there are some datasets required, you will find all data required for week two of practicals in the data folder [here](https://github.com/anasrana/module1-practical_Bham/tree/master/data). Links to individual datasets requried can be found at the beginning of each practical or on Canvas.
-<!-- # About
 
-This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports; for example, a math equation $a^2 + b^2 = c^2$.
+For some of the practical  sessions we will make use of pre-prepared data. You will find all data required for the second phase of the practicals in the data folder [here](https://github.com/anasrana/module1-practical_Bham/tree/master/data) and you can download [here](https://github.com/anasrana/ems-practicals/raw/main/data.zip).
 
-## Usage
+You can download files individually from the website, or using bash commands by either going to the terminal tab on `RStudio` or by opening a dedicated terminal. You can either copy all data Navigate to the folder you want to download your data into, and use the following commands:
 
-Each **bookdown** chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter *must* start with a first-level heading: `# A good chapter`, and can contain one (and only one) first-level heading.
+## Data: Linear regression {- #data-lr}
 
-Use second-level and higher headings within chapters like: `## A short section` or `### An even shorter section`.
 
-The `index.Rmd` file is required, and is also your first book chapter. It will be the homepage when you render the book.
+
+```{.bash .numberLines}
+# Stork download
+wget https://github.com/anasrana/ems-practicals/raw/main/data/stork.txt
+
+# lr_data1
+wget https://github.com/anasrana/ems-practicals/raw/main/data/lr_data1.Rdata
+
+# lr_data2
+wget https://github.com/anasrana/ems-practicals/raw/main/data/lr_data2.Rdata
+
+```
+
+## Data: PCA {- #data-pca}
+
+
+```{.bash .numberLines}
+# Pollen2014 data
+wget https://github.com/anasrana/ems-practicals/raw/main/data/Pollen2014.txt
+
+# Supplementary Labels
+wget https://github.com/anasrana/ems-practicals/raw/main/data/SupplementaryLabels.txt
+```
+
+## Data: Generalised linear models {- #data-glm}
+
+
+```{.bash .numberLines}
+# gwas-cc-ex1.Rdata
+wget https://github.com/anasrana/ems-practicals/raw/main/data/gwas-cc-ex1.Rdata
+
+# gwas-cc-ex2.Rdata
+wget https://github.com/anasrana/ems-practicals/raw/main/data/gwas-cc-ex2.Rdata
+
+# nb_data.Rdata
+wget https://github.com/anasrana/ems-practicals/raw/main/data/nb_data.Rdata
+```

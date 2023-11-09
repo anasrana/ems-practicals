@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 8 Practical: Linear regression | Essentials of Mathematics and Statistics</title>
+<meta name="author" content="Anas A Rana">
+<meta name="description" content="In this practical you will go through some of the basics of linear modeling in R as well as simulating data. The practical contains the following elements: simulate linear regression model...">
+<meta name="generator" content="bookdown 0.36 with bs4_book()">
+<meta property="og:title" content="Chapter 8 Practical: Linear regression | Essentials of Mathematics and Statistics">
+<meta property="og:type" content="book">
+<meta property="og:description" content="In this practical you will go through some of the basics of linear modeling in R as well as simulating data. The practical contains the following elements: simulate linear regression model...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 8 Practical: Linear regression | Essentials of Mathematics and Statistics">
+<meta name="twitter:description" content="In this practical you will go through some of the basics of linear modeling in R as well as simulating data. The practical contains the following elements: simulate linear regression model...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Manrope-0.4.7/font.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira%20Code:wght@100&amp;display=swap" rel="stylesheet">
+<link href="libs/Spectral-0.4.7/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Essentials of Mathematics and Statistics</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introduction to the Practical</a></li>
+<li><a class="" href="getting-started-in-r-and-rstudio.html">Getting started in R and Rstudio</a></li>
+<li><a class="" href="data-sets.html">Data sets</a></li>
+<li><a class="" href="simulating-random-numbers.html"><span class="header-section-number">1</span> Simulating random numbers</a></li>
+<li><a class="" href="markov-chains.html"><span class="header-section-number">2</span> Markov Chains</a></li>
+<li><a class="" href="mc-solution.html">Solution: 3 state Markov Chain</a></li>
+<li><a class="" href="a-monopoly-simulation.html"><span class="header-section-number">3</span> A Monopoly simulation</a></li>
+<li><a class="" href="monopolySol.html">Solutions: Monopoly</a></li>
+<li><a class="" href="monte-carlo-methods.html"><span class="header-section-number">4</span> Monte Carlo Methods</a></li>
+<li><a class="" href="solution-monte-carlo.html">Solution: Monte Carlo</a></li>
+<li><a class="" href="maximum-likelihood.html"><span class="header-section-number">5</span> Maximum Likelihood</a></li>
+<li><a class="" href="sol-mle.html">Solution: Model Answers: MLE</a></li>
+<li><a class="" href="confidence-intervals.html"><span class="header-section-number">6</span> Confidence Intervals</a></li>
+<li><a class="" href="sol-ex-CI.html">Model Answer: Confidence Interval</a></li>
+<li><a class="" href="computational-testing-techniques.html"><span class="header-section-number">7</span> Computational Testing Techniques</a></li>
+<li><a class="" href="model-answers-computational-testing.html">Model Answers: Computational Testing</a></li>
+<li><a class="active" href="practical-linear-regression.html"><span class="header-section-number">8</span> Practical: Linear regression</a></li>
+<li><a class="" href="solutions-linear-regression-and-correlation.html">Solutions: Linear regression and Correlation</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/anasrana/ems-practicals">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="practical-linear-regression" class="section level1" number="8">
+<h1>
+<span class="header-section-number">8</span> Practical: Linear regression<a class="anchor" aria-label="anchor" href="#practical-linear-regression"><i class="fas fa-link"></i></a>
+</h1>
+<p>In this practical you will go through some of the basics of linear modeling in <code>R</code> as well as simulating data. The practical contains the following elements:</p>
+<ul>
+<li>simulate linear regression model</li>
+<li>investigate parameters</li>
+<li>characterize prediction accuracy</li>
+<li>correlation of real world data</li>
+</ul>
+<p>We will make use of the following packages <code>reshape2</code>, <code>ggplo2</code>, and <code>bbmle</code> packages. If the packages are not installed you can use the <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> function to install them. Only do that once you have confirmed they are nto already installed.</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb174-1"><a href="practical-linear-regression.html#cb174-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb174-2"><a href="practical-linear-regression.html#cb174-2"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb174-3"><a href="practical-linear-regression.html#cb174-3"></a><span class="fu">library</span>(bbmle)</span></code></pre></div>
+<div id="data" class="section level2" number="8.1">
+<h2>
+<span class="header-section-number">8.1</span> Data<a class="anchor" aria-label="anchor" href="#data"><i class="fas fa-link"></i></a>
+</h2>
+<p>For this practical you will require three datasets, more information about downloading them <a href="data-sets.html#data-sets">here</a>. If you want to download them manually you can use the following links:</p>
+<ul>
+<li><p><code>stork.txt</code> (<a href="https://raw.githubusercontent.com/anasrana/ems-practicals/main/data/stork.txt">download</a>)</p></li>
+<li><p><code>lr_data1.Rdata</code> (<a href="https://raw.github.com/anasrana/module1-practical_Bham/master/data/lr_data1.Rdata">download</a>)</p></li>
+<li><p><code>lr_data2.Rdata</code> (<a href="https://github.com/anasrana/ems-practicals/raw/main/data/lr_data2.Rdata">download</a>).</p></li>
+</ul>
+</div>
+<div id="simulating-data-1" class="section level2" number="8.2">
+<h2>
+<span class="header-section-number">8.2</span> Simulating data<a class="anchor" aria-label="anchor" href="#simulating-data-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>You will simulate data based on the simple linear regression model:</p>
+<p><span class="math display">\[
+y_i = \beta_0 + \beta_1\, x_i + \epsilon_i,
+\]</span></p>
+<p>where <span class="math inline">\((x_i, y_i)\)</span> represent the <span class="math inline">\(i\)</span>-th measurement pair with <span class="math inline">\(i = 1, \ldots, N\)</span>, <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are regression coefficients representing intercept and slope respectively. We assume the noise term <span class="math inline">\(\epsilon_i \sim N(0, \sigma^2)\)</span> is normally distributed with zero mean and variance <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>First we define the values of the parameters of linear regression <span class="math inline">\((\beta_0, \beta_1, \sigma^2)\)</span>:</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb175-1"><a href="practical-linear-regression.html#cb175-1"></a>b0 <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># regression coefficient for intercept</span></span>
+<span id="cb175-2"><a href="practical-linear-regression.html#cb175-2"></a>b1 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">8</span> <span class="co"># regression coefficient for slope</span></span>
+<span id="cb175-3"><a href="practical-linear-regression.html#cb175-3"></a>sigma2 <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="co"># noise variance</span></span></code></pre></div>
+<p>In the next step we will simulate <span class="math inline">\(N = 100\)</span> covariates <span class="math inline">\(x_i\)</span> by randomly sampling from the standard normal distribution:</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb176-1"><a href="practical-linear-regression.html#cb176-1"></a><span class="fu">set.seed</span>(<span class="dv">198</span>) <span class="co"># set a seed to ensure data is reproducible</span></span>
+<span id="cb176-2"><a href="practical-linear-regression.html#cb176-2"></a>N <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># no of data points to simulate</span></span>
+<span id="cb176-3"><a href="practical-linear-regression.html#cb176-3"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># simulate covariate</span></span></code></pre></div>
+<p>Next we simulate the error term:</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb177-1"><a href="practical-linear-regression.html#cb177-1"></a><span class="co"># simulate the noise terms, rnorm requires the standard deviation</span></span>
+<span id="cb177-2"><a href="practical-linear-regression.html#cb177-2"></a>e <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fu">sqrt</span>(sigma2))</span></code></pre></div>
+<p>Finally we have all the parameters and variables to simulate the response variable <span class="math inline">\(y\)</span>:</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb178-1"><a href="practical-linear-regression.html#cb178-1"></a><span class="co"># compute (simulate) the response variable</span></span>
+<span id="cb178-2"><a href="practical-linear-regression.html#cb178-2"></a>y <span class="ot">=</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> x <span class="sc">+</span> e</span></code></pre></div>
+<p>We will plot our data using <code>ggplot2</code> so the data need to be in a <code>data.frame</code> object:</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb179-1"><a href="practical-linear-regression.html#cb179-1"></a><span class="co"># Set up the data point</span></span>
+<span id="cb179-2"><a href="practical-linear-regression.html#cb179-2"></a>sim_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)</span>
+<span id="cb179-3"><a href="practical-linear-regression.html#cb179-3"></a></span>
+<span id="cb179-4"><a href="practical-linear-regression.html#cb179-4"></a><span class="co"># create a new scatter plot using ggplot2</span></span>
+<span id="cb179-5"><a href="practical-linear-regression.html#cb179-5"></a><span class="fu">ggplot</span>(sim_data, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb179-6"><a href="practical-linear-regression.html#cb179-6"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="inline-figure"><img src="13-linear-regression_files/figure-html/sim-data-1.png" width="95%" style="display: block; margin: auto;"></div>
+<p>We define the true data <code>y_true</code> to be the true linear relationship between the covariate and the response without the noise.</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb180-1"><a href="practical-linear-regression.html#cb180-1"></a><span class="co"># Compute true y values</span></span>
+<span id="cb180-2"><a href="practical-linear-regression.html#cb180-2"></a>y_true <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> x</span>
+<span id="cb180-3"><a href="practical-linear-regression.html#cb180-3"></a></span>
+<span id="cb180-4"><a href="practical-linear-regression.html#cb180-4"></a><span class="co"># Add the data to the existing data frame</span></span>
+<span id="cb180-5"><a href="practical-linear-regression.html#cb180-5"></a>sim_data<span class="sc">$</span>y_true <span class="ot">&lt;-</span> y_true</span></code></pre></div>
+<p>Now we will add the true values of <span class="math inline">\(y\)</span> to the scatter plot:</p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb181-1"><a href="practical-linear-regression.html#cb181-1"></a>lr_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(sim_data, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb181-2"><a href="practical-linear-regression.html#cb181-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb181-3"><a href="practical-linear-regression.html#cb181-3"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y_true), <span class="at">colour =</span> <span class="st">"red"</span>)</span>
+<span id="cb181-4"><a href="practical-linear-regression.html#cb181-4"></a></span>
+<span id="cb181-5"><a href="practical-linear-regression.html#cb181-5"></a><span class="fu">print</span>(lr_plot)</span></code></pre></div>
+<div class="inline-figure"><img src="13-linear-regression_files/figure-html/scatter-true-1.png" width="95%" style="display: block; margin: auto;"></div>
+</div>
+<div id="fitting-simple-linear-regression-model" class="section level2" number="8.3">
+<h2>
+<span class="header-section-number">8.3</span> Fitting simple linear regression model<a class="anchor" aria-label="anchor" href="#fitting-simple-linear-regression-model"><i class="fas fa-link"></i></a>
+</h2>
+<div id="least-squared-estimation" class="section level3" number="8.3.1">
+<h3>
+<span class="header-section-number">8.3.1</span> Least squared estimation<a class="anchor" aria-label="anchor" href="#least-squared-estimation"><i class="fas fa-link"></i></a>
+</h3>
+<p>Now that you have simulated data you can use it to regress <span class="math inline">\(y\)</span> on <span class="math inline">\(x\)</span>, since this is simulated data we know the parameters and can make a comparison. In <code>R</code> we can use the function <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> for this, by default it implements a least squares estimate:</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb182-1"><a href="practical-linear-regression.html#cb182-1"></a><span class="co"># Use the lm function to fit the data</span></span>
+<span id="cb182-2"><a href="practical-linear-regression.html#cb182-2"></a>ls_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> sim_data)</span>
+<span id="cb182-3"><a href="practical-linear-regression.html#cb182-3"></a></span>
+<span id="cb182-4"><a href="practical-linear-regression.html#cb182-4"></a><span class="co"># Display a summary of fit</span></span>
+<span id="cb182-5"><a href="practical-linear-regression.html#cb182-5"></a><span class="fu">summary</span>(ls_fit)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; 
+#&gt; Call:
+#&gt; lm(formula = y ~ x, data = sim_data)
+#&gt; 
+#&gt; Residuals:
+#&gt;      Min       1Q   Median       3Q      Max 
+#&gt; -1.69905 -0.41534  0.02851  0.41265  1.53651 
+#&gt; 
+#&gt; Coefficients:
+#&gt;             Estimate Std. Error t value Pr(&gt;|t|)    
+#&gt; (Intercept)  9.95698    0.06701   148.6   &lt;2e-16 ***
+#&gt; x           -7.94702    0.07417  -107.1   &lt;2e-16 ***
+#&gt; ---
+#&gt; Signif. codes:  
+#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt; 
+#&gt; Residual standard error: 0.6701 on 98 degrees of freedom
+#&gt; Multiple R-squared:  0.9915, Adjusted R-squared:  0.9914 
+#&gt; F-statistic: 1.148e+04 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>The output for <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> is an object (in this case <code>ls_fit</code>) which contains multiple variables. To access them there are some built in functions, e.g. <code><a href="https://rdrr.io/r/stats/coef.html">coef()</a></code>, <code><a href="https://rdrr.io/r/stats/residuals.html">residuals()</a></code>, and <code><a href="https://rdrr.io/r/stats/fitted.values.html">fitted()</a></code>. We will explore these in turn:</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb184-1"><a href="practical-linear-regression.html#cb184-1"></a><span class="co"># Extract coefficients as a named vector</span></span>
+<span id="cb184-2"><a href="practical-linear-regression.html#cb184-2"></a>ls_coef <span class="ot">&lt;-</span> <span class="fu">coef</span>(ls_fit)</span>
+<span id="cb184-3"><a href="practical-linear-regression.html#cb184-3"></a></span>
+<span id="cb184-4"><a href="practical-linear-regression.html#cb184-4"></a><span class="fu">print</span>(ls_coef)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; (Intercept)           x 
+#&gt;    9.956981   -7.947016</code></pre>
+<div class="sourceCode" id="cb186"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb186-1"><a href="practical-linear-regression.html#cb186-1"></a><span class="co"># Extract intercept and slope</span></span>
+<span id="cb186-2"><a href="practical-linear-regression.html#cb186-2"></a>b0_hat <span class="ot">&lt;-</span> ls_coef[<span class="dv">1</span>] <span class="co"># alternative ls_fit$coefficients[1]</span></span>
+<span id="cb186-3"><a href="practical-linear-regression.html#cb186-3"></a>b1_hat <span class="ot">&lt;-</span> ls_coef[<span class="dv">2</span>] <span class="co"># alternative ls_fit$coefficients[2]</span></span>
+<span id="cb186-4"><a href="practical-linear-regression.html#cb186-4"></a></span>
+<span id="cb186-5"><a href="practical-linear-regression.html#cb186-5"></a><span class="co"># Generate the predicted data based on estimated parameters</span></span>
+<span id="cb186-6"><a href="practical-linear-regression.html#cb186-6"></a>y_hat <span class="ot">&lt;-</span> b0_hat <span class="sc">+</span> b1_hat <span class="sc">*</span> x</span>
+<span id="cb186-7"><a href="practical-linear-regression.html#cb186-7"></a>sim_data<span class="sc">$</span>y_hat <span class="ot">&lt;-</span> y_hat <span class="co"># add to the existing data frame</span></span>
+<span id="cb186-8"><a href="practical-linear-regression.html#cb186-8"></a></span>
+<span id="cb186-9"><a href="practical-linear-regression.html#cb186-9"></a><span class="co"># Create scatter plot and lines for the original and fitted</span></span>
+<span id="cb186-10"><a href="practical-linear-regression.html#cb186-10"></a>lr_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(sim_data, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb186-11"><a href="practical-linear-regression.html#cb186-11"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb186-12"><a href="practical-linear-regression.html#cb186-12"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y_true), <span class="at">colour =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">1.3</span>) <span class="sc">+</span></span>
+<span id="cb186-13"><a href="practical-linear-regression.html#cb186-13"></a>  <span class="co"># plot predicted relationship in blue</span></span>
+<span id="cb186-14"><a href="practical-linear-regression.html#cb186-14"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y_hat), <span class="at">colour =</span> <span class="st">"blue"</span>)</span></code></pre></div>
+<pre><code>#&gt; Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+#&gt; ℹ Please use `linewidth` instead.
+#&gt; This warning is displayed once every 8 hours.
+#&gt; Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
+<div class="sourceCode" id="cb188"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb188-1"><a href="practical-linear-regression.html#cb188-1"></a><span class="co"># force Rstudio to display the plot</span></span>
+<span id="cb188-2"><a href="practical-linear-regression.html#cb188-2"></a>  <span class="fu">print</span>(lr_plot)</span></code></pre></div>
+<div class="inline-figure"><img src="13-linear-regression_files/figure-html/lm-fit-1.png" width="95%" style="display: block; margin: auto;"></div>
+<p>The estimated parameters and the plot shows a good correspondence between fitted regression parameters and the true relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span>. We can check this by plotting the residuals, this data is stored as the <code>residuals</code> parameter in the <code>ls_fit</code> object.</p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb189-1"><a href="practical-linear-regression.html#cb189-1"></a><span class="co"># Residuals</span></span>
+<span id="cb189-2"><a href="practical-linear-regression.html#cb189-2"></a>ls_residual <span class="ot">&lt;-</span> <span class="fu">residuals</span>(ls_fit) <span class="co"># can also be accessed via ls_fit$residuals</span></span>
+<span id="cb189-3"><a href="practical-linear-regression.html#cb189-3"></a></span>
+<span id="cb189-4"><a href="practical-linear-regression.html#cb189-4"></a><span class="co"># scatter plot of residuals</span></span>
+<span id="cb189-5"><a href="practical-linear-regression.html#cb189-5"></a><span class="fu">plot</span>(ls_residual)</span></code></pre></div>
+<div class="inline-figure"><img src="13-linear-regression_files/figure-html/resid-scatter-1.png" width="95%" style="display: block; margin: auto;"></div>
+<p>A better way of summarising the data is to visualise them as a histogram:</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb190-1"><a href="practical-linear-regression.html#cb190-1"></a><span class="fu">hist</span>(ls_residual)</span></code></pre></div>
+<div class="inline-figure"><img src="13-linear-regression_files/figure-html/resid_hist-1.png" width="95%" style="display: block; margin: auto;"></div>
+<p>We expect the mean and variance of the residuals to be close to the level used to generate the data.</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb191-1"><a href="practical-linear-regression.html#cb191-1"></a><span class="fu">print</span>(<span class="fu">mean</span>(ls_residual))</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 1.776357e-17</code></pre>
+<div class="sourceCode" id="cb193"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb193-1"><a href="practical-linear-regression.html#cb193-1"></a><span class="fu">print</span>(<span class="fu">var</span>(ls_residual))</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 0.4444955</code></pre>
+<p>This is as expected since subtracting a good fit from the data leaves <span class="math inline">\(\epsilon\)</span> which has <span class="math inline">\(0\)</span> mean and <span class="math inline">\(0.5\)</span> variance.</p>
+</div>
+<div id="maximum-likelihood-estimation" class="section level3" number="8.3.2">
+<h3>
+<span class="header-section-number">8.3.2</span> Maximum likelihood estimation<a class="anchor" aria-label="anchor" href="#maximum-likelihood-estimation"><i class="fas fa-link"></i></a>
+</h3>
+<p>Next you will look at maximum likelihood estimation based on the same data you simulated earlier. This is a bit more involved as it requires you to explicitly write the function you wish to minimise. The function we use is part of the <code>bbmle</code> package.</p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb195-1"><a href="practical-linear-regression.html#cb195-1"></a><span class="co"># Loading the required package</span></span>
+<span id="cb195-2"><a href="practical-linear-regression.html#cb195-2"></a><span class="fu">library</span>(bbmle)</span>
+<span id="cb195-3"><a href="practical-linear-regression.html#cb195-3"></a></span>
+<span id="cb195-4"><a href="practical-linear-regression.html#cb195-4"></a><span class="co"># function that will be minimised. It takes as arguments all parameters</span></span>
+<span id="cb195-5"><a href="practical-linear-regression.html#cb195-5"></a><span class="co"># Here we are helped by the way R works we don't have to explicitly pass x.</span></span>
+<span id="cb195-6"><a href="practical-linear-regression.html#cb195-6"></a><span class="co"># The function will use the existing estimates in the environment</span></span>
+<span id="cb195-7"><a href="practical-linear-regression.html#cb195-7"></a>mle_ll <span class="ot">&lt;-</span> <span class="cf">function</span>(beta0, beta1, sigma) {</span>
+<span id="cb195-8"><a href="practical-linear-regression.html#cb195-8"></a>  <span class="co"># first we predict the response variable based on the guess for our response</span></span>
+<span id="cb195-9"><a href="practical-linear-regression.html#cb195-9"></a>  y_pred <span class="ot">=</span> beta0 <span class="sc">+</span> beta1 <span class="sc">*</span> x</span>
+<span id="cb195-10"><a href="practical-linear-regression.html#cb195-10"></a></span>
+<span id="cb195-11"><a href="practical-linear-regression.html#cb195-11"></a>  <span class="co"># next we calculate the normal distribution based on the predicted value</span></span>
+<span id="cb195-12"><a href="practical-linear-regression.html#cb195-12"></a>  <span class="co"># the guess for sigma and return the log</span></span>
+<span id="cb195-13"><a href="practical-linear-regression.html#cb195-13"></a>  log_lh <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(y, <span class="at">mean =</span> y_pred, <span class="at">sd =</span> sigma, <span class="at">log =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb195-14"><a href="practical-linear-regression.html#cb195-14"></a></span>
+<span id="cb195-15"><a href="practical-linear-regression.html#cb195-15"></a>  <span class="co">#  We returnr the negative sum of the log likelihood</span></span>
+<span id="cb195-16"><a href="practical-linear-regression.html#cb195-16"></a>  <span class="fu">return</span>(<span class="sc">-</span><span class="fu">sum</span>(log_lh))</span>
+<span id="cb195-17"><a href="practical-linear-regression.html#cb195-17"></a>}</span>
+<span id="cb195-18"><a href="practical-linear-regression.html#cb195-18"></a></span>
+<span id="cb195-19"><a href="practical-linear-regression.html#cb195-19"></a><span class="co"># This is the function that actually performs the estimation</span></span>
+<span id="cb195-20"><a href="practical-linear-regression.html#cb195-20"></a><span class="co"># The first variable here is the function we will use</span></span>
+<span id="cb195-21"><a href="practical-linear-regression.html#cb195-21"></a><span class="co"># The second variable passed is a list of initial guesses of parameters</span></span>
+<span id="cb195-22"><a href="practical-linear-regression.html#cb195-22"></a>mle_fit <span class="ot">&lt;-</span> <span class="fu">mle2</span>(mle_ll, <span class="at">start =</span> <span class="fu">list</span>(<span class="at">beta0 =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">beta1 =</span> <span class="dv">20</span>, <span class="at">sigma =</span> <span class="dv">10</span>))</span>
+<span id="cb195-23"><a href="practical-linear-regression.html#cb195-23"></a></span>
+<span id="cb195-24"><a href="practical-linear-regression.html#cb195-24"></a><span class="co"># With the same summary function as above we can output a summary of the fit</span></span>
+<span id="cb195-25"><a href="practical-linear-regression.html#cb195-25"></a><span class="fu">summary</span>(mle_fit)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; Maximum likelihood estimation
+#&gt; 
+#&gt; Call:
+#&gt; mle2(minuslogl = mle_ll, start = list(beta0 = -1, beta1 = 20, 
+#&gt;     sigma = 10))
+#&gt; 
+#&gt; Coefficients:
+#&gt;        Estimate Std. Error  z value     Pr(z)    
+#&gt; beta0  9.957019   0.066336  150.099 &lt; 2.2e-16 ***
+#&gt; beta1 -7.947005   0.073426 -108.231 &lt; 2.2e-16 ***
+#&gt; sigma  0.663347   0.046904   14.143 &lt; 2.2e-16 ***
+#&gt; ---
+#&gt; Signif. codes:  
+#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt; 
+#&gt; -2 log L: 201.7011</code></pre>
+<p>The estimated parameters using the maximum likelihood are also a very good estimate of the true values.</p>
+</div>
+</div>
+<div id="effect-of-variance" class="section level2" number="8.4">
+<h2>
+<span class="header-section-number">8.4</span> Effect of variance<a class="anchor" aria-label="anchor" href="#effect-of-variance"><i class="fas fa-link"></i></a>
+</h2>
+<p>Now investigate the quality of the predictions further by simulating more data sets and seeing how the variance affects the quality of the fit as indicated by the mean-squared error (mse).</p>
+<p>To start you will define some parameter for the simulations, the number of simulations to run for each variance, and the variance values to try.</p>
+<div class="sourceCode" id="cb197"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb197-1"><a href="practical-linear-regression.html#cb197-1"></a><span class="co"># number of simulations for each noise level</span></span>
+<span id="cb197-2"><a href="practical-linear-regression.html#cb197-2"></a>n_simulations <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb197-3"><a href="practical-linear-regression.html#cb197-3"></a></span>
+<span id="cb197-4"><a href="practical-linear-regression.html#cb197-4"></a><span class="co"># A vector of noise levels to try</span></span>
+<span id="cb197-5"><a href="practical-linear-regression.html#cb197-5"></a>sigma_v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.4</span>, <span class="fl">1.0</span>, <span class="fl">2.0</span>, <span class="fl">4.0</span>, <span class="fl">6.0</span>, <span class="fl">8.0</span>)</span>
+<span id="cb197-6"><a href="practical-linear-regression.html#cb197-6"></a>n_sigma <span class="ot">&lt;-</span> <span class="fu">length</span>(sigma_v)</span>
+<span id="cb197-7"><a href="practical-linear-regression.html#cb197-7"></a></span>
+<span id="cb197-8"><a href="practical-linear-regression.html#cb197-8"></a><span class="co"># Create a matrix to store results</span></span>
+<span id="cb197-9"><a href="practical-linear-regression.html#cb197-9"></a>mse_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> n_simulations, <span class="at">ncol =</span> n_sigma)</span>
+<span id="cb197-10"><a href="practical-linear-regression.html#cb197-10"></a></span>
+<span id="cb197-11"><a href="practical-linear-regression.html#cb197-11"></a><span class="co"># name row and column</span></span>
+<span id="cb197-12"><a href="practical-linear-regression.html#cb197-12"></a><span class="fu">rownames</span>(mse_matrix) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>n_simulations)</span>
+<span id="cb197-13"><a href="practical-linear-regression.html#cb197-13"></a><span class="fu">colnames</span>(mse_matrix) <span class="ot">&lt;-</span> sigma_v</span></code></pre></div>
+<p>Next we will write a nested <code>for</code> loop. The first loop will be over the variances and a second loop over the number of repeats. We will simulate the data, perform a fit with <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>. We can use the <code><a href="https://rdrr.io/r/stats/fitted.values.html">fitted()</a></code> function on the resulting object to extract the fitted values <span class="math inline">\(\hat{y}\)</span> and use this to compute the mean-squared error from the true value <span class="math inline">\(y\)</span>.</p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb198-1"><a href="practical-linear-regression.html#cb198-1"></a><span class="co"># loop over variance</span></span>
+<span id="cb198-2"><a href="practical-linear-regression.html#cb198-2"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sigma) {</span>
+<span id="cb198-3"><a href="practical-linear-regression.html#cb198-3"></a>  sigma2 <span class="ot">&lt;-</span> sigma_v[i]</span>
+<span id="cb198-4"><a href="practical-linear-regression.html#cb198-4"></a></span>
+<span id="cb198-5"><a href="practical-linear-regression.html#cb198-5"></a>  <span class="co"># for each simulation</span></span>
+<span id="cb198-6"><a href="practical-linear-regression.html#cb198-6"></a>  <span class="cf">for</span> (it <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_simulations) {</span>
+<span id="cb198-7"><a href="practical-linear-regression.html#cb198-7"></a></span>
+<span id="cb198-8"><a href="practical-linear-regression.html#cb198-8"></a>    <span class="co"># Simulate the data</span></span>
+<span id="cb198-9"><a href="practical-linear-regression.html#cb198-9"></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb198-10"><a href="practical-linear-regression.html#cb198-10"></a>    e <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fu">sqrt</span>(sigma2))</span>
+<span id="cb198-11"><a href="practical-linear-regression.html#cb198-11"></a>    y <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> x <span class="sc">+</span> e</span>
+<span id="cb198-12"><a href="practical-linear-regression.html#cb198-12"></a></span>
+<span id="cb198-13"><a href="practical-linear-regression.html#cb198-13"></a>    <span class="co"># set up a data frame and run lm()</span></span>
+<span id="cb198-14"><a href="practical-linear-regression.html#cb198-14"></a>    sim_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)</span>
+<span id="cb198-15"><a href="practical-linear-regression.html#cb198-15"></a>    lm_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> sim_data)</span>
+<span id="cb198-16"><a href="practical-linear-regression.html#cb198-16"></a></span>
+<span id="cb198-17"><a href="practical-linear-regression.html#cb198-17"></a>    <span class="co"># compute the mean squared error between the fit and the actual y's</span></span>
+<span id="cb198-18"><a href="practical-linear-regression.html#cb198-18"></a>    y_hat <span class="ot">&lt;-</span> <span class="fu">fitted</span>(lm_fit)</span>
+<span id="cb198-19"><a href="practical-linear-regression.html#cb198-19"></a>    mse_matrix[it, i] <span class="ot">&lt;-</span> <span class="fu">mean</span>((y_hat <span class="sc">-</span> y)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb198-20"><a href="practical-linear-regression.html#cb198-20"></a></span>
+<span id="cb198-21"><a href="practical-linear-regression.html#cb198-21"></a>  }</span>
+<span id="cb198-22"><a href="practical-linear-regression.html#cb198-22"></a>}</span></code></pre></div>
+<p>We created a matrix to store the mse values, but to plot them using <code>ggplot2</code> we have to convert them to a <code>data.frame</code>. This can be done using the <code>melt()</code> function form the <code>reshape2</code> library. We can compare the results using boxplots.</p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb199-1"><a href="practical-linear-regression.html#cb199-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb199-2"><a href="practical-linear-regression.html#cb199-2"></a></span>
+<span id="cb199-3"><a href="practical-linear-regression.html#cb199-3"></a><span class="co"># convert the matrix into a data frame for ggplot2</span></span>
+<span id="cb199-4"><a href="practical-linear-regression.html#cb199-4"></a>mse_df <span class="ot">&lt;-</span> <span class="fu">melt</span>(mse_matrix)</span>
+<span id="cb199-5"><a href="practical-linear-regression.html#cb199-5"></a><span class="co"># rename the columns</span></span>
+<span id="cb199-6"><a href="practical-linear-regression.html#cb199-6"></a><span class="fu">names</span>(mse_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Simulation"</span>, <span class="st">"variance"</span>, <span class="st">"MSE"</span>)</span>
+<span id="cb199-7"><a href="practical-linear-regression.html#cb199-7"></a></span>
+<span id="cb199-8"><a href="practical-linear-regression.html#cb199-8"></a><span class="co"># now use a boxplot to look at the relationship between</span></span>
+<span id="cb199-9"><a href="practical-linear-regression.html#cb199-9"></a><span class="co"># mean-squared prediction error and variance</span></span>
+<span id="cb199-10"><a href="practical-linear-regression.html#cb199-10"></a>mse_plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mse_df, <span class="fu">aes</span>(<span class="at">x =</span> variance, <span class="at">y =</span> MSE)) <span class="sc">+</span></span>
+<span id="cb199-11"><a href="practical-linear-regression.html#cb199-11"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">group =</span> variance))</span>
+<span id="cb199-12"><a href="practical-linear-regression.html#cb199-12"></a></span>
+<span id="cb199-13"><a href="practical-linear-regression.html#cb199-13"></a><span class="fu">print</span>(mse_plt)</span></code></pre></div>
+<div class="inline-figure"><img src="13-linear-regression_files/figure-html/effect-plot-1.png" width="95%" style="display: block; margin: auto;"></div>
+<p>You can see that the variances of the mse and the value of the mse go up with increasing variance in the simulation.</p>
+<p>What changes do you need to make to the above function to plot the accuracy of the estimated regression coefficients as a function of variance?</p>
+</div>
+<div id="LR-ex1" class="section level2 infobox" number="8.5">
+<h2>
+<span class="header-section-number">8.5</span> Exercise I: Correlation<a class="anchor" aria-label="anchor" href="#LR-ex1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Read in the data in <code>stork.txt</code>, compute the correlation and comment on it.</p>
+<p>The data represents <code>no of storks</code> (column 1) in Oldenburg Germany from <span class="math inline">\(1930 - 1939\)</span> and the number of people (column 2).</p>
+<button class="button">
+<a href="solutions-linear-regression-and-correlation.html#LR-sol1">Solution</a>
+</button>
+</div>
+<div id="LR-ex2" class="section level2 infobox" number="8.6">
+<h2>
+<span class="header-section-number">8.6</span> Exercise II: Linear Regression<a class="anchor" aria-label="anchor" href="#LR-ex2"><i class="fas fa-link"></i></a>
+</h2>
+<p>Fit a simple linear model to the two data sets supplied (<code>lr_data1.Rdata</code> and <code>lr_data2.Rdata</code>). In both files the <span class="math inline">\((x,y)\)</span> data is saved in two vectors, <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</p>
+<p>Download the data from Canvas, you can read it into <code>R</code> and plot it with the following commands:</p>
+<div class="sourceCode" id="cb200"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb200-1"><a href="practical-linear-regression.html#cb200-1"></a><span class="fu">load</span>(<span class="st">"lr_data1.Rdata"</span>)</span>
+<span id="cb200-2"><a href="practical-linear-regression.html#cb200-2"></a><span class="fu">plot</span>(x, y)</span></code></pre></div>
+<div class="inline-figure"><img src="13-linear-regression_files/figure-html/ex-1-1.png" width="95%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb201-1"><a href="practical-linear-regression.html#cb201-1"></a><span class="fu">load</span>(<span class="st">"lr_data2.Rdata"</span>)</span>
+<span id="cb201-2"><a href="practical-linear-regression.html#cb201-2"></a><span class="fu">plot</span>(x, y)</span></code></pre></div>
+<div class="inline-figure"><img src="13-linear-regression_files/figure-html/ex-1-2.png" width="95%" style="display: block; margin: auto;"></div>
+<p>Fit the linear model and comment on the differences between the two data-sets you have used here.</p>
+<button class="button">
+<a href="solutions-linear-regression-and-correlation.html#LR-sol2">Solution</a>
+</button>
+</div>
+<div id="LR-ex3" class="section level2 infobox" number="8.7">
+<h2>
+<span class="header-section-number">8.7</span> Exercise III: Linear Regression<a class="anchor" aria-label="anchor" href="#LR-ex3"><i class="fas fa-link"></i></a>
+</h2>
+<p>Investigate how the sample size will affect the quality of the fit using mse, use the code for investigating the affect of variance as inspiration.</p>
+<button class="button">
+<a href="solutions-linear-regression-and-correlation.html#LR-sol3">Solution</a>
+</button>
+</div>
+
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="model-answers-computational-testing.html">Model Answers: Computational Testing</a></div>
+<div class="next"><a href="solutions-linear-regression-and-correlation.html">Solutions: Linear regression and Correlation</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#practical-linear-regression"><span class="header-section-number">8</span> Practical: Linear regression</a></li>
+<li><a class="nav-link" href="#data"><span class="header-section-number">8.1</span> Data</a></li>
+<li><a class="nav-link" href="#simulating-data-1"><span class="header-section-number">8.2</span> Simulating data</a></li>
+<li>
+<a class="nav-link" href="#fitting-simple-linear-regression-model"><span class="header-section-number">8.3</span> Fitting simple linear regression model</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#least-squared-estimation"><span class="header-section-number">8.3.1</span> Least squared estimation</a></li>
+<li><a class="nav-link" href="#maximum-likelihood-estimation"><span class="header-section-number">8.3.2</span> Maximum likelihood estimation</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#effect-of-variance"><span class="header-section-number">8.4</span> Effect of variance</a></li>
+<li><a class="nav-link" href="#LR-ex1"><span class="header-section-number">8.5</span> Exercise I: Correlation</a></li>
+<li><a class="nav-link" href="#LR-ex2"><span class="header-section-number">8.6</span> Exercise II: Linear Regression</a></li>
+<li><a class="nav-link" href="#LR-ex3"><span class="header-section-number">8.7</span> Exercise III: Linear Regression</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/anasrana/ems-practicals/blob/master/13-linear-regression.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/anasrana/ems-practicals/edit/master/13-linear-regression.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2023-11-09.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

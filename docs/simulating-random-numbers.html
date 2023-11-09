@@ -62,6 +62,8 @@
 <li><a class="" href="sol-ex-CI.html">Model Answer: Confidence Interval</a></li>
 <li><a class="" href="computational-testing-techniques.html"><span class="header-section-number">7</span> Computational Testing Techniques</a></li>
 <li><a class="" href="model-answers-computational-testing.html">Model Answers: Computational Testing</a></li>
+<li><a class="" href="practical-linear-regression.html"><span class="header-section-number">8</span> Practical: Linear regression</a></li>
+<li><a class="" href="solutions-linear-regression-and-correlation.html">Solutions: Linear regression and Correlation</a></li>
 </ul>
 
         <div class="book-extra">
@@ -77,11 +79,11 @@
 <p>The function <code>sample</code> allows you to take a sample of the specified size from the elements of a vector <code>x</code>using sampling with or without replacement. You can use <code><a href="https://rdrr.io/r/base/sample.html">?sample</a></code> to read the documentation describing the command.</p>
 <p>In the following, we will use the <code>sample</code> function to make 10,000 draws from the set of numbers <code>1</code>, <code>2</code>, <code>3</code> and <code>4</code> and display the distribution of the sampled values using a histogram.</p>
 <p>First, we define a vector called <code>x</code> which contains the numbers <code>1</code>, <code>2</code>, <code>3</code>, and <code>4</code>. The function <code>c</code> allows us to combine these four numbers together into one vector:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb2-1"><a href="simulating-random-numbers.html#cb2-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb5-1"><a href="simulating-random-numbers.html#cb5-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span></code></pre></div>
 <p>We now use the function <code>sample</code> to pick from those four numbers in <code>x</code> 10,000 times. The result, the 10,000 numbers chosen, is store in <code>out</code>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb3-1"><a href="simulating-random-numbers.html#cb3-1"></a>out <span class="ot">&lt;-</span> <span class="fu">sample</span>(x, <span class="dv">10000</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb6-1"><a href="simulating-random-numbers.html#cb6-1"></a>out <span class="ot">&lt;-</span> <span class="fu">sample</span>(x, <span class="dv">10000</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Lets plot a histogram of the values picked:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb4-1"><a href="simulating-random-numbers.html#cb4-1"></a>hist_out <span class="ot">&lt;-</span> <span class="fu">hist</span>(out, <span class="at">main =</span> <span class="st">''</span>, <span class="at">xlab =</span> <span class="st">'Values'</span>, <span class="at">ylab =</span> <span class="st">'Frequency'</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb7-1"><a href="simulating-random-numbers.html#cb7-1"></a>hist_out <span class="ot">&lt;-</span> <span class="fu">hist</span>(out, <span class="at">main =</span> <span class="st">''</span>, <span class="at">xlab =</span> <span class="st">'Values'</span>, <span class="at">ylab =</span> <span class="st">'Frequency'</span>)</span></code></pre></div>
 <div class="inline-figure"><img src="04-simulation_files/figure-html/unnamed-chunk-3-1.png" width="95%" style="display: block; margin: auto;"></div>
 <p>We picked each number with equal probability so the histogram shows each number is equally likely to have been chosen.</p>
 <div id="exercise" class="section level2 infobox" number="1.1">
@@ -95,9 +97,9 @@
 <blockquote>
 <p>What is the difference in the output <code>out1</code> and <code>out2</code> in the following piece of code?</p>
 </blockquote>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb5-1"><a href="simulating-random-numbers.html#cb5-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">9</span> )</span>
-<span id="cb5-2"><a href="simulating-random-numbers.html#cb5-2"></a>out1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(x, <span class="dv">10</span>, <span class="at">replace=</span><span class="cn">FALSE</span>)</span>
-<span id="cb5-3"><a href="simulating-random-numbers.html#cb5-3"></a>out2 <span class="ot">&lt;-</span> <span class="fu">sample</span>(x, <span class="dv">10</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb8-1"><a href="simulating-random-numbers.html#cb8-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">9</span> )</span>
+<span id="cb8-2"><a href="simulating-random-numbers.html#cb8-2"></a>out1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(x, <span class="dv">10</span>, <span class="at">replace=</span><span class="cn">FALSE</span>)</span>
+<span id="cb8-3"><a href="simulating-random-numbers.html#cb8-3"></a>out2 <span class="ot">&lt;-</span> <span class="fu">sample</span>(x, <span class="dv">10</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
 <div id="solution" class="section level3" number="1.1.2">
 <h3>
@@ -116,17 +118,17 @@
 </blockquote>
 <p><em>Hint 1</em>: Type <code><a href="https://rdrr.io/r/base/sample.html">?sample.int</a></code> in the console to get help on this function.</p>
 <p><em>Hint 2</em>: You may find it useful to use the function <code>table</code>. Type <code><a href="https://rdrr.io/r/base/table.html">?table</a></code> in the console to get help on this function.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb6-1"><a href="simulating-random-numbers.html#cb6-1"></a>rolls_from_sample <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="at">size=</span><span class="dv">5000</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
-<span id="cb6-2"><a href="simulating-random-numbers.html#cb6-2"></a>rolls_from_sample.int <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">6</span>, <span class="at">size=</span><span class="dv">5000</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
-<span id="cb6-3"><a href="simulating-random-numbers.html#cb6-3"></a></span>
-<span id="cb6-4"><a href="simulating-random-numbers.html#cb6-4"></a><span class="fu">table</span>(rolls_from_sample)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb9-1"><a href="simulating-random-numbers.html#cb9-1"></a>rolls_from_sample <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="at">size=</span><span class="dv">5000</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb9-2"><a href="simulating-random-numbers.html#cb9-2"></a>rolls_from_sample.int <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">6</span>, <span class="at">size=</span><span class="dv">5000</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb9-3"><a href="simulating-random-numbers.html#cb9-3"></a></span>
+<span id="cb9-4"><a href="simulating-random-numbers.html#cb9-4"></a><span class="fu">table</span>(rolls_from_sample)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; rolls_from_sample
 #&gt;   1   2   3   4   5   6 
-#&gt; 852 823 828 860 819 818</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb8-1"><a href="simulating-random-numbers.html#cb8-1"></a><span class="fu">table</span>(rolls_from_sample.int)</span></code></pre></div>
+#&gt; 847 822 819 817 855 840</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb11-1"><a href="simulating-random-numbers.html#cb11-1"></a><span class="fu">table</span>(rolls_from_sample.int)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; rolls_from_sample.int
 #&gt;   1   2   3   4   5   6 
-#&gt; 858 836 824 785 907 790</code></pre>
+#&gt; 893 815 808 842 841 801</code></pre>
 <p>Both gives a uniform distribution over the numbers 1-6. The function <code>sample.int</code> is a specialised version of sample for sampling integers. Many <code>R</code> libraries have specialised versions of more general functions to do specific tasks under certain conditions.</p>
 </div>
 
@@ -162,7 +164,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2023-11-06.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2023-11-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
