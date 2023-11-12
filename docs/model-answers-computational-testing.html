@@ -64,6 +64,7 @@
 <li><a class="active" href="model-answers-computational-testing.html">Model Answers: Computational Testing</a></li>
 <li><a class="" href="practical-linear-regression.html"><span class="header-section-number">8</span> Practical: Linear regression</a></li>
 <li><a class="" href="solutions-linear-regression-and-correlation.html">Solutions: Linear regression and Correlation</a></li>
+<li><a class="" href="practical-principal-component-analysis.html"><span class="header-section-number">9</span> Practical: Principal component analysis</a></li>
 </ul>
 
         <div class="book-extra">
@@ -144,32 +145,32 @@
 <span id="cb119-15"><a href="model-answers-computational-testing.html#cb119-15"></a></span>
 <span id="cb119-16"><a href="model-answers-computational-testing.html#cb119-16"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># generate some artificial data from a N(0, 1)</span></span>
 <span id="cb119-17"><a href="model-answers-computational-testing.html#cb119-17"></a>out <span class="ot">&lt;-</span> <span class="fu">z_test</span>(x, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># null should not be rejected!</span></span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  z = 0.078 
-#&gt;  one-tailed probability = 0.469 
-#&gt;  two-tailed probability = 0.938</code></pre>
+<pre class="bg-info"><code>#&gt;  z = 0.165 
+#&gt;  one-tailed probability = 0.434 
+#&gt;  two-tailed probability = 0.868</code></pre>
 <div class="sourceCode" id="cb121"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb121-1"><a href="model-answers-computational-testing.html#cb121-1"></a><span class="fu">print</span>(out)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; $z
-#&gt; [1] 0.078
+#&gt; [1] 0.165
 #&gt; 
 #&gt; $one_p
-#&gt; [1] 0.469
+#&gt; [1] 0.434
 #&gt; 
 #&gt; $two_p
-#&gt; [1] 0.938</code></pre>
+#&gt; [1] 0.868</code></pre>
 <div class="sourceCode" id="cb123"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb123-1"><a href="model-answers-computational-testing.html#cb123-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># generate some artificial data from a N(1, 1)</span></span>
 <span id="cb123-2"><a href="model-answers-computational-testing.html#cb123-2"></a>out <span class="ot">&lt;-</span> <span class="fu">z_test</span>(x, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># null should be rejected!</span></span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  z = 3.428 
-#&gt;  one-tailed probability = 0 
-#&gt;  two-tailed probability = 0</code></pre>
+<pre class="bg-info"><code>#&gt;  z = 2.028 
+#&gt;  one-tailed probability = 0.021 
+#&gt;  two-tailed probability = 0.042</code></pre>
 <div class="sourceCode" id="cb125"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb125-1"><a href="model-answers-computational-testing.html#cb125-1"></a><span class="fu">print</span>(out)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; $z
-#&gt; [1] 3.428
+#&gt; [1] 2.028
 #&gt; 
 #&gt; $one_p
-#&gt; [1] 0
+#&gt; [1] 0.021
 #&gt; 
 #&gt; $two_p
-#&gt; [1] 0</code></pre>
+#&gt; [1] 0.042</code></pre>
 <button class="button">
 <a href="computational-testing-techniques.html#ht-ex3">Back to exercise</a>
 </button>
@@ -393,7 +394,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2023-11-09.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2023-11-12.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
