@@ -73,3 +73,10 @@ LR-ex1
 LR-ex2
 LR-ex3
 comparison-of-data
+practical-principal-component-analysis
+data-1
+introduction
+example-pca-on-the-mtcars-dataset
+creating-plots-for-pca
+exercise-i
+example-single-cell-data

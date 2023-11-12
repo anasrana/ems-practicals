@@ -1,6 +1,6 @@
 # Solutions: Linear regression and Correlation {-}
 
-## Exercise I: Correlation {- #LR-sol1}
+## Solution Exercise I: Correlation {- #LR-sol1}
 
 Read in the data in `stork.txt`, compute the correlation and comment on it.
 
