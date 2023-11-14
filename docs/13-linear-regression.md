@@ -415,8 +415,4 @@ Fit the linear model and comment on the differences between the two data-sets yo
 
 Investigate how the sample size will affect the quality of the fit using mse, use the code for investigating the affect of variance as inspiration.
 
-<button class="button">
-[Solution](#LR-sol3)
-</button>
-
 :::
