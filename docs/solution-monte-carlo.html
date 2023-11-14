@@ -65,6 +65,8 @@
 <li><a class="" href="practical-linear-regression.html"><span class="header-section-number">8</span> Practical: Linear regression</a></li>
 <li><a class="" href="solutions-linear-regression-and-correlation.html">Solutions: Linear regression and Correlation</a></li>
 <li><a class="" href="practical-principal-component-analysis.html"><span class="header-section-number">9</span> Practical: Principal component analysis</a></li>
+<li><a class="" href="practical-multiple-regression.html"><span class="header-section-number">10</span> Practical: Multiple regression</a></li>
+<li><a class="" href="practical-generalised-linear-models.html"><span class="header-section-number">11</span> Practical: Generalised linear models</a></li>
 </ul>
 
         <div class="book-extra">
@@ -108,14 +110,14 @@
 <span id="cb43-26"><a href="solution-monte-carlo.html#cb43-26"></a>}</span>
 <span id="cb43-27"><a href="solution-monte-carlo.html#cb43-27"></a></span>
 <span id="cb43-28"><a href="solution-monte-carlo.html#cb43-28"></a><span class="fu">print</span>(accuracy)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 2.655254e-03 5.055254e-03 2.855254e-03 1.525393e-05
-#&gt; [5] 1.055254e-03 1.295254e-03</code></pre>
+<pre class="bg-info"><code>#&gt; [1]  0.013655254 -0.001544746 -0.001844746 -0.004704746
+#&gt; [5] -0.002664746  0.001365254</code></pre>
 <div class="sourceCode" id="cb45"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb45-1"><a href="solution-monte-carlo.html#cb45-1"></a><span class="fu">print</span>(accuracy_sd)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 0.13730450 0.06418911 0.05346915 0.03150229 0.02089899
-#&gt; [6] 0.01424924</code></pre>
+<pre class="bg-info"><code>#&gt; [1] 0.13807844 0.07415490 0.04522391 0.02794349 0.02101317
+#&gt; [6] 0.01542155</code></pre>
 <div class="sourceCode" id="cb47"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb47-1"><a href="solution-monte-carlo.html#cb47-1"></a><span class="fu">print</span>(accuracy <span class="sc">+</span> accuracy_sd)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 0.13995975 0.06924437 0.05632440 0.03151755 0.02195424
-#&gt; [6] 0.01554449</code></pre>
+<pre class="bg-info"><code>#&gt; [1] 0.15173370 0.07261016 0.04337916 0.02323875 0.01834842
+#&gt; [6] 0.01678680</code></pre>
 <p>Next, we will plot the results. Here we will make use of <code>ggplot2</code> a library to create nice plots without much effort. The input need to be a <code>data.frame</code> so we will need to create one based on the data.</p>
 <div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb49-1"><a href="solution-monte-carlo.html#cb49-1"></a><span class="co"># load ggplot</span></span>
 <span id="cb49-2"><a href="solution-monte-carlo.html#cb49-2"></a><span class="fu">library</span>(ggplot2)</span>
@@ -125,12 +127,12 @@
 <span id="cb49-6"><a href="solution-monte-carlo.html#cb49-6"></a></span>
 <span id="cb49-7"><a href="solution-monte-carlo.html#cb49-7"></a><span class="fu">print</span>(df)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;   sample_sizes     accuracy accuracy_sd
-#&gt; 1           10 2.655254e-03  0.13730450
-#&gt; 2           50 5.055254e-03  0.06418911
-#&gt; 3          100 2.855254e-03  0.05346915
-#&gt; 4          250 1.525393e-05  0.03150229
-#&gt; 5          500 1.055254e-03  0.02089899
-#&gt; 6         1000 1.295254e-03  0.01424924</code></pre>
+#&gt; 1           10  0.013655254  0.13807844
+#&gt; 2           50 -0.001544746  0.07415490
+#&gt; 3          100 -0.001844746  0.04522391
+#&gt; 4          250 -0.004704746  0.02794349
+#&gt; 5          500 -0.002664746  0.02101317
+#&gt; 6         1000  0.001365254  0.01542155</code></pre>
 <div class="sourceCode" id="cb51"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb51-1"><a href="solution-monte-carlo.html#cb51-1"></a><span class="co"># use ggplot to plot lines for the mean accuracy and error bars</span></span>
 <span id="cb51-2"><a href="solution-monte-carlo.html#cb51-2"></a><span class="co"># using the std dev</span></span>
 <span id="cb51-3"><a href="solution-monte-carlo.html#cb51-3"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> sample_sizes, <span class="at">y =</span> accuracy)) <span class="sc">+</span></span>
@@ -171,7 +173,7 @@
 <span id="cb52-13"><a href="solution-monte-carlo.html#cb52-13"></a>expected_score <span class="ot">&lt;-</span> <span class="fu">mean</span>(score_per_game) <span class="co"># average over all simulations</span></span>
 <span id="cb52-14"><a href="solution-monte-carlo.html#cb52-14"></a></span>
 <span id="cb52-15"><a href="solution-monte-carlo.html#cb52-15"></a><span class="fu">print</span>(expected_score)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 14.75</code></pre>
+<pre class="bg-info"><code>#&gt; [1] 15.55</code></pre>
 <button class="button">
 <a href="monte-carlo-methods.html#mc-expectation-1">Back to Exercise</a>
 </button>
@@ -202,7 +204,7 @@
 <span id="cb54-20"><a href="solution-monte-carlo.html#cb54-20"></a>}</span>
 <span id="cb54-21"><a href="solution-monte-carlo.html#cb54-21"></a></span>
 <span id="cb54-22"><a href="solution-monte-carlo.html#cb54-22"></a><span class="fu">print</span>(<span class="fu">mean</span>(game_score))</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 9.99</code></pre>
+<pre class="bg-info"><code>#&gt; [1] 9.19</code></pre>
 <div class="sourceCode" id="cb56"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb56-1"><a href="solution-monte-carlo.html#cb56-1"></a><span class="fu">plot</span>(game_score)</span></code></pre></div>
 <div class="inline-figure"><img src="09-monte-carlo_files/figure-html/unnamed-chunk-19-1.png" width="95%" style="display: block; margin: auto;"></div>
 <p>The games with score zero now corresponds to the number of games where we went bust (or genuinely ended the game with zero).</p>
@@ -244,7 +246,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2023-11-12.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2023-11-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
