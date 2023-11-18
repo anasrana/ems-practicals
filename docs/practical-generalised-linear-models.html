@@ -79,7 +79,7 @@
 <span class="header-section-number">11</span> Practical: Generalised linear models<a class="anchor" aria-label="anchor" href="#practical-generalised-linear-models"><i class="fas fa-link"></i></a>
 </h1>
 <p>In a genome-wide association study, we perform an experiment where we select <span class="math inline">\(n\)</span> individuals with a disease (cases) and <span class="math inline">\(n\)</span> individuals without the diseases (controls) and look for genetic differences between these two groups. In particular, we are interested in specific genetic variants (SNPs) that might induce some predisposition towards the disease.</p>
-<p>Suppose I observe the following genotypes for a SNP in 40,000 individuals (2,000 cases, 2,000 controls):</p>
+<p>Suppose I observe the following genotypes for a SNP in 40,000 individuals (20,000 cases, 20,000 controls):</p>
 <ul>
 <li>Genotypes: <code>AA</code> <code>Aa</code> <code>aa</code>
 </li>
@@ -94,6 +94,7 @@
 <span class="header-section-number">11.1</span> Data<a class="anchor" aria-label="anchor" href="#data-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>For this practical we will use some preprepared data-files. You will download instructions <a href="data-sets.html#data-glm">here</a> you can use these links to download them:</p>
+<!-- TODO: Fix links here -->
 <ul>
 <li>
 <code>gwas-cc-ex1.Rdata</code> (<a href="https://raw.github.com/anasrana/module1-practical_Bham/master/data/gwas-cc-ex1.Rdata">download</a>)</li>
@@ -203,13 +204,13 @@
 <h2>
 <span class="header-section-number">11.4</span> Negative binomial and Poisson regression<a class="anchor" aria-label="anchor" href="#negative-binomial-and-poisson-regression"><i class="fas fa-link"></i></a>
 </h2>
-<p>Molecular biologists study the behavior of protein expression in normal and cancerous tissues. The hypothesis is that the total number of over-expressed proteins depends on the histopathological-derived tumor subtype and an immune cell contexture measure.</p>
+<p>Molecular biologists study the behaviour of protein expression in normal and cancerous tissues. The hypothesis is that the total number of over-expressed proteins depends on the histopathological-derived tumour subtype and an immune cell contexture measure.</p>
 <p>You are provided with data on 314 tumours in the file <code>nb_data.Rdata</code>. The file contains one <code>data frame</code> with the following variables:</p>
 <ul>
 <li>
 <strong><code>overexpressed_proteins</code></strong>: response variable of interest.</li>
 <li>
-<strong><code>immunoscore</code></strong>: gives a standardized measure of immune cell contexture.</li>
+<strong><code>immunoscore</code></strong>: gives a standardised measure of immune cell contexture.</li>
 <li>
 <strong><code>tumor_subtype</code></strong>: three-level nominal variable indicating the histopathological sub-type of the tumour. The three levels are Unstable, Stable, and Complex</li>
 </ul>
@@ -393,10 +394,15 @@
 <span id="cb290-6"><a href="practical-generalised-linear-models.html#cb290-6"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Immunoscore"</span>,</span>
 <span id="cb290-7"><a href="practical-generalised-linear-models.html#cb290-7"></a>         <span class="at">y =</span> <span class="st">"Overexpressed Proteins"</span>) <span class="sc">+</span></span>
 <span id="cb290-8"><a href="practical-generalised-linear-models.html#cb290-8"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> gender)</span></code></pre></div>
-<pre><code>#&gt; Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+<pre><code>#&gt; Warning: Using `size` aesthetic for lines was
+#&gt; deprecated in ggplot2 3.4.0.
 #&gt; ℹ Please use `linewidth` instead.
-#&gt; This warning is displayed once every 8 hours.
-#&gt; Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
+#&gt; This warning is displayed once every
+#&gt; 8 hours.
+#&gt; Call
+#&gt; `lifecycle::last_lifecycle_warnings()`
+#&gt; to see where this warning was
+#&gt; generated.</code></pre>
 <div class="inline-figure"><img src="19-glm_files/figure-html/glm-plot-1.png" width="95%" style="display: block; margin: auto;"></div>
 
 </div>
@@ -437,7 +443,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2023-11-14.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2023-11-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

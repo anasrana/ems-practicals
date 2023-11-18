@@ -2,7 +2,7 @@
 
 In a genome-wide association study, we perform an experiment where we select $n$ individuals with a disease (cases) and $n$ individuals without the diseases (controls) and look for genetic differences between these two groups. In particular, we are interested in specific genetic variants (SNPs) that might induce some predisposition towards the disease.
 
-Suppose I observe the following genotypes for a SNP in 40,000 individuals (2,000 cases, 2,000 controls):
+Suppose I observe the following genotypes for a SNP in 40,000 individuals (20,000 cases, 20,000 controls):
 
 - Genotypes: `AA` `Aa` `aa`
 - Controls: `3 209 1788`
@@ -14,6 +14,7 @@ The cases seem to have relatively more `A` alleles than the controls. This might
 
 For this practical we will use some preprepared data-files. You will download instructions [here](#data-glm) you can use these links to download them:
 
+<!-- TODO: Fix links here -->
 - `gwas-cc-ex1.Rdata` ([download](https://raw.github.com/anasrana/module1-practical_Bham/master/data/gwas-cc-ex1.Rdata))
 - `gwas-cc-ex2.Rdata` ([download](https://raw.github.com/anasrana/module1-practical_Bham/master/data/gwas-cc-ex2.Rdata))
 - `nb_data.Rdata` ([download](https://raw.github.com/anasrana/module1-practical_Bham/master/data/nb_data.Rdata))
@@ -154,12 +155,12 @@ You should see a single SNP showing a strong association with disease status.
 
 ## Negative binomial and Poisson regression
 
-Molecular biologists study the behavior of protein expression in normal and cancerous tissues. The hypothesis is that the total number of over-expressed proteins depends on the histopathological-derived tumor subtype and an immune cell contexture measure.
+Molecular biologists study the behaviour of protein expression in normal and cancerous tissues. The hypothesis is that the total number of over-expressed proteins depends on the histopathological-derived tumour subtype and an immune cell contexture measure.
 
 You are provided with data on 314 tumours in the file `nb_data.Rdata`. The file contains one `data frame` with the following variables:
 
 - **`overexpressed_proteins`**: response variable of interest.
-- **`immunoscore`**: gives a standardized measure of immune cell contexture.
+- **`immunoscore`**: gives a standardised measure of immune cell contexture.
 - **`tumor_subtype`**: three-level nominal variable indicating the histopathological sub-type of the tumour. The three levels are Unstable, Stable, and Complex
 
 Let’s load some prerequisite R libraries and the data to produce some summary statistics (*install if required using `install.package()` command* ):
@@ -405,10 +406,15 @@ ggplot(new_data, aes(immunoscore, overexpressed_proteins)) +
 ```
 
 ```
-#> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+#> Warning: Using `size` aesthetic for lines was
+#> deprecated in ggplot2 3.4.0.
 #> ℹ Please use `linewidth` instead.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
+#> This warning is displayed once every
+#> 8 hours.
+#> Call
+#> `lifecycle::last_lifecycle_warnings()`
+#> to see where this warning was
+#> generated.
 ```
 
 <img src="19-glm_files/figure-html/glm-plot-1.png" width="95%" style="display: block; margin: auto;" />

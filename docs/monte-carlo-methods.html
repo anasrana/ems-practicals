@@ -101,7 +101,7 @@
 <span id="cb29-2"><a href="monte-carlo-methods.html#cb29-2"></a>mc_integral <span class="ot">&lt;-</span> <span class="fu">sum</span>(sims <span class="sc">&gt;=</span> <span class="dv">1</span> <span class="sc">&amp;</span> sims <span class="sc">&lt;=</span> <span class="dv">3</span>) <span class="sc">/</span> n</span></code></pre></div>
 <p>The result we get is:</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb30-1"><a href="monte-carlo-methods.html#cb30-1"></a><span class="fu">print</span>(mc_integral)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 0.366</code></pre>
+<pre class="bg-info"><code>#&gt; [1] 0.317</code></pre>
 <!-- TODO: Add some context about sims and mc_integral -->
 <p>The exact answer given using the cumulative distribution function <code>pnorm</code> in R is given by:</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb32-1"><a href="monte-carlo-methods.html#cb32-1"></a>mc_exact <span class="ot">=</span> <span class="fu">pnorm</span>(<span class="at">q=</span><span class="dv">3</span>, <span class="at">mean=</span><span class="dv">1</span>, <span class="at">sd=</span><span class="dv">2</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="at">q=</span><span class="dv">1</span>, <span class="at">mean=</span><span class="dv">1</span>, <span class="at">sd=</span><span class="dv">2</span>)</span>
@@ -157,7 +157,7 @@
 <span id="cb34-16"><a href="monte-carlo-methods.html#cb34-16"></a>pr_greater_than_three <span class="ot">&lt;-</span> <span class="fu">sum</span>(greater_than_three) <span class="sc">/</span> runs</span></code></pre></div>
 <p>For our MC estimate of the probability <span class="math inline">\(P(X&gt;3)\)</span> we get</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb35-1"><a href="monte-carlo-methods.html#cb35-1"></a><span class="fu">print</span>(pr_greater_than_three)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 0.81</code></pre>
+<pre class="bg-info"><code>#&gt; [1] 0.83</code></pre>
 <p>which we can compare to R’s built-in Binomial distribution function:</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb37-1"><a href="monte-carlo-methods.html#cb37-1"></a><span class="fu">print</span>(<span class="fu">pbinom</span>(<span class="dv">3</span>, <span class="dv">10</span>, <span class="fl">0.5</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>))</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; [1] 0.828125</code></pre>
@@ -285,7 +285,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2023-11-14.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2023-11-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
