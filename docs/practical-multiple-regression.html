@@ -364,10 +364,15 @@ The coefficients in the model can be interpreted as follows:</p>
 <span id="cb266-4"><a href="practical-multiple-regression.html#cb266-4"></a>                <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">col =</span> <span class="st">"darkgreen"</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb266-5"><a href="practical-multiple-regression.html#cb266-5"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"x"</span>, <span class="at">y =</span> <span class="st">"y"</span>,</span>
 <span id="cb266-6"><a href="practical-multiple-regression.html#cb266-6"></a>         <span class="at">title =</span> <span class="st">"Estimated response at each step during optimisation"</span>)</span></code></pre></div>
-<pre><code>#&gt; Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+<pre><code>#&gt; Warning: Using `size` aesthetic for lines was
+#&gt; deprecated in ggplot2 3.4.0.
 #&gt; ℹ Please use `linewidth` instead.
-#&gt; This warning is displayed once every 8 hours.
-#&gt; Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
+#&gt; This warning is displayed once every
+#&gt; 8 hours.
+#&gt; Call
+#&gt; `lifecycle::last_lifecycle_warnings()`
+#&gt; to see where this warning was
+#&gt; generated.</code></pre>
 <div class="inline-figure"><img src="16-multiple-regression_files/figure-html/vis_gd-3.png" width="95%" style="display: block; margin: auto;"></div>
 <p>Now compare these results to the ones obtained by fitting a linear model in R using the function <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>, how different are the results. Try to reproduce these plots with <span class="math inline">\(\alpha =\)</span> (0.02, 0.1, 0.5), and different number of iterations in the optimisation and compare the estimated <span class="math inline">\(\hat{\beta}_0\)</span>, and <span class="math inline">\(\hat{\beta}_1\)</span> to the values you use during the simulation step. This will give you an idea how important the right choice of these two parameters is.</p>
 
@@ -401,7 +406,7 @@ The coefficients in the model can be interpreted as follows:</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2023-11-14.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2023-11-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
