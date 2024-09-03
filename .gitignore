@@ -14,6 +14,16 @@ src/init.o
 .RData
 *.Rproj
 
+# Ignore data files
+Pollen2014.txt
+SupplementaryLabels.txt
+gwas-cc-ex1.Rdata
+gwas-cc-ex2.Rdata
+lr-data.Rdata
+lr-data1.Rdata
+lr-data2.Rdata
+nb_data.Rdata
+stork.txt
 
 # Example code in package build process
 *-Ex.R
@@ -70,7 +80,6 @@ vignettes/*.pdf
 
 /notes.md
 
-/*.Rdata
 /*.txt
 
 /*.vscode

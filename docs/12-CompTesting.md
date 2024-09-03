@@ -144,7 +144,7 @@ z <- (x_bar - mu) / (sigma / sqrt(n))
 print(z)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 7.643287
 ```
 
@@ -156,7 +156,7 @@ z_threshold <- qnorm(1 - 0.01, mean = 0, sd = 1)
 print(z_threshold)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 2.326348
 ```
 
@@ -185,7 +185,7 @@ z <- ( x_bar - mu )/(s/sqrt(n))
 print(z)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 0.3899535
 ```
 
@@ -197,7 +197,7 @@ z_upper <- qnorm(1 - 0.025, mean = 0, sd = 1)
 print(z_upper)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 1.959964
 ```
 
@@ -206,7 +206,7 @@ z_lower <- qnorm(0.025, mean = 0, sd = 1)
 print(z_lower)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] -1.959964
 ```
 
@@ -239,25 +239,25 @@ x <- rnorm(10, mean = 0, sd = 1) # generate some artificial data from a N(0, 1)
 out <- z_test(x, 0, 1) # null should not be rejected!
 ```
 
-```{.bg-info}
-#>  z = -0.816 
-#>  one-tailed probability = 0.207 
-#>  two-tailed probability = 0.414
+``` bg-info
+#>  z = -1.065 
+#>  one-tailed probability = 0.143 
+#>  two-tailed probability = 0.286
 ```
 
 ```{.r .numberLines}
 print(out)
 ```
 
-```{.bg-info}
+``` bg-info
 #> $z
-#> [1] -0.816
+#> [1] -1.065
 #> 
 #> $one_p
-#> [1] 0.207
+#> [1] 0.143
 #> 
 #> $two_p
-#> [1] 0.414
+#> [1] 0.286
 ```
 
 ```{.r .numberLines}
@@ -265,25 +265,25 @@ x <- rnorm(10, mean = 1, sd = 1) # generate some artificial data from a N(1, 1)
 out <- z_test(x, 0, 1) # null should be rejected!
 ```
 
-```{.bg-info}
-#>  z = 1.839 
-#>  one-tailed probability = 0.033 
-#>  two-tailed probability = 0.066
+``` bg-info
+#>  z = 2.192 
+#>  one-tailed probability = 0.014 
+#>  two-tailed probability = 0.028
 ```
 
 ```{.r .numberLines}
 print(out)
 ```
 
-```{.bg-info}
+``` bg-info
 #> $z
-#> [1] 1.839
+#> [1] 2.192
 #> 
 #> $one_p
-#> [1] 0.033
+#> [1] 0.014
 #> 
 #> $two_p
-#> [1] 0.066
+#> [1] 0.028
 ```
 
 <button class="button">
@@ -313,7 +313,7 @@ t <- (x_bar - mu) / sqrt(s2 / n)
 print(t)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 2.4
 ```
 
@@ -326,7 +326,7 @@ t_upper <- qt(1 - 0.025, df = n - 1)
 print(t_upper)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 2.776445
 ```
 
@@ -335,7 +335,7 @@ t_lower <- qt(0.025, df = n - 1)
 print(t_lower)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] -2.776445
 ```
 
@@ -369,7 +369,7 @@ z <- ((x_bar_a - x_bar_b) - (mu_a - mu_b)) / sqrt(s2_a / n_a + s2_b / n_b)
 print(z)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 23.2379
 ```
 
@@ -381,7 +381,7 @@ z_upper <- qnorm(1 - 0.05, mean = 0, sd = 1)
 print(z_upper)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 1.644854
 ```
 There is evidence to support the claim that process \(A\) yields higher pressurisation.
@@ -414,7 +414,7 @@ s2_p <- ((n_A - 1) * s2_A + (n_B - 1) * s2_B) / (n_A + n_B - 2)
 print(s2_p)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 7.294654
 ```
 
@@ -426,7 +426,7 @@ t = ( x_bar_A - x_bar_B ) / sqrt( s2_p*(1/n_A + 1/n_B) )
 print(t)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] -0.3535909
 ```
 
@@ -438,7 +438,7 @@ t_upper <- qt(1 - 0.025, df = n_A + n_B - 2)
 print(t_upper)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 2.144787
 ```
 
@@ -447,7 +447,7 @@ t_lower <- qt(0.025, df = n_A + n_B - 2)
 print(t_lower)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] -2.144787
 ```
 
@@ -463,7 +463,7 @@ Now, let us use the built-in `t.test` command:
   print(out)
 ```
 
-```{.bg-info}
+``` bg-info
 #> 
 #> 	Two Sample t-test
 #> 
@@ -512,7 +512,7 @@ chi2 <- sum((x - Ex)^2 / Ex)
 print(chi2)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 2.866667
 ```
 
@@ -524,7 +524,7 @@ chi_upper <- qchisq(1 - 0.05, df = K-1)
 print(chi_upper)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 5.991465
 ```
 
@@ -538,7 +538,7 @@ out <- chisq.test(x, p = c(1 / 3, 1 / 3, 1 / 3))
 print(out)
 ```
 
-```{.bg-info}
+``` bg-info
 #> 
 #> 	Chi-squared test for given probabilities
 #> 
@@ -619,7 +619,7 @@ out <- chisq.test(x, p = pr)
 print(out)
 ```
 
-```{.bg-info}
+``` bg-info
 #> 
 #> 	Chi-squared test for given probabilities
 #> 
@@ -635,7 +635,7 @@ chi2 <- out$statistic
 print(chi2)
 ```
 
-```{.bg-info}
+``` bg-info
 #> X-squared 
 #>   1.34466
 ```
@@ -645,7 +645,7 @@ chi2_lower <- qchisq(1 - 0.01, df = 1)
 print(chi2_lower)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 6.634897
 ```
 

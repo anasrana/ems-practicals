@@ -36,7 +36,7 @@ library(ggplot2)
 head(mtcars)
 ```
 
-```{.bg-info}
+``` bg-info
 #>                    mpg cyl disp  hp drat    wt  qsec vs am
 #> Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1
 #> Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1
@@ -57,7 +57,7 @@ head(mtcars)
 dim(mtcars)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 32 11
 ```
 
@@ -79,7 +79,7 @@ pca_summary <- summary(cars_pca)
 print(pca_summary)
 ```
 
-```{.bg-info}
+``` bg-info
 #> Importance of components:
 #>                           PC1    PC2     PC3     PC4
 #> Standard deviation     2.5707 1.6280 0.79196 0.51923
@@ -156,7 +156,7 @@ label_df <-read.table("SupplementaryLabels.txt", sep=',', header = T)
 pollen_df[1:10, 1:6]
 ```
 
-```{.bg-info}
+``` bg-info
 #>          Cell_2338_1 Cell_2338_10 Cell_2338_11 Cell_2338_12
 #> MTND2P28          78          559          811          705
 #> MTATP6P1        2053         1958         4922         4409
@@ -185,7 +185,7 @@ pollen_df[1:10, 1:6]
 dim(pollen_df)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 8686  300
 ```
 
@@ -207,7 +207,7 @@ We will now use information that we read into the `label_df` variable to rename 
 colnames(label_df)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] "Cell_Identifier"        "Population"            
 #> [3] "Cell_names"             "TrueLabel_CellLevel"   
 #> [5] "Tissue_name"            "TrueLabel_TissuelLevel"

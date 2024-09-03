@@ -13,7 +13,7 @@ transitionMatrix = matrix(c(0.7, 0.2, 0.1,
 print(transitionMatrix)
 ```
 
-```{.bg-info}
+``` bg-info
 #>      [,1] [,2] [,3]
 #> [1,]  0.7  0.2  0.1
 #> [2,]  0.3  0.3  0.4
@@ -38,7 +38,7 @@ for (day in 1:30) {
 print(weather_sequence)
 ```
 
-```{.bg-info}
-#>  [1] 1 1 1 1 1 1 1 1 2 1 1 1 1 1 2 3 1 1 1 1 1 1 3 2 2 1 1 1
-#> [29] 1 1
+``` bg-info
+#>  [1] 1 1 1 2 2 1 1 1 2 3 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 1
+#> [29] 2 3
 ```

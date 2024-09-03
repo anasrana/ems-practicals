@@ -124,7 +124,7 @@ ls_fit <- lm(y ~ x, data = sim_data)
 summary(ls_fit)
 ```
 
-```{.bg-info}
+``` bg-info
 #> 
 #> Call:
 #> lm(formula = y ~ x, data = sim_data)
@@ -156,7 +156,7 @@ ls_coef <- coef(ls_fit)
 print(ls_coef)
 ```
 
-```{.bg-info}
+``` bg-info
 #> (Intercept)           x 
 #>    9.956981   -7.947016
 ```
@@ -179,15 +179,10 @@ lr_plot <- ggplot(sim_data, aes(x = x, y = y)) +
 ```
 
 ```
-#> Warning: Using `size` aesthetic for lines was
-#> deprecated in ggplot2 3.4.0.
+#> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
 #> ℹ Please use `linewidth` instead.
-#> This warning is displayed once every
-#> 8 hours.
-#> Call
-#> `lifecycle::last_lifecycle_warnings()`
-#> to see where this warning was
-#> generated.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 ```
 
 ```{.r .numberLines}
@@ -226,7 +221,7 @@ We expect the mean and variance of the residuals to be close to the level used t
 print(mean(ls_residual))
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 1.776357e-17
 ```
 
@@ -234,7 +229,7 @@ print(mean(ls_residual))
 print(var(ls_residual))
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 0.4444955
 ```
 
@@ -273,7 +268,7 @@ mle_fit <- mle2(mle_ll, start = list(beta0 = -1, beta1 = 20, sigma = 10))
 summary(mle_fit)
 ```
 
-```{.bg-info}
+``` bg-info
 #> Maximum likelihood estimation
 #> 
 #> Call:

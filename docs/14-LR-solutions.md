@@ -34,7 +34,7 @@ This is a plot of number of people in Oldenburg (Germany) against the number of 
 cor(stork_dat$no_storks, stork_dat$peopl)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 0.9443965
 ```
 
@@ -78,7 +78,7 @@ If we plot the data on top of each other, the first data set in black and the se
 summary(lr_fit1)
 ```
 
-```{.bg-info}
+``` bg-info
 #> 
 #> Call:
 #> lm(formula = y ~ x, data = sim_data1)
@@ -104,7 +104,7 @@ summary(lr_fit1)
 summary(lr_fit2)
 ```
 
-```{.bg-info}
+``` bg-info
 #> 
 #> Call:
 #> lm(formula = y ~ x, data = sim_data2)
@@ -223,7 +223,7 @@ for (i in 1:n_sample_size) {
 ```{.r .numberLines}
 library(reshape2)
 
-mse_df = melt(mse_matrix) # convert the matrix into a data frame for ggplot
+mse_df <- melt(mse_matrix) # convert the matrix into a data frame for ggplot
 names(mse_df) = c("Simulation", "Sample_Size", "MSE") # rename the columns
 
 # now use a boxplot to look at the relationship between mean-squared prediction error and sample size

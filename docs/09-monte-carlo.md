@@ -48,8 +48,8 @@ The result we get is:
 print(mc_integral)
 ```
 
-```{.bg-info}
-#> [1] 0.317
+``` bg-info
+#> [1] 0.32
 ```
 
 <!-- TODO: Add some context about sims and mc_integral -->
@@ -62,7 +62,7 @@ mc_exact = pnorm(q=3, mean=1, sd=2) - pnorm(q=1, mean=1, sd=2)
 print(mc_exact)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 0.3413447
 ```
 
@@ -128,8 +128,8 @@ For our MC estimate of the probability \(P(X>3)\) we get
 print(pr_greater_than_three)
 ```
 
-```{.bg-info}
-#> [1] 0.83
+``` bg-info
+#> [1] 0.81
 ```
 
 which we can compare to R’s built-in Binomial distribution function:
@@ -139,7 +139,7 @@ which we can compare to R’s built-in Binomial distribution function:
 print(pbinom(3, 10, 0.5, lower.tail = FALSE))
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 0.828125
 ```
 
@@ -233,7 +233,7 @@ prob_less_than_zero <- sum(less_than_zero)/runs
 print(prob_less_than_zero)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 0
 ```
 
@@ -289,27 +289,27 @@ for (i in 1:n_sample_sizes) {
 print(accuracy)
 ```
 
-```{.bg-info}
-#> [1]  3.065525e-02  1.655254e-03 -2.344746e-03  9.525393e-05
-#> [5]  2.152539e-04 -2.044746e-03
+``` bg-info
+#> [1] -3.447461e-04  1.025525e-02 -6.744746e-03 -3.064746e-03
+#> [5] -2.844746e-03  5.253931e-06
 ```
 
 ```{.r .numberLines}
 print(accuracy_sd)
 ```
 
-```{.bg-info}
-#> [1] 0.15247454 0.06650739 0.05076187 0.02962674 0.02160916
-#> [6] 0.01533630
+``` bg-info
+#> [1] 0.15048407 0.06734083 0.04875045 0.03019803 0.02431672
+#> [6] 0.01458613
 ```
 
 ```{.r .numberLines}
 print(accuracy + accuracy_sd)
 ```
 
-```{.bg-info}
-#> [1] 0.18312979 0.06816264 0.04841713 0.02972200 0.02182442
-#> [6] 0.01329155
+``` bg-info
+#> [1] 0.15013932 0.07759609 0.04200570 0.02713328 0.02147198
+#> [6] 0.01459138
 ```
 
 Next, we will plot the results. Here we will make use of `ggplot2` a library to create nice plots without much effort. The input need to be a `data.frame` so we will need to create one based on the data.
@@ -325,14 +325,14 @@ df <- data.frame(sample_sizes, accuracy, accuracy_sd)
 print(df)
 ```
 
-```{.bg-info}
+``` bg-info
 #>   sample_sizes      accuracy accuracy_sd
-#> 1           10  3.065525e-02  0.15247454
-#> 2           50  1.655254e-03  0.06650739
-#> 3          100 -2.344746e-03  0.05076187
-#> 4          250  9.525393e-05  0.02962674
-#> 5          500  2.152539e-04  0.02160916
-#> 6         1000 -2.044746e-03  0.01533630
+#> 1           10 -3.447461e-04  0.15048407
+#> 2           50  1.025525e-02  0.06734083
+#> 3          100 -6.744746e-03  0.04875045
+#> 4          250 -3.064746e-03  0.03019803
+#> 5          500 -2.844746e-03  0.02431672
+#> 6         1000  5.253931e-06  0.01458613
 ```
 
 ```{.r .numberLines}
@@ -381,8 +381,8 @@ expected_score <- mean(score_per_game) # average over all simulations
 print(expected_score)
 ```
 
-```{.bg-info}
-#> [1] 14.51
+``` bg-info
+#> [1] 15.11
 ```
 <button class="button">
   [Back to Exercise](#mc-expectation-1)
@@ -416,8 +416,8 @@ for (it in 1:runs) {
 print(mean(game_score))
 ```
 
-```{.bg-info}
-#> [1] 9.55
+``` bg-info
+#> [1] 10.1
 ```
 
 ```{.r .numberLines}

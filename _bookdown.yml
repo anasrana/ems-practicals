@@ -4,6 +4,32 @@ before_chapter_script: _common.R
 delete_merged_file: true
 output_dir: "docs"
 clean: ["tikz*.log"]
+rmd_files:
+  html: [
+    "index.Rmd",
+
+    "intro.Rmd",
+    "data.Rmd",
+    "using-practical.Rmd",
+
+    "simulation.Rmd",
+    "markov-chains.Rmd",
+    "monopoly-simulation.Rmd",
+    "monte-carlo.Rmd",
+    "mle.Rmd",
+    "confid-interval.Rmd",
+    "CompTesting.Rmd",
+
+    "linear-regression.Rmd",
+    "PCA.Rmd",
+    "multiple-regression.Rmd",
+    "glm.Rmd",
+
+    "monopoly-solution.Rmd",
+    "MC-solution.Rmd",
+    "comptest-sol.Rmd",
+    "LR-solutions.Rmd"
+    ]
 language:
   ui:
     chapter_name: "Chapter "

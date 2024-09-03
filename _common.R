@@ -5,9 +5,9 @@ options(width = 60)
 knitr::opts_chunk$set(
   comment = "#>",
   collapse = FALSE,
-  out.width='95%',
-  fig.asp=.75,
-  fig.align='center',
-  class.output="bg-info",
-  attr.source='.numberLines'
-  )
+  out.width = "95%",
+  fig.asp = .75,
+  fig.align = "center",
+  class.output = "bg-info",
+  attr.source = ".numberLines"
+)

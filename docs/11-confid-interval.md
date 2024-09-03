@@ -77,8 +77,8 @@ Let’s look at this interval:
 print(interval)
 ```
 
-```{.bg-info}
-#> [1] 2.042167 3.042167
+``` bg-info
+#> [1] 1.649931 2.649931
 ```
 ::: {.infobox}
 ## Exercise
@@ -116,7 +116,7 @@ This creates a sequence of values from 0.1 to 1.0 in steps of 0.1 in the vector 
 print(interval_width)
 ```
 
-```{.bg-info}
+``` bg-info
 #>  [1] 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
 ```
 
@@ -191,7 +191,7 @@ So, if we compute  \(2 \times 1.65\, \frac{\sigma}{\sqrt{n}}\), what do we get?
 print(2 * 1.65 * sigma / sqrt(n))
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 0.6024948
 ```
 
@@ -276,18 +276,18 @@ print(plt)
 print(df)
 ```
 
-```{.bg-info}
+``` bg-info
 #>    interval_width probability_var_contained
-#> 1             0.1                     0.302
-#> 2             0.2                     0.526
-#> 3             0.3                     0.742
-#> 4             0.4                     0.872
-#> 5             0.5                     0.939
-#> 6             0.6                     0.979
+#> 1             0.1                     0.294
+#> 2             0.2                     0.558
+#> 3             0.3                     0.734
+#> 4             0.4                     0.870
+#> 5             0.5                     0.945
+#> 6             0.6                     0.975
 #> 7             0.7                     0.993
-#> 8             0.8                     0.997
-#> 9             0.9                     0.999
-#> 10            1.0                     0.999
+#> 8             0.8                     0.998
+#> 9             0.9                     1.000
+#> 10            1.0                     1.000
 ```
 
 <button class="button">

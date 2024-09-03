@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&family=Oxygen:wght@700&display=swap');
 
 p.caption {
   color: #777;
@@ -6,9 +7,20 @@ p.caption {
 }
 p code {
   white-space: inherit;
+  font-family: 'Fira Code', 'Courier New', Courier, monospace;
+}
+/*____Code Chunks____*/
+
+.sourceCode pre {
+  margin: 0 !important; /* makes space above and below symmetrical*/
+}
+
+.sourceCode {
+  margin-bottom: 0.85em; /* adds same amount of margin as a <p> would */
 }
 pre {
   word-break: normal;
+  font-family: 'Fira Code', Monaco, 'Courier New', monospace;
   word-wrap: normal;
 }
 pre code {
@@ -21,21 +33,21 @@ pre code {
   margin-bottom: 1rem;
 }
 .bg-info {
-  background-color: #17a2b8 !important;
-  color: #919191;
+  background-color: #1b7097 !important;
+  color: #a00202;
 }
 .infobox {
   padding: 1em 1em 1em 4em;
   margin-bottom: 10px;
-  border: 1px solid orange;
+  border: 1px solid #fe7938;
   border-radius: 0.1em;
   background: #fdfcfc 5px center/3em no-repeat;
 }
 .button {
-  background-color: #a6e3a1;
+  background-color: #6cad7a;
   font-family: Oxygen;
   border: none;
-  color: rgb(197, 195, 195);
+  color: white;
   padding: 7px 8px;
   border-radius: 0.2em;
   text-align: center;

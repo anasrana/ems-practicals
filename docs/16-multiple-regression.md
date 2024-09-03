@@ -29,7 +29,7 @@ lr_fit <- lm(Volume ~ Girth, data = trees)
 summary(lr_fit)
 ```
 
-```{.bg-info}
+``` bg-info
 #> 
 #> Call:
 #> lm(formula = Volume ~ Girth, data = trees)
@@ -61,7 +61,7 @@ mr_fit <- lm(Volume ~ Girth + Height, data = trees)
 summary(mr_fit)
 ```
 
-```{.bg-info}
+``` bg-info
 #> 
 #> Call:
 #> lm(formula = Volume ~ Girth + Height, data = trees)
@@ -97,7 +97,7 @@ mrl_fit <- lm(log(Volume) ~ log(Girth) + log(Height), data = trees)
 summary(mrl_fit)
 ```
 
-```{.bg-info}
+``` bg-info
 #> 
 #> Call:
 #> lm(formula = log(Volume) ~ log(Girth) + log(Height), data = trees)
@@ -134,7 +134,7 @@ data("birthwt")
 head(birthwt)
 ```
 
-```{.bg-info}
+``` bg-info
 #>    low age lwt race smoke ptl ht ui ftv  bwt
 #> 85   0  19 182    2     0   0  0  1   0 2523
 #> 86   0  33 155    3     0   0  0  0   3 2551
@@ -148,7 +148,7 @@ head(birthwt)
 summary(birthwt)
 ```
 
-```{.bg-info}
+``` bg-info
 #>       low              age             lwt       
 #>  Min.   :0.0000   Min.   :14.00   Min.   : 80.0  
 #>  1st Qu.:0.0000   1st Qu.:19.00   1st Qu.:110.0  
@@ -219,7 +219,7 @@ bwt_fit <- lm(bwt_grams ~ mother_smokes, data = birthwt)
 summary(bwt_fit)
 ```
 
-```{.bg-info}
+``` bg-info
 #> 
 #> Call:
 #> lm(formula = bwt_grams ~ mother_smokes, data = birthwt)
@@ -356,7 +356,7 @@ res_df <- bind_rows(res)
 tail(res_df)
 ```
 
-```{.bg-info}
+``` bg-info
 #>     itr      cost       b0       b1
 #> 95   95 0.5275707 2.034285 3.014512
 #> 96   96 0.5275707 2.034285 3.014512
@@ -399,15 +399,10 @@ ggplot(sim_df, aes(x = x, y = y)) +
 ```
 
 ```
-#> Warning: Using `size` aesthetic for lines was
-#> deprecated in ggplot2 3.4.0.
+#> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
 #> ℹ Please use `linewidth` instead.
-#> This warning is displayed once every
-#> 8 hours.
-#> Call
-#> `lifecycle::last_lifecycle_warnings()`
-#> to see where this warning was
-#> generated.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 ```
 
 <img src="16-multiple-regression_files/figure-html/vis_gd-3.png" width="95%" style="display: block; margin: auto;" />
