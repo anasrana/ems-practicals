@@ -48,7 +48,7 @@ Once the optimiser has run, we can see what parameter value it has found:
 print(out$par)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 0.1372727
 ```
 
@@ -59,7 +59,7 @@ which we can compare against the sample mean
 print(mean(x))
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 0.1372727
 ```
 
@@ -169,7 +169,7 @@ Excellent! We have now found the maximum likelihood estimates for the unknown me
 print(out$par[1]) # mu estimate
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 0.1372727
 ```
 
@@ -177,7 +177,7 @@ print(out$par[1]) # mu estimate
 print(out$par[2]) # sigma2 estimate
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 0.5569665
 ```
 
@@ -188,7 +188,7 @@ Now, the sample mean and variances:
 print(mean(x)) # sample mean
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 0.1372727
 ```
 
@@ -196,7 +196,7 @@ print(mean(x)) # sample mean
 print(var(x)) # sample variance (normalised by n-1)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 0.6126618
 ```
 
@@ -204,7 +204,7 @@ print(var(x)) # sample variance (normalised by n-1)
 print(var(x)*(n-1)/n) # sample variance (normalised by n)
 ```
 
-```{.bg-info}
+``` bg-info
 #> [1] 0.5569653
 ```
 

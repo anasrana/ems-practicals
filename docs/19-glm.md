@@ -2,6 +2,7 @@
 
 In a genome-wide association study, we perform an experiment where we select $n$ individuals with a disease (cases) and $n$ individuals without the diseases (controls) and look for genetic differences between these two groups. In particular, we are interested in specific genetic variants (SNPs) that might induce some predisposition towards the disease.
 
+<!-- TODO: Fix the data here -->
 Suppose I observe the following genotypes for a SNP in 40,000 individuals (20,000 cases, 20,000 controls):
 
 - Genotypes: `AA` `Aa` `aa`
@@ -170,15 +171,20 @@ Let’s load some prerequisite R libraries and the data to produce some summary 
 # required libraries
 library(MASS)
 library(foreign)
+```
 
+```
+#> Warning: package 'foreign' was built under R version 4.3.3
+```
 
+```{.r .numberLines}
 load("nb_data.Rdata")
 
 # print summary statistics to Console
 summary(dat)
 ```
 
-```{.bg-info}
+``` bg-info
 #>    sample_id      gender     immunoscore   
 #>  1001   :  1   female:160   Min.   : 1.00  
 #>  1002   :  1   male  :154   1st Qu.:28.00  
@@ -221,7 +227,7 @@ glm_1 <- glm.nb(overexpressed_proteins ~ immunoscore + tumor_subtype + gender, d
 summary(glm_1)
 ```
 
-```{.bg-info}
+``` bg-info
 #> 
 #> Call:
 #> glm.nb(formula = overexpressed_proteins ~ immunoscore + tumor_subtype + 
@@ -286,7 +292,7 @@ anova(glm_1, glm_2, test = "LRT")
 #> Chi-squared LR tests are implemented
 ```
 
-```{.bg-info}
+``` bg-info
 #> Likelihood ratio tests of Negative Binomial Models
 #> 
 #> Response: overexpressed_proteins
@@ -322,7 +328,7 @@ Now, lets do our likelihood ratio test, we can extract the log-likelihood using 
 pchisq(2 * (logLik(glm_1) - logLik(glm_3)), df = 1, lower.tail = FALSE)
 ```
 
-```{.bg-info}
+``` bg-info
 #> 'log Lik.' 3.847622e-198 (df=6)
 ```
 
@@ -357,7 +363,7 @@ new_data$phat <- predict(glm_1, new_data, type = "response")
 print(new_data)
 ```
 
-```{.bg-info}
+``` bg-info
 #>   immunoscore tumor_subtype gender      phat
 #> 1    48.26752       Complex   male  8.983829
 #> 2    48.26752        Stable   male  2.567187
@@ -406,15 +412,10 @@ ggplot(new_data, aes(immunoscore, overexpressed_proteins)) +
 ```
 
 ```
-#> Warning: Using `size` aesthetic for lines was
-#> deprecated in ggplot2 3.4.0.
+#> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
 #> ℹ Please use `linewidth` instead.
-#> This warning is displayed once every
-#> 8 hours.
-#> Call
-#> `lifecycle::last_lifecycle_warnings()`
-#> to see where this warning was
-#> generated.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 ```
 
 <img src="19-glm_files/figure-html/glm-plot-1.png" width="95%" style="display: block; margin: auto;" />

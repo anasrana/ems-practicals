@@ -28,7 +28,7 @@ transitionMatrix = matrix(c(0.4, 0.6, 0.7, 0.3), nrow=2, ncol=2, byrow=TRUE)
 print(transitionMatrix)
 ```
 
-```{.bg-info}
+``` bg-info
 #>      [,1] [,2]
 #> [1,]  0.4  0.6
 #> [2,]  0.7  0.3
@@ -55,9 +55,9 @@ for (day in 1:30) { # simulate for 30 days
 print(weather_sequence)
 ```
 
-```{.bg-info}
-#>  [1] 1 1 2 2 1 2 1 2 1 1 2 1 1 2 1 1 1 1 2 1 1 1 1 1 2 1 2 2
-#> [29] 1 1
+``` bg-info
+#>  [1] 2 1 2 1 2 1 1 2 1 2 1 2 1 1 1 2 1 1 1 2 1 1 2 1 2 1 1 1
+#> [29] 1 2
 ```
 
 ::: {.infobox}

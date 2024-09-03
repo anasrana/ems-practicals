@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 6 Confidence Intervals | Essentials of Mathematics and Statistics</title>
+<meta name="author" content="Anas A Rana">
+<meta name="description" content="In this practical session, you will learn how to derive confidence intervals for a particular problem using Monte Carlo simulations. In a random experiment, a sample of data is collected from...">
+<meta name="generator" content="bookdown 0.39 with bs4_book()">
+<meta property="og:title" content="Chapter 6 Confidence Intervals | Essentials of Mathematics and Statistics">
+<meta property="og:type" content="book">
+<meta property="og:description" content="In this practical session, you will learn how to derive confidence intervals for a particular problem using Monte Carlo simulations. In a random experiment, a sample of data is collected from...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 6 Confidence Intervals | Essentials of Mathematics and Statistics">
+<meta name="twitter:description" content="In this practical session, you will learn how to derive confidence intervals for a particular problem using Monte Carlo simulations. In a random experiment, a sample of data is collected from...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Manrope-0.4.9/font.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira%20Code:wght@100&amp;display=swap" rel="stylesheet">
+<link href="libs/Spectral-0.4.9/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.7.0/transition.js"></script><script src="libs/bs3compat-0.7.0/tabs.js"></script><script src="libs/bs3compat-0.7.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Essentials of Mathematics and Statistics</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introduction to the Practical</a></li>
+<li><a class="" href="getting-started-in-r-and-rstudio.html">Getting started in R and Rstudio</a></li>
+<li><a class="" href="data-sets.html">Data sets</a></li>
+<li><a class="" href="simulating-random-numbers.html"><span class="header-section-number">1</span> Simulating random numbers</a></li>
+<li><a class="" href="markov-chains.html"><span class="header-section-number">2</span> Markov Chains</a></li>
+<li><a class="" href="mc-solution.html">Solution: 3 state Markov Chain</a></li>
+<li><a class="" href="a-monopoly-simulation.html"><span class="header-section-number">3</span> A Monopoly simulation</a></li>
+<li><a class="" href="monopolySol.html">Solutions: Monopoly</a></li>
+<li><a class="" href="monte-carlo-methods.html"><span class="header-section-number">4</span> Monte Carlo Methods</a></li>
+<li><a class="" href="solution-monte-carlo.html">Solution: Monte Carlo</a></li>
+<li><a class="" href="maximum-likelihood.html"><span class="header-section-number">5</span> Maximum Likelihood</a></li>
+<li><a class="" href="sol-mle.html">Solution: Model Answers: MLE</a></li>
+<li><a class="active" href="confidence-intervals.html"><span class="header-section-number">6</span> Confidence Intervals</a></li>
+<li><a class="" href="sol-ex-CI.html">Model Answer: Confidence Interval</a></li>
+<li><a class="" href="computational-testing-techniques.html"><span class="header-section-number">7</span> Computational Testing Techniques</a></li>
+<li><a class="" href="model-answers-computational-testing.html">Model Answers: Computational Testing</a></li>
+<li><a class="" href="practical-linear-regression.html"><span class="header-section-number">8</span> Practical: Linear regression</a></li>
+<li><a class="" href="solutions-linear-regression-and-correlation.html">Solutions: Linear regression and Correlation</a></li>
+<li><a class="" href="practical-principal-component-analysis.html"><span class="header-section-number">9</span> Practical: Principal component analysis</a></li>
+<li><a class="" href="practical-multiple-regression.html"><span class="header-section-number">10</span> Practical: Multiple regression</a></li>
+<li><a class="" href="practical-generalised-linear-models.html"><span class="header-section-number">11</span> Practical: Generalised linear models</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/anasrana/ems-practicals">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="confidence-intervals" class="section level1" number="6">
+<h1>
+<span class="header-section-number">6</span> Confidence Intervals<a class="anchor" aria-label="anchor" href="#confidence-intervals"><i class="fas fa-link"></i></a>
+</h1>
+<p>In this practical session, you will learn how to derive confidence intervals for a particular problem using Monte Carlo simulations.</p>
+<p>In a random experiment, a sample of data is collected from which we can estimate a population parameter of interest. This estimate can either be a point estimate or an <em>interval estimate</em> - a range of values.</p>
+<p>A <strong>confidence interval</strong> is an interval estimate which has an associated <em>confidence level</em>. The confidence level tells us the probability that the <em>procedure</em> that is used to construct the confidence interval will result in the interval containing the true population parameter. It is <em>not</em> the probability that the population parameter lies in the range.</p>
+<p>This is a very counter-intuitive concept which we shall now illustrate in this exercise.</p>
+<div id="setup" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> Setup<a class="anchor" aria-label="anchor" href="#setup"><i class="fas fa-link"></i></a>
+</h2>
+<p>First, create a new <code>R</code> script within Rstudio then we will start with some code preamble. We will use the package <code>ggplot2</code> for plotting. You can always create a plot using the base package and the <code>plot</code> function but <code>ggplot2</code> is a very powerful plotting package which we will use throughout the course.</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb84-1"><a href="confidence-intervals.html#cb84-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<p>Use <code>install.packages("ggplot2")</code> in the console window if the package is not installed on your system. If you are running your code on BearPortal it should already be installed, only use this function if you are running this code on your own machine.</p>
+<p>Lets define the width of an interval, we will set this to 1 initially but we will change this later on:</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb85-1"><a href="confidence-intervals.html#cb85-1"></a>interval_width <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># width of confidence interval</span></span></code></pre></div>
+</div>
+<div id="simulating-data" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> Simulating data<a class="anchor" aria-label="anchor" href="#simulating-data"><i class="fas fa-link"></i></a>
+</h2>
+<p>We are now going to generate some simulated data for our experiment. We will create 30 samples from a Normal distribution with mean 2.5 and variance 1. These are <em>true</em> values of the population parameters. In a real experiment, we would not know these values but using simulated data, we obviously control these.</p>
+<p>Let define these first:</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb86-1"><a href="confidence-intervals.html#cb86-1"></a><span class="co"># number of data points to generate</span></span>
+<span id="cb86-2"><a href="confidence-intervals.html#cb86-2"></a>n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb86-3"><a href="confidence-intervals.html#cb86-3"></a><span class="co"># population mean</span></span>
+<span id="cb86-4"><a href="confidence-intervals.html#cb86-4"></a>mu <span class="ot">&lt;-</span> <span class="fl">2.5</span></span>
+<span id="cb86-5"><a href="confidence-intervals.html#cb86-5"></a><span class="co"># population standard deviation (square root of population variance)</span></span>
+<span id="cb86-6"><a href="confidence-intervals.html#cb86-6"></a>sigma <span class="ot">&lt;-</span> <span class="fl">1.0</span></span></code></pre></div>
+<p>Now, we generate some normally distributed data using the <code>R</code> function <code>rnorm</code>,</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb87-1"><a href="confidence-intervals.html#cb87-1"></a><span class="co"># generate n values from the  Normal distribution N(mu, sigma)</span></span>
+<span id="cb87-2"><a href="confidence-intervals.html#cb87-2"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span></code></pre></div>
+<p>We now have 30 samples from a Normal distribution with population mean 2.5 and variance 1.</p>
+</div>
+<div id="constructing-the-confidence-interval" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> Constructing the confidence interval<a class="anchor" aria-label="anchor" href="#constructing-the-confidence-interval"><i class="fas fa-link"></i></a>
+</h2>
+<p>We are going to pretend that we do not know the population mean value (2.5) used to generate this dataset and try to provide an interval estimate for it from the simulated sample data.</p>
+<p>Remember, from lectures, that the sample mean <span class="math inline">\(\bar{x}\)</span> is a natural point estimate for the population mean <span class="math inline">\(\mu\)</span>.</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb88-1"><a href="confidence-intervals.html#cb88-1"></a>x_bar <span class="ot">=</span> <span class="fu">mean</span>(x) <span class="co"># compute sample mean</span></span></code></pre></div>
+<p>so a suitable interval might be centred on the sample mean and extend out,</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb89-1"><a href="confidence-intervals.html#cb89-1"></a>interval <span class="ot">&lt;-</span> <span class="fu">c</span>(x_bar <span class="sc">-</span> interval_width <span class="sc">/</span> <span class="dv">2</span>, x_bar <span class="sc">+</span> interval_width <span class="sc">/</span> <span class="dv">2</span>)</span></code></pre></div>
+<p>Let’s look at this interval:</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb90-1"><a href="confidence-intervals.html#cb90-1"></a><span class="fu">print</span>(interval)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 1.992359 2.992359</code></pre>
+</div>
+<div id="exercise-4" class="section level2 infobox" number="6.4">
+<h2>
+<span class="header-section-number">6.4</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-4"><i class="fas fa-link"></i></a>
+</h2>
+<p>Does the confidence interval contain the true parameter?</p>
+</div>
+<div id="experiment" class="section level2" number="6.5">
+<h2>
+<span class="header-section-number">6.5</span> Experiment<a class="anchor" aria-label="anchor" href="#experiment"><i class="fas fa-link"></i></a>
+</h2>
+<p>The previous experiment only examined one simulated dataset so we cannot fully understand the probabilistic interpretation of the confidence interval just yet. At the moment, the interval you have calculated will either contain the population mean or not.</p>
+<p>In order to understand the probabilistic interpretation, we will need to generate many data sets, construct confidence intervals as we have for each and then see across all generated data sets, how often those intervals cover the true population mean.</p>
+<p>For a Monte Carlo simulation, we will need many repeats of the simulation. Lets define the number of repeats to be used:</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb92-1"><a href="confidence-intervals.html#cb92-1"></a>nreps <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co"># number of Monte Carlo simulation runs</span></span></code></pre></div>
+<p>We will use 1000 simulations initially to make the code quick to run but you may want to make this higher later on for greater accuracy.</p>
+<p>Now, let us define a series of interval widths to simultaneously test,</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb93-1"><a href="confidence-intervals.html#cb93-1"></a><span class="co"># define a series of interval widths</span></span>
+<span id="cb93-2"><a href="confidence-intervals.html#cb93-2"></a>interval_width <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="fl">1.0</span>, <span class="fl">0.1</span>)</span>
+<span id="cb93-3"><a href="confidence-intervals.html#cb93-3"></a><span class="co"># store the number of interval widths generated</span></span>
+<span id="cb93-4"><a href="confidence-intervals.html#cb93-4"></a>n_interval_widths <span class="ot">&lt;-</span> <span class="fu">length</span>(interval_width)</span></code></pre></div>
+<p>This creates a sequence of values from 0.1 to 1.0 in steps of 0.1 in the vector <code>interval_width</code>:</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb94-1"><a href="confidence-intervals.html#cb94-1"></a><span class="fu">print</span>(interval_width)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;  [1] 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0</code></pre>
+<p>Now, we will create a vector of zeros of the same length. We will use this to store the number of times that a confidence interval of those specific widths contain the true population mean</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb96-1"><a href="confidence-intervals.html#cb96-1"></a><span class="co"># create a vector to store the number of times the population mean is contained</span></span>
+<span id="cb96-2"><a href="confidence-intervals.html#cb96-2"></a>mu_contained <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_interval_widths)</span></code></pre></div>
+<p>The hard work now begins. We use a <code>for</code> loop to repeat the simulation <code>nreps</code> times. Within each loop, we will simulate a new data set, compute a sample mean and then check if the confidence interval contains the true population mean. Since we are using more than one confidence width, we use a second <code>for</code> loop to cycle through the different widths.</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb97-1"><a href="confidence-intervals.html#cb97-1"></a><span class="cf">for</span> (replicate <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nreps) {</span>
+<span id="cb97-2"><a href="confidence-intervals.html#cb97-2"></a></span>
+<span id="cb97-3"><a href="confidence-intervals.html#cb97-3"></a>  x <span class="ot">&lt;-</span> sigma <span class="sc">*</span> <span class="fu">rnorm</span>(n) <span class="sc">+</span> mu <span class="co"># simulate a data set</span></span>
+<span id="cb97-4"><a href="confidence-intervals.html#cb97-4"></a></span>
+<span id="cb97-5"><a href="confidence-intervals.html#cb97-5"></a>  xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(x) <span class="co"># compute the sample mean</span></span>
+<span id="cb97-6"><a href="confidence-intervals.html#cb97-6"></a></span>
+<span id="cb97-7"><a href="confidence-intervals.html#cb97-7"></a>  <span class="co"># for each interval width that we are testing ...</span></span>
+<span id="cb97-8"><a href="confidence-intervals.html#cb97-8"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_interval_widths) {</span>
+<span id="cb97-9"><a href="confidence-intervals.html#cb97-9"></a>    <span class="co"># check if the interval contains the true mean</span></span>
+<span id="cb97-10"><a href="confidence-intervals.html#cb97-10"></a>    <span class="cf">if</span> ((mu <span class="sc">&gt;</span> xbar <span class="sc">-</span> <span class="fl">0.5</span> <span class="sc">*</span> interval_width[j]) <span class="sc">&amp;</span></span>
+<span id="cb97-11"><a href="confidence-intervals.html#cb97-11"></a>        (mu <span class="sc">&lt;</span> xbar <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> interval_width[j])) {</span>
+<span id="cb97-12"><a href="confidence-intervals.html#cb97-12"></a>      <span class="co"># if it is, we increment the count by one for this width</span></span>
+<span id="cb97-13"><a href="confidence-intervals.html#cb97-13"></a>      mu_contained[j] <span class="ot">&lt;-</span> mu_contained[j] <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb97-14"><a href="confidence-intervals.html#cb97-14"></a>    }</span>
+<span id="cb97-15"><a href="confidence-intervals.html#cb97-15"></a>  }</span>
+<span id="cb97-16"><a href="confidence-intervals.html#cb97-16"></a></span>
+<span id="cb97-17"><a href="confidence-intervals.html#cb97-17"></a>}</span></code></pre></div>
+<p>We can now calculate, for each width, an estimate of the probability that a confidence interval of that width will contain the population mean.</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb98-1"><a href="confidence-intervals.html#cb98-1"></a>probability_mean_contained <span class="ot">&lt;-</span> mu_contained <span class="sc">/</span> nreps</span></code></pre></div>
+<p>Let’s use <code>ggplot2</code> to plot this relationship,</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb99-1"><a href="confidence-intervals.html#cb99-1"></a><span class="co"># create a data frame containing the variables we wish to plot</span></span>
+<span id="cb99-2"><a href="confidence-intervals.html#cb99-2"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">interval_width =</span> interval_width,</span>
+<span id="cb99-3"><a href="confidence-intervals.html#cb99-3"></a>                 <span class="at">probability_mean_contained =</span> probability_mean_contained)</span>
+<span id="cb99-4"><a href="confidence-intervals.html#cb99-4"></a></span>
+<span id="cb99-5"><a href="confidence-intervals.html#cb99-5"></a><span class="co"># initialise the ggplot</span></span>
+<span id="cb99-6"><a href="confidence-intervals.html#cb99-6"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> interval_width, <span class="at">y =</span> probability_mean_contained))</span>
+<span id="cb99-7"><a href="confidence-intervals.html#cb99-7"></a><span class="co"># create a line plot</span></span>
+<span id="cb99-8"><a href="confidence-intervals.html#cb99-8"></a>plt <span class="ot">&lt;-</span> plt <span class="sc">+</span> <span class="fu">geom_line</span>()</span>
+<span id="cb99-9"><a href="confidence-intervals.html#cb99-9"></a><span class="co"># add a horizontal axis label</span></span>
+<span id="cb99-10"><a href="confidence-intervals.html#cb99-10"></a>plt <span class="ot">&lt;-</span> plt <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Interval Width"</span>)</span>
+<span id="cb99-11"><a href="confidence-intervals.html#cb99-11"></a><span class="co"># create a vertical axis label</span></span>
+<span id="cb99-12"><a href="confidence-intervals.html#cb99-12"></a>plt <span class="ot">&lt;-</span> plt <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Probability that mu is contained"</span>)</span>
+<span id="cb99-13"><a href="confidence-intervals.html#cb99-13"></a></span>
+<span id="cb99-14"><a href="confidence-intervals.html#cb99-14"></a><span class="fu">print</span>(plt) <span class="co"># plot to screen</span></span></code></pre></div>
+<div class="inline-figure"><img src="11-confid-interval_files/figure-html/unnamed-chunk-14-1.png" width="95%" style="display: block; margin: auto;"></div>
+<p>Can you see that an interval width of <span class="math inline">\(0.6\)</span> <span class="math inline">\((\bar{x} \pm 0.3)\)</span> gives a confidence interval close to 90% probability of containing the population mean?</p>
+<p>Remember from the lectures that we saw that the theory says <span class="math inline">\(\bar{x} \pm 1.65\,\frac{\sigma}{\sqrt{n}}\)</span> gives a 90% confidence interval?</p>
+<p>So, if we compute <span class="math inline">\(2 \times 1.65\, \frac{\sigma}{\sqrt{n}}\)</span>, what do we get?</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb100-1"><a href="confidence-intervals.html#cb100-1"></a><span class="fu">print</span>(<span class="dv">2</span> <span class="sc">*</span> <span class="fl">1.65</span> <span class="sc">*</span> sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 0.6024948</code></pre>
+<p>The Monte Carlo estimate matches up with the theory!</p>
+</div>
+<div id="ex-confidence-interval" class="section level2 infobox" number="6.6">
+<h2>
+<span class="header-section-number">6.6</span> Exercise: Confidence Interval<a class="anchor" aria-label="anchor" href="#ex-confidence-interval"><i class="fas fa-link"></i></a>
+</h2>
+<blockquote>
+<p>Can you devise a way to compute a confidence interval for the population standard deviation?</p>
+</blockquote>
+<p>You can make use of the following as a point estimate of the sample variance:</p>
+<p><span class="math display">\[
+  s^2 = \frac{1}{n - 1}\sum_{i = 1}^n (x - \bar{x})^2
+\]</span></p>
+<p>which can be calculated using the <code>sd</code> function in <code>R</code>, remember the relationship between the standard deviation and variance.</p>
+<button class="button">
+<a href="sol-ex-CI.html#sol-ex-CI">Show Solution</a>
+</button>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="sol-mle.html">Solution: Model Answers: MLE</a></div>
+<div class="next"><a href="sol-ex-CI.html">Model Answer: Confidence Interval</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#confidence-intervals"><span class="header-section-number">6</span> Confidence Intervals</a></li>
+<li><a class="nav-link" href="#setup"><span class="header-section-number">6.1</span> Setup</a></li>
+<li><a class="nav-link" href="#simulating-data"><span class="header-section-number">6.2</span> Simulating data</a></li>
+<li><a class="nav-link" href="#constructing-the-confidence-interval"><span class="header-section-number">6.3</span> Constructing the confidence interval</a></li>
+<li><a class="nav-link" href="#exercise-4"><span class="header-section-number">6.4</span> Exercise</a></li>
+<li><a class="nav-link" href="#experiment"><span class="header-section-number">6.5</span> Experiment</a></li>
+<li><a class="nav-link" href="#ex-confidence-interval"><span class="header-section-number">6.6</span> Exercise: Confidence Interval</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/anasrana/ems-practicals/blob/master/11-confid-interval.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/anasrana/ems-practicals/edit/master/11-confid-interval.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2024-06-11.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
