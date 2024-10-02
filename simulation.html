@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>simulation.knit</title>
+
+  
+   
+   <meta name="generator" content="placeholder" />
+  <meta property="og:title" content="simulation.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="simulation.knit" />
+  
+  
+  
+  <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
+    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
+    <link href="libs/Manrope-0.4.9/font.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Fira%20Code:wght@100&amp;display=swap" rel="stylesheet"/>
+    <link href="libs/Spectral-0.4.9/font.css" rel="stylesheet" />
+    <script src="libs/bs3compat-0.8.0/transition.js"></script>
+    <script src="libs/bs3compat-0.8.0/tabs.js"></script>
+    <script src="libs/bs3compat-0.8.0/bs3compat.js"></script>
+    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
+    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+  <style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+      <link rel="stylesheet" href="style.css" />
+  
+</head>
+
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<!--bookdown:title:start-->
+<!--bookdown:title:end-->
+
+<!--bookdown:toc:start-->
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title=""></a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+      </form>
+
+      <nav aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <div id="book-toc"></div>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
+<!--bookdown:toc:end-->
+<!--bookdown:body:start-->
+<div id="part-probability-in-r" class="section level1 unnumbered">
+<h1 class="unnumbered">(PART*) Probability in R</h1>
+</div>
+<div id="simulating-random-numbers" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Simulating random numbers</h1>
+<p>There are a number of functions in <code>R</code> that you can use to simulate random numbers according to different probability distributions.</p>
+<p>The function <code>sample</code> allows you to take a sample of the specified size from the elements of a vector <code>x</code>using sampling with or without replacement. You can use <code>?sample</code> to read the documentation describing the command.</p>
+<p>In the following, we will use the <code>sample</code> function to make 10,000 draws from the set of numbers <code>1</code>, <code>2</code>, <code>3</code> and <code>4</code> and display the distribution of the sampled values using a histogram.</p>
+<p>First, we define a vector called <code>x</code> which contains the numbers <code>1</code>, <code>2</code>, <code>3</code>, and <code>4</code>. The function <code>c</code> allows us to combine these four numbers together into one vector:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span></code></pre></div>
+<p>We now use the function <code>sample</code> to pick from those four numbers in <code>x</code> 10,000 times. The result, the 10,000 numbers chosen, is store in <code>out</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">sample</span>(x, <span class="dv">10000</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Lets plot a histogram of the values picked:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>hist_out <span class="ot">&lt;-</span> <span class="fu">hist</span>(out, <span class="at">main =</span> <span class="st">&#39;&#39;</span>, <span class="at">xlab =</span> <span class="st">&#39;Values&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Frequency&#39;</span>)</span></code></pre></div>
+<p><img src="simulation_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>We picked each number with equal probability so the histogram shows each number is equally likely to have been chosen.</p>
+<div id="exercise" class="section level2 infobox" number="1.1">
+<h2><span class="header-section-number">1.1</span> Exercise</h2>
+<div id="question" class="section level3" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Question</h3>
+<blockquote>
+<p>What is the difference in the output <code>out1</code> and <code>out2</code> in the following piece of code?</p>
+</blockquote>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">9</span> )</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>out1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(x, <span class="dv">10</span>, <span class="at">replace=</span><span class="cn">FALSE</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>out2 <span class="ot">&lt;-</span> <span class="fu">sample</span>(x, <span class="dv">10</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
+<div id="solution" class="section level3" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> Solution</h3>
+<p>The option <code>replace=TRUE</code> activates sampling with replacement (i.e. the numbers that are picked are put back and can be picked again).</p>
+<p>The option <code>replace=FALSE</code> activates sampling without replacement (i.e. the numbers that are picked are not put back and cannot be picked again).</p>
+</div>
+</div>
+<div id="exercise-1" class="section level2 infobox" number="1.2">
+<h2><span class="header-section-number">1.2</span> Exercise</h2>
+<blockquote>
+<p>Use the <code>sample</code> or <code>sample.int</code> function to simulate values from rolls of an unbiased six-sided die. Show that the distribution of values you obtain is consistent with an unbiased die.</p>
+</blockquote>
+<p><em>Hint 1</em>: Type <code>?sample.int</code> in the console to get help on this function.</p>
+<p><em>Hint 2</em>: You may find it useful to use the function <code>table</code>. Type <code>?table</code> in the console to get help on this function.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>rolls_from_sample <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="at">size=</span><span class="dv">5000</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>rolls_from_sample.int <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">6</span>, <span class="at">size=</span><span class="dv">5000</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="fu">table</span>(rolls_from_sample)</span></code></pre></div>
+<pre><code>## rolls_from_sample
+##   1   2   3   4   5   6 
+## 825 866 860 839 793 817</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">table</span>(rolls_from_sample.int)</span></code></pre></div>
+<pre><code>## rolls_from_sample.int
+##   1   2   3   4   5   6 
+## 832 843 852 833 807 833</code></pre>
+<p>Both gives a uniform distribution over the numbers 1-6. The function <code>sample.int</code> is a specialised version of sample for sampling integers. Many <code>R</code> libraries have specialised versions of more general functions to do specific tasks under certain conditions.</p>
+</div>
+</div>
+<!--bookdown:body:end-->
+  </main>
+
+  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <div id="book-on-this-page"></div>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5">
+  <div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong></strong>" was written by . </p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+
+
+</body>
+
+</html>
