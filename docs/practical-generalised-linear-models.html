@@ -47,9 +47,6 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Introduction to the Practical</a></li>
-<li class="book-part">Basic Tools</li>
-<li><a class="" href="start.html">Getting started in R and Rstudio</a></li>
-<li><a class="" href="data-sets.html">Data sets</a></li>
 <li class="book-part">Probability in R</li>
 <li><a class="" href="simulating-random-numbers.html"><span class="header-section-number">1</span> Simulating random numbers</a></li>
 <li><a class="" href="markov-chains.html"><span class="header-section-number">2</span> Markov Chains</a></li>
@@ -72,6 +69,9 @@
 <li><a class="" href="mc-solution.html"><span class="header-section-number">C</span> Solution: 3 state Markov Chain</a></li>
 <li><a class="" href="model-answers-computational-testing.html"><span class="header-section-number">D</span> Model Answers: Computational Testing</a></li>
 <li><a class="" href="solutions-linear-regression-and-correlation.html"><span class="header-section-number">E</span> Solutions: Linear regression and Correlation</a></li>
+<li class="book-part">APPENDIX</li>
+<li><a class="" href="start.html">Getting started in R and Rstudio</a></li>
+<li><a class="" href="data-sets.html">Data sets</a></li>
 </ul>
 
         <div class="book-extra">
@@ -115,66 +115,66 @@
 <span class="header-section-number">11.2</span> Detecting SNP associations<a class="anchor" aria-label="anchor" href="#detecting-snp-associations"><i class="fas fa-link"></i></a>
 </h2>
 <p>We have seen in lectures that we can do statistical tests for this type of contingency table using Chi Squared Tests. Let’s load example data set and and prepare</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb171-1"><a href="practical-generalised-linear-models.html#cb171-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># for plots later</span></span>
-<span id="cb171-2"><a href="practical-generalised-linear-models.html#cb171-2"></a><span class="fu">load</span>(<span class="st">"gwas-cc-ex1.Rdata"</span>)</span>
-<span id="cb171-3"><a href="practical-generalised-linear-models.html#cb171-3"></a></span>
-<span id="cb171-4"><a href="practical-generalised-linear-models.html#cb171-4"></a><span class="co"># how many individuals are there</span></span>
-<span id="cb171-5"><a href="practical-generalised-linear-models.html#cb171-5"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
-<span id="cb171-6"><a href="practical-generalised-linear-models.html#cb171-6"></a><span class="co"># How many SNPs do we have data for</span></span>
-<span id="cb171-7"><a href="practical-generalised-linear-models.html#cb171-7"></a>p <span class="ot">&lt;-</span> <span class="fu">nrow</span>(X)</span>
-<span id="cb171-8"><a href="practical-generalised-linear-models.html#cb171-8"></a></span>
-<span id="cb171-9"><a href="practical-generalised-linear-models.html#cb171-9"></a><span class="co"># samples that are controls are encoded as 0 in y</span></span>
-<span id="cb171-10"><a href="practical-generalised-linear-models.html#cb171-10"></a>control <span class="ot">&lt;-</span> <span class="fu">which</span>(y <span class="sc">==</span> <span class="dv">0</span>)</span>
-<span id="cb171-11"><a href="practical-generalised-linear-models.html#cb171-11"></a><span class="co"># disease cases are encoded as 1 in y</span></span>
-<span id="cb171-12"><a href="practical-generalised-linear-models.html#cb171-12"></a>cases <span class="ot">&lt;-</span> <span class="fu">which</span>(y <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb167-1"><a href="practical-generalised-linear-models.html#cb167-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># for plots later</span></span>
+<span id="cb167-2"><a href="practical-generalised-linear-models.html#cb167-2"></a><span class="fu">load</span>(<span class="st">"gwas-cc-ex1.Rdata"</span>)</span>
+<span id="cb167-3"><a href="practical-generalised-linear-models.html#cb167-3"></a></span>
+<span id="cb167-4"><a href="practical-generalised-linear-models.html#cb167-4"></a><span class="co"># how many individuals are there</span></span>
+<span id="cb167-5"><a href="practical-generalised-linear-models.html#cb167-5"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
+<span id="cb167-6"><a href="practical-generalised-linear-models.html#cb167-6"></a><span class="co"># How many SNPs do we have data for</span></span>
+<span id="cb167-7"><a href="practical-generalised-linear-models.html#cb167-7"></a>p <span class="ot">&lt;-</span> <span class="fu">nrow</span>(X)</span>
+<span id="cb167-8"><a href="practical-generalised-linear-models.html#cb167-8"></a></span>
+<span id="cb167-9"><a href="practical-generalised-linear-models.html#cb167-9"></a><span class="co"># samples that are controls are encoded as 0 in y</span></span>
+<span id="cb167-10"><a href="practical-generalised-linear-models.html#cb167-10"></a>control <span class="ot">&lt;-</span> <span class="fu">which</span>(y <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb167-11"><a href="practical-generalised-linear-models.html#cb167-11"></a><span class="co"># disease cases are encoded as 1 in y</span></span>
+<span id="cb167-12"><a href="practical-generalised-linear-models.html#cb167-12"></a>cases <span class="ot">&lt;-</span> <span class="fu">which</span>(y <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
 <p>Now we need to write a loop that scans through all, <span class="math inline">\(p\)</span>, SNPs:</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb172-1"><a href="practical-generalised-linear-models.html#cb172-1"></a><span class="co"># create a vector where p-values will be stored</span></span>
-<span id="cb172-2"><a href="practical-generalised-linear-models.html#cb172-2"></a>p_vals <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, p)</span>
-<span id="cb172-3"><a href="practical-generalised-linear-models.html#cb172-3"></a></span>
-<span id="cb172-4"><a href="practical-generalised-linear-models.html#cb172-4"></a><span class="co"># Loop over SNPs</span></span>
-<span id="cb172-5"><a href="practical-generalised-linear-models.html#cb172-5"></a><span class="cf">for</span> (i_p <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>p) {</span>
-<span id="cb172-6"><a href="practical-generalised-linear-models.html#cb172-6"></a>    <span class="co"># 1. obtain genotype counts</span></span>
-<span id="cb172-7"><a href="practical-generalised-linear-models.html#cb172-7"></a>    counts <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
-<span id="cb172-8"><a href="practical-generalised-linear-models.html#cb172-8"></a>    counts[<span class="dv">1</span>, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">sum</span>(X[i_p, control] <span class="sc">==</span> <span class="dv">0</span>),</span>
-<span id="cb172-9"><a href="practical-generalised-linear-models.html#cb172-9"></a>                     <span class="fu">sum</span>(X[i_p, control] <span class="sc">==</span> <span class="dv">1</span>),</span>
-<span id="cb172-10"><a href="practical-generalised-linear-models.html#cb172-10"></a>                     <span class="fu">sum</span>(X[i_p, control] <span class="sc">==</span> <span class="dv">2</span>))</span>
-<span id="cb172-11"><a href="practical-generalised-linear-models.html#cb172-11"></a></span>
-<span id="cb172-12"><a href="practical-generalised-linear-models.html#cb172-12"></a>    counts[<span class="dv">2</span>, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">sum</span>(X[i_p, cases] <span class="sc">==</span> <span class="dv">0</span>),</span>
-<span id="cb172-13"><a href="practical-generalised-linear-models.html#cb172-13"></a>                     <span class="fu">sum</span>(X[i_p, cases] <span class="sc">==</span> <span class="dv">1</span>),</span>
-<span id="cb172-14"><a href="practical-generalised-linear-models.html#cb172-14"></a>                     <span class="fu">sum</span>(X[i_p, cases] <span class="sc">==</span> <span class="dv">2</span>))</span>
-<span id="cb172-15"><a href="practical-generalised-linear-models.html#cb172-15"></a></span>
-<span id="cb172-16"><a href="practical-generalised-linear-models.html#cb172-16"></a>    <span class="co"># 2. expected probability of AA</span></span>
-<span id="cb172-17"><a href="practical-generalised-linear-models.html#cb172-17"></a>    <span class="co"># (assuming no dependence on case/control status)</span></span>
-<span id="cb172-18"><a href="practical-generalised-linear-models.html#cb172-18"></a>    expected_pr_AA <span class="ot">&lt;-</span> <span class="fu">sum</span>(counts[, <span class="dv">1</span>]) <span class="sc">/</span> n</span>
-<span id="cb172-19"><a href="practical-generalised-linear-models.html#cb172-19"></a>    <span class="co"># expected probability of Aa</span></span>
-<span id="cb172-20"><a href="practical-generalised-linear-models.html#cb172-20"></a>    expected_pr_Aa <span class="ot">&lt;-</span> <span class="fu">sum</span>(counts[, <span class="dv">2</span>]) <span class="sc">/</span> n</span>
-<span id="cb172-21"><a href="practical-generalised-linear-models.html#cb172-21"></a>    <span class="co"># expected probability of aa</span></span>
-<span id="cb172-22"><a href="practical-generalised-linear-models.html#cb172-22"></a>    expected_pr_aa <span class="ot">&lt;-</span> <span class="fu">sum</span>(counts[, <span class="dv">3</span>]) <span class="sc">/</span> n</span>
-<span id="cb172-23"><a href="practical-generalised-linear-models.html#cb172-23"></a></span>
-<span id="cb172-24"><a href="practical-generalised-linear-models.html#cb172-24"></a>    expected_probs <span class="ot">&lt;-</span> <span class="fu">c</span>(expected_pr_AA, expected_pr_Aa, expected_pr_aa )</span>
-<span id="cb172-25"><a href="practical-generalised-linear-models.html#cb172-25"></a></span>
-<span id="cb172-26"><a href="practical-generalised-linear-models.html#cb172-26"></a>    <span class="co"># 3. do my chi-squared test</span></span>
-<span id="cb172-27"><a href="practical-generalised-linear-models.html#cb172-27"></a>    out <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(counts, <span class="at">p =</span> expected_probs)</span>
-<span id="cb172-28"><a href="practical-generalised-linear-models.html#cb172-28"></a>    <span class="co"># extract p value of test and store</span></span>
-<span id="cb172-29"><a href="practical-generalised-linear-models.html#cb172-29"></a>    p_vals[i_p] <span class="ot">&lt;-</span> out<span class="sc">$</span>p.value</span>
-<span id="cb172-30"><a href="practical-generalised-linear-models.html#cb172-30"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb168-1"><a href="practical-generalised-linear-models.html#cb168-1"></a><span class="co"># create a vector where p-values will be stored</span></span>
+<span id="cb168-2"><a href="practical-generalised-linear-models.html#cb168-2"></a>p_vals <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, p)</span>
+<span id="cb168-3"><a href="practical-generalised-linear-models.html#cb168-3"></a></span>
+<span id="cb168-4"><a href="practical-generalised-linear-models.html#cb168-4"></a><span class="co"># Loop over SNPs</span></span>
+<span id="cb168-5"><a href="practical-generalised-linear-models.html#cb168-5"></a><span class="cf">for</span> (i_p <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>p) {</span>
+<span id="cb168-6"><a href="practical-generalised-linear-models.html#cb168-6"></a>    <span class="co"># 1. obtain genotype counts</span></span>
+<span id="cb168-7"><a href="practical-generalised-linear-models.html#cb168-7"></a>    counts <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb168-8"><a href="practical-generalised-linear-models.html#cb168-8"></a>    counts[<span class="dv">1</span>, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">sum</span>(X[i_p, control] <span class="sc">==</span> <span class="dv">0</span>),</span>
+<span id="cb168-9"><a href="practical-generalised-linear-models.html#cb168-9"></a>                     <span class="fu">sum</span>(X[i_p, control] <span class="sc">==</span> <span class="dv">1</span>),</span>
+<span id="cb168-10"><a href="practical-generalised-linear-models.html#cb168-10"></a>                     <span class="fu">sum</span>(X[i_p, control] <span class="sc">==</span> <span class="dv">2</span>))</span>
+<span id="cb168-11"><a href="practical-generalised-linear-models.html#cb168-11"></a></span>
+<span id="cb168-12"><a href="practical-generalised-linear-models.html#cb168-12"></a>    counts[<span class="dv">2</span>, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">sum</span>(X[i_p, cases] <span class="sc">==</span> <span class="dv">0</span>),</span>
+<span id="cb168-13"><a href="practical-generalised-linear-models.html#cb168-13"></a>                     <span class="fu">sum</span>(X[i_p, cases] <span class="sc">==</span> <span class="dv">1</span>),</span>
+<span id="cb168-14"><a href="practical-generalised-linear-models.html#cb168-14"></a>                     <span class="fu">sum</span>(X[i_p, cases] <span class="sc">==</span> <span class="dv">2</span>))</span>
+<span id="cb168-15"><a href="practical-generalised-linear-models.html#cb168-15"></a></span>
+<span id="cb168-16"><a href="practical-generalised-linear-models.html#cb168-16"></a>    <span class="co"># 2. expected probability of AA</span></span>
+<span id="cb168-17"><a href="practical-generalised-linear-models.html#cb168-17"></a>    <span class="co"># (assuming no dependence on case/control status)</span></span>
+<span id="cb168-18"><a href="practical-generalised-linear-models.html#cb168-18"></a>    expected_pr_AA <span class="ot">&lt;-</span> <span class="fu">sum</span>(counts[, <span class="dv">1</span>]) <span class="sc">/</span> n</span>
+<span id="cb168-19"><a href="practical-generalised-linear-models.html#cb168-19"></a>    <span class="co"># expected probability of Aa</span></span>
+<span id="cb168-20"><a href="practical-generalised-linear-models.html#cb168-20"></a>    expected_pr_Aa <span class="ot">&lt;-</span> <span class="fu">sum</span>(counts[, <span class="dv">2</span>]) <span class="sc">/</span> n</span>
+<span id="cb168-21"><a href="practical-generalised-linear-models.html#cb168-21"></a>    <span class="co"># expected probability of aa</span></span>
+<span id="cb168-22"><a href="practical-generalised-linear-models.html#cb168-22"></a>    expected_pr_aa <span class="ot">&lt;-</span> <span class="fu">sum</span>(counts[, <span class="dv">3</span>]) <span class="sc">/</span> n</span>
+<span id="cb168-23"><a href="practical-generalised-linear-models.html#cb168-23"></a></span>
+<span id="cb168-24"><a href="practical-generalised-linear-models.html#cb168-24"></a>    expected_probs <span class="ot">&lt;-</span> <span class="fu">c</span>(expected_pr_AA, expected_pr_Aa, expected_pr_aa )</span>
+<span id="cb168-25"><a href="practical-generalised-linear-models.html#cb168-25"></a></span>
+<span id="cb168-26"><a href="practical-generalised-linear-models.html#cb168-26"></a>    <span class="co"># 3. do my chi-squared test</span></span>
+<span id="cb168-27"><a href="practical-generalised-linear-models.html#cb168-27"></a>    out <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(counts, <span class="at">p =</span> expected_probs)</span>
+<span id="cb168-28"><a href="practical-generalised-linear-models.html#cb168-28"></a>    <span class="co"># extract p value of test and store</span></span>
+<span id="cb168-29"><a href="practical-generalised-linear-models.html#cb168-29"></a>    p_vals[i_p] <span class="ot">&lt;-</span> out<span class="sc">$</span>p.value</span>
+<span id="cb168-30"><a href="practical-generalised-linear-models.html#cb168-30"></a>}</span></code></pre></div>
 <p>We went through each SNP (rows in matrix <code>X</code>), extracted the counts of each genotype (marked <code>1.</code> in code) for cases and controls, then we compute expected probability (marked <code>2.</code> in code). Finally, we perform a chi-squared contingency table test comparing those observed counts to expected probabilities assuming that genotype is not related to disease status (marked <code>3.</code> in code).</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb173-1"><a href="practical-generalised-linear-models.html#cb173-1"></a>p_val_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">p_val =</span> p_vals, <span class="at">idx =</span> <span class="dv">1</span><span class="sc">:</span>p)</span>
-<span id="cb173-2"><a href="practical-generalised-linear-models.html#cb173-2"></a></span>
-<span id="cb173-3"><a href="practical-generalised-linear-models.html#cb173-3"></a><span class="fu">ggplot</span>(p_val_df, <span class="fu">aes</span>(<span class="at">x =</span> idx, <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(p_val))) <span class="sc">+</span></span>
-<span id="cb173-4"><a href="practical-generalised-linear-models.html#cb173-4"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">col =</span> <span class="st">"dodgerblue1"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb169-1"><a href="practical-generalised-linear-models.html#cb169-1"></a>p_val_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">p_val =</span> p_vals, <span class="at">idx =</span> <span class="dv">1</span><span class="sc">:</span>p)</span>
+<span id="cb169-2"><a href="practical-generalised-linear-models.html#cb169-2"></a></span>
+<span id="cb169-3"><a href="practical-generalised-linear-models.html#cb169-3"></a><span class="fu">ggplot</span>(p_val_df, <span class="fu">aes</span>(<span class="at">x =</span> idx, <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(p_val))) <span class="sc">+</span></span>
+<span id="cb169-4"><a href="practical-generalised-linear-models.html#cb169-4"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">col =</span> <span class="st">"dodgerblue1"</span>)</span></code></pre></div>
 <div class="inline-figure"><img src="glm_files/figure-html/plot-1.png" width="95%" style="display: block; margin: auto;"></div>
 <p>This plot is knows as a <em>Manhattan</em> plot. One SNP (<code>i_p = 250</code>) will pop out as being highly associated with the disease process. Look at the genotype counts (or MAF) for this SNP in the cases and controls to see for yourself that there is large difference in the distribution of genotypes (or MAF).</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb174-1"><a href="practical-generalised-linear-models.html#cb174-1"></a>i_p <span class="ot">&lt;-</span> <span class="dv">250</span></span>
-<span id="cb174-2"><a href="practical-generalised-linear-models.html#cb174-2"></a>counts_v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">sum</span>(X[i_p, control] <span class="sc">==</span> <span class="dv">0</span>), <span class="fu">sum</span>(X[i_p, control] <span class="sc">==</span> <span class="dv">1</span>),</span>
-<span id="cb174-3"><a href="practical-generalised-linear-models.html#cb174-3"></a>              <span class="fu">sum</span>(X[i_p, control] <span class="sc">==</span> <span class="dv">2</span>), <span class="fu">sum</span>(X[i_p, cases] <span class="sc">==</span> <span class="dv">0</span>),</span>
-<span id="cb174-4"><a href="practical-generalised-linear-models.html#cb174-4"></a>              <span class="fu">sum</span>(X[i_p, cases] <span class="sc">==</span> <span class="dv">1</span>), <span class="fu">sum</span>(X[i_p, cases] <span class="sc">==</span> <span class="dv">2</span>))</span>
-<span id="cb174-5"><a href="practical-generalised-linear-models.html#cb174-5"></a></span>
-<span id="cb174-6"><a href="practical-generalised-linear-models.html#cb174-6"></a>snp_procs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(counts_v, <span class="at">type =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"cases"</span>), <span class="at">each =</span> <span class="dv">3</span>),</span>
-<span id="cb174-7"><a href="practical-generalised-linear-models.html#cb174-7"></a>           <span class="at">genotype =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"AA"</span>, <span class="st">"Aa"</span>, <span class="st">"aa"</span>), <span class="dv">2</span>))</span>
-<span id="cb174-8"><a href="practical-generalised-linear-models.html#cb174-8"></a></span>
-<span id="cb174-9"><a href="practical-generalised-linear-models.html#cb174-9"></a><span class="fu">ggplot</span>(snp_procs, <span class="fu">aes</span>(<span class="at">x =</span> genotype, <span class="at">y =</span> counts_v, <span class="at">fill =</span> type)) <span class="sc">+</span></span>
-<span id="cb174-10"><a href="practical-generalised-linear-models.html#cb174-10"></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb170-1"><a href="practical-generalised-linear-models.html#cb170-1"></a>i_p <span class="ot">&lt;-</span> <span class="dv">250</span></span>
+<span id="cb170-2"><a href="practical-generalised-linear-models.html#cb170-2"></a>counts_v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">sum</span>(X[i_p, control] <span class="sc">==</span> <span class="dv">0</span>), <span class="fu">sum</span>(X[i_p, control] <span class="sc">==</span> <span class="dv">1</span>),</span>
+<span id="cb170-3"><a href="practical-generalised-linear-models.html#cb170-3"></a>              <span class="fu">sum</span>(X[i_p, control] <span class="sc">==</span> <span class="dv">2</span>), <span class="fu">sum</span>(X[i_p, cases] <span class="sc">==</span> <span class="dv">0</span>),</span>
+<span id="cb170-4"><a href="practical-generalised-linear-models.html#cb170-4"></a>              <span class="fu">sum</span>(X[i_p, cases] <span class="sc">==</span> <span class="dv">1</span>), <span class="fu">sum</span>(X[i_p, cases] <span class="sc">==</span> <span class="dv">2</span>))</span>
+<span id="cb170-5"><a href="practical-generalised-linear-models.html#cb170-5"></a></span>
+<span id="cb170-6"><a href="practical-generalised-linear-models.html#cb170-6"></a>snp_procs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(counts_v, <span class="at">type =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"cases"</span>), <span class="at">each =</span> <span class="dv">3</span>),</span>
+<span id="cb170-7"><a href="practical-generalised-linear-models.html#cb170-7"></a>           <span class="at">genotype =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"AA"</span>, <span class="st">"Aa"</span>, <span class="st">"aa"</span>), <span class="dv">2</span>))</span>
+<span id="cb170-8"><a href="practical-generalised-linear-models.html#cb170-8"></a></span>
+<span id="cb170-9"><a href="practical-generalised-linear-models.html#cb170-9"></a><span class="fu">ggplot</span>(snp_procs, <span class="fu">aes</span>(<span class="at">x =</span> genotype, <span class="at">y =</span> counts_v, <span class="at">fill =</span> type)) <span class="sc">+</span></span>
+<span id="cb170-10"><a href="practical-generalised-linear-models.html#cb170-10"></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>)</span></code></pre></div>
 <div class="inline-figure"><img src="glm_files/figure-html/snp-1.png" width="95%" style="display: block; margin: auto;"></div>
 </div>
 <div id="gwas-and-logistic-regression" class="section level2" number="11.3">
@@ -182,27 +182,27 @@
 <span class="header-section-number">11.3</span> GWAS and logistic regression<a class="anchor" aria-label="anchor" href="#gwas-and-logistic-regression"><i class="fas fa-link"></i></a>
 </h2>
 <p>Now lets approach this problem using Generalised Linear Models. Lets load a data set containing genotypes in <code>X</code> and case-control status in <code>y</code>:</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb175-1"><a href="practical-generalised-linear-models.html#cb175-1"></a><span class="co"># load an example data set (genotypes in X, case-control (1/0) status in y)</span></span>
-<span id="cb175-2"><a href="practical-generalised-linear-models.html#cb175-2"></a><span class="fu">load</span>(<span class="st">"gwas-cc-ex2.Rdata"</span>)</span>
-<span id="cb175-3"><a href="practical-generalised-linear-models.html#cb175-3"></a></span>
-<span id="cb175-4"><a href="practical-generalised-linear-models.html#cb175-4"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(y) <span class="co"># how many individuals do we have in total?</span></span>
-<span id="cb175-5"><a href="practical-generalised-linear-models.html#cb175-5"></a>p <span class="ot">&lt;-</span> <span class="fu">nrow</span>(X) <span class="co"># how many SNPs do I have data for?</span></span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb171-1"><a href="practical-generalised-linear-models.html#cb171-1"></a><span class="co"># load an example data set (genotypes in X, case-control (1/0) status in y)</span></span>
+<span id="cb171-2"><a href="practical-generalised-linear-models.html#cb171-2"></a><span class="fu">load</span>(<span class="st">"gwas-cc-ex2.Rdata"</span>)</span>
+<span id="cb171-3"><a href="practical-generalised-linear-models.html#cb171-3"></a></span>
+<span id="cb171-4"><a href="practical-generalised-linear-models.html#cb171-4"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(y) <span class="co"># how many individuals do we have in total?</span></span>
+<span id="cb171-5"><a href="practical-generalised-linear-models.html#cb171-5"></a>p <span class="ot">&lt;-</span> <span class="fu">nrow</span>(X) <span class="co"># how many SNPs do I have data for?</span></span></code></pre></div>
 <p>For each of the <code>p</code> SNPs we are going to call the <code>R</code> GLM function <code>glm</code> using the <code>binomial</code> family option with the <code>logit</code> link function because my outcomes are binary. We will then extract the p-value associated with the regression coefficient for the genotype. This is obtained from applying a hypothesis test (the <em>Wald Test</em>) on whether the coefficient has a null value zero.</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb176-1"><a href="practical-generalised-linear-models.html#cb176-1"></a>p_vals <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, p)</span>
-<span id="cb176-2"><a href="practical-generalised-linear-models.html#cb176-2"></a><span class="cf">for</span> ( j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>p ) {</span>
-<span id="cb176-3"><a href="practical-generalised-linear-models.html#cb176-3"></a>  snp_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">y =</span> y, <span class="at">x =</span> X[j, ])</span>
-<span id="cb176-4"><a href="practical-generalised-linear-models.html#cb176-4"></a>  glm.fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit), <span class="at">data =</span> snp_data  )</span>
-<span id="cb176-5"><a href="practical-generalised-linear-models.html#cb176-5"></a>  p_vals[j] <span class="ot">&lt;-</span> <span class="fu">summary</span>(glm.fit)<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">4</span>]</span>
-<span id="cb176-6"><a href="practical-generalised-linear-models.html#cb176-6"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb172-1"><a href="practical-generalised-linear-models.html#cb172-1"></a>p_vals <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, p)</span>
+<span id="cb172-2"><a href="practical-generalised-linear-models.html#cb172-2"></a><span class="cf">for</span> ( j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>p ) {</span>
+<span id="cb172-3"><a href="practical-generalised-linear-models.html#cb172-3"></a>  snp_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">y =</span> y, <span class="at">x =</span> X[j, ])</span>
+<span id="cb172-4"><a href="practical-generalised-linear-models.html#cb172-4"></a>  glm.fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit), <span class="at">data =</span> snp_data  )</span>
+<span id="cb172-5"><a href="practical-generalised-linear-models.html#cb172-5"></a>  p_vals[j] <span class="ot">&lt;-</span> <span class="fu">summary</span>(glm.fit)<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">4</span>]</span>
+<span id="cb172-6"><a href="practical-generalised-linear-models.html#cb172-6"></a>}</span></code></pre></div>
 <p>We are testing 1,000 SNPs so lets use Bonferroni correction to adjust these p-values to take into account multiple testing:</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb177-1"><a href="practical-generalised-linear-models.html#cb177-1"></a>adj_p_vals <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(p_vals, <span class="st">"bonferroni"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb173-1"><a href="practical-generalised-linear-models.html#cb173-1"></a>adj_p_vals <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(p_vals, <span class="st">"bonferroni"</span>)</span></code></pre></div>
 <p>Lets use the adjusted -log10 p-values to plot a Manhattan plot:</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb178-1"><a href="practical-generalised-linear-models.html#cb178-1"></a><span class="co"># create data.frame with p-values for plotting with ggplot</span></span>
-<span id="cb178-2"><a href="practical-generalised-linear-models.html#cb178-2"></a>p_val_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">p_val =</span> adj_p_vals, <span class="at">idx =</span> <span class="dv">1</span><span class="sc">:</span>p)</span>
-<span id="cb178-3"><a href="practical-generalised-linear-models.html#cb178-3"></a></span>
-<span id="cb178-4"><a href="practical-generalised-linear-models.html#cb178-4"></a><span class="fu">ggplot</span>(p_val_df, <span class="fu">aes</span>(<span class="at">x =</span> idx, <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(p_val))) <span class="sc">+</span></span>
-<span id="cb178-5"><a href="practical-generalised-linear-models.html#cb178-5"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">col =</span> <span class="st">"dodgerblue1"</span>) <span class="sc">+</span></span>
-<span id="cb178-6"><a href="practical-generalised-linear-models.html#cb178-6"></a>    <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"-log10(adjusted p-value)"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb174-1"><a href="practical-generalised-linear-models.html#cb174-1"></a><span class="co"># create data.frame with p-values for plotting with ggplot</span></span>
+<span id="cb174-2"><a href="practical-generalised-linear-models.html#cb174-2"></a>p_val_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">p_val =</span> adj_p_vals, <span class="at">idx =</span> <span class="dv">1</span><span class="sc">:</span>p)</span>
+<span id="cb174-3"><a href="practical-generalised-linear-models.html#cb174-3"></a></span>
+<span id="cb174-4"><a href="practical-generalised-linear-models.html#cb174-4"></a><span class="fu">ggplot</span>(p_val_df, <span class="fu">aes</span>(<span class="at">x =</span> idx, <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(p_val))) <span class="sc">+</span></span>
+<span id="cb174-5"><a href="practical-generalised-linear-models.html#cb174-5"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">col =</span> <span class="st">"dodgerblue1"</span>) <span class="sc">+</span></span>
+<span id="cb174-6"><a href="practical-generalised-linear-models.html#cb174-6"></a>    <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"-log10(adjusted p-value)"</span>)</span></code></pre></div>
 <div class="inline-figure"><img src="glm_files/figure-html/gwas2_plot-1.png" width="95%" style="display: block; margin: auto;"></div>
 <p>You should see a single SNP showing a strong association with disease status.</p>
 </div>
@@ -221,14 +221,14 @@
 <strong><code>tumor_subtype</code></strong>: three-level nominal variable indicating the histopathological sub-type of the tumour. The three levels are Unstable, Stable, and Complex</li>
 </ul>
 <p>Let’s load some prerequisite R libraries and the data to produce some summary statistics (<em>install if required using <code>install.package()</code> command</em> ):</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb179-1"><a href="practical-generalised-linear-models.html#cb179-1"></a><span class="co"># required libraries</span></span>
-<span id="cb179-2"><a href="practical-generalised-linear-models.html#cb179-2"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb179-3"><a href="practical-generalised-linear-models.html#cb179-3"></a><span class="fu">library</span>(foreign)</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb175-1"><a href="practical-generalised-linear-models.html#cb175-1"></a><span class="co"># required libraries</span></span>
+<span id="cb175-2"><a href="practical-generalised-linear-models.html#cb175-2"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb175-3"><a href="practical-generalised-linear-models.html#cb175-3"></a><span class="fu">library</span>(foreign)</span></code></pre></div>
 <pre><code>#&gt; Warning: package 'foreign' was built under R version 4.3.3</code></pre>
-<div class="sourceCode" id="cb181"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb181-1"><a href="practical-generalised-linear-models.html#cb181-1"></a><span class="fu">load</span>(<span class="st">"nb_data.Rdata"</span>)</span>
-<span id="cb181-2"><a href="practical-generalised-linear-models.html#cb181-2"></a></span>
-<span id="cb181-3"><a href="practical-generalised-linear-models.html#cb181-3"></a><span class="co"># print summary statistics to Console</span></span>
-<span id="cb181-4"><a href="practical-generalised-linear-models.html#cb181-4"></a><span class="fu">summary</span>(dat)</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb177-1"><a href="practical-generalised-linear-models.html#cb177-1"></a><span class="fu">load</span>(<span class="st">"nb_data.Rdata"</span>)</span>
+<span id="cb177-2"><a href="practical-generalised-linear-models.html#cb177-2"></a></span>
+<span id="cb177-3"><a href="practical-generalised-linear-models.html#cb177-3"></a><span class="co"># print summary statistics to Console</span></span>
+<span id="cb177-4"><a href="practical-generalised-linear-models.html#cb177-4"></a><span class="fu">summary</span>(dat)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;    sample_id      gender     immunoscore   
 #&gt;  1001   :  1   female:160   Min.   : 1.00  
 #&gt;  1002   :  1   male  :154   1st Qu.:28.00  
@@ -260,10 +260,10 @@
 <span class="header-section-number">11.4.2</span> Fitting a GLM<a class="anchor" aria-label="anchor" href="#fitting-a-glm"><i class="fas fa-link"></i></a>
 </h3>
 <p>Below we use the <code>glm.nb</code> function from the <code>MASS</code> package to estimate a negative binomial regression. The use of the function is similar to that of <code>lm</code> for linear models but with the additional requirement of a link function. As count data is always positive, a log link function is useful here.</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb183-1"><a href="practical-generalised-linear-models.html#cb183-1"></a>glm_1 <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(overexpressed_proteins <span class="sc">~</span> immunoscore <span class="sc">+</span> tumor_subtype <span class="sc">+</span> gender, <span class="at">data =</span> dat, <span class="at">link=</span>log)</span>
-<span id="cb183-2"><a href="practical-generalised-linear-models.html#cb183-2"></a></span>
-<span id="cb183-3"><a href="practical-generalised-linear-models.html#cb183-3"></a><span class="co"># print summary statistics of glm.nb output object to Console</span></span>
-<span id="cb183-4"><a href="practical-generalised-linear-models.html#cb183-4"></a><span class="fu">summary</span>(glm_1)</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb179-1"><a href="practical-generalised-linear-models.html#cb179-1"></a>glm_1 <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(overexpressed_proteins <span class="sc">~</span> immunoscore <span class="sc">+</span> tumor_subtype <span class="sc">+</span> gender, <span class="at">data =</span> dat, <span class="at">link=</span>log)</span>
+<span id="cb179-2"><a href="practical-generalised-linear-models.html#cb179-2"></a></span>
+<span id="cb179-3"><a href="practical-generalised-linear-models.html#cb179-3"></a><span class="co"># print summary statistics of glm.nb output object to Console</span></span>
+<span id="cb179-4"><a href="practical-generalised-linear-models.html#cb179-4"></a><span class="fu">summary</span>(glm_1)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; 
 #&gt; Call:
 #&gt; glm.nb(formula = overexpressed_proteins ~ immunoscore + tumor_subtype + 
@@ -308,9 +308,9 @@
 <span class="header-section-number">11.4.3</span> Comparing nested models<a class="anchor" aria-label="anchor" href="#comparing-nested-models"><i class="fas fa-link"></i></a>
 </h3>
 <p>To determine if <code>tumor_subtype</code> itself, overall, is statistically significant, we can compare a model with and without <code>tumor_subtype</code>. The reason it is important to fit separate models is that, unless we do, the overdispersion parameter is held constant and it would not be a fair comparison.</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb185-1"><a href="practical-generalised-linear-models.html#cb185-1"></a>glm_2 <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(overexpressed_proteins <span class="sc">~</span> immunoscore <span class="sc">+</span> gender, <span class="at">data =</span> dat, <span class="at">link =</span> log)</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb181-1"><a href="practical-generalised-linear-models.html#cb181-1"></a>glm_2 <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(overexpressed_proteins <span class="sc">~</span> immunoscore <span class="sc">+</span> gender, <span class="at">data =</span> dat, <span class="at">link =</span> log)</span></code></pre></div>
 <p>We use the <code>anova</code> function to compare models using a likelihood ratio test (LRT):</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb186-1"><a href="practical-generalised-linear-models.html#cb186-1"></a><span class="fu">anova</span>(glm_1, glm_2, <span class="at">test =</span> <span class="st">"LRT"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb182-1"><a href="practical-generalised-linear-models.html#cb182-1"></a><span class="fu">anova</span>(glm_1, glm_2, <span class="at">test =</span> <span class="st">"LRT"</span>)</span></code></pre></div>
 <pre><code>#&gt; Warning in anova.negbin(glm_1, glm_2, test = "LRT"): only
 #&gt; Chi-squared LR tests are implemented</code></pre>
 <pre class="bg-info"><code>#&gt; Likelihood ratio tests of Negative Binomial Models
@@ -333,9 +333,9 @@
 </h2>
 <p>Negative binomial models assume the conditional means are not equal to the conditional variances. This inequality is captured by estimating a dispersion parameter (not shown in the output) that is held constant in a Poisson model. Thus, the Poisson model is actually nested in the negative binomial model. We can then use a likelihood ratio test to compare these two models.</p>
 <p>To do this, we will first fit a GLM Poisson regression:</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb189-1"><a href="practical-generalised-linear-models.html#cb189-1"></a>glm_3 <span class="ot">&lt;-</span> <span class="fu">glm</span>(overexpressed_proteins <span class="sc">~</span> immunoscore <span class="sc">+</span> tumor_subtype <span class="sc">+</span> gender, <span class="at">family =</span> <span class="st">"poisson"</span>, <span class="at">data =</span> dat)</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb185-1"><a href="practical-generalised-linear-models.html#cb185-1"></a>glm_3 <span class="ot">&lt;-</span> <span class="fu">glm</span>(overexpressed_proteins <span class="sc">~</span> immunoscore <span class="sc">+</span> tumor_subtype <span class="sc">+</span> gender, <span class="at">family =</span> <span class="st">"poisson"</span>, <span class="at">data =</span> dat)</span></code></pre></div>
 <p>Now, lets do our likelihood ratio test, we can extract the log-likelihood using <code><a href="https://rdrr.io/r/stats/logLik.html">logLik()</a></code> and then use <code><a href="https://rdrr.io/r/stats/Chisquare.html">pchisq()</a></code> to extract the probability of getting a statistic at least as extreme as this:</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb190-1"><a href="practical-generalised-linear-models.html#cb190-1"></a><span class="fu">pchisq</span>(<span class="dv">2</span> <span class="sc">*</span> (<span class="fu">logLik</span>(glm_1) <span class="sc">-</span> <span class="fu">logLik</span>(glm_3)), <span class="at">df =</span> <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb186-1"><a href="practical-generalised-linear-models.html#cb186-1"></a><span class="fu">pchisq</span>(<span class="dv">2</span> <span class="sc">*</span> (<span class="fu">logLik</span>(glm_1) <span class="sc">-</span> <span class="fu">logLik</span>(glm_3)), <span class="at">df =</span> <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; 'log Lik.' 3.847622e-198 (df=6)</code></pre>
 <p>Note that the more complex model goes first because more complex models always have the larger likelihood.</p>
 <p>In this example the associated chi-squared value estimated from <code>2*(logLik(m1) – logLik(m3))</code> is around 900 with one degree of freedom. This strongly suggests the negative binomial model, estimating the dispersion parameter, is more appropriate than the Poisson model.</p>
@@ -346,23 +346,23 @@
 </h2>
 <p>For assistance in further understanding the model, we can look at predicted counts for various levels of our predictors. Below we create new datasets with values of <code>immunoscore</code> and <code>tumor_subtype</code> and then use the predict command to calculate the predicted number of overexpressed proteins</p>
 <p>First, we can look at predicted counts for each value of <code>tumor_subtype</code> while holding <code>immunoscore</code> at its mean. To do this, we create a new dataset with the combinations of <code>tumor_subtype</code> and <code>immunoscore</code> for which we would like to find predicted values, then use the <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> command.</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb192-1"><a href="practical-generalised-linear-models.html#cb192-1"></a>newdata_1 <span class="ot">&lt;-</span></span>
-<span id="cb192-2"><a href="practical-generalised-linear-models.html#cb192-2"></a><span class="fu">data.frame</span>(</span>
-<span id="cb192-3"><a href="practical-generalised-linear-models.html#cb192-3"></a>    <span class="at">immunoscore =</span> <span class="fu">mean</span>(dat<span class="sc">$</span>immunoscore),</span>
-<span id="cb192-4"><a href="practical-generalised-linear-models.html#cb192-4"></a>    <span class="at">tumor_subtype =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"Complex"</span>, <span class="st">"Unstable"</span>, <span class="st">"Stable"</span>), <span class="at">labels =</span> <span class="fu">levels</span>(dat<span class="sc">$</span>tumor_subtype)),</span>
-<span id="cb192-5"><a href="practical-generalised-linear-models.html#cb192-5"></a>    <span class="at">gender=</span><span class="st">"male"</span>)</span>
-<span id="cb192-6"><a href="practical-generalised-linear-models.html#cb192-6"></a></span>
-<span id="cb192-7"><a href="practical-generalised-linear-models.html#cb192-7"></a>newdata_2 <span class="ot">&lt;-</span></span>
-<span id="cb192-8"><a href="practical-generalised-linear-models.html#cb192-8"></a><span class="fu">data.frame</span>(</span>
-<span id="cb192-9"><a href="practical-generalised-linear-models.html#cb192-9"></a>    <span class="at">immunoscore =</span> <span class="fu">mean</span>(dat<span class="sc">$</span>immunoscore),</span>
-<span id="cb192-10"><a href="practical-generalised-linear-models.html#cb192-10"></a>    <span class="at">tumor_subtype =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"Complex"</span>, <span class="st">"Unstable"</span>, <span class="st">"Stable"</span>), <span class="at">labels =</span> <span class="fu">levels</span>(dat<span class="sc">$</span>tumor_subtype)),</span>
-<span id="cb192-11"><a href="practical-generalised-linear-models.html#cb192-11"></a>    <span class="at">gender=</span><span class="st">"female"</span>)</span>
-<span id="cb192-12"><a href="practical-generalised-linear-models.html#cb192-12"></a></span>
-<span id="cb192-13"><a href="practical-generalised-linear-models.html#cb192-13"></a>new_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(newdata_1, newdata_2)</span>
-<span id="cb192-14"><a href="practical-generalised-linear-models.html#cb192-14"></a></span>
-<span id="cb192-15"><a href="practical-generalised-linear-models.html#cb192-15"></a>new_data<span class="sc">$</span>phat <span class="ot">&lt;-</span> <span class="fu">predict</span>(glm_1, new_data, <span class="at">type =</span> <span class="st">"response"</span>)</span>
-<span id="cb192-16"><a href="practical-generalised-linear-models.html#cb192-16"></a></span>
-<span id="cb192-17"><a href="practical-generalised-linear-models.html#cb192-17"></a><span class="fu">print</span>(new_data)</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb188-1"><a href="practical-generalised-linear-models.html#cb188-1"></a>newdata_1 <span class="ot">&lt;-</span></span>
+<span id="cb188-2"><a href="practical-generalised-linear-models.html#cb188-2"></a><span class="fu">data.frame</span>(</span>
+<span id="cb188-3"><a href="practical-generalised-linear-models.html#cb188-3"></a>    <span class="at">immunoscore =</span> <span class="fu">mean</span>(dat<span class="sc">$</span>immunoscore),</span>
+<span id="cb188-4"><a href="practical-generalised-linear-models.html#cb188-4"></a>    <span class="at">tumor_subtype =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"Complex"</span>, <span class="st">"Unstable"</span>, <span class="st">"Stable"</span>), <span class="at">labels =</span> <span class="fu">levels</span>(dat<span class="sc">$</span>tumor_subtype)),</span>
+<span id="cb188-5"><a href="practical-generalised-linear-models.html#cb188-5"></a>    <span class="at">gender=</span><span class="st">"male"</span>)</span>
+<span id="cb188-6"><a href="practical-generalised-linear-models.html#cb188-6"></a></span>
+<span id="cb188-7"><a href="practical-generalised-linear-models.html#cb188-7"></a>newdata_2 <span class="ot">&lt;-</span></span>
+<span id="cb188-8"><a href="practical-generalised-linear-models.html#cb188-8"></a><span class="fu">data.frame</span>(</span>
+<span id="cb188-9"><a href="practical-generalised-linear-models.html#cb188-9"></a>    <span class="at">immunoscore =</span> <span class="fu">mean</span>(dat<span class="sc">$</span>immunoscore),</span>
+<span id="cb188-10"><a href="practical-generalised-linear-models.html#cb188-10"></a>    <span class="at">tumor_subtype =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"Complex"</span>, <span class="st">"Unstable"</span>, <span class="st">"Stable"</span>), <span class="at">labels =</span> <span class="fu">levels</span>(dat<span class="sc">$</span>tumor_subtype)),</span>
+<span id="cb188-11"><a href="practical-generalised-linear-models.html#cb188-11"></a>    <span class="at">gender=</span><span class="st">"female"</span>)</span>
+<span id="cb188-12"><a href="practical-generalised-linear-models.html#cb188-12"></a></span>
+<span id="cb188-13"><a href="practical-generalised-linear-models.html#cb188-13"></a>new_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(newdata_1, newdata_2)</span>
+<span id="cb188-14"><a href="practical-generalised-linear-models.html#cb188-14"></a></span>
+<span id="cb188-15"><a href="practical-generalised-linear-models.html#cb188-15"></a>new_data<span class="sc">$</span>phat <span class="ot">&lt;-</span> <span class="fu">predict</span>(glm_1, new_data, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb188-16"><a href="practical-generalised-linear-models.html#cb188-16"></a></span>
+<span id="cb188-17"><a href="practical-generalised-linear-models.html#cb188-17"></a><span class="fu">print</span>(new_data)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;   immunoscore tumor_subtype gender      phat
 #&gt; 1    48.26752       Complex   male  8.983829
 #&gt; 2    48.26752        Stable   male  2.567187
@@ -370,35 +370,35 @@
 #&gt; 4    48.26752       Complex female 11.095193
 #&gt; 5    48.26752        Stable female  3.170523
 #&gt; 6    48.26752      Unstable female  7.257042</code></pre>
-<div class="sourceCode" id="cb194"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb194-1"><a href="practical-generalised-linear-models.html#cb194-1"></a>newdata_3 <span class="ot">&lt;-</span></span>
-<span id="cb194-2"><a href="practical-generalised-linear-models.html#cb194-2"></a><span class="fu">data.frame</span>(</span>
-<span id="cb194-3"><a href="practical-generalised-linear-models.html#cb194-3"></a>    <span class="at">immunoscore =</span> <span class="fu">rep</span>(<span class="fu">seq</span>(<span class="at">from =</span> <span class="fu">min</span>(dat<span class="sc">$</span>immunoscore), <span class="at">to =</span> <span class="fu">max</span>(dat<span class="sc">$</span>immunoscore), <span class="at">length.out =</span> <span class="dv">100</span>), <span class="dv">3</span>),</span>
-<span id="cb194-4"><a href="practical-generalised-linear-models.html#cb194-4"></a>    <span class="at">tumor_subtype =</span> <span class="fu">rep</span>(<span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"Complex"</span>, <span class="st">"Unstable"</span>, <span class="st">"Stable"</span>), <span class="at">labels =</span> <span class="fu">levels</span>(dat<span class="sc">$</span>tumor_subtype)), <span class="at">each=</span><span class="dv">100</span>),</span>
-<span id="cb194-5"><a href="practical-generalised-linear-models.html#cb194-5"></a>    <span class="at">gender=</span><span class="st">"male"</span>)</span>
-<span id="cb194-6"><a href="practical-generalised-linear-models.html#cb194-6"></a></span>
-<span id="cb194-7"><a href="practical-generalised-linear-models.html#cb194-7"></a>newdata_4 <span class="ot">&lt;-</span></span>
-<span id="cb194-8"><a href="practical-generalised-linear-models.html#cb194-8"></a><span class="fu">data.frame</span>(</span>
-<span id="cb194-9"><a href="practical-generalised-linear-models.html#cb194-9"></a>    <span class="at">immunoscore =</span> <span class="fu">rep</span>(<span class="fu">seq</span>(<span class="at">from =</span> <span class="fu">min</span>(dat<span class="sc">$</span>immunoscore), <span class="at">to =</span> <span class="fu">max</span>(dat<span class="sc">$</span>immunoscore), <span class="at">length.out =</span> <span class="dv">100</span>), <span class="dv">3</span>),</span>
-<span id="cb194-10"><a href="practical-generalised-linear-models.html#cb194-10"></a>    <span class="at">tumor_subtype =</span> <span class="fu">rep</span>(<span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"Complex"</span>, <span class="st">"Unstable"</span>, <span class="st">"Stable"</span>), <span class="at">labels =</span> <span class="fu">levels</span>(dat<span class="sc">$</span>tumor_subtype)), <span class="at">each=</span><span class="dv">100</span>),</span>
-<span id="cb194-11"><a href="practical-generalised-linear-models.html#cb194-11"></a>    <span class="at">gender=</span><span class="st">"female"</span>)</span>
-<span id="cb194-12"><a href="practical-generalised-linear-models.html#cb194-12"></a></span>
-<span id="cb194-13"><a href="practical-generalised-linear-models.html#cb194-13"></a>new_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(newdata_3, newdata_4)</span>
-<span id="cb194-14"><a href="practical-generalised-linear-models.html#cb194-14"></a></span>
-<span id="cb194-15"><a href="practical-generalised-linear-models.html#cb194-15"></a>new_data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(new_data, <span class="fu">predict</span>(glm_1, new_data, <span class="at">type =</span> <span class="st">"link"</span>, <span class="at">se.fit=</span><span class="cn">TRUE</span>))</span>
-<span id="cb194-16"><a href="practical-generalised-linear-models.html#cb194-16"></a></span>
-<span id="cb194-17"><a href="practical-generalised-linear-models.html#cb194-17"></a>new_data <span class="ot">&lt;-</span> <span class="fu">within</span>(new_data, {</span>
-<span id="cb194-18"><a href="practical-generalised-linear-models.html#cb194-18"></a>  overexpressed_proteins <span class="ot">&lt;-</span> <span class="fu">exp</span>(fit)</span>
-<span id="cb194-19"><a href="practical-generalised-linear-models.html#cb194-19"></a>  LL <span class="ot">&lt;-</span> <span class="fu">exp</span>(fit <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se.fit)</span>
-<span id="cb194-20"><a href="practical-generalised-linear-models.html#cb194-20"></a>  UL <span class="ot">&lt;-</span> <span class="fu">exp</span>(fit <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se.fit)</span>
-<span id="cb194-21"><a href="practical-generalised-linear-models.html#cb194-21"></a>})</span></code></pre></div>
-<div class="sourceCode" id="cb195"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb195-1"><a href="practical-generalised-linear-models.html#cb195-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb195-2"><a href="practical-generalised-linear-models.html#cb195-2"></a></span>
-<span id="cb195-3"><a href="practical-generalised-linear-models.html#cb195-3"></a><span class="fu">ggplot</span>(new_data, <span class="fu">aes</span>(immunoscore, overexpressed_proteins)) <span class="sc">+</span></span>
-<span id="cb195-4"><a href="practical-generalised-linear-models.html#cb195-4"></a>    <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> LL, <span class="at">ymax =</span> UL, <span class="at">fill =</span> tumor_subtype), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb195-5"><a href="practical-generalised-linear-models.html#cb195-5"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">colour =</span> tumor_subtype), <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb195-6"><a href="practical-generalised-linear-models.html#cb195-6"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Immunoscore"</span>,</span>
-<span id="cb195-7"><a href="practical-generalised-linear-models.html#cb195-7"></a>         <span class="at">y =</span> <span class="st">"Overexpressed Proteins"</span>) <span class="sc">+</span></span>
-<span id="cb195-8"><a href="practical-generalised-linear-models.html#cb195-8"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> gender)</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb190-1"><a href="practical-generalised-linear-models.html#cb190-1"></a>newdata_3 <span class="ot">&lt;-</span></span>
+<span id="cb190-2"><a href="practical-generalised-linear-models.html#cb190-2"></a><span class="fu">data.frame</span>(</span>
+<span id="cb190-3"><a href="practical-generalised-linear-models.html#cb190-3"></a>    <span class="at">immunoscore =</span> <span class="fu">rep</span>(<span class="fu">seq</span>(<span class="at">from =</span> <span class="fu">min</span>(dat<span class="sc">$</span>immunoscore), <span class="at">to =</span> <span class="fu">max</span>(dat<span class="sc">$</span>immunoscore), <span class="at">length.out =</span> <span class="dv">100</span>), <span class="dv">3</span>),</span>
+<span id="cb190-4"><a href="practical-generalised-linear-models.html#cb190-4"></a>    <span class="at">tumor_subtype =</span> <span class="fu">rep</span>(<span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"Complex"</span>, <span class="st">"Unstable"</span>, <span class="st">"Stable"</span>), <span class="at">labels =</span> <span class="fu">levels</span>(dat<span class="sc">$</span>tumor_subtype)), <span class="at">each=</span><span class="dv">100</span>),</span>
+<span id="cb190-5"><a href="practical-generalised-linear-models.html#cb190-5"></a>    <span class="at">gender=</span><span class="st">"male"</span>)</span>
+<span id="cb190-6"><a href="practical-generalised-linear-models.html#cb190-6"></a></span>
+<span id="cb190-7"><a href="practical-generalised-linear-models.html#cb190-7"></a>newdata_4 <span class="ot">&lt;-</span></span>
+<span id="cb190-8"><a href="practical-generalised-linear-models.html#cb190-8"></a><span class="fu">data.frame</span>(</span>
+<span id="cb190-9"><a href="practical-generalised-linear-models.html#cb190-9"></a>    <span class="at">immunoscore =</span> <span class="fu">rep</span>(<span class="fu">seq</span>(<span class="at">from =</span> <span class="fu">min</span>(dat<span class="sc">$</span>immunoscore), <span class="at">to =</span> <span class="fu">max</span>(dat<span class="sc">$</span>immunoscore), <span class="at">length.out =</span> <span class="dv">100</span>), <span class="dv">3</span>),</span>
+<span id="cb190-10"><a href="practical-generalised-linear-models.html#cb190-10"></a>    <span class="at">tumor_subtype =</span> <span class="fu">rep</span>(<span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"Complex"</span>, <span class="st">"Unstable"</span>, <span class="st">"Stable"</span>), <span class="at">labels =</span> <span class="fu">levels</span>(dat<span class="sc">$</span>tumor_subtype)), <span class="at">each=</span><span class="dv">100</span>),</span>
+<span id="cb190-11"><a href="practical-generalised-linear-models.html#cb190-11"></a>    <span class="at">gender=</span><span class="st">"female"</span>)</span>
+<span id="cb190-12"><a href="practical-generalised-linear-models.html#cb190-12"></a></span>
+<span id="cb190-13"><a href="practical-generalised-linear-models.html#cb190-13"></a>new_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(newdata_3, newdata_4)</span>
+<span id="cb190-14"><a href="practical-generalised-linear-models.html#cb190-14"></a></span>
+<span id="cb190-15"><a href="practical-generalised-linear-models.html#cb190-15"></a>new_data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(new_data, <span class="fu">predict</span>(glm_1, new_data, <span class="at">type =</span> <span class="st">"link"</span>, <span class="at">se.fit=</span><span class="cn">TRUE</span>))</span>
+<span id="cb190-16"><a href="practical-generalised-linear-models.html#cb190-16"></a></span>
+<span id="cb190-17"><a href="practical-generalised-linear-models.html#cb190-17"></a>new_data <span class="ot">&lt;-</span> <span class="fu">within</span>(new_data, {</span>
+<span id="cb190-18"><a href="practical-generalised-linear-models.html#cb190-18"></a>  overexpressed_proteins <span class="ot">&lt;-</span> <span class="fu">exp</span>(fit)</span>
+<span id="cb190-19"><a href="practical-generalised-linear-models.html#cb190-19"></a>  LL <span class="ot">&lt;-</span> <span class="fu">exp</span>(fit <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se.fit)</span>
+<span id="cb190-20"><a href="practical-generalised-linear-models.html#cb190-20"></a>  UL <span class="ot">&lt;-</span> <span class="fu">exp</span>(fit <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se.fit)</span>
+<span id="cb190-21"><a href="practical-generalised-linear-models.html#cb190-21"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb191-1"><a href="practical-generalised-linear-models.html#cb191-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb191-2"><a href="practical-generalised-linear-models.html#cb191-2"></a></span>
+<span id="cb191-3"><a href="practical-generalised-linear-models.html#cb191-3"></a><span class="fu">ggplot</span>(new_data, <span class="fu">aes</span>(immunoscore, overexpressed_proteins)) <span class="sc">+</span></span>
+<span id="cb191-4"><a href="practical-generalised-linear-models.html#cb191-4"></a>    <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> LL, <span class="at">ymax =</span> UL, <span class="at">fill =</span> tumor_subtype), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb191-5"><a href="practical-generalised-linear-models.html#cb191-5"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">colour =</span> tumor_subtype), <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb191-6"><a href="practical-generalised-linear-models.html#cb191-6"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Immunoscore"</span>,</span>
+<span id="cb191-7"><a href="practical-generalised-linear-models.html#cb191-7"></a>         <span class="at">y =</span> <span class="st">"Overexpressed Proteins"</span>) <span class="sc">+</span></span>
+<span id="cb191-8"><a href="practical-generalised-linear-models.html#cb191-8"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> gender)</span></code></pre></div>
 <pre><code>#&gt; Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
 #&gt; ℹ Please use `linewidth` instead.
 #&gt; This warning is displayed once every 8 hours.

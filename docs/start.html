@@ -47,9 +47,6 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Introduction to the Practical</a></li>
-<li class="book-part">Basic Tools</li>
-<li><a class="active" href="start.html">Getting started in R and Rstudio</a></li>
-<li><a class="" href="data-sets.html">Data sets</a></li>
 <li class="book-part">Probability in R</li>
 <li><a class="" href="simulating-random-numbers.html"><span class="header-section-number">1</span> Simulating random numbers</a></li>
 <li><a class="" href="markov-chains.html"><span class="header-section-number">2</span> Markov Chains</a></li>
@@ -72,6 +69,9 @@
 <li><a class="" href="mc-solution.html"><span class="header-section-number">C</span> Solution: 3 state Markov Chain</a></li>
 <li><a class="" href="model-answers-computational-testing.html"><span class="header-section-number">D</span> Model Answers: Computational Testing</a></li>
 <li><a class="" href="solutions-linear-regression-and-correlation.html"><span class="header-section-number">E</span> Solutions: Linear regression and Correlation</a></li>
+<li class="book-part">APPENDIX</li>
+<li><a class="active" href="start.html">Getting started in R and Rstudio</a></li>
+<li><a class="" href="data-sets.html">Data sets</a></li>
 </ul>
 
         <div class="book-extra">
@@ -96,24 +96,24 @@
 <p>Once the new script opens in the Script Editor panel, the script is ready for text entry, and your RStudio session will look like this.</p>
 <div class="inline-figure"><img src="images/rs-file-open.png" width="95%" style="display: block; margin: auto;"></div>
 <p>Here is an easy example to familiarize you with the Script Editor interface. Type the following code into your new script <em>(later topics will explain the specific code components do)</em>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb1-1"><a href="start.html#cb1-1"></a><span class="co"># this is my first R script</span></span>
-<span id="cb1-2"><a href="start.html#cb1-2"></a><span class="co"># do some things</span></span>
-<span id="cb1-3"><a href="start.html#cb1-3"></a>x <span class="ot">&lt;-</span> <span class="dv">34</span></span>
-<span id="cb1-4"><a href="start.html#cb1-4"></a>y <span class="ot">&lt;-</span> <span class="dv">16</span></span>
-<span id="cb1-5"><a href="start.html#cb1-5"></a>z <span class="ot">&lt;-</span> x <span class="sc">+</span> y   <span class="co"># addition</span></span>
-<span id="cb1-6"><a href="start.html#cb1-6"></a>w <span class="ot">&lt;-</span> y <span class="sc">/</span> x     <span class="co"># division</span></span>
-<span id="cb1-7"><a href="start.html#cb1-7"></a><span class="co"># display the results</span></span>
-<span id="cb1-8"><a href="start.html#cb1-8"></a>x</span>
-<span id="cb1-9"><a href="start.html#cb1-9"></a>y</span>
-<span id="cb1-10"><a href="start.html#cb1-10"></a>z</span>
-<span id="cb1-11"><a href="start.html#cb1-11"></a>w</span>
-<span id="cb1-12"><a href="start.html#cb1-12"></a><span class="co"># change x</span></span>
-<span id="cb1-13"><a href="start.html#cb1-13"></a>x <span class="ot">&lt;-</span> <span class="st">"some text"</span></span>
-<span id="cb1-14"><a href="start.html#cb1-14"></a><span class="co"># display the results</span></span>
-<span id="cb1-15"><a href="start.html#cb1-15"></a>x</span>
-<span id="cb1-16"><a href="start.html#cb1-16"></a>y</span>
-<span id="cb1-17"><a href="start.html#cb1-17"></a>z</span>
-<span id="cb1-18"><a href="start.html#cb1-18"></a>w</span></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb297-1"><a href="start.html#cb297-1"></a><span class="co"># this is my first R script</span></span>
+<span id="cb297-2"><a href="start.html#cb297-2"></a><span class="co"># do some things</span></span>
+<span id="cb297-3"><a href="start.html#cb297-3"></a>x <span class="ot">&lt;-</span> <span class="dv">34</span></span>
+<span id="cb297-4"><a href="start.html#cb297-4"></a>y <span class="ot">&lt;-</span> <span class="dv">16</span></span>
+<span id="cb297-5"><a href="start.html#cb297-5"></a>z <span class="ot">&lt;-</span> x <span class="sc">+</span> y   <span class="co"># addition</span></span>
+<span id="cb297-6"><a href="start.html#cb297-6"></a>w <span class="ot">&lt;-</span> y <span class="sc">/</span> x     <span class="co"># division</span></span>
+<span id="cb297-7"><a href="start.html#cb297-7"></a><span class="co"># display the results</span></span>
+<span id="cb297-8"><a href="start.html#cb297-8"></a>x</span>
+<span id="cb297-9"><a href="start.html#cb297-9"></a>y</span>
+<span id="cb297-10"><a href="start.html#cb297-10"></a>z</span>
+<span id="cb297-11"><a href="start.html#cb297-11"></a>w</span>
+<span id="cb297-12"><a href="start.html#cb297-12"></a><span class="co"># change x</span></span>
+<span id="cb297-13"><a href="start.html#cb297-13"></a>x <span class="ot">&lt;-</span> <span class="st">"some text"</span></span>
+<span id="cb297-14"><a href="start.html#cb297-14"></a><span class="co"># display the results</span></span>
+<span id="cb297-15"><a href="start.html#cb297-15"></a>x</span>
+<span id="cb297-16"><a href="start.html#cb297-16"></a>y</span>
+<span id="cb297-17"><a href="start.html#cb297-17"></a>z</span>
+<span id="cb297-18"><a href="start.html#cb297-18"></a>w</span></code></pre></div>
 <div class="inline-figure"><img src="images/rs-file-content.png" width="95%" style="display: block; margin: auto;"></div>
 <p>There, you now have your first R script. Notice how the editor places a number in front of each line of code. The line numbers can be helpful as you work with your code. Before proceeding on to executing this code, it would be a good idea to learn how to save your script.</p>
 </div>
@@ -144,7 +144,7 @@
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="index.html">Introduction to the Practical</a></div>
+<div class="prev"><a href="solutions-linear-regression-and-correlation.html"><span class="header-section-number">E</span> Solutions: Linear regression and Correlation</a></div>
 <div class="next"><a href="data-sets.html">Data sets</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
