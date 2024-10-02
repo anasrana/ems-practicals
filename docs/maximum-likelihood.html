@@ -67,10 +67,11 @@
 <li><a class="" href="practical-multiple-regression.html"><span class="header-section-number">10</span> Practical: Multiple regression</a></li>
 <li><a class="" href="practical-generalised-linear-models.html"><span class="header-section-number">11</span> Practical: Generalised linear models</a></li>
 <li class="book-part">Solutions</li>
-<li><a class="" href="monopolySol.html"><span class="header-section-number">A</span> Solutions: Monopoly</a></li>
-<li><a class="" href="mc-solution.html"><span class="header-section-number">B</span> Solution: 3 state Markov Chain</a></li>
-<li><a class="" href="model-answers-computational-testing.html"><span class="header-section-number">C</span> Model Answers: Computational Testing</a></li>
-<li><a class="" href="solutions-linear-regression-and-correlation.html"><span class="header-section-number">D</span> Solutions: Linear regression and Correlation</a></li>
+<li><a class="" href="simSol.html"><span class="header-section-number">A</span> Solution: Simulations</a></li>
+<li><a class="" href="monopolySol.html"><span class="header-section-number">B</span> Solutions: Monopoly</a></li>
+<li><a class="" href="mc-solution.html"><span class="header-section-number">C</span> Solution: 3 state Markov Chain</a></li>
+<li><a class="" href="model-answers-computational-testing.html"><span class="header-section-number">D</span> Model Answers: Computational Testing</a></li>
+<li><a class="" href="solutions-linear-regression-and-correlation.html"><span class="header-section-number">E</span> Solutions: Linear regression and Correlation</a></li>
 </ul>
 
         <div class="book-extra">
@@ -88,39 +89,39 @@
 <span class="header-section-number">5.1</span> The likelihood function<a class="anchor" aria-label="anchor" href="#the-likelihood-function"><i class="fas fa-link"></i></a>
 </h2>
 <p>First, we are going to write a function to compute the log-likelihood function given parameters:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb51-1"><a href="maximum-likelihood.html#cb51-1"></a>neglogLikelihood <span class="ot">&lt;-</span> <span class="cf">function</span>(mu, x) {</span>
-<span id="cb51-2"><a href="maximum-likelihood.html#cb51-2"></a>  logF <span class="ot">=</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> mu, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">log =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb51-3"><a href="maximum-likelihood.html#cb51-3"></a>  <span class="fu">return</span>(<span class="sc">-</span><span class="fu">sum</span>(logF))</span>
-<span id="cb51-4"><a href="maximum-likelihood.html#cb51-4"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb47-1"><a href="maximum-likelihood.html#cb47-1"></a>neglogLikelihood <span class="ot">&lt;-</span> <span class="cf">function</span>(mu, x) {</span>
+<span id="cb47-2"><a href="maximum-likelihood.html#cb47-2"></a>  logF <span class="ot">=</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> mu, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">log =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-3"><a href="maximum-likelihood.html#cb47-3"></a>  <span class="fu">return</span>(<span class="sc">-</span><span class="fu">sum</span>(logF))</span>
+<span id="cb47-4"><a href="maximum-likelihood.html#cb47-4"></a>}</span></code></pre></div>
 <p>Note that this function returns the <code>-sum(logF)</code> because the numerical optimisation algorithm we are going to use finds the <em>minimum</em> of a function. We are interested in the <em>maximum</em> likelihood but we can turn this into a minimisation problem by simply negating the likelihood.</p>
 <p>Now, lets assume our data is captured in the following vector:</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb52-1"><a href="maximum-likelihood.html#cb52-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">0.2</span>, <span class="sc">-</span><span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">0.89</span>, <span class="sc">-</span><span class="fl">0.11</span>, <span class="sc">-</span><span class="fl">0.71</span>, <span class="fl">1.0</span>, <span class="sc">-</span><span class="fl">1.3</span>, <span class="fl">0.84</span>)</span>
-<span id="cb52-2"><a href="maximum-likelihood.html#cb52-2"></a>n <span class="ot">=</span> <span class="fu">length</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb48-1"><a href="maximum-likelihood.html#cb48-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">0.2</span>, <span class="sc">-</span><span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">0.89</span>, <span class="sc">-</span><span class="fl">0.11</span>, <span class="sc">-</span><span class="fl">0.71</span>, <span class="fl">1.0</span>, <span class="sc">-</span><span class="fl">1.3</span>, <span class="fl">0.84</span>)</span>
+<span id="cb48-2"><a href="maximum-likelihood.html#cb48-2"></a>n <span class="ot">=</span> <span class="fu">length</span>(x)</span></code></pre></div>
 </div>
 <div id="optimisation" class="section level2" number="5.2">
 <h2>
 <span class="header-section-number">5.2</span> Optimisation<a class="anchor" aria-label="anchor" href="#optimisation"><i class="fas fa-link"></i></a>
 </h2>
 <p>Now, we will need to define an initial search value for the parameter, we will arbitrarily pick a value:</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb53-1"><a href="maximum-likelihood.html#cb53-1"></a>mu_init <span class="ot">=</span> <span class="fl">1.0</span></span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb49-1"><a href="maximum-likelihood.html#cb49-1"></a>mu_init <span class="ot">=</span> <span class="fl">1.0</span></span></code></pre></div>
 <p>Now we will use the <code>R</code> function <code>optim</code> to find the maximum likelihood estimate. As mentioned above, <code>optim</code> finds the minimum value of a function so in this case we are trying to find the parameter that minimises the negative log likelihood.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb54-1"><a href="maximum-likelihood.html#cb54-1"></a>out <span class="ot">&lt;-</span> <span class="fu">optim</span>(mu_init, neglogLikelihood, <span class="at">gr =</span> <span class="cn">NULL</span>, x, <span class="at">method =</span> <span class="st">"L-BFGS-B"</span>,</span>
-<span id="cb54-2"><a href="maximum-likelihood.html#cb54-2"></a>         <span class="at">lower =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">upper =</span> <span class="cn">Inf</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb50-1"><a href="maximum-likelihood.html#cb50-1"></a>out <span class="ot">&lt;-</span> <span class="fu">optim</span>(mu_init, neglogLikelihood, <span class="at">gr =</span> <span class="cn">NULL</span>, x, <span class="at">method =</span> <span class="st">"L-BFGS-B"</span>,</span>
+<span id="cb50-2"><a href="maximum-likelihood.html#cb50-2"></a>         <span class="at">lower =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">upper =</span> <span class="cn">Inf</span>)</span></code></pre></div>
 <p>Here, this says that we will start the search at <code>mu_init</code> using the function <code>logLikelihood</code> that we have defined above. The <code>optim</code> algorithm will use the <code>L-BFGS-B</code> search method. The parameter is allowed to take any value from <code>lower = -Inf</code> to <code>upper = Inf</code>. The result is stored in out.</p>
 <p>Once the optimiser has run, we can see what parameter value it has found:</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb55-1"><a href="maximum-likelihood.html#cb55-1"></a><span class="fu">print</span>(out<span class="sc">$</span>par)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb51-1"><a href="maximum-likelihood.html#cb51-1"></a><span class="fu">print</span>(out<span class="sc">$</span>par)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; [1] 0.1372727</code></pre>
 <p>which we can compare against the sample mean</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb57-1"><a href="maximum-likelihood.html#cb57-1"></a><span class="fu">print</span>(<span class="fu">mean</span>(x))</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb53-1"><a href="maximum-likelihood.html#cb53-1"></a><span class="fu">print</span>(<span class="fu">mean</span>(x))</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; [1] 0.1372727</code></pre>
 <p>It turns out that it is theoretically known that the maximum likelihood estimate, for this particular problem, is the sample mean which is why they coincide!</p>
 <p>We can visualise this further. First we define an array of possible values for <code>mu</code> in this case between -0.1 and 0.3 with 101 values in-between:</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb59-1"><a href="maximum-likelihood.html#cb59-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.1</span>, <span class="fl">0.3</span>, <span class="at">length =</span> <span class="dv">101</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb55-1"><a href="maximum-likelihood.html#cb55-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.1</span>, <span class="fl">0.3</span>, <span class="at">length =</span> <span class="dv">101</span>)</span></code></pre></div>
 <p>We use the <code>apply</code> function to apply the <code>logLikelihood</code> function to each of the <code>mu</code> values we have defined. This means we do not need to use a for loop:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb60-1"><a href="maximum-likelihood.html#cb60-1"></a>neglogL <span class="ot">&lt;-</span> <span class="fu">apply</span>( <span class="fu">matrix</span>(mu), <span class="dv">1</span>, neglogLikelihood, x)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb56-1"><a href="maximum-likelihood.html#cb56-1"></a>neglogL <span class="ot">&lt;-</span> <span class="fu">apply</span>( <span class="fu">matrix</span>(mu), <span class="dv">1</span>, neglogLikelihood, x)</span></code></pre></div>
 <p>We can then plot and overlay the maximum likelihood result:</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb61-1"><a href="maximum-likelihood.html#cb61-1"></a><span class="fu">plot</span>(mu, neglogL, <span class="at">pch=</span><span class="st">"-"</span>)</span>
-<span id="cb61-2"><a href="maximum-likelihood.html#cb61-2"></a><span class="fu">points</span>(out<span class="sc">$</span>par, out<span class="sc">$</span>value, <span class="at">col=</span><span class="st">"red"</span>, <span class="at">pch=</span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb57-1"><a href="maximum-likelihood.html#cb57-1"></a><span class="fu">plot</span>(mu, neglogL, <span class="at">pch=</span><span class="st">"-"</span>)</span>
+<span id="cb57-2"><a href="maximum-likelihood.html#cb57-2"></a><span class="fu">points</span>(out<span class="sc">$</span>par, out<span class="sc">$</span>value, <span class="at">col=</span><span class="st">"red"</span>, <span class="at">pch=</span><span class="dv">0</span>)</span></code></pre></div>
 <div class="inline-figure"><img src="mle_files/figure-html/unnamed-chunk-9-1.png" width="95%" style="display: block; margin: auto;"></div>
 <p>The plot shows that <code>optim</code> has found the <code>mu</code> which minimises the negative log-likelihood.</p>
 </div>
@@ -130,55 +131,55 @@
 </h2>
 <p>Now suppose both the mean and the variance of the Normal distribution are unknown and we need to search over two parameters for the maximum likelihood estimation.</p>
 <p>We now need a modified negative log-likelihood function:</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb62-1"><a href="maximum-likelihood.html#cb62-1"></a>neglogLikelihood2 <span class="ot">&lt;-</span> <span class="cf">function</span>(theta,x) {</span>
-<span id="cb62-2"><a href="maximum-likelihood.html#cb62-2"></a>  mu <span class="ot">&lt;-</span> theta[<span class="dv">1</span>] <span class="co"># get value for mu</span></span>
-<span id="cb62-3"><a href="maximum-likelihood.html#cb62-3"></a>  sigma2 <span class="ot">&lt;-</span> theta[<span class="dv">2</span>] <span class="co"># get value for sigma2</span></span>
-<span id="cb62-4"><a href="maximum-likelihood.html#cb62-4"></a></span>
-<span id="cb62-5"><a href="maximum-likelihood.html#cb62-5"></a>  <span class="co"># compute density for each data element in x</span></span>
-<span id="cb62-6"><a href="maximum-likelihood.html#cb62-6"></a>  logF <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> mu, <span class="at">sd =</span> <span class="fu">sqrt</span>(sigma2), <span class="at">log =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb62-7"><a href="maximum-likelihood.html#cb62-7"></a></span>
-<span id="cb62-8"><a href="maximum-likelihood.html#cb62-8"></a>  <span class="fu">return</span>(<span class="sc">-</span><span class="fu">sum</span>(logF)) <span class="co"># return negative log-likelihood</span></span>
-<span id="cb62-9"><a href="maximum-likelihood.html#cb62-9"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb58-1"><a href="maximum-likelihood.html#cb58-1"></a>neglogLikelihood2 <span class="ot">&lt;-</span> <span class="cf">function</span>(theta,x) {</span>
+<span id="cb58-2"><a href="maximum-likelihood.html#cb58-2"></a>  mu <span class="ot">&lt;-</span> theta[<span class="dv">1</span>] <span class="co"># get value for mu</span></span>
+<span id="cb58-3"><a href="maximum-likelihood.html#cb58-3"></a>  sigma2 <span class="ot">&lt;-</span> theta[<span class="dv">2</span>] <span class="co"># get value for sigma2</span></span>
+<span id="cb58-4"><a href="maximum-likelihood.html#cb58-4"></a></span>
+<span id="cb58-5"><a href="maximum-likelihood.html#cb58-5"></a>  <span class="co"># compute density for each data element in x</span></span>
+<span id="cb58-6"><a href="maximum-likelihood.html#cb58-6"></a>  logF <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> mu, <span class="at">sd =</span> <span class="fu">sqrt</span>(sigma2), <span class="at">log =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb58-7"><a href="maximum-likelihood.html#cb58-7"></a></span>
+<span id="cb58-8"><a href="maximum-likelihood.html#cb58-8"></a>  <span class="fu">return</span>(<span class="sc">-</span><span class="fu">sum</span>(logF)) <span class="co"># return negative log-likelihood</span></span>
+<span id="cb58-9"><a href="maximum-likelihood.html#cb58-9"></a>}</span></code></pre></div>
 <p>Notice that we pass through one argument <code>theta</code> whose elements are the parameters for <code>mu</code> and <code>sigma2</code> which we unpack within the function.</p>
 <p>Now we can run <code>optim</code> but this time the initial parameters values must be initialised with two values. Furthermore, as variance cannot be negative, we bound the possible lower values that <code>sigma2</code> can take by setting <code>lower = c(-Inf, 0.001)</code>. The second argument means <code>sigma2</code> cannot be lower than 0.001:</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb63-1"><a href="maximum-likelihood.html#cb63-1"></a>theta_init <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb63-2"><a href="maximum-likelihood.html#cb63-2"></a></span>
-<span id="cb63-3"><a href="maximum-likelihood.html#cb63-3"></a>out <span class="ot">&lt;-</span> <span class="fu">optim</span>(theta_init, neglogLikelihood2, <span class="at">gr =</span> <span class="cn">NULL</span>, x, <span class="at">method =</span> <span class="st">"L-BFGS-B"</span>,</span>
-<span id="cb63-4"><a href="maximum-likelihood.html#cb63-4"></a>        <span class="at">lower =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="fl">0.001</span>), <span class="at">upper =</span> <span class="fu">c</span>(<span class="cn">Inf</span>, <span class="cn">Inf</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb59-1"><a href="maximum-likelihood.html#cb59-1"></a>theta_init <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb59-2"><a href="maximum-likelihood.html#cb59-2"></a></span>
+<span id="cb59-3"><a href="maximum-likelihood.html#cb59-3"></a>out <span class="ot">&lt;-</span> <span class="fu">optim</span>(theta_init, neglogLikelihood2, <span class="at">gr =</span> <span class="cn">NULL</span>, x, <span class="at">method =</span> <span class="st">"L-BFGS-B"</span>,</span>
+<span id="cb59-4"><a href="maximum-likelihood.html#cb59-4"></a>        <span class="at">lower =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="fl">0.001</span>), <span class="at">upper =</span> <span class="fu">c</span>(<span class="cn">Inf</span>, <span class="cn">Inf</span>))</span></code></pre></div>
 <p>We can now visualise the results by creating a two-dimensional contour plot. We first need to generate a grid of values for <code>mu</code> and <code>sigma2</code>:</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb64-1"><a href="maximum-likelihood.html#cb64-1"></a><span class="co"># one dimensional grid of values for mu</span></span>
-<span id="cb64-2"><a href="maximum-likelihood.html#cb64-2"></a>mu <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.1</span>, <span class="fl">1.0</span>, <span class="at">length =</span> <span class="dv">101</span>)</span>
-<span id="cb64-3"><a href="maximum-likelihood.html#cb64-3"></a><span class="co"># one dimensional grid of values for sigma2</span></span>
-<span id="cb64-4"><a href="maximum-likelihood.html#cb64-4"></a>sigma2 <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="fl">1.0</span>, <span class="at">length =</span> <span class="dv">101</span>)</span>
-<span id="cb64-5"><a href="maximum-likelihood.html#cb64-5"></a></span>
-<span id="cb64-6"><a href="maximum-likelihood.html#cb64-6"></a>mu_xx <span class="ot">&lt;-</span> <span class="fu">rep</span>(mu, <span class="at">each =</span> <span class="dv">101</span>) <span class="co"># replicate this 101 times</span></span>
-<span id="cb64-7"><a href="maximum-likelihood.html#cb64-7"></a>sigma2_yy <span class="ot">&lt;-</span> <span class="fu">rep</span>(sigma2, <span class="at">times =</span> <span class="dv">101</span>) <span class="co"># replicate this 101 times</span></span>
-<span id="cb64-8"><a href="maximum-likelihood.html#cb64-8"></a></span>
-<span id="cb64-9"><a href="maximum-likelihood.html#cb64-9"></a><span class="co"># generate grid of values (each row contains a unique combination</span></span>
-<span id="cb64-10"><a href="maximum-likelihood.html#cb64-10"></a><span class="co"># of mu and sigma2 values)</span></span>
-<span id="cb64-11"><a href="maximum-likelihood.html#cb64-11"></a>mu_sigma_grid <span class="ot">&lt;-</span> <span class="fu">cbind</span>(mu_xx, sigma2_yy)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb60-1"><a href="maximum-likelihood.html#cb60-1"></a><span class="co"># one dimensional grid of values for mu</span></span>
+<span id="cb60-2"><a href="maximum-likelihood.html#cb60-2"></a>mu <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.1</span>, <span class="fl">1.0</span>, <span class="at">length =</span> <span class="dv">101</span>)</span>
+<span id="cb60-3"><a href="maximum-likelihood.html#cb60-3"></a><span class="co"># one dimensional grid of values for sigma2</span></span>
+<span id="cb60-4"><a href="maximum-likelihood.html#cb60-4"></a>sigma2 <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="fl">1.0</span>, <span class="at">length =</span> <span class="dv">101</span>)</span>
+<span id="cb60-5"><a href="maximum-likelihood.html#cb60-5"></a></span>
+<span id="cb60-6"><a href="maximum-likelihood.html#cb60-6"></a>mu_xx <span class="ot">&lt;-</span> <span class="fu">rep</span>(mu, <span class="at">each =</span> <span class="dv">101</span>) <span class="co"># replicate this 101 times</span></span>
+<span id="cb60-7"><a href="maximum-likelihood.html#cb60-7"></a>sigma2_yy <span class="ot">&lt;-</span> <span class="fu">rep</span>(sigma2, <span class="at">times =</span> <span class="dv">101</span>) <span class="co"># replicate this 101 times</span></span>
+<span id="cb60-8"><a href="maximum-likelihood.html#cb60-8"></a></span>
+<span id="cb60-9"><a href="maximum-likelihood.html#cb60-9"></a><span class="co"># generate grid of values (each row contains a unique combination</span></span>
+<span id="cb60-10"><a href="maximum-likelihood.html#cb60-10"></a><span class="co"># of mu and sigma2 values)</span></span>
+<span id="cb60-11"><a href="maximum-likelihood.html#cb60-11"></a>mu_sigma_grid <span class="ot">&lt;-</span> <span class="fu">cbind</span>(mu_xx, sigma2_yy)</span></code></pre></div>
 <p>Now we apply our negative log-likehood function to this grid to generate a negative log-likelihood value for each position on the grid:</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb65-1"><a href="maximum-likelihood.html#cb65-1"></a>neglogL2 <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu_sigma_grid, <span class="dv">1</span>, neglogLikelihood2, x)</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb61-1"><a href="maximum-likelihood.html#cb61-1"></a>neglogL2 <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu_sigma_grid, <span class="dv">1</span>, neglogLikelihood2, x)</span></code></pre></div>
 <p>We now use the <code>contour</code> function to plot our results:</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb66-1"><a href="maximum-likelihood.html#cb66-1"></a><span class="co"># convert vector of negative log-likelihood values into a grid</span></span>
-<span id="cb66-2"><a href="maximum-likelihood.html#cb66-2"></a>neglogL2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(neglogL2, <span class="dv">101</span>)</span>
-<span id="cb66-3"><a href="maximum-likelihood.html#cb66-3"></a></span>
-<span id="cb66-4"><a href="maximum-likelihood.html#cb66-4"></a><span class="co"># draw contour plot</span></span>
-<span id="cb66-5"><a href="maximum-likelihood.html#cb66-5"></a><span class="fu">contour</span>(sigma2, mu, neglogL2, <span class="at">nlevels =</span> <span class="dv">50</span>, <span class="at">xlab =</span> <span class="st">"sigma2"</span>, <span class="at">ylab =</span> <span class="st">"mu"</span>)</span>
-<span id="cb66-6"><a href="maximum-likelihood.html#cb66-6"></a><span class="co"># overlay the maximum likelihood estimate as a red circle</span></span>
-<span id="cb66-7"><a href="maximum-likelihood.html#cb66-7"></a><span class="fu">points</span>(out<span class="sc">$</span>par[<span class="dv">2</span>], out<span class="sc">$</span>par[<span class="dv">1</span>], <span class="at">col=</span><span class="st">"red"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb62-1"><a href="maximum-likelihood.html#cb62-1"></a><span class="co"># convert vector of negative log-likelihood values into a grid</span></span>
+<span id="cb62-2"><a href="maximum-likelihood.html#cb62-2"></a>neglogL2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(neglogL2, <span class="dv">101</span>)</span>
+<span id="cb62-3"><a href="maximum-likelihood.html#cb62-3"></a></span>
+<span id="cb62-4"><a href="maximum-likelihood.html#cb62-4"></a><span class="co"># draw contour plot</span></span>
+<span id="cb62-5"><a href="maximum-likelihood.html#cb62-5"></a><span class="fu">contour</span>(sigma2, mu, neglogL2, <span class="at">nlevels =</span> <span class="dv">50</span>, <span class="at">xlab =</span> <span class="st">"sigma2"</span>, <span class="at">ylab =</span> <span class="st">"mu"</span>)</span>
+<span id="cb62-6"><a href="maximum-likelihood.html#cb62-6"></a><span class="co"># overlay the maximum likelihood estimate as a red circle</span></span>
+<span id="cb62-7"><a href="maximum-likelihood.html#cb62-7"></a><span class="fu">points</span>(out<span class="sc">$</span>par[<span class="dv">2</span>], out<span class="sc">$</span>par[<span class="dv">1</span>], <span class="at">col=</span><span class="st">"red"</span>)</span></code></pre></div>
 <div class="inline-figure"><img src="mle_files/figure-html/unnamed-chunk-14-1.png" width="95%" style="display: block; margin: auto;"></div>
 <p>Excellent! We have now found the maximum likelihood estimates for the unknown mean and variance for the Normal distribution that our data is assumed to be drawn from. Let’s compare our estimates against the sample mean and variance. First, the estimates:</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb67-1"><a href="maximum-likelihood.html#cb67-1"></a><span class="fu">print</span>(out<span class="sc">$</span>par[<span class="dv">1</span>]) <span class="co"># mu estimate</span></span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb63-1"><a href="maximum-likelihood.html#cb63-1"></a><span class="fu">print</span>(out<span class="sc">$</span>par[<span class="dv">1</span>]) <span class="co"># mu estimate</span></span></code></pre></div>
 <pre class="bg-info"><code>#&gt; [1] 0.1372727</code></pre>
-<div class="sourceCode" id="cb69"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb69-1"><a href="maximum-likelihood.html#cb69-1"></a><span class="fu">print</span>(out<span class="sc">$</span>par[<span class="dv">2</span>]) <span class="co"># sigma2 estimate</span></span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb65-1"><a href="maximum-likelihood.html#cb65-1"></a><span class="fu">print</span>(out<span class="sc">$</span>par[<span class="dv">2</span>]) <span class="co"># sigma2 estimate</span></span></code></pre></div>
 <pre class="bg-info"><code>#&gt; [1] 0.5569665</code></pre>
 <p>Now, the sample mean and variances:</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb71-1"><a href="maximum-likelihood.html#cb71-1"></a><span class="fu">print</span>(<span class="fu">mean</span>(x)) <span class="co"># sample mean</span></span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb67-1"><a href="maximum-likelihood.html#cb67-1"></a><span class="fu">print</span>(<span class="fu">mean</span>(x)) <span class="co"># sample mean</span></span></code></pre></div>
 <pre class="bg-info"><code>#&gt; [1] 0.1372727</code></pre>
-<div class="sourceCode" id="cb73"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb73-1"><a href="maximum-likelihood.html#cb73-1"></a><span class="fu">print</span>(<span class="fu">var</span>(x)) <span class="co"># sample variance (normalised by n-1)</span></span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb69-1"><a href="maximum-likelihood.html#cb69-1"></a><span class="fu">print</span>(<span class="fu">var</span>(x)) <span class="co"># sample variance (normalised by n-1)</span></span></code></pre></div>
 <pre class="bg-info"><code>#&gt; [1] 0.6126618</code></pre>
-<div class="sourceCode" id="cb75"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb75-1"><a href="maximum-likelihood.html#cb75-1"></a><span class="fu">print</span>(<span class="fu">var</span>(x)<span class="sc">*</span>(n<span class="dv">-1</span>)<span class="sc">/</span>n) <span class="co"># sample variance (normalised by n)</span></span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb71-1"><a href="maximum-likelihood.html#cb71-1"></a><span class="fu">print</span>(<span class="fu">var</span>(x)<span class="sc">*</span>(n<span class="dv">-1</span>)<span class="sc">/</span>n) <span class="co"># sample variance (normalised by n)</span></span></code></pre></div>
 <pre class="bg-info"><code>#&gt; [1] 0.5569653</code></pre>
 <p>Interesting! The maximum likelihood estimates return the sample mean and the <strong>biased</strong> sample variance estimate (where we normalise by <span class="math inline">\(n\)</span>
 and not <span class="math inline">\(n−1\)</span>). Indeed, it turns out that theoretically, the maximum likelihood estimate does give a biased estimate of the population variance.</p>
@@ -224,7 +225,7 @@ and not <span class="math inline">\(n−1\)</span>). Indeed, it turns out that t
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2024-09-03.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2024-10-02.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

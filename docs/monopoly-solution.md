@@ -1,5 +1,3 @@
-# (APPENDIX) Solutions {-}
-
 # Solutions: Monopoly {#monopolySol}
 
 ## Solution Exercise 1: Rolling three doubles {#3doubleMon}

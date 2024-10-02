@@ -1,15 +1,14 @@
 simulating-random-numbers
-exercise
+sim-ex1
 question
-solution
-exercise-1
+exercise
 markov-chains
 exercise-mc
 a-monopoly-simulation
 moving-around-the-board
 going-to-jail
+exercise-1
 exercise-2
-exercise-3
 exercises-extend-the-game
 monte-carlo-methods
 integration
@@ -34,7 +33,7 @@ confidence-intervals
 setup
 simulating-data
 constructing-the-confidence-interval
-exercise-4
+exercise-3
 experiment
 ex-confidence-interval
 computational-testing-techniques
@@ -78,6 +77,9 @@ fitting-a-glm
 comparing-nested-models
 negative-binomial-vs-poisson-glms
 further-understanding-the-model-optional
+simSol
+sim-sol-ex1
+sim-sol-ex2
 monopolySol
 id_3doubleMon
 monopolyExtSol
@@ -93,3 +95,4 @@ ht-sol-ex7
 ht-sol-ex8
 solutions-linear-regression-and-correlation
 comparison-of-data
+sim-ex2
