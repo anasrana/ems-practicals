@@ -1,7 +1,7 @@
 ---
 title: "Essentials of Mathematics and Statistics"
 author: "Anas A Rana"
-date: "2024-09-03"
+date: "2024-10-02"
 site: bookdown::bookdown_site
 
 bibliography:

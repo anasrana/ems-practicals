@@ -45,33 +45,7 @@
 </form>
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Introduction to the Practical</a></li>
-<li class="book-part">Basic Tools</li>
-<li><a class="" href="start.html">Getting started in R and Rstudio</a></li>
-<li><a class="" href="data-sets.html">Data sets</a></li>
-<li class="book-part">Probability in R</li>
-<li><a class="active" href="simulating-random-numbers.html"><span class="header-section-number">1</span> Simulating random numbers</a></li>
-<li><a class="" href="markov-chains.html"><span class="header-section-number">2</span> Markov Chains</a></li>
-<li><a class="" href="a-monopoly-simulation.html"><span class="header-section-number">3</span> A Monopoly simulation</a></li>
-<li><a class="" href="monte-carlo-methods.html"><span class="header-section-number">4</span> Monte Carlo Methods</a></li>
-<li><a class="" href="solution-monte-carlo.html">Solution: Monte Carlo</a></li>
-<li><a class="" href="maximum-likelihood.html"><span class="header-section-number">5</span> Maximum Likelihood</a></li>
-<li><a class="" href="sol-mle.html">Solution: Model Answers: MLE</a></li>
-<li><a class="" href="confidence-intervals.html"><span class="header-section-number">6</span> Confidence Intervals</a></li>
-<li><a class="" href="sol-ex-CI.html">Model Answer: Confidence Interval</a></li>
-<li><a class="" href="computational-testing-techniques.html"><span class="header-section-number">7</span> Computational Testing Techniques</a></li>
-<li class="book-part">Statistical Modelling</li>
-<li><a class="" href="practical-linear-regression.html"><span class="header-section-number">8</span> Practical: Linear regression</a></li>
-<li><a class="" href="practical-principal-component-analysis.html"><span class="header-section-number">9</span> Practical: Principal component analysis</a></li>
-<li><a class="" href="practical-multiple-regression.html"><span class="header-section-number">10</span> Practical: Multiple regression</a></li>
-<li><a class="" href="practical-generalised-linear-models.html"><span class="header-section-number">11</span> Practical: Generalised linear models</a></li>
-<li class="book-part">Solutions</li>
-<li><a class="" href="monopolySol.html"><span class="header-section-number">A</span> Solutions: Monopoly</a></li>
-<li><a class="" href="mc-solution.html"><span class="header-section-number">B</span> Solution: 3 state Markov Chain</a></li>
-<li><a class="" href="model-answers-computational-testing.html"><span class="header-section-number">C</span> Model Answers: Computational Testing</a></li>
-<li><a class="" href="solutions-linear-regression-and-correlation.html"><span class="header-section-number">D</span> Solutions: Linear regression and Correlation</a></li>
-</ul>
+        <ul class="book-toc list-unstyled"><li><a class="" href="index.html"><span class="header-section-number">Chapter 1</span> Simulating random numbers</a></li></ul>
 
         <div class="book-extra">
           <p><a id="book-repo" href="https://github.com/anasrana/ems-practicals">View book source <i class="fab fa-github"></i></a></p>
@@ -83,19 +57,19 @@
 <span class="header-section-number">1</span> Simulating random numbers<a class="anchor" aria-label="anchor" href="#simulating-random-numbers"><i class="fas fa-link"></i></a>
 </h1>
 <p>There are a number of functions in <code>R</code> that you can use to simulate random numbers according to different probability distributions.</p>
-<p>The function <code>sample</code> allows you to take a sample of the specified size from the elements of a vector <code>x</code>using sampling with or without replacement. You can use <code><a href="https://rdrr.io/r/base/sample.html">?sample</a></code> to read the documentation describing the command.</p>
+<p>The function <code>sample</code> allows you to take a sample of the specified size from the elements of a vector <code>x</code> using sampling with or without replacement. You can use <code><a href="https://rdrr.io/r/base/sample.html">?sample</a></code> to read the documentation describing the command.</p>
 <p>In the following, we will use the <code>sample</code> function to make 10,000 draws from the set of numbers <code>1</code>, <code>2</code>, <code>3</code> and <code>4</code> and display the distribution of the sampled values using a histogram.</p>
 <p>First, we define a vector called <code>x</code> which contains the numbers <code>1</code>, <code>2</code>, <code>3</code>, and <code>4</code>. The function <code>c</code> allows us to combine these four numbers together into one vector:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb5-1"><a href="simulating-random-numbers.html#cb5-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb1-1"><a href="simulating-random-numbers.html#cb1-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span></code></pre></div>
 <p>We now use the function <code>sample</code> to pick from those four numbers in <code>x</code> 10,000 times. The result, the 10,000 numbers chosen, is store in <code>out</code>:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb6-1"><a href="simulating-random-numbers.html#cb6-1"></a>out <span class="ot">&lt;-</span> <span class="fu">sample</span>(x, <span class="dv">10000</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb2-1"><a href="simulating-random-numbers.html#cb2-1"></a>out <span class="ot">&lt;-</span> <span class="fu">sample</span>(x, <span class="dv">10000</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Lets plot a histogram of the values picked:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb7-1"><a href="simulating-random-numbers.html#cb7-1"></a>hist_out <span class="ot">&lt;-</span> <span class="fu">hist</span>(out, <span class="at">main =</span> <span class="st">''</span>, <span class="at">xlab =</span> <span class="st">'Values'</span>, <span class="at">ylab =</span> <span class="st">'Frequency'</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb3-1"><a href="simulating-random-numbers.html#cb3-1"></a>hist_out <span class="ot">&lt;-</span> <span class="fu">hist</span>(out, <span class="at">main =</span> <span class="st">''</span>, <span class="at">xlab =</span> <span class="st">'Values'</span>, <span class="at">ylab =</span> <span class="st">'Frequency'</span>)</span></code></pre></div>
 <div class="inline-figure"><img src="simulation_files/figure-html/unnamed-chunk-3-1.png" width="95%" style="display: block; margin: auto;"></div>
 <p>We picked each number with equal probability so the histogram shows each number is equally likely to have been chosen.</p>
-<div id="exercise" class="section level2 infobox" number="1.1">
+<div id="sim-ex1" class="section level2 infobox" number="1.1">
 <h2>
-<span class="header-section-number">1.1</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.1</span> Exercise - replacement<a class="anchor" aria-label="anchor" href="#sim-ex1"><i class="fas fa-link"></i></a>
 </h2>
 <div id="question" class="section level3" number="1.1.1">
 <h3>
@@ -104,62 +78,42 @@
 <blockquote>
 <p>What is the difference in the output <code>out1</code> and <code>out2</code> in the following piece of code?</p>
 </blockquote>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb8-1"><a href="simulating-random-numbers.html#cb8-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">9</span> )</span>
-<span id="cb8-2"><a href="simulating-random-numbers.html#cb8-2"></a>out1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(x, <span class="dv">10</span>, <span class="at">replace=</span><span class="cn">FALSE</span>)</span>
-<span id="cb8-3"><a href="simulating-random-numbers.html#cb8-3"></a>out2 <span class="ot">&lt;-</span> <span class="fu">sample</span>(x, <span class="dv">10</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-</div>
-<div id="solution" class="section level3" number="1.1.2">
-<h3>
-<span class="header-section-number">1.1.2</span> Solution<a class="anchor" aria-label="anchor" href="#solution"><i class="fas fa-link"></i></a>
-</h3>
-<p>The option <code>replace=TRUE</code> activates sampling with replacement (i.e. the numbers that are picked are put back and can be picked again).</p>
-<p>The option <code>replace=FALSE</code> activates sampling without replacement (i.e. the numbers that are picked are not put back and cannot be picked again).</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb4-1"><a href="simulating-random-numbers.html#cb4-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">9</span> )</span>
+<span id="cb4-2"><a href="simulating-random-numbers.html#cb4-2"></a>out1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(x, <span class="dv">10</span>, <span class="at">replace=</span><span class="cn">FALSE</span>)</span>
+<span id="cb4-3"><a href="simulating-random-numbers.html#cb4-3"></a>out2 <span class="ot">&lt;-</span> <span class="fu">sample</span>(x, <span class="dv">10</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<button class="button">
+<a href="simSol.html#sim-sol-ex1">Solution</a>
+</button>
 </div>
 </div>
-<div id="exercise-1" class="section level2 infobox" number="1.2">
+<div id="sim-ex2" class="section level2 infobox" number="1.2">
 <h2>
-<span class="header-section-number">1.2</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.2</span> Exercise - using sample<a class="anchor" aria-label="anchor" href="#sim-ex2"><i class="fas fa-link"></i></a>
 </h2>
 <blockquote>
 <p>Use the <code>sample</code> or <code>sample.int</code> function to simulate values from rolls of an unbiased six-sided die. Show that the distribution of values you obtain is consistent with an unbiased die.</p>
 </blockquote>
 <p><em>Hint 1</em>: Type <code><a href="https://rdrr.io/r/base/sample.html">?sample.int</a></code> in the console to get help on this function.</p>
 <p><em>Hint 2</em>: You may find it useful to use the function <code>table</code>. Type <code><a href="https://rdrr.io/r/base/table.html">?table</a></code> in the console to get help on this function.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb9-1"><a href="simulating-random-numbers.html#cb9-1"></a>rolls_from_sample <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="at">size=</span><span class="dv">5000</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
-<span id="cb9-2"><a href="simulating-random-numbers.html#cb9-2"></a>rolls_from_sample.int <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">6</span>, <span class="at">size=</span><span class="dv">5000</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
-<span id="cb9-3"><a href="simulating-random-numbers.html#cb9-3"></a></span>
-<span id="cb9-4"><a href="simulating-random-numbers.html#cb9-4"></a><span class="fu">table</span>(rolls_from_sample)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; rolls_from_sample
-#&gt;   1   2   3   4   5   6 
-#&gt; 865 835 816 815 820 849</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb11-1"><a href="simulating-random-numbers.html#cb11-1"></a><span class="fu">table</span>(rolls_from_sample.int)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; rolls_from_sample.int
-#&gt;   1   2   3   4   5   6 
-#&gt; 825 856 883 826 796 814</code></pre>
-<p>Both gives a uniform distribution over the numbers 1-6. The function <code>sample.int</code> is a specialised version of sample for sampling integers. Many <code>R</code> libraries have specialised versions of more general functions to do specific tasks under certain conditions.</p>
+<button class="button">
+<a href="simSol.html#sim-sol-ex2">Solution</a>
+</button>
+</div>
+<div class="infobox">
+<p>Explore simulating random numbers further, checking different values for <code>x</code> and the number of draws. Plot your findings and see if you can find any patterns.</p>
 </div>
 
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="data-sets.html">Data sets</a></div>
-<div class="next"><a href="markov-chains.html"><span class="header-section-number">2</span> Markov Chains</a></div>
+<div class="empty"></div>
+<div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#simulating-random-numbers"><span class="header-section-number">1</span> Simulating random numbers</a></li>
-<li>
-<a class="nav-link" href="#exercise"><span class="header-section-number">1.1</span> Exercise</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#question"><span class="header-section-number">1.1.1</span> Question</a></li>
-<li><a class="nav-link" href="#solution"><span class="header-section-number">1.1.2</span> Solution</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#exercise-1"><span class="header-section-number">1.2</span> Exercise</a></li>
-</ul>
+      <div id="book-on-this-page"></div>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/anasrana/ems-practicals/blob/master/simulation.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/anasrana/ems-practicals/edit/master/simulation.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+          
         </ul>
 </div>
     </nav>
@@ -171,7 +125,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2024-09-03.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2024-10-02.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -179,34 +133,6 @@
   </div>
 
 </div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
-}
-</script>
+</footer>
 </body>
 </html>
