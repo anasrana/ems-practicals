@@ -106,7 +106,7 @@
 <span id="cb19-2"><a href="monte-carlo-methods.html#cb19-2"></a>mc_integral <span class="ot">&lt;-</span> <span class="fu">sum</span>(sims <span class="sc">&gt;=</span> <span class="dv">1</span> <span class="sc">&amp;</span> sims <span class="sc">&lt;=</span> <span class="dv">3</span>) <span class="sc">/</span> n</span></code></pre></div>
 <p>The result we get is:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb20-1"><a href="monte-carlo-methods.html#cb20-1"></a><span class="fu">print</span>(mc_integral)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 0.341</code></pre>
+<pre class="bg-info"><code>#&gt; [1] 0.324</code></pre>
 <!-- TODO: Add some context about sims and mc_integral -->
 <p>The exact answer given using the cumulative distribution function <code>pnorm</code> in R is given by:</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb22-1"><a href="monte-carlo-methods.html#cb22-1"></a>mc_exact <span class="ot">=</span> <span class="fu">pnorm</span>(<span class="at">q=</span><span class="dv">3</span>, <span class="at">mean=</span><span class="dv">1</span>, <span class="at">sd=</span><span class="dv">2</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="at">q=</span><span class="dv">1</span>, <span class="at">mean=</span><span class="dv">1</span>, <span class="at">sd=</span><span class="dv">2</span>)</span>
@@ -162,7 +162,7 @@
 <span id="cb24-16"><a href="monte-carlo-methods.html#cb24-16"></a>pr_greater_than_three <span class="ot">&lt;-</span> <span class="fu">sum</span>(greater_than_three) <span class="sc">/</span> runs</span></code></pre></div>
 <p>For our MC estimate of the probability <span class="math inline">\(P(X&gt;3)\)</span> we get</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb25-1"><a href="monte-carlo-methods.html#cb25-1"></a><span class="fu">print</span>(pr_greater_than_three)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 0.82</code></pre>
+<pre class="bg-info"><code>#&gt; [1] 0.95</code></pre>
 <p>which we can compare to R’s built-in Binomial distribution function:</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb27-1"><a href="monte-carlo-methods.html#cb27-1"></a><span class="fu">print</span>(<span class="fu">pbinom</span>(<span class="dv">3</span>, <span class="dv">10</span>, <span class="fl">0.5</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>))</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; [1] 0.828125</code></pre>
@@ -241,7 +241,7 @@
 <p>We can then compute the probability that, after twenty spins, we will have less than zero points:</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb31-1"><a href="monte-carlo-methods.html#cb31-1"></a>prob_less_than_zero <span class="ot">&lt;-</span> <span class="fu">sum</span>(less_than_zero)<span class="sc">/</span>runs</span>
 <span id="cb31-2"><a href="monte-carlo-methods.html#cb31-2"></a><span class="fu">print</span>(prob_less_than_zero)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 0</code></pre>
+<pre class="bg-info"><code>#&gt; [1] 0.01</code></pre>
 <p>The probability is very low. This is not surprising since there is only a 25% chance of getting a point deduction on any spin and a 75% chance of gaining points. Try to increase the number of simulation runs to see if you can detect any games where you do find a negative score.</p>
 </div>
 <div id="mc-expectation-2" class="section level2 {infobox}" number="4.9">
