@@ -122,9 +122,9 @@ out <- z_test(x, 0, 1) # null should not be rejected!
 ```
 
 ``` bg-info
-#>  z = 1.191 
-#>  one-tailed probability = 0.117 
-#>  two-tailed probability = 0.234
+#>  z = 1.738 
+#>  one-tailed probability = 0.041 
+#>  two-tailed probability = 0.082
 ```
 
 ```{.r .numberLines}
@@ -133,13 +133,13 @@ print(out)
 
 ``` bg-info
 #> $z
-#> [1] 1.191
+#> [1] 1.738
 #> 
 #> $one_p
-#> [1] 0.117
+#> [1] 0.041
 #> 
 #> $two_p
-#> [1] 0.234
+#> [1] 0.082
 ```
 
 ```{.r .numberLines}
@@ -148,9 +148,9 @@ out <- z_test(x, 0, 1) # null should be rejected!
 ```
 
 ``` bg-info
-#>  z = 2.534 
-#>  one-tailed probability = 0.006 
-#>  two-tailed probability = 0.012
+#>  z = 6.306 
+#>  one-tailed probability = 0 
+#>  two-tailed probability = 0
 ```
 
 ```{.r .numberLines}
@@ -159,13 +159,13 @@ print(out)
 
 ``` bg-info
 #> $z
-#> [1] 2.534
+#> [1] 6.306
 #> 
 #> $one_p
-#> [1] 0.006
+#> [1] 0
 #> 
 #> $two_p
-#> [1] 0.012
+#> [1] 0
 ```
 
 <button class="button">

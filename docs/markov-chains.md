@@ -56,12 +56,12 @@ print(weather_sequence)
 ```
 
 ``` bg-info
-#>  [1] 2 1 1 1 1 1 2 1 2 2 1 2 2 1 1 2 1 1 2 1 1 2 1 2 2 1 1 2
-#> [29] 1 2
+#>  [1] 2 1 2 1 2 1 1 1 2 2 2 1 1 2 1 1 2 1 2 1 2 1 2 1 1 2 1 1
+#> [29] 2 2
 ```
 
 ::: {.infobox}
-## Exercise MC
+## Exercise MC {#mc-exercise}
 
 > Can you extend this example to a three-state model?
 
