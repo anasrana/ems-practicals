@@ -2,6 +2,7 @@ simulating-random-numbers
 sim-ex1
 question
 sim-ex2
+exercise---further-exploration
 markov-chains
 exercise-mc
 a-monopoly-simulation

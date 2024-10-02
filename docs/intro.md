@@ -1,4 +1,4 @@
-# (PART\*) Basic Tools {-}
+# (PART\*) APPENDIX {-}
 
 # Getting started in R and Rstudio {- #start}
 
