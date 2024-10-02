@@ -49,7 +49,7 @@ print(mc_integral)
 ```
 
 ``` bg-info
-#> [1] 0.341
+#> [1] 0.324
 ```
 
 <!-- TODO: Add some context about sims and mc_integral -->
@@ -129,7 +129,7 @@ print(pr_greater_than_three)
 ```
 
 ``` bg-info
-#> [1] 0.82
+#> [1] 0.95
 ```
 
 which we can compare to R’s built-in Binomial distribution function:
@@ -234,7 +234,7 @@ print(prob_less_than_zero)
 ```
 
 ``` bg-info
-#> [1] 0
+#> [1] 0.01
 ```
 
 The probability is very low. This is not surprising since there is only a 25% chance of getting a point deduction on any spin and a 75% chance of gaining points. Try to increase the number of simulation runs to see if you can detect any games where you do find a negative score.
@@ -290,8 +290,8 @@ print(accuracy)
 ```
 
 ``` bg-info
-#> [1]  0.0226552539 -0.0147447461  0.0006552539  0.0012552539
-#> [5]  0.0015352539  0.0021952539
+#> [1]  0.0076552539 -0.0041447461 -0.0065447461  0.0019352539
+#> [5]  0.0003552539  0.0001952539
 ```
 
 ```{.r .numberLines}
@@ -299,8 +299,8 @@ print(accuracy_sd)
 ```
 
 ``` bg-info
-#> [1] 0.14669421 0.05963221 0.04313474 0.02986502 0.02334341
-#> [6] 0.01566275
+#> [1] 0.15008079 0.06208629 0.04800000 0.03173822 0.02197037
+#> [6] 0.01567628
 ```
 
 ```{.r .numberLines}
@@ -308,8 +308,8 @@ print(accuracy + accuracy_sd)
 ```
 
 ``` bg-info
-#> [1] 0.16934947 0.04488746 0.04379000 0.03112027 0.02487866
-#> [6] 0.01785800
+#> [1] 0.15773604 0.05794154 0.04145525 0.03367348 0.02232562
+#> [6] 0.01587154
 ```
 
 Next, we will plot the results. Here we will make use of `ggplot2` a library to create nice plots without much effort. The input need to be a `data.frame` so we will need to create one based on the data.
@@ -327,12 +327,12 @@ print(df)
 
 ``` bg-info
 #>   sample_sizes      accuracy accuracy_sd
-#> 1           10  0.0226552539  0.14669421
-#> 2           50 -0.0147447461  0.05963221
-#> 3          100  0.0006552539  0.04313474
-#> 4          250  0.0012552539  0.02986502
-#> 5          500  0.0015352539  0.02334341
-#> 6         1000  0.0021952539  0.01566275
+#> 1           10  0.0076552539  0.15008079
+#> 2           50 -0.0041447461  0.06208629
+#> 3          100 -0.0065447461  0.04800000
+#> 4          250  0.0019352539  0.03173822
+#> 5          500  0.0003552539  0.02197037
+#> 6         1000  0.0001952539  0.01567628
 ```
 
 ```{.r .numberLines}
@@ -382,7 +382,7 @@ print(expected_score)
 ```
 
 ``` bg-info
-#> [1] 15.11
+#> [1] 14.71
 ```
 <button class="button">
   [Back to Exercise](#mc-expectation-1)
@@ -417,7 +417,7 @@ print(mean(game_score))
 ```
 
 ``` bg-info
-#> [1] 8.37
+#> [1] 9.6
 ```
 
 ```{.r .numberLines}

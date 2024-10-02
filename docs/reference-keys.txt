@@ -1,14 +1,14 @@
 simulating-random-numbers
 sim-ex1
 question
-exercise
+sim-ex2
 markov-chains
 exercise-mc
 a-monopoly-simulation
 moving-around-the-board
 going-to-jail
+exercise
 exercise-1
-exercise-2
 exercises-extend-the-game
 monte-carlo-methods
 integration
@@ -33,7 +33,7 @@ confidence-intervals
 setup
 simulating-data
 constructing-the-confidence-interval
-exercise-3
+exercise-2
 experiment
 ex-confidence-interval
 computational-testing-techniques
@@ -95,4 +95,3 @@ ht-sol-ex7
 ht-sol-ex8
 solutions-linear-regression-and-correlation
 comparison-of-data
-sim-ex2
