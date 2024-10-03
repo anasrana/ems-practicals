@@ -14,6 +14,7 @@ repDoublesMon
 monopolyExt
 monte-carlo-methods
 integration
+monte-carlo-integration
 mc-accuracy
 approximating-the-binomial-distribution
 problem-mc-binomial
@@ -22,10 +23,6 @@ mc-expectation-1
 using-functions
 simulating-from-function
 mc-expectation-2
-solution-mc-accuracy
-mc-expectation
-solution-mc-expectation-1
-solution-mc-expectation-2
 maximum-likelihood
 the-likelihood-function
 optimisation
@@ -86,6 +83,10 @@ mc-solution
 monopolySol
 id_3doubleMon-sol
 monopolyExtSol
+solution-mc-accuracy
+mc-expectation
+solution-mc-expectation-1
+solution-mc-expectation-2
 model-answers-computational-testing
 ht-sol-ex1
 ht-sol-ex2
