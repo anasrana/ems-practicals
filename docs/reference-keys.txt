@@ -83,10 +83,13 @@ mc-solution
 monopolySol
 id_3doubleMon-sol
 monopolyExtSol
+solution-monte-carlo
 solution-mc-accuracy
 mc-expectation
 solution-mc-expectation-1
 solution-mc-expectation-2
+sol-mle
+sol-ex-CI
 model-answers-computational-testing
 ht-sol-ex1
 ht-sol-ex2

@@ -60,7 +60,7 @@ Remember, from lectures, that the sample mean \(\bar{x}\) is a natural point est
 
 
 ```{.r .numberLines}
-x_bar = mean(x) # compute sample mean
+x_bar <- mean(x) # compute sample mean
 ```
 
 so a suitable interval might be centred on the sample mean and extend out,
@@ -78,7 +78,7 @@ print(interval)
 ```
 
 ``` bg-info
-#> [1] 1.84551 2.84551
+#> [1] 2.123672 3.123672
 ```
 ::: {.infobox}
 ## Exercise
@@ -200,7 +200,7 @@ The Monte Carlo estimate matches up with the theory!
 ::: {.infobox}
 ## Exercise: Confidence Interval {#ex-confidence-interval}
 
-> Can you devise a way to compute a confidence interval for the population standard deviation?
+ Can you devise a way to compute a confidence interval for the population standard deviation?
 
 You can make use of the following as a point estimate of the sample variance:
 
@@ -214,82 +214,3 @@ which can be calculated using the `sd` function in `R`, remember the relationshi
   [Show Solution](#sol-ex-CI)
 </button>
 :::
-
-# Model Answer: Confidence Interval {- #sol-ex-CI}
-
-> Can you devise a way to compute a confidence interval for the population standard deviation?
-
-You can make use of the following as a point estimate of the sample variance:
-
-\[
-  s^2 = \frac{1}{n - 1}\sum_{i = 1}^n (x - \bar{x})^2
-\]
-
-which can be calculated using the `sd` function in `R`, remember the relationship between the standard deviation and variance.
-
-
-```{.r .numberLines}
-# create a vector to store the number of times
-# the population variance is contained
-sigma_contained <- rep(0, n_interval_widths)
-
-for (replicate in 1:nreps) {
-
-  x <- rnorm(n, mean = mu, sd = sigma) # simulate a data set
-
-  sigmabar <- sd(x) # compute the sample standard deviation
-
-  # for each interval width that we are testing ...
-  for (j in 1:n_interval_widths) {
-    # check if the interval contains the true mean
-    if ((sigma > sigmabar - 0.5 * interval_width[j]) &
-        (sigma < sigmabar + 0.5 * interval_width[j])) {
-
-      # if it is, we increment the count by one for this width
-      sigma_contained[j] <- sigma_contained[j] + 1
-    }
-  }
-}
-
-probability_var_contained <- sigma_contained / nreps
-
-# create a data frame containing the variables we wish to plot
-df <- data.frame(interval_width = interval_width,
-        probability_var_contained = probability_var_contained)
-
-# initialise the ggplot
-plt <- ggplot(df, aes(x = interval_width, y = probability_var_contained))
-# create a line plot
-plt <- plt + geom_line()
-# add a horizontal axis label
-plt <- plt + xlab("Interval Width")
-# create a vertical axis label
-plt <- plt + ylab("Probability that sigma is contained")
-
-# plot to screen
-print(plt)
-```
-
-<img src="confid-interval_files/figure-html/unnamed-chunk-16-1.png" width="95%" style="display: block; margin: auto;" />
-
-```{.r .numberLines}
-print(df)
-```
-
-``` bg-info
-#>    interval_width probability_var_contained
-#> 1             0.1                     0.315
-#> 2             0.2                     0.558
-#> 3             0.3                     0.747
-#> 4             0.4                     0.888
-#> 5             0.5                     0.951
-#> 6             0.6                     0.985
-#> 7             0.7                     0.996
-#> 8             0.8                     0.998
-#> 9             0.9                     1.000
-#> 10            1.0                     1.000
-```
-
-<button class="button">
-  [Return to Exercise](#ex-confidence-interval)
-</button>
