@@ -52,7 +52,6 @@
 <li><a class="" href="markov-chains.html"><span class="header-section-number">2</span> Markov Chains</a></li>
 <li><a class="" href="a-monopoly-simulation.html"><span class="header-section-number">3</span> A Monopoly simulation</a></li>
 <li><a class="" href="monte-carlo-methods.html"><span class="header-section-number">4</span> Monte Carlo Methods</a></li>
-<li><a class="" href="solution-monte-carlo.html">Solution: Monte Carlo</a></li>
 <li><a class="" href="maximum-likelihood.html"><span class="header-section-number">5</span> Maximum Likelihood</a></li>
 <li><a class="" href="sol-mle.html">Solution: Model Answers: MLE</a></li>
 <li><a class="" href="confidence-intervals.html"><span class="header-section-number">6</span> Confidence Intervals</a></li>
@@ -67,6 +66,7 @@
 <li><a class="" href="simSol.html"><span class="header-section-number">A</span> Solution: Simulations</a></li>
 <li><a class="" href="mc-solution.html"><span class="header-section-number">B</span> Solutions: 3 state Markov Chain</a></li>
 <li><a class="" href="monopolySol.html"><span class="header-section-number">C</span> Solutions: Monopoly</a></li>
+<li><a class="" href="solution-monte-carlo.html">Solution: Monte Carlo</a></li>
 <li><a class="active" href="model-answers-computational-testing.html"><span class="header-section-number">D</span> Model Answers: Computational Testing</a></li>
 <li><a class="" href="solutions-linear-regression-and-correlation.html"><span class="header-section-number">E</span> Solutions: Linear regression and Correlation</a></li>
 <li class="book-part">APPENDIX</li>
@@ -153,32 +153,32 @@
 <span id="cb222-15"><a href="model-answers-computational-testing.html#cb222-15"></a></span>
 <span id="cb222-16"><a href="model-answers-computational-testing.html#cb222-16"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># generate some artificial data from a N(0, 1)</span></span>
 <span id="cb222-17"><a href="model-answers-computational-testing.html#cb222-17"></a>out <span class="ot">&lt;-</span> <span class="fu">z_test</span>(x, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># null should not be rejected!</span></span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  z = 1.738 
-#&gt;  one-tailed probability = 0.041 
-#&gt;  two-tailed probability = 0.082</code></pre>
+<pre class="bg-info"><code>#&gt;  z = 2.147 
+#&gt;  one-tailed probability = 0.016 
+#&gt;  two-tailed probability = 0.032</code></pre>
 <div class="sourceCode" id="cb224"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb224-1"><a href="model-answers-computational-testing.html#cb224-1"></a><span class="fu">print</span>(out)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; $z
-#&gt; [1] 1.738
+#&gt; [1] 2.147
 #&gt; 
 #&gt; $one_p
-#&gt; [1] 0.041
+#&gt; [1] 0.016
 #&gt; 
 #&gt; $two_p
-#&gt; [1] 0.082</code></pre>
+#&gt; [1] 0.032</code></pre>
 <div class="sourceCode" id="cb226"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb226-1"><a href="model-answers-computational-testing.html#cb226-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># generate some artificial data from a N(1, 1)</span></span>
 <span id="cb226-2"><a href="model-answers-computational-testing.html#cb226-2"></a>out <span class="ot">&lt;-</span> <span class="fu">z_test</span>(x, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># null should be rejected!</span></span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  z = 6.306 
-#&gt;  one-tailed probability = 0 
-#&gt;  two-tailed probability = 0</code></pre>
+<pre class="bg-info"><code>#&gt;  z = 1.325 
+#&gt;  one-tailed probability = 0.093 
+#&gt;  two-tailed probability = 0.186</code></pre>
 <div class="sourceCode" id="cb228"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb228-1"><a href="model-answers-computational-testing.html#cb228-1"></a><span class="fu">print</span>(out)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; $z
-#&gt; [1] 6.306
+#&gt; [1] 1.325
 #&gt; 
 #&gt; $one_p
-#&gt; [1] 0
+#&gt; [1] 0.093
 #&gt; 
 #&gt; $two_p
-#&gt; [1] 0</code></pre>
+#&gt; [1] 0.186</code></pre>
 <button class="button">
 <a href="computational-testing-techniques.html#ht-ex3">Back to exercise</a>
 </button>
@@ -372,7 +372,7 @@
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="monopolySol.html"><span class="header-section-number">C</span> Solutions: Monopoly</a></div>
+<div class="prev"><a href="solution-monte-carlo.html">Solution: Monte Carlo</a></div>
 <div class="next"><a href="solutions-linear-regression-and-correlation.html"><span class="header-section-number">E</span> Solutions: Linear regression and Correlation</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
@@ -403,7 +403,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2024-10-02.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2024-10-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

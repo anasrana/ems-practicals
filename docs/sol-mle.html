@@ -52,7 +52,6 @@
 <li><a class="" href="markov-chains.html"><span class="header-section-number">2</span> Markov Chains</a></li>
 <li><a class="" href="a-monopoly-simulation.html"><span class="header-section-number">3</span> A Monopoly simulation</a></li>
 <li><a class="" href="monte-carlo-methods.html"><span class="header-section-number">4</span> Monte Carlo Methods</a></li>
-<li><a class="" href="solution-monte-carlo.html">Solution: Monte Carlo</a></li>
 <li><a class="" href="maximum-likelihood.html"><span class="header-section-number">5</span> Maximum Likelihood</a></li>
 <li><a class="active" href="sol-mle.html">Solution: Model Answers: MLE</a></li>
 <li><a class="" href="confidence-intervals.html"><span class="header-section-number">6</span> Confidence Intervals</a></li>
@@ -67,6 +66,7 @@
 <li><a class="" href="simSol.html"><span class="header-section-number">A</span> Solution: Simulations</a></li>
 <li><a class="" href="mc-solution.html"><span class="header-section-number">B</span> Solutions: 3 state Markov Chain</a></li>
 <li><a class="" href="monopolySol.html"><span class="header-section-number">C</span> Solutions: Monopoly</a></li>
+<li><a class="" href="solution-monte-carlo.html">Solution: Monte Carlo</a></li>
 <li><a class="" href="model-answers-computational-testing.html"><span class="header-section-number">D</span> Model Answers: Computational Testing</a></li>
 <li><a class="" href="solutions-linear-regression-and-correlation.html"><span class="header-section-number">E</span> Solutions: Linear regression and Correlation</a></li>
 <li class="book-part">APPENDIX</li>
@@ -84,31 +84,31 @@
 </h1>
 <p>A potentially biased coin is tossed 10 times and the number of heads recorded. The experiment is repeated 5 times and the number of heads recorded was 3, 2, 4, 5 and 2 respectively.</p>
 <p>We need to choose the correct pdf and then write a likelihood function in <code>R</code>. In this case, we will use the binomial distribution. In this case, this is one of the ways we write the solution.</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb69-1"><a href="sol-mle.html#cb69-1"></a>neglogLikelihood <span class="ot">&lt;-</span> <span class="cf">function</span>(p, n, x) {</span>
-<span id="cb69-2"><a href="sol-mle.html#cb69-2"></a>  <span class="co"># compute density for each data element in x</span></span>
-<span id="cb69-3"><a href="sol-mle.html#cb69-3"></a>  logF <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(x, n, <span class="at">prob =</span> <span class="fu">c</span>(p, <span class="dv">1</span> <span class="sc">-</span> p), <span class="at">log =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb69-4"><a href="sol-mle.html#cb69-4"></a>  <span class="fu">return</span>(<span class="sc">-</span><span class="fu">sum</span>(logF)) <span class="co"># return negative log-likelihood</span></span>
-<span id="cb69-5"><a href="sol-mle.html#cb69-5"></a>}</span>
-<span id="cb69-6"><a href="sol-mle.html#cb69-6"></a></span>
-<span id="cb69-7"><a href="sol-mle.html#cb69-7"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># number of coin tosses</span></span>
-<span id="cb69-8"><a href="sol-mle.html#cb69-8"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">2</span>) <span class="co"># number of heads observed</span></span>
-<span id="cb69-9"><a href="sol-mle.html#cb69-9"></a></span>
-<span id="cb69-10"><a href="sol-mle.html#cb69-10"></a>p_init <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="co"># initial value of the probability</span></span>
-<span id="cb69-11"><a href="sol-mle.html#cb69-11"></a></span>
-<span id="cb69-12"><a href="sol-mle.html#cb69-12"></a><span class="co"># run optim to get maximum likelihood estimates</span></span>
-<span id="cb69-13"><a href="sol-mle.html#cb69-13"></a>out <span class="ot">&lt;-</span> <span class="fu">optim</span>(p_init, neglogLikelihood, <span class="at">gr =</span> <span class="cn">NULL</span>, n, x, <span class="at">method =</span> <span class="st">"L-BFGS-B"</span>,</span>
-<span id="cb69-14"><a href="sol-mle.html#cb69-14"></a>  <span class="at">lower =</span> <span class="fl">0.001</span>, <span class="at">upper =</span> <span class="dv">1</span><span class="fl">-0.001</span>)</span>
-<span id="cb69-15"><a href="sol-mle.html#cb69-15"></a></span>
-<span id="cb69-16"><a href="sol-mle.html#cb69-16"></a><span class="co"># create a grid of probability values</span></span>
-<span id="cb69-17"><a href="sol-mle.html#cb69-17"></a>p_vals <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.001</span>, <span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.001</span>, <span class="at">length =</span> <span class="dv">101</span>)</span>
-<span id="cb69-18"><a href="sol-mle.html#cb69-18"></a></span>
-<span id="cb69-19"><a href="sol-mle.html#cb69-19"></a><span class="co"># use apply to compute the negative log-likelihood for each probability value</span></span>
-<span id="cb69-20"><a href="sol-mle.html#cb69-20"></a>neglogL <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">matrix</span>(p_vals), <span class="dv">1</span>, neglogLikelihood, n, x)</span>
-<span id="cb69-21"><a href="sol-mle.html#cb69-21"></a></span>
-<span id="cb69-22"><a href="sol-mle.html#cb69-22"></a><span class="co"># plot negative log-likelihood function and overlay maximum (negative)</span></span>
-<span id="cb69-23"><a href="sol-mle.html#cb69-23"></a><span class="co"># log-likelihood estimate</span></span>
-<span id="cb69-24"><a href="sol-mle.html#cb69-24"></a><span class="fu">plot</span>(p_vals, neglogL, <span class="at">pch =</span> <span class="st">"-"</span>)</span>
-<span id="cb69-25"><a href="sol-mle.html#cb69-25"></a><span class="fu">points</span>(out<span class="sc">$</span>par, out<span class="sc">$</span>value, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">pch =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb55-1"><a href="sol-mle.html#cb55-1"></a>neglogLikelihood <span class="ot">&lt;-</span> <span class="cf">function</span>(p, n, x) {</span>
+<span id="cb55-2"><a href="sol-mle.html#cb55-2"></a>  <span class="co"># compute density for each data element in x</span></span>
+<span id="cb55-3"><a href="sol-mle.html#cb55-3"></a>  logF <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(x, n, <span class="at">prob =</span> <span class="fu">c</span>(p, <span class="dv">1</span> <span class="sc">-</span> p), <span class="at">log =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb55-4"><a href="sol-mle.html#cb55-4"></a>  <span class="fu">return</span>(<span class="sc">-</span><span class="fu">sum</span>(logF)) <span class="co"># return negative log-likelihood</span></span>
+<span id="cb55-5"><a href="sol-mle.html#cb55-5"></a>}</span>
+<span id="cb55-6"><a href="sol-mle.html#cb55-6"></a></span>
+<span id="cb55-7"><a href="sol-mle.html#cb55-7"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># number of coin tosses</span></span>
+<span id="cb55-8"><a href="sol-mle.html#cb55-8"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">2</span>) <span class="co"># number of heads observed</span></span>
+<span id="cb55-9"><a href="sol-mle.html#cb55-9"></a></span>
+<span id="cb55-10"><a href="sol-mle.html#cb55-10"></a>p_init <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="co"># initial value of the probability</span></span>
+<span id="cb55-11"><a href="sol-mle.html#cb55-11"></a></span>
+<span id="cb55-12"><a href="sol-mle.html#cb55-12"></a><span class="co"># run optim to get maximum likelihood estimates</span></span>
+<span id="cb55-13"><a href="sol-mle.html#cb55-13"></a>out <span class="ot">&lt;-</span> <span class="fu">optim</span>(p_init, neglogLikelihood, <span class="at">gr =</span> <span class="cn">NULL</span>, n, x, <span class="at">method =</span> <span class="st">"L-BFGS-B"</span>,</span>
+<span id="cb55-14"><a href="sol-mle.html#cb55-14"></a>  <span class="at">lower =</span> <span class="fl">0.001</span>, <span class="at">upper =</span> <span class="dv">1</span><span class="fl">-0.001</span>)</span>
+<span id="cb55-15"><a href="sol-mle.html#cb55-15"></a></span>
+<span id="cb55-16"><a href="sol-mle.html#cb55-16"></a><span class="co"># create a grid of probability values</span></span>
+<span id="cb55-17"><a href="sol-mle.html#cb55-17"></a>p_vals <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.001</span>, <span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.001</span>, <span class="at">length =</span> <span class="dv">101</span>)</span>
+<span id="cb55-18"><a href="sol-mle.html#cb55-18"></a></span>
+<span id="cb55-19"><a href="sol-mle.html#cb55-19"></a><span class="co"># use apply to compute the negative log-likelihood for each probability value</span></span>
+<span id="cb55-20"><a href="sol-mle.html#cb55-20"></a>neglogL <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">matrix</span>(p_vals), <span class="dv">1</span>, neglogLikelihood, n, x)</span>
+<span id="cb55-21"><a href="sol-mle.html#cb55-21"></a></span>
+<span id="cb55-22"><a href="sol-mle.html#cb55-22"></a><span class="co"># plot negative log-likelihood function and overlay maximum (negative)</span></span>
+<span id="cb55-23"><a href="sol-mle.html#cb55-23"></a><span class="co"># log-likelihood estimate</span></span>
+<span id="cb55-24"><a href="sol-mle.html#cb55-24"></a><span class="fu">plot</span>(p_vals, neglogL, <span class="at">pch =</span> <span class="st">"-"</span>)</span>
+<span id="cb55-25"><a href="sol-mle.html#cb55-25"></a><span class="fu">points</span>(out<span class="sc">$</span>par, out<span class="sc">$</span>value, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">pch =</span> <span class="dv">0</span>)</span></code></pre></div>
 <div class="inline-figure"><img src="mle_files/figure-html/unnamed-chunk-17-1.png" width="95%" style="display: block; margin: auto;"></div>
 <button class="button">
 <a href="maximum-likelihood.html#ex-mle">Back to exercise</a>
@@ -137,7 +137,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2024-10-02.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2024-10-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

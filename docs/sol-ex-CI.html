@@ -52,7 +52,6 @@
 <li><a class="" href="markov-chains.html"><span class="header-section-number">2</span> Markov Chains</a></li>
 <li><a class="" href="a-monopoly-simulation.html"><span class="header-section-number">3</span> A Monopoly simulation</a></li>
 <li><a class="" href="monte-carlo-methods.html"><span class="header-section-number">4</span> Monte Carlo Methods</a></li>
-<li><a class="" href="solution-monte-carlo.html">Solution: Monte Carlo</a></li>
 <li><a class="" href="maximum-likelihood.html"><span class="header-section-number">5</span> Maximum Likelihood</a></li>
 <li><a class="" href="sol-mle.html">Solution: Model Answers: MLE</a></li>
 <li><a class="" href="confidence-intervals.html"><span class="header-section-number">6</span> Confidence Intervals</a></li>
@@ -67,6 +66,7 @@
 <li><a class="" href="simSol.html"><span class="header-section-number">A</span> Solution: Simulations</a></li>
 <li><a class="" href="mc-solution.html"><span class="header-section-number">B</span> Solutions: 3 state Markov Chain</a></li>
 <li><a class="" href="monopolySol.html"><span class="header-section-number">C</span> Solutions: Monopoly</a></li>
+<li><a class="" href="solution-monte-carlo.html">Solution: Monte Carlo</a></li>
 <li><a class="" href="model-answers-computational-testing.html"><span class="header-section-number">D</span> Model Answers: Computational Testing</a></li>
 <li><a class="" href="solutions-linear-regression-and-correlation.html"><span class="header-section-number">E</span> Solutions: Linear regression and Correlation</a></li>
 <li class="book-part">APPENDIX</li>
@@ -90,56 +90,56 @@
   s^2 = \frac{1}{n - 1}\sum_{i = 1}^n (x - \bar{x})^2
 \]</span></p>
 <p>which can be calculated using the <code>sd</code> function in <code>R</code>, remember the relationship between the standard deviation and variance.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb88-1"><a href="sol-ex-CI.html#cb88-1"></a><span class="co"># create a vector to store the number of times</span></span>
-<span id="cb88-2"><a href="sol-ex-CI.html#cb88-2"></a><span class="co"># the population variance is contained</span></span>
-<span id="cb88-3"><a href="sol-ex-CI.html#cb88-3"></a>sigma_contained <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_interval_widths)</span>
-<span id="cb88-4"><a href="sol-ex-CI.html#cb88-4"></a></span>
-<span id="cb88-5"><a href="sol-ex-CI.html#cb88-5"></a><span class="cf">for</span> (replicate <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nreps) {</span>
-<span id="cb88-6"><a href="sol-ex-CI.html#cb88-6"></a></span>
-<span id="cb88-7"><a href="sol-ex-CI.html#cb88-7"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma) <span class="co"># simulate a data set</span></span>
-<span id="cb88-8"><a href="sol-ex-CI.html#cb88-8"></a></span>
-<span id="cb88-9"><a href="sol-ex-CI.html#cb88-9"></a>  sigmabar <span class="ot">&lt;-</span> <span class="fu">sd</span>(x) <span class="co"># compute the sample standard deviation</span></span>
-<span id="cb88-10"><a href="sol-ex-CI.html#cb88-10"></a></span>
-<span id="cb88-11"><a href="sol-ex-CI.html#cb88-11"></a>  <span class="co"># for each interval width that we are testing ...</span></span>
-<span id="cb88-12"><a href="sol-ex-CI.html#cb88-12"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_interval_widths) {</span>
-<span id="cb88-13"><a href="sol-ex-CI.html#cb88-13"></a>    <span class="co"># check if the interval contains the true mean</span></span>
-<span id="cb88-14"><a href="sol-ex-CI.html#cb88-14"></a>    <span class="cf">if</span> ((sigma <span class="sc">&gt;</span> sigmabar <span class="sc">-</span> <span class="fl">0.5</span> <span class="sc">*</span> interval_width[j]) <span class="sc">&amp;</span></span>
-<span id="cb88-15"><a href="sol-ex-CI.html#cb88-15"></a>        (sigma <span class="sc">&lt;</span> sigmabar <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> interval_width[j])) {</span>
-<span id="cb88-16"><a href="sol-ex-CI.html#cb88-16"></a></span>
-<span id="cb88-17"><a href="sol-ex-CI.html#cb88-17"></a>      <span class="co"># if it is, we increment the count by one for this width</span></span>
-<span id="cb88-18"><a href="sol-ex-CI.html#cb88-18"></a>      sigma_contained[j] <span class="ot">&lt;-</span> sigma_contained[j] <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb88-19"><a href="sol-ex-CI.html#cb88-19"></a>    }</span>
-<span id="cb88-20"><a href="sol-ex-CI.html#cb88-20"></a>  }</span>
-<span id="cb88-21"><a href="sol-ex-CI.html#cb88-21"></a>}</span>
-<span id="cb88-22"><a href="sol-ex-CI.html#cb88-22"></a></span>
-<span id="cb88-23"><a href="sol-ex-CI.html#cb88-23"></a>probability_var_contained <span class="ot">&lt;-</span> sigma_contained <span class="sc">/</span> nreps</span>
-<span id="cb88-24"><a href="sol-ex-CI.html#cb88-24"></a></span>
-<span id="cb88-25"><a href="sol-ex-CI.html#cb88-25"></a><span class="co"># create a data frame containing the variables we wish to plot</span></span>
-<span id="cb88-26"><a href="sol-ex-CI.html#cb88-26"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">interval_width =</span> interval_width,</span>
-<span id="cb88-27"><a href="sol-ex-CI.html#cb88-27"></a>        <span class="at">probability_var_contained =</span> probability_var_contained)</span>
-<span id="cb88-28"><a href="sol-ex-CI.html#cb88-28"></a></span>
-<span id="cb88-29"><a href="sol-ex-CI.html#cb88-29"></a><span class="co"># initialise the ggplot</span></span>
-<span id="cb88-30"><a href="sol-ex-CI.html#cb88-30"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> interval_width, <span class="at">y =</span> probability_var_contained))</span>
-<span id="cb88-31"><a href="sol-ex-CI.html#cb88-31"></a><span class="co"># create a line plot</span></span>
-<span id="cb88-32"><a href="sol-ex-CI.html#cb88-32"></a>plt <span class="ot">&lt;-</span> plt <span class="sc">+</span> <span class="fu">geom_line</span>()</span>
-<span id="cb88-33"><a href="sol-ex-CI.html#cb88-33"></a><span class="co"># add a horizontal axis label</span></span>
-<span id="cb88-34"><a href="sol-ex-CI.html#cb88-34"></a>plt <span class="ot">&lt;-</span> plt <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Interval Width"</span>)</span>
-<span id="cb88-35"><a href="sol-ex-CI.html#cb88-35"></a><span class="co"># create a vertical axis label</span></span>
-<span id="cb88-36"><a href="sol-ex-CI.html#cb88-36"></a>plt <span class="ot">&lt;-</span> plt <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Probability that sigma is contained"</span>)</span>
-<span id="cb88-37"><a href="sol-ex-CI.html#cb88-37"></a></span>
-<span id="cb88-38"><a href="sol-ex-CI.html#cb88-38"></a><span class="co"># plot to screen</span></span>
-<span id="cb88-39"><a href="sol-ex-CI.html#cb88-39"></a><span class="fu">print</span>(plt)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb74-1"><a href="sol-ex-CI.html#cb74-1"></a><span class="co"># create a vector to store the number of times</span></span>
+<span id="cb74-2"><a href="sol-ex-CI.html#cb74-2"></a><span class="co"># the population variance is contained</span></span>
+<span id="cb74-3"><a href="sol-ex-CI.html#cb74-3"></a>sigma_contained <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_interval_widths)</span>
+<span id="cb74-4"><a href="sol-ex-CI.html#cb74-4"></a></span>
+<span id="cb74-5"><a href="sol-ex-CI.html#cb74-5"></a><span class="cf">for</span> (replicate <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nreps) {</span>
+<span id="cb74-6"><a href="sol-ex-CI.html#cb74-6"></a></span>
+<span id="cb74-7"><a href="sol-ex-CI.html#cb74-7"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma) <span class="co"># simulate a data set</span></span>
+<span id="cb74-8"><a href="sol-ex-CI.html#cb74-8"></a></span>
+<span id="cb74-9"><a href="sol-ex-CI.html#cb74-9"></a>  sigmabar <span class="ot">&lt;-</span> <span class="fu">sd</span>(x) <span class="co"># compute the sample standard deviation</span></span>
+<span id="cb74-10"><a href="sol-ex-CI.html#cb74-10"></a></span>
+<span id="cb74-11"><a href="sol-ex-CI.html#cb74-11"></a>  <span class="co"># for each interval width that we are testing ...</span></span>
+<span id="cb74-12"><a href="sol-ex-CI.html#cb74-12"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_interval_widths) {</span>
+<span id="cb74-13"><a href="sol-ex-CI.html#cb74-13"></a>    <span class="co"># check if the interval contains the true mean</span></span>
+<span id="cb74-14"><a href="sol-ex-CI.html#cb74-14"></a>    <span class="cf">if</span> ((sigma <span class="sc">&gt;</span> sigmabar <span class="sc">-</span> <span class="fl">0.5</span> <span class="sc">*</span> interval_width[j]) <span class="sc">&amp;</span></span>
+<span id="cb74-15"><a href="sol-ex-CI.html#cb74-15"></a>        (sigma <span class="sc">&lt;</span> sigmabar <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> interval_width[j])) {</span>
+<span id="cb74-16"><a href="sol-ex-CI.html#cb74-16"></a></span>
+<span id="cb74-17"><a href="sol-ex-CI.html#cb74-17"></a>      <span class="co"># if it is, we increment the count by one for this width</span></span>
+<span id="cb74-18"><a href="sol-ex-CI.html#cb74-18"></a>      sigma_contained[j] <span class="ot">&lt;-</span> sigma_contained[j] <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb74-19"><a href="sol-ex-CI.html#cb74-19"></a>    }</span>
+<span id="cb74-20"><a href="sol-ex-CI.html#cb74-20"></a>  }</span>
+<span id="cb74-21"><a href="sol-ex-CI.html#cb74-21"></a>}</span>
+<span id="cb74-22"><a href="sol-ex-CI.html#cb74-22"></a></span>
+<span id="cb74-23"><a href="sol-ex-CI.html#cb74-23"></a>probability_var_contained <span class="ot">&lt;-</span> sigma_contained <span class="sc">/</span> nreps</span>
+<span id="cb74-24"><a href="sol-ex-CI.html#cb74-24"></a></span>
+<span id="cb74-25"><a href="sol-ex-CI.html#cb74-25"></a><span class="co"># create a data frame containing the variables we wish to plot</span></span>
+<span id="cb74-26"><a href="sol-ex-CI.html#cb74-26"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">interval_width =</span> interval_width,</span>
+<span id="cb74-27"><a href="sol-ex-CI.html#cb74-27"></a>        <span class="at">probability_var_contained =</span> probability_var_contained)</span>
+<span id="cb74-28"><a href="sol-ex-CI.html#cb74-28"></a></span>
+<span id="cb74-29"><a href="sol-ex-CI.html#cb74-29"></a><span class="co"># initialise the ggplot</span></span>
+<span id="cb74-30"><a href="sol-ex-CI.html#cb74-30"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> interval_width, <span class="at">y =</span> probability_var_contained))</span>
+<span id="cb74-31"><a href="sol-ex-CI.html#cb74-31"></a><span class="co"># create a line plot</span></span>
+<span id="cb74-32"><a href="sol-ex-CI.html#cb74-32"></a>plt <span class="ot">&lt;-</span> plt <span class="sc">+</span> <span class="fu">geom_line</span>()</span>
+<span id="cb74-33"><a href="sol-ex-CI.html#cb74-33"></a><span class="co"># add a horizontal axis label</span></span>
+<span id="cb74-34"><a href="sol-ex-CI.html#cb74-34"></a>plt <span class="ot">&lt;-</span> plt <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Interval Width"</span>)</span>
+<span id="cb74-35"><a href="sol-ex-CI.html#cb74-35"></a><span class="co"># create a vertical axis label</span></span>
+<span id="cb74-36"><a href="sol-ex-CI.html#cb74-36"></a>plt <span class="ot">&lt;-</span> plt <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Probability that sigma is contained"</span>)</span>
+<span id="cb74-37"><a href="sol-ex-CI.html#cb74-37"></a></span>
+<span id="cb74-38"><a href="sol-ex-CI.html#cb74-38"></a><span class="co"># plot to screen</span></span>
+<span id="cb74-39"><a href="sol-ex-CI.html#cb74-39"></a><span class="fu">print</span>(plt)</span></code></pre></div>
 <div class="inline-figure"><img src="confid-interval_files/figure-html/unnamed-chunk-16-1.png" width="95%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb89"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb89-1"><a href="sol-ex-CI.html#cb89-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb75-1"><a href="sol-ex-CI.html#cb75-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;    interval_width probability_var_contained
-#&gt; 1             0.1                     0.303
-#&gt; 2             0.2                     0.545
-#&gt; 3             0.3                     0.752
-#&gt; 4             0.4                     0.879
-#&gt; 5             0.5                     0.938
-#&gt; 6             0.6                     0.984
-#&gt; 7             0.7                     0.994
-#&gt; 8             0.8                     0.997
+#&gt; 1             0.1                     0.315
+#&gt; 2             0.2                     0.558
+#&gt; 3             0.3                     0.747
+#&gt; 4             0.4                     0.888
+#&gt; 5             0.5                     0.951
+#&gt; 6             0.6                     0.985
+#&gt; 7             0.7                     0.996
+#&gt; 8             0.8                     0.998
 #&gt; 9             0.9                     1.000
 #&gt; 10            1.0                     1.000</code></pre>
 <button class="button">
@@ -169,7 +169,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2024-10-02.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2024-10-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
