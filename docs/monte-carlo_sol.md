@@ -1,4 +1,4 @@
-#  Solution: Monte Carlo {-}
+#  Solution: Monte Carlo
 
 ## Solution: MC accuracy {#solution-mc-accuracy}
 
@@ -41,8 +41,8 @@ print(accuracy)
 ```
 
 ``` bg-info
-#> [1]  0.001655254  0.001855254  0.004455254 -0.002344746
-#> [5]  0.001135254 -0.002214746
+#> [1] -0.0073447461 -0.0019447461  0.0086552539  0.0007752539
+#> [5]  0.0009352539  0.0005852539
 ```
 
 ```{.r .numberLines}
@@ -50,8 +50,8 @@ print(accuracy_sd)
 ```
 
 ``` bg-info
-#> [1] 0.15259043 0.06284308 0.04853781 0.03200189 0.02065615
-#> [6] 0.01513018
+#> [1] 0.15322790 0.06711696 0.04878317 0.03009724 0.02137878
+#> [6] 0.01402469
 ```
 
 ```{.r .numberLines}
@@ -59,8 +59,8 @@ print(accuracy + accuracy_sd)
 ```
 
 ``` bg-info
-#> [1] 0.15424568 0.06469833 0.05299307 0.02965715 0.02179140
-#> [6] 0.01291543
+#> [1] 0.14588315 0.06517222 0.05743843 0.03087250 0.02231403
+#> [6] 0.01460995
 ```
 
 Next, we will plot the results. Here we will make use of `ggplot2` a library to create nice plots without much effort. The input need to be a `data.frame` so we will need to create one based on the data.
@@ -77,13 +77,13 @@ print(df)
 ```
 
 ``` bg-info
-#>   sample_sizes     accuracy accuracy_sd
-#> 1           10  0.001655254  0.15259043
-#> 2           50  0.001855254  0.06284308
-#> 3          100  0.004455254  0.04853781
-#> 4          250 -0.002344746  0.03200189
-#> 5          500  0.001135254  0.02065615
-#> 6         1000 -0.002214746  0.01513018
+#>   sample_sizes      accuracy accuracy_sd
+#> 1           10 -0.0073447461  0.15322790
+#> 2           50 -0.0019447461  0.06711696
+#> 3          100  0.0086552539  0.04878317
+#> 4          250  0.0007752539  0.03009724
+#> 5          500  0.0009352539  0.02137878
+#> 6         1000  0.0005852539  0.01402469
 ```
 
 ```{.r .numberLines}
@@ -136,7 +136,7 @@ print(expected_score)
 ```
 
 ``` bg-info
-#> [1] 14.97
+#> [1] 15.56
 ```
 <button class="button">
   [Back to Exercise](#mc-expectation-1)
@@ -171,7 +171,7 @@ print(mean(game_score))
 ```
 
 ``` bg-info
-#> [1] 9.26
+#> [1] 7.86
 ```
 
 ```{.r .numberLines}

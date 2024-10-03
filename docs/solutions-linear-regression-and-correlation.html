@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>E Solutions: Linear regression and Correlation | Essentials of Mathematics and Statistics</title>
+<title>H Solutions: Linear regression and Correlation | Essentials of Mathematics and Statistics</title>
 <meta name="author" content="Anas A Rana">
 <meta name="description" content="Solution Exercise I: Correlation Read in the data in stork.txt, compute the correlation and comment on it. The data represents no of storks (column 1) in Oldenburg Germany from \(1930 - 1939\) and...">
 <meta name="generator" content="bookdown 0.40 with bs4_book()">
-<meta property="og:title" content="E Solutions: Linear regression and Correlation | Essentials of Mathematics and Statistics">
+<meta property="og:title" content="H Solutions: Linear regression and Correlation | Essentials of Mathematics and Statistics">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Solution Exercise I: Correlation Read in the data in stork.txt, compute the correlation and comment on it. The data represents no of storks (column 1) in Oldenburg Germany from \(1930 - 1939\) and...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="E Solutions: Linear regression and Correlation | Essentials of Mathematics and Statistics">
+<meta name="twitter:title" content="H Solutions: Linear regression and Correlation | Essentials of Mathematics and Statistics">
 <meta name="twitter:description" content="Solution Exercise I: Correlation Read in the data in stork.txt, compute the correlation and comment on it. The data represents no of storks (column 1) in Oldenburg Germany from \(1930 - 1939\) and...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -53,9 +53,7 @@
 <li><a class="" href="a-monopoly-simulation.html"><span class="header-section-number">3</span> A Monopoly simulation</a></li>
 <li><a class="" href="monte-carlo-methods.html"><span class="header-section-number">4</span> Monte Carlo Methods</a></li>
 <li><a class="" href="maximum-likelihood.html"><span class="header-section-number">5</span> Maximum Likelihood</a></li>
-<li><a class="" href="sol-mle.html">Solution: Model Answers: MLE</a></li>
 <li><a class="" href="confidence-intervals.html"><span class="header-section-number">6</span> Confidence Intervals</a></li>
-<li><a class="" href="sol-ex-CI.html">Model Answer: Confidence Interval</a></li>
 <li><a class="" href="computational-testing-techniques.html"><span class="header-section-number">7</span> Computational Testing Techniques</a></li>
 <li class="book-part">Statistical Modelling</li>
 <li><a class="" href="practical-linear-regression.html"><span class="header-section-number">8</span> Practical: Linear regression</a></li>
@@ -66,9 +64,11 @@
 <li><a class="" href="simSol.html"><span class="header-section-number">A</span> Solution: Simulations</a></li>
 <li><a class="" href="mc-solution.html"><span class="header-section-number">B</span> Solutions: 3 state Markov Chain</a></li>
 <li><a class="" href="monopolySol.html"><span class="header-section-number">C</span> Solutions: Monopoly</a></li>
-<li><a class="" href="solution-monte-carlo.html">Solution: Monte Carlo</a></li>
-<li><a class="" href="model-answers-computational-testing.html"><span class="header-section-number">D</span> Model Answers: Computational Testing</a></li>
-<li><a class="active" href="solutions-linear-regression-and-correlation.html"><span class="header-section-number">E</span> Solutions: Linear regression and Correlation</a></li>
+<li><a class="" href="solution-monte-carlo.html"><span class="header-section-number">D</span> Solution: Monte Carlo</a></li>
+<li><a class="" href="sol-mle.html"><span class="header-section-number">E</span> Solution: Model Answers: MLE</a></li>
+<li><a class="" href="sol-ex-CI.html"><span class="header-section-number">F</span> Model Answer: Confidence Interval</a></li>
+<li><a class="" href="model-answers-computational-testing.html"><span class="header-section-number">G</span> Model Answers: Computational Testing</a></li>
+<li><a class="active" href="solutions-linear-regression-and-correlation.html"><span class="header-section-number">H</span> Solutions: Linear regression and Correlation</a></li>
 <li class="book-part">APPENDIX</li>
 <li><a class="" href="start.html">Getting started in R and Rstudio</a></li>
 <li><a class="" href="data-sets.html">Data sets</a></li>
@@ -79,9 +79,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="solutions-linear-regression-and-correlation" class="section level1" number="16">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="solutions-linear-regression-and-correlation" class="section level1" number="19">
 <h1>
-<span class="header-section-number">E</span> Solutions: Linear regression and Correlation<a class="anchor" aria-label="anchor" href="#solutions-linear-regression-and-correlation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">H</span> Solutions: Linear regression and Correlation<a class="anchor" aria-label="anchor" href="#solutions-linear-regression-and-correlation"><i class="fas fa-link"></i></a>
 </h1>
 <div id="LR-sol1" class="section level2 unnumbered">
 <h2>Solution Exercise I: Correlation<a class="anchor" aria-label="anchor" href="#LR-sol1"><i class="fas fa-link"></i></a>
@@ -115,9 +115,9 @@
 <span id="cb283-8"><a href="solutions-linear-regression-and-correlation.html#cb283-8"></a></span>
 <span id="cb283-9"><a href="solutions-linear-regression-and-correlation.html#cb283-9"></a>lr_fit1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> sim_data1)</span>
 <span id="cb283-10"><a href="solutions-linear-regression-and-correlation.html#cb283-10"></a>lr_fit2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> sim_data2)</span></code></pre></div>
-<div id="comparison-of-data" class="section level3" number="16.0.1">
+<div id="comparison-of-data" class="section level3" number="19.0.1">
 <h3>
-<span class="header-section-number">E.0.1</span> Comparison of data<a class="anchor" aria-label="anchor" href="#comparison-of-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">H.0.1</span> Comparison of data<a class="anchor" aria-label="anchor" href="#comparison-of-data"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb284"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb284-1"><a href="solutions-linear-regression-and-correlation.html#cb284-1"></a><span class="fu">ggplot</span>(sim_data1, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
 <span id="cb284-2"><a href="solutions-linear-regression-and-correlation.html#cb284-2"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
@@ -247,15 +247,15 @@
 
 
   <div class="chapter-nav">
-<div class="prev"><a href="model-answers-computational-testing.html"><span class="header-section-number">D</span> Model Answers: Computational Testing</a></div>
+<div class="prev"><a href="model-answers-computational-testing.html"><span class="header-section-number">G</span> Model Answers: Computational Testing</a></div>
 <div class="next"><a href="start.html">Getting started in R and Rstudio</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#solutions-linear-regression-and-correlation"><span class="header-section-number">E</span> Solutions: Linear regression and Correlation</a></li>
+<li><a class="nav-link" href="#solutions-linear-regression-and-correlation"><span class="header-section-number">H</span> Solutions: Linear regression and Correlation</a></li>
 <li><a class="nav-link" href="#LR-sol1">Solution Exercise I: Correlation</a></li>
 <li>
-<a class="nav-link" href="#LR-sol2">Solution Exercise II</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#comparison-of-data"><span class="header-section-number">E.0.1</span> Comparison of data</a></li></ul>
+<a class="nav-link" href="#LR-sol2">Solution Exercise II</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#comparison-of-data"><span class="header-section-number">H.0.1</span> Comparison of data</a></li></ul>
 </li>
 <li><a class="nav-link" href="#LR-sol3">Solution Exercise II</a></li>
 </ul>
