@@ -1,5 +1,5 @@
 
-#  Solutions: 3 state Markov Chain {#mc-solution}
+#  Solution: Three state Markov Chain {#mc-solution}
 <img src="MC-solution_files/figure-html/unnamed-chunk-1-1.png" width="70%" style="display: block; margin: auto;" />
 
 Set up a 3x3 transition matrix:
@@ -45,8 +45,8 @@ print(weather_sequence)
 ```
 
 ``` bg-info
-#>  [1] 1 1 1 1 2 1 3 2 2 1 1 1 1 1 1 1 1 1 1 1 2 3 1 1 2 2 1 3
-#> [29] 1 1
+#>  [1] 1 1 1 2 2 2 1 1 1 1 1 1 3 1 1 1 1 1 1 1 1 1 2 1 1 2 3 3
+#> [29] 3 3
 ```
 
 This is simplest way to output the weather sequence. You could also use a `data.frame` to store the day and the weather state if you wanted to output the day and the weather state together. Even better would to create plot of the weather sequence over the 30 days or perform basic statistics on the weather sequence to output a useful summary of the weather sequence. This is left as an exercise for the reader, some methods we have already covered and we will learn more over the coming days.

@@ -1,4 +1,4 @@
-# Model Answer: Confidence Interval {#sol-ex-CI}
+# Solution: Confidence Interval {#sol-ex-CI}
 
 > Can you devise a way to compute a confidence interval for the population standard deviation?
 
@@ -76,15 +76,15 @@ print(df)
 
 ``` bg-info
 #>    interval_width probability_var_contained
-#> 1             0.1                     0.298
-#> 2             0.2                     0.567
-#> 3             0.3                     0.749
-#> 4             0.4                     0.877
-#> 5             0.5                     0.947
-#> 6             0.6                     0.980
-#> 7             0.7                     0.994
-#> 8             0.8                     1.000
-#> 9             0.9                     1.000
+#> 1             0.1                     0.314
+#> 2             0.2                     0.576
+#> 3             0.3                     0.768
+#> 4             0.4                     0.882
+#> 5             0.5                     0.942
+#> 6             0.6                     0.974
+#> 7             0.7                     0.987
+#> 8             0.8                     0.997
+#> 9             0.9                     0.999
 #> 10            1.0                     1.000
 ```
 

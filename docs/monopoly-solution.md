@@ -1,4 +1,4 @@
-# Solutions: Monopoly {#monopolySol}
+# Solution: Monopoly {#monopolySol}
 
 ## Solution: Rolling three doubles {#3doubleMon-sol}
 

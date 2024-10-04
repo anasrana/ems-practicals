@@ -1,4 +1,4 @@
-# Solutions: Linear regression and Correlation
+# Solution: Linear regression and Correlation
 
 ## Solution Exercise I: Correlation {- #LR-sol1}
 
@@ -170,7 +170,7 @@ A change in only 4 data points was sufficient to change the regression coefficie
 [Return to Exercise](#LR-ex2)
 </button>
 
-## Solution Exercise II {- #LR-sol3}
+## Solution Exercise III {- #LR-sol3}
 
 
 ```{.r .numberLines}
