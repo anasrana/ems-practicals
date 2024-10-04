@@ -1,4 +1,4 @@
-# Model Answers: Computational Testing
+# Solution: Computational Testing
 
 ## Solution: Exercise 1 {#ht-sol-ex1}
 
@@ -122,9 +122,9 @@ out <- z_test(x, 0, 1) # null should not be rejected!
 ```
 
 ``` bg-info
-#>  z = 0.252 
-#>  one-tailed probability = 0.401 
-#>  two-tailed probability = 0.802
+#>  z = -1.825 
+#>  one-tailed probability = 0.034 
+#>  two-tailed probability = 0.068
 ```
 
 ```{.r .numberLines}
@@ -133,13 +133,13 @@ print(out)
 
 ``` bg-info
 #> $z
-#> [1] 0.252
+#> [1] -1.825
 #> 
 #> $one_p
-#> [1] 0.401
+#> [1] 0.034
 #> 
 #> $two_p
-#> [1] 0.802
+#> [1] 0.068
 ```
 
 ```{.r .numberLines}
@@ -148,9 +148,9 @@ out <- z_test(x, 0, 1) # null should be rejected!
 ```
 
 ``` bg-info
-#>  z = 3.268 
-#>  one-tailed probability = 0.001 
-#>  two-tailed probability = 0.002
+#>  z = 2.925 
+#>  one-tailed probability = 0.002 
+#>  two-tailed probability = 0.004
 ```
 
 ```{.r .numberLines}
@@ -159,18 +159,14 @@ print(out)
 
 ``` bg-info
 #> $z
-#> [1] 3.268
+#> [1] 2.925
 #> 
 #> $one_p
-#> [1] 0.001
+#> [1] 0.002
 #> 
 #> $two_p
-#> [1] 0.002
+#> [1] 0.004
 ```
-
-<button class="button">
-  [Back to exercise](#ht-ex3)
-</button>
 
 <button class="button">
   [Back to exercise](#ht-ex3)

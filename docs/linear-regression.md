@@ -1,15 +1,13 @@
-# (PART\*) Statistical Modelling {-}
+# Linear regression
 
-# Practical: Linear regression
-
-In this practical you will go through some of the basics of linear modeling in `R` as well as simulating data. The practical contains the following elements:
+In this practical you will go through some of the basics of linear modelling in `R` as well as simulating data. The practical contains the following elements:
 
 - simulate linear regression model
 - investigate parameters
 - characterize prediction accuracy
 - correlation of real world data
 
-We will make use of the following packages `reshape2`, `ggplo2`, and `bbmle` packages. If the packages are not installed you can use the `install.packages()` function to install them. Only do that once you have confirmed they are nto already installed.
+We will make use of the following packages `reshape2`, `ggplot2`, and `bbmle` packages. If you are using your own machine you can use the `install.packages()` function to install them. Only do that once you have confirmed they are not already installed.
 
 
 ```{.r .numberLines}
@@ -22,14 +20,15 @@ library(bbmle)
 
 ## Data
 
-For this practical you will require three datasets, more information about downloading them [here](#data-sets). If you want to download them manually you can use the following links:
+For this practical you will require three datasets, more information about downloading them [here](#data-sets).
 
-- `stork.txt` ([download](https://raw.githubusercontent.com/anasrana/ems-practicals/main/data/stork.txt))
-- `lr_data1.Rdata` ([download](https://raw.github.com/anasrana/module1-practical_Bham/master/data/lr_data1.Rdata))
+For today you will only need the files in the linear regression section.
 
-- `lr_data2.Rdata` ([download](https://github.com/anasrana/ems-practicals/raw/main/data/lr_data2.Rdata)).
+<button class="buttonD">
+[Download data](#data-lr)
+</button>
 
-## Simulating data
+## Simulating data for regression {#LR-sim}
 
 You will simulate data based on the simple linear regression model:
 
@@ -70,7 +69,7 @@ Finally we have all the parameters and variables to simulate the response variab
 
 ```{.r .numberLines}
 # compute (simulate) the response variable
-y = b0 + b1 * x + e
+y <- b0 + b1 * x + e
 ```
 
 We will plot our data using `ggplot2` so the data need to be in a `data.frame` object:
@@ -184,7 +183,8 @@ lr_plot <- ggplot(sim_data, aes(x = x, y = y)) +
 #> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
 #> ℹ Please use `linewidth` instead.
 #> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#> generated.
 ```
 
 ```{.r .numberLines}
@@ -386,7 +386,7 @@ The data represents `no of storks` (column 1) in Oldenburg Germany from $1930 - 
 
 Fit a simple linear model to the two data sets supplied (`lr_data1.Rdata` and `lr_data2.Rdata`). In both files the $(x,y)$ data is saved in two vectors, $x$ and $y$.
 
-Download the data from Canvas, you can read it into `R` and plot it with the following commands:
+Download the data (see above), you can read it into `R` and plot it with the following commands:
 
 
 ```{.r .numberLines}
@@ -416,5 +416,9 @@ Fit the linear model and comment on the differences between the two data-sets yo
 ## Exercise III: Linear Regression {#LR-ex3}
 
 Investigate how the sample size will affect the quality of the fit using mse, use the code for investigating the affect of variance as inspiration.
+
+<button class="button">
+[Solution](#LR-sol3)
+</button>
 
 :::

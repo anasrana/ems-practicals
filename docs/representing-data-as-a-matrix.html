@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 8 Representing data as a matrix | Essentials of Mathematics and Statistics</title>
+<meta name="author" content="Anas A Rana">
+<meta name="description" content="An important part of linear algebra is of course also matrices. In R a matrix is simply data arrange in two dimensions as a square or rectangle. Here is an example of a simple matrix: \[  A =...">
+<meta name="generator" content="bookdown 0.40 with bs4_book()">
+<meta property="og:title" content="Chapter 8 Representing data as a matrix | Essentials of Mathematics and Statistics">
+<meta property="og:type" content="book">
+<meta property="og:description" content="An important part of linear algebra is of course also matrices. In R a matrix is simply data arrange in two dimensions as a square or rectangle. Here is an example of a simple matrix: \[  A =...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 8 Representing data as a matrix | Essentials of Mathematics and Statistics">
+<meta name="twitter:description" content="An important part of linear algebra is of course also matrices. In R a matrix is simply data arrange in two dimensions as a square or rectangle. Here is an example of a simple matrix: \[  A =...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Manrope-0.4.9/font.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira%20Code:wght@100&amp;display=swap" rel="stylesheet">
+<link href="libs/Spectral-0.4.9/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Essentials of Mathematics and Statistics</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled"><li><a class="" href="index.html"><span class="header-section-number">Chapter 8</span> Representing data as a matrix</a></li></ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/anasrana/ems-practicals">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="representing-data-as-a-matrix" class="section level1" number="8">
+<h1>
+<span class="header-section-number">8</span> Representing data as a matrix<a class="anchor" aria-label="anchor" href="#representing-data-as-a-matrix"><i class="fas fa-link"></i></a>
+</h1>
+<p>An important part of linear algebra is of course also matrices. In R a matrix is simply data arrange in two dimensions as a square or rectangle. Here is an example of a simple matrix:</p>
+<p><span class="math display">\[
+  A = \begin{bmatrix}
+            1 &amp; 3 &amp; 4\\
+            5 &amp; 9 &amp; 2
+        \end{bmatrix}
+\]</span></p>
+<p>In R to create a matrix using the <code><a href="https://rdrr.io/r/base/matrix.html">matrix()</a></code> function. We first provide a data vector and then we can specify how many rows and columns the matrix has and in which order the matrix is filled with the data. Either filling rows one at a time or columns at a time.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb42-1"><a href="representing-data-as-a-matrix.html#cb42-1"></a><span class="co"># Create a matrix A using the specified vector</span></span>
+<span id="cb42-2"><a href="representing-data-as-a-matrix.html#cb42-2"></a>A <span class="ot">&lt;-</span></span>
+<span id="cb42-3"><a href="representing-data-as-a-matrix.html#cb42-3"></a><span class="fu">matrix</span>(</span>
+<span id="cb42-4"><a href="representing-data-as-a-matrix.html#cb42-4"></a>  <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">9</span>, <span class="dv">2</span>), <span class="co"># data</span></span>
+<span id="cb42-5"><a href="representing-data-as-a-matrix.html#cb42-5"></a>  <span class="at">nrow =</span> <span class="dv">2</span>, <span class="co"># 2 rows</span></span>
+<span id="cb42-6"><a href="representing-data-as-a-matrix.html#cb42-6"></a>  <span class="at">ncol =</span> <span class="dv">3</span>, <span class="co"># 3 columns</span></span>
+<span id="cb42-7"><a href="representing-data-as-a-matrix.html#cb42-7"></a>  <span class="at">byrow =</span> <span class="cn">TRUE</span> <span class="co"># fill by row</span></span>
+<span id="cb42-8"><a href="representing-data-as-a-matrix.html#cb42-8"></a>)</span>
+<span id="cb42-9"><a href="representing-data-as-a-matrix.html#cb42-9"></a></span>
+<span id="cb42-10"><a href="representing-data-as-a-matrix.html#cb42-10"></a><span class="co"># Create a matrix B using the specified vector</span></span>
+<span id="cb42-11"><a href="representing-data-as-a-matrix.html#cb42-11"></a>B <span class="ot">&lt;-</span></span>
+<span id="cb42-12"><a href="representing-data-as-a-matrix.html#cb42-12"></a><span class="fu">matrix</span>(</span>
+<span id="cb42-13"><a href="representing-data-as-a-matrix.html#cb42-13"></a>  <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">9</span>, <span class="dv">2</span>), <span class="co"># data</span></span>
+<span id="cb42-14"><a href="representing-data-as-a-matrix.html#cb42-14"></a>  <span class="at">nrow =</span> <span class="dv">2</span>, <span class="co"># 2 rows</span></span>
+<span id="cb42-15"><a href="representing-data-as-a-matrix.html#cb42-15"></a>  <span class="at">ncol =</span> <span class="dv">3</span>, <span class="co"># 3 columns</span></span>
+<span id="cb42-16"><a href="representing-data-as-a-matrix.html#cb42-16"></a>  <span class="at">byrow =</span> <span class="cn">FALSE</span> <span class="co"># fill by column</span></span>
+<span id="cb42-17"><a href="representing-data-as-a-matrix.html#cb42-17"></a>)</span>
+<span id="cb42-18"><a href="representing-data-as-a-matrix.html#cb42-18"></a></span>
+<span id="cb42-19"><a href="representing-data-as-a-matrix.html#cb42-19"></a><span class="co"># Create a matrix C using the specified vector</span></span>
+<span id="cb42-20"><a href="representing-data-as-a-matrix.html#cb42-20"></a>C <span class="ot">&lt;-</span></span>
+<span id="cb42-21"><a href="representing-data-as-a-matrix.html#cb42-21"></a><span class="fu">matrix</span>(</span>
+<span id="cb42-22"><a href="representing-data-as-a-matrix.html#cb42-22"></a>  <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">9</span>, <span class="dv">2</span>), <span class="co"># data</span></span>
+<span id="cb42-23"><a href="representing-data-as-a-matrix.html#cb42-23"></a>  <span class="at">nrow =</span> <span class="dv">3</span>, <span class="co"># 2 rows</span></span>
+<span id="cb42-24"><a href="representing-data-as-a-matrix.html#cb42-24"></a>  <span class="at">ncol =</span> <span class="dv">2</span>, <span class="co"># 3 columns</span></span>
+<span id="cb42-25"><a href="representing-data-as-a-matrix.html#cb42-25"></a>  <span class="at">byrow =</span> <span class="cn">FALSE</span> <span class="co"># fill by column</span></span>
+<span id="cb42-26"><a href="representing-data-as-a-matrix.html#cb42-26"></a>)</span>
+<span id="cb42-27"><a href="representing-data-as-a-matrix.html#cb42-27"></a></span>
+<span id="cb42-28"><a href="representing-data-as-a-matrix.html#cb42-28"></a><span class="co"># Create a matrix D using the specified vector</span></span>
+<span id="cb42-29"><a href="representing-data-as-a-matrix.html#cb42-29"></a>D <span class="ot">&lt;-</span></span>
+<span id="cb42-30"><a href="representing-data-as-a-matrix.html#cb42-30"></a><span class="fu">matrix</span>(</span>
+<span id="cb42-31"><a href="representing-data-as-a-matrix.html#cb42-31"></a>  <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">9</span>, <span class="dv">2</span>), <span class="co"># data</span></span>
+<span id="cb42-32"><a href="representing-data-as-a-matrix.html#cb42-32"></a>  <span class="at">nrow =</span> <span class="dv">6</span>, <span class="co"># 2 rows</span></span>
+<span id="cb42-33"><a href="representing-data-as-a-matrix.html#cb42-33"></a>  <span class="at">ncol =</span> <span class="dv">2</span>, <span class="co"># 3 columns</span></span>
+<span id="cb42-34"><a href="representing-data-as-a-matrix.html#cb42-34"></a>  <span class="at">byrow =</span> <span class="cn">FALSE</span> <span class="co"># fill by column</span></span>
+<span id="cb42-35"><a href="representing-data-as-a-matrix.html#cb42-35"></a>)</span>
+<span id="cb42-36"><a href="representing-data-as-a-matrix.html#cb42-36"></a></span>
+<span id="cb42-37"><a href="representing-data-as-a-matrix.html#cb42-37"></a><span class="co"># print matrix A</span></span>
+<span id="cb42-38"><a href="representing-data-as-a-matrix.html#cb42-38"></a><span class="fu">print</span>(A)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;      [,1] [,2] [,3]
+#&gt; [1,]    1    3    4
+#&gt; [2,]    5    9    2</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb44-1"><a href="representing-data-as-a-matrix.html#cb44-1"></a><span class="co"># print matrix B</span></span>
+<span id="cb44-2"><a href="representing-data-as-a-matrix.html#cb44-2"></a><span class="fu">print</span>(B)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;      [,1] [,2] [,3]
+#&gt; [1,]    1    4    9
+#&gt; [2,]    3    5    2</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb46-1"><a href="representing-data-as-a-matrix.html#cb46-1"></a><span class="co"># print matrix C</span></span>
+<span id="cb46-2"><a href="representing-data-as-a-matrix.html#cb46-2"></a><span class="fu">print</span>(C)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;      [,1] [,2]
+#&gt; [1,]    1    5
+#&gt; [2,]    3    9
+#&gt; [3,]    4    2</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb48-1"><a href="representing-data-as-a-matrix.html#cb48-1"></a><span class="co"># print matrix D</span></span>
+<span id="cb48-2"><a href="representing-data-as-a-matrix.html#cb48-2"></a><span class="fu">print</span>(D)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;      [,1] [,2]
+#&gt; [1,]    1    1
+#&gt; [2,]    3    3
+#&gt; [3,]    4    4
+#&gt; [4,]    5    5
+#&gt; [5,]    9    9
+#&gt; [6,]    2    2</code></pre>
+<p>You can see that it is not only important what the data vector looks like but also how we fill the matrix. You can see different options when we created matrices <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, and <span class="math inline">\(C\)</span>. We can create matrices with different dimensions and fill them up differently. It is important to know which matrix we are trying to create and to ensure we are doing it correctly.</p>
+<p><strong>Always print it (if not too large) to check you have done it correctly.</strong></p>
+<p>The other thing you will have seen when creating <span class="math inline">\(D\)</span> is that R will reuse your data vector if you put in a matrix where the number of elements are a multiple of the data vector without warning and with warning when it isn’t an exact exact multiple.</p>
+<p>We use <code><a href="https://rdrr.io/r/base/dim.html">dim()</a></code> to check the dimension of the data. For instance <code>dim(A) =</code> 2, 3, and <code>dim(D) =</code> 6, 2. The other useful thing is that we can name rows and columns to identify wha the data is that we have created. We can use it in two different ways, using <code><a href="https://rdrr.io/r/base/dimnames.html">dimnames()</a></code>, and a combination of <code><a href="https://rdrr.io/r/base/colnames.html">colnames()</a></code> and <code><a href="https://rdrr.io/r/base/colnames.html">rownames()</a></code>.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb50-1"><a href="representing-data-as-a-matrix.html#cb50-1"></a><span class="co"># use dimnames to create both in one go using a list of vector</span></span>
+<span id="cb50-2"><a href="representing-data-as-a-matrix.html#cb50-2"></a><span class="fu">dimnames</span>(A)  <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb50-3"><a href="representing-data-as-a-matrix.html#cb50-3"></a>  <span class="fu">c</span>(<span class="st">"sample1"</span>, <span class="st">"sample2"</span>), <span class="co"># rows</span></span>
+<span id="cb50-4"><a href="representing-data-as-a-matrix.html#cb50-4"></a>  <span class="fu">c</span>(<span class="st">"patient1"</span>, <span class="st">"patient2"</span>, <span class="st">"patient3"</span>) <span class="co"># columns</span></span>
+<span id="cb50-5"><a href="representing-data-as-a-matrix.html#cb50-5"></a>)</span>
+<span id="cb50-6"><a href="representing-data-as-a-matrix.html#cb50-6"></a></span>
+<span id="cb50-7"><a href="representing-data-as-a-matrix.html#cb50-7"></a><span class="co"># print matrix A</span></span>
+<span id="cb50-8"><a href="representing-data-as-a-matrix.html#cb50-8"></a><span class="fu">print</span>(A)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;         patient1 patient2 patient3
+#&gt; sample1        1        3        4
+#&gt; sample2        5        9        2</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb52-1"><a href="representing-data-as-a-matrix.html#cb52-1"></a><span class="co"># Create column names B</span></span>
+<span id="cb52-2"><a href="representing-data-as-a-matrix.html#cb52-2"></a><span class="fu">colnames</span>(B) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"gene1"</span>, <span class="st">"gene2"</span>, <span class="st">"gene3"</span>)</span>
+<span id="cb52-3"><a href="representing-data-as-a-matrix.html#cb52-3"></a><span class="co"># print matrix B</span></span>
+<span id="cb52-4"><a href="representing-data-as-a-matrix.html#cb52-4"></a><span class="fu">print</span>(B)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;      gene1 gene2 gene3
+#&gt; [1,]     1     4     9
+#&gt; [2,]     3     5     2</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb54-1"><a href="representing-data-as-a-matrix.html#cb54-1"></a><span class="co"># create row names C</span></span>
+<span id="cb54-2"><a href="representing-data-as-a-matrix.html#cb54-2"></a><span class="fu">rownames</span>(C) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"hospital1"</span>, <span class="st">"hospital2"</span>, <span class="st">"hospital3"</span>)</span>
+<span id="cb54-3"><a href="representing-data-as-a-matrix.html#cb54-3"></a><span class="co"># print matrix C</span></span>
+<span id="cb54-4"><a href="representing-data-as-a-matrix.html#cb54-4"></a><span class="fu">print</span>(C)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;           [,1] [,2]
+#&gt; hospital1    1    5
+#&gt; hospital2    3    9
+#&gt; hospital3    4    2</code></pre>
+<p>This can be very useful when working with data. We can also create a matrix based on a data matrix. We will make use of the <code>iris</code> data set which is built into R. This can be useful when the data is not made up of just numerical values and you need to perform linear algebraic manipulations. We can convert a subset of a <code>data.frame</code> to matrix using the <code><a href="https://rdrr.io/r/base/matrix.html">as.matrix()</a></code> command.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb56-1"><a href="representing-data-as-a-matrix.html#cb56-1"></a><span class="co"># Load iris data</span></span>
+<span id="cb56-2"><a href="representing-data-as-a-matrix.html#cb56-2"></a><span class="fu">data</span>(<span class="st">"iris"</span>)</span>
+<span id="cb56-3"><a href="representing-data-as-a-matrix.html#cb56-3"></a></span>
+<span id="cb56-4"><a href="representing-data-as-a-matrix.html#cb56-4"></a><span class="co"># Look at first 6 rows of the data</span></span>
+<span id="cb56-5"><a href="representing-data-as-a-matrix.html#cb56-5"></a><span class="fu">head</span>(iris)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#&gt; 1          5.1         3.5          1.4         0.2  setosa
+#&gt; 2          4.9         3.0          1.4         0.2  setosa
+#&gt; 3          4.7         3.2          1.3         0.2  setosa
+#&gt; 4          4.6         3.1          1.5         0.2  setosa
+#&gt; 5          5.0         3.6          1.4         0.2  setosa
+#&gt; 6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<div class="sourceCode" id="cb58"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb58-1"><a href="representing-data-as-a-matrix.html#cb58-1"></a><span class="co"># Create a matrix of the first 3 columns and the first 10 rows</span></span>
+<span id="cb58-2"><a href="representing-data-as-a-matrix.html#cb58-2"></a>iris_matrix <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span>
+<span id="cb58-3"><a href="representing-data-as-a-matrix.html#cb58-3"></a></span>
+<span id="cb58-4"><a href="representing-data-as-a-matrix.html#cb58-4"></a><span class="fu">print</span>(iris_matrix)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;    Sepal.Length Sepal.Width Petal.Length
+#&gt; 1           5.1         3.5          1.4
+#&gt; 2           4.9         3.0          1.4
+#&gt; 3           4.7         3.2          1.3
+#&gt; 4           4.6         3.1          1.5
+#&gt; 5           5.0         3.6          1.4
+#&gt; 6           5.4         3.9          1.7
+#&gt; 7           4.6         3.4          1.4
+#&gt; 8           5.0         3.4          1.5
+#&gt; 9           4.4         2.9          1.4
+#&gt; 10          4.9         3.1          1.5</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb60-1"><a href="representing-data-as-a-matrix.html#cb60-1"></a><span class="co"># Create a matrix of the first 10 rows and all columns</span></span>
+<span id="cb60-2"><a href="representing-data-as-a-matrix.html#cb60-2"></a>iris_full <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ])</span>
+<span id="cb60-3"><a href="representing-data-as-a-matrix.html#cb60-3"></a></span>
+<span id="cb60-4"><a href="representing-data-as-a-matrix.html#cb60-4"></a><span class="fu">print</span>(iris_full)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width
+#&gt; 1  "5.1"        "3.5"       "1.4"        "0.2"      
+#&gt; 2  "4.9"        "3.0"       "1.4"        "0.2"      
+#&gt; 3  "4.7"        "3.2"       "1.3"        "0.2"      
+#&gt; 4  "4.6"        "3.1"       "1.5"        "0.2"      
+#&gt; 5  "5.0"        "3.6"       "1.4"        "0.2"      
+#&gt; 6  "5.4"        "3.9"       "1.7"        "0.4"      
+#&gt; 7  "4.6"        "3.4"       "1.4"        "0.3"      
+#&gt; 8  "5.0"        "3.4"       "1.5"        "0.2"      
+#&gt; 9  "4.4"        "2.9"       "1.4"        "0.2"      
+#&gt; 10 "4.9"        "3.1"       "1.5"        "0.1"      
+#&gt;    Species 
+#&gt; 1  "setosa"
+#&gt; 2  "setosa"
+#&gt; 3  "setosa"
+#&gt; 4  "setosa"
+#&gt; 5  "setosa"
+#&gt; 6  "setosa"
+#&gt; 7  "setosa"
+#&gt; 8  "setosa"
+#&gt; 9  "setosa"
+#&gt; 10 "setosa"</code></pre>
+<p>We can see that if the data we use in the <code><a href="https://rdrr.io/r/base/matrix.html">as.matrix()</a></code> command consists of more than numerical values all entries will be converted to characters. This will not allow for matrix manipulations. So you have to be careful when creating such a matrix.</p>
+<div id="matrix-operations" class="section level2" number="8.1">
+<h2>
+<span class="header-section-number">8.1</span> Matrix operations<a class="anchor" aria-label="anchor" href="#matrix-operations"><i class="fas fa-link"></i></a>
+</h2>
+<p>Now we can look at matrix operations that will allow us to perform operations. We can create a transpose of a matrix using the <code><a href="https://rdrr.io/r/base/t.html">t()</a></code> command. All normal arithmetic operations like addition and subs-traction. There are multiple ways we can use to perform multiplications. If we use the simple product <code>*</code> operation it multiplies both matrices element by element. We did not cover this in the lectures but it is called a Hadamard product. We can implement the matrix product using <code>%*%</code> we can also use this to multiply a vector with a matrix.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb62-1"><a href="representing-data-as-a-matrix.html#cb62-1"></a><span class="co"># Substraction</span></span>
+<span id="cb62-2"><a href="representing-data-as-a-matrix.html#cb62-2"></a>A <span class="sc">-</span> B</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;         patient1 patient2 patient3
+#&gt; sample1        0       -1       -5
+#&gt; sample2        2        4        0</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb64-1"><a href="representing-data-as-a-matrix.html#cb64-1"></a><span class="co"># Addition</span></span>
+<span id="cb64-2"><a href="representing-data-as-a-matrix.html#cb64-2"></a>A <span class="sc">+</span> B</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;         patient1 patient2 patient3
+#&gt; sample1        2        7       13
+#&gt; sample2        8       14        4</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb66-1"><a href="representing-data-as-a-matrix.html#cb66-1"></a><span class="co"># Adding matrices of different dimensions</span></span>
+<span id="cb66-2"><a href="representing-data-as-a-matrix.html#cb66-2"></a>A <span class="sc">+</span> D</span></code></pre></div>
+<pre><code>#&gt; Error in A + D: non-conformable arrays</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb68-1"><a href="representing-data-as-a-matrix.html#cb68-1"></a><span class="co"># Haddamard product</span></span>
+<span id="cb68-2"><a href="representing-data-as-a-matrix.html#cb68-2"></a><span class="fu">print</span>(A)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;         patient1 patient2 patient3
+#&gt; sample1        1        3        4
+#&gt; sample2        5        9        2</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb70-1"><a href="representing-data-as-a-matrix.html#cb70-1"></a><span class="fu">print</span>(B)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;      gene1 gene2 gene3
+#&gt; [1,]     1     4     9
+#&gt; [2,]     3     5     2</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb72-1"><a href="representing-data-as-a-matrix.html#cb72-1"></a>A <span class="sc">*</span> B</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;         patient1 patient2 patient3
+#&gt; sample1        1       12       36
+#&gt; sample2       15       45        4</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb74-1"><a href="representing-data-as-a-matrix.html#cb74-1"></a><span class="co"># matrix product with equal dimensions</span></span>
+<span id="cb74-2"><a href="representing-data-as-a-matrix.html#cb74-2"></a>A <span class="sc">%*%</span> B</span></code></pre></div>
+<pre><code>#&gt; Error in A %*% B: non-conformable arguments</code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb76-1"><a href="representing-data-as-a-matrix.html#cb76-1"></a><span class="co"># matrix product with unequal dimension</span></span>
+<span id="cb76-2"><a href="representing-data-as-a-matrix.html#cb76-2"></a><span class="fu">print</span>(A)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;         patient1 patient2 patient3
+#&gt; sample1        1        3        4
+#&gt; sample2        5        9        2</code></pre>
+<div class="sourceCode" id="cb78"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb78-1"><a href="representing-data-as-a-matrix.html#cb78-1"></a><span class="fu">print</span>(B)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;      gene1 gene2 gene3
+#&gt; [1,]     1     4     9
+#&gt; [2,]     3     5     2</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb80-1"><a href="representing-data-as-a-matrix.html#cb80-1"></a><span class="fu">print</span>(C)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;           [,1] [,2]
+#&gt; hospital1    1    5
+#&gt; hospital2    3    9
+#&gt; hospital3    4    2</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb82-1"><a href="representing-data-as-a-matrix.html#cb82-1"></a><span class="fu">print</span>(D)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;      [,1] [,2]
+#&gt; [1,]    1    1
+#&gt; [2,]    3    3
+#&gt; [3,]    4    4
+#&gt; [4,]    5    5
+#&gt; [5,]    9    9
+#&gt; [6,]    2    2</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb84-1"><a href="representing-data-as-a-matrix.html#cb84-1"></a>A <span class="sc">%*%</span> C</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;         [,1] [,2]
+#&gt; sample1   26   40
+#&gt; sample2   40  110</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb86-1"><a href="representing-data-as-a-matrix.html#cb86-1"></a>A <span class="sc">%*%</span> B</span></code></pre></div>
+<pre><code>#&gt; Error in A %*% B: non-conformable arguments</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb88-1"><a href="representing-data-as-a-matrix.html#cb88-1"></a>C <span class="sc">%*%</span> A</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;           patient1 patient2 patient3
+#&gt; hospital1       26       48       14
+#&gt; hospital2       48       90       30
+#&gt; hospital3       14       30       20</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb90-1"><a href="representing-data-as-a-matrix.html#cb90-1"></a>A <span class="sc">%*%</span> D</span></code></pre></div>
+<pre><code>#&gt; Error in A %*% D: non-conformable arguments</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb92-1"><a href="representing-data-as-a-matrix.html#cb92-1"></a><span class="co"># product between matrix and vector</span></span>
+<span id="cb92-2"><a href="representing-data-as-a-matrix.html#cb92-2"></a><span class="fu">length</span>(x)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 3</code></pre>
+<div class="sourceCode" id="cb94"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb94-1"><a href="representing-data-as-a-matrix.html#cb94-1"></a><span class="fu">dim</span>(A)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 2 3</code></pre>
+<div class="sourceCode" id="cb96"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb96-1"><a href="representing-data-as-a-matrix.html#cb96-1"></a><span class="co"># Using a normal product operation</span></span>
+<span id="cb96-2"><a href="representing-data-as-a-matrix.html#cb96-2"></a>A <span class="sc">*</span> x</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;         patient1 patient2 patient3
+#&gt; sample1        1        9        8
+#&gt; sample2       10        9        6</code></pre>
+<div class="sourceCode" id="cb98"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb98-1"><a href="representing-data-as-a-matrix.html#cb98-1"></a><span class="co"># matrix multiplication with a vector</span></span>
+<span id="cb98-2"><a href="representing-data-as-a-matrix.html#cb98-2"></a>A <span class="sc">%*%</span> x</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;         [,1]
+#&gt; sample1   19
+#&gt; sample2   29</code></pre>
+<div class="sourceCode" id="cb100"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb100-1"><a href="representing-data-as-a-matrix.html#cb100-1"></a>x <span class="sc">%*%</span> A</span></code></pre></div>
+<pre><code>#&gt; Error in x %*% A: non-conformable arguments</code></pre>
+<blockquote>
+<p>Q1: Check the product <code>A * x</code>, does it behave as you expect? What about <code>x * A</code>?</p>
+</blockquote>
+<p>There are several other operations that can be useful for matrices. We will not be able to go through all of them. Here are a few you should explore:</p>
+<ul>
+<li><code><a href="https://rdrr.io/r/base/colSums.html">rowSums()</a></code></li>
+<li><code><a href="https://rdrr.io/r/base/colSums.html">colSums()</a></code></li>
+<li><code><a href="https://rdrr.io/r/base/colSums.html">rowMeans()</a></code></li>
+<li><code><a href="https://rdrr.io/r/base/det.html">det()</a></code></li>
+</ul>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="empty"></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <div id="book-on-this-page"></div>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2024-10-04.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

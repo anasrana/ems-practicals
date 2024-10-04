@@ -21,6 +21,10 @@ wget https://github.com/anasrana/ems-practicals/raw/main/data/lr_data2.Rdata
 
 ```
 
+<button class="buttonD">
+  [Back to Exercise](#LR-sim)
+</button>
+
 ## Data: PCA {- #data-pca}
 
 
