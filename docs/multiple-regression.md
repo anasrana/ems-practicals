@@ -1,4 +1,4 @@
-# Practical: Multiple regression
+# Multiple regression
 
 Previously we have only considered simple linear regression with one response variable and one feature. In this practical we will go through examples with multiple features:
 
@@ -123,6 +123,12 @@ summary(mrl_fit)
 Now we see that the regression coefficient is large and both covariates are significant. This shows that we need to ensure we understand the relationship between covariates before we construct our model.
 
 ## Categorical covariates
+
+::: {.note}
+
+In this section we will consider a dataset with a categorical covariate. We will use linear regression to explore the relationship between the response variable and the categorical covariate. This is a simple example to illustrate the interpretation of the coefficients in the model. This is not a general approach to using linear regression with categorical variables.
+
+:::
 
 Recall from the lecture that covariates don't need to be numerical but can also be *categorical*. We will now explore regression with a categorical variable. Load a new dataset which is included in the `MASS` package, you won't be able to load this dataset if package isn't installed. Load the dataset explore what the data looks like.
 

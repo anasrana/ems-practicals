@@ -57,9 +57,9 @@
 <li><a class="" href="computational-testing-techniques.html"><span class="header-section-number">7</span> Computational Testing Techniques</a></li>
 <li class="book-part">Statistical Modelling</li>
 <li><a class="" href="representing-data-in-r.html"><span class="header-section-number">8</span> Representing Data in R</a></li>
-<li><a class="" href="linear-regression.html"><span class="header-section-number">9</span> Linear regression</a></li>
-<li><a class="" href="practical-principal-component-analysis.html"><span class="header-section-number">10</span> Practical: Principal component analysis</a></li>
-<li><a class="" href="practical-multiple-regression.html"><span class="header-section-number">11</span> Practical: Multiple regression</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">9</span> Principal component analysis</a></li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">10</span> Linear regression</a></li>
+<li><a class="" href="multiple-regression.html"><span class="header-section-number">11</span> Multiple regression</a></li>
 <li><a class="" href="practical-generalised-linear-models.html"><span class="header-section-number">12</span> Practical: Generalised linear models</a></li>
 <li class="book-part">Solutions</li>
 <li><a class="" href="simSol.html"><span class="header-section-number">A</span> Solution: Simulations</a></li>
@@ -115,8 +115,8 @@
 <span id="cb289-10"><a href="mc-solution.html#cb289-10"></a>  weather_sequence[day] <span class="ot">&lt;-</span> state <span class="co"># store the sampled state</span></span>
 <span id="cb289-11"><a href="mc-solution.html#cb289-11"></a>}</span>
 <span id="cb289-12"><a href="mc-solution.html#cb289-12"></a><span class="fu">print</span>(weather_sequence)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  [1] 1 1 1 2 2 2 1 1 1 1 1 1 3 1 1 1 1 1 1 1 1 1 2 1 1 2 3 3
-#&gt; [29] 3 3</code></pre>
+<pre class="bg-info"><code>#&gt;  [1] 2 1 1 1 1 1 2 3 2 3 1 1 1 3 2 1 1 3 1 1 3 1 1 1 1 1 1 1
+#&gt; [29] 1 1</code></pre>
 <p>This is simplest way to output the weather sequence. You could also use a <code>data.frame</code> to store the day and the weather state if you wanted to output the day and the weather state together. Even better would to create plot of the weather sequence over the 30 days or perform basic statistics on the weather sequence to output a useful summary of the weather sequence. This is left as an exercise for the reader, some methods we have already covered and we will learn more over the coming days.</p>
 <button class="button">
 <a href="markov-chains.html#mc-exercise">Back to exercise</a>

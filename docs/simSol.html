@@ -57,9 +57,9 @@
 <li><a class="" href="computational-testing-techniques.html"><span class="header-section-number">7</span> Computational Testing Techniques</a></li>
 <li class="book-part">Statistical Modelling</li>
 <li><a class="" href="representing-data-in-r.html"><span class="header-section-number">8</span> Representing Data in R</a></li>
-<li><a class="" href="linear-regression.html"><span class="header-section-number">9</span> Linear regression</a></li>
-<li><a class="" href="practical-principal-component-analysis.html"><span class="header-section-number">10</span> Practical: Principal component analysis</a></li>
-<li><a class="" href="practical-multiple-regression.html"><span class="header-section-number">11</span> Practical: Multiple regression</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">9</span> Principal component analysis</a></li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">10</span> Linear regression</a></li>
+<li><a class="" href="multiple-regression.html"><span class="header-section-number">11</span> Multiple regression</a></li>
 <li><a class="" href="practical-generalised-linear-models.html"><span class="header-section-number">12</span> Practical: Generalised linear models</a></li>
 <li class="book-part">Solutions</li>
 <li><a class="active" href="simSol.html"><span class="header-section-number">A</span> Solution: Simulations</a></li>
@@ -96,14 +96,13 @@
 <span id="cb277-2"><a href="simSol.html#cb277-2"></a></span>
 <span id="cb277-3"><a href="simSol.html#cb277-3"></a><span class="co"># Working example</span></span>
 <span id="cb277-4"><a href="simSol.html#cb277-4"></a><span class="fu">sample</span>(x, <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  [1]  7  9  1  2 10  2  4  8  1  5</code></pre>
+<pre class="bg-info"><code>#&gt;  [1] 1 5 2 5 1 4 6 2 8 7</code></pre>
 <div class="sourceCode" id="cb279"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb279-1"><a href="simSol.html#cb279-1"></a><span class="co"># This will cause an error</span></span>
 <span id="cb279-2"><a href="simSol.html#cb279-2"></a><span class="fu">sample</span>(x, <span class="dv">20</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>#&gt; Error in sample.int(length(x), size, replace, prob): cannot take a sample larger than the population when 'replace = FALSE'</code></pre>
 <div class="sourceCode" id="cb281"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb281-1"><a href="simSol.html#cb281-1"></a><span class="co"># Fix it</span></span>
 <span id="cb281-2"><a href="simSol.html#cb281-2"></a><span class="fu">sample</span>(x, <span class="dv">20</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  [1]  8  9  8  2  1  6  5 10  5  5  5  2  5  5  5  2 10  2
-#&gt; [19]  2  3</code></pre>
+<pre class="bg-info"><code>#&gt;  [1] 1 6 2 1 5 1 1 4 5 1 7 5 6 2 3 1 5 2 1 4</code></pre>
 <button class="button">
 <a href="simulating-random-numbers.html#sim-ex1">Back to exercise</a>
 </button>
@@ -118,11 +117,11 @@
 <span id="cb283-4"><a href="simSol.html#cb283-4"></a><span class="fu">table</span>(rolls_from_sample)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; rolls_from_sample
 #&gt;   1   2   3   4   5   6 
-#&gt; 835 781 841 859 870 814</code></pre>
+#&gt; 869 856 854 769 813 839</code></pre>
 <div class="sourceCode" id="cb285"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb285-1"><a href="simSol.html#cb285-1"></a><span class="fu">table</span>(rolls_from_sample.int)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; rolls_from_sample.int
 #&gt;   1   2   3   4   5   6 
-#&gt; 822 834 806 881 854 803</code></pre>
+#&gt; 857 860 807 796 846 834</code></pre>
 <p>Both gives a uniform distribution over the numbers 1-6. The function <code>sample.int</code> is a specialised version of sample for sampling integers. Many <code>R</code> libraries have specialised versions of more general functions to do specific tasks under certain conditions.</p>
 <button class="button">
 <a href="simulating-random-numbers.html#sim-ex2">Back to exercise</a>
