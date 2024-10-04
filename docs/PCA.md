@@ -1,13 +1,14 @@
-# Practical: Principal component analysis
+# Principal component analysis
 
 In this practical we will practice some of the ideas outlined in the lecture on Principal Component Analysis (PCA), this will include computing principal components, visualisation techniques and an application to real data.
 
 ## Data
 
-For this practical you will require three datasets, more information about downloading them [here](#data-sets). If you want to download them manually you can use the following links:
+For this practical you will require three datasets, for more information about downloading data see the link below:
 
-- `Pollen2014.txt` ([download](https://github.com/anasrana/ems-practicals/raw/main/data/Pollen2014.txt))
-- `SupplementaryLabels.txt` ([download](https://github.com/anasrana/ems-practicals/raw/main/data/SupplementaryLabels.txt))
+<button class="buttonD">
+  [Download data](#data-pca)
+</button>
 
 ## Introduction
 
@@ -95,7 +96,7 @@ print(pca_summary)
 #> Cumulative Proportion  0.9933 0.99800 1.0000
 ```
 
-*Note,* `Proportion of Variance` will always add up to $1$. Here the `PC1` explain $60.08%$ of the variance, and `PC2` explains $24.09%$, which means together `PC1` and `PC2` account for $84.17%$  of the variance.
+*Note,* `Proportion of Variance` will always add up to $1$ if you include all principal components. Here the `PC1` explain $60.08%$ of the variance, and `PC2` explains $24.09%$, which means together `PC1` and `PC2` account for $84.17%$  of the variance.
 
 Using the `str()` function we can see the full structure of an `R` object, or alternatively using `?prcomp` in the *Value* section. In this case the `cars_pca` variable is a list containing several variables, `x` is the data represented using the new principal components. We can now plot the data in the first two principal components:
 
@@ -141,6 +142,10 @@ We can see the original axis starting from the origin. Therefore we can make obs
 ## Exercise I
 
 Now try to perform a PCA on the `USArrests` data also build into `R`. Typing `?USArrests` will give you further information on the data. Perform the analysis on the subset `USArrests[, -3]` data.
+
+<font style="color:darkorange">
+Discuss with your neighbour and the instructor what you observe in the plot. What do you think the first two principal components represent in this case?
+</font>
 :::
 
 ## Example: Single cell data

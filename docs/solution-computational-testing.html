@@ -57,9 +57,9 @@
 <li><a class="" href="computational-testing-techniques.html"><span class="header-section-number">7</span> Computational Testing Techniques</a></li>
 <li class="book-part">Statistical Modelling</li>
 <li><a class="" href="representing-data-in-r.html"><span class="header-section-number">8</span> Representing Data in R</a></li>
-<li><a class="" href="linear-regression.html"><span class="header-section-number">9</span> Linear regression</a></li>
-<li><a class="" href="practical-principal-component-analysis.html"><span class="header-section-number">10</span> Practical: Principal component analysis</a></li>
-<li><a class="" href="practical-multiple-regression.html"><span class="header-section-number">11</span> Practical: Multiple regression</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">9</span> Principal component analysis</a></li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">10</span> Linear regression</a></li>
+<li><a class="" href="multiple-regression.html"><span class="header-section-number">11</span> Multiple regression</a></li>
 <li><a class="" href="practical-generalised-linear-models.html"><span class="header-section-number">12</span> Practical: Generalised linear models</a></li>
 <li class="book-part">Solutions</li>
 <li><a class="" href="simSol.html"><span class="header-section-number">A</span> Solution: Simulations</a></li>
@@ -155,26 +155,26 @@
 <span id="cb324-15"><a href="solution-computational-testing.html#cb324-15"></a></span>
 <span id="cb324-16"><a href="solution-computational-testing.html#cb324-16"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># generate some artificial data from a N(0, 1)</span></span>
 <span id="cb324-17"><a href="solution-computational-testing.html#cb324-17"></a>out <span class="ot">&lt;-</span> <span class="fu">z_test</span>(x, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># null should not be rejected!</span></span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  z = -1.825 
-#&gt;  one-tailed probability = 0.034 
-#&gt;  two-tailed probability = 0.068</code></pre>
+<pre class="bg-info"><code>#&gt;  z = -0.671 
+#&gt;  one-tailed probability = 0.251 
+#&gt;  two-tailed probability = 0.502</code></pre>
 <div class="sourceCode" id="cb326"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb326-1"><a href="solution-computational-testing.html#cb326-1"></a><span class="fu">print</span>(out)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; $z
-#&gt; [1] -1.825
+#&gt; [1] -0.671
 #&gt; 
 #&gt; $one_p
-#&gt; [1] 0.034
+#&gt; [1] 0.251
 #&gt; 
 #&gt; $two_p
-#&gt; [1] 0.068</code></pre>
+#&gt; [1] 0.502</code></pre>
 <div class="sourceCode" id="cb328"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb328-1"><a href="solution-computational-testing.html#cb328-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># generate some artificial data from a N(1, 1)</span></span>
 <span id="cb328-2"><a href="solution-computational-testing.html#cb328-2"></a>out <span class="ot">&lt;-</span> <span class="fu">z_test</span>(x, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># null should be rejected!</span></span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  z = 2.925 
+<pre class="bg-info"><code>#&gt;  z = 2.857 
 #&gt;  one-tailed probability = 0.002 
 #&gt;  two-tailed probability = 0.004</code></pre>
 <div class="sourceCode" id="cb330"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb330-1"><a href="solution-computational-testing.html#cb330-1"></a><span class="fu">print</span>(out)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; $z
-#&gt; [1] 2.925
+#&gt; [1] 2.857
 #&gt; 
 #&gt; $one_p
 #&gt; [1] 0.002
