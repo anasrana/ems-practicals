@@ -74,6 +74,13 @@ multiple-regression-1
 categorical-covariates
 residuals
 gradient-descent-algorithm
+qq-plot
+introduction-and-simulation
+plotting-qq-plots-in-r
+interpreting-qq-plots
+standard-normal
+skewed-data
+symmetric-tails
 practical-generalised-linear-models
 data-2
 detecting-snp-associations
