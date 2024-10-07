@@ -60,7 +60,8 @@
 <li><a class="" href="principal-component-analysis.html"><span class="header-section-number">9</span> Principal component analysis</a></li>
 <li><a class="" href="linear-regression.html"><span class="header-section-number">10</span> Linear regression</a></li>
 <li><a class="" href="multiple-regression.html"><span class="header-section-number">11</span> Multiple regression</a></li>
-<li><a class="" href="practical-generalised-linear-models.html"><span class="header-section-number">12</span> Practical: Generalised linear models</a></li>
+<li><a class="" href="qq-plot.html"><span class="header-section-number">12</span> QQ Plot - How To Use And Interpret</a></li>
+<li><a class="" href="practical-generalised-linear-models.html"><span class="header-section-number">13</span> Practical: Generalised linear models</a></li>
 <li class="book-part">Solutions</li>
 <li><a class="" href="simSol.html"><span class="header-section-number">A</span> Solution: Simulations</a></li>
 <li><a class="" href="mc-solution.html"><span class="header-section-number">B</span> Solution: Three state Markov Chain</a></li>
@@ -81,145 +82,145 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="solution-monte-carlo" class="section level1" number="16">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="solution-monte-carlo" class="section level1" number="17">
 <h1>
 <span class="header-section-number">D</span> Solution: Monte Carlo<a class="anchor" aria-label="anchor" href="#solution-monte-carlo"><i class="fas fa-link"></i></a>
 </h1>
-<div id="solution-mc-accuracy" class="section level2" number="16.1">
+<div id="solution-mc-accuracy" class="section level2" number="17.1">
 <h2>
 <span class="header-section-number">D.1</span> Solution: MC accuracy<a class="anchor" aria-label="anchor" href="#solution-mc-accuracy"><i class="fas fa-link"></i></a>
 </h2>
 <p>First let’s increase the number of simulations and out the accuracy</p>
-<div class="sourceCode" id="cb293"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb293-1"><a href="solution-monte-carlo.html#cb293-1"></a>sample_sizes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">250</span>, <span class="dv">500</span>, <span class="dv">1000</span>) <span class="co"># try different sample sizes</span></span>
-<span id="cb293-2"><a href="solution-monte-carlo.html#cb293-2"></a>n_sample_sizes <span class="ot">&lt;-</span> <span class="fu">length</span>(sample_sizes) <span class="co"># number of sample sizes to try</span></span>
-<span id="cb293-3"><a href="solution-monte-carlo.html#cb293-3"></a>rpts <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># number of repeats for each sample size</span></span>
-<span id="cb293-4"><a href="solution-monte-carlo.html#cb293-4"></a>accuracy <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_sample_sizes) <span class="co"># vector to record accuracy values</span></span>
-<span id="cb293-5"><a href="solution-monte-carlo.html#cb293-5"></a>accuracy_sd <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_sample_sizes) <span class="co"># vector to record accuracy sd values</span></span>
-<span id="cb293-6"><a href="solution-monte-carlo.html#cb293-6"></a></span>
-<span id="cb293-7"><a href="solution-monte-carlo.html#cb293-7"></a><span class="co"># Let's store the exact value of the integral</span></span>
-<span id="cb293-8"><a href="solution-monte-carlo.html#cb293-8"></a>mc_exact <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">2</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">1</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
-<span id="cb293-9"><a href="solution-monte-carlo.html#cb293-9"></a></span>
-<span id="cb293-10"><a href="solution-monte-carlo.html#cb293-10"></a><span class="co"># for each sample size</span></span>
-<span id="cb293-11"><a href="solution-monte-carlo.html#cb293-11"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sample_sizes) {</span>
-<span id="cb293-12"><a href="solution-monte-carlo.html#cb293-12"></a></span>
-<span id="cb293-13"><a href="solution-monte-carlo.html#cb293-13"></a>  sample_sz <span class="ot">&lt;-</span> sample_sizes[i] <span class="co"># select a sanmple size to use</span></span>
-<span id="cb293-14"><a href="solution-monte-carlo.html#cb293-14"></a></span>
-<span id="cb293-15"><a href="solution-monte-carlo.html#cb293-15"></a>  <span class="co"># vector to store results from each repeat</span></span>
-<span id="cb293-16"><a href="solution-monte-carlo.html#cb293-16"></a>  mc_integral <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, rpts)</span>
-<span id="cb293-17"><a href="solution-monte-carlo.html#cb293-17"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>rpts){</span>
-<span id="cb293-18"><a href="solution-monte-carlo.html#cb293-18"></a>    <span class="co"># simulated normally distributed numbers</span></span>
-<span id="cb293-19"><a href="solution-monte-carlo.html#cb293-19"></a>    sims <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(sample_sz, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
-<span id="cb293-20"><a href="solution-monte-carlo.html#cb293-20"></a>    <span class="co"># find proportion of values between 1-3</span></span>
-<span id="cb293-21"><a href="solution-monte-carlo.html#cb293-21"></a>    mc_integral[j] <span class="ot">&lt;-</span> <span class="fu">sum</span>(sims <span class="sc">&gt;=</span> <span class="dv">1</span> <span class="sc">&amp;</span> sims <span class="sc">&lt;=</span> <span class="dv">3</span>) <span class="sc">/</span> sample_sz</span>
-<span id="cb293-22"><a href="solution-monte-carlo.html#cb293-22"></a>  }</span>
-<span id="cb293-23"><a href="solution-monte-carlo.html#cb293-23"></a></span>
-<span id="cb293-24"><a href="solution-monte-carlo.html#cb293-24"></a>  <span class="co"># compute average difference between integral estimate and real value</span></span>
-<span id="cb293-25"><a href="solution-monte-carlo.html#cb293-25"></a>  accuracy[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(mc_integral <span class="sc">-</span> mc_exact)</span>
-<span id="cb293-26"><a href="solution-monte-carlo.html#cb293-26"></a>  <span class="co"># compute sd difference between integral estimate and real value</span></span>
-<span id="cb293-27"><a href="solution-monte-carlo.html#cb293-27"></a>  accuracy_sd[i] <span class="ot">&lt;-</span> <span class="fu">sd</span>(mc_integral <span class="sc">-</span> mc_exact)</span>
-<span id="cb293-28"><a href="solution-monte-carlo.html#cb293-28"></a></span>
-<span id="cb293-29"><a href="solution-monte-carlo.html#cb293-29"></a>}</span>
-<span id="cb293-30"><a href="solution-monte-carlo.html#cb293-30"></a></span>
-<span id="cb293-31"><a href="solution-monte-carlo.html#cb293-31"></a><span class="fu">print</span>(accuracy)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1]  1.965525e-02  5.525393e-05 -1.447461e-04  2.175254e-03
-#&gt; [5] -3.384746e-03  2.655254e-03</code></pre>
-<div class="sourceCode" id="cb295"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb295-1"><a href="solution-monte-carlo.html#cb295-1"></a><span class="fu">print</span>(accuracy_sd)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 0.15102010 0.06710492 0.05367843 0.03221283 0.02020297
-#&gt; [6] 0.01526996</code></pre>
-<div class="sourceCode" id="cb297"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb297-1"><a href="solution-monte-carlo.html#cb297-1"></a><span class="fu">print</span>(accuracy <span class="sc">+</span> accuracy_sd)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 0.17067535 0.06716018 0.05353368 0.03438808 0.01681822
-#&gt; [6] 0.01792522</code></pre>
+<div class="sourceCode" id="cb317"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb317-1"><a href="solution-monte-carlo.html#cb317-1"></a>sample_sizes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">250</span>, <span class="dv">500</span>, <span class="dv">1000</span>) <span class="co"># try different sample sizes</span></span>
+<span id="cb317-2"><a href="solution-monte-carlo.html#cb317-2"></a>n_sample_sizes <span class="ot">&lt;-</span> <span class="fu">length</span>(sample_sizes) <span class="co"># number of sample sizes to try</span></span>
+<span id="cb317-3"><a href="solution-monte-carlo.html#cb317-3"></a>rpts <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># number of repeats for each sample size</span></span>
+<span id="cb317-4"><a href="solution-monte-carlo.html#cb317-4"></a>accuracy <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_sample_sizes) <span class="co"># vector to record accuracy values</span></span>
+<span id="cb317-5"><a href="solution-monte-carlo.html#cb317-5"></a>accuracy_sd <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_sample_sizes) <span class="co"># vector to record accuracy sd values</span></span>
+<span id="cb317-6"><a href="solution-monte-carlo.html#cb317-6"></a></span>
+<span id="cb317-7"><a href="solution-monte-carlo.html#cb317-7"></a><span class="co"># Let's store the exact value of the integral</span></span>
+<span id="cb317-8"><a href="solution-monte-carlo.html#cb317-8"></a>mc_exact <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">2</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">1</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb317-9"><a href="solution-monte-carlo.html#cb317-9"></a></span>
+<span id="cb317-10"><a href="solution-monte-carlo.html#cb317-10"></a><span class="co"># for each sample size</span></span>
+<span id="cb317-11"><a href="solution-monte-carlo.html#cb317-11"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sample_sizes) {</span>
+<span id="cb317-12"><a href="solution-monte-carlo.html#cb317-12"></a></span>
+<span id="cb317-13"><a href="solution-monte-carlo.html#cb317-13"></a>  sample_sz <span class="ot">&lt;-</span> sample_sizes[i] <span class="co"># select a sanmple size to use</span></span>
+<span id="cb317-14"><a href="solution-monte-carlo.html#cb317-14"></a></span>
+<span id="cb317-15"><a href="solution-monte-carlo.html#cb317-15"></a>  <span class="co"># vector to store results from each repeat</span></span>
+<span id="cb317-16"><a href="solution-monte-carlo.html#cb317-16"></a>  mc_integral <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, rpts)</span>
+<span id="cb317-17"><a href="solution-monte-carlo.html#cb317-17"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>rpts){</span>
+<span id="cb317-18"><a href="solution-monte-carlo.html#cb317-18"></a>    <span class="co"># simulated normally distributed numbers</span></span>
+<span id="cb317-19"><a href="solution-monte-carlo.html#cb317-19"></a>    sims <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(sample_sz, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb317-20"><a href="solution-monte-carlo.html#cb317-20"></a>    <span class="co"># find proportion of values between 1-3</span></span>
+<span id="cb317-21"><a href="solution-monte-carlo.html#cb317-21"></a>    mc_integral[j] <span class="ot">&lt;-</span> <span class="fu">sum</span>(sims <span class="sc">&gt;=</span> <span class="dv">1</span> <span class="sc">&amp;</span> sims <span class="sc">&lt;=</span> <span class="dv">3</span>) <span class="sc">/</span> sample_sz</span>
+<span id="cb317-22"><a href="solution-monte-carlo.html#cb317-22"></a>  }</span>
+<span id="cb317-23"><a href="solution-monte-carlo.html#cb317-23"></a></span>
+<span id="cb317-24"><a href="solution-monte-carlo.html#cb317-24"></a>  <span class="co"># compute average difference between integral estimate and real value</span></span>
+<span id="cb317-25"><a href="solution-monte-carlo.html#cb317-25"></a>  accuracy[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(mc_integral <span class="sc">-</span> mc_exact)</span>
+<span id="cb317-26"><a href="solution-monte-carlo.html#cb317-26"></a>  <span class="co"># compute sd difference between integral estimate and real value</span></span>
+<span id="cb317-27"><a href="solution-monte-carlo.html#cb317-27"></a>  accuracy_sd[i] <span class="ot">&lt;-</span> <span class="fu">sd</span>(mc_integral <span class="sc">-</span> mc_exact)</span>
+<span id="cb317-28"><a href="solution-monte-carlo.html#cb317-28"></a></span>
+<span id="cb317-29"><a href="solution-monte-carlo.html#cb317-29"></a>}</span>
+<span id="cb317-30"><a href="solution-monte-carlo.html#cb317-30"></a></span>
+<span id="cb317-31"><a href="solution-monte-carlo.html#cb317-31"></a><span class="fu">print</span>(accuracy)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] -1.034475e-02 -4.344746e-03  2.555254e-03  2.952539e-04
+#&gt; [5] -2.084746e-03  1.525393e-05</code></pre>
+<div class="sourceCode" id="cb319"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb319-1"><a href="solution-monte-carlo.html#cb319-1"></a><span class="fu">print</span>(accuracy_sd)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 0.13831234 0.07159792 0.05024978 0.03175204 0.02110418
+#&gt; [6] 0.01673895</code></pre>
+<div class="sourceCode" id="cb321"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb321-1"><a href="solution-monte-carlo.html#cb321-1"></a><span class="fu">print</span>(accuracy <span class="sc">+</span> accuracy_sd)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 0.12796759 0.06725318 0.05280503 0.03204730 0.01901943
+#&gt; [6] 0.01675420</code></pre>
 <p>Next, we will plot the results. Here we will make use of <code>ggplot2</code> a library to create nice plots without much effort. The input need to be a <code>data.frame</code> so we will need to create one based on the data.</p>
-<div class="sourceCode" id="cb299"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb299-1"><a href="solution-monte-carlo.html#cb299-1"></a><span class="co"># load ggplot</span></span>
-<span id="cb299-2"><a href="solution-monte-carlo.html#cb299-2"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb299-3"><a href="solution-monte-carlo.html#cb299-3"></a></span>
-<span id="cb299-4"><a href="solution-monte-carlo.html#cb299-4"></a><span class="co"># create a data frame for plotting</span></span>
-<span id="cb299-5"><a href="solution-monte-carlo.html#cb299-5"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(sample_sizes, accuracy, accuracy_sd)</span>
-<span id="cb299-6"><a href="solution-monte-carlo.html#cb299-6"></a></span>
-<span id="cb299-7"><a href="solution-monte-carlo.html#cb299-7"></a><span class="fu">print</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb323"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb323-1"><a href="solution-monte-carlo.html#cb323-1"></a><span class="co"># load ggplot</span></span>
+<span id="cb323-2"><a href="solution-monte-carlo.html#cb323-2"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb323-3"><a href="solution-monte-carlo.html#cb323-3"></a></span>
+<span id="cb323-4"><a href="solution-monte-carlo.html#cb323-4"></a><span class="co"># create a data frame for plotting</span></span>
+<span id="cb323-5"><a href="solution-monte-carlo.html#cb323-5"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(sample_sizes, accuracy, accuracy_sd)</span>
+<span id="cb323-6"><a href="solution-monte-carlo.html#cb323-6"></a></span>
+<span id="cb323-7"><a href="solution-monte-carlo.html#cb323-7"></a><span class="fu">print</span>(df)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;   sample_sizes      accuracy accuracy_sd
-#&gt; 1           10  1.965525e-02  0.15102010
-#&gt; 2           50  5.525393e-05  0.06710492
-#&gt; 3          100 -1.447461e-04  0.05367843
-#&gt; 4          250  2.175254e-03  0.03221283
-#&gt; 5          500 -3.384746e-03  0.02020297
-#&gt; 6         1000  2.655254e-03  0.01526996</code></pre>
-<div class="sourceCode" id="cb301"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb301-1"><a href="solution-monte-carlo.html#cb301-1"></a><span class="co"># use ggplot to plot lines for the mean accuracy and error bars</span></span>
-<span id="cb301-2"><a href="solution-monte-carlo.html#cb301-2"></a><span class="co"># using the std dev</span></span>
-<span id="cb301-3"><a href="solution-monte-carlo.html#cb301-3"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> sample_sizes, <span class="at">y =</span> accuracy)) <span class="sc">+</span></span>
-<span id="cb301-4"><a href="solution-monte-carlo.html#cb301-4"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb301-5"><a href="solution-monte-carlo.html#cb301-5"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb301-6"><a href="solution-monte-carlo.html#cb301-6"></a>  <span class="fu">geom_errorbar</span>(</span>
-<span id="cb301-7"><a href="solution-monte-carlo.html#cb301-7"></a>      <span class="fu">aes</span>(<span class="at">ymin =</span> accuracy <span class="sc">-</span> accuracy_sd, <span class="at">ymax =</span> accuracy <span class="sc">+</span> accuracy_sd),</span>
-<span id="cb301-8"><a href="solution-monte-carlo.html#cb301-8"></a>          <span class="at">width =</span> .<span class="dv">2</span>,</span>
-<span id="cb301-9"><a href="solution-monte-carlo.html#cb301-9"></a>          <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.05</span>)) <span class="sc">+</span></span>
-<span id="cb301-10"><a href="solution-monte-carlo.html#cb301-10"></a>  <span class="fu">ylab</span>(<span class="st">"Estimate-Exact"</span>) <span class="sc">+</span></span>
-<span id="cb301-11"><a href="solution-monte-carlo.html#cb301-11"></a>  <span class="fu">xlab</span>(<span class="st">"Run"</span>)</span></code></pre></div>
+#&gt; 1           10 -1.034475e-02  0.13831234
+#&gt; 2           50 -4.344746e-03  0.07159792
+#&gt; 3          100  2.555254e-03  0.05024978
+#&gt; 4          250  2.952539e-04  0.03175204
+#&gt; 5          500 -2.084746e-03  0.02110418
+#&gt; 6         1000  1.525393e-05  0.01673895</code></pre>
+<div class="sourceCode" id="cb325"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb325-1"><a href="solution-monte-carlo.html#cb325-1"></a><span class="co"># use ggplot to plot lines for the mean accuracy and error bars</span></span>
+<span id="cb325-2"><a href="solution-monte-carlo.html#cb325-2"></a><span class="co"># using the std dev</span></span>
+<span id="cb325-3"><a href="solution-monte-carlo.html#cb325-3"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> sample_sizes, <span class="at">y =</span> accuracy)) <span class="sc">+</span></span>
+<span id="cb325-4"><a href="solution-monte-carlo.html#cb325-4"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb325-5"><a href="solution-monte-carlo.html#cb325-5"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb325-6"><a href="solution-monte-carlo.html#cb325-6"></a>  <span class="fu">geom_errorbar</span>(</span>
+<span id="cb325-7"><a href="solution-monte-carlo.html#cb325-7"></a>      <span class="fu">aes</span>(<span class="at">ymin =</span> accuracy <span class="sc">-</span> accuracy_sd, <span class="at">ymax =</span> accuracy <span class="sc">+</span> accuracy_sd),</span>
+<span id="cb325-8"><a href="solution-monte-carlo.html#cb325-8"></a>          <span class="at">width =</span> .<span class="dv">2</span>,</span>
+<span id="cb325-9"><a href="solution-monte-carlo.html#cb325-9"></a>          <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.05</span>)) <span class="sc">+</span></span>
+<span id="cb325-10"><a href="solution-monte-carlo.html#cb325-10"></a>  <span class="fu">ylab</span>(<span class="st">"Estimate-Exact"</span>) <span class="sc">+</span></span>
+<span id="cb325-11"><a href="solution-monte-carlo.html#cb325-11"></a>  <span class="fu">xlab</span>(<span class="st">"Run"</span>)</span></code></pre></div>
 <div class="inline-figure"><img src="monte-carlo_sol_files/figure-html/unnamed-chunk-2-1.png" width="95%" style="display: block; margin: auto;"></div>
 <p>This shows that as the number of Monte Carlo samples is increased, the accuracy increases (i.e. the difference between the estimated integral value and real values converges to zero). In addition, the variability in the integral estimates across different simulation runs reduces.</p>
 <button class="button">
 <a href="monte-carlo-methods.html#mc-accuracy">Back to Exercise</a>
 </button>
 </div>
-<div id="mc-expectation" class="section level2" number="16.2">
+<div id="mc-expectation" class="section level2" number="17.2">
 <h2>
 <span class="header-section-number">D.2</span> MC Expectation<a class="anchor" aria-label="anchor" href="#mc-expectation"><i class="fas fa-link"></i></a>
 </h2>
-<div id="solution-mc-expectation-1" class="section level3" number="16.2.1">
+<div id="solution-mc-expectation-1" class="section level3" number="17.2.1">
 <h3>
 <span class="header-section-number">D.2.1</span> Solution: MC Expectation 1<a class="anchor" aria-label="anchor" href="#solution-mc-expectation-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb302"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb302-1"><a href="solution-monte-carlo.html#cb302-1"></a><span class="co"># simulates a game of 20 spins</span></span>
-<span id="cb302-2"><a href="solution-monte-carlo.html#cb302-2"></a>play_game <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb302-3"><a href="solution-monte-carlo.html#cb302-3"></a>    <span class="co"># picks a number from the list (1, -1, 2)</span></span>
-<span id="cb302-4"><a href="solution-monte-carlo.html#cb302-4"></a>    <span class="co">#  with probability 50%, 25% and 25% twenty times</span></span>
-<span id="cb302-5"><a href="solution-monte-carlo.html#cb302-5"></a>  results <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">2</span>), <span class="dv">20</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>))</span>
-<span id="cb302-6"><a href="solution-monte-carlo.html#cb302-6"></a>  <span class="fu">return</span>(<span class="fu">sum</span>(results)) <span class="co"># function returns the sum of all the spins</span></span>
-<span id="cb302-7"><a href="solution-monte-carlo.html#cb302-7"></a>}</span>
-<span id="cb302-8"><a href="solution-monte-carlo.html#cb302-8"></a></span>
-<span id="cb302-9"><a href="solution-monte-carlo.html#cb302-9"></a><span class="co"># Define the number of runs</span></span>
-<span id="cb302-10"><a href="solution-monte-carlo.html#cb302-10"></a>runs <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb302-11"><a href="solution-monte-carlo.html#cb302-11"></a></span>
-<span id="cb302-12"><a href="solution-monte-carlo.html#cb302-12"></a>score_per_game <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, runs) <span class="co"># vector to store outcome of each game</span></span>
-<span id="cb302-13"><a href="solution-monte-carlo.html#cb302-13"></a><span class="cf">for</span> (it <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>runs) {</span>
-<span id="cb302-14"><a href="solution-monte-carlo.html#cb302-14"></a>  score_per_game[it] <span class="ot">&lt;-</span> <span class="fu">play_game</span>() <span class="co"># play the game by calling the function</span></span>
-<span id="cb302-15"><a href="solution-monte-carlo.html#cb302-15"></a>}</span>
-<span id="cb302-16"><a href="solution-monte-carlo.html#cb302-16"></a>expected_score <span class="ot">&lt;-</span> <span class="fu">mean</span>(score_per_game) <span class="co"># average over all simulations</span></span>
-<span id="cb302-17"><a href="solution-monte-carlo.html#cb302-17"></a></span>
-<span id="cb302-18"><a href="solution-monte-carlo.html#cb302-18"></a><span class="fu">print</span>(expected_score)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 15</code></pre>
+<div class="sourceCode" id="cb326"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb326-1"><a href="solution-monte-carlo.html#cb326-1"></a><span class="co"># simulates a game of 20 spins</span></span>
+<span id="cb326-2"><a href="solution-monte-carlo.html#cb326-2"></a>play_game <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb326-3"><a href="solution-monte-carlo.html#cb326-3"></a>    <span class="co"># picks a number from the list (1, -1, 2)</span></span>
+<span id="cb326-4"><a href="solution-monte-carlo.html#cb326-4"></a>    <span class="co">#  with probability 50%, 25% and 25% twenty times</span></span>
+<span id="cb326-5"><a href="solution-monte-carlo.html#cb326-5"></a>  results <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">2</span>), <span class="dv">20</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>))</span>
+<span id="cb326-6"><a href="solution-monte-carlo.html#cb326-6"></a>  <span class="fu">return</span>(<span class="fu">sum</span>(results)) <span class="co"># function returns the sum of all the spins</span></span>
+<span id="cb326-7"><a href="solution-monte-carlo.html#cb326-7"></a>}</span>
+<span id="cb326-8"><a href="solution-monte-carlo.html#cb326-8"></a></span>
+<span id="cb326-9"><a href="solution-monte-carlo.html#cb326-9"></a><span class="co"># Define the number of runs</span></span>
+<span id="cb326-10"><a href="solution-monte-carlo.html#cb326-10"></a>runs <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb326-11"><a href="solution-monte-carlo.html#cb326-11"></a></span>
+<span id="cb326-12"><a href="solution-monte-carlo.html#cb326-12"></a>score_per_game <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, runs) <span class="co"># vector to store outcome of each game</span></span>
+<span id="cb326-13"><a href="solution-monte-carlo.html#cb326-13"></a><span class="cf">for</span> (it <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>runs) {</span>
+<span id="cb326-14"><a href="solution-monte-carlo.html#cb326-14"></a>  score_per_game[it] <span class="ot">&lt;-</span> <span class="fu">play_game</span>() <span class="co"># play the game by calling the function</span></span>
+<span id="cb326-15"><a href="solution-monte-carlo.html#cb326-15"></a>}</span>
+<span id="cb326-16"><a href="solution-monte-carlo.html#cb326-16"></a>expected_score <span class="ot">&lt;-</span> <span class="fu">mean</span>(score_per_game) <span class="co"># average over all simulations</span></span>
+<span id="cb326-17"><a href="solution-monte-carlo.html#cb326-17"></a></span>
+<span id="cb326-18"><a href="solution-monte-carlo.html#cb326-18"></a><span class="fu">print</span>(expected_score)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 14.85</code></pre>
 <button class="button">
 <a href="monte-carlo-methods.html#mc-expectation-1">Back to Exercise</a>
 </button>
 </div>
-<div id="solution-mc-expectation-2" class="section level3" number="16.2.2">
+<div id="solution-mc-expectation-2" class="section level3" number="17.2.2">
 <h3>
 <span class="header-section-number">D.2.2</span> Solution: MC Expectation 2<a class="anchor" aria-label="anchor" href="#solution-mc-expectation-2"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb304"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb304-1"><a href="solution-monte-carlo.html#cb304-1"></a><span class="co"># simulates a game of up to 20 spins</span></span>
-<span id="cb304-2"><a href="solution-monte-carlo.html#cb304-2"></a>play_game <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb304-3"><a href="solution-monte-carlo.html#cb304-3"></a>    <span class="co"># picks a number from the list (1, -1, 2)</span></span>
-<span id="cb304-4"><a href="solution-monte-carlo.html#cb304-4"></a>    <span class="co">#  with probability 50%, 25% and 25% twenty times</span></span>
-<span id="cb304-5"><a href="solution-monte-carlo.html#cb304-5"></a>  results <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">2</span>), <span class="dv">20</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>))</span>
-<span id="cb304-6"><a href="solution-monte-carlo.html#cb304-6"></a>  results_sum <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(results) <span class="co"># compute a running sum of points</span></span>
-<span id="cb304-7"><a href="solution-monte-carlo.html#cb304-7"></a>  <span class="co"># check if the game goes to zero at any point</span></span>
-<span id="cb304-8"><a href="solution-monte-carlo.html#cb304-8"></a>  <span class="cf">if</span> (<span class="fu">sum</span>(results_sum <span class="sc">&lt;=</span> <span class="dv">0</span>)) {</span>
-<span id="cb304-9"><a href="solution-monte-carlo.html#cb304-9"></a>    <span class="fu">return</span>(<span class="dv">0</span>) <span class="co"># return zero</span></span>
-<span id="cb304-10"><a href="solution-monte-carlo.html#cb304-10"></a>  } <span class="cf">else</span> {</span>
-<span id="cb304-11"><a href="solution-monte-carlo.html#cb304-11"></a>    <span class="fu">return</span>(results_sum[<span class="dv">20</span>]) <span class="co"># returns the final score</span></span>
-<span id="cb304-12"><a href="solution-monte-carlo.html#cb304-12"></a>  }</span>
-<span id="cb304-13"><a href="solution-monte-carlo.html#cb304-13"></a>}</span>
-<span id="cb304-14"><a href="solution-monte-carlo.html#cb304-14"></a></span>
-<span id="cb304-15"><a href="solution-monte-carlo.html#cb304-15"></a>game_score <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, runs) <span class="co"># vector to store scores in each game played</span></span>
-<span id="cb304-16"><a href="solution-monte-carlo.html#cb304-16"></a></span>
-<span id="cb304-17"><a href="solution-monte-carlo.html#cb304-17"></a><span class="co"># for each game</span></span>
-<span id="cb304-18"><a href="solution-monte-carlo.html#cb304-18"></a><span class="cf">for</span> (it <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>runs) {</span>
-<span id="cb304-19"><a href="solution-monte-carlo.html#cb304-19"></a>  game_score[it] <span class="ot">&lt;-</span> <span class="fu">play_game</span>()</span>
-<span id="cb304-20"><a href="solution-monte-carlo.html#cb304-20"></a>}</span>
-<span id="cb304-21"><a href="solution-monte-carlo.html#cb304-21"></a></span>
-<span id="cb304-22"><a href="solution-monte-carlo.html#cb304-22"></a><span class="fu">print</span>(<span class="fu">mean</span>(game_score))</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 10</code></pre>
-<div class="sourceCode" id="cb306"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb306-1"><a href="solution-monte-carlo.html#cb306-1"></a><span class="fu">plot</span>(game_score)</span></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb328-1"><a href="solution-monte-carlo.html#cb328-1"></a><span class="co"># simulates a game of up to 20 spins</span></span>
+<span id="cb328-2"><a href="solution-monte-carlo.html#cb328-2"></a>play_game <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb328-3"><a href="solution-monte-carlo.html#cb328-3"></a>    <span class="co"># picks a number from the list (1, -1, 2)</span></span>
+<span id="cb328-4"><a href="solution-monte-carlo.html#cb328-4"></a>    <span class="co">#  with probability 50%, 25% and 25% twenty times</span></span>
+<span id="cb328-5"><a href="solution-monte-carlo.html#cb328-5"></a>  results <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">2</span>), <span class="dv">20</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>))</span>
+<span id="cb328-6"><a href="solution-monte-carlo.html#cb328-6"></a>  results_sum <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(results) <span class="co"># compute a running sum of points</span></span>
+<span id="cb328-7"><a href="solution-monte-carlo.html#cb328-7"></a>  <span class="co"># check if the game goes to zero at any point</span></span>
+<span id="cb328-8"><a href="solution-monte-carlo.html#cb328-8"></a>  <span class="cf">if</span> (<span class="fu">sum</span>(results_sum <span class="sc">&lt;=</span> <span class="dv">0</span>)) {</span>
+<span id="cb328-9"><a href="solution-monte-carlo.html#cb328-9"></a>    <span class="fu">return</span>(<span class="dv">0</span>) <span class="co"># return zero</span></span>
+<span id="cb328-10"><a href="solution-monte-carlo.html#cb328-10"></a>  } <span class="cf">else</span> {</span>
+<span id="cb328-11"><a href="solution-monte-carlo.html#cb328-11"></a>    <span class="fu">return</span>(results_sum[<span class="dv">20</span>]) <span class="co"># returns the final score</span></span>
+<span id="cb328-12"><a href="solution-monte-carlo.html#cb328-12"></a>  }</span>
+<span id="cb328-13"><a href="solution-monte-carlo.html#cb328-13"></a>}</span>
+<span id="cb328-14"><a href="solution-monte-carlo.html#cb328-14"></a></span>
+<span id="cb328-15"><a href="solution-monte-carlo.html#cb328-15"></a>game_score <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, runs) <span class="co"># vector to store scores in each game played</span></span>
+<span id="cb328-16"><a href="solution-monte-carlo.html#cb328-16"></a></span>
+<span id="cb328-17"><a href="solution-monte-carlo.html#cb328-17"></a><span class="co"># for each game</span></span>
+<span id="cb328-18"><a href="solution-monte-carlo.html#cb328-18"></a><span class="cf">for</span> (it <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>runs) {</span>
+<span id="cb328-19"><a href="solution-monte-carlo.html#cb328-19"></a>  game_score[it] <span class="ot">&lt;-</span> <span class="fu">play_game</span>()</span>
+<span id="cb328-20"><a href="solution-monte-carlo.html#cb328-20"></a>}</span>
+<span id="cb328-21"><a href="solution-monte-carlo.html#cb328-21"></a></span>
+<span id="cb328-22"><a href="solution-monte-carlo.html#cb328-22"></a><span class="fu">print</span>(<span class="fu">mean</span>(game_score))</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 9.16</code></pre>
+<div class="sourceCode" id="cb330"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb330-1"><a href="solution-monte-carlo.html#cb330-1"></a><span class="fu">plot</span>(game_score)</span></code></pre></div>
 <div class="inline-figure"><img src="monte-carlo_sol_files/figure-html/unnamed-chunk-4-1.png" width="95%" style="display: block; margin: auto;"></div>
 <p>The games with score zero now corresponds to the number of games where we went bust (or genuinely ended the game with zero).</p>
 <p>This is a simple example of how Monte Carlo simulations can be used to estimate the expected value of a random variable. The more simulations you run, the more accurate the estimate will be. You can imagine that this could be used to estimate the expected value of a random variable for biological systems where the underlying distribution is unknown or too complex to model directly. You could even come up with an example considering say mutations in a population of bacteria that have a certain probability of being beneficial, neutral or harmful.</p>
@@ -261,7 +262,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2024-10-04.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2024-10-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

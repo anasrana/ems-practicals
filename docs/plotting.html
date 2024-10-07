@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Chapter 13 Plotting | Essentials of Mathematics and Statistics</title>
+
+    <meta name="author" content="Anas A Rana" />
+  
+   <meta name="description" content="This is a resource containing the practical session for Essentials of Mathematics and Statistics part of your MSc Bioinformatics course." />
+   <meta name="generator" content="placeholder" />
+  <meta property="og:title" content="Chapter 13 Plotting | Essentials of Mathematics and Statistics" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a resource containing the practical session for Essentials of Mathematics and Statistics part of your MSc Bioinformatics course." />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 13 Plotting | Essentials of Mathematics and Statistics" />
+  
+  <meta name="twitter:description" content="This is a resource containing the practical session for Essentials of Mathematics and Statistics part of your MSc Bioinformatics course." />
+  
+  <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
+    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
+    <link href="libs/Manrope-0.4.9/font.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Fira%20Code:wght@100&amp;display=swap" rel="stylesheet"/>
+    <link href="libs/Spectral-0.4.9/font.css" rel="stylesheet" />
+    <script src="libs/bs3compat-0.8.0/transition.js"></script>
+    <script src="libs/bs3compat-0.8.0/tabs.js"></script>
+    <script src="libs/bs3compat-0.8.0/bs3compat.js"></script>
+    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
+    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+  <style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+      <link rel="stylesheet" href="style.css" />
+  
+</head>
+
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Essentials of Mathematics and Statistics</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+      </form>
+
+      <nav aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <div id="book-toc"></div>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
+<div id="plotting" class="section level1" number="13">
+<h1><span class="header-section-number">Chapter 13</span> Plotting</h1>
+<p>Everything above was just to gain an understanding of what goes into a QQ plot. Of course you would not go through this whole process every time you want to create such a plot. Instead you would use inbuilt functions in R.</p>
+<p>Let’s first recreate the plots based on the above data to check it’s working and ensure we have performed the correct steps. We will use both base R plots and <code>ggplot</code></p>
+<p>First we use <code>ggplot</code> and you will note that instead of providing the <code>x</code> or <code>y</code> aesthetics we provide the the <code>sample</code> aesthetics. <em>As usual to learn more about this use <code>?stat_qq</code> and <code>?stat_qq_line</code> to learn more about these.</em></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb14-1"><a href="plotting.html#cb14-1"></a><span class="co"># ggplot providing the data.frame variable and the sample</span></span>
+<span id="cb14-2"><a href="plotting.html#cb14-2"></a><span class="fu">ggplot</span>(<span class="at">data =</span> qq_df, <span class="fu">aes</span>(<span class="at">sample =</span> x_sort)) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="plotting.html#cb14-3"></a>  <span class="co"># creating the points in the sample</span></span>
+<span id="cb14-4"><a href="plotting.html#cb14-4"></a>  <span class="fu">stat_qq</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb14-5"><a href="plotting.html#cb14-5"></a>  <span class="co"># Create the line for comparison</span></span>
+<span id="cb14-6"><a href="plotting.html#cb14-6"></a>  <span class="fu">stat_qq_line</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="plotting.html#cb14-7"></a>  <span class="co"># Choosing a simpler theme</span></span>
+<span id="cb14-8"><a href="plotting.html#cb14-8"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="QQ-plot_files/figure-html/unnamed-chunk-6-1.png" width="95%" style="display: block; margin: auto;" /></p>
+<p>You can also use base R to create these plots using the functions <code>qqnorm</code> and <code>qqline</code>. Check the help functions for these before making use of them.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb15-1"><a href="plotting.html#cb15-1"></a><span class="co"># Create a plot of sample quantiles and theoretical quantiles</span></span>
+<span id="cb15-2"><a href="plotting.html#cb15-2"></a><span class="fu">qqnorm</span>(x_sort, <span class="at">frame =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb15-3"><a href="plotting.html#cb15-3"></a><span class="co"># Create the reference line for comparison in blue linewidth = 2</span></span>
+<span id="cb15-4"><a href="plotting.html#cb15-4"></a><span class="fu">qqline</span>(x_sort, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="QQ-plot_files/figure-html/unnamed-chunk-7-1.png" width="95%" style="display: block; margin: auto;" /></p>
+<p>We can see that all plots we have created above yield the same results. Both work but <code>ggplot</code> has more versatility. Let us look at that using the <code>mtcars</code> data.</p>
+<p>This dataset contains a variety of information about cars. We will specifically make use of the miles per gallon (<code>mpg</code>) and the number of cylinders (<code>cyl</code>). One data structure we will make use of here is <code>factors</code>. (See <a href="https://swcarpentry.github.io/r-novice-inflammation/12-supp-factors/index.html">here</a> for brief description and some exercies on factors.)</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb16-1"><a href="plotting.html#cb16-1"></a><span class="co"># convert the cyl varibale in the data into factors</span></span>
+<span id="cb16-2"><a href="plotting.html#cb16-2"></a>mtcars<span class="sc">$</span>cyl <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(mtcars<span class="sc">$</span>cyl)</span>
+<span id="cb16-3"><a href="plotting.html#cb16-3"></a></span>
+<span id="cb16-4"><a href="plotting.html#cb16-4"></a><span class="co"># Look at the top 6 rows of the data.frame</span></span>
+<span id="cb16-5"><a href="plotting.html#cb16-5"></a><span class="fu">head</span>(mtcars)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;                    mpg cyl disp  hp drat    wt  qsec vs am
+#&gt; Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1
+#&gt; Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1
+#&gt; Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1
+#&gt; Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0
+#&gt; Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0
+#&gt; Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0
+#&gt;                   gear carb
+#&gt; Mazda RX4            4    4
+#&gt; Mazda RX4 Wag        4    4
+#&gt; Datsun 710           4    1
+#&gt; Hornet 4 Drive       3    1
+#&gt; Hornet Sportabout    3    2
+#&gt; Valiant              3    1</code></pre>
+<p>We can now use this slightly changed <code>data.frame</code> to create QQ plots in one go subsetting for the number of cylinders cars have.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb18-1"><a href="plotting.html#cb18-1"></a><span class="co"># We use as the data the slightly modified mtcars data.frame</span></span>
+<span id="cb18-2"><a href="plotting.html#cb18-2"></a><span class="co"># As asthetics we mpg as the sample and we want to colour code for cyclinders</span></span>
+<span id="cb18-3"><a href="plotting.html#cb18-3"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mtcars, <span class="fu">aes</span>(<span class="at">sample =</span> mpg, <span class="at">color =</span> cyl)) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="plotting.html#cb18-4"></a>  <span class="co"># We create the points first</span></span>
+<span id="cb18-5"><a href="plotting.html#cb18-5"></a>  <span class="fu">stat_qq</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="plotting.html#cb18-6"></a>  <span class="co"># We now add the reference lines</span></span>
+<span id="cb18-7"><a href="plotting.html#cb18-7"></a>  <span class="fu">stat_qq_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb18-8"><a href="plotting.html#cb18-8"></a>  <span class="co"># We choose a theme that is easier to read</span></span>
+<span id="cb18-9"><a href="plotting.html#cb18-9"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="QQ-plot_files/figure-html/unnamed-chunk-9-1.png" width="95%" style="display: block; margin: auto;" /></p>
+<p>You can see how useful this approach can be be and managed to create a lot of information in a few lines of code.</p>
+</div>
+  </main>
+
+  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <div id="book-on-this-page"></div>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5">
+  <div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2024-10-07.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+<script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+
+</html>

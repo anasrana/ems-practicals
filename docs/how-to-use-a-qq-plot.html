@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 13 How to Use a QQ Plot | Essentials of Mathematics and Statistics</title>
+<meta name="author" content="Anas A Rana">
+<meta name="description" content="Let us go through creating a QQ plot from basic principles, this will give you a good understanding of what happens in the background when you use the qqplot functions in R. You are unlikely to do...">
+<meta name="generator" content="bookdown 0.40 with bs4_book()">
+<meta property="og:title" content="Chapter 13 How to Use a QQ Plot | Essentials of Mathematics and Statistics">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Let us go through creating a QQ plot from basic principles, this will give you a good understanding of what happens in the background when you use the qqplot functions in R. You are unlikely to do...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 13 How to Use a QQ Plot | Essentials of Mathematics and Statistics">
+<meta name="twitter:description" content="Let us go through creating a QQ plot from basic principles, this will give you a good understanding of what happens in the background when you use the qqplot functions in R. You are unlikely to do...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Manrope-0.4.9/font.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira%20Code:wght@100&amp;display=swap" rel="stylesheet">
+<link href="libs/Spectral-0.4.9/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Essentials of Mathematics and Statistics</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introduction to the Practical</a></li>
+<li class="book-part">Probability in R</li>
+<li><a class="" href="simulating-random-numbers.html"><span class="header-section-number">1</span> Simulating random numbers</a></li>
+<li><a class="" href="markov-chains.html"><span class="header-section-number">2</span> Markov Chains</a></li>
+<li><a class="" href="a-monopoly-simulation.html"><span class="header-section-number">3</span> A Monopoly simulation</a></li>
+<li><a class="" href="monte-carlo-methods.html"><span class="header-section-number">4</span> Monte Carlo Methods</a></li>
+<li><a class="" href="maximum-likelihood.html"><span class="header-section-number">5</span> Maximum Likelihood</a></li>
+<li><a class="" href="confidence-intervals.html"><span class="header-section-number">6</span> Confidence Intervals</a></li>
+<li><a class="" href="computational-testing-techniques.html"><span class="header-section-number">7</span> Computational Testing Techniques</a></li>
+<li class="book-part">Statistical Modelling</li>
+<li><a class="" href="representing-data-in-r.html"><span class="header-section-number">8</span> Representing Data in R</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">9</span> Principal component analysis</a></li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">10</span> Linear regression</a></li>
+<li><a class="" href="multiple-regression.html"><span class="header-section-number">11</span> Multiple regression</a></li>
+<li><a class="" href="qq-plot.html"><span class="header-section-number">12</span> QQ Plot</a></li>
+<li><a class="active" href="how-to-use-a-qq-plot.html"><span class="header-section-number">13</span> How to Use a QQ Plot</a></li>
+<li><a class="" href="plotting.html"><span class="header-section-number">14</span> Plotting</a></li>
+<li><a class="" href="interpreting-qq-plots.html"><span class="header-section-number">15</span> Interpreting QQ Plots</a></li>
+<li><a class="" href="practical-generalised-linear-models.html"><span class="header-section-number">16</span> Practical: Generalised linear models</a></li>
+<li class="book-part">Solutions</li>
+<li><a class="" href="simSol.html"><span class="header-section-number">A</span> Solution: Simulations</a></li>
+<li><a class="" href="mc-solution.html"><span class="header-section-number">B</span> Solution: Three state Markov Chain</a></li>
+<li><a class="" href="monopolySol.html"><span class="header-section-number">C</span> Solution: Monopoly</a></li>
+<li><a class="" href="solution-monte-carlo.html"><span class="header-section-number">D</span> Solution: Monte Carlo</a></li>
+<li><a class="" href="sol-mle.html"><span class="header-section-number">E</span> Solution: Model Answers: MLE</a></li>
+<li><a class="" href="sol-ex-CI.html"><span class="header-section-number">F</span> Solution: Confidence Interval</a></li>
+<li><a class="" href="solution-computational-testing.html"><span class="header-section-number">G</span> Solution: Computational Testing</a></li>
+<li><a class="" href="representing_data-sol.html"><span class="header-section-number">H</span> Solution: Representing Data</a></li>
+<li><a class="" href="solution-linear-regression-and-correlation.html"><span class="header-section-number">I</span> Solution: Linear regression and Correlation</a></li>
+<li class="book-part">APPENDIX</li>
+<li><a class="" href="start.html">Getting started in R and Rstudio</a></li>
+<li><a class="" href="data-sets.html">Data sets</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/anasrana/ems-practicals">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="how-to-use-a-qq-plot" class="section level1" number="13">
+<h1>
+<span class="header-section-number">13</span> How to Use a QQ Plot<a class="anchor" aria-label="anchor" href="#how-to-use-a-qq-plot"><i class="fas fa-link"></i></a>
+</h1>
+<p>Let us go through creating a QQ plot from basic principles, this will give you a good understanding of what happens in the background when you use the <code>qqplot</code> functions in R. You are unlikely to do this yourself in the future but it is good to know what is happening and understand the principles you are applying.</p>
+<p>We will make a start by generating some random data sampled from a normal distribution <span class="math inline">\(\operatorname{N}(\mu = 5, \sigma^2 = 4)\)</span>.</p>
+<div class="sourceCode" id="cb251"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb251-1"><a href="how-to-use-a-qq-plot.html#cb251-1"></a><span class="co"># Random seed, there is no significance to the number used</span></span>
+<span id="cb251-2"><a href="how-to-use-a-qq-plot.html#cb251-2"></a><span class="fu">set.seed</span>(<span class="dv">1214</span>)</span>
+<span id="cb251-3"><a href="how-to-use-a-qq-plot.html#cb251-3"></a><span class="co"># create random number sampled from a normal distribution</span></span>
+<span id="cb251-4"><a href="how-to-use-a-qq-plot.html#cb251-4"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb251-5"><a href="how-to-use-a-qq-plot.html#cb251-5"></a></span>
+<span id="cb251-6"><a href="how-to-use-a-qq-plot.html#cb251-6"></a><span class="fu">print</span>(x)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;  [1]  3.0199947  1.7430854  3.8219702  1.2638861 -0.9820494
+#&gt;  [6] -1.6086784  2.1157220 -0.4646442 -1.2996165  3.7570844
+#&gt; [11]  0.8184567  2.1577627  1.6635102  2.6436570 -0.4730233
+#&gt; [16]  5.1968979  4.5040566  0.6371819  0.5883411  0.0900340</code></pre>
+<p>The first step is to sort the data, and then can create quantiles. We can create naïve quantiles based on this data first.</p>
+<div class="sourceCode" id="cb253"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb253-1"><a href="how-to-use-a-qq-plot.html#cb253-1"></a>x_sort <span class="ot">&lt;-</span> <span class="fu">sort</span>(x)</span>
+<span id="cb253-2"><a href="how-to-use-a-qq-plot.html#cb253-2"></a></span>
+<span id="cb253-3"><a href="how-to-use-a-qq-plot.html#cb253-3"></a><span class="fu">rank</span>(x_sort) <span class="sc">/</span> <span class="fu">length</span>(x_sort)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;  [1] 0.05 0.10 0.15 0.20 0.25 0.30 0.35 0.40 0.45 0.50 0.55
+#&gt; [12] 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 1.00</code></pre>
+<p>When we create theoretical quantiles we want to center them. You can check this yourself try <code>qnorm(0)</code> and <code>qnorm(1)</code>. Instead we adjust the ranks by <span class="math inline">\(1/2\)</span> to get a centered bins. There is an inbuilt function in R that also performs this adjustment, <code>ppoints</code>. <em>Remember to check how it works using <code><a href="https://rdrr.io/r/stats/ppoints.html">?ppoints</a></code></em></p>
+<div class="sourceCode" id="cb255"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb255-1"><a href="how-to-use-a-qq-plot.html#cb255-1"></a><span class="co"># Emperical quantiles</span></span>
+<span id="cb255-2"><a href="how-to-use-a-qq-plot.html#cb255-2"></a>eq <span class="ot">&lt;-</span> (<span class="fu">rank</span>(x_sort) <span class="sc">-</span> <span class="fl">0.5</span>) <span class="sc">/</span> <span class="fu">length</span>(x_sort)</span>
+<span id="cb255-3"><a href="how-to-use-a-qq-plot.html#cb255-3"></a></span>
+<span id="cb255-4"><a href="how-to-use-a-qq-plot.html#cb255-4"></a><span class="co"># Emperical quantiles using ppoints</span></span>
+<span id="cb255-5"><a href="how-to-use-a-qq-plot.html#cb255-5"></a>eq_p <span class="ot">&lt;-</span> <span class="fu">ppoints</span>(<span class="fu">length</span>(x_sort))</span>
+<span id="cb255-6"><a href="how-to-use-a-qq-plot.html#cb255-6"></a></span>
+<span id="cb255-7"><a href="how-to-use-a-qq-plot.html#cb255-7"></a><span class="co"># Check if the two ways produce an identical vector</span></span>
+<span id="cb255-8"><a href="how-to-use-a-qq-plot.html#cb255-8"></a><span class="fu">print</span>(<span class="fu">identical</span>(eq, eq_p))</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] TRUE</code></pre>
+<div class="sourceCode" id="cb257"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb257-1"><a href="how-to-use-a-qq-plot.html#cb257-1"></a><span class="co"># Print the values</span></span>
+<span id="cb257-2"><a href="how-to-use-a-qq-plot.html#cb257-2"></a><span class="fu">print</span>(eq)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;  [1] 0.025 0.075 0.125 0.175 0.225 0.275 0.325 0.375 0.425
+#&gt; [10] 0.475 0.525 0.575 0.625 0.675 0.725 0.775 0.825 0.875
+#&gt; [19] 0.925 0.975</code></pre>
+<p>You can see that the first quantile 0.05 becomes 0.025. We will use the sample mean and sample standard deviation. We also want to project our data on the standard normal distribution as that is how a QQ plot is generated. It is just a simple transformation and we can plot the two values to convince ourselves that is the case.</p>
+<div class="sourceCode" id="cb259"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb259-1"><a href="how-to-use-a-qq-plot.html#cb259-1"></a><span class="co"># Theoretical quantiles</span></span>
+<span id="cb259-2"><a href="how-to-use-a-qq-plot.html#cb259-2"></a>tq <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(eq, <span class="fu">mean</span>(x_sort), <span class="fu">sd</span>(x_sort))</span>
+<span id="cb259-3"><a href="how-to-use-a-qq-plot.html#cb259-3"></a></span>
+<span id="cb259-4"><a href="how-to-use-a-qq-plot.html#cb259-4"></a><span class="co"># Quantiles for Standard noraml</span></span>
+<span id="cb259-5"><a href="how-to-use-a-qq-plot.html#cb259-5"></a>tq_sn <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(eq, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb259-6"><a href="how-to-use-a-qq-plot.html#cb259-6"></a></span>
+<span id="cb259-7"><a href="how-to-use-a-qq-plot.html#cb259-7"></a><span class="co"># Plot the two values</span></span>
+<span id="cb259-8"><a href="how-to-use-a-qq-plot.html#cb259-8"></a><span class="co"># You will see that it is simple transformation. All values are on straight line</span></span>
+<span id="cb259-9"><a href="how-to-use-a-qq-plot.html#cb259-9"></a><span class="fu">plot</span>(tq, tq_sn)</span></code></pre></div>
+<div class="inline-figure"><img src="QQ-plot_files/figure-html/unnamed-chunk-4-1.png" width="95%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb260-1"><a href="how-to-use-a-qq-plot.html#cb260-1"></a><span class="fu">print</span>(tq)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;  [1] -2.38629750 -1.36506828 -0.79761487 -0.37423528
+#&gt;  [5] -0.02264695  0.28671456  0.56927742  0.83442492
+#&gt;  [9]  1.08858000  1.33663381  1.58272910  1.83078291
+#&gt; [13]  2.08493799  2.35008548  2.63264834  2.94200986
+#&gt; [17]  3.29359818  3.71697778  4.28443118  5.30566040</code></pre>
+<p>The next thing we need is to create is the reference line to assess if the empirical quantiles correspond to the theoretical ones from the distribution we are comparing to. There are two lines we could consider, it is either the naïve line<span class="math inline">\(y = mean + s \times x\)</span>, where <span class="math inline">\(s\)</span> is the sample standard deviation and the mean is the sample mean. The other option is a robust line which works better especially if there is deviation from the normal in the sample, here we replace the mean with the median and the standard deviation with the interquartile range.
+a QQ
+Let us put everything together and create a plot with both the naïve and robust lines.</p>
+<div class="sourceCode" id="cb262"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb262-1"><a href="how-to-use-a-qq-plot.html#cb262-1"></a><span class="co"># library for plotting</span></span>
+<span id="cb262-2"><a href="how-to-use-a-qq-plot.html#cb262-2"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb262-3"><a href="how-to-use-a-qq-plot.html#cb262-3"></a></span>
+<span id="cb262-4"><a href="how-to-use-a-qq-plot.html#cb262-4"></a><span class="co"># create a data.frame with the vectors we have already created</span></span>
+<span id="cb262-5"><a href="how-to-use-a-qq-plot.html#cb262-5"></a>qq_df <span class="ot">&lt;-</span></span>
+<span id="cb262-6"><a href="how-to-use-a-qq-plot.html#cb262-6"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb262-7"><a href="how-to-use-a-qq-plot.html#cb262-7"></a>    <span class="at">x =</span> x_sort,</span>
+<span id="cb262-8"><a href="how-to-use-a-qq-plot.html#cb262-8"></a>    <span class="at">eq =</span> eq,</span>
+<span id="cb262-9"><a href="how-to-use-a-qq-plot.html#cb262-9"></a>    <span class="at">tq =</span> tq_sn)</span>
+<span id="cb262-10"><a href="how-to-use-a-qq-plot.html#cb262-10"></a></span>
+<span id="cb262-11"><a href="how-to-use-a-qq-plot.html#cb262-11"></a><span class="co"># Add the naïve line</span></span>
+<span id="cb262-12"><a href="how-to-use-a-qq-plot.html#cb262-12"></a>qq_df<span class="sc">$</span>naive <span class="ot">&lt;-</span> <span class="fu">mean</span>(x_sort) <span class="sc">+</span> <span class="fu">sd</span>(x_sort) <span class="sc">*</span> tq_sn</span>
+<span id="cb262-13"><a href="how-to-use-a-qq-plot.html#cb262-13"></a></span>
+<span id="cb262-14"><a href="how-to-use-a-qq-plot.html#cb262-14"></a><span class="co"># Add the robust line into the data.frame</span></span>
+<span id="cb262-15"><a href="how-to-use-a-qq-plot.html#cb262-15"></a>qq_df<span class="sc">$</span>qq_line <span class="ot">&lt;-</span> <span class="fu">median</span>(x_sort) <span class="sc">+</span> <span class="fu">IQR</span>(x_sort) <span class="sc">*</span> tq_sn</span>
+<span id="cb262-16"><a href="how-to-use-a-qq-plot.html#cb262-16"></a></span>
+<span id="cb262-17"><a href="how-to-use-a-qq-plot.html#cb262-17"></a><span class="co"># When using ggplot you start with the basic framework declaring the data</span></span>
+<span id="cb262-18"><a href="how-to-use-a-qq-plot.html#cb262-18"></a><span class="co"># We declare the data and aesthetics of the plot that are shared</span></span>
+<span id="cb262-19"><a href="how-to-use-a-qq-plot.html#cb262-19"></a><span class="co"># We end with a + to indicated there is more to come</span></span>
+<span id="cb262-20"><a href="how-to-use-a-qq-plot.html#cb262-20"></a><span class="fu">ggplot</span>(<span class="at">data =</span> qq_df, <span class="fu">aes</span>(<span class="at">x =</span> tq)) <span class="sc">+</span></span>
+<span id="cb262-21"><a href="how-to-use-a-qq-plot.html#cb262-21"></a>  <span class="co"># We create points for the observed data with size =3</span></span>
+<span id="cb262-22"><a href="how-to-use-a-qq-plot.html#cb262-22"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> x_sort), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb262-23"><a href="how-to-use-a-qq-plot.html#cb262-23"></a>  <span class="co"># We create the naïve line in blue</span></span>
+<span id="cb262-24"><a href="how-to-use-a-qq-plot.html#cb262-24"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> naive), <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb262-25"><a href="how-to-use-a-qq-plot.html#cb262-25"></a>  <span class="co"># We create the robust line in red</span></span>
+<span id="cb262-26"><a href="how-to-use-a-qq-plot.html#cb262-26"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> qq_line), <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb262-27"><a href="how-to-use-a-qq-plot.html#cb262-27"></a>  <span class="co"># Change the plot theme to something easier to see</span></span>
+<span id="cb262-28"><a href="how-to-use-a-qq-plot.html#cb262-28"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb262-29"><a href="how-to-use-a-qq-plot.html#cb262-29"></a>  <span class="fu">labs</span>(</span>
+<span id="cb262-30"><a href="how-to-use-a-qq-plot.html#cb262-30"></a>    <span class="at">x =</span> <span class="st">"Theoretical Quantiles"</span>,</span>
+<span id="cb262-31"><a href="how-to-use-a-qq-plot.html#cb262-31"></a>    <span class="at">y =</span> <span class="st">"Sample Quantiles"</span></span>
+<span id="cb262-32"><a href="how-to-use-a-qq-plot.html#cb262-32"></a>  )</span></code></pre></div>
+<pre><code>#&gt; Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+#&gt; ℹ Please use `linewidth` instead.
+#&gt; This warning is displayed once every 8 hours.
+#&gt; Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#&gt; generated.</code></pre>
+<div class="inline-figure"><img src="QQ-plot_files/figure-html/unnamed-chunk-5-1.png" width="95%" style="display: block; margin: auto;"></div>
+<p>You can see that there is a small difference between the two lines but it can be larger depending on the data.</p>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="qq-plot.html"><span class="header-section-number">12</span> QQ Plot</a></div>
+<div class="next"><a href="plotting.html"><span class="header-section-number">14</span> Plotting</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#how-to-use-a-qq-plot"><span class="header-section-number">13</span> How to Use a QQ Plot</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/anasrana/ems-practicals/blob/master/QQ-plot.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/anasrana/ems-practicals/edit/master/QQ-plot.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2024-10-07.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

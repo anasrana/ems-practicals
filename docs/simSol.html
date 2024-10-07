@@ -60,7 +60,8 @@
 <li><a class="" href="principal-component-analysis.html"><span class="header-section-number">9</span> Principal component analysis</a></li>
 <li><a class="" href="linear-regression.html"><span class="header-section-number">10</span> Linear regression</a></li>
 <li><a class="" href="multiple-regression.html"><span class="header-section-number">11</span> Multiple regression</a></li>
-<li><a class="" href="practical-generalised-linear-models.html"><span class="header-section-number">12</span> Practical: Generalised linear models</a></li>
+<li><a class="" href="qq-plot.html"><span class="header-section-number">12</span> QQ Plot - How To Use And Interpret</a></li>
+<li><a class="" href="practical-generalised-linear-models.html"><span class="header-section-number">13</span> Practical: Generalised linear models</a></li>
 <li class="book-part">Solutions</li>
 <li><a class="active" href="simSol.html"><span class="header-section-number">A</span> Solution: Simulations</a></li>
 <li><a class="" href="mc-solution.html"><span class="header-section-number">B</span> Solution: Three state Markov Chain</a></li>
@@ -81,47 +82,47 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="simSol" class="section level1" number="13">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="simSol" class="section level1" number="14">
 <h1>
 <span class="header-section-number">A</span> Solution: Simulations<a class="anchor" aria-label="anchor" href="#simSol"><i class="fas fa-link"></i></a>
 </h1>
-<div id="sim-sol-ex1" class="section level2" number="13.1">
+<div id="sim-sol-ex1" class="section level2" number="14.1">
 <h2>
 <span class="header-section-number">A.1</span> Solution Simulation - replacement<a class="anchor" aria-label="anchor" href="#sim-sol-ex1"><i class="fas fa-link"></i></a>
 </h2>
 <p>The option <code>replace=TRUE</code> activates sampling with replacement (i.e. the numbers that are picked are put back and can be picked again).</p>
 <p>The option <code>replace=FALSE</code> activates sampling without replacement (i.e. the numbers that are picked are not put back and cannot be picked again).</p>
 <p>Let’s try this out:</p>
-<div class="sourceCode" id="cb277"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb277-1"><a href="simSol.html#cb277-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">9</span> )</span>
-<span id="cb277-2"><a href="simSol.html#cb277-2"></a></span>
-<span id="cb277-3"><a href="simSol.html#cb277-3"></a><span class="co"># Working example</span></span>
-<span id="cb277-4"><a href="simSol.html#cb277-4"></a><span class="fu">sample</span>(x, <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  [1] 1 5 2 5 1 4 6 2 8 7</code></pre>
-<div class="sourceCode" id="cb279"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb279-1"><a href="simSol.html#cb279-1"></a><span class="co"># This will cause an error</span></span>
-<span id="cb279-2"><a href="simSol.html#cb279-2"></a><span class="fu">sample</span>(x, <span class="dv">20</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb301-1"><a href="simSol.html#cb301-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">9</span> )</span>
+<span id="cb301-2"><a href="simSol.html#cb301-2"></a></span>
+<span id="cb301-3"><a href="simSol.html#cb301-3"></a><span class="co"># Working example</span></span>
+<span id="cb301-4"><a href="simSol.html#cb301-4"></a><span class="fu">sample</span>(x, <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;  [1]  9  2  4  5  3  1  4  7 10  1</code></pre>
+<div class="sourceCode" id="cb303"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb303-1"><a href="simSol.html#cb303-1"></a><span class="co"># This will cause an error</span></span>
+<span id="cb303-2"><a href="simSol.html#cb303-2"></a><span class="fu">sample</span>(x, <span class="dv">20</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>#&gt; Error in sample.int(length(x), size, replace, prob): cannot take a sample larger than the population when 'replace = FALSE'</code></pre>
-<div class="sourceCode" id="cb281"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb281-1"><a href="simSol.html#cb281-1"></a><span class="co"># Fix it</span></span>
-<span id="cb281-2"><a href="simSol.html#cb281-2"></a><span class="fu">sample</span>(x, <span class="dv">20</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  [1] 1 6 2 1 5 1 1 4 5 1 7 5 6 2 3 1 5 2 1 4</code></pre>
+<div class="sourceCode" id="cb305"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb305-1"><a href="simSol.html#cb305-1"></a><span class="co"># Fix it</span></span>
+<span id="cb305-2"><a href="simSol.html#cb305-2"></a><span class="fu">sample</span>(x, <span class="dv">20</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;  [1] 2 7 1 5 3 2 4 9 5 8 7 1 3 4 2 1 4 2 1 6</code></pre>
 <button class="button">
 <a href="simulating-random-numbers.html#sim-ex1">Back to exercise</a>
 </button>
 </div>
-<div id="sim-sol-ex2" class="section level2" number="13.2">
+<div id="sim-sol-ex2" class="section level2" number="14.2">
 <h2>
 <span class="header-section-number">A.2</span> Solution Simulation - using sample<a class="anchor" aria-label="anchor" href="#sim-sol-ex2"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb283"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb283-1"><a href="simSol.html#cb283-1"></a>rolls_from_sample <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="at">size=</span><span class="dv">5000</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
-<span id="cb283-2"><a href="simSol.html#cb283-2"></a>rolls_from_sample.int <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">6</span>, <span class="at">size=</span><span class="dv">5000</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
-<span id="cb283-3"><a href="simSol.html#cb283-3"></a></span>
-<span id="cb283-4"><a href="simSol.html#cb283-4"></a><span class="fu">table</span>(rolls_from_sample)</span></code></pre></div>
+<div class="sourceCode" id="cb307"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb307-1"><a href="simSol.html#cb307-1"></a>rolls_from_sample <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="at">size=</span><span class="dv">5000</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb307-2"><a href="simSol.html#cb307-2"></a>rolls_from_sample.int <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">6</span>, <span class="at">size=</span><span class="dv">5000</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb307-3"><a href="simSol.html#cb307-3"></a></span>
+<span id="cb307-4"><a href="simSol.html#cb307-4"></a><span class="fu">table</span>(rolls_from_sample)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; rolls_from_sample
 #&gt;   1   2   3   4   5   6 
-#&gt; 869 856 854 769 813 839</code></pre>
-<div class="sourceCode" id="cb285"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb285-1"><a href="simSol.html#cb285-1"></a><span class="fu">table</span>(rolls_from_sample.int)</span></code></pre></div>
+#&gt; 773 886 826 827 833 855</code></pre>
+<div class="sourceCode" id="cb309"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb309-1"><a href="simSol.html#cb309-1"></a><span class="fu">table</span>(rolls_from_sample.int)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; rolls_from_sample.int
 #&gt;   1   2   3   4   5   6 
-#&gt; 857 860 807 796 846 834</code></pre>
+#&gt; 811 820 817 838 848 866</code></pre>
 <p>Both gives a uniform distribution over the numbers 1-6. The function <code>sample.int</code> is a specialised version of sample for sampling integers. Many <code>R</code> libraries have specialised versions of more general functions to do specific tasks under certain conditions.</p>
 <button class="button">
 <a href="simulating-random-numbers.html#sim-ex2">Back to exercise</a>
@@ -130,7 +131,7 @@
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="practical-generalised-linear-models.html"><span class="header-section-number">12</span> Practical: Generalised linear models</a></div>
+<div class="prev"><a href="practical-generalised-linear-models.html"><span class="header-section-number">13</span> Practical: Generalised linear models</a></div>
 <div class="next"><a href="mc-solution.html"><span class="header-section-number">B</span> Solution: Three state Markov Chain</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
@@ -155,7 +156,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2024-10-04.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2024-10-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

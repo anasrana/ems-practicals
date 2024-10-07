@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Chapter 14 Interpreting QQ Plots | Essentials of Mathematics and Statistics</title>
+
+    <meta name="author" content="Anas A Rana" />
+  
+   <meta name="description" content="This is a resource containing the practical session for Essentials of Mathematics and Statistics part of your MSc Bioinformatics course." />
+   <meta name="generator" content="placeholder" />
+  <meta property="og:title" content="Chapter 14 Interpreting QQ Plots | Essentials of Mathematics and Statistics" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a resource containing the practical session for Essentials of Mathematics and Statistics part of your MSc Bioinformatics course." />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 14 Interpreting QQ Plots | Essentials of Mathematics and Statistics" />
+  
+  <meta name="twitter:description" content="This is a resource containing the practical session for Essentials of Mathematics and Statistics part of your MSc Bioinformatics course." />
+  
+  <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
+    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
+    <link href="libs/Manrope-0.4.9/font.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Fira%20Code:wght@100&amp;display=swap" rel="stylesheet"/>
+    <link href="libs/Spectral-0.4.9/font.css" rel="stylesheet" />
+    <script src="libs/bs3compat-0.8.0/transition.js"></script>
+    <script src="libs/bs3compat-0.8.0/tabs.js"></script>
+    <script src="libs/bs3compat-0.8.0/bs3compat.js"></script>
+    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
+    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+  <style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+      <link rel="stylesheet" href="style.css" />
+  
+</head>
+
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Essentials of Mathematics and Statistics</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+      </form>
+
+      <nav aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <div id="book-toc"></div>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
+<div id="interpreting-qq-plots" class="section level1" number="14">
+<h1><span class="header-section-number">Chapter 14</span> Interpreting QQ Plots</h1>
+<p>The main reason we use QQ plots is to assess if our data can be from a specific distribution. Usually we will perform this test to check for normality. This can be important if we perform a statistical test that makes the normality assumption. Since it is only a visual test it is subjective.</p>
+<p>In QQ plot we are putting our data in quantiles and answering the questions: how similar are these sample quantiles to the theoretical values from a probability distribution. We put each data point we observe into its own quantile and compare them to a theoretical probability distribution.</p>
+<p>Obviously, because we are looking at subjective visual comparison it is important to understand what these comparisons mean. To do that we will first create a few functions to make it easier to go from random sample to plot.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb19-1"><a href="interpreting-qq-plots.html#cb19-1"></a><span class="co"># function to plot histogram and distribution for comparison</span></span>
+<span id="cb19-2"><a href="interpreting-qq-plots.html#cb19-2"></a>hist_comp  <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">n_breaks =</span> <span class="dv">30</span>, title, xs, norm_dens) {</span>
+<span id="cb19-3"><a href="interpreting-qq-plots.html#cb19-3"></a>  <span class="fu">hist</span>(x, <span class="at">breaks =</span> n_breaks, <span class="at">xlab =</span> <span class="st">&quot;Sample Value&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb19-4"><a href="interpreting-qq-plots.html#cb19-4"></a>       <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">main =</span> title, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.45</span>))</span>
+<span id="cb19-5"><a href="interpreting-qq-plots.html#cb19-5"></a>  <span class="fu">lines</span>(xs, norm_dens, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb19-6"><a href="interpreting-qq-plots.html#cb19-6"></a></span>
+<span id="cb19-7"><a href="interpreting-qq-plots.html#cb19-7"></a>}</span>
+<span id="cb19-8"><a href="interpreting-qq-plots.html#cb19-8"></a></span>
+<span id="cb19-9"><a href="interpreting-qq-plots.html#cb19-9"></a><span class="co"># function to create QQ scatter plot and reference line</span></span>
+<span id="cb19-10"><a href="interpreting-qq-plots.html#cb19-10"></a>qq_comp <span class="ot">&lt;-</span> <span class="cf">function</span>(gaussian_rv) {</span>
+<span id="cb19-11"><a href="interpreting-qq-plots.html#cb19-11"></a>  <span class="fu">qqnorm</span>(gaussian_rv)</span>
+<span id="cb19-12"><a href="interpreting-qq-plots.html#cb19-12"></a>  <span class="fu">qqline</span>(gaussian_rv, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">lwd =</span> <span class="fl">1.5</span>)</span>
+<span id="cb19-13"><a href="interpreting-qq-plots.html#cb19-13"></a>}</span></code></pre></div>
+<div id="standard-normal" class="section level2" number="14.1">
+<h2><span class="header-section-number">14.1</span> Standard Normal</h2>
+<p>Now we can start comparing, we will start with the simplest comparison. Here we will sample from a normal distribution with <span class="math inline">\(\operatorname{N}(\mu = 0, \sigma^2 = 1)\)</span>.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb20-1"><a href="interpreting-qq-plots.html#cb20-1"></a><span class="co"># Create two plots next to each other one row and two columns</span></span>
+<span id="cb20-2"><a href="interpreting-qq-plots.html#cb20-2"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb20-3"><a href="interpreting-qq-plots.html#cb20-3"></a></span>
+<span id="cb20-4"><a href="interpreting-qq-plots.html#cb20-4"></a><span class="co"># Sample data</span></span>
+<span id="cb20-5"><a href="interpreting-qq-plots.html#cb20-5"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb20-6"><a href="interpreting-qq-plots.html#cb20-6"></a><span class="fu">set.seed</span>(<span class="dv">1234324</span>) <span class="co"># choosing reproducible seed for random number</span></span>
+<span id="cb20-7"><a href="interpreting-qq-plots.html#cb20-7"></a>data_sample <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb20-8"><a href="interpreting-qq-plots.html#cb20-8"></a></span>
+<span id="cb20-9"><a href="interpreting-qq-plots.html#cb20-9"></a><span class="co"># normal density</span></span>
+<span id="cb20-10"><a href="interpreting-qq-plots.html#cb20-10"></a><span class="co"># xs are x-values for the distribution</span></span>
+<span id="cb20-11"><a href="interpreting-qq-plots.html#cb20-11"></a>xs <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="fl">0.01</span>)</span>
+<span id="cb20-12"><a href="interpreting-qq-plots.html#cb20-12"></a>norm_dens <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(xs)</span>
+<span id="cb20-13"><a href="interpreting-qq-plots.html#cb20-13"></a></span>
+<span id="cb20-14"><a href="interpreting-qq-plots.html#cb20-14"></a><span class="fu">hist_comp</span>(data_sample, <span class="at">title =</span> <span class="st">&quot;Gaussian Distribution&quot;</span>,</span>
+<span id="cb20-15"><a href="interpreting-qq-plots.html#cb20-15"></a>         <span class="at">xs =</span> xs, <span class="at">norm_dens =</span> norm_dens)</span>
+<span id="cb20-16"><a href="interpreting-qq-plots.html#cb20-16"></a></span>
+<span id="cb20-17"><a href="interpreting-qq-plots.html#cb20-17"></a><span class="fu">qq_comp</span>(data_sample)</span></code></pre></div>
+<p><img src="QQ-plot_files/figure-html/unnamed-chunk-11-1.png" width="95%" style="display: block; margin: auto;" /></p>
+<p>Here we can see on the left the theoretical Gaussian distribution as the read curve. The histogram shows the sample with n = 10000. The same data is represented on the right which is a QQ plot. The normal distribution is along the diagonal blue line. We can see that this data lies mostly along the diagonal so matches the standard normal. There is some minor deviation on the edges of the distribution. Here there are minor deviation on the tails but only a handful of points out of the large sample.</p>
+</div>
+<div id="skewed-data" class="section level2" number="14.2">
+<h2><span class="header-section-number">14.2</span> Skewed data</h2>
+<p>Now we will look at data that is skewed in either directions, which we can see on the histogram and what that looks like on the QQ plot. We will make use of filtering the vector of data using the square brackets. If we have a vector <code>vec_a</code> we can subset (or filter) all values smaller than zero by using <code>vec_b &lt;- vec_a[vec_a &lt; 0]</code>. This new vector <code>vec_b</code> contains all entires in <code>vec_a</code> that are smaller than 0.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb21-1"><a href="interpreting-qq-plots.html#cb21-1"></a><span class="co"># Skewed left more samples to the left of standard normal</span></span>
+<span id="cb21-2"><a href="interpreting-qq-plots.html#cb21-2"></a><span class="co"># To create this data we will add more samples to the left of the mean</span></span>
+<span id="cb21-3"><a href="interpreting-qq-plots.html#cb21-3"></a><span class="co"># artificially using the same data as above</span></span>
+<span id="cb21-4"><a href="interpreting-qq-plots.html#cb21-4"></a><span class="fu">set.seed</span>(<span class="dv">1234234</span>) <span class="co">#set a random seed</span></span>
+<span id="cb21-5"><a href="interpreting-qq-plots.html#cb21-5"></a><span class="co"># we create a vector which contains the new data</span></span>
+<span id="cb21-6"><a href="interpreting-qq-plots.html#cb21-6"></a>new_skew_left <span class="ot">&lt;-</span> data_sample[data_sample <span class="sc">&lt;</span> <span class="dv">0</span>] <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb21-7"><a href="interpreting-qq-plots.html#cb21-7"></a>nor_skew_left <span class="ot">&lt;-</span> <span class="fu">c</span>(new_skew_left, data_sample)</span>
+<span id="cb21-8"><a href="interpreting-qq-plots.html#cb21-8"></a></span>
+<span id="cb21-9"><a href="interpreting-qq-plots.html#cb21-9"></a><span class="co"># Create new plots</span></span>
+<span id="cb21-10"><a href="interpreting-qq-plots.html#cb21-10"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb21-11"><a href="interpreting-qq-plots.html#cb21-11"></a><span class="fu">hist_comp</span>(nor_skew_left, <span class="at">title =</span> <span class="st">&quot;Skewed Left&quot;</span>, <span class="at">xs =</span> xs,</span>
+<span id="cb21-12"><a href="interpreting-qq-plots.html#cb21-12"></a>          <span class="at">norm_dens =</span> norm_dens)</span>
+<span id="cb21-13"><a href="interpreting-qq-plots.html#cb21-13"></a><span class="fu">qq_comp</span>(nor_skew_left)</span></code></pre></div>
+<p><img src="QQ-plot_files/figure-html/unnamed-chunk-12-1.png" width="95%" style="display: block; margin: auto;" /></p>
+<p>If the data is left skewed as in this case, you can see that the histogram is shifted to the left compared to the standard normal distribution. You can see a proportion of the data on the left tail of the distribution. Now looking at the corresponding QQ plot we can see the first two quantiles are blow the theoretical (diagonal) line. The points above 0 are close to the diagonal but below 0 the points deviate from the diagonal. If you see such a QQ plot, the interpretation is that the data is left skewed.</p>
+<blockquote>
+<p><strong>Q.</strong> Now try to create data skewed to the right and interpret the plots you create.</p>
+</blockquote>
+<details>
+<summary>
+Only expand once you have made an attempt!
+</summary>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb22-1"><a href="interpreting-qq-plots.html#cb22-1"></a><span class="co"># Skewed right more samples to the right of standard normal</span></span>
+<span id="cb22-2"><a href="interpreting-qq-plots.html#cb22-2"></a><span class="co"># To create this data we will add more samples to the right of the mean</span></span>
+<span id="cb22-3"><a href="interpreting-qq-plots.html#cb22-3"></a><span class="co"># artificially using the same data as above</span></span>
+<span id="cb22-4"><a href="interpreting-qq-plots.html#cb22-4"></a><span class="fu">set.seed</span>(<span class="dv">1234234</span>) <span class="co">#set a random seed</span></span>
+<span id="cb22-5"><a href="interpreting-qq-plots.html#cb22-5"></a><span class="co"># we create a vector which contains the new data</span></span>
+<span id="cb22-6"><a href="interpreting-qq-plots.html#cb22-6"></a>new_skew_right <span class="ot">&lt;-</span> data_sample[data_sample <span class="sc">&gt;</span> <span class="dv">0</span>] <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb22-7"><a href="interpreting-qq-plots.html#cb22-7"></a>nor_skew_right <span class="ot">&lt;-</span> <span class="fu">c</span>(new_skew_right, data_sample)</span>
+<span id="cb22-8"><a href="interpreting-qq-plots.html#cb22-8"></a></span>
+<span id="cb22-9"><a href="interpreting-qq-plots.html#cb22-9"></a><span class="co"># Create new plots</span></span>
+<span id="cb22-10"><a href="interpreting-qq-plots.html#cb22-10"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb22-11"><a href="interpreting-qq-plots.html#cb22-11"></a><span class="fu">hist_comp</span>(nor_skew_right, <span class="at">title =</span> <span class="st">&quot;Skewed Right&quot;</span>, <span class="at">xs =</span> xs,</span>
+<span id="cb22-12"><a href="interpreting-qq-plots.html#cb22-12"></a>          <span class="at">norm_dens =</span> norm_dens)</span>
+<span id="cb22-13"><a href="interpreting-qq-plots.html#cb22-13"></a><span class="fu">qq_comp</span>(nor_skew_right)</span></code></pre></div>
+<p><img src="QQ-plot_files/figure-html/unnamed-chunk-13-1.png" width="95%" style="display: block; margin: auto;" /></p>
+Here we are looking at data that is skewed to the right of the standard normal. The histogram is shifted to the right of the standard normal (red line). On the QQ plot we now see a deviation from the diagonal for values larger than 0. Seeing such a QQ plot means you are looking right skewed data.
+</details>
+</div>
+<div id="symmetric-tails" class="section level2" number="14.3">
+<h2><span class="header-section-number">14.3</span> Symmetric Tails</h2>
+<p>We can also have tails which are symmetric on both sides. We distinguish between fat tailed and thin tailed distributions. We will again create such data and look at how we can identify them in a QQ plot. We wills tart with at fat tailed example.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb23-1"><a href="interpreting-qq-plots.html#cb23-1"></a><span class="co"># To create fat tailed data</span></span>
+<span id="cb23-2"><a href="interpreting-qq-plots.html#cb23-2"></a>nor_fat <span class="ot">&lt;-</span> <span class="fu">c</span>(data_sample <span class="sc">*</span> <span class="dv">3</span>, data_sample)</span>
+<span id="cb23-3"><a href="interpreting-qq-plots.html#cb23-3"></a></span>
+<span id="cb23-4"><a href="interpreting-qq-plots.html#cb23-4"></a><span class="co"># Create plot</span></span>
+<span id="cb23-5"><a href="interpreting-qq-plots.html#cb23-5"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb23-6"><a href="interpreting-qq-plots.html#cb23-6"></a><span class="fu">hist_comp</span>(nor_fat, <span class="at">title =</span> <span class="st">&quot;Fat Tails&quot;</span>, <span class="at">xs =</span> xs, <span class="at">norm_dens =</span> norm_dens)</span>
+<span id="cb23-7"><a href="interpreting-qq-plots.html#cb23-7"></a><span class="fu">qq_comp</span>(nor_fat)</span></code></pre></div>
+<p><img src="QQ-plot_files/figure-html/unnamed-chunk-14-1.png" width="95%" style="display: block; margin: auto;" /></p>
+<p>Here we can see the histogram there is more data located both to the right and left of the standard normal distribution drawn as a red line. When we look at the QQ plot we see that the first quantiles are smaller than the corresponding theoretical values. For larger quantiles the values are larger than the theoretical values.</p>
+<p>We can now look at thin tailed, the easiest way to simulate this is by using a normal distribution with variance smaller than 1.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb24-1"><a href="interpreting-qq-plots.html#cb24-1"></a><span class="co"># Create thin tailed data</span></span>
+<span id="cb24-2"><a href="interpreting-qq-plots.html#cb24-2"></a><span class="fu">set.seed</span>(<span class="dv">1112</span>) <span class="co"># set a random seed</span></span>
+<span id="cb24-3"><a href="interpreting-qq-plots.html#cb24-3"></a><span class="co"># we simulate new data with n as before but different variance</span></span>
+<span id="cb24-4"><a href="interpreting-qq-plots.html#cb24-4"></a>norm_thin <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb24-5"><a href="interpreting-qq-plots.html#cb24-5"></a></span>
+<span id="cb24-6"><a href="interpreting-qq-plots.html#cb24-6"></a><span class="co"># Create plots</span></span>
+<span id="cb24-7"><a href="interpreting-qq-plots.html#cb24-7"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb24-8"><a href="interpreting-qq-plots.html#cb24-8"></a><span class="fu">hist_comp</span>(norm_thin, <span class="at">title =</span> <span class="st">&quot;Skewed Right&quot;</span>, <span class="at">xs =</span> xs,</span>
+<span id="cb24-9"><a href="interpreting-qq-plots.html#cb24-9"></a>          <span class="at">norm_dens =</span> norm_dens)</span>
+<span id="cb24-10"><a href="interpreting-qq-plots.html#cb24-10"></a><span class="fu">qq_comp</span>(norm_thin)</span></code></pre></div>
+<p><img src="QQ-plot_files/figure-html/unnamed-chunk-15-1.png" width="95%" style="display: block; margin: auto;" /></p>
+<p>Here we can see that the histogram of the data indicating a distribution narrower than the standard normal distribution. Here it is a little tricker to see in the QQ plot but you should notice that the initial quartiles have values higher than the diagonal and the last quantiles have values smaller than the diagonal. This is the opposite behavior compared to the fat tailed distribution.</p>
+
+</div>
+</div>
+  </main>
+
+  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <div id="book-on-this-page"></div>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5">
+  <div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2024-10-07.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+<script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+
+</html>
