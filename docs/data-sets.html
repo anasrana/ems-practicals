@@ -61,7 +61,7 @@
 <li><a class="" href="linear-regression.html"><span class="header-section-number">10</span> Linear regression</a></li>
 <li><a class="" href="multiple-regression.html"><span class="header-section-number">11</span> Multiple regression</a></li>
 <li><a class="" href="qq-plot.html"><span class="header-section-number">12</span> QQ Plot - How To Use And Interpret</a></li>
-<li><a class="" href="practical-generalised-linear-models.html"><span class="header-section-number">13</span> Practical: Generalised linear models</a></li>
+<li><a class="" href="generalised-linear-models.html"><span class="header-section-number">13</span> Generalised Linear Models</a></li>
 <li class="book-part">Solutions</li>
 <li><a class="" href="simSol.html"><span class="header-section-number">A</span> Solution: Simulations</a></li>
 <li><a class="" href="mc-solution.html"><span class="header-section-number">B</span> Solution: Three state Markov Chain</a></li>
@@ -90,14 +90,14 @@
 <div id="data-lr" class="section level2 unnumbered">
 <h2>Data: Linear regression<a class="anchor" aria-label="anchor" href="#data-lr"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb465"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb465-1"><a href="data-sets.html#cb465-1"></a><span class="co"># Stork download</span></span>
-<span id="cb465-2"><a href="data-sets.html#cb465-2"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/stork.txt</span>
-<span id="cb465-3"><a href="data-sets.html#cb465-3"></a></span>
-<span id="cb465-4"><a href="data-sets.html#cb465-4"></a><span class="co"># lr_data1</span></span>
-<span id="cb465-5"><a href="data-sets.html#cb465-5"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/lr_data1.Rdata</span>
-<span id="cb465-6"><a href="data-sets.html#cb465-6"></a></span>
-<span id="cb465-7"><a href="data-sets.html#cb465-7"></a><span class="co"># lr_data2</span></span>
-<span id="cb465-8"><a href="data-sets.html#cb465-8"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/lr_data2.Rdata</span></code></pre></div>
+<div class="sourceCode" id="cb472"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb472-1"><a href="data-sets.html#cb472-1"></a><span class="co"># Stork download</span></span>
+<span id="cb472-2"><a href="data-sets.html#cb472-2"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/stork.txt</span>
+<span id="cb472-3"><a href="data-sets.html#cb472-3"></a></span>
+<span id="cb472-4"><a href="data-sets.html#cb472-4"></a><span class="co"># lr_data1</span></span>
+<span id="cb472-5"><a href="data-sets.html#cb472-5"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/lr_data1.Rdata</span>
+<span id="cb472-6"><a href="data-sets.html#cb472-6"></a></span>
+<span id="cb472-7"><a href="data-sets.html#cb472-7"></a><span class="co"># lr_data2</span></span>
+<span id="cb472-8"><a href="data-sets.html#cb472-8"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/lr_data2.Rdata</span></code></pre></div>
 <button class="buttonD">
 <a href="linear-regression.html#LR-sim">Back to Exercise</a>
 </button>
@@ -105,24 +105,29 @@
 <div id="data-pca" class="section level2 unnumbered">
 <h2>Data: PCA<a class="anchor" aria-label="anchor" href="#data-pca"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb466"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb466-1"><a href="data-sets.html#cb466-1"></a><span class="co"># Pollen2014 data</span></span>
-<span id="cb466-2"><a href="data-sets.html#cb466-2"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/Pollen2014.txt</span>
-<span id="cb466-3"><a href="data-sets.html#cb466-3"></a></span>
-<span id="cb466-4"><a href="data-sets.html#cb466-4"></a><span class="co"># Supplementary Labels</span></span>
-<span id="cb466-5"><a href="data-sets.html#cb466-5"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/SupplementaryLabels.txt</span></code></pre></div>
+<div class="sourceCode" id="cb473"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb473-1"><a href="data-sets.html#cb473-1"></a><span class="co"># Pollen2014 data</span></span>
+<span id="cb473-2"><a href="data-sets.html#cb473-2"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/Pollen2014.txt</span>
+<span id="cb473-3"><a href="data-sets.html#cb473-3"></a></span>
+<span id="cb473-4"><a href="data-sets.html#cb473-4"></a><span class="co"># Supplementary Labels</span></span>
+<span id="cb473-5"><a href="data-sets.html#cb473-5"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/SupplementaryLabels.txt</span></code></pre></div>
+<button class="buttonD">
+<a href="principal-component-analysis.html#pca-intro">Back to Exercise</a>
+</button>
 </div>
 <div id="data-glm" class="section level2 unnumbered">
 <h2>Data: Generalised linear models<a class="anchor" aria-label="anchor" href="#data-glm"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb467"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb467-1"><a href="data-sets.html#cb467-1"></a><span class="co"># gwas-cc-ex1.Rdata</span></span>
-<span id="cb467-2"><a href="data-sets.html#cb467-2"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/gwas-cc-ex1.Rdata</span>
-<span id="cb467-3"><a href="data-sets.html#cb467-3"></a></span>
-<span id="cb467-4"><a href="data-sets.html#cb467-4"></a><span class="co"># gwas-cc-ex2.Rdata</span></span>
-<span id="cb467-5"><a href="data-sets.html#cb467-5"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/gwas-cc-ex2.Rdata</span>
-<span id="cb467-6"><a href="data-sets.html#cb467-6"></a></span>
-<span id="cb467-7"><a href="data-sets.html#cb467-7"></a><span class="co"># nb_data.Rdata</span></span>
-<span id="cb467-8"><a href="data-sets.html#cb467-8"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/nb_data.Rdata</span></code></pre></div>
-
+<div class="sourceCode" id="cb474"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb474-1"><a href="data-sets.html#cb474-1"></a><span class="co"># gwas-cc-ex1.Rdata</span></span>
+<span id="cb474-2"><a href="data-sets.html#cb474-2"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/gwas-cc-ex1.Rdata</span>
+<span id="cb474-3"><a href="data-sets.html#cb474-3"></a></span>
+<span id="cb474-4"><a href="data-sets.html#cb474-4"></a><span class="co"># gwas-cc-ex2.Rdata</span></span>
+<span id="cb474-5"><a href="data-sets.html#cb474-5"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/gwas-cc-ex2.Rdata</span>
+<span id="cb474-6"><a href="data-sets.html#cb474-6"></a></span>
+<span id="cb474-7"><a href="data-sets.html#cb474-7"></a><span class="co"># nb_data.Rdata</span></span>
+<span id="cb474-8"><a href="data-sets.html#cb474-8"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/nb_data.Rdata</span></code></pre></div>
+<button class="buttonD">
+<a href="generalised-linear-models.html#gwas">Back to Exercise</a>
+</button>
 
 </div>
 </div>

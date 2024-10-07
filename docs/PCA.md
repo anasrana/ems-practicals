@@ -10,7 +10,7 @@ For this practical you will require three datasets, for more information about d
   [Download data](#data-pca)
 </button>
 
-## Introduction
+## Introduction {#pca-intro}
 
 We use PCA in order to explore complex datasets. By performing dimensionality reduction we can better visualize the data that has many variables. This technique is probably the most popular tool applied across bioscience problems (e.g. for gene expression problems).
 
