@@ -61,7 +61,7 @@
 <li><a class="" href="linear-regression.html"><span class="header-section-number">10</span> Linear regression</a></li>
 <li><a class="" href="multiple-regression.html"><span class="header-section-number">11</span> Multiple regression</a></li>
 <li><a class="" href="qq-plot.html"><span class="header-section-number">12</span> QQ Plot - How To Use And Interpret</a></li>
-<li><a class="" href="practical-generalised-linear-models.html"><span class="header-section-number">13</span> Practical: Generalised linear models</a></li>
+<li><a class="" href="generalised-linear-models.html"><span class="header-section-number">13</span> Generalised Linear Models</a></li>
 <li class="book-part">Solutions</li>
 <li><a class="" href="simSol.html"><span class="header-section-number">A</span> Solution: Simulations</a></li>
 <li><a class="" href="mc-solution.html"><span class="header-section-number">B</span> Solution: Three state Markov Chain</a></li>
@@ -116,7 +116,7 @@
 <span id="cb15-2"><a href="monte-carlo-methods.html#cb15-2"></a>mc_integral <span class="ot">&lt;-</span> <span class="fu">sum</span>(sims <span class="sc">&gt;=</span> <span class="dv">1</span> <span class="sc">&amp;</span> sims <span class="sc">&lt;=</span> <span class="dv">3</span>) <span class="sc">/</span> n</span></code></pre></div>
 <p>The result we get is:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb16-1"><a href="monte-carlo-methods.html#cb16-1"></a><span class="fu">print</span>(mc_integral)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 0.364</code></pre>
+<pre class="bg-info"><code>#&gt; [1] 0.367</code></pre>
 <p>This is our estimate of the integral. We can compare this to the true value of the integral which we can calculate using the <code>pnorm</code> function in <code>R</code>. This is the probability of a Normal distribution falling between 1 and 3:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb18-1"><a href="monte-carlo-methods.html#cb18-1"></a>mc_exact <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">2</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">1</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
 <span id="cb18-2"><a href="monte-carlo-methods.html#cb18-2"></a><span class="fu">print</span>(mc_exact)</span></code></pre></div>
@@ -183,7 +183,7 @@ Hint
 <span id="cb20-16"><a href="monte-carlo-methods.html#cb20-16"></a>pr_greater_than_three <span class="ot">&lt;-</span> <span class="fu">sum</span>(greater_than_three) <span class="sc">/</span> runs</span></code></pre></div>
 <p>For our MC estimate of the probability <span class="math inline">\(P(X&gt;3)\)</span> we get</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb21-1"><a href="monte-carlo-methods.html#cb21-1"></a><span class="fu">print</span>(pr_greater_than_three)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 0.71</code></pre>
+<pre class="bg-info"><code>#&gt; [1] 0.82</code></pre>
 <p>which we can compare to <code>R</code>’s built-in Binomial distribution function:</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb23-1"><a href="monte-carlo-methods.html#cb23-1"></a><span class="fu">print</span>(<span class="fu">pbinom</span>(<span class="dv">3</span>, <span class="dv">10</span>, <span class="fl">0.5</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>))</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; [1] 0.828125</code></pre>

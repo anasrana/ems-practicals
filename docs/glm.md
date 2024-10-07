@@ -1,9 +1,9 @@
-# Practical: Generalised linear models
+# Generalised Linear Models
 
 In a genome-wide association study, we perform an experiment where we select $n$ individuals with a disease (cases) and $n$ individuals without the diseases (controls) and look for genetic differences between these two groups. In particular, we are interested in specific genetic variants (SNPs) that might induce some predisposition towards the disease.
 
 <!-- TODO: Fix the data here -->
-Suppose I observe the following genotypes for a SNP in 40,000 individuals (20,000 cases, 20,000 controls):
+Suppose I observe the following genotypes for a SNP in 4,000 individuals (2,000 cases, 2,000 controls):
 
 - Genotypes: `AA` `Aa` `aa`
 - Controls: `3 209 1788`
@@ -11,18 +11,21 @@ Suppose I observe the following genotypes for a SNP in 40,000 individuals (20,00
 
 The cases seem to have relatively more `A` alleles than the controls. This might make us suspect that having `A` alleles at this SNP is associated with the disease.
 
+This is the idea we will implement with data.
+
 ## Data
 
-For this practical we will use some preprepared data-files. You will download instructions [here](#data-glm) you can use these links to download them:
+For this practical we will use some preprepared data-files. You will find instructions on how to download files in the linke below:
 
-<!-- TODO: Fix links here -->
-- `gwas-cc-ex1.Rdata` ([download](https://raw.github.com/anasrana/module1-practical_Bham/master/data/gwas-cc-ex1.Rdata))
-- `gwas-cc-ex2.Rdata` ([download](https://raw.github.com/anasrana/module1-practical_Bham/master/data/gwas-cc-ex2.Rdata))
-- `nb_data.Rdata` ([download](https://raw.github.com/anasrana/module1-practical_Bham/master/data/nb_data.Rdata))
+<button class="buttonD">
+  [Download data](#data-glm)
+</button>
 
-## Detecting SNP associations
+## Detecting SNP Associations {#gwas}
 
-We have seen in lectures that we can do statistical tests for this type of contingency table using Chi Squared Tests. Let's load example data set and and prepare
+We have seen in lectures that we can do statistical tests for this type of contingency table using Chi Squared Tests. Let's load the example data set and prepare a loop to scan through all SNPs to find those that are associated with the disease.
+
+The first step is to load the data and check what the data looks like:
 
 
 ```{.r .numberLines}
@@ -38,9 +41,39 @@ p <- nrow(X)
 control <- which(y == 0)
 # disease cases are encoded as 1 in y
 cases <- which(y == 1)
+
+cat("No. of individuals:", n)
 ```
 
-Now we need to write a loop that scans through all, $p$, SNPs:
+``` bg-info
+#> No. of individuals: 40000
+```
+
+```{.r .numberLines}
+cat("No. of SNPs:", p)
+```
+
+``` bg-info
+#> No. of SNPs: 300
+```
+
+```{.r .numberLines}
+cat("No. of controls:", sum(control))
+```
+
+``` bg-info
+#> No. of controls: 200010000
+```
+
+```{.r .numberLines}
+cat("No. of cases:", sum(cases))
+```
+
+``` bg-info
+#> No. of cases: 600010000
+```
+
+Now we need to write a loop that scans through all, $p$, SNPs. Each SNP is a row in the matrix `X`. For each SNP we will perform a chi-squared test to see if the genotype distribution is different between cases and controls. This means we will create a contingency table for each SNP and perform a chi-squared test.
 
 
 ```{.r .numberLines}
@@ -415,8 +448,7 @@ ggplot(new_data, aes(immunoscore, overexpressed_proteins)) +
 #> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
 #> ℹ Please use `linewidth` instead.
 #> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-#> generated.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 ```
 
 <img src="glm_files/figure-html/glm-plot-1.png" width="95%" style="display: block; margin: auto;" />

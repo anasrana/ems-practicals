@@ -54,7 +54,7 @@ matrix-operations
 rep_data-ex
 principal-component-analysis
 data
-introduction
+pca-intro
 example-pca-on-the-mtcars-dataset
 creating-plots-for-pca
 exercise-i
@@ -81,9 +81,9 @@ interpreting-qq-plots
 standard-normal
 skewed-data
 symmetric-tails
-practical-generalised-linear-models
+generalised-linear-models
 data-2
-detecting-snp-associations
+gwas
 gwas-and-logistic-regression
 negative-binomial-and-poisson-regression
 count-based-glms

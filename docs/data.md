@@ -36,6 +36,10 @@ wget https://github.com/anasrana/ems-practicals/raw/main/data/Pollen2014.txt
 wget https://github.com/anasrana/ems-practicals/raw/main/data/SupplementaryLabels.txt
 ```
 
+<button class="buttonD">
+  [Back to Exercise](#pca-intro)
+</button>
+
 ## Data: Generalised linear models {- #data-glm}
 
 
@@ -49,3 +53,7 @@ wget https://github.com/anasrana/ems-practicals/raw/main/data/gwas-cc-ex2.Rdata
 # nb_data.Rdata
 wget https://github.com/anasrana/ems-practicals/raw/main/data/nb_data.Rdata
 ```
+
+<button class="buttonD">
+  [Back to Exercise](#gwas)
+</button>
