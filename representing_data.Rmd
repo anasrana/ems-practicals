@@ -1,0 +1,337 @@
+# (PART\*) Statistical Modelling {-}
+
+# Representing Data in R
+
+In this exercise, we will go through some aspects of Linear Algebra and how we implement them in R. We will also look how to represent data and encode it properly for applications. It will teach you to implement statistical methodologies effectively in R.
+
+After these initial introduction to concepts, we will implement some linear algebraic manipulations. In this section you should check if you can repeat the calculations by hand. You will have the solutions in R and can check if you reach the same solutions calculating by hand.
+
+Some of the ideas will be familiar to you but we will phrase them in the linear algebra context. We will use data built into R or we will generate our own data.
+
+## Representing data as vectors
+
+The first thing we will revisit is vectors. This is quite basic and you have already encountered it so think of this as a refresher. We create a basic vector using `c()` and assign it using `<-` to a variable. Let us create a vector \(x\) going from 1 to 3. We can also use the function `seq()` to create a more elaborate vector. Let us create another vector, \(y\), that is made up of \(x\) and sequence from 10 to 120 in steps of 20. Some functions will also return vectors, a simple example is creating random numbers for instance using `rnorm()`. Let us create another vector, \(z\), which consists of 7 random numbers from \(\operatorname{N}(0,1)\).
+
+*Hint: Use `?seq` (or `?rnorm`) to find more information on a function. Make use of this in everything that follows.*
+
+```{r}
+# Create x vector
+x <- c(1:3)
+print(x)
+
+# Create y vector
+y <- c(x, seq(from = 10, to = 120, by = 20))
+print(y)
+
+# Create z vector
+z <- rnorm(7)
+print(z)
+
+```
+
+When you are trying to implement any vector operations in R you will be using data and for manipulations. It is important that data is made up of numbers and not anything else, otherwise operations will not work. There is one way of checking if what we have created is a vector made up of numbers, we can use the function `class()`. If it only contains numbers you will get a response of `integer`, or `numeric`. We can check what it looks like for the vectors we have created.
+
+*Note: We can nest functions in R, to run them. We make use of that here.*
+
+```{r}
+# Check what each of the vectors is made of.
+# We nest the print function and class function to create one output.
+print(class(x))
+
+# We can also introduce a step inbetween
+a <- class(y)
+print(a)
+
+print(class(z))
+```
+
+What happens when one of the entries in the vector is a string. We will create a new vector `x1` based on \(x\) and `y2` based on \(y\) to test what happens to the vector.
+
+```{r}
+# Create a vector x1
+x1 <- c(x, "x")
+# Print the class for vector x1
+print(class(x1))
+
+# Create a vector y1
+y1 <- c(y, "1")
+# Print the class for vector y1
+print(class(y1))
+```
+
+This is not a vector we can use for manipulations as you will see in the next section.
+
+## Vector operations
+
+### Addition
+
+Next we look at operations we can perform with vectors. There are a few simple ones we will explore and also see what errors we can have. You will also have noticed a few ways that R behaves in unexpected ways, this can be useful and can also cause errors. You need to be aware of them to exploit them or know when something has gone wrong.
+
+The first thing we look at is addition. We can add two vectors together that are of the same length. The first quirk in R is that we can also add vectors together that are multiples of each other. This is important to remember as it doesn't follow the rules we looked at for linear algebra. The simplest such case is when we add a number to a vector. We will look at the error message when the vectors are not of equal length.
+
+```{r, error=TRUE}
+# Add the same vector to itself
+x + x
+
+# Add a number to the vector
+x + 2
+
+# We can add x + y even though they are not the same length
+x + y
+
+# Check the length of each
+length(x)
+length(y)
+length(x + y)
+
+# We can try to add vectors of different length
+x + z
+
+```
+
+We can add \(x\) and \(y\), only because one is a multiple of the other. The vector \(x\) has length `r length(x)` and the vector \(y\) has length `r length(y)`. The addition is performed without error. You will find that the shorter vector is replicated to perform the addition and the new vector is the same length as the longer. The final part we tried is to add two vectors which are not multiples of each other. You will notice that the code will run and produce a result but you will get a warning message. This is among the reasons you want to be careful with warnings and checking each step of functions and code you write.
+
+### Multiplication
+
+The second important operation is multiplication. We can obviously multiply a vector with a numerical value. We can also multiply two vectors of the same length, and two vectors of different length, where the lengths are multiples of each other. This operation has no equivalent in linear algebra we have studied but it can be useful and can provide a shortcut for many applications. We can of course also multiply the transpose of a vector with a vector of equal length which results in a simple number. For this we use the special product sign `%*%`. Finally we can also check what happens if we multiply a numeric vector with a character vector.
+
+```{r, error=TRUE}
+# Multiply by scalar
+2 * x
+
+# Multiply two vectors of equal length
+x * x
+
+# Multiply two vectors of unequal length
+x * y
+
+# Vector multiplications
+x %*% x
+
+# Multiply character vector with numeric vector
+x * x1
+```
+
+You get an error message for the final product because one of the vectors is not a numeric vector. There are many other useful commands `sum(x)` will sum the values of a vector. You can also use `max(x)` or `min(x)` to find the maximum and minimal entry of a vector. There are many others we don't have time to go into.
+
+## Representing data as a matrix
+
+An important part of linear algebra is of course also matrices. In R a matrix is simply data arrange in two dimensions as a square or rectangle. Here is an example of a simple matrix:
+
+\[
+  A = \begin{bmatrix}
+            1 & 3 & 4\\
+            5 & 9 & 2
+        \end{bmatrix}
+\]
+
+In R to create a matrix using the `matrix()` function. We first provide a data vector and then we can specify how many rows and columns the matrix has and in which order the matrix is filled with the data. Either filling rows one at a time or columns at a time.
+
+```{r}
+# Create a matrix A using the specified vector
+A <-
+matrix(
+  c(1, 3, 4, 5, 9, 2), # data
+  nrow = 2, # 2 rows
+  ncol = 3, # 3 columns
+  byrow = TRUE # fill by row
+)
+
+# Create a matrix B using the specified vector
+B <-
+matrix(
+  c(1, 3, 4, 5, 9, 2), # data
+  nrow = 2, # 2 rows
+  ncol = 3, # 3 columns
+  byrow = FALSE # fill by column
+)
+
+# Create a matrix C using the specified vector
+C <-
+matrix(
+  c(1, 3, 4, 5, 9, 2), # data
+  nrow = 3, # 2 rows
+  ncol = 2, # 3 columns
+  byrow = FALSE # fill by column
+)
+
+# Create a matrix D using the specified vector
+D <-
+matrix(
+  c(1, 3, 4, 5, 9, 2), # data
+  nrow = 6, # 2 rows
+  ncol = 2, # 3 columns
+  byrow = FALSE # fill by column
+)
+
+# print matrix A
+print(A)
+
+# print matrix B
+print(B)
+
+# print matrix C
+print(C)
+
+# print matrix D
+print(D)
+```
+
+You can see that it is not only important what the data vector looks like but also how we fill the matrix. You can see different options when we created matrices \(A\), \(B\), and \(C\). We can create matrices with different dimensions and fill them up differently. It is important to know which matrix we are trying to create and to ensure we are doing it correctly.
+
+**Always print it (if not too large) to check you have done it correctly.**
+
+The other thing you will have seen when creating \(D\) is that R will reuse your data vector if you put in a matrix where the number of elements are a multiple of the data vector without warning and with warning when it isn't an exact exact multiple.
+
+We use `dim()` to check the dimension of the data. For instance `dim(A) =`  `r dim(A)`, and `dim(D) =` `r dim(D)`. The other useful thing is that we can name rows and columns to identify wha the data is that we have created. We can use it in two different ways, using `dimnames()`, and a combination of `colnames()`  and `rownames()`.
+
+```{r}
+# use dimnames to create both in one go using a list of vector
+dimnames(A)  <- list(
+  c("sample1", "sample2"), # rows
+  c("patient1", "patient2", "patient3") # columns
+)
+
+# print matrix A
+print(A)
+
+# Create column names B
+colnames(B) <- c("gene1", "gene2", "gene3")
+# print matrix B
+print(B)
+
+# create row names C
+rownames(C) <- c("hospital1", "hospital2", "hospital3")
+# print matrix C
+print(C)
+```
+
+This can be very useful when working with data. We can also create a matrix based on a data matrix. We will make use of the `iris` data set which is built  into R. This can be useful when the data is not made up of just numerical values and you need to perform linear algebraic manipulations. We can convert a subset of a `data.frame` to matrix using the `as.matrix()` command.
+
+```{r, error=T}
+# Load iris data
+data("iris")
+
+# Look at first 6 rows of the data
+head(iris)
+
+# Create a matrix of the first 3 columns and the first 10 rows
+iris_matrix <- as.matrix(iris[1:10, 1:3])
+
+print(iris_matrix)
+
+# Create a matrix of the first 10 rows and all columns
+iris_full <- as.matrix(iris[1:10, ])
+
+print(iris_full)
+```
+
+We can see that if the data we use in the `as.matrix()` command consists of more than numerical values all entries will be converted to characters. This will not allow for matrix manipulations. So you have to be careful when creating such a matrix.
+
+## Matrix operations
+
+Now we can look at matrix operations that will allow us to perform operations. We can create a transpose of a matrix using the `t()` command. All normal arithmetic operations like addition and subs-traction. There are multiple ways we can use to perform multiplications. If we use the simple product `*` operation it multiplies both matrices element by element. We did not cover this in the lectures but it is called a Hadamard product. We can implement the matrix product using `%*%` we can also use this to multiply a vector with a matrix.
+
+```{r, error=T}
+# Substraction
+A - B
+
+# Addition
+A + B
+
+# Adding matrices of different dimensions
+A + D
+
+# Haddamard product
+print(A)
+print(B)
+A * B
+
+# matrix product with equal dimensions
+A %*% B
+
+# matrix product with unequal dimension
+print(A)
+print(B)
+print(C)
+print(D)
+A %*% C
+A %*% B
+C %*% A
+A %*% D
+
+# product between matrix and vector
+length(x)
+dim(A)
+
+# Using a normal product operation
+A * x
+
+# matrix multiplication with a vector
+A %*% x
+x %*% A
+
+
+
+```
+
+> Q1: Check the product `A * x`, does it behave as you expect? What about `x * A`?
+
+There are several other operations that can be useful for matrices. We will not be able to go through all of them. Here are a few you should explore:
+
+- `rowSums()`
+- `colSums()`
+- `rowMeans()`
+- `det()`
+
+## Testing application {#rep_data-ex}
+
+We will create a few matrices and vectors here. Then you should implement some arithmetic operations in R. Following that you should try to perform the same calculations by hand to check you have done the operations correctly and can perform them by hand.
+
+```{r}
+# Creating matrices
+A1 <- matrix(
+  c(1:9),
+  nrow = 3
+)
+
+A2 <- matrix(
+  c(1, 3, 4, 6, 9, 2, 1, 0, 3),
+  nrow = 3
+)
+
+# Creating vectors
+v1 <- c(0, 1, 1)
+v2 <- c(2, 1, 0)
+v3 <- c(3, 1, 1)
+x1 <- c(1, 2, 0, 1)
+x2 <- c(2, 3, 1, 1)
+x3 <- c(4, 1, 2, 0)
+
+# Another way to create matrices
+B1 <- cbind(v1, v3, v2)
+B2 <- rbind(v1, v2, v3)
+
+```
+
+> Q2: Calculate the following matrices.
+>
+> - `A1 + A2`
+> - `A1 * A2`
+> - `A1 - A2`
+> - `t(A1)`
+> - `t(B2)`
+
+
+> Q3: Compute the norms of all vectors.
+
+> Q4: Compute the inverse of `A1`, `A2`, and `B3`.
+> You don't need to invert the matrices by hand but check they are an inverse.
+
+> Q5: Compute `A1 %*% v1` and `v1 %*% A1`
+
+> Q6: Compute `v2 %*% B2` and `B2 %*% v2`
+
+<button class="button">
+ [Solution](#representing_data-sol)
+</button>

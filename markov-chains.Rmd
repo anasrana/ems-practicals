@@ -58,7 +58,7 @@ print(weather_sequence)
 ```
 
 ::: {.infobox}
-## Exercise MC
+## Exercise MC {#mc-exercise}
 
 > Can you extend this example to a three-state model?
 

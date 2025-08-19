@@ -14,11 +14,12 @@ bs4:
 clean:
 	Rscript -e 'bookdown::clean_book()';\
 	rm -rf _bookdown_files
-	rm tikz*log
-	rm tikz*aux
+	 rm -f tikz*log
+	 rm -f tikz*aux
 
 publish:
 	cd docs;\
 	git add .;\
 	git commit -m '$(COMMIT)';\
 	git push
+	make clean

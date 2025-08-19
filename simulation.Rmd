@@ -62,6 +62,8 @@ out2 <- sample(x, 10, replace=TRUE)
 :::
 
 ::: {.infobox}
+## Exercise - further exploration
+
 Explore simulating random numbers further, checking different values for `x` and the number of draws. Plot your findings and see if you can find any patterns.
 
 :::
