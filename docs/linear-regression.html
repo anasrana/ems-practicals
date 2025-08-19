@@ -7,7 +7,7 @@
 <title>Chapter 10 Linear regression | Essentials of Mathematics and Statistics</title>
 <meta name="author" content="Anas A Rana">
 <meta name="description" content="In this practical you will go through some of the basics of linear modelling in R as well as simulating data. The practical contains the following elements: simulate linear regression model...">
-<meta name="generator" content="bookdown 0.40 with bs4_book()">
+<meta name="generator" content="bookdown 0.43 with bs4_book()">
 <meta property="og:title" content="Chapter 10 Linear regression | Essentials of Mathematics and Statistics">
 <meta property="og:type" content="book">
 <meta property="og:description" content="In this practical you will go through some of the basics of linear modelling in R as well as simulating data. The practical contains the following elements: simulate linear regression model...">
@@ -16,10 +16,10 @@
 <meta name="twitter:description" content="In this practical you will go through some of the basics of linear modelling in R as well as simulating data. The practical contains the following elements: simulate linear regression model...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Manrope-0.4.9/font.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Manrope-0.4.10/font.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Fira%20Code:wght@100&amp;display=swap" rel="stylesheet">
-<link href="libs/Spectral-0.4.9/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<link href="libs/Spectral-0.4.10/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -74,6 +74,7 @@
 <li><a class="" href="solution-linear-regression-and-correlation.html"><span class="header-section-number">I</span> Solution: Linear regression and Correlation</a></li>
 <li class="book-part">APPENDIX</li>
 <li><a class="" href="start.html">Getting started in R and Rstudio</a></li>
+<li><a class="" href="creating-functions-r.html">Creating functions R</a></li>
 <li><a class="" href="data-sets.html">Data sets</a></li>
 </ul>
 
@@ -207,10 +208,12 @@ First we define the values of the parameters of linear regression <span class="m
 <span id="cb209-12"><a href="linear-regression.html#cb209-12"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y_true), <span class="at">colour =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">1.3</span>) <span class="sc">+</span></span>
 <span id="cb209-13"><a href="linear-regression.html#cb209-13"></a>  <span class="co"># plot predicted relationship in blue</span></span>
 <span id="cb209-14"><a href="linear-regression.html#cb209-14"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y_hat), <span class="at">colour =</span> <span class="st">"blue"</span>)</span></code></pre></div>
-<pre><code>#&gt; Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+<pre><code>#&gt; Warning: Using `size` aesthetic for lines was deprecated in ggplot2
+#&gt; 3.4.0.
 #&gt; ℹ Please use `linewidth` instead.
 #&gt; This warning is displayed once every 8 hours.
-#&gt; Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
+#&gt; Call `lifecycle::last_lifecycle_warnings()` to see where
+#&gt; this warning was generated.</code></pre>
 <div class="sourceCode" id="cb211"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb211-1"><a href="linear-regression.html#cb211-1"></a><span class="co"># force Rstudio to display the plot</span></span>
 <span id="cb211-2"><a href="linear-regression.html#cb211-2"></a>  <span class="fu">print</span>(lr_plot)</span></code></pre></div>
 <div class="inline-figure"><img src="linear-regression_files/figure-html/lm-fit-1.png" width="95%" style="display: block; margin: auto;"></div>
@@ -226,7 +229,7 @@ First we define the values of the parameters of linear regression <span class="m
 <div class="inline-figure"><img src="linear-regression_files/figure-html/resid_hist-1.png" width="95%" style="display: block; margin: auto;"></div>
 <p>We expect the mean and variance of the residuals to be close to the level used to generate the data.</p>
 <div class="sourceCode" id="cb214"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb214-1"><a href="linear-regression.html#cb214-1"></a><span class="fu">print</span>(<span class="fu">mean</span>(ls_residual))</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 1.776357e-17</code></pre>
+<pre class="bg-info"><code>#&gt; [1] -3.885781e-17</code></pre>
 <div class="sourceCode" id="cb216"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb216-1"><a href="linear-regression.html#cb216-1"></a><span class="fu">print</span>(<span class="fu">var</span>(ls_residual))</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; [1] 0.4444955</code></pre>
 <p>This is as expected since subtracting a good fit from the data leaves <span class="math inline">\(\epsilon\)</span> which has <span class="math inline">\(0\)</span> mean and <span class="math inline">\(0.5\)</span> variance.</p>
@@ -414,7 +417,7 @@ First we define the values of the parameters of linear regression <span class="m
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2024-10-07.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-08-19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -122,9 +122,9 @@ out <- z_test(x, 0, 1) # null should not be rejected!
 ```
 
 ``` bg-info
-#>  z = 0.055 
-#>  one-tailed probability = 0.478 
-#>  two-tailed probability = 0.956
+#>  z = -2.233 
+#>  one-tailed probability = 0.013 
+#>  two-tailed probability = 0.026
 ```
 
 ```{.r .numberLines}
@@ -133,13 +133,13 @@ print(out)
 
 ``` bg-info
 #> $z
-#> [1] 0.055
+#> [1] -2.233
 #> 
 #> $one_p
-#> [1] 0.478
+#> [1] 0.013
 #> 
 #> $two_p
-#> [1] 0.956
+#> [1] 0.026
 ```
 
 ```{.r .numberLines}
@@ -148,9 +148,9 @@ out <- z_test(x, 0, 1) # null should be rejected!
 ```
 
 ``` bg-info
-#>  z = 2.584 
-#>  one-tailed probability = 0.005 
-#>  two-tailed probability = 0.01
+#>  z = 4.196 
+#>  one-tailed probability = 0 
+#>  two-tailed probability = 0
 ```
 
 ```{.r .numberLines}
@@ -159,13 +159,13 @@ print(out)
 
 ``` bg-info
 #> $z
-#> [1] 2.584
+#> [1] 4.196
 #> 
 #> $one_p
-#> [1] 0.005
+#> [1] 0
 #> 
 #> $two_p
-#> [1] 0.01
+#> [1] 0
 ```
 
 <button class="button">
@@ -447,10 +447,6 @@ library(vcdExtra)
 
 ```
 #> Loading required package: vcd
-```
-
-```
-#> Warning: package 'vcd' was built under R version 4.3.3
 ```
 
 ```
