@@ -8,10 +8,6 @@ rmd_files:
   html: [
     "index.Rmd",
 
-    "intro.Rmd",
-    "data.Rmd",
-    "using-practical.Rmd",
-
     "simulation.Rmd",
     "markov-chains.Rmd",
     "monopoly-simulation.Rmd",
@@ -20,15 +16,25 @@ rmd_files:
     "confid-interval.Rmd",
     "CompTesting.Rmd",
 
-    "linear-regression.Rmd",
+    "representing_data.Rmd",
     "PCA.Rmd",
+    "linear-regression.Rmd",
     "multiple-regression.Rmd",
+    "QQ-plot.Rmd",
     "glm.Rmd",
 
-    "monopoly-solution.Rmd",
+    "sim-sol.Rmd",
     "MC-solution.Rmd",
+    "monopoly-solution.Rmd",
+    "monte-carlo_sol.Rmd",
+    "mle_sol.Rmd",
+    "ci_sol.Rmd",
     "comptest-sol.Rmd",
-    "LR-solutions.Rmd"
+    "representing_data-sol.Rmd",
+    "LR-solutions.Rmd",
+
+    "intro.Rmd",
+    "data.Rmd"
     ]
 language:
   ui:
