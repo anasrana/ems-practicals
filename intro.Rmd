@@ -1,4 +1,4 @@
-# (PART\*) Basic Tools {-}
+# (PART\*) APPENDIX {-}
 
 # Getting started in R and Rstudio {- #start}
 
@@ -86,3 +86,51 @@ A comment in R code begins with the `#` symbol. Your code in First `script.R` co
 Notice how the RStudio editor shows these comments colored green. The green color helps you focus on the code and not get confused by the comments.
 
 Besides using comments to help make your `R` code more easily understood, you can use the `#` symbol to ignore lines of code while you are developing your code stream. Simply place a `#` in front of any line that you want to ignore. `R` will treat those lines as comments and ignore them. When you want to include those lines again in the code execution, remove the `#` symbols and the code is executable again. This technique allows you to change what code you execute without having to retype deleted code.
+
+# Creating functions R {-}
+
+A really useful way to organize your code is by creating functions. Functions allow you to encapsulate code that performs a specific task, making your scripts more modular and easier to read. You should always consider creating functions, whenever you find yourself repeating code or performing a specific task multiple times.
+
+In R, you can create a function using the `function` keyword. Here is a simple example of a function that adds two numbers:
+
+```{r}
+add_numbers <- function(a, b) {
+  return(a + b)
+}
+```
+
+This is a simple function that takes two arguments and returns their sum. In the function call `function(a, b)` the arguments `a` and `b` are passed to the function. They will be used locally within the function. The `return` statement specifies what the function will output when it is called. In this case, it returns the sum of `a` and `b`.
+
+You can then call this function with different arguments, but the arguments must match the function's parameters:
+
+```{r}
+result1 <- add_numbers(3, 5)
+result2 <- add_numbers(10, 20)
+```
+
+Here we called the function without specifying the variable names. The function uses the values in the same order as the parameters are defined. In R you can also call the function with named arguments:
+
+```{r}
+result1 <- add_numbers(a = 3, b = 5)
+result2 <- add_numbers(b = 20, a = 10)
+```
+
+Note, that you can reorder the arguments when using named parameters in the function call.
+
+Functions can also have default argument values. For example:
+
+```{r}
+add_numbers <- function(a, b = 0) {
+  return(a + b)
+}
+```
+
+In this case, if you call `add_numbers(3)`, it will return `3` because `b` defaults to `0` unless otherwise specified.
+
+```{r}
+result1 <- add_numbers(3)
+result3 <- add_number(3, 0)
+result2 <- add_numbers(10, 5)
+```
+
+Creating functions is a powerful way to make your R code more efficient and easier to maintain.

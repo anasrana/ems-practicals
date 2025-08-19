@@ -2,11 +2,27 @@
 
 Now you will use to simulate simplified games of Monopoly (https://en.wikipedia.org/wiki/Monopoly_(game)). In addition, there are also many tutorials and guides on the Web describing how to produce computer simulations for Monopoly. You are welcome to read and use these examples to inspire your work.
 
+This will be your first larger simulation. The first thing to do when working on a larger simulation is to break it down into smaller parts and set up a plan. Here are some steps to consider:
+
+1.  Simulate a single player moving around the board
+2.  Simulate a player going to jail
+3.  Simulate a player going to jail with three doubles
+4.  Simulate multiple players moving around the board
+5.  ... and so on
+
+We will start with the first step.
+
 ## Moving around the board
 
-A Monopoly board has 40 spaces. Players take it in turns to roll two dice and traverse around the board according to the sum of the dice values.
+A Monopoly board has 40 spaces. Players take it in turns to roll two dice and traverse around the board according to the sum of the dice values. You can plan this code by considering the main components:
 
-Use the following code example to simulate turns of a single player:
+-   the board
+-   the dice
+-   the player position
+-   the input you need to provide
+-   the output you want to get
+
+Use the following code example to simulate turns of a single player moving around the board. The code will simulate a player moving around the board for a number of turns and store the board positions visited. Consider each step of the code and try to understand what it is doing and why.
 
 ```{r}
 num_turns <- 100000 # number of turns to take
@@ -47,12 +63,28 @@ By increasing the number of turns taken, what distribution does the set of simul
 hist(positions_visited, breaks = seq(0, 40, len = 41), right = FALSE)
 ```
 
+::: {.infobox}
+
+## Questions to consider
+
+-   What is the distribution of board positions during a long game?
+-   Can you explain this result qualitatively?
+-   How does the distribution change if you increase the number of turns?
+-   Why do you need to specify 41 of breaks in the histogram?
+-   What does `right = FALSE` do in the `hist` function?
+
+<font color="darkorange">**Discuss with your neighbour and the instructor.**</font>
+
+:::
+
 ## Going to Jail
 
-If a player lands on to Go To Jail space they must move immediately to the Jail space. Extend your code to include the possibility of going to jail. Here, assume that once in jail, the player continues as normal on the next turn.
+Now we will add the next level of complexity to the simulation. We will consider the possibility of going to jail.
+
+If a player lands on to Go To Jail space they must move immediately to the Jail space. Extend your code to include the possibility of going to jail. Here, assume that once in jail, the player continues as normal on the next turn. This is of course not the case in the real game, but we are simplifying the rules for this simulation.
 
 ```{r}
- num_turns <- 100000 # number of turns to take
+num_turns <- 100000 # number of turns to take
 
 current_board_position <- 0 # start on the GO space
 go_to_jail_position <- 30 # the go to jail space
@@ -90,24 +122,37 @@ for (turn in 1:num_turns) {
 ```
 
 ::: {.infobox}
-## Exercise
+## Exercise - Going to Jail {#goJailMon}
 
 > What is the distribution of board positions during a long game?
 
+<details>
+<summary>Show solution</summary>
 ```{r, background="transparent"}
 hist(positions_visited, breaks = seq(0, 40, len = 41), right = FALSE)
 ```
 
 > Can you explain this result qualitatively?
 
-Discuss with your neighbour and the instructor.
+<font color="darkorange">Discuss with your neighbour and the instructor.</font>
+
+</details>
 :::
 
 
 ::: {.infobox}
-## Exercise
+## Exercise - Repeated doubles {#repDoublesMon}
 
-You can also go to jail, if you roll three doubles (both dice having the same value) in a row. Update your code to allow for the possibility of going to Jail with three doubles. How does the distribution of board positions change?
+Now we will add the next level of complexity to the simulation by considering the possibility of going to jail with three doubles. A double is when both dice have the same value.
+
+Update your code to allow for the possibility of going to Jail with three doubles. How does the distribution of board positions change?
+
+Plan your code by considering the main components:
+
+-   detecting doubles
+-   counting doubles
+-   going to jail with three doubles
+-   updating the board position
 
 <button class="button">
   [Show Solution](#3doubleMon)
@@ -115,9 +160,9 @@ You can also go to jail, if you roll three doubles (both dice having the same va
 :::
 
 ::: {.infobox}
-## Exercises: Extend the game
+## Exercises - Extend the game {#monopolyExt}
 
-Now consider building a more complex Monopoly simulation by incorporating more complex aspects of the game such as:
+As the final part of this exercise, consider building a more complex Monopoly simulation by incorporating more complex aspects of the game such as:
 
 -   the purchase of properties
 -   a ledger for each player
@@ -130,6 +175,9 @@ Here are some questions to answer with your simulations:
 1.  How many turns does it take before all properties are purchased?
 2.  What are the best properties to buy?
 3.  How long does it take for a winner to be determined?
+
+As before you want to plan out your code and break it down into smaller parts. You can start by simulating a single player purchasing properties. You can then extend this to multiple players and so on. Do not try to do everything at once.
+
 <button class="button">
   [Show Solution](#monopolyExtSol)
 </button>

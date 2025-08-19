@@ -1,4 +1,4 @@
-# Model Answers: Computational Testing
+# Solution: Computational Testing
 
 ## Solution: Exercise 1 {#ht-sol-ex1}
 
@@ -97,10 +97,6 @@ out <- z_test(x, 0, 1) # null should be rejected!
 print(out)
 
 ```
-
-<button class="button">
-  [Back to exercise](#ht-ex3)
-</button>
 
 <button class="button">
   [Back to exercise](#ht-ex3)

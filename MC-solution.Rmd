@@ -1,6 +1,6 @@
 
-#  Solution: 3 state Markov Chain {#mc-solution}
-```{r, echo=FALSE, engine='tikz', out.width='90%', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', engine.opts = list(template = "latex/tikz2pdf.tex")}
+#  Solution: Three state Markov Chain {#mc-solution}
+```{r, echo=FALSE, engine='tikz', out.width='70%', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', engine.opts = list(template = "latex/tikz2pdf.tex")}
 \begin{tikzpicture}[node distance=4cm,->,>=latex,auto,
   every edge/.append style={thick}]
 
@@ -33,7 +33,12 @@ print(transitionMatrix)
 
 ```
 
-Note the ordering of the states is arbitrary but here we have used the convention that State 1 is Sunny, State 2 is Rainy and State 3 is Cloudy which means the probabilities are completed in that order in the transition matrix. We just need to be consistent.
+***Note:***
+
+- Always output the matrix to check it is set up correctly.
+- Check the row sums are equal to 1. If not, you have made a mistake.
+
+Remember the ordering of the states is arbitrary but here we have used the convention that State 1 is Sunny, State 2 is Rainy and State 3 is Cloudy which means the probabilities are completed in that order in the transition matrix. We just need to be consistent.
 
 ```{r}
 state <- 1 # initial state - it is [1] sunny, [2] rainy and [3] cloudy
@@ -49,3 +54,9 @@ for (day in 1:30) {
 }
 print(weather_sequence)
 ```
+
+This is simplest way to output the weather sequence. You could also use a `data.frame` to store the day and the weather state if you wanted to output the day and the weather state together. Even better would to create plot of the weather sequence over the 30 days or perform basic statistics on the weather sequence to output a useful summary of the weather sequence. This is left as an exercise for the reader, some methods we have already covered and we will learn more over the coming days.
+
+<button class="button">
+  [Back to exercise](#mc-exercise)
+</button>

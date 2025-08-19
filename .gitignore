@@ -85,3 +85,6 @@ vignettes/*.pdf
 /*.vscode
 *.log
 *.aux
+
+# R testing files
+testing.R

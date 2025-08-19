@@ -1,4 +1,4 @@
-# Practical: Multiple regression
+# Multiple regression
 
 Previously we have only considered simple linear regression with one response variable and one feature. In this practical we will go through examples with multiple features:
 
@@ -63,6 +63,11 @@ summary(mrl_fit)
 Now we see that the regression coefficient is large and both covariates are significant. This shows that we need to ensure we understand the relationship between covariates before we construct our model.
 
 ## Categorical covariates
+
+::: {.rmdnote}
+## NOTE {-}
+In this section we will consider a dataset with a categorical covariate. We will use linear regression to explore the relationship between the response variable and the categorical covariate. This is a simple example to illustrate the interpretation of the coefficients in the model. This is not a general approach to using linear regression with categorical variables.
+:::
 
 Recall from the lecture that covariates don't need to be numerical but can also be *categorical*. We will now explore regression with a categorical variable. Load a new dataset which is included in the `MASS` package, you won't be able to load this dataset if package isn't installed. Load the dataset explore what the data looks like.
 
@@ -144,10 +149,12 @@ plot(bwt_fit, which = 2)
 
 As we can see in this example the residuals are very close to normal with some outliers especially towards larger values of the residual. This would indicate that the model as it stands does not fulfil that assumption fully but comes close.
 
+<font color="dodgerblue">**There is a more detailed example on QQ plots and how to interpret them in the next practical, [here](#qq-plot).**</font>
+
 
 ## Gradient descent algorithm (+)
 
-Finally, in todays practical we will implement the *gradient descent algorithm* which we discussed in the lecture.
+Finally, in todays practical we will implement the *gradient descent algorithm* which we discussed in the lecture. This is a slightly tricker practical, try to implement the algorithm yourself before looking at the full details.
 
 For simplicity we will only consider the case with one covariate. In this section we will use simulated data and compare the results with `lm()`. The model we will simulate from is:
 
