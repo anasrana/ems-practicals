@@ -7,7 +7,7 @@
 <title>Chapter 8 Representing Data in R | Essentials of Mathematics and Statistics</title>
 <meta name="author" content="Anas A Rana">
 <meta name="description" content="In this exercise, we will go through some aspects of Linear Algebra and how we implement them in R. We will also look how to represent data and encode it properly for applications. It will teach...">
-<meta name="generator" content="bookdown 0.40 with bs4_book()">
+<meta name="generator" content="bookdown 0.43 with bs4_book()">
 <meta property="og:title" content="Chapter 8 Representing Data in R | Essentials of Mathematics and Statistics">
 <meta property="og:type" content="book">
 <meta property="og:description" content="In this exercise, we will go through some aspects of Linear Algebra and how we implement them in R. We will also look how to represent data and encode it properly for applications. It will teach...">
@@ -16,10 +16,10 @@
 <meta name="twitter:description" content="In this exercise, we will go through some aspects of Linear Algebra and how we implement them in R. We will also look how to represent data and encode it properly for applications. It will teach...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Manrope-0.4.9/font.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Manrope-0.4.10/font.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Fira%20Code:wght@100&amp;display=swap" rel="stylesheet">
-<link href="libs/Spectral-0.4.9/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<link href="libs/Spectral-0.4.10/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -74,6 +74,7 @@
 <li><a class="" href="solution-linear-regression-and-correlation.html"><span class="header-section-number">I</span> Solution: Linear regression and Correlation</a></li>
 <li class="book-part">APPENDIX</li>
 <li><a class="" href="start.html">Getting started in R and Rstudio</a></li>
+<li><a class="" href="creating-functions-r.html">Creating functions R</a></li>
 <li><a class="" href="data-sets.html">Data sets</a></li>
 </ul>
 
@@ -106,8 +107,8 @@
 <div class="sourceCode" id="cb78"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb78-1"><a href="representing-data-in-r.html#cb78-1"></a><span class="co"># Create z vector</span></span>
 <span id="cb78-2"><a href="representing-data-in-r.html#cb78-2"></a>z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">7</span>)</span>
 <span id="cb78-3"><a href="representing-data-in-r.html#cb78-3"></a><span class="fu">print</span>(z)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1]  0.96356355  0.05798104  0.85412413 -0.78319170
-#&gt; [5]  0.16486881 -1.65757463  0.76259245</code></pre>
+<pre class="bg-info"><code>#&gt; [1]  0.2295425  0.1207713 -2.9146956 -1.1420899 -1.1012544
+#&gt; [6]  2.4043025  0.7696968</code></pre>
 <p>When you are trying to implement any vector operations in R you will be using data and for manipulations. It is important that data is made up of numbers and not anything else, otherwise operations will not work. There is one way of checking if what we have created is a vector made up of numbers, we can use the function <code><a href="https://rdrr.io/r/base/class.html">class()</a></code>. If it only contains numbers you will get a response of <code>integer</code>, or <code>numeric</code>. We can check what it looks like for the vectors we have created.</p>
 <p><em>Note: We can nest functions in R, to run them. We make use of that here.</em></p>
 <div class="sourceCode" id="cb80"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb80-1"><a href="representing-data-in-r.html#cb80-1"></a><span class="co"># Check what each of the vectors is made of.</span></span>
@@ -163,8 +164,8 @@
 <span id="cb102-2"><a href="representing-data-in-r.html#cb102-2"></a>x <span class="sc">+</span> z</span></code></pre></div>
 <pre><code>#&gt; Warning in x + z: longer object length is not a multiple of
 #&gt; shorter object length</code></pre>
-<pre class="bg-info"><code>#&gt; [1] 1.9635636 2.0579810 3.8541241 0.2168083 2.1648688
-#&gt; [6] 1.3424254 1.7625924</code></pre>
+<pre class="bg-info"><code>#&gt; [1]  1.22954245  2.12077130  0.08530437 -0.14208993
+#&gt; [5]  0.89874559  5.40430247  1.76969676</code></pre>
 <p>We can add <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, only because one is a multiple of the other. The vector <span class="math inline">\(x\)</span> has length 3 and the vector <span class="math inline">\(y\)</span> has length 9. The addition is performed without error. You will find that the shorter vector is replicated to perform the addition and the new vector is the same length as the longer. The final part we tried is to add two vectors which are not multiples of each other. You will notice that the code will run and produce a result but you will get a warning message. This is among the reasons you want to be careful with warnings and checking each step of functions and code you write.</p>
 </div>
 <div id="multiplication" class="section level3" number="8.2.2">
@@ -537,7 +538,7 @@ You don’t need to invert the matrices by hand but check they are an inverse.</
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2024-10-07.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-08-19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

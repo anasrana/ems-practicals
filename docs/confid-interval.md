@@ -78,7 +78,7 @@ print(interval)
 ```
 
 ``` bg-info
-#> [1] 1.914822 2.914822
+#> [1] 1.82177 2.82177
 ```
 ::: {.infobox}
 ## Exercise

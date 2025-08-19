@@ -161,7 +161,7 @@ For each of the `p` SNPs we are going to call the `R` GLM function `glm` using t
 p_vals <- rep(0, p)
 for ( j in 1:p ) {
   snp_data <- data.frame(y = y, x = X[j, ])
-  glm.fit <- glm(y ~ x, family = binomial(link = logit), data = snp_data  )
+  glm.fit <- glm(y ~ x, family = binomial(link = logit), data = snp_data)
   p_vals[j] <- summary(glm.fit)$coefficients[2,4]
 }
 ```
@@ -204,13 +204,8 @@ Let’s load some prerequisite R libraries and the data to produce some summary 
 # required libraries
 library(MASS)
 library(foreign)
-```
 
-```
-#> Warning: package 'foreign' was built under R version 4.3.3
-```
 
-```{.r .numberLines}
 load("nb_data.Rdata")
 
 # print summary statistics to Console
@@ -445,10 +440,12 @@ ggplot(new_data, aes(immunoscore, overexpressed_proteins)) +
 ```
 
 ```
-#> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+#> Warning: Using `size` aesthetic for lines was deprecated in ggplot2
+#> 3.4.0.
 #> ℹ Please use `linewidth` instead.
 #> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where
+#> this warning was generated.
 ```
 
 <img src="glm_files/figure-html/glm-plot-1.png" width="95%" style="display: block; margin: auto;" />
