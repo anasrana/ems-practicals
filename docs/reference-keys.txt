@@ -5,6 +5,7 @@ sim-ex2
 exercise---further-exploration
 markov-chains
 mc-exercise
+mc-function
 a-monopoly-simulation
 moving-around-the-board
 questions-to-consider
@@ -94,7 +95,9 @@ further-understanding-the-model-optional
 simSol
 sim-sol-ex1
 sim-sol-ex2
+solution-markov-chains
 mc-solution
+mc-fn-solution
 monopolySol
 id_3doubleMon-sol
 monopolyExtSol

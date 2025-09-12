@@ -1,6 +1,17 @@
 # Markov Chains
 
-<!-- In this practical you will learn a number of techniques in R that you will use to simulate simplified games of Monopoly (<https://en.wikipedia.org/wiki/Monopoly_(game)>). In addition, there are also many tutorials and guides on the Web describing how to produce computer simulations for Monopoly. You are welcome to read and use these examples to inspire your work. -->
+
+
+<!-- In this practical you will learn a number of techniques in R that you wie_r_c <- connect(
+  from = s["Rainy"], to = s["Cloudy"],
+  label = lbl_04, label_sloped = FALSE, resect = 2, color = "black",
+  curvature = 0.3
+)
+e_r_s <- connect(
+  from = s["Rainy"], to = s["Sunny"],
+  label = lbl_03, label_sloped = FALSE, resect = 2, color = "black",
+  curvature = -0.4
+)simulate simplified games of Monopoly (<https://en.wikipedia.org/wiki/Monopoly_(game)>). In addition, there are also many tutorials and guides on the Web describing how to produce computer simulations for Monopoly. You are welcome to read and use these examples to inspire your work. -->
 
 We will now look at a **Markov Chain**. We have not covered it during lectures but based on the basic principles we have covered we will be able to use it for simulations.
 
@@ -18,7 +29,7 @@ A Markov Chain is defined by three properties:
 
 Consider the following example where we have two states describing the weather on any particular day: (i) Sunny and (ii) Rainy. Each arrow denotes the probability of going from one state to itself or another over the course of a day. For example, if it is currently sunny, the probability of it raining the next day is 0.6. Conversely, if it is raining, the probability that it will become sunny the next day is 0.7 and 0.3 that it will continue raining.
 
-<img src="markov-chains_files/figure-html/unnamed-chunk-1-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="markov-chains_files/figure-html/tstate-1.png" width="95%" style="display: block; margin: auto;" />
 
 The transition matrix can be written as the following in R:
 
@@ -56,8 +67,8 @@ print(weather_sequence)
 ```
 
 ``` bg-info
-#>  [1] 2 1 2 2 2 1 2 1 1 2 1 2 1 2 1 1 1 2 1 1 2 2 2 2 1 2 1 2
-#> [29] 1 2
+#>  [1] 2 1 2 1 1 1 1 1 2 1 2 1 1 2 1 2 2 1 2 1 2 1 2 1 2 2 1 2
+#> [29] 2 1
 ```
 
 ::: {.infobox}
@@ -65,7 +76,7 @@ print(weather_sequence)
 
 > Can you extend this example to a three-state model?
 
-<img src="markov-chains_files/figure-html/unnamed-chunk-4-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="markov-chains_files/figure-html/fstate-1.png" width="95%" style="display: block; margin: auto;" />
 
 Note, the diagram (intentionally) misses out the self-transitions. You should be able to infer this because the probabilities given would otherwise not add up to one!
 
@@ -73,5 +84,23 @@ Note, the diagram (intentionally) misses out the self-transitions. You should be
   [Show Solution](#mc-solution)
 </button>
 
+:::
+
+::: {.infobox}
+
+## Function MC {#mc-function}
+
+Now let's put the code into a function that can take a general transition matrix for any number of states and run the markov chain simulation. The function should be named `run_markov_chain` and take three arguments:
+
+- `transitionMatrix`: a matrix of transition probabilities
+- `initialState`: the starting state (an integer)
+- `numSteps`: the number of steps to simulate
+
+The function should then return a vector of simulated states as a vector. Once you have written the function, you can test it using the two-state weather model above and the three-state model. Also check that it works for a system with more states. Then also test that the function works for different initial states and number of steps. The final thing to test is if the output is a vector and has the correct length.
+
+
+<button class="button">
+  [Show Solution](#mc-fn-solution)
+</button>
 
 :::

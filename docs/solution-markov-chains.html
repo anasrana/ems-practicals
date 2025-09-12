@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>B Solution: Markov Chains | Essentials of Mathematics and Statistics</title>
+<meta name="author" content="Anas A Rana">
+<meta name="description" content="B.1 Three state Markov Chain The three state Markov chain is more complex to draw. The diagram below shows the states and the transition probabilities. The self-loop probabilities need to be...">
+<meta name="generator" content="bookdown 0.44 with bs4_book()">
+<meta property="og:title" content="B Solution: Markov Chains | Essentials of Mathematics and Statistics">
+<meta property="og:type" content="book">
+<meta property="og:description" content="B.1 Three state Markov Chain The three state Markov chain is more complex to draw. The diagram below shows the states and the transition probabilities. The self-loop probabilities need to be...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="B Solution: Markov Chains | Essentials of Mathematics and Statistics">
+<meta name="twitter:description" content="B.1 Three state Markov Chain The three state Markov chain is more complex to draw. The diagram below shows the states and the transition probabilities. The self-loop probabilities need to be...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Manrope-0.4.10/font.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira%20Code:wght@100&amp;display=swap" rel="stylesheet">
+<link href="libs/Spectral-0.4.10/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Essentials of Mathematics and Statistics</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled"><li><a class="" href="index.html"><span class="header-section-number">B</span> Solution: Markov Chains</a></li></ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/anasrana/ems-practicals">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="solution-markov-chains" class="section level1" number="15">
+<h1>
+<span class="header-section-number">B</span> Solution: Markov Chains<a class="anchor" aria-label="anchor" href="#solution-markov-chains"><i class="fas fa-link"></i></a>
+</h1>
+<div id="mc-solution" class="section level2" number="15.1">
+<h2>
+<span class="header-section-number">B.1</span> Three state Markov Chain<a class="anchor" aria-label="anchor" href="#mc-solution"><i class="fas fa-link"></i></a>
+</h2>
+<p>The three state Markov chain is more complex to draw. The diagram below shows the states and the transition probabilities. The self-loop probabilities need to be calculated. Let’s label the edges with missing values as follows:</p>
+<ul>
+<li>Sunny -&gt; Sunny = a</li>
+<li>Rainy -&gt; Rainy = b</li>
+<li>Cloudy -&gt; Cloudy = c</li>
+</ul>
+<div class="inline-figure"><img src="MC-solution_files/figure-html/fstate-1.png" width="95%" style="display: block; margin: auto;"></div>
+<p>The next step is to set-up a transition matrix for the three-state model. The transition matrix is a square matrix where each row corresponds to a state and each column corresponds to the probability of transitioning to another state. The rows must sum to 1. The main thing to bear in mind is that the ordering of the states is arbitrary but you must be consistent. Here we will use the convention that State 1 is Sunny, State 2 is Rainy and State 3 is Cloudy.</p>
+<p>The way we work out the values for a, b, and c is that the emission probabilities from each state must sum to 1. So we can work out the values as follows:</p>
+<ul>
+<li>For Sunny: <span class="math inline">\(a + 0.2 + 0.1 = 1 \Rightarrow a = 0.7\)</span>
+</li>
+<li>For Rainy: <span class="math inline">\(0.3 + b + 0.4 = 1 \Rightarrow b = 0.3\)</span>
+</li>
+<li>For Cloudy: <span class="math inline">\(0.6 + 0.2 + c = 1 \Rightarrow c = 0.2\)</span>
+</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb1-1"><a href="solution-markov-chains.html#cb1-1"></a>transitionMatrix <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">0.7</span>, <span class="fl">0.2</span>, <span class="fl">0.1</span>,</span>
+<span id="cb1-2"><a href="solution-markov-chains.html#cb1-2"></a>                            <span class="fl">0.3</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>,</span>
+<span id="cb1-3"><a href="solution-markov-chains.html#cb1-3"></a>                            <span class="fl">0.6</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>), <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">3</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-4"><a href="solution-markov-chains.html#cb1-4"></a></span>
+<span id="cb1-5"><a href="solution-markov-chains.html#cb1-5"></a><span class="co"># Check matrix set-up correctly</span></span>
+<span id="cb1-6"><a href="solution-markov-chains.html#cb1-6"></a><span class="fu">print</span>(transitionMatrix)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;      [,1] [,2] [,3]
+#&gt; [1,]  0.7  0.2  0.1
+#&gt; [2,]  0.3  0.3  0.4
+#&gt; [3,]  0.6  0.2  0.2</code></pre>
+<p><strong><em>Note:</em></strong></p>
+<ul>
+<li>Always output the matrix to check it is set up correctly.</li>
+<li>Check the row sums are equal to 1. If not, you have made a mistake.</li>
+</ul>
+<p>Remember the ordering of the states is arbitrary but here we have used the convention that State 1 is Sunny, State 2 is Rainy and State 3 is Cloudy which means the probabilities are completed in that order in the transition matrix. We just need to be consistent.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb3-1"><a href="solution-markov-chains.html#cb3-1"></a>state <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># initial state - it is [1] sunny, [2] rainy and [3] cloudy</span></span>
+<span id="cb3-2"><a href="solution-markov-chains.html#cb3-2"></a>weather_sequence <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">30</span>) <span class="co"># vector to store simulated values</span></span>
+<span id="cb3-3"><a href="solution-markov-chains.html#cb3-3"></a></span>
+<span id="cb3-4"><a href="solution-markov-chains.html#cb3-4"></a><span class="co"># simulate for 30 days</span></span>
+<span id="cb3-5"><a href="solution-markov-chains.html#cb3-5"></a><span class="cf">for</span> (day <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>) {</span>
+<span id="cb3-6"><a href="solution-markov-chains.html#cb3-6"></a>  pr <span class="ot">&lt;-</span> transitionMatrix[state, ] <span class="co"># select the row of transition probabilities</span></span>
+<span id="cb3-7"><a href="solution-markov-chains.html#cb3-7"></a></span>
+<span id="cb3-8"><a href="solution-markov-chains.html#cb3-8"></a>  <span class="co"># sample [1-3] based on the probs pr</span></span>
+<span id="cb3-9"><a href="solution-markov-chains.html#cb3-9"></a>  state <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> pr)</span>
+<span id="cb3-10"><a href="solution-markov-chains.html#cb3-10"></a>  weather_sequence[day] <span class="ot">&lt;-</span> state <span class="co"># store the sampled state</span></span>
+<span id="cb3-11"><a href="solution-markov-chains.html#cb3-11"></a>}</span>
+<span id="cb3-12"><a href="solution-markov-chains.html#cb3-12"></a><span class="fu">print</span>(weather_sequence)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;  [1] 2 1 3 3 1 2 1 3 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 3 3 2 2 3
+#&gt; [29] 2 3</code></pre>
+<p>This is simplest way to output the weather sequence. You could also use a <code>data.frame</code> to store the day and the weather state if you wanted to output the day and the weather state together. Even better would to create plot of the weather sequence over the 30 days or perform basic statistics on the weather sequence to output a useful summary of the weather sequence. This is left as an exercise for the reader, some methods we have already covered and we will learn more over the coming days.</p>
+<button class="button">
+<a href="markov-chains.html#mc-exercise">Back to exercise</a>
+</button>
+</div>
+<div id="mc-fn-solution" class="section level2" number="15.2">
+<h2>
+<span class="header-section-number">B.2</span> Solution: MC Function<a class="anchor" aria-label="anchor" href="#mc-fn-solution"><i class="fas fa-link"></i></a>
+</h2>
+<p>The first thing we will do when we want to write a function like this is to write the basic part of the function.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb5-1"><a href="solution-markov-chains.html#cb5-1"></a><span class="co"># Function with just simple structure</span></span>
+<span id="cb5-2"><a href="solution-markov-chains.html#cb5-2"></a>run_markov_chain <span class="ot">&lt;-</span> <span class="cf">function</span>(transitionMatrix, initialState, numSteps) {</span>
+<span id="cb5-3"><a href="solution-markov-chains.html#cb5-3"></a>  state <span class="ot">&lt;-</span> initialState</span>
+<span id="cb5-4"><a href="solution-markov-chains.html#cb5-4"></a>  output_vec <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, numSteps) <span class="co"># vector to store simulated values</span></span>
+<span id="cb5-5"><a href="solution-markov-chains.html#cb5-5"></a></span>
+<span id="cb5-6"><a href="solution-markov-chains.html#cb5-6"></a>  <span class="fu">return</span>(output_vec)</span>
+<span id="cb5-7"><a href="solution-markov-chains.html#cb5-7"></a>}</span></code></pre></div>
+<p>This function has the basic components required, it takes three arguments and returns a vector of simulated values. Let’s test if it works:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb6-1"><a href="solution-markov-chains.html#cb6-1"></a><span class="co"># Test the function with the two-state model</span></span>
+<span id="cb6-2"><a href="solution-markov-chains.html#cb6-2"></a>transitionMatrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.3</span>), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb6-3"><a href="solution-markov-chains.html#cb6-3"></a>initialState <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb6-4"><a href="solution-markov-chains.html#cb6-4"></a>numSteps <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb6-5"><a href="solution-markov-chains.html#cb6-5"></a>weather_sequence <span class="ot">&lt;-</span> <span class="fu">run_markov_chain</span>(transitionMatrix, initialState, numSteps)</span>
+<span id="cb6-6"><a href="solution-markov-chains.html#cb6-6"></a><span class="fu">print</span>(weather_sequence)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;  [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; [29] 0 0</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb8-1"><a href="solution-markov-chains.html#cb8-1"></a><span class="fu">print</span>(<span class="fu">length</span>(weather_sequence))</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 30</code></pre>
+<p>What we have tested here is that the function works for the two-state model and produces a vector of simulated states of the correct length. At this stage of the function that is sufficient as it doesn’t do much else.</p>
+<p>Next, we need to add the code to actually run the markov chain simulation. This is just the code we wrote above but with a few small changes to make it work in the function.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb10-1"><a href="solution-markov-chains.html#cb10-1"></a><span class="co"># Function to run a Markov chain simulation</span></span>
+<span id="cb10-2"><a href="solution-markov-chains.html#cb10-2"></a><span class="co"># input: transitionMatrix, initialState, numSteps</span></span>
+<span id="cb10-3"><a href="solution-markov-chains.html#cb10-3"></a><span class="co"># output: a vector of simulated states</span></span>
+<span id="cb10-4"><a href="solution-markov-chains.html#cb10-4"></a>run_markov_chain <span class="ot">&lt;-</span> <span class="cf">function</span>(transitionMatrix, initialState, numSteps) {</span>
+<span id="cb10-5"><a href="solution-markov-chains.html#cb10-5"></a>  state <span class="ot">&lt;-</span> initialState</span>
+<span id="cb10-6"><a href="solution-markov-chains.html#cb10-6"></a>  weather_sequence <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, numSteps) <span class="co"># vector to store simulated values</span></span>
+<span id="cb10-7"><a href="solution-markov-chains.html#cb10-7"></a>  <span class="cf">for</span> (day <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>numSteps) { <span class="co"># simulate for numSteps days</span></span>
+<span id="cb10-8"><a href="solution-markov-chains.html#cb10-8"></a>    pr <span class="ot">&lt;-</span> transitionMatrix[state, ] <span class="co"># select the row of transition probabilities</span></span>
+<span id="cb10-9"><a href="solution-markov-chains.html#cb10-9"></a></span>
+<span id="cb10-10"><a href="solution-markov-chains.html#cb10-10"></a>    <span class="co"># sample [1] or [2] based on the probs pr</span></span>
+<span id="cb10-11"><a href="solution-markov-chains.html#cb10-11"></a>    state <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">seq_along</span>(pr), <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> pr)</span>
+<span id="cb10-12"><a href="solution-markov-chains.html#cb10-12"></a>    weather_sequence[day] <span class="ot">&lt;-</span> state <span class="co"># store the sampled state</span></span>
+<span id="cb10-13"><a href="solution-markov-chains.html#cb10-13"></a>  }</span>
+<span id="cb10-14"><a href="solution-markov-chains.html#cb10-14"></a></span>
+<span id="cb10-15"><a href="solution-markov-chains.html#cb10-15"></a>  <span class="fu">return</span>(weather_sequence)</span>
+<span id="cb10-16"><a href="solution-markov-chains.html#cb10-16"></a>}</span></code></pre></div>
+<p>Now we have the function we need to check if the function is working as intended. The first thing to try is the two-state weather model we have already used.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb11-1"><a href="solution-markov-chains.html#cb11-1"></a><span class="co"># Test the function with the two-state model</span></span>
+<span id="cb11-2"><a href="solution-markov-chains.html#cb11-2"></a>transitionMatrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.3</span>), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb11-3"><a href="solution-markov-chains.html#cb11-3"></a>initialState <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb11-4"><a href="solution-markov-chains.html#cb11-4"></a>numSteps <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb11-5"><a href="solution-markov-chains.html#cb11-5"></a>weather_sequence <span class="ot">&lt;-</span> <span class="fu">run_markov_chain</span>(transitionMatrix, initialState, numSteps)</span>
+<span id="cb11-6"><a href="solution-markov-chains.html#cb11-6"></a><span class="fu">print</span>(weather_sequence)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;  [1] 2 2 1 1 2 1 1 1 2 2 2 1 1 1 2 2 1 1 1 1 2 2 1 2 2 1 2 1
+#&gt; [29] 2 1</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb13-1"><a href="solution-markov-chains.html#cb13-1"></a><span class="fu">print</span>(<span class="fu">length</span>(weather_sequence))</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 30</code></pre>
+<p>It is always a good idea to test the function with different inputs. So next we will try the three-state weather model.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb15-1"><a href="solution-markov-chains.html#cb15-1"></a><span class="co"># Test the function with the three-state model</span></span>
+<span id="cb15-2"><a href="solution-markov-chains.html#cb15-2"></a>transitionMatrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb15-3"><a href="solution-markov-chains.html#cb15-3"></a>  <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.3</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>), <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">3</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb15-4"><a href="solution-markov-chains.html#cb15-4"></a>initialState <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb15-5"><a href="solution-markov-chains.html#cb15-5"></a>numSteps <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb15-6"><a href="solution-markov-chains.html#cb15-6"></a>weather_sequence <span class="ot">&lt;-</span> <span class="fu">run_markov_chain</span>(transitionMatrix, initialState, numSteps)</span>
+<span id="cb15-7"><a href="solution-markov-chains.html#cb15-7"></a><span class="fu">print</span>(weather_sequence)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;  [1] 1 1 1 1 2 1 2 3 3 3 1 3 3 1 2 2 1 1 3 3 2 1 1 1 1 3 3 2
+#&gt; [29] 1 1</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb17-1"><a href="solution-markov-chains.html#cb17-1"></a><span class="fu">print</span>(<span class="fu">length</span>(weather_sequence))</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 30</code></pre>
+<p>This works as expected and produces a vector of simulated states for the three-state model. We can further change the initial state, for 50 states and analyze the output or visualize it as needed.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb19-1"><a href="solution-markov-chains.html#cb19-1"></a><span class="co"># Test the function with a 50-state model</span></span>
+<span id="cb19-2"><a href="solution-markov-chains.html#cb19-2"></a>transitionMatrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="dv">2500</span>), <span class="at">nrow=</span><span class="dv">50</span>, <span class="at">ncol=</span><span class="dv">50</span>)</span>
+<span id="cb19-3"><a href="solution-markov-chains.html#cb19-3"></a>transitionMatrix <span class="ot">&lt;-</span> transitionMatrix <span class="sc">/</span> <span class="fu">rowSums</span>(transitionMatrix) <span class="co"># normalize rows</span></span>
+<span id="cb19-4"><a href="solution-markov-chains.html#cb19-4"></a>initialState <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb19-5"><a href="solution-markov-chains.html#cb19-5"></a>numSteps <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb19-6"><a href="solution-markov-chains.html#cb19-6"></a>weather_sequence <span class="ot">&lt;-</span> <span class="fu">run_markov_chain</span>(transitionMatrix, initialState, numSteps)</span>
+<span id="cb19-7"><a href="solution-markov-chains.html#cb19-7"></a><span class="fu">print</span>(weather_sequence)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;  [1]  5 18 18 45 25 40 25  4  5 18 48 49  6  2 12 37 34 37
+#&gt; [19] 38 41  9 46 19 37 25 15  4 21 32 45</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb21-1"><a href="solution-markov-chains.html#cb21-1"></a><span class="fu">print</span>(<span class="fu">length</span>(weather_sequence))</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 30</code></pre>
+<button class="button">
+<a href="markov-chains.html#mc-function">Back to exercise</a>
+</button>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="empty"></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <div id="book-on-this-page"></div>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-09-12.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
