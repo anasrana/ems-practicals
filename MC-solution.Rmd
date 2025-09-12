@@ -1,27 +1,234 @@
 
-#  Solution: Three state Markov Chain {#mc-solution}
-```{r, echo=FALSE, engine='tikz', out.width='70%', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', engine.opts = list(template = "latex/tikz2pdf.tex")}
-\begin{tikzpicture}[node distance=4cm,->,>=latex,auto,
-  every edge/.append style={thick}]
+#  Solution: Markov Chains
 
-  \node[state] (1) {Cloudy};
-   \node[state] (2) [below left of =1] {Sunny};
-  \node[state] (3) [below right of=1] {Rainy};
+## Three state Markov Chain {#mc-solution}
 
+The three state Markov chain is more complex to draw. The diagram below shows the states and the transition probabilities. The self-loop probabilities need to be calculated. Let's label the edges with missing values as follows:
 
-  \path (1) edge[loop above]  node{$?$} (1)
-            edge[bend left =12]  node{$0.6$}   (2)
-            edge[bend left = 12] node{$ 0.2$} (3)
-        (2) edge[loop below] node{$?$}  (2)
-            edge[bend left=12] node{$0.1$}     (1)
-            edge[bend right = 12] node {$0.2$} (3)
-        (3) edge[loop below] node{$?$} (3)
-            edge[bend left = 15] node{$0.4$} (1)
-            edge[bend right = 15] node{$0.3$} (2);
-\end{tikzpicture}
+- Sunny -> Sunny = a
+- Rainy -> Rainy = b
+- Cloudy -> Cloudy = c
+
+```{r fstate}
+#| echo=FALSE,
+#| warning=FALSE,
+#| fig.bg = 'transparent'
+
+library(ggdiagram)
+library(ggplot2)
+# ===== CONFIGURATION VARIABLES =====
+my_font <- "Fira Code"
+font_size <- 18
+label_font_size <- 20
+node_label_size <- 0.8 # Font size for node labels (Cloudy, Sunny, Rainy)
+
+# Node configuration
+node_radius <- 15
+node_separation <- 50
+
+# Get three viridis colors for the nodes
+node_colors <- viridis::viridis(3, begin = .25, end = .75)
+cloudy_color <- node_colors[1]   # Purple-ish
+sunny_color <- node_colors[2]    # Teal-ish
+rainy_color <- node_colors[3]    # Yellow-ish
+
+# Edge configuration
+edge_resect <- 1
+label_size <- 0.45
+
+# Curvature settings for avoiding overlaps
+curve_large <- 8.0   # For long distances
+
+# Arc bend settings for inter-node edges
+arc_bend_value <- 0.5  # Controls the arc bend of bidirectional edges
+
+# Self-loop offset settings
+self_loop_offset <- 20
+
+# ===== CREATE NODES =====
+# Define individual node styles with viridis colors
+cloudy_style <- ob_style(
+  fill = cloudy_color,
+  color = "white"
+)
+
+sunny_style <- ob_style(
+  fill = sunny_color,
+  color = "white"
+)
+
+rainy_style <- ob_style(
+  fill = rainy_color,
+  color = "white"
+)
+
+large_node_label_3state <- redefault(
+  ob_label,
+  color = "white",  # White text for better contrast on colored backgrounds
+  fill = NA,
+  family = my_font,
+  size = 18  # Large size for 3-state node labels
+)
+
+# Create nodes directly with custom styling
+cloudy_node <- ob_circle(
+  x = 0, y = 1,
+  r = node_radius,
+  style = cloudy_style,
+  label = large_node_label_3state("Cloudy")
+)
+
+sunny_node_3state <- ob_circle(
+  x = -1, y = -1,
+  r = node_radius,
+  style = sunny_style,
+  label = large_node_label_3state("Sunny")
+)
+
+rainy_node_3state <- ob_circle(
+  x = 1, y = -1,
+  r = node_radius,
+  style = rainy_style,
+  label = large_node_label_3state("Rainy")
+)
+
+# Position nodes in triangle formation
+cloudy_node <- place(cloudy_node, cloudy_node@bounding_box, "top", sep = 20)
+sunny_node_3state <-
+  place(sunny_node_3state, cloudy_node@bounding_box, "bottom left",
+  sep = node_separation)
+rainy_node_3state <-
+  place(rainy_node_3state, cloudy_node@bounding_box, "bottom right",
+  sep = node_separation)
+
+# ===== CREATE EDGE LABELS =====
+lbl_ab <- ob_label("0.6",
+  angle = 0, position = label_size, size = label_font_size)
+lbl_ba <- ob_label("0.1",
+  angle = 0, position = label_size, size = label_font_size)
+lbl_ac <- ob_label("0.2",
+  angle = 0, position = label_size, size = label_font_size)
+lbl_ca <- ob_label("0.4",
+  angle = 0, position = label_size, size = label_font_size)
+lbl_bc <- ob_label("0.2",
+  angle = 0, position = label_size, size = label_font_size)
+lbl_cb <- ob_label("0.3",
+  angle = 0, position = label_size, size = label_font_size)
+
+# Self-loop labels
+lbl_aa <- ob_label("c", angle = 0, position = 0.5, size = label_font_size,
+                   color = "#f57c7c")
+lbl_bb <- ob_label("a", angle = 0, position = 0.5, size = label_font_size,
+                   color = "#f57c7c")
+lbl_cc <- ob_label("b", angle = 0, position = 0.5, size = label_font_size,
+                   color = "#f57c7c")
+
+# ===== CREATE EDGES =====
+
+# ===== SELF-LOOPS =====
+# A -> A (self-loop at top with larger offsets)
+edge_aa <- connect(
+  from = cloudy_node, to = cloudy_node,
+  label = lbl_aa, label_sloped = TRUE,
+  resect = edge_resect, color = cloudy_color,
+  from_offset = ob_point(-self_loop_offset, self_loop_offset * 2.5),
+  to_offset = ob_point(self_loop_offset, self_loop_offset * 2.5)
+)
+
+# B -> B (self-loop at bottom left with larger offsets)
+edge_bb <- connect(
+  from = sunny_node_3state, to = sunny_node_3state,
+  label = lbl_bb, label_sloped = TRUE,
+  resect = edge_resect, color = sunny_color,
+  from_offset = ob_point(self_loop_offset, -self_loop_offset * 2.5),
+  to_offset = ob_point(-self_loop_offset, -self_loop_offset * 2.5)
+)
+
+# C -> C (self-loop at bottom right with larger offsets)
+edge_cc <- connect(
+  from = rainy_node_3state, to = rainy_node_3state,
+  label = lbl_cc, label_sloped = TRUE,
+  resect = edge_resect, color = rainy_color,
+  from_offset = ob_point(self_loop_offset, -self_loop_offset * 2.5),
+  to_offset = ob_point(-self_loop_offset, -self_loop_offset * 2.5)
+)
+
+# ===== INTER-NODE EDGES =====
+# A -> B (maximum offset + very high curvature)
+edge_ab <- connect(
+  from = cloudy_node, to = sunny_node_3state,
+  label = lbl_ab, label_sloped = FALSE,
+  resect = edge_resect, color = cloudy_color,
+  curvature = curve_large,
+  from_offset = ob_point(-20, -6), to_offset = ob_point(6, 20)
+)
+
+# B -> A (maximum different offset + opposite very high curvature)
+edge_ba <- connect(
+  from = sunny_node_3state, to = cloudy_node,
+  label = lbl_ba, label_sloped = FALSE,
+  resect = edge_resect, color = sunny_color,
+  curvature = -curve_large,
+  from_offset = ob_point(20, 6), to_offset = ob_point(-6, -20)
+)
+
+# A -> C (symmetric to A -> B with opposite curvature)
+edge_ac <- connect(
+  from = cloudy_node, to = rainy_node_3state,
+  label = lbl_ac, label_sloped = FALSE,
+  resect = edge_resect, color = cloudy_color,
+  curvature = -curve_large,
+  from_offset = ob_point(20, -6), to_offset = ob_point(-6, 20)
+)
+
+# C -> A (symmetric to B -> A with opposite curvature)
+edge_ca <- connect(
+  from = rainy_node_3state, to = cloudy_node,
+  label = lbl_ca, label_sloped = FALSE,
+  resect = edge_resect, color = rainy_color,
+  curvature = curve_large,
+  from_offset = ob_point(-20, 6), to_offset = ob_point(6, -20)
+)
+
+# B -> C (larger offset for bottom edge)
+edge_bc <- connect(
+  from = sunny_node_3state, to = rainy_node_3state,
+  label = lbl_bc, label_sloped = TRUE,
+  resect = edge_resect, color = sunny_color,
+  curvature = curve_large,
+  from_offset = ob_point(6, 10), to_offset = ob_point(-5, 10)
+)
+
+# C -> B (opposite offset to avoid overlap)
+edge_cb <- connect(
+  from = rainy_node_3state, to = sunny_node_3state,
+  label = lbl_cb, label_sloped = TRUE,
+  resect = edge_resect, color = rainy_color,
+  curvature = -curve_large,
+  from_offset = ob_point(-6, -10), to_offset = ob_point(6, -10)
+)
+
+# ===== CREATE DIAGRAM =====
+diagram <- ggdiagram(font_family = my_font, font_size = font_size) + cloudy_node + sunny_node_3state + rainy_node_3state
+diagram <- diagram + edge_aa + edge_bb + edge_cc + edge_ab + edge_ba + edge_ac + edge_ca + edge_bc + edge_cb
+
+# Remove white background
+diagram <- diagram + theme_void() + theme(
+  panel.background = element_rect(fill = "transparent", color = NA),
+  plot.background = element_rect(fill = "transparent", color = NA)
+)
+
+print(diagram)
 ```
 
-Set up a 3x3 transition matrix:
+The next step is to set-up a transition matrix for the three-state model. The transition matrix is a square matrix where each row corresponds to a state and each column corresponds to the probability of transitioning to another state. The rows must sum to 1. The main thing to bear in mind is that the ordering of the states is arbitrary but you must be consistent. Here we will use the convention that State 1 is Sunny, State 2 is Rainy and State 3 is Cloudy.
+
+The way we work out the values for a, b, and c is that the emission probabilities from each state must sum to 1. So we can work out the values as follows:
+
+- For Sunny: $a + 0.2 + 0.1 = 1 \Rightarrow a = 0.7$
+- For Rainy: $0.3 + b + 0.4 = 1 \Rightarrow b = 0.3$
+- For Cloudy: $0.6 + 0.2 + c = 1 \Rightarrow c = 0.2$
+
 
 ```{r}
 transitionMatrix = matrix(c(0.7, 0.2, 0.1,
@@ -59,4 +266,101 @@ This is simplest way to output the weather sequence. You could also use a `data.
 
 <button class="button">
   [Back to exercise](#mc-exercise)
+</button>
+
+## Solution: MC Function {#mc-fn-solution}
+
+The first thing we will do when we want to write a function like this is to write the basic part of the function.
+
+```{r}
+# Function with just simple structure
+run_markov_chain <- function(transitionMatrix, initialState, numSteps) {
+  state <- initialState
+  output_vec <- rep(0, numSteps) # vector to store simulated values
+
+  return(output_vec)
+}
+```
+
+This function has the basic components required, it takes three arguments and returns a vector of simulated values. Let's test if it works:
+
+```{r}
+# Test the function with the two-state model
+transitionMatrix <- matrix(c(0.4, 0.6, 0.7, 0.3), nrow=2, ncol=2, byrow=TRUE)
+initialState <- 1
+numSteps <- 30
+weather_sequence <- run_markov_chain(transitionMatrix, initialState, numSteps)
+print(weather_sequence)
+
+print(length(weather_sequence))
+```
+
+What we have tested here is that the function works for the two-state model and produces a vector of simulated states of the correct length. At this stage of the function that is sufficient as it doesn't do much else.
+
+Next, we need to add the code to actually run the markov chain simulation. This is just the code we wrote above but with a few small changes to make it work in the function.
+
+
+
+```{r}
+# Function to run a Markov chain simulation
+# input: transitionMatrix, initialState, numSteps
+# output: a vector of simulated states
+run_markov_chain <- function(transitionMatrix, initialState, numSteps) {
+  state <- initialState
+  weather_sequence <- rep(0, numSteps) # vector to store simulated values
+  for (day in 1:numSteps) { # simulate for numSteps days
+    pr <- transitionMatrix[state, ] # select the row of transition probabilities
+
+    # sample [1] or [2] based on the probs pr
+    state <- sample(seq_along(pr), size = 1, prob = pr)
+    weather_sequence[day] <- state # store the sampled state
+  }
+
+  return(weather_sequence)
+}
+```
+
+Now we have the function we need to check if the function is working as intended. The first thing to try is the two-state weather model we have already used.
+
+```{r}
+# Test the function with the two-state model
+transitionMatrix <- matrix(c(0.4, 0.6, 0.7, 0.3), nrow=2, ncol=2, byrow=TRUE)
+initialState <- 1
+numSteps <- 30
+weather_sequence <- run_markov_chain(transitionMatrix, initialState, numSteps)
+print(weather_sequence)
+
+print(length(weather_sequence))
+```
+
+It is always a good idea to test the function with different inputs. So next we will try the three-state weather model.
+
+```{r}
+# Test the function with the three-state model
+transitionMatrix <- matrix(
+  c(0.5, 0.3, 0.2, 0.4, 0.4, 0.2, 0.3, 0.3, 0.4), nrow=3, ncol=3, byrow=TRUE)
+initialState <- 1
+numSteps <- 30
+weather_sequence <- run_markov_chain(transitionMatrix, initialState, numSteps)
+print(weather_sequence)
+
+print(length(weather_sequence))
+```
+
+This works as expected and produces a vector of simulated states for the three-state model. We can further change the initial state, for 50 states and analyze the output or visualize it as needed.
+
+```{r}
+# Test the function with a 50-state model
+transitionMatrix <- matrix(runif(2500), nrow=50, ncol=50)
+transitionMatrix <- transitionMatrix / rowSums(transitionMatrix) # normalize rows
+initialState <- 1
+numSteps <- 30
+weather_sequence <- run_markov_chain(transitionMatrix, initialState, numSteps)
+print(weather_sequence)
+
+print(length(weather_sequence))
+```
+
+<button class="button">
+  [Back to exercise](#mc-function)
 </button>

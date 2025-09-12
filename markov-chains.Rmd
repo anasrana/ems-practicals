@@ -1,6 +1,23 @@
 # Markov Chains
 
-<!-- In this practical you will learn a number of techniques in R that you will use to simulate simplified games of Monopoly (<https://en.wikipedia.org/wiki/Monopoly_(game)>). In addition, there are also many tutorials and guides on the Web describing how to produce computer simulations for Monopoly. You are welcome to read and use these examples to inspire your work. -->
+```{r}
+#| echo=FALSE
+library(tibble)
+library(ggplot2)
+library(grid)        # for arrow()
+library(ggdiagram)
+```
+
+<!-- In this practical you will learn a number of techniques in R that you wie_r_c <- connect(
+  from = s["Rainy"], to = s["Cloudy"],
+  label = lbl_04, label_sloped = FALSE, resect = 2, color = "black",
+  curvature = 0.3
+)
+e_r_s <- connect(
+  from = s["Rainy"], to = s["Sunny"],
+  label = lbl_03, label_sloped = FALSE, resect = 2, color = "black",
+  curvature = -0.4
+)simulate simplified games of Monopoly (<https://en.wikipedia.org/wiki/Monopoly_(game)>). In addition, there are also many tutorials and guides on the Web describing how to produce computer simulations for Monopoly. You are welcome to read and use these examples to inspire your work. -->
 
 We will now look at a **Markov Chain**. We have not covered it during lectures but based on the basic principles we have covered we will be able to use it for simulations.
 
@@ -18,16 +35,88 @@ A Markov Chain is defined by three properties:
 
 Consider the following example where we have two states describing the weather on any particular day: (i) Sunny and (ii) Rainy. Each arrow denotes the probability of going from one state to itself or another over the course of a day. For example, if it is currently sunny, the probability of it raining the next day is 0.6. Conversely, if it is raining, the probability that it will become sunny the next day is 0.7 and 0.3 that it will continue raining.
 
-```{r, echo=FALSE, engine='tikz', out.width='90%', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', engine.opts = list(template = "latex/tikz2pdf.tex")}
-\begin{tikzpicture}[node distance=2cm,->,>=latex,auto,
-  every edge/.append style={thick}]
-  \node[state] (1) {Sunny};
-  \node[state] (2) [right of=1] {Rainy};
-  \path (1) edge[loop left]  node{$0.4$} (1)
-            edge[bend left]  node{$0.6$}   (2)
-        (2) edge[loop right] node{$0.3$}  (2)
-            edge[bend left] node{$0.7$}     (1);
-\end{tikzpicture}
+```{r tstate}
+#| echo=FALSE
+
+# ===== CONFIGURATION VARIABLES =====
+my_font <- "Fira Code"
+my_font_size <- 18
+my_point_size <- 2
+# my_colors <- viridis::viridis(2, begin = .25, end = .5)
+my_colors <- c("#440154FF", "#2C728EFF", "#5DC863FF")
+
+
+# Define node style and large label style
+node_style1 <- ob_style(
+  fill = my_colors[1],
+  color = "white"
+)
+
+node_style2 <- ob_style(
+  fill = my_colors[2],
+  color = "white"
+)
+
+large_node_label <- redefault(
+  ob_label,
+  color = "white",
+  fill = NA,
+  size = 20,
+  family = my_font
+)
+# Create nodes directly with custom styling
+sunny_node <- ob_circle(
+  x = -2,
+  style = node_style1,
+  label = large_node_label("Sunny")
+)
+
+rainy_node <- ob_ellipse(
+  x = 2,
+  style = node_style2,
+  label = large_node_label("Rainy")
+)
+
+# Position the nodes
+sunny_node <- place(sunny_node, sunny_node@bounding_box, "left", sep = 0.5)
+rainy_node <- place(rainy_node, sunny_node@bounding_box, "right", sep = 3)
+
+# ---- cross edges (use your connect + on-path labels) ----
+lbl06 <- ob_label("0.6", angle = 0, position = 0.50, size = 18, color = my_colors[1])
+lbl07 <- ob_label("0.7", angle = 0, position = 0.50, size = 18, color = my_colors[2])
+
+e_sr <- connect(
+  from = sunny_node, to = rainy_node,
+  label = lbl06, label_sloped = FALSE, resect = 1,
+  color = my_colors[1],
+  to_offset = ob_point(0,  3)
+)
+e_rs <- connect(
+  from = rainy_node, to = sunny_node,
+  label = lbl07, label_sloped = FALSE, resect = 2, color = my_colors[2],
+  to_offset = ob_point(0, -3)
+)
+e_ss <- connect(
+  from = sunny_node, to = sunny_node,
+  label = ob_label("0.4", angle = 0, position = 0.50, size = 18, color = my_colors[3]),
+  label_sloped = FALSE, resect = 2, color = my_colors[3],
+  from_offset = ob_point(-2, 3), to_offset = ob_point(2, 3)
+)
+e_rr <- connect(
+  from = rainy_node, to = rainy_node,
+  label = ob_label("0.3", angle = 0, position = 0.50, size = 18, color = my_colors[3]),
+  label_sloped = FALSE, resect = 2, color = my_colors[3],
+  from_offset = ob_point(-3, -2), to_offset = ob_point(3, -3)
+)
+
+# ---- base diagram with larger text ----
+p <- ggdiagram(font_family = my_font, font_size = 28) + sunny_node + rainy_node
+for (ed in list(e_sr, e_rs, e_ss, e_rr)) {
+  p <- p + ed
+}
+
+print(p)
+
 ```
 
 The transition matrix can be written as the following in R:
@@ -62,25 +151,214 @@ print(weather_sequence)
 
 > Can you extend this example to a three-state model?
 
-```{r, echo=FALSE, engine='tikz', out.width='90%', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', engine.opts = list(template = "latex/tikz2pdf.tex")}
-\begin{tikzpicture}[node distance=4cm,->,>=latex,auto,
-  every edge/.append style={thick}]
+```{r fstate}
+#| echo=FALSE,
+#| warning=FALSE,
+#| fig.bg = 'transparent'
 
-  \node[state] (1) {Cloudy};
-   \node[state] (2) [below left of =1] {Sunny};
-  \node[state] (3) [below right of=1] {Rainy};
+# ===== CONFIGURATION VARIABLES =====
+my_font <- "Fira Code"
+font_size <- 18
+label_font_size <- 20
+node_label_size <- 0.8 # Font size for node labels (Cloudy, Sunny, Rainy)
 
+# Node configuration
+node_radius <- 15
+node_separation <- 50
 
-  \path (1) edge[loop above]  node{$?$} (1)
-            edge[bend left =12]  node{$0.6$}   (2)
-            edge[bend left = 12] node{$ 0.2$} (3)
-        (2) edge[loop below] node{$?$}  (2)
-            edge[bend left=12] node{$0.1$}     (1)
-            edge[bend right = 12] node {$0.2$} (3)
-        (3) edge[loop below] node{$?$} (3)
-            edge[bend left = 15] node{$0.4$} (1)
-            edge[bend right = 15] node{$0.3$} (2);
-\end{tikzpicture}
+# Get three viridis colors for the nodes
+node_colors <- viridis::viridis(3, begin = .25, end = .75)
+cloudy_color <- node_colors[1]   # Purple-ish
+sunny_color <- node_colors[2]    # Teal-ish
+rainy_color <- node_colors[3]    # Yellow-ish
+
+# Edge configuration
+edge_resect <- 1
+label_size <- 0.45
+
+# Curvature settings for avoiding overlaps
+curve_large <- 8.0   # For long distances
+
+# Arc bend settings for inter-node edges
+arc_bend_value <- 0.5  # Controls the arc bend of bidirectional edges
+
+# Self-loop offset settings
+self_loop_offset <- 20
+
+# ===== CREATE NODES =====
+# Define individual node styles with viridis colors
+cloudy_style <- ob_style(
+  fill = cloudy_color,
+  color = "white"
+)
+
+sunny_style <- ob_style(
+  fill = sunny_color,
+  color = "white"
+)
+
+rainy_style <- ob_style(
+  fill = rainy_color,
+  color = "white"
+)
+
+large_node_label_3state <- redefault(
+  ob_label,
+  color = "white",  # White text for better contrast on colored backgrounds
+  fill = NA,
+  family = my_font,
+  size = 18  # Large size for 3-state node labels
+)
+
+# Create nodes directly with custom styling
+cloudy_node <- ob_circle(
+  x = 0, y = 1,
+  r = node_radius,
+  style = cloudy_style,
+  label = large_node_label_3state("Cloudy")
+)
+
+sunny_node_3state <- ob_circle(
+  x = -1, y = -1,
+  r = node_radius,
+  style = sunny_style,
+  label = large_node_label_3state("Sunny")
+)
+
+rainy_node_3state <- ob_circle(
+  x = 1, y = -1,
+  r = node_radius,
+  style = rainy_style,
+  label = large_node_label_3state("Rainy")
+)
+
+# Position nodes in triangle formation
+cloudy_node <- place(cloudy_node, cloudy_node@bounding_box, "top", sep = 20)
+sunny_node_3state <-
+  place(sunny_node_3state, cloudy_node@bounding_box, "bottom left",
+  sep = node_separation)
+rainy_node_3state <-
+  place(rainy_node_3state, cloudy_node@bounding_box, "bottom right",
+  sep = node_separation)
+
+# ===== CREATE EDGE LABELS =====
+lbl_ab <- ob_label("0.6",
+  angle = 0, position = label_size, size = label_font_size)
+lbl_ba <- ob_label("0.1",
+  angle = 0, position = label_size, size = label_font_size)
+lbl_ac <- ob_label("0.2",
+  angle = 0, position = label_size, size = label_font_size)
+lbl_ca <- ob_label("0.4",
+  angle = 0, position = label_size, size = label_font_size)
+lbl_bc <- ob_label("0.2",
+  angle = 0, position = label_size, size = label_font_size)
+lbl_cb <- ob_label("0.3",
+  angle = 0, position = label_size, size = label_font_size)
+
+# Self-loop labels
+lbl_aa <- ob_label("?", angle = 0, position = 0.5, size = label_font_size,
+                   color = "#f57c7c")
+lbl_bb <- ob_label("?", angle = 0, position = 0.5, size = label_font_size,
+                   color = "#f57c7c")
+lbl_cc <- ob_label("?", angle = 0, position = 0.5, size = label_font_size,
+                   color = "#f57c7c")
+
+# ===== CREATE EDGES =====
+
+# ===== SELF-LOOPS =====
+# A -> A (self-loop at top with larger offsets)
+edge_aa <- connect(
+  from = cloudy_node, to = cloudy_node,
+  label = lbl_aa, label_sloped = TRUE,
+  resect = edge_resect, color = cloudy_color,
+  from_offset = ob_point(-self_loop_offset, self_loop_offset * 2.5),
+  to_offset = ob_point(self_loop_offset, self_loop_offset * 2.5)
+)
+
+# B -> B (self-loop at bottom left with larger offsets)
+edge_bb <- connect(
+  from = sunny_node_3state, to = sunny_node_3state,
+  label = lbl_bb, label_sloped = TRUE,
+  resect = edge_resect, color = sunny_color,
+  from_offset = ob_point(self_loop_offset, -self_loop_offset * 2.5),
+  to_offset = ob_point(-self_loop_offset, -self_loop_offset * 2.5)
+)
+
+# C -> C (self-loop at bottom right with larger offsets)
+edge_cc <- connect(
+  from = rainy_node_3state, to = rainy_node_3state,
+  label = lbl_cc, label_sloped = TRUE,
+  resect = edge_resect, color = rainy_color,
+  from_offset = ob_point(self_loop_offset, -self_loop_offset * 2.5),
+  to_offset = ob_point(-self_loop_offset, -self_loop_offset * 2.5)
+)
+
+# ===== INTER-NODE EDGES =====
+# A -> B (maximum offset + very high curvature)
+edge_ab <- connect(
+  from = cloudy_node, to = sunny_node_3state,
+  label = lbl_ab, label_sloped = FALSE,
+  resect = edge_resect, color = cloudy_color,
+  curvature = curve_large,
+  from_offset = ob_point(-20, -6), to_offset = ob_point(6, 20)
+)
+
+# B -> A (maximum different offset + opposite very high curvature)
+edge_ba <- connect(
+  from = sunny_node_3state, to = cloudy_node,
+  label = lbl_ba, label_sloped = FALSE,
+  resect = edge_resect, color = sunny_color,
+  curvature = -curve_large,
+  from_offset = ob_point(20, 6), to_offset = ob_point(-6, -20)
+)
+
+# A -> C (symmetric to A -> B with opposite curvature)
+edge_ac <- connect(
+  from = cloudy_node, to = rainy_node_3state,
+  label = lbl_ac, label_sloped = FALSE,
+  resect = edge_resect, color = cloudy_color,
+  curvature = -curve_large,
+  from_offset = ob_point(20, -6), to_offset = ob_point(-6, 20)
+)
+
+# C -> A (symmetric to B -> A with opposite curvature)
+edge_ca <- connect(
+  from = rainy_node_3state, to = cloudy_node,
+  label = lbl_ca, label_sloped = FALSE,
+  resect = edge_resect, color = rainy_color,
+  curvature = curve_large,
+  from_offset = ob_point(-20, 6), to_offset = ob_point(6, -20)
+)
+
+# B -> C (larger offset for bottom edge)
+edge_bc <- connect(
+  from = sunny_node_3state, to = rainy_node_3state,
+  label = lbl_bc, label_sloped = TRUE,
+  resect = edge_resect, color = sunny_color,
+  curvature = curve_large,
+  from_offset = ob_point(6, 10), to_offset = ob_point(-5, 10)
+)
+
+# C -> B (opposite offset to avoid overlap)
+edge_cb <- connect(
+  from = rainy_node_3state, to = sunny_node_3state,
+  label = lbl_cb, label_sloped = TRUE,
+  resect = edge_resect, color = rainy_color,
+  curvature = -curve_large,
+  from_offset = ob_point(-6, -10), to_offset = ob_point(6, -10)
+)
+
+# ===== CREATE DIAGRAM =====
+diagram <- ggdiagram(font_family = my_font, font_size = font_size) + cloudy_node + sunny_node_3state + rainy_node_3state
+diagram <- diagram + edge_aa + edge_bb + edge_cc + edge_ab + edge_ba + edge_ac + edge_ca + edge_bc + edge_cb
+
+# Remove white background
+diagram <- diagram + theme_void() + theme(
+  panel.background = element_rect(fill = "transparent", color = NA),
+  plot.background = element_rect(fill = "transparent", color = NA)
+)
+
+print(diagram)
 ```
 
 Note, the diagram (intentionally) misses out the self-transitions. You should be able to infer this because the probabilities given would otherwise not add up to one!
@@ -89,5 +367,23 @@ Note, the diagram (intentionally) misses out the self-transitions. You should be
   [Show Solution](#mc-solution)
 </button>
 
+:::
+
+::: {.infobox}
+
+## Function MC {#mc-function}
+
+Now let's put the code into a function that can take a general transition matrix for any number of states and run the markov chain simulation. The function should be named `run_markov_chain` and take three arguments:
+
+- `transitionMatrix`: a matrix of transition probabilities
+- `initialState`: the starting state (an integer)
+- `numSteps`: the number of steps to simulate
+
+The function should then return a vector of simulated states as a vector. Once you have written the function, you can test it using the two-state weather model above and the three-state model. Also check that it works for a system with more states. Then also test that the function works for different initial states and number of steps. The final thing to test is if the output is a vector and has the correct length.
+
+
+<button class="button">
+  [Show Solution](#mc-fn-solution)
+</button>
 
 :::
