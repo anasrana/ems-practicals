@@ -29,7 +29,7 @@ A Markov Chain is defined by three properties:
 
 Consider the following example where we have two states describing the weather on any particular day: (i) Sunny and (ii) Rainy. Each arrow denotes the probability of going from one state to itself or another over the course of a day. For example, if it is currently sunny, the probability of it raining the next day is 0.6. Conversely, if it is raining, the probability that it will become sunny the next day is 0.7 and 0.3 that it will continue raining.
 
-<img src="markov-chains_files/figure-html/tstate-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="markov-chains_files/figure-html/unnamed-chunk-2-1.png" width="95%" style="display: block; margin: auto;" />
 
 The transition matrix can be written as the following in R:
 
@@ -67,14 +67,37 @@ print(weather_sequence)
 ```
 
 ``` bg-info
-#>  [1] 2 1 2 1 1 1 1 1 2 1 2 1 1 2 1 2 2 1 2 1 2 1 2 1 2 2 1 2
-#> [29] 2 1
+#>  [1] 2 1 1 2 2 1 2 1 2 2 1 1 1 1 2 1 2 1 1 1 2 1 2 1 2 1 2 1
+#> [29] 2 2
 ```
 
 ::: {.infobox}
 ## Exercise MC {#mc-exercise}
 
 > Can you extend this example to a three-state model?
+
+
+
+<!-- ```{r, echo=FALSE, engine='tikz', out.width='90%', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', engine.opts = list(template = "latex/tikz2pdf.tex")}
+\begin{tikzpicture}[node distance=4cm,->,>=latex,auto,
+  every edge/.append style={thick}]
+
+  \node[state] (1) {Cloudy};
+   \node[state] (2) [below left of =1] {Sunny};
+  \node[state] (3) [below right of=1] {Rainy};
+
+
+  \path (1) edge[loop above]  node{$?$} (1)
+            edge[bend left =12]  node{$0.6$}   (2)
+            edge[bend left = 12] node{$ 0.2$} (3)
+        (2) edge[loop below] node{$?$}  (2)
+            edge[bend left=12] node{$0.1$}     (1)
+            edge[bend right = 12] node {$0.2$} (3)
+        (3) edge[loop below] node{$?$} (3)
+            edge[bend left = 15] node{$0.4$} (1)
+            edge[bend right = 15] node{$0.3$} (2);
+\end{tikzpicture}
+``` -->
 
 <img src="markov-chains_files/figure-html/fstate-1.png" width="95%" style="display: block; margin: auto;" />
 

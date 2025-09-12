@@ -7,7 +7,7 @@
 <title>Getting started in R and Rstudio | Essentials of Mathematics and Statistics</title>
 <meta name="author" content="Anas A Rana">
 <meta name="description" content="You have already started working with R, here are just some of the core principles revisited. Ensure you understand them as they are required knowledge and will not be covered during this module....">
-<meta name="generator" content="bookdown 0.43 with bs4_book()">
+<meta name="generator" content="bookdown 0.44 with bs4_book()">
 <meta property="og:title" content="Getting started in R and Rstudio | Essentials of Mathematics and Statistics">
 <meta property="og:type" content="book">
 <meta property="og:description" content="You have already started working with R, here are just some of the core principles revisited. Ensure you understand them as they are required knowledge and will not be covered during this module....">
@@ -64,7 +64,7 @@
 <li><a class="" href="generalised-linear-models.html"><span class="header-section-number">13</span> Generalised Linear Models</a></li>
 <li class="book-part">Solutions</li>
 <li><a class="" href="simSol.html"><span class="header-section-number">A</span> Solution: Simulations</a></li>
-<li><a class="" href="mc-solution.html"><span class="header-section-number">B</span> Solution: Three state Markov Chain</a></li>
+<li><a class="" href="solution-markov-chains.html"><span class="header-section-number">B</span> Solution: Markov Chains</a></li>
 <li><a class="" href="monopolySol.html"><span class="header-section-number">C</span> Solution: Monopoly</a></li>
 <li><a class="" href="solution-monte-carlo.html"><span class="header-section-number">D</span> Solution: Monte Carlo</a></li>
 <li><a class="" href="sol-mle.html"><span class="header-section-number">E</span> Solution: Model Answers: MLE</a></li>
@@ -100,24 +100,24 @@
 <p>Once the new script opens in the Script Editor panel, the script is ready for text entry, and your RStudio session will look like this.</p>
 <div class="inline-figure"><img src="images/rs-file-open.png" width="95%" style="display: block; margin: auto;"></div>
 <p>Here is an easy example to familiarize you with the Script Editor interface. Type the following code into your new script <em>(later topics will explain the specific code components do)</em>.</p>
-<div class="sourceCode" id="cb468"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb468-1"><a href="start.html#cb468-1"></a><span class="co"># this is my first R script</span></span>
-<span id="cb468-2"><a href="start.html#cb468-2"></a><span class="co"># do some things</span></span>
-<span id="cb468-3"><a href="start.html#cb468-3"></a>x <span class="ot">&lt;-</span> <span class="dv">34</span></span>
-<span id="cb468-4"><a href="start.html#cb468-4"></a>y <span class="ot">&lt;-</span> <span class="dv">16</span></span>
-<span id="cb468-5"><a href="start.html#cb468-5"></a>z <span class="ot">&lt;-</span> x <span class="sc">+</span> y   <span class="co"># addition</span></span>
-<span id="cb468-6"><a href="start.html#cb468-6"></a>w <span class="ot">&lt;-</span> y <span class="sc">/</span> x     <span class="co"># division</span></span>
-<span id="cb468-7"><a href="start.html#cb468-7"></a><span class="co"># display the results</span></span>
-<span id="cb468-8"><a href="start.html#cb468-8"></a>x</span>
-<span id="cb468-9"><a href="start.html#cb468-9"></a>y</span>
-<span id="cb468-10"><a href="start.html#cb468-10"></a>z</span>
-<span id="cb468-11"><a href="start.html#cb468-11"></a>w</span>
-<span id="cb468-12"><a href="start.html#cb468-12"></a><span class="co"># change x</span></span>
-<span id="cb468-13"><a href="start.html#cb468-13"></a>x <span class="ot">&lt;-</span> <span class="st">"some text"</span></span>
-<span id="cb468-14"><a href="start.html#cb468-14"></a><span class="co"># display the results</span></span>
-<span id="cb468-15"><a href="start.html#cb468-15"></a>x</span>
-<span id="cb468-16"><a href="start.html#cb468-16"></a>y</span>
-<span id="cb468-17"><a href="start.html#cb468-17"></a>z</span>
-<span id="cb468-18"><a href="start.html#cb468-18"></a>w</span></code></pre></div>
+<div class="sourceCode" id="cb486"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb486-1"><a href="start.html#cb486-1"></a><span class="co"># this is my first R script</span></span>
+<span id="cb486-2"><a href="start.html#cb486-2"></a><span class="co"># do some things</span></span>
+<span id="cb486-3"><a href="start.html#cb486-3"></a>x <span class="ot">&lt;-</span> <span class="dv">34</span></span>
+<span id="cb486-4"><a href="start.html#cb486-4"></a>y <span class="ot">&lt;-</span> <span class="dv">16</span></span>
+<span id="cb486-5"><a href="start.html#cb486-5"></a>z <span class="ot">&lt;-</span> x <span class="sc">+</span> y   <span class="co"># addition</span></span>
+<span id="cb486-6"><a href="start.html#cb486-6"></a>w <span class="ot">&lt;-</span> y <span class="sc">/</span> x     <span class="co"># division</span></span>
+<span id="cb486-7"><a href="start.html#cb486-7"></a><span class="co"># display the results</span></span>
+<span id="cb486-8"><a href="start.html#cb486-8"></a>x</span>
+<span id="cb486-9"><a href="start.html#cb486-9"></a>y</span>
+<span id="cb486-10"><a href="start.html#cb486-10"></a>z</span>
+<span id="cb486-11"><a href="start.html#cb486-11"></a>w</span>
+<span id="cb486-12"><a href="start.html#cb486-12"></a><span class="co"># change x</span></span>
+<span id="cb486-13"><a href="start.html#cb486-13"></a>x <span class="ot">&lt;-</span> <span class="st">"some text"</span></span>
+<span id="cb486-14"><a href="start.html#cb486-14"></a><span class="co"># display the results</span></span>
+<span id="cb486-15"><a href="start.html#cb486-15"></a>x</span>
+<span id="cb486-16"><a href="start.html#cb486-16"></a>y</span>
+<span id="cb486-17"><a href="start.html#cb486-17"></a>z</span>
+<span id="cb486-18"><a href="start.html#cb486-18"></a>w</span></code></pre></div>
 <div class="inline-figure"><img src="images/rs-file-content.png" width="95%" style="display: block; margin: auto;"></div>
 <p>There, you now have your first R script. Notice how the editor places a number in front of each line of code. The line numbers can be helpful as you work with your code. Before proceeding on to executing this code, it would be a good idea to learn how to save your script.</p>
 </div>
@@ -176,7 +176,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-08-19.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-09-12.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
