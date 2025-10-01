@@ -129,7 +129,7 @@ In this case, if you call `add_numbers(3)`, it will return `3` because `b` defau
 
 ```{r}
 result1 <- add_numbers(3)
-result3 <- add_number(3, 0)
+result3 <- add_numbers(3, 0)
 result2 <- add_numbers(10, 5)
 ```
 
