@@ -184,8 +184,8 @@ lr_plot <- ggplot(sim_data, aes(x = x, y = y)) +
 #> 3.4.0.
 #> ℹ Please use `linewidth` instead.
 #> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where
-#> this warning was generated.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this
+#> warning was generated.
 ```
 
 ```{.r .numberLines}

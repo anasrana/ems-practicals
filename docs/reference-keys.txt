@@ -125,3 +125,7 @@ solution-q4
 solution-q5-and-q6
 solution-linear-regression-and-correlation
 comparison-of-data
+creating-a-function
+monopolyFunc
+monopolyFun-sol
+goJailMon-sol
