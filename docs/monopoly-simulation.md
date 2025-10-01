@@ -80,6 +80,20 @@ hist(positions_visited, breaks = seq(0, 40, len = 41), right = FALSE)
 
 :::
 
+## Creating a function
+
+Before we move on, it is a good idea to put the code you have just written into a function. This will make it easier to reuse and modify later. This will then allow you to easily extend the simulation to include more complex aspects of the game and test the results.
+
+::: {.infobox}
+## Exercise - Create a function {#monopolyFunc}
+
+Create a function called `monopoly_sim` that takes the number of turns as an input argument and returns the vector of board positions visited. You can use the code you have just written as a starting point.
+
+<button class="button">
+  [Show Solution](#monopolyFun-sol)
+</button>
+:::
+
 ## Going to Jail
 
 Now we will add the next level of complexity to the simulation. We will consider the possibility of going to jail.
@@ -128,10 +142,10 @@ for (turn in 1:num_turns) {
 ::: {.infobox}
 ## Exercise - Going to Jail {#goJailMon}
 
-> What is the distribution of board positions during a long game?
+> Plot the distribution of board positions during a long game with the possibility of going to jail. How does the distribution change compared to the previous simulation without the possibility of going to jail?
 
 <details>
-<summary>Show solution</summary>
+<summary>Show plot</summary>
 
 ```{.r .numberLines}
 hist(positions_visited, breaks = seq(0, 40, len = 41), right = FALSE)
@@ -139,11 +153,33 @@ hist(positions_visited, breaks = seq(0, 40, len = 41), right = FALSE)
 
 <img src="monopoly-simulation_files/figure-html/unnamed-chunk-4-1.png" width="95%" style="display: block; margin: auto;" />
 
-> Can you explain this result qualitatively?
+Explain the results qualitatively.
 
 <font color="darkorange">Discuss with your neighbour and the instructor.</font>
+</details>
+
+
+
+- Create a new function called `monopoly_jail_sim` that includes the possibility of going to jail. The function should take the number of turns as an input argument, `num_turns`, and the jail position, `jail_position`, (but have a default when that is not explicitly provided) and return the vector of board positions visited.
+- What is the distribution of board positions during a long game?
+
+<details>
+<summary>Show hint</summary>
+
+To create a function where the input argument has a default value, you can define the function like this:
+
+
+```{.r .numberLines}
+monopoly_jail_sim <- function(num_turns = 100, jail_position = 10) {
+  # function body
+}
+```
 
 </details>
+
+<button class="button">
+  [Show Solution](#goJailMon-sol)
+</button>
 :::
 
 
@@ -160,6 +196,8 @@ Plan your code by considering the main components:
 -   counting doubles
 -   going to jail with three doubles
 -   updating the board position
+
+Ensure your code is in a function called `monopoly_double_sim` that takes the number of turns as an input argument, `num_turns`, and the jail position, `jail_position`, (but have a default when that is not explicitly provided) and returns the vector of board positions visited.
 
 <button class="button">
   [Show Solution](#3doubleMon)
@@ -184,6 +222,10 @@ Here are some questions to answer with your simulations:
 3.  How long does it take for a winner to be determined?
 
 As before you want to plan out your code and break it down into smaller parts. You can start by simulating a single player purchasing properties. You can then extend this to multiple players and so on. Do not try to do everything at once.
+
+The code should be in a function called `monopoly_ext_sim` that takes the number of turns as an input argument, `num_turns`, and the jail position, `jail_position`, (but have a default when that is not explicitly provided) and returns a list containing the vector of board positions visited and any other information you want to return.
+
+*Note, before looking at the results, try to implement the simulation yourself. Use google to research any functions or techniques you are not familiar with.*
 
 <button class="button">
   [Show Solution](#monopolyExtSol)

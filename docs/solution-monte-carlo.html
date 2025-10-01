@@ -123,14 +123,14 @@
 <span id="cb340-29"><a href="solution-monte-carlo.html#cb340-29"></a>}</span>
 <span id="cb340-30"><a href="solution-monte-carlo.html#cb340-30"></a></span>
 <span id="cb340-31"><a href="solution-monte-carlo.html#cb340-31"></a><span class="fu">print</span>(accuracy)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] -1.034475e-02 -1.344746e-03  1.552539e-04  9.752539e-04
-#&gt; [5] -2.964746e-03  2.525393e-05</code></pre>
+<pre class="bg-info"><code>#&gt; [1]  0.0116552539  0.0104552539 -0.0015447461 -0.0009847461
+#&gt; [5]  0.0039152539  0.0003652539</code></pre>
 <div class="sourceCode" id="cb342"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb342-1"><a href="solution-monte-carlo.html#cb342-1"></a><span class="fu">print</span>(accuracy_sd)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 0.15615002 0.06660603 0.05099762 0.03028847 0.02089453
-#&gt; [6] 0.01170483</code></pre>
+<pre class="bg-info"><code>#&gt; [1] 0.13740378 0.06084224 0.04577018 0.03131125 0.02292307
+#&gt; [6] 0.01437260</code></pre>
 <div class="sourceCode" id="cb344"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb344-1"><a href="solution-monte-carlo.html#cb344-1"></a><span class="fu">print</span>(accuracy <span class="sc">+</span> accuracy_sd)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 0.14580527 0.06526129 0.05115288 0.03126373 0.01792978
-#&gt; [6] 0.01173009</code></pre>
+<pre class="bg-info"><code>#&gt; [1] 0.14905903 0.07129749 0.04422543 0.03032650 0.02683832
+#&gt; [6] 0.01473785</code></pre>
 <p>Next, we will plot the results. Here we will make use of <code>ggplot2</code> a library to create nice plots without much effort. The input need to be a <code>data.frame</code> so we will need to create one based on the data.</p>
 <div class="sourceCode" id="cb346"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb346-1"><a href="solution-monte-carlo.html#cb346-1"></a><span class="co"># load ggplot</span></span>
 <span id="cb346-2"><a href="solution-monte-carlo.html#cb346-2"></a><span class="fu">library</span>(ggplot2)</span>
@@ -140,12 +140,12 @@
 <span id="cb346-6"><a href="solution-monte-carlo.html#cb346-6"></a></span>
 <span id="cb346-7"><a href="solution-monte-carlo.html#cb346-7"></a><span class="fu">print</span>(df)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;   sample_sizes      accuracy accuracy_sd
-#&gt; 1           10 -1.034475e-02  0.15615002
-#&gt; 2           50 -1.344746e-03  0.06660603
-#&gt; 3          100  1.552539e-04  0.05099762
-#&gt; 4          250  9.752539e-04  0.03028847
-#&gt; 5          500 -2.964746e-03  0.02089453
-#&gt; 6         1000  2.525393e-05  0.01170483</code></pre>
+#&gt; 1           10  0.0116552539  0.13740378
+#&gt; 2           50  0.0104552539  0.06084224
+#&gt; 3          100 -0.0015447461  0.04577018
+#&gt; 4          250 -0.0009847461  0.03131125
+#&gt; 5          500  0.0039152539  0.02292307
+#&gt; 6         1000  0.0003652539  0.01437260</code></pre>
 <div class="sourceCode" id="cb348"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb348-1"><a href="solution-monte-carlo.html#cb348-1"></a><span class="co"># use ggplot to plot lines for the mean accuracy and error bars</span></span>
 <span id="cb348-2"><a href="solution-monte-carlo.html#cb348-2"></a><span class="co"># using the std dev</span></span>
 <span id="cb348-3"><a href="solution-monte-carlo.html#cb348-3"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> sample_sizes, <span class="at">y =</span> accuracy)) <span class="sc">+</span></span>
@@ -189,7 +189,7 @@
 <span id="cb349-16"><a href="solution-monte-carlo.html#cb349-16"></a>expected_score <span class="ot">&lt;-</span> <span class="fu">mean</span>(score_per_game) <span class="co"># average over all simulations</span></span>
 <span id="cb349-17"><a href="solution-monte-carlo.html#cb349-17"></a></span>
 <span id="cb349-18"><a href="solution-monte-carlo.html#cb349-18"></a><span class="fu">print</span>(expected_score)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 15.31</code></pre>
+<pre class="bg-info"><code>#&gt; [1] 14.5</code></pre>
 <button class="button">
 <a href="monte-carlo-methods.html#mc-expectation-1">Back to Exercise</a>
 </button>
@@ -220,7 +220,7 @@
 <span id="cb351-20"><a href="solution-monte-carlo.html#cb351-20"></a>}</span>
 <span id="cb351-21"><a href="solution-monte-carlo.html#cb351-21"></a></span>
 <span id="cb351-22"><a href="solution-monte-carlo.html#cb351-22"></a><span class="fu">print</span>(<span class="fu">mean</span>(game_score))</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 10.54</code></pre>
+<pre class="bg-info"><code>#&gt; [1] 9.38</code></pre>
 <div class="sourceCode" id="cb353"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb353-1"><a href="solution-monte-carlo.html#cb353-1"></a><span class="fu">plot</span>(game_score)</span></code></pre></div>
 <div class="inline-figure"><img src="monte-carlo_sol_files/figure-html/unnamed-chunk-4-1.png" width="95%" style="display: block; margin: auto;"></div>
 <p>The games with score zero now corresponds to the number of games where we went bust (or genuinely ended the game with zero).</p>
@@ -263,7 +263,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-09-12.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-09-24.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
