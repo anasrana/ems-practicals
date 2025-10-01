@@ -9,6 +9,8 @@ mc-function
 a-monopoly-simulation
 moving-around-the-board
 questions-to-consider
+creating-a-function
+monopolyFunc
 going-to-jail
 goJailMon
 repDoublesMon
@@ -99,6 +101,8 @@ solution-markov-chains
 mc-solution
 mc-fn-solution
 monopolySol
+monopolyFun-sol
+goJailMon-sol
 id_3doubleMon-sol
 monopolyExtSol
 solution-monte-carlo
@@ -125,7 +129,3 @@ solution-q4
 solution-q5-and-q6
 solution-linear-regression-and-correlation
 comparison-of-data
-creating-a-function
-monopolyFunc
-monopolyFun-sol
-goJailMon-sol
