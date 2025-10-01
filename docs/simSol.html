@@ -94,17 +94,17 @@
 <p>The option <code>replace=TRUE</code> activates sampling with replacement (i.e. the numbers that are picked are put back and can be picked again).</p>
 <p>The option <code>replace=FALSE</code> activates sampling without replacement (i.e. the numbers that are picked are not put back and cannot be picked again).</p>
 <p>Let’s try this out:</p>
-<div class="sourceCode" id="cb306"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb306-1"><a href="simSol.html#cb306-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">9</span> )</span>
-<span id="cb306-2"><a href="simSol.html#cb306-2"></a></span>
-<span id="cb306-3"><a href="simSol.html#cb306-3"></a><span class="co"># Working example</span></span>
-<span id="cb306-4"><a href="simSol.html#cb306-4"></a><span class="fu">sample</span>(x, <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  [1]  1 10  1  4  7  4  6  5  9  2</code></pre>
-<div class="sourceCode" id="cb308"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb308-1"><a href="simSol.html#cb308-1"></a><span class="co"># This will cause an error</span></span>
-<span id="cb308-2"><a href="simSol.html#cb308-2"></a><span class="fu">sample</span>(x, <span class="dv">20</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb307"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb307-1"><a href="simSol.html#cb307-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">9</span> )</span>
+<span id="cb307-2"><a href="simSol.html#cb307-2"></a></span>
+<span id="cb307-3"><a href="simSol.html#cb307-3"></a><span class="co"># Working example</span></span>
+<span id="cb307-4"><a href="simSol.html#cb307-4"></a><span class="fu">sample</span>(x, <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;  [1]  4  3  2  1  7 10  5  2  8  4</code></pre>
+<div class="sourceCode" id="cb309"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb309-1"><a href="simSol.html#cb309-1"></a><span class="co"># This will cause an error</span></span>
+<span id="cb309-2"><a href="simSol.html#cb309-2"></a><span class="fu">sample</span>(x, <span class="dv">20</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>#&gt; Error in sample.int(length(x), size, replace, prob): cannot take a sample larger than the population when 'replace = FALSE'</code></pre>
-<div class="sourceCode" id="cb310"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb310-1"><a href="simSol.html#cb310-1"></a><span class="co"># Fix it</span></span>
-<span id="cb310-2"><a href="simSol.html#cb310-2"></a><span class="fu">sample</span>(x, <span class="dv">20</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  [1] 2 4 5 4 4 9 5 4 1 4 5 5 7 4 3 3 1 7 1 4</code></pre>
+<div class="sourceCode" id="cb311"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb311-1"><a href="simSol.html#cb311-1"></a><span class="co"># Fix it</span></span>
+<span id="cb311-2"><a href="simSol.html#cb311-2"></a><span class="fu">sample</span>(x, <span class="dv">20</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;  [1] 6 4 5 3 1 1 4 1 6 1 2 4 5 8 8 2 1 1 4 2</code></pre>
 <button class="button">
 <a href="simulating-random-numbers.html#sim-ex1">Back to exercise</a>
 </button>
@@ -113,17 +113,17 @@
 <h2>
 <span class="header-section-number">A.2</span> Solution Simulation - using sample<a class="anchor" aria-label="anchor" href="#sim-sol-ex2"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb312"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb312-1"><a href="simSol.html#cb312-1"></a>rolls_from_sample <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="at">size=</span><span class="dv">5000</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
-<span id="cb312-2"><a href="simSol.html#cb312-2"></a>rolls_from_sample.int <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">6</span>, <span class="at">size=</span><span class="dv">5000</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
-<span id="cb312-3"><a href="simSol.html#cb312-3"></a></span>
-<span id="cb312-4"><a href="simSol.html#cb312-4"></a><span class="fu">table</span>(rolls_from_sample)</span></code></pre></div>
+<div class="sourceCode" id="cb313"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb313-1"><a href="simSol.html#cb313-1"></a>rolls_from_sample <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="at">size=</span><span class="dv">5000</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb313-2"><a href="simSol.html#cb313-2"></a>rolls_from_sample.int <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">6</span>, <span class="at">size=</span><span class="dv">5000</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb313-3"><a href="simSol.html#cb313-3"></a></span>
+<span id="cb313-4"><a href="simSol.html#cb313-4"></a><span class="fu">table</span>(rolls_from_sample)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; rolls_from_sample
 #&gt;   1   2   3   4   5   6 
-#&gt; 830 846 805 787 842 890</code></pre>
-<div class="sourceCode" id="cb314"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb314-1"><a href="simSol.html#cb314-1"></a><span class="fu">table</span>(rolls_from_sample.int)</span></code></pre></div>
+#&gt; 824 844 802 834 844 852</code></pre>
+<div class="sourceCode" id="cb315"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb315-1"><a href="simSol.html#cb315-1"></a><span class="fu">table</span>(rolls_from_sample.int)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; rolls_from_sample.int
 #&gt;   1   2   3   4   5   6 
-#&gt; 852 848 828 786 832 854</code></pre>
+#&gt; 881 827 855 805 852 780</code></pre>
 <p>Both gives a uniform distribution over the numbers 1-6. The function <code>sample.int</code> is a specialised version of sample for sampling integers. Many <code>R</code> libraries have specialised versions of more general functions to do specific tasks under certain conditions.</p>
 <button class="button">
 <a href="simulating-random-numbers.html#sim-ex2">Back to exercise</a>
@@ -157,7 +157,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-09-24.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-10-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

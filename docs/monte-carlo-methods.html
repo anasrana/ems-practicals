@@ -109,18 +109,18 @@
 </h3>
 <p>Like before we will set up a simulation, this time to estimate the integral of a Normal distribution. We will go step by step to understand the process and then we will write a function to do this for us.</p>
 <p>First, create a new <code>R</code> script in <code>Rstudio</code>. Next we define the number of samples we will obtain. Lets start by choosing <span class="math inline">\(1,000\)</span> samples:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb13-1"><a href="monte-carlo-methods.html#cb13-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co"># number of samples to take</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb14-1"><a href="monte-carlo-methods.html#cb14-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co"># number of samples to take</span></span></code></pre></div>
 <p>Now we use the <code>R</code> function <code>rnorm</code> to simulate <span class="math inline">\(1,000\)</span> numbers from a Normal distribution with mean 1 and standard deviation 2:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb14-1"><a href="monte-carlo-methods.html#cb14-1"></a>sims <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">2</span>) <span class="co"># simulated normally distributed numbers</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb15-1"><a href="monte-carlo-methods.html#cb15-1"></a>sims <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">2</span>) <span class="co"># simulated normally distributed numbers</span></span></code></pre></div>
 <p>Lets estimate the integral between 1 and 3 by counting how many samples had a value in this range. We can do this by summing the number of samples that are greater than or equal to 1 and less than or equal to 3 and dividing by the total number of samples:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb15-1"><a href="monte-carlo-methods.html#cb15-1"></a><span class="co"># find proportion of values between 1-3</span></span>
-<span id="cb15-2"><a href="monte-carlo-methods.html#cb15-2"></a>mc_integral <span class="ot">&lt;-</span> <span class="fu">sum</span>(sims <span class="sc">&gt;=</span> <span class="dv">1</span> <span class="sc">&amp;</span> sims <span class="sc">&lt;=</span> <span class="dv">3</span>) <span class="sc">/</span> n</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb16-1"><a href="monte-carlo-methods.html#cb16-1"></a><span class="co"># find proportion of values between 1-3</span></span>
+<span id="cb16-2"><a href="monte-carlo-methods.html#cb16-2"></a>mc_integral <span class="ot">&lt;-</span> <span class="fu">sum</span>(sims <span class="sc">&gt;=</span> <span class="dv">1</span> <span class="sc">&amp;</span> sims <span class="sc">&lt;=</span> <span class="dv">3</span>) <span class="sc">/</span> n</span></code></pre></div>
 <p>The result we get is:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb16-1"><a href="monte-carlo-methods.html#cb16-1"></a><span class="fu">print</span>(mc_integral)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 0.312</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb17-1"><a href="monte-carlo-methods.html#cb17-1"></a><span class="fu">print</span>(mc_integral)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 0.302</code></pre>
 <p>This is our estimate of the integral. We can compare this to the true value of the integral which we can calculate using the <code>pnorm</code> function in <code>R</code>. This is the probability of a Normal distribution falling between 1 and 3:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb18-1"><a href="monte-carlo-methods.html#cb18-1"></a>mc_exact <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">2</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">1</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
-<span id="cb18-2"><a href="monte-carlo-methods.html#cb18-2"></a><span class="fu">print</span>(mc_exact)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb19-1"><a href="monte-carlo-methods.html#cb19-1"></a>mc_exact <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">2</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">1</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb19-2"><a href="monte-carlo-methods.html#cb19-2"></a><span class="fu">print</span>(mc_exact)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; [1] 0.3413447</code></pre>
 <p>Let’s break down the above code, to understand what is happening. The <code>pnorm</code> gives the integral under the Normal distribution (in this case with mean 1 and standard deviation 2) from negative infinity up to the value specified by <code>q</code>.</p>
 <p>The first call to <code>pnorm(q=3, mean=1, sd=2)</code> gives us this integral:</p>
@@ -166,27 +166,27 @@ Hint
 </h2>
 <p>Now we will consider a different problem, bust using the same techniques. Suppose we have a fair coin and we want to know the probability of getting more than 3 heads in 10 flips. This is a trivial problem using the Binomial distribution but suppose we have forgotten about this or never learned it in the first place.</p>
 <p>Lets solve this problem with a Monte Carlo simulation. We will use the common trick of representing tails with 0 and heads with 1, then simulate 10 coin tosses 100 times and see how often that happens.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb20-1"><a href="monte-carlo-methods.html#cb20-1"></a>runs <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># number of simulations to run</span></span>
-<span id="cb20-2"><a href="monte-carlo-methods.html#cb20-2"></a></span>
-<span id="cb20-3"><a href="monte-carlo-methods.html#cb20-3"></a>greater_than_three <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, runs) <span class="co"># vector to hold outcomes</span></span>
-<span id="cb20-4"><a href="monte-carlo-methods.html#cb20-4"></a></span>
-<span id="cb20-5"><a href="monte-carlo-methods.html#cb20-5"></a><span class="co"># run 100 simulations</span></span>
-<span id="cb20-6"><a href="monte-carlo-methods.html#cb20-6"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>runs) {</span>
-<span id="cb20-7"><a href="monte-carlo-methods.html#cb20-7"></a></span>
-<span id="cb20-8"><a href="monte-carlo-methods.html#cb20-8"></a>  <span class="co"># flip a coin ten times (0 - tail, 1 - head)</span></span>
-<span id="cb20-9"><a href="monte-carlo-methods.html#cb20-9"></a>  coin_flips <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dv">10</span>, <span class="at">replace =</span> T)</span>
-<span id="cb20-10"><a href="monte-carlo-methods.html#cb20-10"></a></span>
-<span id="cb20-11"><a href="monte-carlo-methods.html#cb20-11"></a>  <span class="co"># count how many heads and check if greater than 3</span></span>
-<span id="cb20-12"><a href="monte-carlo-methods.html#cb20-12"></a>  greater_than_three[i] <span class="ot">&lt;-</span> (<span class="fu">sum</span>(coin_flips) <span class="sc">&gt;</span> <span class="dv">3</span>)</span>
-<span id="cb20-13"><a href="monte-carlo-methods.html#cb20-13"></a>}</span>
-<span id="cb20-14"><a href="monte-carlo-methods.html#cb20-14"></a></span>
-<span id="cb20-15"><a href="monte-carlo-methods.html#cb20-15"></a><span class="co"># compute average over simulations</span></span>
-<span id="cb20-16"><a href="monte-carlo-methods.html#cb20-16"></a>pr_greater_than_three <span class="ot">&lt;-</span> <span class="fu">sum</span>(greater_than_three) <span class="sc">/</span> runs</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb21-1"><a href="monte-carlo-methods.html#cb21-1"></a>runs <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># number of simulations to run</span></span>
+<span id="cb21-2"><a href="monte-carlo-methods.html#cb21-2"></a></span>
+<span id="cb21-3"><a href="monte-carlo-methods.html#cb21-3"></a>greater_than_three <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, runs) <span class="co"># vector to hold outcomes</span></span>
+<span id="cb21-4"><a href="monte-carlo-methods.html#cb21-4"></a></span>
+<span id="cb21-5"><a href="monte-carlo-methods.html#cb21-5"></a><span class="co"># run 100 simulations</span></span>
+<span id="cb21-6"><a href="monte-carlo-methods.html#cb21-6"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>runs) {</span>
+<span id="cb21-7"><a href="monte-carlo-methods.html#cb21-7"></a></span>
+<span id="cb21-8"><a href="monte-carlo-methods.html#cb21-8"></a>  <span class="co"># flip a coin ten times (0 - tail, 1 - head)</span></span>
+<span id="cb21-9"><a href="monte-carlo-methods.html#cb21-9"></a>  coin_flips <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dv">10</span>, <span class="at">replace =</span> T)</span>
+<span id="cb21-10"><a href="monte-carlo-methods.html#cb21-10"></a></span>
+<span id="cb21-11"><a href="monte-carlo-methods.html#cb21-11"></a>  <span class="co"># count how many heads and check if greater than 3</span></span>
+<span id="cb21-12"><a href="monte-carlo-methods.html#cb21-12"></a>  greater_than_three[i] <span class="ot">&lt;-</span> (<span class="fu">sum</span>(coin_flips) <span class="sc">&gt;</span> <span class="dv">3</span>)</span>
+<span id="cb21-13"><a href="monte-carlo-methods.html#cb21-13"></a>}</span>
+<span id="cb21-14"><a href="monte-carlo-methods.html#cb21-14"></a></span>
+<span id="cb21-15"><a href="monte-carlo-methods.html#cb21-15"></a><span class="co"># compute average over simulations</span></span>
+<span id="cb21-16"><a href="monte-carlo-methods.html#cb21-16"></a>pr_greater_than_three <span class="ot">&lt;-</span> <span class="fu">sum</span>(greater_than_three) <span class="sc">/</span> runs</span></code></pre></div>
 <p>For our MC estimate of the probability <span class="math inline">\(P(X&gt;3)\)</span> we get</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb21-1"><a href="monte-carlo-methods.html#cb21-1"></a><span class="fu">print</span>(pr_greater_than_three)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 0.82</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb22-1"><a href="monte-carlo-methods.html#cb22-1"></a><span class="fu">print</span>(pr_greater_than_three)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; [1] 0.77</code></pre>
 <p>which we can compare to <code>R</code>’s built-in Binomial distribution function:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb23-1"><a href="monte-carlo-methods.html#cb23-1"></a><span class="fu">print</span>(<span class="fu">pbinom</span>(<span class="dv">3</span>, <span class="dv">10</span>, <span class="fl">0.5</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb24-1"><a href="monte-carlo-methods.html#cb24-1"></a><span class="fu">print</span>(<span class="fu">pbinom</span>(<span class="dv">3</span>, <span class="dv">10</span>, <span class="fl">0.5</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>))</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; [1] 0.828125</code></pre>
 <p>Not bad! <strong>The Monte Carlo estimate is close to the true value.</strong></p>
 </div>
@@ -249,31 +249,31 @@ Hint
 <p>We now move to another essential concept in programming - functions. You would have already encountered functions in <code>R</code> and other programming languages. Functions are a way to encapsulate code so that it can be reused. This is a key concept in programming and is used to make code more readable and maintainable.</p>
 <p>A function is a piece of code which is encapsulated so then we can refer to it repeatedly via the name of the function rather than repeatedly writing those lines of code. If you would like to learn more about functions in R, you can read <a href="https://www.datacamp.com/community/tutorials/functions-in-r-a-tutorial">this</a> tutorial or the software carpentry <a href="https://bham-carpentries.github.io/R-course-material/10-functions/index.html">lesson</a>.</p>
 <p>Here is an example function we can write to simulate one game as indicated above and return whether the number of points is less than zero.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb25-1"><a href="monte-carlo-methods.html#cb25-1"></a><span class="co"># simulates a game of 20 spins</span></span>
-<span id="cb25-2"><a href="monte-carlo-methods.html#cb25-2"></a>play_game <span class="ot">&lt;-</span> <span class="cf">function</span>(){</span>
-<span id="cb25-3"><a href="monte-carlo-methods.html#cb25-3"></a>    <span class="co"># picks a number from the list (1, -1, 2)</span></span>
-<span id="cb25-4"><a href="monte-carlo-methods.html#cb25-4"></a>    <span class="co"># with probability 50%, 25% and 25% twenty times</span></span>
-<span id="cb25-5"><a href="monte-carlo-methods.html#cb25-5"></a>  results <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">2</span>), <span class="dv">20</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>))</span>
-<span id="cb25-6"><a href="monte-carlo-methods.html#cb25-6"></a></span>
-<span id="cb25-7"><a href="monte-carlo-methods.html#cb25-7"></a>  <span class="co"># function returns whether the sum of all the spins is &lt; 1</span></span>
-<span id="cb25-8"><a href="monte-carlo-methods.html#cb25-8"></a>  <span class="fu">return</span>(<span class="fu">sum</span>(results) <span class="sc">&lt;</span> <span class="dv">0</span>)</span>
-<span id="cb25-9"><a href="monte-carlo-methods.html#cb25-9"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb26-1"><a href="monte-carlo-methods.html#cb26-1"></a><span class="co"># simulates a game of 20 spins</span></span>
+<span id="cb26-2"><a href="monte-carlo-methods.html#cb26-2"></a>play_game <span class="ot">&lt;-</span> <span class="cf">function</span>(){</span>
+<span id="cb26-3"><a href="monte-carlo-methods.html#cb26-3"></a>    <span class="co"># picks a number from the list (1, -1, 2)</span></span>
+<span id="cb26-4"><a href="monte-carlo-methods.html#cb26-4"></a>    <span class="co"># with probability 50%, 25% and 25% twenty times</span></span>
+<span id="cb26-5"><a href="monte-carlo-methods.html#cb26-5"></a>  results <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">2</span>), <span class="dv">20</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>))</span>
+<span id="cb26-6"><a href="monte-carlo-methods.html#cb26-6"></a></span>
+<span id="cb26-7"><a href="monte-carlo-methods.html#cb26-7"></a>  <span class="co"># function returns whether the sum of all the spins is &lt; 1</span></span>
+<span id="cb26-8"><a href="monte-carlo-methods.html#cb26-8"></a>  <span class="fu">return</span>(<span class="fu">sum</span>(results) <span class="sc">&lt;</span> <span class="dv">0</span>)</span>
+<span id="cb26-9"><a href="monte-carlo-methods.html#cb26-9"></a>}</span></code></pre></div>
 </div>
 <div id="simulating-from-function" class="section level2" number="4.8">
 <h2>
 <span class="header-section-number">4.8</span> Simulating from function<a class="anchor" aria-label="anchor" href="#simulating-from-function"><i class="fas fa-link"></i></a>
 </h2>
 <p>Now we can use this function in a loop to play the game 100 times:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb26-1"><a href="monte-carlo-methods.html#cb26-1"></a>runs <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># play the game 100 times</span></span>
-<span id="cb26-2"><a href="monte-carlo-methods.html#cb26-2"></a></span>
-<span id="cb26-3"><a href="monte-carlo-methods.html#cb26-3"></a>less_than_zero <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, runs) <span class="co"># vector to store outcome of each game</span></span>
-<span id="cb26-4"><a href="monte-carlo-methods.html#cb26-4"></a><span class="cf">for</span> (it <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>runs) {</span>
-<span id="cb26-5"><a href="monte-carlo-methods.html#cb26-5"></a>  <span class="co"># play the game by calling the function and store the outcome</span></span>
-<span id="cb26-6"><a href="monte-carlo-methods.html#cb26-6"></a>  less_than_zero[it] <span class="ot">&lt;-</span> <span class="fu">play_game</span>()</span>
-<span id="cb26-7"><a href="monte-carlo-methods.html#cb26-7"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb27-1"><a href="monte-carlo-methods.html#cb27-1"></a>runs <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># play the game 100 times</span></span>
+<span id="cb27-2"><a href="monte-carlo-methods.html#cb27-2"></a></span>
+<span id="cb27-3"><a href="monte-carlo-methods.html#cb27-3"></a>less_than_zero <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, runs) <span class="co"># vector to store outcome of each game</span></span>
+<span id="cb27-4"><a href="monte-carlo-methods.html#cb27-4"></a><span class="cf">for</span> (it <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>runs) {</span>
+<span id="cb27-5"><a href="monte-carlo-methods.html#cb27-5"></a>  <span class="co"># play the game by calling the function and store the outcome</span></span>
+<span id="cb27-6"><a href="monte-carlo-methods.html#cb27-6"></a>  less_than_zero[it] <span class="ot">&lt;-</span> <span class="fu">play_game</span>()</span>
+<span id="cb27-7"><a href="monte-carlo-methods.html#cb27-7"></a>}</span></code></pre></div>
 <p>We can then compute the probability that, after twenty spins, we will have less than zero points:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb27-1"><a href="monte-carlo-methods.html#cb27-1"></a>prob_less_than_zero <span class="ot">&lt;-</span> <span class="fu">sum</span>(less_than_zero)<span class="sc">/</span>runs</span>
-<span id="cb27-2"><a href="monte-carlo-methods.html#cb27-2"></a><span class="fu">print</span>(prob_less_than_zero)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb28-1"><a href="monte-carlo-methods.html#cb28-1"></a>prob_less_than_zero <span class="ot">&lt;-</span> <span class="fu">sum</span>(less_than_zero)<span class="sc">/</span>runs</span>
+<span id="cb28-2"><a href="monte-carlo-methods.html#cb28-2"></a><span class="fu">print</span>(prob_less_than_zero)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; [1] 0</code></pre>
 <p>The probability is very low. This is not surprising since there is only a 25% chance of getting a point deduction on any spin and a 75% chance of gaining points. Try to increase the number of simulation runs to see if you can detect any games where you do find a negative score.</p>
 </div>
@@ -326,7 +326,7 @@ Hint
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-09-24.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-10-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
