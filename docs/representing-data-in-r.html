@@ -69,9 +69,8 @@
 <li><a class="" href="solution-monte-carlo.html"><span class="header-section-number">D</span> Solution: Monte Carlo</a></li>
 <li><a class="" href="sol-mle.html"><span class="header-section-number">E</span> Solution: Model Answers: MLE</a></li>
 <li><a class="" href="sol-ex-CI.html"><span class="header-section-number">F</span> Solution: Confidence Interval</a></li>
-<li><a class="" href="solution-computational-testing.html"><span class="header-section-number">G</span> Solution: Computational Testing</a></li>
-<li><a class="" href="representing_data-sol.html"><span class="header-section-number">H</span> Solution: Representing Data</a></li>
-<li><a class="" href="solution-linear-regression-and-correlation.html"><span class="header-section-number">I</span> Solution: Linear regression and Correlation</a></li>
+<li><a class="" href="representing_data-sol.html"><span class="header-section-number">G</span> Solution: Representing Data</a></li>
+<li><a class="" href="solution-linear-regression-and-correlation.html"><span class="header-section-number">H</span> Solution: Linear regression and Correlation</a></li>
 <li class="book-part">APPENDIX</li>
 <li><a class="" href="start.html">Getting started in R and Rstudio</a></li>
 <li><a class="" href="creating-functions-r.html">Creating functions R</a></li>
@@ -107,8 +106,8 @@
 <div class="sourceCode" id="cb83"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb83-1"><a href="representing-data-in-r.html#cb83-1"></a><span class="co"># Create z vector</span></span>
 <span id="cb83-2"><a href="representing-data-in-r.html#cb83-2"></a>z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">7</span>)</span>
 <span id="cb83-3"><a href="representing-data-in-r.html#cb83-3"></a><span class="fu">print</span>(z)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1]  0.4767177 -0.1024876 -0.3944188  0.0165095  0.8178858
-#&gt; [6]  1.1329001 -1.1285254</code></pre>
+<pre class="bg-info"><code>#&gt; [1] -0.2459790 -0.7280753  0.2331859  1.5085272  0.1784215
+#&gt; [6]  0.6521499  0.5507398</code></pre>
 <p>When you are trying to implement any vector operations in R you will be using data and for manipulations. It is important that data is made up of numbers and not anything else, otherwise operations will not work. There is one way of checking if what we have created is a vector made up of numbers, we can use the function <code><a href="https://rdrr.io/r/base/class.html">class()</a></code>. If it only contains numbers you will get a response of <code>integer</code>, or <code>numeric</code>. We can check what it looks like for the vectors we have created.</p>
 <p><em>Note: We can nest functions in R, to run them. We make use of that here.</em></p>
 <div class="sourceCode" id="cb85"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb85-1"><a href="representing-data-in-r.html#cb85-1"></a><span class="co"># Check what each of the vectors is made of.</span></span>
@@ -164,8 +163,8 @@
 <span id="cb107-2"><a href="representing-data-in-r.html#cb107-2"></a>x <span class="sc">+</span> z</span></code></pre></div>
 <pre><code>#&gt; Warning in x + z: longer object length is not a multiple of
 #&gt; shorter object length</code></pre>
-<pre class="bg-info"><code>#&gt; [1]  1.4767177  1.8975124  2.6055812  1.0165095  2.8178858
-#&gt; [6]  4.1329001 -0.1285254</code></pre>
+<pre class="bg-info"><code>#&gt; [1] 0.754021 1.271925 3.233186 2.508527 2.178422 3.652150
+#&gt; [7] 1.550740</code></pre>
 <p>We can add <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, only because one is a multiple of the other. The vector <span class="math inline">\(x\)</span> has length 3 and the vector <span class="math inline">\(y\)</span> has length 9. The addition is performed without error. You will find that the shorter vector is replicated to perform the addition and the new vector is the same length as the longer. The final part we tried is to add two vectors which are not multiples of each other. You will notice that the code will run and produce a result but you will get a warning message. This is among the reasons you want to be careful with warnings and checking each step of functions and code you write.</p>
 </div>
 <div id="multiplication" class="section level3" number="8.2.2">
