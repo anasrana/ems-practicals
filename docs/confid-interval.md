@@ -78,7 +78,7 @@ print(interval)
 ```
 
 ``` bg-info
-#> [1] 2.304318 3.304318
+#> [1] 2.067736 3.067736
 ```
 ::: {.infobox}
 ## Exercise
@@ -209,6 +209,8 @@ You can make use of the following as a point estimate of the sample variance:
 \]
 
 which can be calculated using the `sd` function in `R`, remember the relationship between the standard deviation and variance.
+
+Ensure you create a functions and place them in a separate script file and source them in your main script or the Rmarkdown document. The function should take as input the sample size, number of repeats and a vector of interval widths to test. The output should be a list containing the mean accuracy and standard deviation of the accuracy for each interval width.
 
 <button class="button">
   [Show Solution](#sol-ex-CI)
