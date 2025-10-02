@@ -89,31 +89,31 @@
 </h1>
 <p>A potentially biased coin is tossed 10 times and the number of heads recorded. The experiment is repeated 5 times and the number of heads recorded was 3, 2, 4, 5 and 2 respectively.</p>
 <p>We need to choose the correct pdf and then write a likelihood function in <code>R</code>. In this case, we will use the binomial distribution. In this case, this is one of the ways we write the solution.</p>
-<div class="sourceCode" id="cb366"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb366-1"><a href="sol-mle.html#cb366-1"></a>neglogLikelihood <span class="ot">&lt;-</span> <span class="cf">function</span>(p, n, x) {</span>
-<span id="cb366-2"><a href="sol-mle.html#cb366-2"></a>  <span class="co"># compute density for each data element in x</span></span>
-<span id="cb366-3"><a href="sol-mle.html#cb366-3"></a>  logF <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(x, n, <span class="at">prob =</span> <span class="fu">c</span>(p, <span class="dv">1</span> <span class="sc">-</span> p), <span class="at">log =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb366-4"><a href="sol-mle.html#cb366-4"></a>  <span class="fu">return</span>(<span class="sc">-</span><span class="fu">sum</span>(logF)) <span class="co"># return negative log-likelihood</span></span>
-<span id="cb366-5"><a href="sol-mle.html#cb366-5"></a>}</span>
-<span id="cb366-6"><a href="sol-mle.html#cb366-6"></a></span>
-<span id="cb366-7"><a href="sol-mle.html#cb366-7"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># number of coin tosses</span></span>
-<span id="cb366-8"><a href="sol-mle.html#cb366-8"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">2</span>) <span class="co"># number of heads observed</span></span>
-<span id="cb366-9"><a href="sol-mle.html#cb366-9"></a></span>
-<span id="cb366-10"><a href="sol-mle.html#cb366-10"></a>p_init <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="co"># initial value of the probability</span></span>
-<span id="cb366-11"><a href="sol-mle.html#cb366-11"></a></span>
-<span id="cb366-12"><a href="sol-mle.html#cb366-12"></a><span class="co"># run optim to get maximum likelihood estimates</span></span>
-<span id="cb366-13"><a href="sol-mle.html#cb366-13"></a>out <span class="ot">&lt;-</span> <span class="fu">optim</span>(p_init, neglogLikelihood, <span class="at">gr =</span> <span class="cn">NULL</span>, n, x, <span class="at">method =</span> <span class="st">"L-BFGS-B"</span>,</span>
-<span id="cb366-14"><a href="sol-mle.html#cb366-14"></a>  <span class="at">lower =</span> <span class="fl">0.001</span>, <span class="at">upper =</span> <span class="dv">1</span><span class="fl">-0.001</span>)</span>
-<span id="cb366-15"><a href="sol-mle.html#cb366-15"></a></span>
-<span id="cb366-16"><a href="sol-mle.html#cb366-16"></a><span class="co"># create a grid of probability values</span></span>
-<span id="cb366-17"><a href="sol-mle.html#cb366-17"></a>p_vals <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.001</span>, <span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.001</span>, <span class="at">length =</span> <span class="dv">101</span>)</span>
-<span id="cb366-18"><a href="sol-mle.html#cb366-18"></a></span>
-<span id="cb366-19"><a href="sol-mle.html#cb366-19"></a><span class="co"># use apply to compute the negative log-likelihood for each probability value</span></span>
-<span id="cb366-20"><a href="sol-mle.html#cb366-20"></a>neglogL <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">matrix</span>(p_vals), <span class="dv">1</span>, neglogLikelihood, n, x)</span>
-<span id="cb366-21"><a href="sol-mle.html#cb366-21"></a></span>
-<span id="cb366-22"><a href="sol-mle.html#cb366-22"></a><span class="co"># plot negative log-likelihood function and overlay maximum (negative)</span></span>
-<span id="cb366-23"><a href="sol-mle.html#cb366-23"></a><span class="co"># log-likelihood estimate</span></span>
-<span id="cb366-24"><a href="sol-mle.html#cb366-24"></a><span class="fu">plot</span>(p_vals, neglogL, <span class="at">pch =</span> <span class="st">"-"</span>)</span>
-<span id="cb366-25"><a href="sol-mle.html#cb366-25"></a><span class="fu">points</span>(out<span class="sc">$</span>par, out<span class="sc">$</span>value, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">pch =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb371"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb371-1"><a href="sol-mle.html#cb371-1"></a>neglogLikelihood <span class="ot">&lt;-</span> <span class="cf">function</span>(p, n, x) {</span>
+<span id="cb371-2"><a href="sol-mle.html#cb371-2"></a>  <span class="co"># compute density for each data element in x</span></span>
+<span id="cb371-3"><a href="sol-mle.html#cb371-3"></a>  logF <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(x, n, <span class="at">prob =</span> <span class="fu">c</span>(p, <span class="dv">1</span> <span class="sc">-</span> p), <span class="at">log =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb371-4"><a href="sol-mle.html#cb371-4"></a>  <span class="fu">return</span>(<span class="sc">-</span><span class="fu">sum</span>(logF)) <span class="co"># return negative log-likelihood</span></span>
+<span id="cb371-5"><a href="sol-mle.html#cb371-5"></a>}</span>
+<span id="cb371-6"><a href="sol-mle.html#cb371-6"></a></span>
+<span id="cb371-7"><a href="sol-mle.html#cb371-7"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># number of coin tosses</span></span>
+<span id="cb371-8"><a href="sol-mle.html#cb371-8"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">2</span>) <span class="co"># number of heads observed</span></span>
+<span id="cb371-9"><a href="sol-mle.html#cb371-9"></a></span>
+<span id="cb371-10"><a href="sol-mle.html#cb371-10"></a>p_init <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="co"># initial value of the probability</span></span>
+<span id="cb371-11"><a href="sol-mle.html#cb371-11"></a></span>
+<span id="cb371-12"><a href="sol-mle.html#cb371-12"></a><span class="co"># run optim to get maximum likelihood estimates</span></span>
+<span id="cb371-13"><a href="sol-mle.html#cb371-13"></a>out <span class="ot">&lt;-</span> <span class="fu">optim</span>(p_init, neglogLikelihood, <span class="at">gr =</span> <span class="cn">NULL</span>, n, x, <span class="at">method =</span> <span class="st">"L-BFGS-B"</span>,</span>
+<span id="cb371-14"><a href="sol-mle.html#cb371-14"></a>  <span class="at">lower =</span> <span class="fl">0.001</span>, <span class="at">upper =</span> <span class="dv">1</span><span class="fl">-0.001</span>)</span>
+<span id="cb371-15"><a href="sol-mle.html#cb371-15"></a></span>
+<span id="cb371-16"><a href="sol-mle.html#cb371-16"></a><span class="co"># create a grid of probability values</span></span>
+<span id="cb371-17"><a href="sol-mle.html#cb371-17"></a>p_vals <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.001</span>, <span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.001</span>, <span class="at">length =</span> <span class="dv">101</span>)</span>
+<span id="cb371-18"><a href="sol-mle.html#cb371-18"></a></span>
+<span id="cb371-19"><a href="sol-mle.html#cb371-19"></a><span class="co"># use apply to compute the negative log-likelihood for each probability value</span></span>
+<span id="cb371-20"><a href="sol-mle.html#cb371-20"></a>neglogL <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">matrix</span>(p_vals), <span class="dv">1</span>, neglogLikelihood, n, x)</span>
+<span id="cb371-21"><a href="sol-mle.html#cb371-21"></a></span>
+<span id="cb371-22"><a href="sol-mle.html#cb371-22"></a><span class="co"># plot negative log-likelihood function and overlay maximum (negative)</span></span>
+<span id="cb371-23"><a href="sol-mle.html#cb371-23"></a><span class="co"># log-likelihood estimate</span></span>
+<span id="cb371-24"><a href="sol-mle.html#cb371-24"></a><span class="fu">plot</span>(p_vals, neglogL, <span class="at">pch =</span> <span class="st">"-"</span>)</span>
+<span id="cb371-25"><a href="sol-mle.html#cb371-25"></a><span class="fu">points</span>(out<span class="sc">$</span>par, out<span class="sc">$</span>value, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">pch =</span> <span class="dv">0</span>)</span></code></pre></div>
 <div class="inline-figure"><img src="mle_sol_files/figure-html/unnamed-chunk-1-1.png" width="95%" style="display: block; margin: auto;"></div>
 <button class="button">
 <a href="maximum-likelihood.html#ex-mle">Back to exercise</a>
@@ -142,7 +142,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-10-01.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-10-02.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

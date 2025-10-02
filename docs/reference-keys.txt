@@ -1,3 +1,4 @@
+tab:unnamed-chunk-7
 simulating-random-numbers
 sim-ex1
 question
@@ -23,7 +24,7 @@ approximating-the-binomial-distribution
 problem-mc-binomial
 monte-carlo-expectations
 mc-expectation-1
-using-functions
+mc---functions
 simulating-from-function
 mc-expectation-2
 maximum-likelihood
@@ -110,6 +111,7 @@ solution-mc-accuracy
 mc-expectation
 solution-mc-expectation-1
 solution-mc-expectation-2
+extend-the-function
 sol-mle
 sol-ex-CI
 solution-computational-testing
@@ -129,8 +131,3 @@ solution-q4
 solution-q5-and-q6
 solution-linear-regression-and-correlation
 comparison-of-data
-mc---functions
-tab:unnamed-chunk-6
-experimenting-with-game-parameters
-extend-the-function
-tab:unnamed-chunk-7

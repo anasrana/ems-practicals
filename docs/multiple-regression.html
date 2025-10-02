@@ -104,8 +104,8 @@ library(ggplot2)
 </h2>
 <p>For this part we will use the inbuilt <code>trees</code> dataset containing <code>Volume</code>, <code>Girth</code> and <code>Height</code> data for 31 trees.</p>
 <p>First we revisit linear regression on this example, recall the function to fit a linear model <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>. Consider <code>Volume</code> to be the response variable and <code>Girth</code> to be the covariate.</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb226-1"><a href="multiple-regression.html#cb226-1"></a>lr_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(Volume <span class="sc">~</span> Girth, <span class="at">data =</span> trees)</span>
-<span id="cb226-2"><a href="multiple-regression.html#cb226-2"></a><span class="fu">summary</span>(lr_fit)</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb230-1"><a href="multiple-regression.html#cb230-1"></a>lr_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(Volume <span class="sc">~</span> Girth, <span class="at">data =</span> trees)</span>
+<span id="cb230-2"><a href="multiple-regression.html#cb230-2"></a><span class="fu">summary</span>(lr_fit)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; 
 #&gt; Call:
 #&gt; lm(formula = Volume ~ Girth, data = trees)
@@ -126,10 +126,10 @@ library(ggplot2)
 #&gt; Multiple R-squared:  0.9353, Adjusted R-squared:  0.9331 
 #&gt; F-statistic: 419.4 on 1 and 29 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>We will now consider a linear regression example with multiple covariates, <code>Girth</code> as well as <code>Height</code>. In this case of course we know that they are related so we do expect both covariates to be significant.</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb228-1"><a href="multiple-regression.html#cb228-1"></a>mr_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(Volume <span class="sc">~</span> Girth <span class="sc">+</span> Height, <span class="at">data =</span> trees)</span>
-<span id="cb228-2"><a href="multiple-regression.html#cb228-2"></a></span>
-<span id="cb228-3"><a href="multiple-regression.html#cb228-3"></a></span>
-<span id="cb228-4"><a href="multiple-regression.html#cb228-4"></a><span class="fu">summary</span>(mr_fit)</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb232-1"><a href="multiple-regression.html#cb232-1"></a>mr_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(Volume <span class="sc">~</span> Girth <span class="sc">+</span> Height, <span class="at">data =</span> trees)</span>
+<span id="cb232-2"><a href="multiple-regression.html#cb232-2"></a></span>
+<span id="cb232-3"><a href="multiple-regression.html#cb232-3"></a></span>
+<span id="cb232-4"><a href="multiple-regression.html#cb232-4"></a><span class="fu">summary</span>(mr_fit)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; 
 #&gt; Call:
 #&gt; lm(formula = Volume ~ Girth + Height, data = trees)
@@ -153,9 +153,9 @@ library(ggplot2)
 <p><em>Note</em>, in the formula you only enter the covariates and not the regression coefficients or any information regarding the noise.</p>
 <p>Let us now look at RSS values, we can calculate the RSS for the <code>lf_fit</code> object by using <code>sum(residuals(lr_fit)^2)</code>. We see that the RSS for LR = 524.3 and the RSS for MR = 421.92. Therefore the fit has improved but the regression coefficient for <code>Height</code> is very small and not significant.</p>
 <p>One reason for this is that the in the relationship between <code>Volume</code>, <code>Girth</code>, and <code>Height</code> is not additive but rather <code>Girth</code> and <code>Height</code> are multiplied. Using the fact that <span class="math inline">\(\log(a*b) = \log(a) + \log(b)\)</span> we can consider the log-transformed data in a linear model.</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb230-1"><a href="multiple-regression.html#cb230-1"></a>mrl_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(Volume) <span class="sc">~</span> <span class="fu">log</span>(Girth) <span class="sc">+</span> <span class="fu">log</span>(Height), <span class="at">data =</span> trees)</span>
-<span id="cb230-2"><a href="multiple-regression.html#cb230-2"></a></span>
-<span id="cb230-3"><a href="multiple-regression.html#cb230-3"></a><span class="fu">summary</span>(mrl_fit)</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb234-1"><a href="multiple-regression.html#cb234-1"></a>mrl_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(Volume) <span class="sc">~</span> <span class="fu">log</span>(Girth) <span class="sc">+</span> <span class="fu">log</span>(Height), <span class="at">data =</span> trees)</span>
+<span id="cb234-2"><a href="multiple-regression.html#cb234-2"></a></span>
+<span id="cb234-3"><a href="multiple-regression.html#cb234-3"></a><span class="fu">summary</span>(mrl_fit)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; 
 #&gt; Call:
 #&gt; lm(formula = log(Volume) ~ log(Girth) + log(Height), data = trees)
@@ -189,10 +189,10 @@ library(ggplot2)
 <p>In this section we will consider a dataset with a categorical covariate. We will use linear regression to explore the relationship between the response variable and the categorical covariate. This is a simple example to illustrate the interpretation of the coefficients in the model. This is not a general approach to using linear regression with categorical variables.</p>
 </div>
 <p>Recall from the lecture that covariates don’t need to be numerical but can also be <em>categorical</em>. We will now explore regression with a categorical variable. Load a new dataset which is included in the <code>MASS</code> package, you won’t be able to load this dataset if package isn’t installed. Load the dataset explore what the data looks like.</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb232-1"><a href="multiple-regression.html#cb232-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb232-2"><a href="multiple-regression.html#cb232-2"></a><span class="fu">data</span>(<span class="st">"birthwt"</span>)</span>
-<span id="cb232-3"><a href="multiple-regression.html#cb232-3"></a></span>
-<span id="cb232-4"><a href="multiple-regression.html#cb232-4"></a><span class="fu">head</span>(birthwt)</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb236-1"><a href="multiple-regression.html#cb236-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb236-2"><a href="multiple-regression.html#cb236-2"></a><span class="fu">data</span>(<span class="st">"birthwt"</span>)</span>
+<span id="cb236-3"><a href="multiple-regression.html#cb236-3"></a></span>
+<span id="cb236-4"><a href="multiple-regression.html#cb236-4"></a><span class="fu">head</span>(birthwt)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;    low age lwt race smoke ptl ht ui ftv  bwt
 #&gt; 85   0  19 182    2     0   0  0  1   0 2523
 #&gt; 86   0  33 155    3     0   0  0  0   3 2551
@@ -200,7 +200,7 @@ library(ggplot2)
 #&gt; 88   0  21 108    1     1   0  0  1   2 2594
 #&gt; 89   0  18 107    1     1   0  0  1   0 2600
 #&gt; 91   0  21 124    3     0   0  0  0   0 2622</code></pre>
-<div class="sourceCode" id="cb234"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb234-1"><a href="multiple-regression.html#cb234-1"></a><span class="fu">summary</span>(birthwt)</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb238-1"><a href="multiple-regression.html#cb238-1"></a><span class="fu">summary</span>(birthwt)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;       low              age             lwt       
 #&gt;  Min.   :0.0000   Min.   :14.00   Min.   : 80.0  
 #&gt;  1st Qu.:0.0000   1st Qu.:19.00   1st Qu.:110.0  
@@ -230,29 +230,29 @@ library(ggplot2)
 #&gt;  3rd Qu.:3487  
 #&gt;  Max.   :4990</code></pre>
 <p>We will give the data more interpretable names and generally cleanup the data a little bit.</p>
-<div class="sourceCode" id="cb236"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb236-1"><a href="multiple-regression.html#cb236-1"></a><span class="co"># rename columns</span></span>
-<span id="cb236-2"><a href="multiple-regression.html#cb236-2"></a><span class="fu">colnames</span>(birthwt) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"bwt_below_2500"</span>, <span class="st">"mother_age"</span>, <span class="st">"mother_weight"</span>, <span class="st">"race"</span>,</span>
-<span id="cb236-3"><a href="multiple-regression.html#cb236-3"></a>                       <span class="st">"mother_smokes"</span>, <span class="st">"previous_prem_labor"</span>, <span class="st">"hypertension"</span>,</span>
-<span id="cb236-4"><a href="multiple-regression.html#cb236-4"></a>                       <span class="st">"uterine_irr"</span>, <span class="st">"physician_visits"</span>, <span class="st">"bwt_grams"</span>)</span>
-<span id="cb236-5"><a href="multiple-regression.html#cb236-5"></a></span>
-<span id="cb236-6"><a href="multiple-regression.html#cb236-6"></a>birthwt<span class="sc">$</span>race <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"white"</span>, <span class="st">"black"</span>, <span class="st">"other"</span>)[birthwt<span class="sc">$</span>race])</span>
-<span id="cb236-7"><a href="multiple-regression.html#cb236-7"></a>birthwt<span class="sc">$</span>mother_smokes <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"No"</span>, <span class="st">"Yes"</span>)[birthwt<span class="sc">$</span>mother_smokes <span class="sc">+</span> <span class="dv">1</span>])</span>
-<span id="cb236-8"><a href="multiple-regression.html#cb236-8"></a>birthwt<span class="sc">$</span>uterine_irr <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"No"</span>, <span class="st">"Yes"</span>)[birthwt<span class="sc">$</span>uterine_irr <span class="sc">+</span> <span class="dv">1</span>])</span>
-<span id="cb236-9"><a href="multiple-regression.html#cb236-9"></a>birthwt<span class="sc">$</span>hypertension <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"No"</span>, <span class="st">"Yes"</span>)[birthwt<span class="sc">$</span>hypertension <span class="sc">+</span> <span class="dv">1</span>])</span>
-<span id="cb236-10"><a href="multiple-regression.html#cb236-10"></a></span>
-<span id="cb236-11"><a href="multiple-regression.html#cb236-11"></a><span class="fu">ggplot</span>(birthwt, <span class="fu">aes</span>(<span class="at">x =</span> mother_smokes, <span class="at">y =</span> bwt_grams)) <span class="sc">+</span></span>
-<span id="cb236-12"><a href="multiple-regression.html#cb236-12"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb236-13"><a href="multiple-regression.html#cb236-13"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Data on baby births in Springfield (1986)"</span>,</span>
-<span id="cb236-14"><a href="multiple-regression.html#cb236-14"></a>         <span class="at">x =</span> <span class="st">"Does the mother smoke?"</span>,</span>
-<span id="cb236-15"><a href="multiple-regression.html#cb236-15"></a>         <span class="at">y =</span> <span class="st">"Birth-weight [grams]"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb240-1"><a href="multiple-regression.html#cb240-1"></a><span class="co"># rename columns</span></span>
+<span id="cb240-2"><a href="multiple-regression.html#cb240-2"></a><span class="fu">colnames</span>(birthwt) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"bwt_below_2500"</span>, <span class="st">"mother_age"</span>, <span class="st">"mother_weight"</span>, <span class="st">"race"</span>,</span>
+<span id="cb240-3"><a href="multiple-regression.html#cb240-3"></a>                       <span class="st">"mother_smokes"</span>, <span class="st">"previous_prem_labor"</span>, <span class="st">"hypertension"</span>,</span>
+<span id="cb240-4"><a href="multiple-regression.html#cb240-4"></a>                       <span class="st">"uterine_irr"</span>, <span class="st">"physician_visits"</span>, <span class="st">"bwt_grams"</span>)</span>
+<span id="cb240-5"><a href="multiple-regression.html#cb240-5"></a></span>
+<span id="cb240-6"><a href="multiple-regression.html#cb240-6"></a>birthwt<span class="sc">$</span>race <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"white"</span>, <span class="st">"black"</span>, <span class="st">"other"</span>)[birthwt<span class="sc">$</span>race])</span>
+<span id="cb240-7"><a href="multiple-regression.html#cb240-7"></a>birthwt<span class="sc">$</span>mother_smokes <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"No"</span>, <span class="st">"Yes"</span>)[birthwt<span class="sc">$</span>mother_smokes <span class="sc">+</span> <span class="dv">1</span>])</span>
+<span id="cb240-8"><a href="multiple-regression.html#cb240-8"></a>birthwt<span class="sc">$</span>uterine_irr <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"No"</span>, <span class="st">"Yes"</span>)[birthwt<span class="sc">$</span>uterine_irr <span class="sc">+</span> <span class="dv">1</span>])</span>
+<span id="cb240-9"><a href="multiple-regression.html#cb240-9"></a>birthwt<span class="sc">$</span>hypertension <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"No"</span>, <span class="st">"Yes"</span>)[birthwt<span class="sc">$</span>hypertension <span class="sc">+</span> <span class="dv">1</span>])</span>
+<span id="cb240-10"><a href="multiple-regression.html#cb240-10"></a></span>
+<span id="cb240-11"><a href="multiple-regression.html#cb240-11"></a><span class="fu">ggplot</span>(birthwt, <span class="fu">aes</span>(<span class="at">x =</span> mother_smokes, <span class="at">y =</span> bwt_grams)) <span class="sc">+</span></span>
+<span id="cb240-12"><a href="multiple-regression.html#cb240-12"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb240-13"><a href="multiple-regression.html#cb240-13"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Data on baby births in Springfield (1986)"</span>,</span>
+<span id="cb240-14"><a href="multiple-regression.html#cb240-14"></a>         <span class="at">x =</span> <span class="st">"Does the mother smoke?"</span>,</span>
+<span id="cb240-15"><a href="multiple-regression.html#cb240-15"></a>         <span class="at">y =</span> <span class="st">"Birth-weight [grams]"</span>)</span></code></pre></div>
 <div class="inline-figure"><img src="multiple-regression_files/figure-html/bplt-1.png" width="95%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb237"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb237-1"><a href="multiple-regression.html#cb237-1"></a><span class="fu">ggplot</span>(birthwt, <span class="fu">aes</span>(<span class="at">x =</span> mother_age, <span class="at">y =</span> bwt_grams, <span class="at">col =</span> mother_smokes)) <span class="sc">+</span></span>
-<span id="cb237-2"><a href="multiple-regression.html#cb237-2"></a>    <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb241-1"><a href="multiple-regression.html#cb241-1"></a><span class="fu">ggplot</span>(birthwt, <span class="fu">aes</span>(<span class="at">x =</span> mother_age, <span class="at">y =</span> bwt_grams, <span class="at">col =</span> mother_smokes)) <span class="sc">+</span></span>
+<span id="cb241-2"><a href="multiple-regression.html#cb241-2"></a>    <span class="fu">geom_point</span>()</span></code></pre></div>
 <div class="inline-figure"><img src="multiple-regression_files/figure-html/bwt_sct-1.png" width="95%" style="display: block; margin: auto;"></div>
 <p>Now we perform linear regression using the categorical variable, it is no different than performing linear regression on numeric data. The difference is in interpretation.</p>
-<div class="sourceCode" id="cb238"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb238-1"><a href="multiple-regression.html#cb238-1"></a>bwt_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(bwt_grams <span class="sc">~</span> mother_smokes, <span class="at">data =</span> birthwt)</span>
-<span id="cb238-2"><a href="multiple-regression.html#cb238-2"></a></span>
-<span id="cb238-3"><a href="multiple-regression.html#cb238-3"></a><span class="fu">summary</span>(bwt_fit)</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb242-1"><a href="multiple-regression.html#cb242-1"></a>bwt_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(bwt_grams <span class="sc">~</span> mother_smokes, <span class="at">data =</span> birthwt)</span>
+<span id="cb242-2"><a href="multiple-regression.html#cb242-2"></a></span>
+<span id="cb242-3"><a href="multiple-regression.html#cb242-3"></a><span class="fu">summary</span>(bwt_fit)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; 
 #&gt; Call:
 #&gt; lm(formula = bwt_grams ~ mother_smokes, data = birthwt)
@@ -291,14 +291,14 @@ The coefficients in the model can be interpreted as follows:</p>
 <span class="header-section-number">11.3</span> Residuals<a class="anchor" aria-label="anchor" href="#residuals"><i class="fas fa-link"></i></a>
 </h2>
 <p>Recall from the lectures the residuals are the differences between the observed data <span class="math inline">\(y\)</span> and the fitted values <span class="math inline">\(\hat{y}\)</span>. One of the assumptions we make in the simple linear regression model is that the residuals should be normally distributed. To extract residuals from an <code>lm</code> object we will use the <code><a href="https://rdrr.io/r/stats/residuals.html">residuals()</a></code> function.</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb240-1"><a href="multiple-regression.html#cb240-1"></a>residuals_df <span class="ot">&lt;-</span></span>
-<span id="cb240-2"><a href="multiple-regression.html#cb240-2"></a><span class="fu">data.frame</span>(<span class="at">resid =</span> <span class="fu">residuals</span>(bwt_fit))</span>
-<span id="cb240-3"><a href="multiple-regression.html#cb240-3"></a></span>
-<span id="cb240-4"><a href="multiple-regression.html#cb240-4"></a><span class="fu">ggplot</span>(residuals_df, <span class="fu">aes</span>(<span class="at">x =</span> resid)) <span class="sc">+</span></span>
-<span id="cb240-5"><a href="multiple-regression.html#cb240-5"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb244-1"><a href="multiple-regression.html#cb244-1"></a>residuals_df <span class="ot">&lt;-</span></span>
+<span id="cb244-2"><a href="multiple-regression.html#cb244-2"></a><span class="fu">data.frame</span>(<span class="at">resid =</span> <span class="fu">residuals</span>(bwt_fit))</span>
+<span id="cb244-3"><a href="multiple-regression.html#cb244-3"></a></span>
+<span id="cb244-4"><a href="multiple-regression.html#cb244-4"></a><span class="fu">ggplot</span>(residuals_df, <span class="fu">aes</span>(<span class="at">x =</span> resid)) <span class="sc">+</span></span>
+<span id="cb244-5"><a href="multiple-regression.html#cb244-5"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">10</span>)</span></code></pre></div>
 <div class="inline-figure"><img src="multiple-regression_files/figure-html/bwt_resid-1.png" width="95%" style="display: block; margin: auto;"></div>
 <p>Even if we consider that these residuals look like they are normally distributed we need to get better understanding of this we will use the Q-Q Plot. You can take a look at the wiki to get a better understanding (<a href="https://en.wikipedia.org/wiki/Q%E2%80%93Q_plot">Q–Q plot - Wikipedia</a>). In simple terms if the residuals are normally distributed we expect them to be on the diagonal straight line on a Q-Q plot. The simplest way to get such a plot is using the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function and specifically for an <code>lm</code> object it has an option <code>which =</code> that takes a numeric value depending on which plot you want to plot.</p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb241-1"><a href="multiple-regression.html#cb241-1"></a><span class="fu">plot</span>(bwt_fit, <span class="at">which =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb245-1"><a href="multiple-regression.html#cb245-1"></a><span class="fu">plot</span>(bwt_fit, <span class="at">which =</span> <span class="dv">2</span>)</span></code></pre></div>
 <div class="inline-figure"><img src="multiple-regression_files/figure-html/qq-1.png" width="95%" style="display: block; margin: auto;"></div>
 <p>As we can see in this example the residuals are very close to normal with some outliers especially towards larger values of the residual. This would indicate that the model as it stands does not fulfil that assumption fully but comes close.</p>
 <p><font color="dodgerblue"><strong>There is a more detailed example on QQ plots and how to interpret them in the next practical, <a href="qq-plot.html#qq-plot">here</a>.</strong></font></p>
@@ -310,49 +310,49 @@ The coefficients in the model can be interpreted as follows:</p>
 <p>Finally, in todays practical we will implement the <em>gradient descent algorithm</em> which we discussed in the lecture. This is a slightly tricker practical, try to implement the algorithm yourself before looking at the full details.</p>
 <p>For simplicity we will only consider the case with one covariate. In this section we will use simulated data and compare the results with <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>. The model we will simulate from is:</p>
 <p><span class="math display">\[y = 2 + 3 x + \epsilon\]</span></p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb242-1"><a href="multiple-regression.html#cb242-1"></a><span class="co"># setting seed to be able to reproduce the simulation</span></span>
-<span id="cb242-2"><a href="multiple-regression.html#cb242-2"></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
-<span id="cb242-3"><a href="multiple-regression.html#cb242-3"></a></span>
-<span id="cb242-4"><a href="multiple-regression.html#cb242-4"></a><span class="co"># number of samples</span></span>
-<span id="cb242-5"><a href="multiple-regression.html#cb242-5"></a>n_sample <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb242-6"><a href="multiple-regression.html#cb242-6"></a></span>
-<span id="cb242-7"><a href="multiple-regression.html#cb242-7"></a><span class="co"># We sample x values from a uniform distribution in the range [-5, 5]</span></span>
-<span id="cb242-8"><a href="multiple-regression.html#cb242-8"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(n_sample, <span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>)</span>
-<span id="cb242-9"><a href="multiple-regression.html#cb242-9"></a><span class="co"># Next we compute y</span></span>
-<span id="cb242-10"><a href="multiple-regression.html#cb242-10"></a>y <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n_sample, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb242-11"><a href="multiple-regression.html#cb242-11"></a></span>
-<span id="cb242-12"><a href="multiple-regression.html#cb242-12"></a>sim_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)</span>
-<span id="cb242-13"><a href="multiple-regression.html#cb242-13"></a></span>
-<span id="cb242-14"><a href="multiple-regression.html#cb242-14"></a><span class="fu">ggplot</span>(sim_df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
-<span id="cb242-15"><a href="multiple-regression.html#cb242-15"></a>    <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb246-1"><a href="multiple-regression.html#cb246-1"></a><span class="co"># setting seed to be able to reproduce the simulation</span></span>
+<span id="cb246-2"><a href="multiple-regression.html#cb246-2"></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span>
+<span id="cb246-3"><a href="multiple-regression.html#cb246-3"></a></span>
+<span id="cb246-4"><a href="multiple-regression.html#cb246-4"></a><span class="co"># number of samples</span></span>
+<span id="cb246-5"><a href="multiple-regression.html#cb246-5"></a>n_sample <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb246-6"><a href="multiple-regression.html#cb246-6"></a></span>
+<span id="cb246-7"><a href="multiple-regression.html#cb246-7"></a><span class="co"># We sample x values from a uniform distribution in the range [-5, 5]</span></span>
+<span id="cb246-8"><a href="multiple-regression.html#cb246-8"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(n_sample, <span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>)</span>
+<span id="cb246-9"><a href="multiple-regression.html#cb246-9"></a><span class="co"># Next we compute y</span></span>
+<span id="cb246-10"><a href="multiple-regression.html#cb246-10"></a>y <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">2</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n_sample, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb246-11"><a href="multiple-regression.html#cb246-11"></a></span>
+<span id="cb246-12"><a href="multiple-regression.html#cb246-12"></a>sim_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)</span>
+<span id="cb246-13"><a href="multiple-regression.html#cb246-13"></a></span>
+<span id="cb246-14"><a href="multiple-regression.html#cb246-14"></a><span class="fu">ggplot</span>(sim_df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb246-15"><a href="multiple-regression.html#cb246-15"></a>    <span class="fu">geom_point</span>()</span></code></pre></div>
 <div class="inline-figure"><img src="multiple-regression_files/figure-html/sim-mr-1.png" width="95%" style="display: block; margin: auto;"></div>
 <p>Recall that in gradient descent we want to minimise the Mean Squared Error (<span class="math inline">\(J(\beta)\)</span>) which is the cost function. The first step is to write this cost function in R. For simplicity we will use matrix multiplication, which in R is implemented as <code>%*%</code>. (<em>Note</em>, to get help on these function with special characters you can’t simply run the command <code>?%*%</code> instead you have to put it in quotes <code><a href="https://rdrr.io/r/base/matmult.html">?"%*%"</a></code>.)</p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb243-1"><a href="multiple-regression.html#cb243-1"></a>cost_fn <span class="ot">&lt;-</span> <span class="cf">function</span>(X, y, coef) {</span>
-<span id="cb243-2"><a href="multiple-regression.html#cb243-2"></a>    <span class="fu">sum</span>( (X <span class="sc">%*%</span> coef <span class="sc">-</span> y)<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">/</span> (<span class="dv">2</span><span class="sc">*</span><span class="fu">length</span>(y))</span>
-<span id="cb243-3"><a href="multiple-regression.html#cb243-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb247-1"><a href="multiple-regression.html#cb247-1"></a>cost_fn <span class="ot">&lt;-</span> <span class="cf">function</span>(X, y, coef) {</span>
+<span id="cb247-2"><a href="multiple-regression.html#cb247-2"></a>    <span class="fu">sum</span>( (X <span class="sc">%*%</span> coef <span class="sc">-</span> y)<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">/</span> (<span class="dv">2</span><span class="sc">*</span><span class="fu">length</span>(y))</span>
+<span id="cb247-3"><a href="multiple-regression.html#cb247-3"></a>}</span></code></pre></div>
 <p>To perform an optimisation we will have to initialise parameters, in general optimisation algorithms won’t always produce the same results for all choices of initialisations.</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb244-1"><a href="multiple-regression.html#cb244-1"></a><span class="co"># First we set alpha and the number of iterations we will perform</span></span>
-<span id="cb244-2"><a href="multiple-regression.html#cb244-2"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
-<span id="cb244-3"><a href="multiple-regression.html#cb244-3"></a>num_iters <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb244-4"><a href="multiple-regression.html#cb244-4"></a></span>
-<span id="cb244-5"><a href="multiple-regression.html#cb244-5"></a><span class="co"># next we will initialise regression coefficients</span></span>
-<span id="cb244-6"><a href="multiple-regression.html#cb244-6"></a>coef <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">nrow=</span><span class="dv">2</span>)</span>
-<span id="cb244-7"><a href="multiple-regression.html#cb244-7"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, <span class="fu">matrix</span>(x))</span>
-<span id="cb244-8"><a href="multiple-regression.html#cb244-8"></a>res <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"list"</span>, num_iters)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb248-1"><a href="multiple-regression.html#cb248-1"></a><span class="co"># First we set alpha and the number of iterations we will perform</span></span>
+<span id="cb248-2"><a href="multiple-regression.html#cb248-2"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb248-3"><a href="multiple-regression.html#cb248-3"></a>num_iters <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb248-4"><a href="multiple-regression.html#cb248-4"></a></span>
+<span id="cb248-5"><a href="multiple-regression.html#cb248-5"></a><span class="co"># next we will initialise regression coefficients</span></span>
+<span id="cb248-6"><a href="multiple-regression.html#cb248-6"></a>coef <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">nrow=</span><span class="dv">2</span>)</span>
+<span id="cb248-7"><a href="multiple-regression.html#cb248-7"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, <span class="fu">matrix</span>(x))</span>
+<span id="cb248-8"><a href="multiple-regression.html#cb248-8"></a>res <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"list"</span>, num_iters)</span></code></pre></div>
 <p>We now write a for loop to compute the optimisation, where we store the full history of the opmtimisation.</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb245-1"><a href="multiple-regression.html#cb245-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>num_iters) {</span>
-<span id="cb245-2"><a href="multiple-regression.html#cb245-2"></a>  error <span class="ot">&lt;-</span> (X <span class="sc">%*%</span> coef <span class="sc">-</span> y)</span>
-<span id="cb245-3"><a href="multiple-regression.html#cb245-3"></a>  delta <span class="ot">&lt;-</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> error <span class="sc">/</span> <span class="fu">length</span>(y)</span>
-<span id="cb245-4"><a href="multiple-regression.html#cb245-4"></a>  coef <span class="ot">&lt;-</span> coef <span class="sc">-</span> alpha <span class="sc">*</span> delta</span>
-<span id="cb245-5"><a href="multiple-regression.html#cb245-5"></a>  res_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">itr =</span> i , <span class="at">cost =</span> <span class="fu">cost_fn</span>(X, y, coef),</span>
-<span id="cb245-6"><a href="multiple-regression.html#cb245-6"></a>                   <span class="at">b0 =</span> coef[<span class="dv">1</span>], <span class="at">b1 =</span> coef[<span class="dv">2</span>])</span>
-<span id="cb245-7"><a href="multiple-regression.html#cb245-7"></a></span>
-<span id="cb245-8"><a href="multiple-regression.html#cb245-8"></a>  res[[i]] <span class="ot">&lt;-</span> res_df</span>
-<span id="cb245-9"><a href="multiple-regression.html#cb245-9"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb249-1"><a href="multiple-regression.html#cb249-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>num_iters) {</span>
+<span id="cb249-2"><a href="multiple-regression.html#cb249-2"></a>  error <span class="ot">&lt;-</span> (X <span class="sc">%*%</span> coef <span class="sc">-</span> y)</span>
+<span id="cb249-3"><a href="multiple-regression.html#cb249-3"></a>  delta <span class="ot">&lt;-</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> error <span class="sc">/</span> <span class="fu">length</span>(y)</span>
+<span id="cb249-4"><a href="multiple-regression.html#cb249-4"></a>  coef <span class="ot">&lt;-</span> coef <span class="sc">-</span> alpha <span class="sc">*</span> delta</span>
+<span id="cb249-5"><a href="multiple-regression.html#cb249-5"></a>  res_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">itr =</span> i , <span class="at">cost =</span> <span class="fu">cost_fn</span>(X, y, coef),</span>
+<span id="cb249-6"><a href="multiple-regression.html#cb249-6"></a>                   <span class="at">b0 =</span> coef[<span class="dv">1</span>], <span class="at">b1 =</span> coef[<span class="dv">2</span>])</span>
+<span id="cb249-7"><a href="multiple-regression.html#cb249-7"></a></span>
+<span id="cb249-8"><a href="multiple-regression.html#cb249-8"></a>  res[[i]] <span class="ot">&lt;-</span> res_df</span>
+<span id="cb249-9"><a href="multiple-regression.html#cb249-9"></a>}</span></code></pre></div>
 <p>We created a list to store results <code>res</code> it is possible to combine all results into a simple <code>data.frame</code> using the <code>bind_rows()</code> function from the <code>dplyr</code> package. If we look at the final values in the resulting variable we will</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb246-1"><a href="multiple-regression.html#cb246-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb246-2"><a href="multiple-regression.html#cb246-2"></a>res_df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(res)</span>
-<span id="cb246-3"><a href="multiple-regression.html#cb246-3"></a><span class="fu">tail</span>(res_df)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb250-1"><a href="multiple-regression.html#cb250-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb250-2"><a href="multiple-regression.html#cb250-2"></a>res_df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(res)</span>
+<span id="cb250-3"><a href="multiple-regression.html#cb250-3"></a><span class="fu">tail</span>(res_df)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;     itr      cost       b0       b1
 #&gt; 95   95 0.5275707 2.034285 3.014512
 #&gt; 96   96 0.5275707 2.034285 3.014512
@@ -361,24 +361,24 @@ The coefficients in the model can be interpreted as follows:</p>
 #&gt; 99   99 0.5275707 2.034285 3.014512
 #&gt; 100 100 0.5275707 2.034285 3.014512</code></pre>
 <p>We can see that <span class="math inline">\(\beta_0 = 2\)</span> and <span class="math inline">\(\beta_1 = 3\)</span> are reproduced faithfully. There are a few ways to visualise the optimisation. We can look at the convergence of the parameters, the cost function itself or even the estimated <span class="math inline">\(y\)</span> at each step of the optimisation.</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb248-1"><a href="multiple-regression.html#cb248-1"></a><span class="fu">ggplot</span>(res_df, <span class="fu">aes</span>(<span class="at">x =</span> itr, <span class="at">y =</span> b1)) <span class="sc">+</span></span>
-<span id="cb248-2"><a href="multiple-regression.html#cb248-2"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb248-3"><a href="multiple-regression.html#cb248-3"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Iteration"</span>,</span>
-<span id="cb248-4"><a href="multiple-regression.html#cb248-4"></a>         <span class="at">y =</span> <span class="st">"Estimated beta_1"</span>,</span>
-<span id="cb248-5"><a href="multiple-regression.html#cb248-5"></a>         <span class="at">title =</span> <span class="st">"Visuaslisation of the cconvergence of the beta_1 parameter"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb252-1"><a href="multiple-regression.html#cb252-1"></a><span class="fu">ggplot</span>(res_df, <span class="fu">aes</span>(<span class="at">x =</span> itr, <span class="at">y =</span> b1)) <span class="sc">+</span></span>
+<span id="cb252-2"><a href="multiple-regression.html#cb252-2"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb252-3"><a href="multiple-regression.html#cb252-3"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Iteration"</span>,</span>
+<span id="cb252-4"><a href="multiple-regression.html#cb252-4"></a>         <span class="at">y =</span> <span class="st">"Estimated beta_1"</span>,</span>
+<span id="cb252-5"><a href="multiple-regression.html#cb252-5"></a>         <span class="at">title =</span> <span class="st">"Visuaslisation of the cconvergence of the beta_1 parameter"</span>)</span></code></pre></div>
 <div class="inline-figure"><img src="multiple-regression_files/figure-html/vis_gd-1.png" width="95%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb249"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb249-1"><a href="multiple-regression.html#cb249-1"></a><span class="fu">ggplot</span>(res_df, <span class="fu">aes</span>(<span class="at">x =</span> itr, <span class="at">y =</span> cost)) <span class="sc">+</span></span>
-<span id="cb249-2"><a href="multiple-regression.html#cb249-2"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb249-3"><a href="multiple-regression.html#cb249-3"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Iteration"</span>,</span>
-<span id="cb249-4"><a href="multiple-regression.html#cb249-4"></a>         <span class="at">y =</span> <span class="st">"Cost function"</span>,</span>
-<span id="cb249-5"><a href="multiple-regression.html#cb249-5"></a>         <span class="at">title =</span> <span class="st">"History of cost function at each iteration"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb253-1"><a href="multiple-regression.html#cb253-1"></a><span class="fu">ggplot</span>(res_df, <span class="fu">aes</span>(<span class="at">x =</span> itr, <span class="at">y =</span> cost)) <span class="sc">+</span></span>
+<span id="cb253-2"><a href="multiple-regression.html#cb253-2"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb253-3"><a href="multiple-regression.html#cb253-3"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Iteration"</span>,</span>
+<span id="cb253-4"><a href="multiple-regression.html#cb253-4"></a>         <span class="at">y =</span> <span class="st">"Cost function"</span>,</span>
+<span id="cb253-5"><a href="multiple-regression.html#cb253-5"></a>         <span class="at">title =</span> <span class="st">"History of cost function at each iteration"</span>)</span></code></pre></div>
 <div class="inline-figure"><img src="multiple-regression_files/figure-html/vis_gd-2.png" width="95%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb250"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb250-1"><a href="multiple-regression.html#cb250-1"></a><span class="fu">ggplot</span>(sim_df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
-<span id="cb250-2"><a href="multiple-regression.html#cb250-2"></a>    <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb250-3"><a href="multiple-regression.html#cb250-3"></a>    <span class="fu">geom_abline</span>(<span class="at">data =</span> res_df, <span class="fu">aes</span>(<span class="at">intercept =</span> b0, <span class="at">slope =</span> b1),</span>
-<span id="cb250-4"><a href="multiple-regression.html#cb250-4"></a>                <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">col =</span> <span class="st">"darkgreen"</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb250-5"><a href="multiple-regression.html#cb250-5"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"x"</span>, <span class="at">y =</span> <span class="st">"y"</span>,</span>
-<span id="cb250-6"><a href="multiple-regression.html#cb250-6"></a>         <span class="at">title =</span> <span class="st">"Estimated response at each step during optimisation"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb254-1"><a href="multiple-regression.html#cb254-1"></a><span class="fu">ggplot</span>(sim_df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb254-2"><a href="multiple-regression.html#cb254-2"></a>    <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb254-3"><a href="multiple-regression.html#cb254-3"></a>    <span class="fu">geom_abline</span>(<span class="at">data =</span> res_df, <span class="fu">aes</span>(<span class="at">intercept =</span> b0, <span class="at">slope =</span> b1),</span>
+<span id="cb254-4"><a href="multiple-regression.html#cb254-4"></a>                <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">col =</span> <span class="st">"darkgreen"</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb254-5"><a href="multiple-regression.html#cb254-5"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"x"</span>, <span class="at">y =</span> <span class="st">"y"</span>,</span>
+<span id="cb254-6"><a href="multiple-regression.html#cb254-6"></a>         <span class="at">title =</span> <span class="st">"Estimated response at each step during optimisation"</span>)</span></code></pre></div>
 <pre><code>#&gt; Warning: Using `size` aesthetic for lines was deprecated in
 #&gt; ggplot2 3.4.0.
 #&gt; ℹ Please use `linewidth` instead.
@@ -419,7 +419,7 @@ The coefficients in the model can be interpreted as follows:</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-10-01.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-10-02.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
