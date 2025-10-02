@@ -18,7 +18,34 @@ Suppose we have an instance of a Normal distribution with a mean of 1 and a stan
 
 which we can visualise as follows:
 
-<img src="monte-carlo_files/figure-html/unnamed-chunk-1-1.png" width="90%" style="display: block; margin: auto;" />
+
+```
+#> 
+#> Attaching package: 'dplyr'
+```
+
+```
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+```
+
+```
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
+```
+
+```
+#> Warning: Using `size` aesthetic for lines was deprecated in
+#> ggplot2 3.4.0.
+#> ℹ Please use `linewidth` instead.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where
+#> this warning was generated.
+```
+
+<img src="monte-carlo_files/figure-html/unnamed-chunk-1-1.png" width="95%" style="display: block; margin: auto;" />
 
 If you have not done calculus before - do not worry. We are going to write a Monte Carlo approach for estimating this integral which does not require any knowledge of calculus!
 
@@ -57,7 +84,7 @@ print(mc_integral)
 ```
 
 ``` bg-info
-#> [1] 0.302
+#> [1] 0.342
 ```
 
 This is our estimate of the integral. We can compare this to the true value of the integral which we can calculate using the `pnorm` function in `R`. This is the probability of a Normal distribution falling between 1 and 3:
@@ -74,15 +101,12 @@ print(mc_exact)
 
 Let's break down the above code, to understand what is happening. The `pnorm` gives the integral under the Normal distribution (in this case with mean 1 and standard deviation 2) from negative infinity up to the value specified by `q`.
 
-The first call to `pnorm(q=3, mean=1, sd=2)` gives us this integral:
+We use `pnorm` with `q=1` and `q=3` plugging in the mean and standard deviation `pnorm(q=?, mean=1, sd=2)`. This produces the following integrals:
 
-<img src="monte-carlo_files/figure-html/unnamed-chunk-7-1.png" width="90%" style="display: block; margin: auto;" />
-
-The second call to `pnorm(q=1, mean=1, sd=2)` gives us this integral:
-
-<img src="monte-carlo_files/figure-html/unnamed-chunk-8-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="monte-carlo_files/figure-html/unnamed-chunk-7-1.png" width="95%" style="display: block; margin: auto;" />
 
 Therefore the difference between these gives us the integral of interest between 1 and 3.
+
 
 ::: {.rmdnote }
 <center>
@@ -99,6 +123,8 @@ Let us now explore how the accuracy of the Monte Carlo estimate changes as the n
 
 1. Try increasing the number of simulations and see how the accuracy improves?
 2. Can you draw a graph of number of MC samples vs accuracy?
+
+Ensure you write functions to do this, and make use of loops to avoid repeating code.
 
 <details>
 
@@ -157,7 +183,7 @@ print(pr_greater_than_three)
 ```
 
 ``` bg-info
-#> [1] 0.77
+#> [1] 0.8
 ```
 
 which we can compare to `R`’s built-in Binomial distribution function:
@@ -181,6 +207,7 @@ Let's expand this once again trying to see the impact of the number of simulatio
 1. Try increasing the number of simulations and see how the accuracy improves?
 2. Can you plot how the accuracy varies as a function of the number of simulations?
 
+Once again, make use of functions and loops to avoid repeating code.
 
 (Hint: see the previous section, the solution is very similar)
 
@@ -192,7 +219,7 @@ Let us look at a more interesting problem after understanding how MC works and w
 
 Consider the following spinner. If the spinner is spun randomly then it has a probability 0.5 of landing on yellow and 0.25 of landing on red or blue respectively.
 
-<img src="monte-carlo_files/figure-html/unnamed-chunk-12-1.png" width="20%" style="display: block; margin: auto;" />
+<img src="monte-carlo_files/figure-html/unnamed-chunk-11-1.png" width="95%" style="display: block; margin: auto;" />
 
 If the rules of the game are such that landing on *yellow* you gain 1 point,* red* you lose 1 point and *blue* you gain 2 points. We can easily calculate the expected score.
 
@@ -248,20 +275,18 @@ To solve this with a Monte Carlo simulation you need to sample from the Spinner 
 </button>
 :::
 
-## Using Functions
+## MC - Functions
 
-We now move to another essential concept in programming - functions. You would have already encountered functions in `R` and other programming languages. Functions are a way to encapsulate code so that it can be reused. This is a key concept in programming and is used to make code more readable and maintainable.
+We have been using functions throughout your practical sessions. So we will look at them in a bit more detail here and build on what you have already learned.
 
-A function is a piece of code which is encapsulated so then we can refer to it repeatedly via the name of the function rather than repeatedly writing those lines of code. If you would like to learn more about functions in R, you can read [this](https://www.datacamp.com/community/tutorials/functions-in-r-a-tutorial) tutorial or the software carpentry [lesson](https://bham-carpentries.github.io/R-course-material/10-functions/index.html).
-
-Here is an example function we can write to simulate one game as indicated above and return whether the number of points is less than zero.
+When writing a potentially complex function, you should always start with the most basic building blocks. Here is an example function we can write to simulate one game as indicated above and return whether the number of points is less than zero.
 
 
 ```{.r .numberLines}
 # simulates a game of 20 spins
-play_game <- function(){
-    # picks a number from the list (1, -1, 2)
-    # with probability 50%, 25% and 25% twenty times
+play_game <- function() {
+  # picks a number from the list (1, -1, 2)
+  # with probability 50%, 25% and 25% twenty times
   results <- sample(c(1, -1, 2), 20, replace = TRUE, prob = c(0.5, 0.25, 0.25))
 
   # function returns whether the sum of all the spins is < 1
@@ -288,7 +313,7 @@ We can then compute the probability that, after twenty spins, we will have less 
 
 
 ```{.r .numberLines}
-prob_less_than_zero <- sum(less_than_zero)/runs
+prob_less_than_zero <- sum(less_than_zero) / runs
 print(prob_less_than_zero)
 ```
 
@@ -298,12 +323,18 @@ print(prob_less_than_zero)
 
 The probability is very low. This is not surprising since there is only a 25% chance of getting a point deduction on any spin and a 75% chance of gaining points. Try to increase the number of simulation runs to see if you can detect any games where you do find a negative score.
 
+*This is a very basic function and can be improved in many ways. For example, you could add parameters to the function to allow for different numbers of spins or different probabilities for each colour. You could also add error checking to ensure that the input parameters are valid.*
+
 ::: {.infobox}
 
 ## Exercise: MC Expectation 2 {#mc-expectation-2}
 
+In this exercise we will extend the above function to answer the following questions:
+
 1. Modify your code to allow you to calculate the expected number of points after 20 spins.
 2. Simulate a game in which you have a maximum of 20 spins but you go “bust” once you hit a negative score and take this into account when you compute the expected end of game score.
+3. Add options in the game to different probabilities for each colour and different point values for each colour. There should be default values for the original game.
+4. Experiment with different probabilities and point values to see how they affect the expected score. Create a table of results.
 
 <button class="button">
   [Show Solution](#solution-mc-expectation-2)

@@ -129,3 +129,8 @@ solution-q4
 solution-q5-and-q6
 solution-linear-regression-and-correlation
 comparison-of-data
+mc---functions
+tab:unnamed-chunk-6
+experimenting-with-game-parameters
+extend-the-function
+tab:unnamed-chunk-7
