@@ -157,26 +157,26 @@
 <span id="cb395-15"><a href="solution-computational-testing.html#cb395-15"></a></span>
 <span id="cb395-16"><a href="solution-computational-testing.html#cb395-16"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># generate some artificial data from a N(0, 1)</span></span>
 <span id="cb395-17"><a href="solution-computational-testing.html#cb395-17"></a>out <span class="ot">&lt;-</span> <span class="fu">z_test</span>(x, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># null should not be rejected!</span></span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  z = -0.041 
-#&gt;  one-tailed probability = 0.484 
-#&gt;  two-tailed probability = 0.968</code></pre>
+<pre class="bg-info"><code>#&gt;  z = 0.081 
+#&gt;  one-tailed probability = 0.468 
+#&gt;  two-tailed probability = 0.936</code></pre>
 <div class="sourceCode" id="cb397"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb397-1"><a href="solution-computational-testing.html#cb397-1"></a><span class="fu">print</span>(out)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; $z
-#&gt; [1] -0.041
+#&gt; [1] 0.081
 #&gt; 
 #&gt; $one_p
-#&gt; [1] 0.484
+#&gt; [1] 0.468
 #&gt; 
 #&gt; $two_p
-#&gt; [1] 0.968</code></pre>
+#&gt; [1] 0.936</code></pre>
 <div class="sourceCode" id="cb399"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb399-1"><a href="solution-computational-testing.html#cb399-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># generate some artificial data from a N(1, 1)</span></span>
 <span id="cb399-2"><a href="solution-computational-testing.html#cb399-2"></a>out <span class="ot">&lt;-</span> <span class="fu">z_test</span>(x, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># null should be rejected!</span></span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  z = 3.619 
+<pre class="bg-info"><code>#&gt;  z = 3.469 
 #&gt;  one-tailed probability = 0 
 #&gt;  two-tailed probability = 0</code></pre>
 <div class="sourceCode" id="cb401"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb401-1"><a href="solution-computational-testing.html#cb401-1"></a><span class="fu">print</span>(out)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; $z
-#&gt; [1] 3.619
+#&gt; [1] 3.469
 #&gt; 
 #&gt; $one_p
 #&gt; [1] 0

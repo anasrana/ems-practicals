@@ -1,4 +1,3 @@
-tab:unnamed-chunk-7
 simulating-random-numbers
 sim-ex1
 question
@@ -114,6 +113,10 @@ solution-mc-expectation-2
 extend-the-function
 sol-mle
 sol-ex-CI
+function-definitions
+main-analysis
+define-parameters
+advanced-analysis-with-accuracy-assessment
 solution-computational-testing
 ht-sol-ex1
 ht-sol-ex2
