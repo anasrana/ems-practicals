@@ -67,8 +67,8 @@ print(weather_sequence)
 ```
 
 ``` bg-info
-#>  [1] 2 2 1 1 1 1 1 2 1 2 2 1 2 1 2 1 2 2 1 1 1 2 1 2 1 2 2 1
-#> [29] 1 1
+#>  [1] 2 1 1 1 2 1 2 1 1 2 1 2 1 2 1 1 1 2 1 1 2 1 2 2 2 1 2 1
+#> [29] 2 2
 ```
 
 ::: {.infobox}
@@ -90,7 +90,11 @@ Note, the diagram (intentionally) misses out the self-transitions. You should be
 
 ## Function MC {#mc-function}
 
-Now let's put the code into a function that can take a general transition matrix for any number of states and run the markov chain simulation. The function should be named `run_markov_chain` and take three arguments:
+We now move to another essential concept in programming - functions. You would have already encountered functions in R and other programming languages. Functions are a way to encapsulate code so that it can be reused. This is a key concept in programming and is used to make code more readable and maintainable.
+
+A function is a piece of code which is encapsulated so then we can refer to it repeatedly via the name of the function rather than repeatedly writing those lines of code. If you would like to learn more about functions in R, you can read [this](https://www.datacamp.com/community/tutorials/functions-in-r-a-tutorial) tutorial or the software carpentry [lesson](https://bham-carpentries.github.io/R-course-material/10-functions/index.html).
+
+Now let's put the code we have created in this practical into a function that can take a general transition matrix for any number of states and run the markov chain simulation. The function should be named `run_markov_chain` and take three arguments:
 
 - `transitionMatrix`: a matrix of transition probabilities
 - `initialState`: the starting state (an integer)

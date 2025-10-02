@@ -1,4 +1,3 @@
-
 #  Solution: Markov Chains
 
 ## Three state Markov Chain {#mc-solution}
@@ -61,8 +60,8 @@ print(weather_sequence)
 ```
 
 ``` bg-info
-#>  [1] 1 2 1 1 3 1 2 3 2 1 1 1 1 1 1 3 2 3 1 1 3 2 3 1 1 1 3 1
-#> [29] 2 1
+#>  [1] 1 2 3 1 1 1 1 1 1 1 1 1 3 1 2 2 3 2 3 3 1 1 1 1 1 2 1 1
+#> [29] 2 2
 ```
 
 This is simplest way to output the weather sequence. You could also use a `data.frame` to store the day and the weather state if you wanted to output the day and the weather state together. Even better would to create plot of the weather sequence over the 30 days or perform basic statistics on the weather sequence to output a useful summary of the weather sequence. This is left as an exercise for the reader, some methods we have already covered and we will learn more over the coming days.
@@ -150,8 +149,8 @@ print(weather_sequence)
 ```
 
 ``` bg-info
-#>  [1] 1 1 1 2 2 1 2 2 1 1 2 1 2 1 2 1 2 2 2 2 1 2 1 2 2 1 2 1
-#> [29] 1 2
+#>  [1] 1 1 1 2 1 2 1 2 1 2 2 1 2 2 2 2 2 2 1 2 1 1 1 2 1 1 1 2
+#> [29] 1 1
 ```
 
 ```{.r .numberLines}
@@ -176,8 +175,8 @@ print(weather_sequence)
 ```
 
 ``` bg-info
-#>  [1] 1 1 3 2 1 2 2 1 1 2 3 3 3 3 3 1 3 2 2 2 2 2 1 3 3 3 2 2
-#> [29] 1 1
+#>  [1] 1 1 1 3 2 1 2 2 2 1 2 1 2 2 1 2 2 3 2 2 2 1 2 2 2 1 2 1
+#> [29] 1 3
 ```
 
 ```{.r .numberLines}
@@ -202,8 +201,8 @@ print(weather_sequence)
 ```
 
 ``` bg-info
-#>  [1] 48 19 43 13 11 26 38 15 32 43  6 36 37  2 35 34 14 13
-#> [19]  1 18  8 18 36  5  9 18 33  6 49 35
+#>  [1] 50 15 35 48 39 19 47 19 20 24  8 48 45 33 31 19 21 49
+#> [19] 27 38 20 28 15  5 44 26 47 42 14 16
 ```
 
 ```{.r .numberLines}
