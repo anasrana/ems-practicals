@@ -8,7 +8,7 @@ First, we are going to write a function to compute the log-likelihood function g
 
 ```{.r .numberLines}
 neglogLikelihood <- function(mu, x) {
-  logF = dnorm(x, mean = mu, sd = 1, log = TRUE)
+  logF <- dnorm(x, mean = mu, sd = 1, log = TRUE)
   return(-sum(logF))
 }
 ```
@@ -19,8 +19,8 @@ Now, lets assume our data is captured in the following vector:
 
 
 ```{.r .numberLines}
-x = c(-0.5, 1.0, 0.2, -0.3, 0.5, 0.89, -0.11, -0.71, 1.0, -1.3, 0.84)
-n = length(x)
+x <- c(-0.5, 1.0, 0.2, -0.3, 0.5, 0.89, -0.11, -0.71, 1.0, -1.3, 0.84)
+n <- length(x)
 ```
 
 ## Optimisation
@@ -28,14 +28,14 @@ n = length(x)
 Now, we will need to define an initial search value for the parameter, we will arbitrarily pick a value:
 
 ```{.r .numberLines}
-mu_init = 1.0
+mu_init <- 1.0
 ```
 Now we will use the `R` function `optim` to find the maximum likelihood estimate. As mentioned above, `optim` finds the minimum value of a function so in this case we are trying to find the parameter that minimises the negative log likelihood.
 
 
 ```{.r .numberLines}
 out <- optim(mu_init, neglogLikelihood, gr = NULL, x, method = "L-BFGS-B",
-         lower = -Inf, upper = Inf)
+             lower = -Inf, upper = Inf)
 ```
 
 Here, this says that we will start the search at `mu_init` using the function `logLikelihood` that we have defined above. The `optim` algorithm will use the `L-BFGS-B` search method. The parameter is allowed to take any value from `lower = -Inf` to `upper = Inf`. The result is stored in out.
@@ -75,7 +75,7 @@ We use the `apply` function to apply the `logLikelihood` function to each of the
 
 
 ```{.r .numberLines}
-neglogL <- apply( matrix(mu), 1, neglogLikelihood, x)
+neglogL <- apply(matrix(mu), 1, neglogLikelihood, x)
 ```
 
 We can then plot and overlay the maximum likelihood result:
@@ -216,6 +216,8 @@ Interesting! The maximum likelihood estimates return the sample mean and the **b
 A potentially biased coin is tossed 10 times and the number of heads recorded. The experiment is repeated 5 times and the number of heads recorded was 3, 2, 4, 5 and 2 respectively.
 
 - Can you derive a maximum likelihood estimate of the probability of obtaining a head?
+
+Create a function to compute the negative log-likelihood and use `optim` to find the maximum likelihood estimate. Plot the negative log-likelihood function and overlay the maximum likelihood estimate.
 
 <button class="button">
 [Show solution](#sol-mle)
