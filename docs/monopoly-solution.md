@@ -328,7 +328,7 @@ print(paste("Turns to buy all properties:", game_result$turns_to_buy_all))
 ```
 
 ``` bg-info
-#> [1] "Turns to buy all properties: 127"
+#> [1] "Turns to buy all properties: 89"
 ```
 
 ```{.r .numberLines}
