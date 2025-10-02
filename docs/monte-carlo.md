@@ -84,7 +84,7 @@ print(mc_integral)
 ```
 
 ``` bg-info
-#> [1] 0.356
+#> [1] 0.352
 ```
 
 This is our estimate of the integral. We can compare this to the true value of the integral which we can calculate using the `pnorm` function in `R`. This is the probability of a Normal distribution falling between 1 and 3:
@@ -183,7 +183,7 @@ print(pr_greater_than_three)
 ```
 
 ``` bg-info
-#> [1] 0.81
+#> [1] 0.85
 ```
 
 which we can compare to `R`’s built-in Binomial distribution function:
@@ -318,7 +318,7 @@ print(prob_less_than_zero)
 ```
 
 ``` bg-info
-#> [1] 0
+#> [1] 0.01
 ```
 
 The probability is very low. This is not surprising since there is only a 25% chance of getting a point deduction on any spin and a 75% chance of gaining points. Try to increase the number of simulation runs to see if you can detect any games where you do find a negative score.
