@@ -378,7 +378,7 @@
 <span id="cb351-76"><a href="monopolySol.html#cb351-76"></a><span class="co"># Example usage for a single game:</span></span>
 <span id="cb351-77"><a href="monopolySol.html#cb351-77"></a>game_result <span class="ot">&lt;-</span> <span class="fu">monopoly_ext_sim</span>(<span class="dv">1000</span>)</span>
 <span id="cb351-78"><a href="monopolySol.html#cb351-78"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Turns to buy all properties:"</span>, game_result<span class="sc">$</span>turns_to_buy_all))</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] "Turns to buy all properties: 100"</code></pre>
+<pre class="bg-info"><code>#&gt; [1] "Turns to buy all properties: 129"</code></pre>
 <div class="sourceCode" id="cb353"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb353-1"><a href="monopolySol.html#cb353-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Total properties bought:"</span>,</span>
 <span id="cb353-2"><a href="monopolySol.html#cb353-2"></a>            <span class="fu">max</span>(game_result<span class="sc">$</span>properties_bought_timeline)))</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; [1] "Total properties bought: 28"</code></pre>

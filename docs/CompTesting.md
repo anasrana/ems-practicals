@@ -114,3 +114,16 @@ Test the hypothesis, at the 1% level, that \(Y \sim \operatorname{Poisson} (\lam
 <button class="button">
  [Solution](#ht-sol-ex8)
 </button>
+
+
+::: {.infobox}
+
+## Universal Hypothesis Testing Function {#ht-universal}
+
+As a slightly tougher task, can you write a function that can take multiple inputs and perform a hypothesis test based on the input data, and the choice made? It should be able to handle z-tests, t-tests, and chi-squared tests. The output should be a clear statement of the null and alternative hypotheses, the test statistic, the p-value, and the conclusion of the test.
+
+<button class="button">
+ [Solution](#ht-sol-universal)
+</button>
+
+:::

@@ -205,14 +205,14 @@
 <div class="inline-figure"><img src="ci_sol_files/figure-html/unnamed-chunk-3-1.png" width="95%" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb381"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb381-1"><a href="sol-ex-CI.html#cb381-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;    interval_width probability_var_contained
-#&gt; 1             0.1                     0.298
-#&gt; 2             0.2                     0.542
-#&gt; 3             0.3                     0.764
-#&gt; 4             0.4                     0.880
-#&gt; 5             0.5                     0.948
-#&gt; 6             0.6                     0.981
-#&gt; 7             0.7                     0.995
-#&gt; 8             0.8                     1.000
+#&gt; 1             0.1                     0.309
+#&gt; 2             0.2                     0.589
+#&gt; 3             0.3                     0.773
+#&gt; 4             0.4                     0.886
+#&gt; 5             0.5                     0.945
+#&gt; 6             0.6                     0.980
+#&gt; 7             0.7                     0.989
+#&gt; 8             0.8                     0.999
 #&gt; 9             0.9                     1.000
 #&gt; 10            1.0                     1.000</code></pre>
 </div>
@@ -242,16 +242,16 @@
 <pre class="bg-info"><code>#&gt; [1] "Summary of Confidence Interval Accuracy:"</code></pre>
 <div class="sourceCode" id="cb385"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb385-1"><a href="sol-ex-CI.html#cb385-1"></a><span class="fu">print</span>(summary_df)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;    interval_width mean_accuracy  sd_accuracy
-#&gt; 1             0.1        0.2930 0.0198885785
-#&gt; 2             0.2        0.5470 0.0164654520
-#&gt; 3             0.3        0.7470 0.0134412301
-#&gt; 4             0.4        0.8736 0.0093594872
-#&gt; 5             0.5        0.9456 0.0061137368
-#&gt; 6             0.6        0.9810 0.0042426407
-#&gt; 7             0.7        0.9933 0.0031287200
-#&gt; 8             0.8        0.9987 0.0010593499
-#&gt; 9             0.9        0.9996 0.0006992059
-#&gt; 10            1.0        1.0000 0.0000000000</code></pre>
+#&gt; 1             0.1        0.2969 0.0110599377
+#&gt; 2             0.2        0.5492 0.0104753679
+#&gt; 3             0.3        0.7438 0.0078570563
+#&gt; 4             0.4        0.8740 0.0055976185
+#&gt; 5             0.5        0.9474 0.0046714261
+#&gt; 6             0.6        0.9799 0.0044584502
+#&gt; 7             0.7        0.9932 0.0031198291
+#&gt; 8             0.8        0.9977 0.0013374935
+#&gt; 9             0.9        0.9992 0.0010327956
+#&gt; 10            1.0        0.9999 0.0003162278</code></pre>
 <div class="sourceCode" id="cb387"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb387-1"><a href="sol-ex-CI.html#cb387-1"></a><span class="co"># Plot mean accuracy with error bars</span></span>
 <span id="cb387-2"><a href="sol-ex-CI.html#cb387-2"></a>plt_accuracy <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(summary_df, <span class="fu">aes</span>(<span class="at">x =</span> interval_width, <span class="at">y =</span> mean_accuracy))</span>
 <span id="cb387-3"><a href="sol-ex-CI.html#cb387-3"></a>plt_accuracy <span class="ot">&lt;-</span> plt_accuracy <span class="sc">+</span> <span class="fu">geom_line</span>()</span>
@@ -344,26 +344,26 @@ x &lt;- c(263.9, 266.2, 266.3, 266.8, 265.0)</code></pre>
 <span id="cb401-15"><a href="sol-ex-CI.html#cb401-15"></a></span>
 <span id="cb401-16"><a href="sol-ex-CI.html#cb401-16"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># generate some artificial data from a N(0, 1)</span></span>
 <span id="cb401-17"><a href="sol-ex-CI.html#cb401-17"></a>out <span class="ot">&lt;-</span> <span class="fu">z_test</span>(x, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># null should not be rejected!</span></span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  z = 0.123 
-#&gt;  one-tailed probability = 0.451 
-#&gt;  two-tailed probability = 0.902</code></pre>
+<pre class="bg-info"><code>#&gt;  z = -1.027 
+#&gt;  one-tailed probability = 0.152 
+#&gt;  two-tailed probability = 0.304</code></pre>
 <div class="sourceCode" id="cb403"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb403-1"><a href="sol-ex-CI.html#cb403-1"></a><span class="fu">print</span>(out)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; $z
-#&gt; [1] 0.123
+#&gt; [1] -1.027
 #&gt; 
 #&gt; $one_p
-#&gt; [1] 0.451
+#&gt; [1] 0.152
 #&gt; 
 #&gt; $two_p
-#&gt; [1] 0.902</code></pre>
+#&gt; [1] 0.304</code></pre>
 <div class="sourceCode" id="cb405"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb405-1"><a href="sol-ex-CI.html#cb405-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># generate some artificial data from a N(1, 1)</span></span>
 <span id="cb405-2"><a href="sol-ex-CI.html#cb405-2"></a>out <span class="ot">&lt;-</span> <span class="fu">z_test</span>(x, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># null should be rejected!</span></span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  z = 3.538 
+<pre class="bg-info"><code>#&gt;  z = 3.304 
 #&gt;  one-tailed probability = 0 
 #&gt;  two-tailed probability = 0</code></pre>
 <div class="sourceCode" id="cb407"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb407-1"><a href="sol-ex-CI.html#cb407-1"></a><span class="fu">print</span>(out)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; $z
-#&gt; [1] 3.538
+#&gt; [1] 3.304
 #&gt; 
 #&gt; $one_p
 #&gt; [1] 0
@@ -555,6 +555,349 @@ x &lt;- c(263.9, 266.2, 266.3, 266.8, 265.0)</code></pre>
 <button class="button">
 <a href="computational-testing-techniques.html#ht-ex8">Back to exercise</a>
 </button>
+</div>
+<div id="ht-sol-universal" class="section level2" number="19.11">
+<h2>
+<span class="header-section-number">F.11</span> Universal Hypothesis Testing Function<a class="anchor" aria-label="anchor" href="#ht-sol-universal"><i class="fas fa-link"></i></a>
+</h2>
+<p>Here’s a comprehensive function that can handle multiple types of hypothesis tests. This is a basic implementation and can be extended further based on specific requirements. There are many edge cases and additional features that could be added, but this should serve as a solid starting point. This is not the only way to implement such a function, but it covers the main types of tests:</p>
+<div class="sourceCode" id="cb456"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb456-1"><a href="sol-ex-CI.html#cb456-1"></a><span class="co"># Universal hypothesis testing function</span></span>
+<span id="cb456-2"><a href="sol-ex-CI.html#cb456-2"></a>hypothesis_test <span class="ot">&lt;-</span> <span class="cf">function</span>(test_type, <span class="at">data =</span> <span class="cn">NULL</span>, ..., <span class="at">alpha =</span> <span class="fl">0.05</span>) {</span>
+<span id="cb456-3"><a href="sol-ex-CI.html#cb456-3"></a></span>
+<span id="cb456-4"><a href="sol-ex-CI.html#cb456-4"></a>  <span class="co"># Initialize result list</span></span>
+<span id="cb456-5"><a href="sol-ex-CI.html#cb456-5"></a>  result <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb456-6"><a href="sol-ex-CI.html#cb456-6"></a></span>
+<span id="cb456-7"><a href="sol-ex-CI.html#cb456-7"></a>  <span class="cf">if</span> (test_type <span class="sc">==</span> <span class="st">"z_test"</span>) {</span>
+<span id="cb456-8"><a href="sol-ex-CI.html#cb456-8"></a>    <span class="co"># Z-test (one-sample or two-sample)</span></span>
+<span id="cb456-9"><a href="sol-ex-CI.html#cb456-9"></a>    args <span class="ot">&lt;-</span> <span class="fu">list</span>(...)</span>
+<span id="cb456-10"><a href="sol-ex-CI.html#cb456-10"></a></span>
+<span id="cb456-11"><a href="sol-ex-CI.html#cb456-11"></a>    <span class="cf">if</span> (<span class="fu">length</span>(args<span class="sc">$</span>mu0) <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;&amp;</span> <span class="fu">length</span>(args<span class="sc">$</span>sigma) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb456-12"><a href="sol-ex-CI.html#cb456-12"></a>      <span class="co"># One-sample z-test</span></span>
+<span id="cb456-13"><a href="sol-ex-CI.html#cb456-13"></a>      x <span class="ot">&lt;-</span> data</span>
+<span id="cb456-14"><a href="sol-ex-CI.html#cb456-14"></a>      mu0 <span class="ot">&lt;-</span> args<span class="sc">$</span>mu0</span>
+<span id="cb456-15"><a href="sol-ex-CI.html#cb456-15"></a>      sigma <span class="ot">&lt;-</span> args<span class="sc">$</span>sigma</span>
+<span id="cb456-16"><a href="sol-ex-CI.html#cb456-16"></a>      alternative <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.null</span>(args<span class="sc">$</span>alternative), <span class="st">"two.sided"</span>, args<span class="sc">$</span>alternative)</span>
+<span id="cb456-17"><a href="sol-ex-CI.html#cb456-17"></a></span>
+<span id="cb456-18"><a href="sol-ex-CI.html#cb456-18"></a>      n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb456-19"><a href="sol-ex-CI.html#cb456-19"></a>      xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb456-20"><a href="sol-ex-CI.html#cb456-20"></a>      z_stat <span class="ot">&lt;-</span> (xbar <span class="sc">-</span> mu0) <span class="sc">/</span> (sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
+<span id="cb456-21"><a href="sol-ex-CI.html#cb456-21"></a></span>
+<span id="cb456-22"><a href="sol-ex-CI.html#cb456-22"></a>      <span class="co"># Calculate p-value based on alternative hypothesis</span></span>
+<span id="cb456-23"><a href="sol-ex-CI.html#cb456-23"></a>      <span class="cf">if</span> (alternative <span class="sc">==</span> <span class="st">"two.sided"</span>) {</span>
+<span id="cb456-24"><a href="sol-ex-CI.html#cb456-24"></a>        p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fu">abs</span>(z_stat)))</span>
+<span id="cb456-25"><a href="sol-ex-CI.html#cb456-25"></a>        h0 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"H0: μ ="</span>, mu0)</span>
+<span id="cb456-26"><a href="sol-ex-CI.html#cb456-26"></a>        h1 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"H1: μ ≠"</span>, mu0)</span>
+<span id="cb456-27"><a href="sol-ex-CI.html#cb456-27"></a>      } <span class="cf">else</span> <span class="cf">if</span> (alternative <span class="sc">==</span> <span class="st">"greater"</span>) {</span>
+<span id="cb456-28"><a href="sol-ex-CI.html#cb456-28"></a>        p_value <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(z_stat)</span>
+<span id="cb456-29"><a href="sol-ex-CI.html#cb456-29"></a>        h0 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"H0: μ ≤"</span>, mu0)</span>
+<span id="cb456-30"><a href="sol-ex-CI.html#cb456-30"></a>        h1 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"H1: μ &gt;"</span>, mu0)</span>
+<span id="cb456-31"><a href="sol-ex-CI.html#cb456-31"></a>      } <span class="cf">else</span> <span class="cf">if</span> (alternative <span class="sc">==</span> <span class="st">"less"</span>) {</span>
+<span id="cb456-32"><a href="sol-ex-CI.html#cb456-32"></a>        p_value <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(z_stat)</span>
+<span id="cb456-33"><a href="sol-ex-CI.html#cb456-33"></a>        h0 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"H0: μ ≥"</span>, mu0)</span>
+<span id="cb456-34"><a href="sol-ex-CI.html#cb456-34"></a>        h1 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"H1: μ &lt;"</span>, mu0)</span>
+<span id="cb456-35"><a href="sol-ex-CI.html#cb456-35"></a>      }</span>
+<span id="cb456-36"><a href="sol-ex-CI.html#cb456-36"></a></span>
+<span id="cb456-37"><a href="sol-ex-CI.html#cb456-37"></a>      result <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb456-38"><a href="sol-ex-CI.html#cb456-38"></a>        <span class="at">test_name =</span> <span class="st">"One-sample Z-test"</span>,</span>
+<span id="cb456-39"><a href="sol-ex-CI.html#cb456-39"></a>        <span class="at">null_hypothesis =</span> h0,</span>
+<span id="cb456-40"><a href="sol-ex-CI.html#cb456-40"></a>        <span class="at">alternative_hypothesis =</span> h1,</span>
+<span id="cb456-41"><a href="sol-ex-CI.html#cb456-41"></a>        <span class="at">test_statistic =</span> z_stat,</span>
+<span id="cb456-42"><a href="sol-ex-CI.html#cb456-42"></a>        <span class="at">p_value =</span> p_value,</span>
+<span id="cb456-43"><a href="sol-ex-CI.html#cb456-43"></a>        <span class="at">alpha =</span> alpha,</span>
+<span id="cb456-44"><a href="sol-ex-CI.html#cb456-44"></a>        <span class="at">conclusion =</span> <span class="fu">ifelse</span>(p_value <span class="sc">&lt;</span> alpha, <span class="st">"Reject H0"</span>, <span class="st">"Fail to reject H0"</span>),</span>
+<span id="cb456-45"><a href="sol-ex-CI.html#cb456-45"></a>        <span class="at">sample_mean =</span> xbar,</span>
+<span id="cb456-46"><a href="sol-ex-CI.html#cb456-46"></a>        <span class="at">sample_size =</span> n</span>
+<span id="cb456-47"><a href="sol-ex-CI.html#cb456-47"></a>      )</span>
+<span id="cb456-48"><a href="sol-ex-CI.html#cb456-48"></a>    }</span>
+<span id="cb456-49"><a href="sol-ex-CI.html#cb456-49"></a></span>
+<span id="cb456-50"><a href="sol-ex-CI.html#cb456-50"></a>  } <span class="cf">else</span> <span class="cf">if</span> (test_type <span class="sc">==</span> <span class="st">"t_test"</span>) {</span>
+<span id="cb456-51"><a href="sol-ex-CI.html#cb456-51"></a>    <span class="co"># T-test (one-sample, two-sample, or paired)</span></span>
+<span id="cb456-52"><a href="sol-ex-CI.html#cb456-52"></a>    args <span class="ot">&lt;-</span> <span class="fu">list</span>(...)</span>
+<span id="cb456-53"><a href="sol-ex-CI.html#cb456-53"></a></span>
+<span id="cb456-54"><a href="sol-ex-CI.html#cb456-54"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(args<span class="sc">$</span>y)) {</span>
+<span id="cb456-55"><a href="sol-ex-CI.html#cb456-55"></a>      <span class="co"># Two-sample t-test</span></span>
+<span id="cb456-56"><a href="sol-ex-CI.html#cb456-56"></a>      x <span class="ot">&lt;-</span> data</span>
+<span id="cb456-57"><a href="sol-ex-CI.html#cb456-57"></a>      y <span class="ot">&lt;-</span> args<span class="sc">$</span>y</span>
+<span id="cb456-58"><a href="sol-ex-CI.html#cb456-58"></a>      alternative <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.null</span>(args<span class="sc">$</span>alternative), <span class="st">"two.sided"</span>, args<span class="sc">$</span>alternative)</span>
+<span id="cb456-59"><a href="sol-ex-CI.html#cb456-59"></a>      paired <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.null</span>(args<span class="sc">$</span>paired), <span class="cn">FALSE</span>, args<span class="sc">$</span>paired)</span>
+<span id="cb456-60"><a href="sol-ex-CI.html#cb456-60"></a></span>
+<span id="cb456-61"><a href="sol-ex-CI.html#cb456-61"></a>      <span class="cf">if</span> (paired) {</span>
+<span id="cb456-62"><a href="sol-ex-CI.html#cb456-62"></a>        <span class="co"># Paired t-test</span></span>
+<span id="cb456-63"><a href="sol-ex-CI.html#cb456-63"></a>        diff <span class="ot">&lt;-</span> x <span class="sc">-</span> y</span>
+<span id="cb456-64"><a href="sol-ex-CI.html#cb456-64"></a>        n <span class="ot">&lt;-</span> <span class="fu">length</span>(diff)</span>
+<span id="cb456-65"><a href="sol-ex-CI.html#cb456-65"></a>        mean_diff <span class="ot">&lt;-</span> <span class="fu">mean</span>(diff)</span>
+<span id="cb456-66"><a href="sol-ex-CI.html#cb456-66"></a>        sd_diff <span class="ot">&lt;-</span> <span class="fu">sd</span>(diff)</span>
+<span id="cb456-67"><a href="sol-ex-CI.html#cb456-67"></a>        t_stat <span class="ot">&lt;-</span> mean_diff <span class="sc">/</span> (sd_diff <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
+<span id="cb456-68"><a href="sol-ex-CI.html#cb456-68"></a>        df <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb456-69"><a href="sol-ex-CI.html#cb456-69"></a></span>
+<span id="cb456-70"><a href="sol-ex-CI.html#cb456-70"></a>        <span class="cf">if</span> (alternative <span class="sc">==</span> <span class="st">"two.sided"</span>) {</span>
+<span id="cb456-71"><a href="sol-ex-CI.html#cb456-71"></a>          p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(<span class="fu">abs</span>(t_stat), df))</span>
+<span id="cb456-72"><a href="sol-ex-CI.html#cb456-72"></a>          h0 <span class="ot">&lt;-</span> <span class="st">"H0: μd = 0"</span></span>
+<span id="cb456-73"><a href="sol-ex-CI.html#cb456-73"></a>          h1 <span class="ot">&lt;-</span> <span class="st">"H1: μd ≠ 0"</span></span>
+<span id="cb456-74"><a href="sol-ex-CI.html#cb456-74"></a>        } <span class="cf">else</span> <span class="cf">if</span> (alternative <span class="sc">==</span> <span class="st">"greater"</span>) {</span>
+<span id="cb456-75"><a href="sol-ex-CI.html#cb456-75"></a>          p_value <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(t_stat, df)</span>
+<span id="cb456-76"><a href="sol-ex-CI.html#cb456-76"></a>          h0 <span class="ot">&lt;-</span> <span class="st">"H0: μd ≤ 0"</span></span>
+<span id="cb456-77"><a href="sol-ex-CI.html#cb456-77"></a>          h1 <span class="ot">&lt;-</span> <span class="st">"H1: μd &gt; 0"</span></span>
+<span id="cb456-78"><a href="sol-ex-CI.html#cb456-78"></a>        } <span class="cf">else</span> <span class="cf">if</span> (alternative <span class="sc">==</span> <span class="st">"less"</span>) {</span>
+<span id="cb456-79"><a href="sol-ex-CI.html#cb456-79"></a>          p_value <span class="ot">&lt;-</span> <span class="fu">pt</span>(t_stat, df)</span>
+<span id="cb456-80"><a href="sol-ex-CI.html#cb456-80"></a>          h0 <span class="ot">&lt;-</span> <span class="st">"H0: μd ≥ 0"</span></span>
+<span id="cb456-81"><a href="sol-ex-CI.html#cb456-81"></a>          h1 <span class="ot">&lt;-</span> <span class="st">"H1: μd &lt; 0"</span></span>
+<span id="cb456-82"><a href="sol-ex-CI.html#cb456-82"></a>        }</span>
+<span id="cb456-83"><a href="sol-ex-CI.html#cb456-83"></a></span>
+<span id="cb456-84"><a href="sol-ex-CI.html#cb456-84"></a>        result <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb456-85"><a href="sol-ex-CI.html#cb456-85"></a>          <span class="at">test_name =</span> <span class="st">"Paired t-test"</span>,</span>
+<span id="cb456-86"><a href="sol-ex-CI.html#cb456-86"></a>          <span class="at">null_hypothesis =</span> h0,</span>
+<span id="cb456-87"><a href="sol-ex-CI.html#cb456-87"></a>          <span class="at">alternative_hypothesis =</span> h1,</span>
+<span id="cb456-88"><a href="sol-ex-CI.html#cb456-88"></a>          <span class="at">test_statistic =</span> t_stat,</span>
+<span id="cb456-89"><a href="sol-ex-CI.html#cb456-89"></a>          <span class="at">degrees_of_freedom =</span> df,</span>
+<span id="cb456-90"><a href="sol-ex-CI.html#cb456-90"></a>          <span class="at">p_value =</span> p_value,</span>
+<span id="cb456-91"><a href="sol-ex-CI.html#cb456-91"></a>          <span class="at">alpha =</span> alpha,</span>
+<span id="cb456-92"><a href="sol-ex-CI.html#cb456-92"></a>          <span class="at">conclusion =</span> <span class="fu">ifelse</span>(p_value <span class="sc">&lt;</span> alpha, <span class="st">"Reject H0"</span>, <span class="st">"Fail to reject H0"</span>),</span>
+<span id="cb456-93"><a href="sol-ex-CI.html#cb456-93"></a>          <span class="at">mean_difference =</span> mean_diff</span>
+<span id="cb456-94"><a href="sol-ex-CI.html#cb456-94"></a>        )</span>
+<span id="cb456-95"><a href="sol-ex-CI.html#cb456-95"></a></span>
+<span id="cb456-96"><a href="sol-ex-CI.html#cb456-96"></a>      } <span class="cf">else</span> {</span>
+<span id="cb456-97"><a href="sol-ex-CI.html#cb456-97"></a>        <span class="co"># Two-sample t-test (assuming equal variances)</span></span>
+<span id="cb456-98"><a href="sol-ex-CI.html#cb456-98"></a>        n1 <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb456-99"><a href="sol-ex-CI.html#cb456-99"></a>        n2 <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
+<span id="cb456-100"><a href="sol-ex-CI.html#cb456-100"></a>        mean1 <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb456-101"><a href="sol-ex-CI.html#cb456-101"></a>        mean2 <span class="ot">&lt;-</span> <span class="fu">mean</span>(y)</span>
+<span id="cb456-102"><a href="sol-ex-CI.html#cb456-102"></a>        var1 <span class="ot">&lt;-</span> <span class="fu">var</span>(x)</span>
+<span id="cb456-103"><a href="sol-ex-CI.html#cb456-103"></a>        var2 <span class="ot">&lt;-</span> <span class="fu">var</span>(y)</span>
+<span id="cb456-104"><a href="sol-ex-CI.html#cb456-104"></a></span>
+<span id="cb456-105"><a href="sol-ex-CI.html#cb456-105"></a>        <span class="co"># Pooled variance</span></span>
+<span id="cb456-106"><a href="sol-ex-CI.html#cb456-106"></a>        pooled_var <span class="ot">&lt;-</span> ((n1 <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> var1 <span class="sc">+</span> (n2 <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> var2) <span class="sc">/</span> (n1 <span class="sc">+</span> n2 <span class="sc">-</span> <span class="dv">2</span>)</span>
+<span id="cb456-107"><a href="sol-ex-CI.html#cb456-107"></a>        se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(pooled_var <span class="sc">*</span> (<span class="dv">1</span><span class="sc">/</span>n1 <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>n2))</span>
+<span id="cb456-108"><a href="sol-ex-CI.html#cb456-108"></a>        t_stat <span class="ot">&lt;-</span> (mean1 <span class="sc">-</span> mean2) <span class="sc">/</span> se</span>
+<span id="cb456-109"><a href="sol-ex-CI.html#cb456-109"></a>        df <span class="ot">&lt;-</span> n1 <span class="sc">+</span> n2 <span class="sc">-</span> <span class="dv">2</span></span>
+<span id="cb456-110"><a href="sol-ex-CI.html#cb456-110"></a></span>
+<span id="cb456-111"><a href="sol-ex-CI.html#cb456-111"></a>        <span class="cf">if</span> (alternative <span class="sc">==</span> <span class="st">"two.sided"</span>) {</span>
+<span id="cb456-112"><a href="sol-ex-CI.html#cb456-112"></a>          p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(<span class="fu">abs</span>(t_stat), df))</span>
+<span id="cb456-113"><a href="sol-ex-CI.html#cb456-113"></a>          h0 <span class="ot">&lt;-</span> <span class="st">"H0: μ1 = μ2"</span></span>
+<span id="cb456-114"><a href="sol-ex-CI.html#cb456-114"></a>          h1 <span class="ot">&lt;-</span> <span class="st">"H1: μ1 ≠ μ2"</span></span>
+<span id="cb456-115"><a href="sol-ex-CI.html#cb456-115"></a>        } <span class="cf">else</span> <span class="cf">if</span> (alternative <span class="sc">==</span> <span class="st">"greater"</span>) {</span>
+<span id="cb456-116"><a href="sol-ex-CI.html#cb456-116"></a>          p_value <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(t_stat, df)</span>
+<span id="cb456-117"><a href="sol-ex-CI.html#cb456-117"></a>          h0 <span class="ot">&lt;-</span> <span class="st">"H0: μ1 ≤ μ2"</span></span>
+<span id="cb456-118"><a href="sol-ex-CI.html#cb456-118"></a>          h1 <span class="ot">&lt;-</span> <span class="st">"H1: μ1 &gt; μ2"</span></span>
+<span id="cb456-119"><a href="sol-ex-CI.html#cb456-119"></a>        } <span class="cf">else</span> <span class="cf">if</span> (alternative <span class="sc">==</span> <span class="st">"less"</span>) {</span>
+<span id="cb456-120"><a href="sol-ex-CI.html#cb456-120"></a>          p_value <span class="ot">&lt;-</span> <span class="fu">pt</span>(t_stat, df)</span>
+<span id="cb456-121"><a href="sol-ex-CI.html#cb456-121"></a>          h0 <span class="ot">&lt;-</span> <span class="st">"H0: μ1 ≥ μ2"</span></span>
+<span id="cb456-122"><a href="sol-ex-CI.html#cb456-122"></a>          h1 <span class="ot">&lt;-</span> <span class="st">"H1: μ1 &lt; μ2"</span></span>
+<span id="cb456-123"><a href="sol-ex-CI.html#cb456-123"></a>        }</span>
+<span id="cb456-124"><a href="sol-ex-CI.html#cb456-124"></a></span>
+<span id="cb456-125"><a href="sol-ex-CI.html#cb456-125"></a>        result <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb456-126"><a href="sol-ex-CI.html#cb456-126"></a>          <span class="at">test_name =</span> <span class="st">"Two-sample t-test"</span>,</span>
+<span id="cb456-127"><a href="sol-ex-CI.html#cb456-127"></a>          <span class="at">null_hypothesis =</span> h0,</span>
+<span id="cb456-128"><a href="sol-ex-CI.html#cb456-128"></a>          <span class="at">alternative_hypothesis =</span> h1,</span>
+<span id="cb456-129"><a href="sol-ex-CI.html#cb456-129"></a>          <span class="at">test_statistic =</span> t_stat,</span>
+<span id="cb456-130"><a href="sol-ex-CI.html#cb456-130"></a>          <span class="at">degrees_of_freedom =</span> df,</span>
+<span id="cb456-131"><a href="sol-ex-CI.html#cb456-131"></a>          <span class="at">p_value =</span> p_value,</span>
+<span id="cb456-132"><a href="sol-ex-CI.html#cb456-132"></a>          <span class="at">alpha =</span> alpha,</span>
+<span id="cb456-133"><a href="sol-ex-CI.html#cb456-133"></a>          <span class="at">conclusion =</span> <span class="fu">ifelse</span>(p_value <span class="sc">&lt;</span> alpha, <span class="st">"Reject H0"</span>, <span class="st">"Fail to reject H0"</span>),</span>
+<span id="cb456-134"><a href="sol-ex-CI.html#cb456-134"></a>          <span class="at">sample1_mean =</span> mean1,</span>
+<span id="cb456-135"><a href="sol-ex-CI.html#cb456-135"></a>          <span class="at">sample2_mean =</span> mean2</span>
+<span id="cb456-136"><a href="sol-ex-CI.html#cb456-136"></a>        )</span>
+<span id="cb456-137"><a href="sol-ex-CI.html#cb456-137"></a>      }</span>
+<span id="cb456-138"><a href="sol-ex-CI.html#cb456-138"></a></span>
+<span id="cb456-139"><a href="sol-ex-CI.html#cb456-139"></a>    } <span class="cf">else</span> {</span>
+<span id="cb456-140"><a href="sol-ex-CI.html#cb456-140"></a>      <span class="co"># One-sample t-test</span></span>
+<span id="cb456-141"><a href="sol-ex-CI.html#cb456-141"></a>      x <span class="ot">&lt;-</span> data</span>
+<span id="cb456-142"><a href="sol-ex-CI.html#cb456-142"></a>      mu0 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.null</span>(args<span class="sc">$</span>mu0), <span class="dv">0</span>, args<span class="sc">$</span>mu0)</span>
+<span id="cb456-143"><a href="sol-ex-CI.html#cb456-143"></a>      alternative <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.null</span>(args<span class="sc">$</span>alternative), <span class="st">"two.sided"</span>, args<span class="sc">$</span>alternative)</span>
+<span id="cb456-144"><a href="sol-ex-CI.html#cb456-144"></a></span>
+<span id="cb456-145"><a href="sol-ex-CI.html#cb456-145"></a>      n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb456-146"><a href="sol-ex-CI.html#cb456-146"></a>      xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb456-147"><a href="sol-ex-CI.html#cb456-147"></a>      s <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
+<span id="cb456-148"><a href="sol-ex-CI.html#cb456-148"></a>      t_stat <span class="ot">&lt;-</span> (xbar <span class="sc">-</span> mu0) <span class="sc">/</span> (s <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
+<span id="cb456-149"><a href="sol-ex-CI.html#cb456-149"></a>      df <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb456-150"><a href="sol-ex-CI.html#cb456-150"></a></span>
+<span id="cb456-151"><a href="sol-ex-CI.html#cb456-151"></a>      <span class="cf">if</span> (alternative <span class="sc">==</span> <span class="st">"two.sided"</span>) {</span>
+<span id="cb456-152"><a href="sol-ex-CI.html#cb456-152"></a>        p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(<span class="fu">abs</span>(t_stat), df))</span>
+<span id="cb456-153"><a href="sol-ex-CI.html#cb456-153"></a>        h0 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"H0: μ ="</span>, mu0)</span>
+<span id="cb456-154"><a href="sol-ex-CI.html#cb456-154"></a>        h1 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"H1: μ ≠"</span>, mu0)</span>
+<span id="cb456-155"><a href="sol-ex-CI.html#cb456-155"></a>      } <span class="cf">else</span> <span class="cf">if</span> (alternative <span class="sc">==</span> <span class="st">"greater"</span>) {</span>
+<span id="cb456-156"><a href="sol-ex-CI.html#cb456-156"></a>        p_value <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(t_stat, df)</span>
+<span id="cb456-157"><a href="sol-ex-CI.html#cb456-157"></a>        h0 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"H0: μ ≤"</span>, mu0)</span>
+<span id="cb456-158"><a href="sol-ex-CI.html#cb456-158"></a>        h1 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"H1: μ &gt;"</span>, mu0)</span>
+<span id="cb456-159"><a href="sol-ex-CI.html#cb456-159"></a>      } <span class="cf">else</span> <span class="cf">if</span> (alternative <span class="sc">==</span> <span class="st">"less"</span>) {</span>
+<span id="cb456-160"><a href="sol-ex-CI.html#cb456-160"></a>        p_value <span class="ot">&lt;-</span> <span class="fu">pt</span>(t_stat, df)</span>
+<span id="cb456-161"><a href="sol-ex-CI.html#cb456-161"></a>        h0 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"H0: μ ≥"</span>, mu0)</span>
+<span id="cb456-162"><a href="sol-ex-CI.html#cb456-162"></a>        h1 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"H1: μ &lt;"</span>, mu0)</span>
+<span id="cb456-163"><a href="sol-ex-CI.html#cb456-163"></a>      }</span>
+<span id="cb456-164"><a href="sol-ex-CI.html#cb456-164"></a></span>
+<span id="cb456-165"><a href="sol-ex-CI.html#cb456-165"></a>      result <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb456-166"><a href="sol-ex-CI.html#cb456-166"></a>        <span class="at">test_name =</span> <span class="st">"One-sample t-test"</span>,</span>
+<span id="cb456-167"><a href="sol-ex-CI.html#cb456-167"></a>        <span class="at">null_hypothesis =</span> h0,</span>
+<span id="cb456-168"><a href="sol-ex-CI.html#cb456-168"></a>        <span class="at">alternative_hypothesis =</span> h1,</span>
+<span id="cb456-169"><a href="sol-ex-CI.html#cb456-169"></a>        <span class="at">test_statistic =</span> t_stat,</span>
+<span id="cb456-170"><a href="sol-ex-CI.html#cb456-170"></a>        <span class="at">degrees_of_freedom =</span> df,</span>
+<span id="cb456-171"><a href="sol-ex-CI.html#cb456-171"></a>        <span class="at">p_value =</span> p_value,</span>
+<span id="cb456-172"><a href="sol-ex-CI.html#cb456-172"></a>        <span class="at">alpha =</span> alpha,</span>
+<span id="cb456-173"><a href="sol-ex-CI.html#cb456-173"></a>        <span class="at">conclusion =</span> <span class="fu">ifelse</span>(p_value <span class="sc">&lt;</span> alpha, <span class="st">"Reject H0"</span>, <span class="st">"Fail to reject H0"</span>),</span>
+<span id="cb456-174"><a href="sol-ex-CI.html#cb456-174"></a>        <span class="at">sample_mean =</span> xbar,</span>
+<span id="cb456-175"><a href="sol-ex-CI.html#cb456-175"></a>        <span class="at">sample_size =</span> n</span>
+<span id="cb456-176"><a href="sol-ex-CI.html#cb456-176"></a>      )</span>
+<span id="cb456-177"><a href="sol-ex-CI.html#cb456-177"></a>    }</span>
+<span id="cb456-178"><a href="sol-ex-CI.html#cb456-178"></a></span>
+<span id="cb456-179"><a href="sol-ex-CI.html#cb456-179"></a>  } <span class="cf">else</span> <span class="cf">if</span> (test_type <span class="sc">==</span> <span class="st">"chi_squared_test"</span>) {</span>
+<span id="cb456-180"><a href="sol-ex-CI.html#cb456-180"></a>    <span class="co"># Chi-squared test (goodness of fit or independence)</span></span>
+<span id="cb456-181"><a href="sol-ex-CI.html#cb456-181"></a>    args <span class="ot">&lt;-</span> <span class="fu">list</span>(...)</span>
+<span id="cb456-182"><a href="sol-ex-CI.html#cb456-182"></a></span>
+<span id="cb456-183"><a href="sol-ex-CI.html#cb456-183"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(args<span class="sc">$</span>expected)) {</span>
+<span id="cb456-184"><a href="sol-ex-CI.html#cb456-184"></a>      <span class="co"># Goodness of fit test</span></span>
+<span id="cb456-185"><a href="sol-ex-CI.html#cb456-185"></a>      observed <span class="ot">&lt;-</span> data</span>
+<span id="cb456-186"><a href="sol-ex-CI.html#cb456-186"></a>      expected <span class="ot">&lt;-</span> args<span class="sc">$</span>expected</span>
+<span id="cb456-187"><a href="sol-ex-CI.html#cb456-187"></a></span>
+<span id="cb456-188"><a href="sol-ex-CI.html#cb456-188"></a>      chi_stat <span class="ot">&lt;-</span> <span class="fu">sum</span>((observed <span class="sc">-</span> expected)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> expected)</span>
+<span id="cb456-189"><a href="sol-ex-CI.html#cb456-189"></a>      df <span class="ot">&lt;-</span> <span class="fu">length</span>(observed) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb456-190"><a href="sol-ex-CI.html#cb456-190"></a>      p_value <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(chi_stat, df)</span>
+<span id="cb456-191"><a href="sol-ex-CI.html#cb456-191"></a></span>
+<span id="cb456-192"><a href="sol-ex-CI.html#cb456-192"></a>      result <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb456-193"><a href="sol-ex-CI.html#cb456-193"></a>        <span class="at">test_name =</span> <span class="st">"Chi-squared goodness of fit test"</span>,</span>
+<span id="cb456-194"><a href="sol-ex-CI.html#cb456-194"></a>        <span class="at">null_hypothesis =</span> <span class="st">"H0: Data follows the specified distribution"</span>,</span>
+<span id="cb456-195"><a href="sol-ex-CI.html#cb456-195"></a>        <span class="at">alternative_hypothesis =</span> <span class="st">"H1: Data does not follow the specified distribution"</span>,</span>
+<span id="cb456-196"><a href="sol-ex-CI.html#cb456-196"></a>        <span class="at">test_statistic =</span> chi_stat,</span>
+<span id="cb456-197"><a href="sol-ex-CI.html#cb456-197"></a>        <span class="at">degrees_of_freedom =</span> df,</span>
+<span id="cb456-198"><a href="sol-ex-CI.html#cb456-198"></a>        <span class="at">p_value =</span> p_value,</span>
+<span id="cb456-199"><a href="sol-ex-CI.html#cb456-199"></a>        <span class="at">alpha =</span> alpha,</span>
+<span id="cb456-200"><a href="sol-ex-CI.html#cb456-200"></a>        <span class="at">conclusion =</span> <span class="fu">ifelse</span>(p_value <span class="sc">&lt;</span> alpha, <span class="st">"Reject H0"</span>, <span class="st">"Fail to reject H0"</span>),</span>
+<span id="cb456-201"><a href="sol-ex-CI.html#cb456-201"></a>        <span class="at">observed =</span> observed,</span>
+<span id="cb456-202"><a href="sol-ex-CI.html#cb456-202"></a>        <span class="at">expected =</span> expected</span>
+<span id="cb456-203"><a href="sol-ex-CI.html#cb456-203"></a>      )</span>
+<span id="cb456-204"><a href="sol-ex-CI.html#cb456-204"></a></span>
+<span id="cb456-205"><a href="sol-ex-CI.html#cb456-205"></a>    } <span class="cf">else</span> {</span>
+<span id="cb456-206"><a href="sol-ex-CI.html#cb456-206"></a>      <span class="co"># Test of independence (contingency table)</span></span>
+<span id="cb456-207"><a href="sol-ex-CI.html#cb456-207"></a>      contingency_table <span class="ot">&lt;-</span> data</span>
+<span id="cb456-208"><a href="sol-ex-CI.html#cb456-208"></a></span>
+<span id="cb456-209"><a href="sol-ex-CI.html#cb456-209"></a>      <span class="co"># Calculate expected frequencies</span></span>
+<span id="cb456-210"><a href="sol-ex-CI.html#cb456-210"></a>      row_totals <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(contingency_table)</span>
+<span id="cb456-211"><a href="sol-ex-CI.html#cb456-211"></a>      col_totals <span class="ot">&lt;-</span> <span class="fu">colSums</span>(contingency_table)</span>
+<span id="cb456-212"><a href="sol-ex-CI.html#cb456-212"></a>      total <span class="ot">&lt;-</span> <span class="fu">sum</span>(contingency_table)</span>
+<span id="cb456-213"><a href="sol-ex-CI.html#cb456-213"></a></span>
+<span id="cb456-214"><a href="sol-ex-CI.html#cb456-214"></a>      expected <span class="ot">&lt;-</span> <span class="fu">outer</span>(row_totals, col_totals) <span class="sc">/</span> total</span>
+<span id="cb456-215"><a href="sol-ex-CI.html#cb456-215"></a></span>
+<span id="cb456-216"><a href="sol-ex-CI.html#cb456-216"></a>      chi_stat <span class="ot">&lt;-</span> <span class="fu">sum</span>((contingency_table <span class="sc">-</span> expected)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> expected)</span>
+<span id="cb456-217"><a href="sol-ex-CI.html#cb456-217"></a>      df <span class="ot">&lt;-</span> (<span class="fu">nrow</span>(contingency_table) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> (<span class="fu">ncol</span>(contingency_table) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb456-218"><a href="sol-ex-CI.html#cb456-218"></a>      p_value <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(chi_stat, df)</span>
+<span id="cb456-219"><a href="sol-ex-CI.html#cb456-219"></a></span>
+<span id="cb456-220"><a href="sol-ex-CI.html#cb456-220"></a>      result <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb456-221"><a href="sol-ex-CI.html#cb456-221"></a>        <span class="at">test_name =</span> <span class="st">"Chi-squared test of independence"</span>,</span>
+<span id="cb456-222"><a href="sol-ex-CI.html#cb456-222"></a>        <span class="at">null_hypothesis =</span> <span class="st">"H0: Variables are independent"</span>,</span>
+<span id="cb456-223"><a href="sol-ex-CI.html#cb456-223"></a>        <span class="at">alternative_hypothesis =</span> <span class="st">"H1: Variables are not independent"</span>,</span>
+<span id="cb456-224"><a href="sol-ex-CI.html#cb456-224"></a>        <span class="at">test_statistic =</span> chi_stat,</span>
+<span id="cb456-225"><a href="sol-ex-CI.html#cb456-225"></a>        <span class="at">degrees_of_freedom =</span> df,</span>
+<span id="cb456-226"><a href="sol-ex-CI.html#cb456-226"></a>        <span class="at">p_value =</span> p_value,</span>
+<span id="cb456-227"><a href="sol-ex-CI.html#cb456-227"></a>        <span class="at">alpha =</span> alpha,</span>
+<span id="cb456-228"><a href="sol-ex-CI.html#cb456-228"></a>        <span class="at">conclusion =</span> <span class="fu">ifelse</span>(p_value <span class="sc">&lt;</span> alpha, <span class="st">"Reject H0"</span>, <span class="st">"Fail to reject H0"</span>),</span>
+<span id="cb456-229"><a href="sol-ex-CI.html#cb456-229"></a>        <span class="at">observed =</span> contingency_table,</span>
+<span id="cb456-230"><a href="sol-ex-CI.html#cb456-230"></a>        <span class="at">expected =</span> expected</span>
+<span id="cb456-231"><a href="sol-ex-CI.html#cb456-231"></a>      )</span>
+<span id="cb456-232"><a href="sol-ex-CI.html#cb456-232"></a>    }</span>
+<span id="cb456-233"><a href="sol-ex-CI.html#cb456-233"></a>  }</span>
+<span id="cb456-234"><a href="sol-ex-CI.html#cb456-234"></a></span>
+<span id="cb456-235"><a href="sol-ex-CI.html#cb456-235"></a>  <span class="fu">class</span>(result) <span class="ot">&lt;-</span> <span class="st">"hypothesis_test"</span></span>
+<span id="cb456-236"><a href="sol-ex-CI.html#cb456-236"></a>  <span class="fu">return</span>(result)</span>
+<span id="cb456-237"><a href="sol-ex-CI.html#cb456-237"></a>}</span>
+<span id="cb456-238"><a href="sol-ex-CI.html#cb456-238"></a></span>
+<span id="cb456-239"><a href="sol-ex-CI.html#cb456-239"></a><span class="co"># Print method for hypothesis_test objects</span></span>
+<span id="cb456-240"><a href="sol-ex-CI.html#cb456-240"></a>print.hypothesis_test <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb456-241"><a href="sol-ex-CI.html#cb456-241"></a>  <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, x<span class="sc">$</span>test_name, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb456-242"><a href="sol-ex-CI.html#cb456-242"></a>  <span class="fu">cat</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="fu">nchar</span>(x<span class="sc">$</span>test_name) <span class="sc">+</span> <span class="dv">2</span>), <span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb456-243"><a href="sol-ex-CI.html#cb456-243"></a></span>
+<span id="cb456-244"><a href="sol-ex-CI.html#cb456-244"></a>  <span class="fu">cat</span>(<span class="st">"Hypotheses:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb456-245"><a href="sol-ex-CI.html#cb456-245"></a>  <span class="fu">cat</span>(<span class="st">"  "</span>, x<span class="sc">$</span>null_hypothesis, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb456-246"><a href="sol-ex-CI.html#cb456-246"></a>  <span class="fu">cat</span>(<span class="st">"  "</span>, x<span class="sc">$</span>alternative_hypothesis, <span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb456-247"><a href="sol-ex-CI.html#cb456-247"></a></span>
+<span id="cb456-248"><a href="sol-ex-CI.html#cb456-248"></a>  <span class="fu">cat</span>(<span class="st">"Test Statistics:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb456-249"><a href="sol-ex-CI.html#cb456-249"></a>  <span class="fu">cat</span>(<span class="st">"  Test statistic:"</span>, <span class="fu">round</span>(x<span class="sc">$</span>test_statistic, <span class="dv">4</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb456-250"><a href="sol-ex-CI.html#cb456-250"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(x<span class="sc">$</span>degrees_of_freedom)) {</span>
+<span id="cb456-251"><a href="sol-ex-CI.html#cb456-251"></a>    <span class="fu">cat</span>(<span class="st">"  Degrees of freedom:"</span>, x<span class="sc">$</span>degrees_of_freedom, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb456-252"><a href="sol-ex-CI.html#cb456-252"></a>  }</span>
+<span id="cb456-253"><a href="sol-ex-CI.html#cb456-253"></a>  <span class="fu">cat</span>(<span class="st">"  P-value:"</span>, <span class="fu">round</span>(x<span class="sc">$</span>p_value, <span class="dv">6</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb456-254"><a href="sol-ex-CI.html#cb456-254"></a>  <span class="fu">cat</span>(<span class="st">"  Significance level (α):"</span>, x<span class="sc">$</span>alpha, <span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb456-255"><a href="sol-ex-CI.html#cb456-255"></a></span>
+<span id="cb456-256"><a href="sol-ex-CI.html#cb456-256"></a>  <span class="fu">cat</span>(<span class="st">"Conclusion:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb456-257"><a href="sol-ex-CI.html#cb456-257"></a>  <span class="fu">cat</span>(<span class="st">"  "</span>, x<span class="sc">$</span>conclusion, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb456-258"><a href="sol-ex-CI.html#cb456-258"></a>  <span class="cf">if</span> (x<span class="sc">$</span>p_value <span class="sc">&lt;</span> x<span class="sc">$</span>alpha) {</span>
+<span id="cb456-259"><a href="sol-ex-CI.html#cb456-259"></a>    <span class="fu">cat</span>(<span class="st">"  There is sufficient evidence to reject the null hypothesis.</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb456-260"><a href="sol-ex-CI.html#cb456-260"></a>  } <span class="cf">else</span> {</span>
+<span id="cb456-261"><a href="sol-ex-CI.html#cb456-261"></a>    <span class="fu">cat</span>(<span class="st">"  There is insufficient evidence to reject the null hypothesis.</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb456-262"><a href="sol-ex-CI.html#cb456-262"></a>  }</span>
+<span id="cb456-263"><a href="sol-ex-CI.html#cb456-263"></a>}</span></code></pre></div>
+</div>
+<div id="example-usage" class="section level2" number="19.12">
+<h2>
+<span class="header-section-number">F.12</span> Example Usage<a class="anchor" aria-label="anchor" href="#example-usage"><i class="fas fa-link"></i></a>
+</h2>
+<p>Here are examples of how to use the universal hypothesis testing function:</p>
+<div class="sourceCode" id="cb457"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb457-1"><a href="sol-ex-CI.html#cb457-1"></a><span class="co"># Example 1: One-sample z-test (Exercise 1 data)</span></span>
+<span id="cb457-2"><a href="sol-ex-CI.html#cb457-2"></a>milk_data <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">263.9</span>, <span class="fl">266.2</span>, <span class="fl">266.3</span>, <span class="fl">266.8</span>, <span class="fl">265.0</span>)</span>
+<span id="cb457-3"><a href="sol-ex-CI.html#cb457-3"></a>z_result <span class="ot">&lt;-</span> <span class="fu">hypothesis_test</span>(<span class="st">"z_test"</span>, <span class="at">data =</span> milk_data, <span class="at">mu0 =</span> <span class="dv">260</span>, <span class="at">sigma =</span> <span class="fl">1.65</span>,</span>
+<span id="cb457-4"><a href="sol-ex-CI.html#cb457-4"></a>                           <span class="at">alternative =</span> <span class="st">"greater"</span>, <span class="at">alpha =</span> <span class="fl">0.01</span>)</span>
+<span id="cb457-5"><a href="sol-ex-CI.html#cb457-5"></a><span class="fu">print</span>(z_result)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; 
+#&gt;  One-sample Z-test 
+#&gt; ===================
+#&gt; 
+#&gt; Hypotheses:
+#&gt;    H0: μ ≤ 260 
+#&gt;    H1: μ &gt; 260 
+#&gt; 
+#&gt; Test Statistics:
+#&gt;   Test statistic: 7.6433 
+#&gt;   P-value: 0 
+#&gt;   Significance level (α): 0.01 
+#&gt; 
+#&gt; Conclusion:
+#&gt;    Reject H0 
+#&gt;   There is sufficient evidence to reject the null hypothesis.</code></pre>
+<div class="sourceCode" id="cb459"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb459-1"><a href="sol-ex-CI.html#cb459-1"></a><span class="co"># Example 2: One-sample t-test (Exercise 4 data)</span></span>
+<span id="cb459-2"><a href="sol-ex-CI.html#cb459-2"></a><span class="co"># Simulating data with mean 5.64 and variance 0.05</span></span>
+<span id="cb459-3"><a href="sol-ex-CI.html#cb459-3"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb459-4"><a href="sol-ex-CI.html#cb459-4"></a>process_data <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="fl">5.64</span>, <span class="at">sd =</span> <span class="fu">sqrt</span>(<span class="fl">0.05</span>))</span>
+<span id="cb459-5"><a href="sol-ex-CI.html#cb459-5"></a>t_result <span class="ot">&lt;-</span> <span class="fu">hypothesis_test</span>(<span class="st">"t_test"</span>, <span class="at">data =</span> process_data, <span class="at">mu0 =</span> <span class="fl">5.4</span>,</span>
+<span id="cb459-6"><a href="sol-ex-CI.html#cb459-6"></a>                           <span class="at">alternative =</span> <span class="st">"two.sided"</span>, <span class="at">alpha =</span> <span class="fl">0.05</span>)</span>
+<span id="cb459-7"><a href="sol-ex-CI.html#cb459-7"></a><span class="fu">print</span>(t_result)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; 
+#&gt;  One-sample t-test 
+#&gt; ===================
+#&gt; 
+#&gt; Hypotheses:
+#&gt;    H0: μ = 5.4 
+#&gt;    H1: μ ≠ 5.4 
+#&gt; 
+#&gt; Test Statistics:
+#&gt;   Test statistic: 3.4929 
+#&gt;   Degrees of freedom: 4 
+#&gt;   P-value: 0.025056 
+#&gt;   Significance level (α): 0.05 
+#&gt; 
+#&gt; Conclusion:
+#&gt;    Reject H0 
+#&gt;   There is sufficient evidence to reject the null hypothesis.</code></pre>
+<div class="sourceCode" id="cb461"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb461-1"><a href="sol-ex-CI.html#cb461-1"></a><span class="co"># Example 3: Chi-squared goodness of fit test (Exercise 7 data)</span></span>
+<span id="cb461-2"><a href="sol-ex-CI.html#cb461-2"></a>door_counts <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">36</span>, <span class="dv">31</span>)</span>
+<span id="cb461-3"><a href="sol-ex-CI.html#cb461-3"></a>expected_counts <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">30</span>, <span class="dv">3</span>)  <span class="co"># Equal preference expected</span></span>
+<span id="cb461-4"><a href="sol-ex-CI.html#cb461-4"></a>chi_result <span class="ot">&lt;-</span> <span class="fu">hypothesis_test</span>(<span class="st">"chi_squared_test"</span>, <span class="at">data =</span> door_counts,</span>
+<span id="cb461-5"><a href="sol-ex-CI.html#cb461-5"></a>                             <span class="at">expected =</span> expected_counts, <span class="at">alpha =</span> <span class="fl">0.05</span>)</span>
+<span id="cb461-6"><a href="sol-ex-CI.html#cb461-6"></a><span class="fu">print</span>(chi_result)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; 
+#&gt;  Chi-squared goodness of fit test 
+#&gt; ==================================
+#&gt; 
+#&gt; Hypotheses:
+#&gt;    H0: Data follows the specified distribution 
+#&gt;    H1: Data does not follow the specified distribution 
+#&gt; 
+#&gt; Test Statistics:
+#&gt;   Test statistic: 2.8667 
+#&gt;   Degrees of freedom: 2 
+#&gt;   P-value: 0.238513 
+#&gt;   Significance level (α): 0.05 
+#&gt; 
+#&gt; Conclusion:
+#&gt;    Fail to reject H0 
+#&gt;   There is insufficient evidence to reject the null hypothesis.</code></pre>
 
 </div>
 </div>
@@ -575,6 +918,8 @@ x &lt;- c(263.9, 266.2, 266.3, 266.8, 265.0)</code></pre>
 <li><a class="nav-link" href="#ht-sol-ex6"><span class="header-section-number">F.8</span> Solution: Exercise 6</a></li>
 <li><a class="nav-link" href="#ht-sol-ex7"><span class="header-section-number">F.9</span> Solution: Exercise 7</a></li>
 <li><a class="nav-link" href="#ht-sol-ex8"><span class="header-section-number">F.10</span> Solution: Exercise 8</a></li>
+<li><a class="nav-link" href="#ht-sol-universal"><span class="header-section-number">F.11</span> Universal Hypothesis Testing Function</a></li>
+<li><a class="nav-link" href="#example-usage"><span class="header-section-number">F.12</span> Example Usage</a></li>
 </ul>
 
       <div class="book-extra">

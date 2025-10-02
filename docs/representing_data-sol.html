@@ -90,28 +90,28 @@
 <h2>
 <span class="header-section-number">G.1</span> Creating vectors and matrices<a class="anchor" aria-label="anchor" href="#creating-vectors-and-matrices"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb456"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb456-1"><a href="representing_data-sol.html#cb456-1"></a><span class="co"># Creating matrices</span></span>
-<span id="cb456-2"><a href="representing_data-sol.html#cb456-2"></a>A1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
-<span id="cb456-3"><a href="representing_data-sol.html#cb456-3"></a>  <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>),</span>
-<span id="cb456-4"><a href="representing_data-sol.html#cb456-4"></a>  <span class="at">nrow =</span> <span class="dv">3</span></span>
-<span id="cb456-5"><a href="representing_data-sol.html#cb456-5"></a>)</span>
-<span id="cb456-6"><a href="representing_data-sol.html#cb456-6"></a></span>
-<span id="cb456-7"><a href="representing_data-sol.html#cb456-7"></a>A2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
-<span id="cb456-8"><a href="representing_data-sol.html#cb456-8"></a>  <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">3</span>),</span>
-<span id="cb456-9"><a href="representing_data-sol.html#cb456-9"></a>  <span class="at">nrow =</span> <span class="dv">3</span></span>
-<span id="cb456-10"><a href="representing_data-sol.html#cb456-10"></a>)</span>
-<span id="cb456-11"><a href="representing_data-sol.html#cb456-11"></a></span>
-<span id="cb456-12"><a href="representing_data-sol.html#cb456-12"></a><span class="co"># Creating vectors</span></span>
-<span id="cb456-13"><a href="representing_data-sol.html#cb456-13"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb456-14"><a href="representing_data-sol.html#cb456-14"></a>v2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb456-15"><a href="representing_data-sol.html#cb456-15"></a>v3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb456-16"><a href="representing_data-sol.html#cb456-16"></a>x1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb456-17"><a href="representing_data-sol.html#cb456-17"></a>x2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb456-18"><a href="representing_data-sol.html#cb456-18"></a>x3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>)</span>
-<span id="cb456-19"><a href="representing_data-sol.html#cb456-19"></a></span>
-<span id="cb456-20"><a href="representing_data-sol.html#cb456-20"></a><span class="co"># Another way to create matrices</span></span>
-<span id="cb456-21"><a href="representing_data-sol.html#cb456-21"></a>B1 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(v1, v3, v2)</span>
-<span id="cb456-22"><a href="representing_data-sol.html#cb456-22"></a>B2 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(v1, v2, v3)</span></code></pre></div>
+<div class="sourceCode" id="cb463"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb463-1"><a href="representing_data-sol.html#cb463-1"></a><span class="co"># Creating matrices</span></span>
+<span id="cb463-2"><a href="representing_data-sol.html#cb463-2"></a>A1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb463-3"><a href="representing_data-sol.html#cb463-3"></a>  <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>),</span>
+<span id="cb463-4"><a href="representing_data-sol.html#cb463-4"></a>  <span class="at">nrow =</span> <span class="dv">3</span></span>
+<span id="cb463-5"><a href="representing_data-sol.html#cb463-5"></a>)</span>
+<span id="cb463-6"><a href="representing_data-sol.html#cb463-6"></a></span>
+<span id="cb463-7"><a href="representing_data-sol.html#cb463-7"></a>A2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb463-8"><a href="representing_data-sol.html#cb463-8"></a>  <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">3</span>),</span>
+<span id="cb463-9"><a href="representing_data-sol.html#cb463-9"></a>  <span class="at">nrow =</span> <span class="dv">3</span></span>
+<span id="cb463-10"><a href="representing_data-sol.html#cb463-10"></a>)</span>
+<span id="cb463-11"><a href="representing_data-sol.html#cb463-11"></a></span>
+<span id="cb463-12"><a href="representing_data-sol.html#cb463-12"></a><span class="co"># Creating vectors</span></span>
+<span id="cb463-13"><a href="representing_data-sol.html#cb463-13"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb463-14"><a href="representing_data-sol.html#cb463-14"></a>v2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb463-15"><a href="representing_data-sol.html#cb463-15"></a>v3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb463-16"><a href="representing_data-sol.html#cb463-16"></a>x1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb463-17"><a href="representing_data-sol.html#cb463-17"></a>x2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb463-18"><a href="representing_data-sol.html#cb463-18"></a>x3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>)</span>
+<span id="cb463-19"><a href="representing_data-sol.html#cb463-19"></a></span>
+<span id="cb463-20"><a href="representing_data-sol.html#cb463-20"></a><span class="co"># Another way to create matrices</span></span>
+<span id="cb463-21"><a href="representing_data-sol.html#cb463-21"></a>B1 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(v1, v3, v2)</span>
+<span id="cb463-22"><a href="representing_data-sol.html#cb463-22"></a>B2 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(v1, v2, v3)</span></code></pre></div>
 <button class="button">
 <a href="representing-data-in-r.html#rep_data-ex">Back to exercise</a>
 </button>
@@ -132,27 +132,27 @@
 <li>transpose of <code>B2</code>
 </li>
 </ul>
-<div class="sourceCode" id="cb457"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb457-1"><a href="representing_data-sol.html#cb457-1"></a>A1 <span class="sc">+</span> A2</span></code></pre></div>
+<div class="sourceCode" id="cb464"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb464-1"><a href="representing_data-sol.html#cb464-1"></a>A1 <span class="sc">+</span> A2</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;      [,1] [,2] [,3]
 #&gt; [1,]    2   10    8
 #&gt; [2,]    5   14    8
 #&gt; [3,]    7    8   12</code></pre>
-<div class="sourceCode" id="cb459"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb459-1"><a href="representing_data-sol.html#cb459-1"></a>A1 <span class="sc">*</span> A2</span></code></pre></div>
+<div class="sourceCode" id="cb466"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb466-1"><a href="representing_data-sol.html#cb466-1"></a>A1 <span class="sc">*</span> A2</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;      [,1] [,2] [,3]
 #&gt; [1,]    1   24    7
 #&gt; [2,]    6   45    0
 #&gt; [3,]   12   12   27</code></pre>
-<div class="sourceCode" id="cb461"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb461-1"><a href="representing_data-sol.html#cb461-1"></a>A1 <span class="sc">-</span> A2</span></code></pre></div>
+<div class="sourceCode" id="cb468"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb468-1"><a href="representing_data-sol.html#cb468-1"></a>A1 <span class="sc">-</span> A2</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;      [,1] [,2] [,3]
 #&gt; [1,]    0   -2    6
 #&gt; [2,]   -1   -4    8
 #&gt; [3,]   -1    4    6</code></pre>
-<div class="sourceCode" id="cb463"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb463-1"><a href="representing_data-sol.html#cb463-1"></a><span class="fu">t</span>(A1)</span></code></pre></div>
+<div class="sourceCode" id="cb470"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb470-1"><a href="representing_data-sol.html#cb470-1"></a><span class="fu">t</span>(A1)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;      [,1] [,2] [,3]
 #&gt; [1,]    1    2    3
 #&gt; [2,]    4    5    6
 #&gt; [3,]    7    8    9</code></pre>
-<div class="sourceCode" id="cb465"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb465-1"><a href="representing_data-sol.html#cb465-1"></a><span class="fu">t</span>(B2)</span></code></pre></div>
+<div class="sourceCode" id="cb472"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb472-1"><a href="representing_data-sol.html#cb472-1"></a><span class="fu">t</span>(B2)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;      v1 v2 v3
 #&gt; [1,]  0  2  3
 #&gt; [2,]  1  1  1
@@ -168,17 +168,17 @@
 <blockquote>
 <p>Q3: Compute the norms of all vectors.</p>
 </blockquote>
-<div class="sourceCode" id="cb467"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb467-1"><a href="representing_data-sol.html#cb467-1"></a><span class="fu">sum</span>(v1<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb474"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb474-1"><a href="representing_data-sol.html#cb474-1"></a><span class="fu">sum</span>(v1<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; [1] 2</code></pre>
-<div class="sourceCode" id="cb469"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb469-1"><a href="representing_data-sol.html#cb469-1"></a><span class="fu">sum</span>(v2<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb476"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb476-1"><a href="representing_data-sol.html#cb476-1"></a><span class="fu">sum</span>(v2<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; [1] 5</code></pre>
-<div class="sourceCode" id="cb471"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb471-1"><a href="representing_data-sol.html#cb471-1"></a><span class="fu">sum</span>(v3<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb478"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb478-1"><a href="representing_data-sol.html#cb478-1"></a><span class="fu">sum</span>(v3<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; [1] 11</code></pre>
-<div class="sourceCode" id="cb473"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb473-1"><a href="representing_data-sol.html#cb473-1"></a><span class="fu">sum</span>(x1<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb480"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb480-1"><a href="representing_data-sol.html#cb480-1"></a><span class="fu">sum</span>(x1<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; [1] 6</code></pre>
-<div class="sourceCode" id="cb475"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb475-1"><a href="representing_data-sol.html#cb475-1"></a><span class="fu">sum</span>(x2<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb482"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb482-1"><a href="representing_data-sol.html#cb482-1"></a><span class="fu">sum</span>(x2<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; [1] 15</code></pre>
-<div class="sourceCode" id="cb477"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb477-1"><a href="representing_data-sol.html#cb477-1"></a><span class="fu">sum</span>(x3<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb484"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb484-1"><a href="representing_data-sol.html#cb484-1"></a><span class="fu">sum</span>(x3<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; [1] 21</code></pre>
 <button class="button">
 <a href="representing-data-in-r.html#rep_data-ex">Back to exercise</a>
@@ -192,25 +192,25 @@
 <p>Q4: Compute the inverse of <code>A1</code>, <code>A2</code>, and <code>B3</code>.
 You don’t need to invert the matrices by hand but check they are an inverse.</p>
 </blockquote>
-<div class="sourceCode" id="cb479"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb479-1"><a href="representing_data-sol.html#cb479-1"></a><span class="co"># Inverse doesn't exist as it is a singular matrix</span></span>
-<span id="cb479-2"><a href="representing_data-sol.html#cb479-2"></a><span class="fu">solve</span>(A1)</span></code></pre></div>
+<div class="sourceCode" id="cb486"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb486-1"><a href="representing_data-sol.html#cb486-1"></a><span class="co"># Inverse doesn't exist as it is a singular matrix</span></span>
+<span id="cb486-2"><a href="representing_data-sol.html#cb486-2"></a><span class="fu">solve</span>(A1)</span></code></pre></div>
 <pre><code>#&gt; Error in solve.default(A1): Lapack routine dgesv: system is exactly singular: U[3,3] = 0</code></pre>
-<div class="sourceCode" id="cb481"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb481-1"><a href="representing_data-sol.html#cb481-1"></a><span class="fu">solve</span>(A2)</span></code></pre></div>
+<div class="sourceCode" id="cb488"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb488-1"><a href="representing_data-sol.html#cb488-1"></a><span class="fu">solve</span>(A2)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;            [,1]        [,2]        [,3]
 #&gt; [1,] -0.4736842  0.28070175  0.15789474
 #&gt; [2,]  0.1578947  0.01754386 -0.05263158
 #&gt; [3,]  0.5263158 -0.38596491  0.15789474</code></pre>
-<div class="sourceCode" id="cb483"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb483-1"><a href="representing_data-sol.html#cb483-1"></a><span class="fu">solve</span>(A2) <span class="sc">%*%</span> A2</span></code></pre></div>
+<div class="sourceCode" id="cb490"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb490-1"><a href="representing_data-sol.html#cb490-1"></a><span class="fu">solve</span>(A2) <span class="sc">%*%</span> A2</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;               [,1]          [,2]          [,3]
 #&gt; [1,]  1.000000e+00 -5.551115e-17  2.775558e-17
 #&gt; [2,] -2.775558e-17  1.000000e+00 -4.163336e-17
 #&gt; [3,] -1.110223e-16  1.665335e-16  1.000000e+00</code></pre>
-<div class="sourceCode" id="cb485"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb485-1"><a href="representing_data-sol.html#cb485-1"></a><span class="fu">solve</span>(B2)</span></code></pre></div>
+<div class="sourceCode" id="cb492"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb492-1"><a href="representing_data-sol.html#cb492-1"></a><span class="fu">solve</span>(B2)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;              v1 v2         v3
 #&gt; [1,] -0.3333333  0  0.3333333
 #&gt; [2,]  0.6666667  1 -0.6666667
 #&gt; [3,]  0.3333333 -1  0.6666667</code></pre>
-<div class="sourceCode" id="cb487"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb487-1"><a href="representing_data-sol.html#cb487-1"></a><span class="fu">solve</span>(B2) <span class="sc">%*%</span> B2</span></code></pre></div>
+<div class="sourceCode" id="cb494"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb494-1"><a href="representing_data-sol.html#cb494-1"></a><span class="fu">solve</span>(B2) <span class="sc">%*%</span> B2</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;               [,1] [,2] [,3]
 #&gt; [1,]  1.000000e+00    0    0
 #&gt; [2,]  1.110223e-16    1    0
@@ -226,21 +226,21 @@ You don’t need to invert the matrices by hand but check they are an inverse.</
 <blockquote>
 <p>Q5: Compute <code>A1 %*% v1</code> and <code>v1 %*% A1</code></p>
 </blockquote>
-<div class="sourceCode" id="cb489"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb489-1"><a href="representing_data-sol.html#cb489-1"></a>A1 <span class="sc">%*%</span> v1</span></code></pre></div>
+<div class="sourceCode" id="cb496"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb496-1"><a href="representing_data-sol.html#cb496-1"></a>A1 <span class="sc">%*%</span> v1</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;      [,1]
 #&gt; [1,]   11
 #&gt; [2,]   13
 #&gt; [3,]   15</code></pre>
-<div class="sourceCode" id="cb491"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb491-1"><a href="representing_data-sol.html#cb491-1"></a>v1 <span class="sc">%*%</span> A1</span></code></pre></div>
+<div class="sourceCode" id="cb498"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb498-1"><a href="representing_data-sol.html#cb498-1"></a>v1 <span class="sc">%*%</span> A1</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;      [,1] [,2] [,3]
 #&gt; [1,]    5   11   17</code></pre>
 <blockquote>
 <p>Q6: Compute <code>v2 %*% B2</code> and <code>B2 %*% v2</code></p>
 </blockquote>
-<div class="sourceCode" id="cb493"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb493-1"><a href="representing_data-sol.html#cb493-1"></a>v2 <span class="sc">%*%</span> B2</span></code></pre></div>
+<div class="sourceCode" id="cb500"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb500-1"><a href="representing_data-sol.html#cb500-1"></a>v2 <span class="sc">%*%</span> B2</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;      [,1] [,2] [,3]
 #&gt; [1,]    2    3    2</code></pre>
-<div class="sourceCode" id="cb495"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb495-1"><a href="representing_data-sol.html#cb495-1"></a>B2 <span class="sc">%*%</span> v2</span></code></pre></div>
+<div class="sourceCode" id="cb502"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb502-1"><a href="representing_data-sol.html#cb502-1"></a>B2 <span class="sc">%*%</span> v2</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;    [,1]
 #&gt; v1    1
 #&gt; v2    5

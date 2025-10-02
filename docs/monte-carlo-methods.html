@@ -130,7 +130,7 @@
 <span id="cb20-2"><a href="monte-carlo-methods.html#cb20-2"></a>mc_integral <span class="ot">&lt;-</span> <span class="fu">sum</span>(sims <span class="sc">&gt;=</span> <span class="dv">1</span> <span class="sc">&amp;</span> sims <span class="sc">&lt;=</span> <span class="dv">3</span>) <span class="sc">/</span> n</span></code></pre></div>
 <p>The result we get is:</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb21-1"><a href="monte-carlo-methods.html#cb21-1"></a><span class="fu">print</span>(mc_integral)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 0.35</code></pre>
+<pre class="bg-info"><code>#&gt; [1] 0.362</code></pre>
 <p>This is our estimate of the integral. We can compare this to the true value of the integral which we can calculate using the <code>pnorm</code> function in <code>R</code>. This is the probability of a Normal distribution falling between 1 and 3:</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb23-1"><a href="monte-carlo-methods.html#cb23-1"></a>mc_exact <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">2</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">1</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
 <span id="cb23-2"><a href="monte-carlo-methods.html#cb23-2"></a><span class="fu">print</span>(mc_exact)</span></code></pre></div>

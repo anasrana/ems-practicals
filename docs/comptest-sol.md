@@ -122,9 +122,9 @@ out <- z_test(x, 0, 1) # null should not be rejected!
 ```
 
 ``` bg-info
-#>  z = 0.123 
-#>  one-tailed probability = 0.451 
-#>  two-tailed probability = 0.902
+#>  z = -1.027 
+#>  one-tailed probability = 0.152 
+#>  two-tailed probability = 0.304
 ```
 
 ```{.r .numberLines}
@@ -133,13 +133,13 @@ print(out)
 
 ``` bg-info
 #> $z
-#> [1] 0.123
+#> [1] -1.027
 #> 
 #> $one_p
-#> [1] 0.451
+#> [1] 0.152
 #> 
 #> $two_p
-#> [1] 0.902
+#> [1] 0.304
 ```
 
 ```{.r .numberLines}
@@ -148,7 +148,7 @@ out <- z_test(x, 0, 1) # null should be rejected!
 ```
 
 ``` bg-info
-#>  z = 3.538 
+#>  z = 3.304 
 #>  one-tailed probability = 0 
 #>  two-tailed probability = 0
 ```
@@ -159,7 +159,7 @@ print(out)
 
 ``` bg-info
 #> $z
-#> [1] 3.538
+#> [1] 3.304
 #> 
 #> $one_p
 #> [1] 0
@@ -532,3 +532,365 @@ Hence, there is no evidence to reject the null hypothesis. There is no reason to
 <button class="button">
   [Back to exercise](#ht-ex8)
 </button>
+
+## Universal Hypothesis Testing Function {#ht-sol-universal}
+
+Here's a comprehensive function that can handle multiple types of hypothesis tests. This is a basic implementation and can be extended further based on specific requirements. There are many edge cases and additional features that could be added, but this should serve as a solid starting point. This is not the only way to implement such a function, but it covers the main types of tests:
+
+
+```{.r .numberLines}
+# Universal hypothesis testing function
+hypothesis_test <- function(test_type, data = NULL, ..., alpha = 0.05) {
+
+  # Initialize result list
+  result <- list()
+
+  if (test_type == "z_test") {
+    # Z-test (one-sample or two-sample)
+    args <- list(...)
+
+    if (length(args$mu0) > 0 && length(args$sigma) > 0) {
+      # One-sample z-test
+      x <- data
+      mu0 <- args$mu0
+      sigma <- args$sigma
+      alternative <- ifelse(is.null(args$alternative), "two.sided", args$alternative)
+
+      n <- length(x)
+      xbar <- mean(x)
+      z_stat <- (xbar - mu0) / (sigma / sqrt(n))
+
+      # Calculate p-value based on alternative hypothesis
+      if (alternative == "two.sided") {
+        p_value <- 2 * (1 - pnorm(abs(z_stat)))
+        h0 <- paste("H0: μ =", mu0)
+        h1 <- paste("H1: μ ≠", mu0)
+      } else if (alternative == "greater") {
+        p_value <- 1 - pnorm(z_stat)
+        h0 <- paste("H0: μ ≤", mu0)
+        h1 <- paste("H1: μ >", mu0)
+      } else if (alternative == "less") {
+        p_value <- pnorm(z_stat)
+        h0 <- paste("H0: μ ≥", mu0)
+        h1 <- paste("H1: μ <", mu0)
+      }
+
+      result <- list(
+        test_name = "One-sample Z-test",
+        null_hypothesis = h0,
+        alternative_hypothesis = h1,
+        test_statistic = z_stat,
+        p_value = p_value,
+        alpha = alpha,
+        conclusion = ifelse(p_value < alpha, "Reject H0", "Fail to reject H0"),
+        sample_mean = xbar,
+        sample_size = n
+      )
+    }
+
+  } else if (test_type == "t_test") {
+    # T-test (one-sample, two-sample, or paired)
+    args <- list(...)
+
+    if (!is.null(args$y)) {
+      # Two-sample t-test
+      x <- data
+      y <- args$y
+      alternative <- ifelse(is.null(args$alternative), "two.sided", args$alternative)
+      paired <- ifelse(is.null(args$paired), FALSE, args$paired)
+
+      if (paired) {
+        # Paired t-test
+        diff <- x - y
+        n <- length(diff)
+        mean_diff <- mean(diff)
+        sd_diff <- sd(diff)
+        t_stat <- mean_diff / (sd_diff / sqrt(n))
+        df <- n - 1
+
+        if (alternative == "two.sided") {
+          p_value <- 2 * (1 - pt(abs(t_stat), df))
+          h0 <- "H0: μd = 0"
+          h1 <- "H1: μd ≠ 0"
+        } else if (alternative == "greater") {
+          p_value <- 1 - pt(t_stat, df)
+          h0 <- "H0: μd ≤ 0"
+          h1 <- "H1: μd > 0"
+        } else if (alternative == "less") {
+          p_value <- pt(t_stat, df)
+          h0 <- "H0: μd ≥ 0"
+          h1 <- "H1: μd < 0"
+        }
+
+        result <- list(
+          test_name = "Paired t-test",
+          null_hypothesis = h0,
+          alternative_hypothesis = h1,
+          test_statistic = t_stat,
+          degrees_of_freedom = df,
+          p_value = p_value,
+          alpha = alpha,
+          conclusion = ifelse(p_value < alpha, "Reject H0", "Fail to reject H0"),
+          mean_difference = mean_diff
+        )
+
+      } else {
+        # Two-sample t-test (assuming equal variances)
+        n1 <- length(x)
+        n2 <- length(y)
+        mean1 <- mean(x)
+        mean2 <- mean(y)
+        var1 <- var(x)
+        var2 <- var(y)
+
+        # Pooled variance
+        pooled_var <- ((n1 - 1) * var1 + (n2 - 1) * var2) / (n1 + n2 - 2)
+        se <- sqrt(pooled_var * (1/n1 + 1/n2))
+        t_stat <- (mean1 - mean2) / se
+        df <- n1 + n2 - 2
+
+        if (alternative == "two.sided") {
+          p_value <- 2 * (1 - pt(abs(t_stat), df))
+          h0 <- "H0: μ1 = μ2"
+          h1 <- "H1: μ1 ≠ μ2"
+        } else if (alternative == "greater") {
+          p_value <- 1 - pt(t_stat, df)
+          h0 <- "H0: μ1 ≤ μ2"
+          h1 <- "H1: μ1 > μ2"
+        } else if (alternative == "less") {
+          p_value <- pt(t_stat, df)
+          h0 <- "H0: μ1 ≥ μ2"
+          h1 <- "H1: μ1 < μ2"
+        }
+
+        result <- list(
+          test_name = "Two-sample t-test",
+          null_hypothesis = h0,
+          alternative_hypothesis = h1,
+          test_statistic = t_stat,
+          degrees_of_freedom = df,
+          p_value = p_value,
+          alpha = alpha,
+          conclusion = ifelse(p_value < alpha, "Reject H0", "Fail to reject H0"),
+          sample1_mean = mean1,
+          sample2_mean = mean2
+        )
+      }
+
+    } else {
+      # One-sample t-test
+      x <- data
+      mu0 <- ifelse(is.null(args$mu0), 0, args$mu0)
+      alternative <- ifelse(is.null(args$alternative), "two.sided", args$alternative)
+
+      n <- length(x)
+      xbar <- mean(x)
+      s <- sd(x)
+      t_stat <- (xbar - mu0) / (s / sqrt(n))
+      df <- n - 1
+
+      if (alternative == "two.sided") {
+        p_value <- 2 * (1 - pt(abs(t_stat), df))
+        h0 <- paste("H0: μ =", mu0)
+        h1 <- paste("H1: μ ≠", mu0)
+      } else if (alternative == "greater") {
+        p_value <- 1 - pt(t_stat, df)
+        h0 <- paste("H0: μ ≤", mu0)
+        h1 <- paste("H1: μ >", mu0)
+      } else if (alternative == "less") {
+        p_value <- pt(t_stat, df)
+        h0 <- paste("H0: μ ≥", mu0)
+        h1 <- paste("H1: μ <", mu0)
+      }
+
+      result <- list(
+        test_name = "One-sample t-test",
+        null_hypothesis = h0,
+        alternative_hypothesis = h1,
+        test_statistic = t_stat,
+        degrees_of_freedom = df,
+        p_value = p_value,
+        alpha = alpha,
+        conclusion = ifelse(p_value < alpha, "Reject H0", "Fail to reject H0"),
+        sample_mean = xbar,
+        sample_size = n
+      )
+    }
+
+  } else if (test_type == "chi_squared_test") {
+    # Chi-squared test (goodness of fit or independence)
+    args <- list(...)
+
+    if (!is.null(args$expected)) {
+      # Goodness of fit test
+      observed <- data
+      expected <- args$expected
+
+      chi_stat <- sum((observed - expected)^2 / expected)
+      df <- length(observed) - 1
+      p_value <- 1 - pchisq(chi_stat, df)
+
+      result <- list(
+        test_name = "Chi-squared goodness of fit test",
+        null_hypothesis = "H0: Data follows the specified distribution",
+        alternative_hypothesis = "H1: Data does not follow the specified distribution",
+        test_statistic = chi_stat,
+        degrees_of_freedom = df,
+        p_value = p_value,
+        alpha = alpha,
+        conclusion = ifelse(p_value < alpha, "Reject H0", "Fail to reject H0"),
+        observed = observed,
+        expected = expected
+      )
+
+    } else {
+      # Test of independence (contingency table)
+      contingency_table <- data
+
+      # Calculate expected frequencies
+      row_totals <- rowSums(contingency_table)
+      col_totals <- colSums(contingency_table)
+      total <- sum(contingency_table)
+
+      expected <- outer(row_totals, col_totals) / total
+
+      chi_stat <- sum((contingency_table - expected)^2 / expected)
+      df <- (nrow(contingency_table) - 1) * (ncol(contingency_table) - 1)
+      p_value <- 1 - pchisq(chi_stat, df)
+
+      result <- list(
+        test_name = "Chi-squared test of independence",
+        null_hypothesis = "H0: Variables are independent",
+        alternative_hypothesis = "H1: Variables are not independent",
+        test_statistic = chi_stat,
+        degrees_of_freedom = df,
+        p_value = p_value,
+        alpha = alpha,
+        conclusion = ifelse(p_value < alpha, "Reject H0", "Fail to reject H0"),
+        observed = contingency_table,
+        expected = expected
+      )
+    }
+  }
+
+  class(result) <- "hypothesis_test"
+  return(result)
+}
+
+# Print method for hypothesis_test objects
+print.hypothesis_test <- function(x) {
+  cat("\n", x$test_name, "\n")
+  cat(rep("=", nchar(x$test_name) + 2), "\n\n", sep = "")
+
+  cat("Hypotheses:\n")
+  cat("  ", x$null_hypothesis, "\n")
+  cat("  ", x$alternative_hypothesis, "\n\n")
+
+  cat("Test Statistics:\n")
+  cat("  Test statistic:", round(x$test_statistic, 4), "\n")
+  if (!is.null(x$degrees_of_freedom)) {
+    cat("  Degrees of freedom:", x$degrees_of_freedom, "\n")
+  }
+  cat("  P-value:", round(x$p_value, 6), "\n")
+  cat("  Significance level (α):", x$alpha, "\n\n")
+
+  cat("Conclusion:\n")
+  cat("  ", x$conclusion, "\n")
+  if (x$p_value < x$alpha) {
+    cat("  There is sufficient evidence to reject the null hypothesis.\n")
+  } else {
+    cat("  There is insufficient evidence to reject the null hypothesis.\n")
+  }
+}
+```
+
+## Example Usage
+
+Here are examples of how to use the universal hypothesis testing function:
+
+
+```{.r .numberLines}
+# Example 1: One-sample z-test (Exercise 1 data)
+milk_data <- c(263.9, 266.2, 266.3, 266.8, 265.0)
+z_result <- hypothesis_test("z_test", data = milk_data, mu0 = 260, sigma = 1.65,
+                           alternative = "greater", alpha = 0.01)
+print(z_result)
+```
+
+``` bg-info
+#> 
+#>  One-sample Z-test 
+#> ===================
+#> 
+#> Hypotheses:
+#>    H0: μ ≤ 260 
+#>    H1: μ > 260 
+#> 
+#> Test Statistics:
+#>   Test statistic: 7.6433 
+#>   P-value: 0 
+#>   Significance level (α): 0.01 
+#> 
+#> Conclusion:
+#>    Reject H0 
+#>   There is sufficient evidence to reject the null hypothesis.
+```
+
+```{.r .numberLines}
+# Example 2: One-sample t-test (Exercise 4 data)
+# Simulating data with mean 5.64 and variance 0.05
+set.seed(123)
+process_data <- rnorm(5, mean = 5.64, sd = sqrt(0.05))
+t_result <- hypothesis_test("t_test", data = process_data, mu0 = 5.4,
+                           alternative = "two.sided", alpha = 0.05)
+print(t_result)
+```
+
+``` bg-info
+#> 
+#>  One-sample t-test 
+#> ===================
+#> 
+#> Hypotheses:
+#>    H0: μ = 5.4 
+#>    H1: μ ≠ 5.4 
+#> 
+#> Test Statistics:
+#>   Test statistic: 3.4929 
+#>   Degrees of freedom: 4 
+#>   P-value: 0.025056 
+#>   Significance level (α): 0.05 
+#> 
+#> Conclusion:
+#>    Reject H0 
+#>   There is sufficient evidence to reject the null hypothesis.
+```
+
+```{.r .numberLines}
+# Example 3: Chi-squared goodness of fit test (Exercise 7 data)
+door_counts <- c(23, 36, 31)
+expected_counts <- rep(30, 3)  # Equal preference expected
+chi_result <- hypothesis_test("chi_squared_test", data = door_counts,
+                             expected = expected_counts, alpha = 0.05)
+print(chi_result)
+```
+
+``` bg-info
+#> 
+#>  Chi-squared goodness of fit test 
+#> ==================================
+#> 
+#> Hypotheses:
+#>    H0: Data follows the specified distribution 
+#>    H1: Data does not follow the specified distribution 
+#> 
+#> Test Statistics:
+#>   Test statistic: 2.8667 
+#>   Degrees of freedom: 2 
+#>   P-value: 0.238513 
+#>   Significance level (α): 0.05 
+#> 
+#> Conclusion:
+#>    Fail to reject H0 
+#>   There is insufficient evidence to reject the null hypothesis.
+```
