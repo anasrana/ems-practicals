@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Data sets | Essentials of Mathematics and Statistics</title>
+<title>Chapter 8 Universal Hypothesis Testing Function | Essentials of Mathematics and Statistics</title>
 <meta name="author" content="Anas A Rana">
-<meta name="description" content="For some of the practical sessions we will make use of pre-prepared data. You will find all data required for the second phase of the practicals in the data folder here and you can download here....">
+<meta name="description" content="As a slightly tougher task, can you write a function that can take multiple inputs and perform a hypothesis test based on the input data, and the choice made? It should be able to handle z-tests,...">
 <meta name="generator" content="bookdown 0.44 with bs4_book()">
-<meta property="og:title" content="Data sets | Essentials of Mathematics and Statistics">
+<meta property="og:title" content="Chapter 8 Universal Hypothesis Testing Function | Essentials of Mathematics and Statistics">
 <meta property="og:type" content="book">
-<meta property="og:description" content="For some of the practical sessions we will make use of pre-prepared data. You will find all data required for the second phase of the practicals in the data folder here and you can download here....">
+<meta property="og:description" content="As a slightly tougher task, can you write a function that can take multiple inputs and perform a hypothesis test based on the input data, and the choice made? It should be able to handle z-tests,...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Data sets | Essentials of Mathematics and Statistics">
-<meta name="twitter:description" content="For some of the practical sessions we will make use of pre-prepared data. You will find all data required for the second phase of the practicals in the data folder here and you can download here....">
+<meta name="twitter:title" content="Chapter 8 Universal Hypothesis Testing Function | Essentials of Mathematics and Statistics">
+<meta name="twitter:description" content="As a slightly tougher task, can you write a function that can take multiple inputs and perform a hypothesis test based on the input data, and the choice made? It should be able to handle z-tests,...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Manrope-0.4.10/font.css" rel="stylesheet">
@@ -55,13 +55,14 @@
 <li><a class="" href="maximum-likelihood.html"><span class="header-section-number">5</span> Maximum Likelihood</a></li>
 <li><a class="" href="confidence-intervals.html"><span class="header-section-number">6</span> Confidence Intervals</a></li>
 <li><a class="" href="computational-testing-techniques.html"><span class="header-section-number">7</span> Computational Testing Techniques</a></li>
+<li><a class="active" href="ht-universal.html"><span class="header-section-number">8</span> Universal Hypothesis Testing Function</a></li>
 <li class="book-part">Statistical Modelling</li>
-<li><a class="" href="representing-data-in-r.html"><span class="header-section-number">8</span> Representing Data in R</a></li>
-<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">9</span> Principal component analysis</a></li>
-<li><a class="" href="linear-regression.html"><span class="header-section-number">10</span> Linear regression</a></li>
-<li><a class="" href="multiple-regression.html"><span class="header-section-number">11</span> Multiple regression</a></li>
-<li><a class="" href="qq-plot.html"><span class="header-section-number">12</span> QQ Plot - How To Use And Interpret</a></li>
-<li><a class="" href="generalised-linear-models.html"><span class="header-section-number">13</span> Generalised Linear Models</a></li>
+<li><a class="" href="representing-data-in-r.html"><span class="header-section-number">9</span> Representing Data in R</a></li>
+<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">10</span> Principal component analysis</a></li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">11</span> Linear regression</a></li>
+<li><a class="" href="multiple-regression.html"><span class="header-section-number">12</span> Multiple regression</a></li>
+<li><a class="" href="qq-plot.html"><span class="header-section-number">13</span> QQ Plot - How To Use And Interpret</a></li>
+<li><a class="" href="generalised-linear-models.html"><span class="header-section-number">14</span> Generalised Linear Models</a></li>
 <li class="book-part">Solutions</li>
 <li><a class="" href="simSol.html"><span class="header-section-number">A</span> Solution: Simulations</a></li>
 <li><a class="" href="solution-markov-chains.html"><span class="header-section-number">B</span> Solution: Markov Chains</a></li>
@@ -74,7 +75,7 @@
 <li class="book-part">APPENDIX</li>
 <li><a class="" href="start.html">Getting started in R and Rstudio</a></li>
 <li><a class="" href="creating-functions-r.html">Creating functions R</a></li>
-<li><a class="active" href="data-sets.html">Data sets</a></li>
+<li><a class="" href="data-sets.html">Data sets</a></li>
 </ul>
 
         <div class="book-extra">
@@ -82,71 +83,30 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="data-sets" class="section level1 unnumbered">
-<h1>Data sets<a class="anchor" aria-label="anchor" href="#data-sets"><i class="fas fa-link"></i></a>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="ht-universal" class="section level1 infobox" number="8">
+<h1>
+<span class="header-section-number">8</span> Universal Hypothesis Testing Function<a class="anchor" aria-label="anchor" href="#ht-universal"><i class="fas fa-link"></i></a>
 </h1>
-<p>For some of the practical sessions we will make use of pre-prepared data. You will find all data required for the second phase of the practicals in the data folder <a href="https://github.com/anasrana/module1-practical_Bham/tree/master/data">here</a> and you can download <a href="https://github.com/anasrana/ems-practicals/raw/main/data.zip">here</a>.</p>
-<p>You can download files individually from the website, or using bash commands by either going to the terminal tab on <code>RStudio</code> or by opening a dedicated terminal. You can either copy all data Navigate to the folder you want to download your data into, and use the following commands:</p>
-<div id="data-lr" class="section level2 unnumbered">
-<h2>Data: Linear regression<a class="anchor" aria-label="anchor" href="#data-lr"><i class="fas fa-link"></i></a>
-</h2>
-<div class="sourceCode" id="cb529"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb529-1"><a href="data-sets.html#cb529-1"></a><span class="co"># Stork download</span></span>
-<span id="cb529-2"><a href="data-sets.html#cb529-2"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/stork.txt</span>
-<span id="cb529-3"><a href="data-sets.html#cb529-3"></a></span>
-<span id="cb529-4"><a href="data-sets.html#cb529-4"></a><span class="co"># lr_data1</span></span>
-<span id="cb529-5"><a href="data-sets.html#cb529-5"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/lr_data1.Rdata</span>
-<span id="cb529-6"><a href="data-sets.html#cb529-6"></a></span>
-<span id="cb529-7"><a href="data-sets.html#cb529-7"></a><span class="co"># lr_data2</span></span>
-<span id="cb529-8"><a href="data-sets.html#cb529-8"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/lr_data2.Rdata</span></code></pre></div>
-<button class="buttonD">
-<a href="linear-regression.html#LR-sim">Back to Exercise</a>
+<p>As a slightly tougher task, can you write a function that can take multiple inputs and perform a hypothesis test based on the input data, and the choice made? It should be able to handle z-tests, t-tests, and chi-squared tests. The output should be a clear statement of the null and alternative hypotheses, the test statistic, the p-value, and the conclusion of the test.</p>
+<button class="button">
+<a href="sol-ex-CI.html#ht-sol-universal">Solution</a>
 </button>
 </div>
-<div id="data-pca" class="section level2 unnumbered">
-<h2>Data: PCA<a class="anchor" aria-label="anchor" href="#data-pca"><i class="fas fa-link"></i></a>
-</h2>
-<div class="sourceCode" id="cb530"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb530-1"><a href="data-sets.html#cb530-1"></a><span class="co"># Pollen2014 data</span></span>
-<span id="cb530-2"><a href="data-sets.html#cb530-2"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/Pollen2014.txt</span>
-<span id="cb530-3"><a href="data-sets.html#cb530-3"></a></span>
-<span id="cb530-4"><a href="data-sets.html#cb530-4"></a><span class="co"># Supplementary Labels</span></span>
-<span id="cb530-5"><a href="data-sets.html#cb530-5"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/SupplementaryLabels.txt</span></code></pre></div>
-<button class="buttonD">
-<a href="principal-component-analysis.html#pca-intro">Back to Exercise</a>
-</button>
-</div>
-<div id="data-glm" class="section level2 unnumbered">
-<h2>Data: Generalised linear models<a class="anchor" aria-label="anchor" href="#data-glm"><i class="fas fa-link"></i></a>
-</h2>
-<div class="sourceCode" id="cb531"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb531-1"><a href="data-sets.html#cb531-1"></a><span class="co"># gwas-cc-ex1.Rdata</span></span>
-<span id="cb531-2"><a href="data-sets.html#cb531-2"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/gwas-cc-ex1.Rdata</span>
-<span id="cb531-3"><a href="data-sets.html#cb531-3"></a></span>
-<span id="cb531-4"><a href="data-sets.html#cb531-4"></a><span class="co"># gwas-cc-ex2.Rdata</span></span>
-<span id="cb531-5"><a href="data-sets.html#cb531-5"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/gwas-cc-ex2.Rdata</span>
-<span id="cb531-6"><a href="data-sets.html#cb531-6"></a></span>
-<span id="cb531-7"><a href="data-sets.html#cb531-7"></a><span class="co"># nb_data.Rdata</span></span>
-<span id="cb531-8"><a href="data-sets.html#cb531-8"></a><span class="fu">wget</span> https://github.com/anasrana/ems-practicals/raw/main/data/nb_data.Rdata</span></code></pre></div>
-<button class="buttonD">
-<a href="generalised-linear-models.html#gwas">Back to Exercise</a>
-</button>
 
-</div>
-</div>
+
+
+
   <div class="chapter-nav">
-<div class="prev"><a href="creating-functions-r.html">Creating functions R</a></div>
-<div class="empty"></div>
+<div class="prev"><a href="computational-testing-techniques.html"><span class="header-section-number">7</span> Computational Testing Techniques</a></div>
+<div class="next"><a href="representing-data-in-r.html"><span class="header-section-number">9</span> Representing Data in R</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#data-sets">Data sets</a></li>
-<li><a class="nav-link" href="#data-lr">Data: Linear regression</a></li>
-<li><a class="nav-link" href="#data-pca">Data: PCA</a></li>
-<li><a class="nav-link" href="#data-glm">Data: Generalised linear models</a></li>
-</ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#ht-universal"><span class="header-section-number">8</span> Universal Hypothesis Testing Function</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/anasrana/ems-practicals/blob/master/data.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/anasrana/ems-practicals/edit/master/data.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/anasrana/ems-practicals/blob/master/CompTesting.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/anasrana/ems-practicals/edit/master/CompTesting.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
