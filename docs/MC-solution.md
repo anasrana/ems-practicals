@@ -60,8 +60,8 @@ print(weather_sequence)
 ```
 
 ``` bg-info
-#>  [1] 3 1 1 1 1 2 1 2 3 3 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2
-#> [29] 3 1
+#>  [1] 1 1 1 2 1 1 1 1 1 1 3 1 2 3 1 1 1 1 1 2 3 2 2 3 1 1 1 2
+#> [29] 3 3
 ```
 
 This is simplest way to output the weather sequence. You could also use a `data.frame` to store the day and the weather state if you wanted to output the day and the weather state together. Even better would to create plot of the weather sequence over the 30 days or perform basic statistics on the weather sequence to output a useful summary of the weather sequence. This is left as an exercise for the reader, some methods we have already covered and we will learn more over the coming days.
@@ -149,8 +149,8 @@ print(weather_sequence)
 ```
 
 ``` bg-info
-#>  [1] 2 1 2 1 2 1 1 2 2 1 2 1 2 1 2 1 1 2 1 1 2 1 2 2 1 2 2 1
-#> [29] 2 2
+#>  [1] 2 2 1 1 1 1 2 1 2 2 1 1 2 1 1 1 2 1 1 1 2 1 2 1 2 1 2 1
+#> [29] 2 1
 ```
 
 ```{.r .numberLines}
@@ -175,8 +175,8 @@ print(weather_sequence)
 ```
 
 ``` bg-info
-#>  [1] 1 2 1 3 1 1 3 3 3 1 1 3 3 2 2 2 2 1 2 2 3 3 2 1 3 3 1 1
-#> [29] 1 1
+#>  [1] 1 2 2 1 3 3 3 1 2 2 2 2 2 2 1 1 1 2 1 3 3 2 2 1 2 1 1 1
+#> [29] 2 2
 ```
 
 ```{.r .numberLines}
@@ -201,8 +201,8 @@ print(weather_sequence)
 ```
 
 ``` bg-info
-#>  [1]  6 26 41  2 45 14 43 34 29 12  5 31 30 22 50  1 49 21
-#> [19] 28 24 40 39 46 13 12 41 35 17 38 26
+#>  [1] 37 28 37 37  9 33 43 49 25 43  1 17  3 33  4 11 50  6
+#> [19] 49 31 40 33 10 10 48 47  4 37 39 33
 ```
 
 ```{.r .numberLines}
