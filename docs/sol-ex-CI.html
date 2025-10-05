@@ -205,14 +205,14 @@
 <div class="inline-figure"><img src="ci_sol_files/figure-html/unnamed-chunk-3-1.png" width="95%" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb381"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb381-1"><a href="sol-ex-CI.html#cb381-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;    interval_width probability_var_contained
-#&gt; 1             0.1                     0.309
-#&gt; 2             0.2                     0.589
-#&gt; 3             0.3                     0.773
-#&gt; 4             0.4                     0.886
-#&gt; 5             0.5                     0.945
-#&gt; 6             0.6                     0.980
+#&gt; 1             0.1                     0.327
+#&gt; 2             0.2                     0.583
+#&gt; 3             0.3                     0.724
+#&gt; 4             0.4                     0.869
+#&gt; 5             0.5                     0.943
+#&gt; 6             0.6                     0.976
 #&gt; 7             0.7                     0.989
-#&gt; 8             0.8                     0.999
+#&gt; 8             0.8                     0.998
 #&gt; 9             0.9                     1.000
 #&gt; 10            1.0                     1.000</code></pre>
 </div>
@@ -242,15 +242,15 @@
 <pre class="bg-info"><code>#&gt; [1] "Summary of Confidence Interval Accuracy:"</code></pre>
 <div class="sourceCode" id="cb385"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb385-1"><a href="sol-ex-CI.html#cb385-1"></a><span class="fu">print</span>(summary_df)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;    interval_width mean_accuracy  sd_accuracy
-#&gt; 1             0.1        0.2969 0.0110599377
-#&gt; 2             0.2        0.5492 0.0104753679
-#&gt; 3             0.3        0.7438 0.0078570563
-#&gt; 4             0.4        0.8740 0.0055976185
-#&gt; 5             0.5        0.9474 0.0046714261
-#&gt; 6             0.6        0.9799 0.0044584502
-#&gt; 7             0.7        0.9932 0.0031198291
-#&gt; 8             0.8        0.9977 0.0013374935
-#&gt; 9             0.9        0.9992 0.0010327956
+#&gt; 1             0.1        0.2937 0.0104248634
+#&gt; 2             0.2        0.5490 0.0117945373
+#&gt; 3             0.3        0.7461 0.0129910225
+#&gt; 4             0.4        0.8749 0.0095968745
+#&gt; 5             0.5        0.9433 0.0048773855
+#&gt; 6             0.6        0.9754 0.0059292121
+#&gt; 7             0.7        0.9908 0.0035213634
+#&gt; 8             0.8        0.9969 0.0021832697
+#&gt; 9             0.9        0.9991 0.0007378648
 #&gt; 10            1.0        0.9999 0.0003162278</code></pre>
 <div class="sourceCode" id="cb387"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb387-1"><a href="sol-ex-CI.html#cb387-1"></a><span class="co"># Plot mean accuracy with error bars</span></span>
 <span id="cb387-2"><a href="sol-ex-CI.html#cb387-2"></a>plt_accuracy <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(summary_df, <span class="fu">aes</span>(<span class="at">x =</span> interval_width, <span class="at">y =</span> mean_accuracy))</span>
@@ -344,32 +344,32 @@ x &lt;- c(263.9, 266.2, 266.3, 266.8, 265.0)</code></pre>
 <span id="cb401-15"><a href="sol-ex-CI.html#cb401-15"></a></span>
 <span id="cb401-16"><a href="sol-ex-CI.html#cb401-16"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># generate some artificial data from a N(0, 1)</span></span>
 <span id="cb401-17"><a href="sol-ex-CI.html#cb401-17"></a>out <span class="ot">&lt;-</span> <span class="fu">z_test</span>(x, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># null should not be rejected!</span></span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  z = -1.027 
-#&gt;  one-tailed probability = 0.152 
-#&gt;  two-tailed probability = 0.304</code></pre>
+<pre class="bg-info"><code>#&gt;  z = -0.038 
+#&gt;  one-tailed probability = 0.485 
+#&gt;  two-tailed probability = 0.97</code></pre>
 <div class="sourceCode" id="cb403"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb403-1"><a href="sol-ex-CI.html#cb403-1"></a><span class="fu">print</span>(out)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; $z
-#&gt; [1] -1.027
+#&gt; [1] -0.038
 #&gt; 
 #&gt; $one_p
-#&gt; [1] 0.152
+#&gt; [1] 0.485
 #&gt; 
 #&gt; $two_p
-#&gt; [1] 0.304</code></pre>
+#&gt; [1] 0.97</code></pre>
 <div class="sourceCode" id="cb405"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb405-1"><a href="sol-ex-CI.html#cb405-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># generate some artificial data from a N(1, 1)</span></span>
 <span id="cb405-2"><a href="sol-ex-CI.html#cb405-2"></a>out <span class="ot">&lt;-</span> <span class="fu">z_test</span>(x, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># null should be rejected!</span></span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  z = 3.304 
-#&gt;  one-tailed probability = 0 
-#&gt;  two-tailed probability = 0</code></pre>
+<pre class="bg-info"><code>#&gt;  z = 1.741 
+#&gt;  one-tailed probability = 0.041 
+#&gt;  two-tailed probability = 0.082</code></pre>
 <div class="sourceCode" id="cb407"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb407-1"><a href="sol-ex-CI.html#cb407-1"></a><span class="fu">print</span>(out)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; $z
-#&gt; [1] 3.304
+#&gt; [1] 1.741
 #&gt; 
 #&gt; $one_p
-#&gt; [1] 0
+#&gt; [1] 0.041
 #&gt; 
 #&gt; $two_p
-#&gt; [1] 0</code></pre>
+#&gt; [1] 0.082</code></pre>
 <button class="button">
 <a href="computational-testing-techniques.html#ht-ex3">Back to exercise</a>
 </button>
@@ -898,6 +898,9 @@ x &lt;- c(263.9, 266.2, 266.3, 266.8, 265.0)</code></pre>
 #&gt; Conclusion:
 #&gt;    Fail to reject H0 
 #&gt;   There is insufficient evidence to reject the null hypothesis.</code></pre>
+<button class="button">
+<a href="computational-testing-techniques.html#ht-universal">Back to exercise</a>
+</button>
 
 </div>
 </div>
@@ -937,7 +940,7 @@ x &lt;- c(263.9, 266.2, 266.3, 266.8, 265.0)</code></pre>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-10-02.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-10-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

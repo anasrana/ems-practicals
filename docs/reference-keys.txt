@@ -56,6 +56,7 @@ multiplication
 representing-data-as-a-matrix
 matrix-operations
 rep_data-ex
+rep_data-ex-fun
 principal-component-analysis
 data
 pca-intro
@@ -135,5 +136,9 @@ solution-q2
 solution-q3
 solution-q4
 solution-q5-and-q6
+rep_data-func-sol
+example-usage-with-iris-dataset
+error-handling-examples
+function-features-summary
 solution-linear-regression-and-correlation
 comparison-of-data

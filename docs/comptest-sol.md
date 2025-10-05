@@ -122,9 +122,9 @@ out <- z_test(x, 0, 1) # null should not be rejected!
 ```
 
 ``` bg-info
-#>  z = -1.027 
-#>  one-tailed probability = 0.152 
-#>  two-tailed probability = 0.304
+#>  z = -0.038 
+#>  one-tailed probability = 0.485 
+#>  two-tailed probability = 0.97
 ```
 
 ```{.r .numberLines}
@@ -133,13 +133,13 @@ print(out)
 
 ``` bg-info
 #> $z
-#> [1] -1.027
+#> [1] -0.038
 #> 
 #> $one_p
-#> [1] 0.152
+#> [1] 0.485
 #> 
 #> $two_p
-#> [1] 0.304
+#> [1] 0.97
 ```
 
 ```{.r .numberLines}
@@ -148,9 +148,9 @@ out <- z_test(x, 0, 1) # null should be rejected!
 ```
 
 ``` bg-info
-#>  z = 3.304 
-#>  one-tailed probability = 0 
-#>  two-tailed probability = 0
+#>  z = 1.741 
+#>  one-tailed probability = 0.041 
+#>  two-tailed probability = 0.082
 ```
 
 ```{.r .numberLines}
@@ -159,13 +159,13 @@ print(out)
 
 ``` bg-info
 #> $z
-#> [1] 3.304
+#> [1] 1.741
 #> 
 #> $one_p
-#> [1] 0
+#> [1] 0.041
 #> 
 #> $two_p
-#> [1] 0
+#> [1] 0.082
 ```
 
 <button class="button">
@@ -894,3 +894,7 @@ print(chi_result)
 #>    Fail to reject H0 
 #>   There is insufficient evidence to reject the null hypothesis.
 ```
+
+<button class="button">
+  [Back to exercise](#ht-universal)
+</button>

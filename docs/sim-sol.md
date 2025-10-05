@@ -12,14 +12,14 @@ Let's try this out:
 
 
 ```{.r .numberLines}
-x <- c( 1, 2, 2, 3, 4, 1, 6, 7, 8, 10, 5, 5, 1, 4, 9 )
+x <- c(1, 2, 2, 3, 4, 1, 6, 7, 8, 10, 5, 5, 1, 4, 9)
 
 # Working example
 sample(x, 10, replace = FALSE)
 ```
 
 ``` bg-info
-#>  [1] 8 4 1 2 6 5 7 1 9 1
+#>  [1]  2  8 10  1  9  1  1  7  5  4
 ```
 
 ```{.r .numberLines}
@@ -37,8 +37,7 @@ sample(x, 20, replace = TRUE)
 ```
 
 ``` bg-info
-#>  [1]  4  7  2  1  6  5 10  1  3  3  1  8  9  1  9  2  3  2
-#> [19]  1  5
+#>  [1] 2 5 9 9 4 7 5 1 4 3 2 5 2 9 1 5 8 6 9 2
 ```
 
 <button class="button">
@@ -50,8 +49,8 @@ sample(x, 20, replace = TRUE)
 
 
 ```{.r .numberLines}
-rolls_from_sample = sample(c(1:6), size=5000, replace=TRUE)
-rolls_from_sample.int = sample(6, size=5000, replace=TRUE)
+rolls_from_sample <- sample(c(1:6), size = 5000, replace = TRUE)
+rolls_from_sample.int <- sample(6, size = 5000, replace = TRUE)
 
 table(rolls_from_sample)
 ```
@@ -59,7 +58,7 @@ table(rolls_from_sample)
 ``` bg-info
 #> rolls_from_sample
 #>   1   2   3   4   5   6 
-#> 847 854 809 852 822 816
+#> 809 808 795 869 853 866
 ```
 
 
@@ -70,7 +69,7 @@ table(rolls_from_sample.int)
 ``` bg-info
 #> rolls_from_sample.int
 #>   1   2   3   4   5   6 
-#> 828 838 812 851 849 822
+#> 818 833 840 848 816 845
 ```
 
 Both gives a uniform distribution over the numbers 1-6. The function `sample.int` is a specialised version of sample for sampling integers. Many `R` libraries have specialised versions of more general functions to do specific tasks under certain conditions.

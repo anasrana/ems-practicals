@@ -248,6 +248,258 @@ You don’t need to invert the matrices by hand but check they are an inverse.</
 <button class="button">
 <a href="representing-data-in-r.html#rep_data-ex">Back to exercise</a>
 </button>
+</div>
+<div id="rep_data-func-sol" class="section level2" number="20.6">
+<h2>
+<span class="header-section-number">G.6</span> Solution - Data Processing Function<a class="anchor" aria-label="anchor" href="#rep_data-func-sol"><i class="fas fa-link"></i></a>
+</h2>
+<p>Here’s a function that extracts a matrix and vector from a data.frame and performs matrix multiplication. Note, this is a more advanced function that includes error handling and checks to ensure the matrix multiplication is valid.Also, this is a implementation and there are several ways to do this:</p>
+<div class="sourceCode" id="cb504"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb504-1"><a href="representing_data-sol.html#cb504-1"></a><span class="co"># Function to extract matrix and vector from data.frame</span></span>
+<span id="cb504-2"><a href="representing_data-sol.html#cb504-2"></a><span class="co">#   and perform matrix multiplication</span></span>
+<span id="cb504-3"><a href="representing_data-sol.html#cb504-3"></a><span class="co"># Note: For matrix multiplication A %*% v, the vector length must equal</span></span>
+<span id="cb504-4"><a href="representing_data-sol.html#cb504-4"></a><span class="co">#   the number of columns in A</span></span>
+<span id="cb504-5"><a href="representing_data-sol.html#cb504-5"></a><span class="co"># Here we will make use of the function `stop()` to handle errors.</span></span>
+<span id="cb504-6"><a href="representing_data-sol.html#cb504-6"></a><span class="co">#   this will ensure you know where the error is coming from</span></span>
+<span id="cb504-7"><a href="representing_data-sol.html#cb504-7"></a>matrix_vector_multiply <span class="ot">&lt;-</span> <span class="cf">function</span>(data, columns, vector, n_rows) {</span>
+<span id="cb504-8"><a href="representing_data-sol.html#cb504-8"></a></span>
+<span id="cb504-9"><a href="representing_data-sol.html#cb504-9"></a>  <span class="co"># Input validation</span></span>
+<span id="cb504-10"><a href="representing_data-sol.html#cb504-10"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.data.frame</span>(data)) {</span>
+<span id="cb504-11"><a href="representing_data-sol.html#cb504-11"></a>    <span class="fu">stop</span>(<span class="st">"Error: 'data' must be a data.frame"</span>)</span>
+<span id="cb504-12"><a href="representing_data-sol.html#cb504-12"></a>  }</span>
+<span id="cb504-13"><a href="representing_data-sol.html#cb504-13"></a></span>
+<span id="cb504-14"><a href="representing_data-sol.html#cb504-14"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.numeric</span>(columns) <span class="sc">||</span> <span class="fu">any</span>(columns <span class="sc">&lt;</span> <span class="dv">1</span>) <span class="sc">||</span></span>
+<span id="cb504-15"><a href="representing_data-sol.html#cb504-15"></a>      <span class="fu">any</span>(columns <span class="sc">&gt;</span> <span class="fu">ncol</span>(data))) {</span>
+<span id="cb504-16"><a href="representing_data-sol.html#cb504-16"></a>    <span class="fu">stop</span>(<span class="st">"Error: 'columns' must be valid column indices within the data.frame"</span>)</span>
+<span id="cb504-17"><a href="representing_data-sol.html#cb504-17"></a>  }</span>
+<span id="cb504-18"><a href="representing_data-sol.html#cb504-18"></a></span>
+<span id="cb504-19"><a href="representing_data-sol.html#cb504-19"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.numeric</span>(vector) <span class="sc">||</span> <span class="fu">length</span>(vector) <span class="sc">!=</span> <span class="dv">1</span> <span class="sc">||</span> vector <span class="sc">&lt;</span> <span class="dv">1</span> <span class="sc">||</span></span>
+<span id="cb504-20"><a href="representing_data-sol.html#cb504-20"></a>      vector <span class="sc">&gt;</span> <span class="fu">ncol</span>(data)) {</span>
+<span id="cb504-21"><a href="representing_data-sol.html#cb504-21"></a>    <span class="fu">stop</span>(<span class="st">"Error: 'vector' must be a single valid column index"</span>)</span>
+<span id="cb504-22"><a href="representing_data-sol.html#cb504-22"></a>  }</span>
+<span id="cb504-23"><a href="representing_data-sol.html#cb504-23"></a></span>
+<span id="cb504-24"><a href="representing_data-sol.html#cb504-24"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.numeric</span>(n_rows) <span class="sc">||</span> <span class="fu">length</span>(n_rows) <span class="sc">!=</span> <span class="dv">1</span> <span class="sc">||</span> n_rows <span class="sc">&lt;</span> <span class="dv">1</span> <span class="sc">||</span></span>
+<span id="cb504-25"><a href="representing_data-sol.html#cb504-25"></a>      n_rows <span class="sc">&gt;</span> <span class="fu">nrow</span>(data)) {</span>
+<span id="cb504-26"><a href="representing_data-sol.html#cb504-26"></a>    <span class="fu">stop</span>(<span class="st">"Error: 'n_rows' must be a single positive integer not exceeding "</span>,</span>
+<span id="cb504-27"><a href="representing_data-sol.html#cb504-27"></a>         <span class="st">"the number of rows in data"</span>)</span>
+<span id="cb504-28"><a href="representing_data-sol.html#cb504-28"></a>  }</span>
+<span id="cb504-29"><a href="representing_data-sol.html#cb504-29"></a></span>
+<span id="cb504-30"><a href="representing_data-sol.html#cb504-30"></a>  <span class="co"># Check if selected columns are numeric</span></span>
+<span id="cb504-31"><a href="representing_data-sol.html#cb504-31"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">all</span>(<span class="fu">sapply</span>(data[columns], is.numeric))) {</span>
+<span id="cb504-32"><a href="representing_data-sol.html#cb504-32"></a>    <span class="fu">stop</span>(<span class="st">"Error: All selected columns must be numeric"</span>)</span>
+<span id="cb504-33"><a href="representing_data-sol.html#cb504-33"></a>  }</span>
+<span id="cb504-34"><a href="representing_data-sol.html#cb504-34"></a></span>
+<span id="cb504-35"><a href="representing_data-sol.html#cb504-35"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.numeric</span>(data[[vector]])) {</span>
+<span id="cb504-36"><a href="representing_data-sol.html#cb504-36"></a>    <span class="fu">stop</span>(<span class="st">"Error: The vector column must be numeric"</span>)</span>
+<span id="cb504-37"><a href="representing_data-sol.html#cb504-37"></a>  }</span>
+<span id="cb504-38"><a href="representing_data-sol.html#cb504-38"></a></span>
+<span id="cb504-39"><a href="representing_data-sol.html#cb504-39"></a>  <span class="co"># Extract the matrix (first n_rows of specified columns)</span></span>
+<span id="cb504-40"><a href="representing_data-sol.html#cb504-40"></a>  matrix_data <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(data[<span class="dv">1</span><span class="sc">:</span>n_rows, columns])</span>
+<span id="cb504-41"><a href="representing_data-sol.html#cb504-41"></a></span>
+<span id="cb504-42"><a href="representing_data-sol.html#cb504-42"></a>  <span class="co"># Extract the vector (first ncol(matrix) rows of specified column)</span></span>
+<span id="cb504-43"><a href="representing_data-sol.html#cb504-43"></a>  <span class="co"># For matrix multiplication A %*% v, length(v) must equal ncol(A)</span></span>
+<span id="cb504-44"><a href="representing_data-sol.html#cb504-44"></a>  vector_length_needed <span class="ot">&lt;-</span> <span class="fu">ncol</span>(matrix_data)</span>
+<span id="cb504-45"><a href="representing_data-sol.html#cb504-45"></a></span>
+<span id="cb504-46"><a href="representing_data-sol.html#cb504-46"></a>  <span class="cf">if</span> (vector_length_needed <span class="sc">&gt;</span> <span class="fu">nrow</span>(data)) {</span>
+<span id="cb504-47"><a href="representing_data-sol.html#cb504-47"></a>    <span class="fu">stop</span>(<span class="st">"Error: Not enough rows in data to create vector of required "</span>,</span>
+<span id="cb504-48"><a href="representing_data-sol.html#cb504-48"></a>         <span class="st">"length ("</span>, vector_length_needed, <span class="st">")"</span>)</span>
+<span id="cb504-49"><a href="representing_data-sol.html#cb504-49"></a>  }</span>
+<span id="cb504-50"><a href="representing_data-sol.html#cb504-50"></a></span>
+<span id="cb504-51"><a href="representing_data-sol.html#cb504-51"></a>  vector_data <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(data[<span class="dv">1</span><span class="sc">:</span>vector_length_needed, vector])</span>
+<span id="cb504-52"><a href="representing_data-sol.html#cb504-52"></a></span>
+<span id="cb504-53"><a href="representing_data-sol.html#cb504-53"></a>  <span class="co"># Print dimensions before multiplication</span></span>
+<span id="cb504-54"><a href="representing_data-sol.html#cb504-54"></a>  <span class="fu">cat</span>(<span class="st">"Matrix dimensions:"</span>, <span class="fu">dim</span>(matrix_data), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb504-55"><a href="representing_data-sol.html#cb504-55"></a>  <span class="fu">cat</span>(<span class="st">"Vector length:"</span>, <span class="fu">length</span>(vector_data), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb504-56"><a href="representing_data-sol.html#cb504-56"></a></span>
+<span id="cb504-57"><a href="representing_data-sol.html#cb504-57"></a>  <span class="co"># Check if matrix multiplication is possible (should always be true now)</span></span>
+<span id="cb504-58"><a href="representing_data-sol.html#cb504-58"></a>  <span class="cf">if</span> (<span class="fu">ncol</span>(matrix_data) <span class="sc">!=</span> <span class="fu">length</span>(vector_data)) {</span>
+<span id="cb504-59"><a href="representing_data-sol.html#cb504-59"></a>    <span class="fu">stop</span>(<span class="st">"Error: Matrix multiplication not possible - number of columns "</span>,</span>
+<span id="cb504-60"><a href="representing_data-sol.html#cb504-60"></a>         <span class="st">"in matrix ("</span>, <span class="fu">ncol</span>(matrix_data), <span class="st">") must equal length of vector ("</span>,</span>
+<span id="cb504-61"><a href="representing_data-sol.html#cb504-61"></a>         <span class="fu">length</span>(vector_data), <span class="st">")"</span>)</span>
+<span id="cb504-62"><a href="representing_data-sol.html#cb504-62"></a>  }</span>
+<span id="cb504-63"><a href="representing_data-sol.html#cb504-63"></a></span>
+<span id="cb504-64"><a href="representing_data-sol.html#cb504-64"></a>  <span class="co"># Perform matrix multiplication</span></span>
+<span id="cb504-65"><a href="representing_data-sol.html#cb504-65"></a>  result <span class="ot">&lt;-</span> matrix_data <span class="sc">%*%</span> vector_data</span>
+<span id="cb504-66"><a href="representing_data-sol.html#cb504-66"></a></span>
+<span id="cb504-67"><a href="representing_data-sol.html#cb504-67"></a>  <span class="co"># Return the result</span></span>
+<span id="cb504-68"><a href="representing_data-sol.html#cb504-68"></a>  <span class="fu">return</span>(result)</span>
+<span id="cb504-69"><a href="representing_data-sol.html#cb504-69"></a>}</span></code></pre></div>
+</div>
+<div id="example-usage-with-iris-dataset" class="section level2" number="20.7">
+<h2>
+<span class="header-section-number">G.7</span> Example Usage with Iris Dataset<a class="anchor" aria-label="anchor" href="#example-usage-with-iris-dataset"><i class="fas fa-link"></i></a>
+</h2>
+<p>Let’s demonstrate the function using the iris dataset:</p>
+<div class="sourceCode" id="cb505"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb505-1"><a href="representing_data-sol.html#cb505-1"></a><span class="co"># Load the iris dataset</span></span>
+<span id="cb505-2"><a href="representing_data-sol.html#cb505-2"></a><span class="fu">data</span>(iris)</span>
+<span id="cb505-3"><a href="representing_data-sol.html#cb505-3"></a></span>
+<span id="cb505-4"><a href="representing_data-sol.html#cb505-4"></a><span class="co"># Display the structure of iris dataset</span></span>
+<span id="cb505-5"><a href="representing_data-sol.html#cb505-5"></a><span class="fu">str</span>(iris)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; 'data.frame':    150 obs. of  5 variables:
+#&gt;  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+#&gt;  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+#&gt;  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+#&gt;  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+#&gt;  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+<div class="sourceCode" id="cb507"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb507-1"><a href="representing_data-sol.html#cb507-1"></a><span class="co"># Example 1: Extract first 3 columns as matrix, 4th column as vector,</span></span>
+<span id="cb507-2"><a href="representing_data-sol.html#cb507-2"></a><span class="co">#   using 5 rows</span></span>
+<span id="cb507-3"><a href="representing_data-sol.html#cb507-3"></a><span class="co"># Note: Vector will have length 3 (matching matrix columns) for valid</span></span>
+<span id="cb507-4"><a href="representing_data-sol.html#cb507-4"></a><span class="co">#   multiplication</span></span>
+<span id="cb507-5"><a href="representing_data-sol.html#cb507-5"></a><span class="fu">cat</span>(<span class="st">"Example 1: Using columns 1-3 as matrix (5 rows), column 4 as vector"</span>,</span>
+<span id="cb507-6"><a href="representing_data-sol.html#cb507-6"></a>    <span class="st">"(3 elements)</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; Example 1: Using columns 1-3 as matrix (5 rows), column 4 as vector (3 elements)</code></pre>
+<div class="sourceCode" id="cb509"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb509-1"><a href="representing_data-sol.html#cb509-1"></a>result1 <span class="ot">&lt;-</span> <span class="fu">matrix_vector_multiply</span>(</span>
+<span id="cb509-2"><a href="representing_data-sol.html#cb509-2"></a>  <span class="at">data =</span> iris,</span>
+<span id="cb509-3"><a href="representing_data-sol.html#cb509-3"></a>  <span class="at">columns =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb509-4"><a href="representing_data-sol.html#cb509-4"></a>  <span class="at">vector =</span> <span class="dv">4</span>,</span>
+<span id="cb509-5"><a href="representing_data-sol.html#cb509-5"></a>  <span class="at">n_rows =</span> <span class="dv">5</span></span>
+<span id="cb509-6"><a href="representing_data-sol.html#cb509-6"></a>)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; Matrix dimensions: 5 3 
+#&gt; Vector length: 3</code></pre>
+<div class="sourceCode" id="cb511"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb511-1"><a href="representing_data-sol.html#cb511-1"></a><span class="fu">print</span>(result1)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;   [,1]
+#&gt; 1 2.00
+#&gt; 2 1.86
+#&gt; 3 1.84
+#&gt; 4 1.84
+#&gt; 5 2.00</code></pre>
+<div class="sourceCode" id="cb513"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb513-1"><a href="representing_data-sol.html#cb513-1"></a><span class="co"># Example 2: Extract columns 1 and 3 as matrix, column 2 as vector,</span></span>
+<span id="cb513-2"><a href="representing_data-sol.html#cb513-2"></a><span class="co">#   using 10 rows</span></span>
+<span id="cb513-3"><a href="representing_data-sol.html#cb513-3"></a><span class="co"># Note: Vector will have length 2 (matching matrix columns) for valid</span></span>
+<span id="cb513-4"><a href="representing_data-sol.html#cb513-4"></a><span class="co">#   multiplication</span></span>
+<span id="cb513-5"><a href="representing_data-sol.html#cb513-5"></a><span class="fu">cat</span>(<span class="st">"Example 2: Using columns 1,3 as matrix (10 rows), column 2 as vector"</span>,</span>
+<span id="cb513-6"><a href="representing_data-sol.html#cb513-6"></a>    <span class="st">"(2 elements)</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; Example 2: Using columns 1,3 as matrix (10 rows), column 2 as vector (2 elements)</code></pre>
+<div class="sourceCode" id="cb515"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb515-1"><a href="representing_data-sol.html#cb515-1"></a>result2 <span class="ot">&lt;-</span> <span class="fu">matrix_vector_multiply</span>(</span>
+<span id="cb515-2"><a href="representing_data-sol.html#cb515-2"></a>  <span class="at">data =</span> iris,</span>
+<span id="cb515-3"><a href="representing_data-sol.html#cb515-3"></a>  <span class="at">columns =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>),</span>
+<span id="cb515-4"><a href="representing_data-sol.html#cb515-4"></a>  <span class="at">vector =</span> <span class="dv">2</span>,</span>
+<span id="cb515-5"><a href="representing_data-sol.html#cb515-5"></a>  <span class="at">n_rows =</span> <span class="dv">10</span></span>
+<span id="cb515-6"><a href="representing_data-sol.html#cb515-6"></a>)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; Matrix dimensions: 10 2 
+#&gt; Vector length: 2</code></pre>
+<div class="sourceCode" id="cb517"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb517-1"><a href="representing_data-sol.html#cb517-1"></a><span class="fu">print</span>(result2)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;     [,1]
+#&gt; 1  22.05
+#&gt; 2  21.35
+#&gt; 3  20.35
+#&gt; 4  20.60
+#&gt; 5  21.70
+#&gt; 6  24.00
+#&gt; 7  20.30
+#&gt; 8  22.00
+#&gt; 9  19.60
+#&gt; 10 21.65</code></pre>
+<div class="sourceCode" id="cb519"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb519-1"><a href="representing_data-sol.html#cb519-1"></a><span class="co"># Example 3: Create a square matrix for demonstration</span></span>
+<span id="cb519-2"><a href="representing_data-sol.html#cb519-2"></a><span class="fu">cat</span>(<span class="st">"Example 3: Using columns 1-3 as matrix (3 rows), column 1 as vector"</span>,</span>
+<span id="cb519-3"><a href="representing_data-sol.html#cb519-3"></a>    <span class="st">"(3 elements)</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; Example 3: Using columns 1-3 as matrix (3 rows), column 1 as vector (3 elements)</code></pre>
+<div class="sourceCode" id="cb521"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb521-1"><a href="representing_data-sol.html#cb521-1"></a>result3 <span class="ot">&lt;-</span> <span class="fu">matrix_vector_multiply</span>(</span>
+<span id="cb521-2"><a href="representing_data-sol.html#cb521-2"></a>  <span class="at">data =</span> iris,</span>
+<span id="cb521-3"><a href="representing_data-sol.html#cb521-3"></a>  <span class="at">columns =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb521-4"><a href="representing_data-sol.html#cb521-4"></a>  <span class="at">vector =</span> <span class="dv">1</span>,</span>
+<span id="cb521-5"><a href="representing_data-sol.html#cb521-5"></a>  <span class="at">n_rows =</span> <span class="dv">3</span></span>
+<span id="cb521-6"><a href="representing_data-sol.html#cb521-6"></a>)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; Matrix dimensions: 3 3 
+#&gt; Vector length: 3</code></pre>
+<div class="sourceCode" id="cb523"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb523-1"><a href="representing_data-sol.html#cb523-1"></a><span class="fu">print</span>(result3)</span></code></pre></div>
+<pre class="bg-info"><code>#&gt;    [,1]
+#&gt; 1 49.74
+#&gt; 2 46.27
+#&gt; 3 45.76</code></pre>
+<div id="error-handling-examples" class="section level3" number="20.7.1">
+<h3>
+<span class="header-section-number">G.7.1</span> Error Handling Examples<a class="anchor" aria-label="anchor" href="#error-handling-examples"><i class="fas fa-link"></i></a>
+</h3>
+<p>Let’s test the error handling capabilities:</p>
+<div class="sourceCode" id="cb525"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb525-1"><a href="representing_data-sol.html#cb525-1"></a><span class="co"># Test error cases (these will produce errors as expected)</span></span>
+<span id="cb525-2"><a href="representing_data-sol.html#cb525-2"></a></span>
+<span id="cb525-3"><a href="representing_data-sol.html#cb525-3"></a><span class="co"># Error: Invalid column indices</span></span>
+<span id="cb525-4"><a href="representing_data-sol.html#cb525-4"></a><span class="fu">try</span>({</span>
+<span id="cb525-5"><a href="representing_data-sol.html#cb525-5"></a>  <span class="fu">matrix_vector_multiply</span>(iris, <span class="at">columns =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>), <span class="at">vector =</span> <span class="dv">2</span>,</span>
+<span id="cb525-6"><a href="representing_data-sol.html#cb525-6"></a>                         <span class="at">n_rows =</span> <span class="dv">5</span>)</span>
+<span id="cb525-7"><a href="representing_data-sol.html#cb525-7"></a>})</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; Error in matrix_vector_multiply(iris, columns = c(1, 10), vector = 2,  : 
+#&gt;   Error: 'columns' must be valid column indices within the data.frame</code></pre>
+<div class="sourceCode" id="cb527"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb527-1"><a href="representing_data-sol.html#cb527-1"></a><span class="co"># Error: Non-numeric vector column (species column)</span></span>
+<span id="cb527-2"><a href="representing_data-sol.html#cb527-2"></a><span class="fu">try</span>({</span>
+<span id="cb527-3"><a href="representing_data-sol.html#cb527-3"></a>  <span class="fu">matrix_vector_multiply</span>(iris, <span class="at">columns =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">vector =</span> <span class="dv">5</span>,</span>
+<span id="cb527-4"><a href="representing_data-sol.html#cb527-4"></a>                         <span class="at">n_rows =</span> <span class="dv">5</span>)</span>
+<span id="cb527-5"><a href="representing_data-sol.html#cb527-5"></a>})</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; Error in matrix_vector_multiply(iris, columns = 1:2, vector = 5, n_rows = 5) : 
+#&gt;   Error: The vector column must be numeric</code></pre>
+<div class="sourceCode" id="cb529"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb529-1"><a href="representing_data-sol.html#cb529-1"></a><span class="co"># Error: Too many rows requested</span></span>
+<span id="cb529-2"><a href="representing_data-sol.html#cb529-2"></a><span class="fu">try</span>({</span>
+<span id="cb529-3"><a href="representing_data-sol.html#cb529-3"></a>  <span class="fu">matrix_vector_multiply</span>(iris, <span class="at">columns =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">vector =</span> <span class="dv">3</span>,</span>
+<span id="cb529-4"><a href="representing_data-sol.html#cb529-4"></a>                         <span class="at">n_rows =</span> <span class="dv">200</span>)</span>
+<span id="cb529-5"><a href="representing_data-sol.html#cb529-5"></a>})</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; Error in matrix_vector_multiply(iris, columns = 1:2, vector = 3, n_rows = 200) : 
+#&gt;   Error: 'n_rows' must be a single positive integer not exceeding the number of rows in data</code></pre>
+<div class="sourceCode" id="cb531"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb531-1"><a href="representing_data-sol.html#cb531-1"></a><span class="co"># Error: Non-data.frame input</span></span>
+<span id="cb531-2"><a href="representing_data-sol.html#cb531-2"></a><span class="fu">try</span>({</span>
+<span id="cb531-3"><a href="representing_data-sol.html#cb531-3"></a>  <span class="fu">matrix_vector_multiply</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="at">columns =</span> <span class="dv">1</span>, <span class="at">vector =</span> <span class="dv">1</span>,</span>
+<span id="cb531-4"><a href="representing_data-sol.html#cb531-4"></a>                         <span class="at">n_rows =</span> <span class="dv">1</span>)</span>
+<span id="cb531-5"><a href="representing_data-sol.html#cb531-5"></a>})</span></code></pre></div>
+<pre class="bg-info"><code>#&gt; Error in matrix_vector_multiply(c(1, 2, 3), columns = 1, vector = 1, n_rows = 1) : 
+#&gt;   Error: 'data' must be a data.frame</code></pre>
+</div>
+</div>
+<div id="function-features-summary" class="section level2" number="20.8">
+<h2>
+<span class="header-section-number">G.8</span> Function Features Summary<a class="anchor" aria-label="anchor" href="#function-features-summary"><i class="fas fa-link"></i></a>
+</h2>
+<p>The <code>matrix_vector_multiply</code> function includes:</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Input Validation</strong>:
+<ul>
+<li>Checks if <code>data</code> is a data.frame</li>
+<li>Validates column indices are within bounds</li>
+<li>Ensures vector column index is valid</li>
+<li>Confirms n_rows is appropriate</li>
+<li>Verifies all selected columns are numeric</li>
+</ul>
+</li>
+<li>
+<strong>Smart Dimension Handling</strong>:
+<ul>
+<li>Extracts matrix using first <code>n_rows</code> of specified columns</li>
+<li>Extracts vector with length equal to number of matrix columns
+(ensuring valid multiplication)</li>
+<li>Prints matrix and vector dimensions before multiplication</li>
+<li>Ensures matrix multiplication is mathematically possible</li>
+</ul>
+</li>
+<li>
+<strong>Matrix Multiplication Logic</strong>:
+<ul>
+<li>For <code>A %*% v</code>, ensures <code>length(v) == ncol(A)</code>
+</li>
+<li>Vector is extracted from the first <code>ncol(matrix)</code> rows of the
+specified column</li>
+<li>This guarantees valid matrix-vector multiplication</li>
+</ul>
+</li>
+<li>
+<strong>Error Handling</strong>:
+<ul>
+<li>Provides clear error messages for invalid inputs</li>
+<li>Uses <code><a href="https://rdrr.io/r/base/stop.html">stop()</a></code> for immediate termination with informative messages</li>
+<li>Checks if enough data rows exist for required vector length</li>
+</ul>
+</li>
+<li>
+<strong>Flexibility</strong>:
+<ul>
+<li>Allows selection of any numeric columns for the matrix</li>
+<li>Can extract any number of rows for the matrix (up to dataset size)</li>
+<li>Works with any data.frame containing numeric columns</li>
+<li>Automatically adjusts vector length to match matrix dimensions</li>
+</ul>
+</li>
+</ol>
+<button class="button">
+<a href="representing-data-in-r.html#rep_data-ex">Back to exercise</a>
+</button>
 
 </div>
 </div>
@@ -263,6 +515,11 @@ You don’t need to invert the matrices by hand but check they are an inverse.</
 <li><a class="nav-link" href="#solution-q3"><span class="header-section-number">G.3</span> Solution Q3</a></li>
 <li><a class="nav-link" href="#solution-q4"><span class="header-section-number">G.4</span> Solution Q4</a></li>
 <li><a class="nav-link" href="#solution-q5-and-q6"><span class="header-section-number">G.5</span> Solution Q5 and Q6</a></li>
+<li><a class="nav-link" href="#rep_data-func-sol"><span class="header-section-number">G.6</span> Solution - Data Processing Function</a></li>
+<li>
+<a class="nav-link" href="#example-usage-with-iris-dataset"><span class="header-section-number">G.7</span> Example Usage with Iris Dataset</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#error-handling-examples"><span class="header-section-number">G.7.1</span> Error Handling Examples</a></li></ul>
+</li>
+<li><a class="nav-link" href="#function-features-summary"><span class="header-section-number">G.8</span> Function Features Summary</a></li>
 </ul>
 
       <div class="book-extra">
@@ -280,7 +537,7 @@ You don’t need to invert the matrices by hand but check they are an inverse.</
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-10-02.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-10-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
