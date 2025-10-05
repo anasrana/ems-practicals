@@ -42,8 +42,8 @@ print(z)
 ```
 
 ``` bg-info
-#> [1]  0.5402594  0.3387926  1.5855142  0.7562714  0.6297700
-#> [6] -1.3758854  1.9041529
+#> [1]  0.2991056 -0.3612928  0.7790015 -0.9822449  0.6990270
+#> [6]  0.8098074 -0.6893589
 ```
 
 When you are trying to implement any vector operations in R you will be using data and for manipulations. It is important that data is made up of numbers and not anything else, otherwise operations will not work. There is one way of checking if what we have created is a vector made up of numbers, we can use the function `class()`. If it only contains numbers you will get a response of `integer`, or `numeric`. We can check what it looks like for the vectors we have created.
@@ -178,8 +178,8 @@ x + z
 ```
 
 ``` bg-info
-#> [1] 1.540259 2.338793 4.585514 1.756271 2.629770 1.624115
-#> [7] 2.904153
+#> [1] 1.29910556 1.63870716 3.77900149 0.01775511 2.69902698
+#> [6] 3.80980738 0.31064114
 ```
 
 We can add \(x\) and \(y\), only because one is a multiple of the other. The vector \(x\) has length 3 and the vector \(y\) has length 9. The addition is performed without error. You will find that the shorter vector is replicated to perform the addition and the new vector is the same length as the longer. The final part we tried is to add two vectors which are not multiples of each other. You will notice that the code will run and produce a result but you will get a warning message. This is among the reasons you want to be careful with warnings and checking each step of functions and code you write.
@@ -710,6 +710,7 @@ B1 <- cbind(v1, v3, v2)
 B2 <- rbind(v1, v2, v3)
 ```
 
+::: {.infobox}
 > Q2: Calculate the following matrices.
 >
 > - `A1 + A2`
@@ -731,3 +732,26 @@ B2 <- rbind(v1, v2, v3)
 <button class="button">
  [Solution](#representing_data-sol)
 </button>
+:::
+
+
+::: {.hardbox}
+
+## Exercise - Data Processing Function {#rep_data-ex-fun}
+
+Now we will create a function that will take a `data.frame`, extract a matrix and a vector, and perform a matrix multiplication. You can use the `iris` data set again. The function should take the following inputs:
+
+- `data`: a `data.frame` containing the numerical
+- `columns`: a vector of column indices to extract the matrix
+- `vector`: a numerical value indicateing which column to extract the vector
+- `n_rows`: a numerical value indicating how many rows to extract
+
+The function should then extract the matrix and vector, perform the multiplication, and return the result. Your function should also check that the inputs are valid and return an error message if they are not. The function should also print the dimensions of the matrix and vector before performing the multiplication.
+
+*Hint:* if you went through the CPD **Coding without Coding**, use the steps outlined there to create the function. Especially the process of breaking down the task into smaller steps and writing pseudocode first will help you.
+
+<button class="button">
+ [Solution](#rep_data-func-sol)
+</button>
+
+:::

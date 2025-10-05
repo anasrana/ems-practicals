@@ -106,8 +106,8 @@
 <div class="sourceCode" id="cb83"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb83-1"><a href="representing-data-in-r.html#cb83-1"></a><span class="co"># Create z vector</span></span>
 <span id="cb83-2"><a href="representing-data-in-r.html#cb83-2"></a>z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">7</span>)</span>
 <span id="cb83-3"><a href="representing-data-in-r.html#cb83-3"></a><span class="fu">print</span>(z)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] -1.2077439 -0.3002838 -1.5812049 -0.7015067 -0.7968169
-#&gt; [6] -0.2054488  0.5927608</code></pre>
+<pre class="bg-info"><code>#&gt; [1]  0.2991056 -0.3612928  0.7790015 -0.9822449  0.6990270
+#&gt; [6]  0.8098074 -0.6893589</code></pre>
 <p>When you are trying to implement any vector operations in R you will be using data and for manipulations. It is important that data is made up of numbers and not anything else, otherwise operations will not work. There is one way of checking if what we have created is a vector made up of numbers, we can use the function <code><a href="https://rdrr.io/r/base/class.html">class()</a></code>. If it only contains numbers you will get a response of <code>integer</code>, or <code>numeric</code>. We can check what it looks like for the vectors we have created.</p>
 <p><em>Note: We can nest functions in R, to run them. We make use of that here.</em></p>
 <div class="sourceCode" id="cb85"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb85-1"><a href="representing-data-in-r.html#cb85-1"></a><span class="co"># Check what each of the vectors is made of.</span></span>
@@ -163,8 +163,8 @@
 <span id="cb107-2"><a href="representing-data-in-r.html#cb107-2"></a>x <span class="sc">+</span> z</span></code></pre></div>
 <pre><code>#&gt; Warning in x + z: longer object length is not a multiple of
 #&gt; shorter object length</code></pre>
-<pre class="bg-info"><code>#&gt; [1] -0.2077439  1.6997162  1.4187951  0.2984933  1.2031831
-#&gt; [6]  2.7945512  1.5927608</code></pre>
+<pre class="bg-info"><code>#&gt; [1] 1.29910556 1.63870716 3.77900149 0.01775511 2.69902698
+#&gt; [6] 3.80980738 0.31064114</code></pre>
 <p>We can add <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, only because one is a multiple of the other. The vector <span class="math inline">\(x\)</span> has length 3 and the vector <span class="math inline">\(y\)</span> has length 9. The addition is performed without error. You will find that the shorter vector is replicated to perform the addition and the new vector is the same length as the longer. The final part we tried is to add two vectors which are not multiples of each other. You will notice that the code will run and produce a result but you will get a warning message. This is among the reasons you want to be careful with warnings and checking each step of functions and code you write.</p>
 </div>
 <div id="multiplication" class="section level3" number="8.2.2">
@@ -474,6 +474,7 @@
 <span id="cb180-20"><a href="representing-data-in-r.html#cb180-20"></a><span class="co"># Another way to create matrices</span></span>
 <span id="cb180-21"><a href="representing-data-in-r.html#cb180-21"></a>B1 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(v1, v3, v2)</span>
 <span id="cb180-22"><a href="representing-data-in-r.html#cb180-22"></a>B2 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(v1, v2, v3)</span></code></pre></div>
+<div class="infobox">
 <blockquote>
 <p>Q2: Calculate the following matrices.</p>
 <ul>
@@ -500,8 +501,30 @@ You don’t need to invert the matrices by hand but check they are an inverse.</
 <button class="button">
 <a href="representing_data-sol.html#representing_data-sol">Solution</a>
 </button>
-
 </div>
+</div>
+<div id="rep_data-ex-fun" class="section level2 hardbox" number="8.6">
+<h2>
+<span class="header-section-number">8.6</span> Exercise - Data Processing Function<a class="anchor" aria-label="anchor" href="#rep_data-ex-fun"><i class="fas fa-link"></i></a>
+</h2>
+<p>Now we will create a function that will take a <code>data.frame</code>, extract a matrix and a vector, and perform a matrix multiplication. You can use the <code>iris</code> data set again. The function should take the following inputs:</p>
+<ul>
+<li>
+<code>data</code>: a <code>data.frame</code> containing the numerical</li>
+<li>
+<code>columns</code>: a vector of column indices to extract the matrix</li>
+<li>
+<code>vector</code>: a numerical value indicateing which column to extract the vector</li>
+<li>
+<code>n_rows</code>: a numerical value indicating how many rows to extract</li>
+</ul>
+<p>The function should then extract the matrix and vector, perform the multiplication, and return the result. Your function should also check that the inputs are valid and return an error message if they are not. The function should also print the dimensions of the matrix and vector before performing the multiplication.</p>
+<p><em>Hint:</em> if you went through the CPD <strong>Coding without Coding</strong>, use the steps outlined there to create the function. Especially the process of breaking down the task into smaller steps and writing pseudocode first will help you.</p>
+<button class="button">
+<a href="representing_data-sol.html#rep_data-func-sol">Solution</a>
+</button>
+</div>
+
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="computational-testing-techniques.html"><span class="header-section-number">7</span> Computational Testing Techniques</a></div>
@@ -520,6 +543,7 @@ You don’t need to invert the matrices by hand but check they are an inverse.</
 <li><a class="nav-link" href="#representing-data-as-a-matrix"><span class="header-section-number">8.3</span> Representing data as a matrix</a></li>
 <li><a class="nav-link" href="#matrix-operations"><span class="header-section-number">8.4</span> Matrix operations</a></li>
 <li><a class="nav-link" href="#rep_data-ex"><span class="header-section-number">8.5</span> Testing application</a></li>
+<li><a class="nav-link" href="#rep_data-ex-fun"><span class="header-section-number">8.6</span> Exercise - Data Processing Function</a></li>
 </ul>
 
       <div class="book-extra">
@@ -537,7 +561,7 @@ You don’t need to invert the matrices by hand but check they are an inverse.</
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-10-02.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-10-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

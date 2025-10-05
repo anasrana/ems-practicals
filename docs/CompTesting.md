@@ -116,7 +116,7 @@ Test the hypothesis, at the 1% level, that \(Y \sim \operatorname{Poisson} (\lam
 </button>
 
 
-::: {.infobox}
+::: {.hardbox}
 
 ## Universal Hypothesis Testing Function {#ht-universal}
 

@@ -87,25 +87,25 @@
 </h1>
 <p>A really useful way to organize your code is by creating functions. Functions allow you to encapsulate code that performs a specific task, making your scripts more modular and easier to read. You should always consider creating functions, whenever you find yourself repeating code or performing a specific task multiple times.</p>
 <p>In R, you can create a function using the <code>function</code> keyword. Here is a simple example of a function that adds two numbers:</p>
-<div class="sourceCode" id="cb524"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb524-1"><a href="creating-functions-r.html#cb524-1"></a>add_numbers <span class="ot">&lt;-</span> <span class="cf">function</span>(a, b) {</span>
-<span id="cb524-2"><a href="creating-functions-r.html#cb524-2"></a>  <span class="fu">return</span>(a <span class="sc">+</span> b)</span>
-<span id="cb524-3"><a href="creating-functions-r.html#cb524-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb553"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb553-1"><a href="creating-functions-r.html#cb553-1"></a>add_numbers <span class="ot">&lt;-</span> <span class="cf">function</span>(a, b) {</span>
+<span id="cb553-2"><a href="creating-functions-r.html#cb553-2"></a>  <span class="fu">return</span>(a <span class="sc">+</span> b)</span>
+<span id="cb553-3"><a href="creating-functions-r.html#cb553-3"></a>}</span></code></pre></div>
 <p>This is a simple function that takes two arguments and returns their sum. In the function call <code>function(a, b)</code> the arguments <code>a</code> and <code>b</code> are passed to the function. They will be used locally within the function. The <code>return</code> statement specifies what the function will output when it is called. In this case, it returns the sum of <code>a</code> and <code>b</code>.</p>
 <p>You can then call this function with different arguments, but the arguments must match the function’s parameters:</p>
-<div class="sourceCode" id="cb525"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb525-1"><a href="creating-functions-r.html#cb525-1"></a>result1 <span class="ot">&lt;-</span> <span class="fu">add_numbers</span>(<span class="dv">3</span>, <span class="dv">5</span>)</span>
-<span id="cb525-2"><a href="creating-functions-r.html#cb525-2"></a>result2 <span class="ot">&lt;-</span> <span class="fu">add_numbers</span>(<span class="dv">10</span>, <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb554"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb554-1"><a href="creating-functions-r.html#cb554-1"></a>result1 <span class="ot">&lt;-</span> <span class="fu">add_numbers</span>(<span class="dv">3</span>, <span class="dv">5</span>)</span>
+<span id="cb554-2"><a href="creating-functions-r.html#cb554-2"></a>result2 <span class="ot">&lt;-</span> <span class="fu">add_numbers</span>(<span class="dv">10</span>, <span class="dv">20</span>)</span></code></pre></div>
 <p>Here we called the function without specifying the variable names. The function uses the values in the same order as the parameters are defined. In R you can also call the function with named arguments:</p>
-<div class="sourceCode" id="cb526"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb526-1"><a href="creating-functions-r.html#cb526-1"></a>result1 <span class="ot">&lt;-</span> <span class="fu">add_numbers</span>(<span class="at">a =</span> <span class="dv">3</span>, <span class="at">b =</span> <span class="dv">5</span>)</span>
-<span id="cb526-2"><a href="creating-functions-r.html#cb526-2"></a>result2 <span class="ot">&lt;-</span> <span class="fu">add_numbers</span>(<span class="at">b =</span> <span class="dv">20</span>, <span class="at">a =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb555"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb555-1"><a href="creating-functions-r.html#cb555-1"></a>result1 <span class="ot">&lt;-</span> <span class="fu">add_numbers</span>(<span class="at">a =</span> <span class="dv">3</span>, <span class="at">b =</span> <span class="dv">5</span>)</span>
+<span id="cb555-2"><a href="creating-functions-r.html#cb555-2"></a>result2 <span class="ot">&lt;-</span> <span class="fu">add_numbers</span>(<span class="at">b =</span> <span class="dv">20</span>, <span class="at">a =</span> <span class="dv">10</span>)</span></code></pre></div>
 <p>Note, that you can reorder the arguments when using named parameters in the function call.</p>
 <p>Functions can also have default argument values. For example:</p>
-<div class="sourceCode" id="cb527"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb527-1"><a href="creating-functions-r.html#cb527-1"></a>add_numbers <span class="ot">&lt;-</span> <span class="cf">function</span>(a, <span class="at">b =</span> <span class="dv">0</span>) {</span>
-<span id="cb527-2"><a href="creating-functions-r.html#cb527-2"></a>  <span class="fu">return</span>(a <span class="sc">+</span> b)</span>
-<span id="cb527-3"><a href="creating-functions-r.html#cb527-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb556"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb556-1"><a href="creating-functions-r.html#cb556-1"></a>add_numbers <span class="ot">&lt;-</span> <span class="cf">function</span>(a, <span class="at">b =</span> <span class="dv">0</span>) {</span>
+<span id="cb556-2"><a href="creating-functions-r.html#cb556-2"></a>  <span class="fu">return</span>(a <span class="sc">+</span> b)</span>
+<span id="cb556-3"><a href="creating-functions-r.html#cb556-3"></a>}</span></code></pre></div>
 <p>In this case, if you call <code>add_numbers(3)</code>, it will return <code>3</code> because <code>b</code> defaults to <code>0</code> unless otherwise specified.</p>
-<div class="sourceCode" id="cb528"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb528-1"><a href="creating-functions-r.html#cb528-1"></a>result1 <span class="ot">&lt;-</span> <span class="fu">add_numbers</span>(<span class="dv">3</span>)</span>
-<span id="cb528-2"><a href="creating-functions-r.html#cb528-2"></a>result3 <span class="ot">&lt;-</span> <span class="fu">add_numbers</span>(<span class="dv">3</span>, <span class="dv">0</span>)</span>
-<span id="cb528-3"><a href="creating-functions-r.html#cb528-3"></a>result2 <span class="ot">&lt;-</span> <span class="fu">add_numbers</span>(<span class="dv">10</span>, <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb557"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb557-1"><a href="creating-functions-r.html#cb557-1"></a>result1 <span class="ot">&lt;-</span> <span class="fu">add_numbers</span>(<span class="dv">3</span>)</span>
+<span id="cb557-2"><a href="creating-functions-r.html#cb557-2"></a>result3 <span class="ot">&lt;-</span> <span class="fu">add_numbers</span>(<span class="dv">3</span>, <span class="dv">0</span>)</span>
+<span id="cb557-3"><a href="creating-functions-r.html#cb557-3"></a>result2 <span class="ot">&lt;-</span> <span class="fu">add_numbers</span>(<span class="dv">10</span>, <span class="dv">5</span>)</span></code></pre></div>
 <p>Creating functions is a powerful way to make your R code more efficient and easier to maintain.</p>
 
 </div>
@@ -131,7 +131,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-10-02.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-10-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
