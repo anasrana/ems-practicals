@@ -205,15 +205,15 @@
 <div class="inline-figure"><img src="ci_sol_files/figure-html/unnamed-chunk-3-1.png" width="95%" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb381"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb381-1"><a href="sol-ex-CI.html#cb381-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;    interval_width probability_var_contained
-#&gt; 1             0.1                     0.312
-#&gt; 2             0.2                     0.551
-#&gt; 3             0.3                     0.723
-#&gt; 4             0.4                     0.851
-#&gt; 5             0.5                     0.928
-#&gt; 6             0.6                     0.969
+#&gt; 1             0.1                     0.318
+#&gt; 2             0.2                     0.578
+#&gt; 3             0.3                     0.770
+#&gt; 4             0.4                     0.884
+#&gt; 5             0.5                     0.960
+#&gt; 6             0.6                     0.983
 #&gt; 7             0.7                     0.993
-#&gt; 8             0.8                     1.000
-#&gt; 9             0.9                     1.000
+#&gt; 8             0.8                     0.999
+#&gt; 9             0.9                     0.999
 #&gt; 10            1.0                     1.000</code></pre>
 </div>
 <div id="advanced-analysis-with-accuracy-assessment" class="section level2" number="19.3">
@@ -242,16 +242,16 @@
 <pre class="bg-info"><code>#&gt; [1] "Summary of Confidence Interval Accuracy:"</code></pre>
 <div class="sourceCode" id="cb385"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb385-1"><a href="sol-ex-CI.html#cb385-1"></a><span class="fu">print</span>(summary_df)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt;    interval_width mean_accuracy  sd_accuracy
-#&gt; 1             0.1        0.2993 0.0153915561
-#&gt; 2             0.2        0.5484 0.0160291401
-#&gt; 3             0.3        0.7406 0.0087075957
-#&gt; 4             0.4        0.8718 0.0091627264
-#&gt; 5             0.5        0.9444 0.0067692113
-#&gt; 6             0.6        0.9770 0.0054569018
-#&gt; 7             0.7        0.9920 0.0027080128
-#&gt; 8             0.8        0.9979 0.0017919573
-#&gt; 9             0.9        0.9991 0.0012866839
-#&gt; 10            1.0        0.9999 0.0003162278</code></pre>
+#&gt; 1             0.1        0.2908 0.0197304052
+#&gt; 2             0.2        0.5408 0.0211018693
+#&gt; 3             0.3        0.7395 0.0184767121
+#&gt; 4             0.4        0.8699 0.0113377442
+#&gt; 5             0.5        0.9447 0.0094874186
+#&gt; 6             0.6        0.9772 0.0045898439
+#&gt; 7             0.7        0.9931 0.0020248457
+#&gt; 8             0.8        0.9983 0.0010593499
+#&gt; 9             0.9        0.9993 0.0006749486
+#&gt; 10            1.0        0.9997 0.0004830459</code></pre>
 <div class="sourceCode" id="cb387"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb387-1"><a href="sol-ex-CI.html#cb387-1"></a><span class="co"># Plot mean accuracy with error bars</span></span>
 <span id="cb387-2"><a href="sol-ex-CI.html#cb387-2"></a>plt_accuracy <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(summary_df, <span class="fu">aes</span>(<span class="at">x =</span> interval_width, <span class="at">y =</span> mean_accuracy))</span>
 <span id="cb387-3"><a href="sol-ex-CI.html#cb387-3"></a>plt_accuracy <span class="ot">&lt;-</span> plt_accuracy <span class="sc">+</span> <span class="fu">geom_line</span>()</span>
@@ -344,32 +344,32 @@ x &lt;- c(263.9, 266.2, 266.3, 266.8, 265.0)</code></pre>
 <span id="cb401-15"><a href="sol-ex-CI.html#cb401-15"></a></span>
 <span id="cb401-16"><a href="sol-ex-CI.html#cb401-16"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># generate some artificial data from a N(0, 1)</span></span>
 <span id="cb401-17"><a href="sol-ex-CI.html#cb401-17"></a>out <span class="ot">&lt;-</span> <span class="fu">z_test</span>(x, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># null should not be rejected!</span></span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  z = -0.288 
-#&gt;  one-tailed probability = 0.387 
-#&gt;  two-tailed probability = 0.774</code></pre>
+<pre class="bg-info"><code>#&gt;  z = -1.105 
+#&gt;  one-tailed probability = 0.135 
+#&gt;  two-tailed probability = 0.27</code></pre>
 <div class="sourceCode" id="cb403"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb403-1"><a href="sol-ex-CI.html#cb403-1"></a><span class="fu">print</span>(out)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; $z
-#&gt; [1] -0.288
+#&gt; [1] -1.105
 #&gt; 
 #&gt; $one_p
-#&gt; [1] 0.387
+#&gt; [1] 0.135
 #&gt; 
 #&gt; $two_p
-#&gt; [1] 0.774</code></pre>
+#&gt; [1] 0.27</code></pre>
 <div class="sourceCode" id="cb405"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb405-1"><a href="sol-ex-CI.html#cb405-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># generate some artificial data from a N(1, 1)</span></span>
 <span id="cb405-2"><a href="sol-ex-CI.html#cb405-2"></a>out <span class="ot">&lt;-</span> <span class="fu">z_test</span>(x, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># null should be rejected!</span></span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  z = 0.635 
-#&gt;  one-tailed probability = 0.263 
-#&gt;  two-tailed probability = 0.526</code></pre>
+<pre class="bg-info"><code>#&gt;  z = 2.657 
+#&gt;  one-tailed probability = 0.004 
+#&gt;  two-tailed probability = 0.008</code></pre>
 <div class="sourceCode" id="cb407"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb407-1"><a href="sol-ex-CI.html#cb407-1"></a><span class="fu">print</span>(out)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; $z
-#&gt; [1] 0.635
+#&gt; [1] 2.657
 #&gt; 
 #&gt; $one_p
-#&gt; [1] 0.263
+#&gt; [1] 0.004
 #&gt; 
 #&gt; $two_p
-#&gt; [1] 0.526</code></pre>
+#&gt; [1] 0.008</code></pre>
 <button class="button">
 <a href="computational-testing-techniques.html#ht-ex3">Back to exercise</a>
 </button>

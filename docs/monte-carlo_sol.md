@@ -67,7 +67,7 @@ cat("Mean errors:", accuracy)
 ```
 
 ``` bg-info
-#> Mean errors: 0.01265525 0.003655254 0.008155254 0.0008152539 -0.001884746 0.0008152539
+#> Mean errors: -0.01234475 -0.01034475 -0.007744746 0.002535254 -0.0003847461 -0.001214746
 ```
 
 ```{.r .numberLines}
@@ -75,7 +75,7 @@ cat("Standard deviation of errors:", accuracy_sd)
 ```
 
 ``` bg-info
-#> Standard deviation of errors: 0.1672233 0.06656811 0.04493261 0.03286911 0.02136712 0.01417475
+#> Standard deviation of errors: 0.1444565 0.07332645 0.04680758 0.02980586 0.01923062 0.01511281
 ```
 
 Next, we will plot the results. Here we will make use of `ggplot2` a library to create nice plots without much effort. The input need to be a `data.frame` so we will need to create one based on the data.
@@ -93,12 +93,12 @@ print(df)
 
 ``` bg-info
 #>   sample_sizes      accuracy accuracy_sd
-#> 1           10  0.0126552539  0.16722331
-#> 2           50  0.0036552539  0.06656811
-#> 3          100  0.0081552539  0.04493261
-#> 4          250  0.0008152539  0.03286911
-#> 5          500 -0.0018847461  0.02136712
-#> 6         1000  0.0008152539  0.01417475
+#> 1           10 -0.0123447461  0.14445649
+#> 2           50 -0.0103447461  0.07332645
+#> 3          100 -0.0077447461  0.04680758
+#> 4          250  0.0025352539  0.02980586
+#> 5          500 -0.0003847461  0.01923062
+#> 6         1000 -0.0012147461  0.01511281
 ```
 
 ```{.r .numberLines}
@@ -151,7 +151,7 @@ print(expected_score)
 ```
 
 ``` bg-info
-#> [1] 14.8
+#> [1] 14.31
 ```
 <button class="button">
   [Back to Exercise](#mc-expectation-1)
@@ -188,7 +188,7 @@ print(mean(game_score))
 ```
 
 ``` bg-info
-#> [1] 9.235
+#> [1] 9.631
 ```
 
 ```{.r .numberLines}
@@ -300,10 +300,10 @@ Table: (\#tab:unnamed-chunk-7)Experimenting with different game parameters
 
 |Scenario                               | Expected_Score|
 |:--------------------------------------|--------------:|
-|Original Game                          |          9.266|
-|Higher chance of non-positive outcomes |          7.866|
-|Higher stakes                          |         18.940|
-|High reward for one outcome            |         19.738|
+|Original Game                          |          9.285|
+|Higher chance of non-positive outcomes |          8.507|
+|Higher stakes                          |         18.604|
+|High reward for one outcome            |         20.172|
 
 <button class="button">
   [Back to Exercise](#mc-expectation-2)

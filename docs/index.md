@@ -13,6 +13,128 @@ biblio-style: apalike
 csl: "chicago-fullnote-bibliography.csl"
 ---
 
+```{=html}
+<script>
+// Theme switcher functionality for EMS Practicals
+(function() {
+  'use strict';
+
+  // Theme switching function
+  function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    
+    // Update button icon
+    updateThemeButton(newTheme);
+  }
+
+  // Update theme button appearance
+  function updateThemeButton(theme) {
+    const button = document.getElementById('theme-toggle');
+    if (button) {
+      const lightIcon = button.querySelector('.light-icon');
+      const darkIcon = button.querySelector('.dark-icon');
+      
+      if (theme === 'dark') {
+        lightIcon.style.display = 'none';
+        darkIcon.style.display = 'inline';
+        button.setAttribute('aria-label', 'Switch to light mode');
+      } else {
+        lightIcon.style.display = 'inline';
+        darkIcon.style.display = 'none';
+        button.setAttribute('aria-label', 'Switch to dark mode');
+      }
+    }
+  }
+
+  // Initialize theme
+  function initTheme() {
+    // Check for saved theme, otherwise check system preference
+    let savedTheme = localStorage.getItem('theme');
+    
+    if (!savedTheme) {
+      // Check system preference
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        savedTheme = 'dark';
+      } else {
+        savedTheme = 'light';
+      }
+    }
+    
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeButton(savedTheme);
+  }
+
+  // Create theme toggle button
+  function createThemeButton() {
+    const button = document.createElement('button');
+    button.id = 'theme-toggle';
+    button.className = 'theme-toggle-btn';
+    button.innerHTML = `
+      <span class="light-icon">🌙</span>
+      <span class="dark-icon">☀️</span>
+    `;
+    button.onclick = toggleTheme;
+    button.setAttribute('aria-label', 'Toggle theme');
+    
+    // Try to find the best place to insert the button
+    const navbar = document.querySelector('.navbar');
+    const sidebar = document.querySelector('.bs4-sidebar');
+    const header = document.querySelector('header');
+    
+    if (navbar) {
+      navbar.appendChild(button);
+    } else if (sidebar) {
+      sidebar.insertBefore(button, sidebar.firstChild);
+    } else if (header) {
+      header.appendChild(button);
+    } else {
+      // Fallback: add to body
+      document.body.appendChild(button);
+    }
+  }
+
+  // Listen for system theme changes
+  function listenForSystemThemeChanges() {
+    if (window.matchMedia) {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      mediaQuery.addListener(function(e) {
+        // Only auto-switch if user hasn't manually set a preference
+        if (!localStorage.getItem('theme')) {
+          const newTheme = e.matches ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', newTheme);
+          updateThemeButton(newTheme);
+        }
+      });
+    }
+  }
+
+  // Initialize when DOM is ready
+  function init() {
+    initTheme();
+    
+    // Wait for DOM to be fully loaded
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() {
+        createThemeButton();
+        listenForSystemThemeChanges();
+      });
+    } else {
+      createThemeButton();
+      listenForSystemThemeChanges();
+    }
+  }
+
+  // Start initialization
+  init();
+
+})();
+</script>
+```
+
 # Introduction to the Practical {-}
 
 On this website you will find the resources for the practical session for the module Essentials of Mathematics and Statistics (EMS) part of the MSc Bioinformatics course at the University of Birmingham.
