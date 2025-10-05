@@ -107,12 +107,14 @@
 <pre><code>#&gt; The following objects are masked from 'package:base':
 #&gt; 
 #&gt;     intersect, setdiff, setequal, union</code></pre>
-<pre><code>#&gt; Warning: Using `size` aesthetic for lines was deprecated in ggplot2
-#&gt; 3.4.0.
+<pre><code>#&gt; Warning: Using `size` aesthetic for lines was
+#&gt; deprecated in ggplot2 3.4.0.
 #&gt; ℹ Please use `linewidth` instead.
-#&gt; This warning is displayed once every 8 hours.
-#&gt; Call `lifecycle::last_lifecycle_warnings()` to see where
-#&gt; this warning was generated.</code></pre>
+#&gt; This warning is displayed once every 8
+#&gt; hours.
+#&gt; Call
+#&gt; `lifecycle::last_lifecycle_warnings()` to
+#&gt; see where this warning was generated.</code></pre>
 <div class="inline-figure"><img src="monte-carlo_files/figure-html/unnamed-chunk-1-1.png" width="95%" style="display: block; margin: auto;"></div>
 <p>If you have not done calculus before - do not worry. We are going to write a Monte Carlo approach for estimating this integral which does not require any knowledge of calculus!</p>
 <p>The method relies on being able to generate samples from this distribution (the blue curve) and counting how many values fall between 1 and 3. The proportion of samples that fall in this range over the total number of samples gives the area.</p>
@@ -130,7 +132,7 @@
 <span id="cb20-2"><a href="monte-carlo-methods.html#cb20-2"></a>mc_integral <span class="ot">&lt;-</span> <span class="fu">sum</span>(sims <span class="sc">&gt;=</span> <span class="dv">1</span> <span class="sc">&amp;</span> sims <span class="sc">&lt;=</span> <span class="dv">3</span>) <span class="sc">/</span> n</span></code></pre></div>
 <p>The result we get is:</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb21-1"><a href="monte-carlo-methods.html#cb21-1"></a><span class="fu">print</span>(mc_integral)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 0.331</code></pre>
+<pre class="bg-info"><code>#&gt; [1] 0.35</code></pre>
 <p>This is our estimate of the integral. We can compare this to the true value of the integral which we can calculate using the <code>pnorm</code> function in <code>R</code>. This is the probability of a Normal distribution falling between 1 and 3:</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb23-1"><a href="monte-carlo-methods.html#cb23-1"></a>mc_exact <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">3</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">2</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">1</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
 <span id="cb23-2"><a href="monte-carlo-methods.html#cb23-2"></a><span class="fu">print</span>(mc_exact)</span></code></pre></div>
@@ -196,7 +198,7 @@ Hint
 <span id="cb25-16"><a href="monte-carlo-methods.html#cb25-16"></a>pr_greater_than_three <span class="ot">&lt;-</span> <span class="fu">sum</span>(greater_than_three) <span class="sc">/</span> runs</span></code></pre></div>
 <p>For our MC estimate of the probability <span class="math inline">\(P(X&gt;3)\)</span> we get</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb26-1"><a href="monte-carlo-methods.html#cb26-1"></a><span class="fu">print</span>(pr_greater_than_three)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 0.87</code></pre>
+<pre class="bg-info"><code>#&gt; [1] 0.83</code></pre>
 <p>which we can compare to <code>R</code>’s built-in Binomial distribution function:</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb28-1"><a href="monte-carlo-methods.html#cb28-1"></a><span class="fu">print</span>(<span class="fu">pbinom</span>(<span class="dv">3</span>, <span class="dv">10</span>, <span class="fl">0.5</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>))</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; [1] 0.828125</code></pre>
@@ -286,7 +288,7 @@ Hint
 <p>We can then compute the probability that, after twenty spins, we will have less than zero points:</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb32-1"><a href="monte-carlo-methods.html#cb32-1"></a>prob_less_than_zero <span class="ot">&lt;-</span> <span class="fu">sum</span>(less_than_zero) <span class="sc">/</span> runs</span>
 <span id="cb32-2"><a href="monte-carlo-methods.html#cb32-2"></a><span class="fu">print</span>(prob_less_than_zero)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 0.01</code></pre>
+<pre class="bg-info"><code>#&gt; [1] 0</code></pre>
 <p>The probability is very low. This is not surprising since there is only a 25% chance of getting a point deduction on any spin and a 75% chance of gaining points. Try to increase the number of simulation runs to see if you can detect any games where you do find a negative score.</p>
 <p><em>This is a very basic function and can be improved in many ways. For example, you could add parameters to the function to allow for different numbers of spins or different probabilities for each colour. You could also add error checking to ensure that the input parameters are valid.</em></p>
 </div>

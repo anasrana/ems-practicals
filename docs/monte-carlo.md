@@ -37,12 +37,14 @@ which we can visualise as follows:
 ```
 
 ```
-#> Warning: Using `size` aesthetic for lines was deprecated in
-#> ggplot2 3.4.0.
+#> Warning: Using `size` aesthetic for lines was
+#> deprecated in ggplot2 3.4.0.
 #> ℹ Please use `linewidth` instead.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where
-#> this warning was generated.
+#> This warning is displayed once every 8
+#> hours.
+#> Call
+#> `lifecycle::last_lifecycle_warnings()` to
+#> see where this warning was generated.
 ```
 
 <img src="monte-carlo_files/figure-html/unnamed-chunk-1-1.png" width="95%" style="display: block; margin: auto;" />
@@ -84,7 +86,7 @@ print(mc_integral)
 ```
 
 ``` bg-info
-#> [1] 0.349
+#> [1] 0.35
 ```
 
 This is our estimate of the integral. We can compare this to the true value of the integral which we can calculate using the `pnorm` function in `R`. This is the probability of a Normal distribution falling between 1 and 3:
@@ -183,7 +185,7 @@ print(pr_greater_than_three)
 ```
 
 ``` bg-info
-#> [1] 0.81
+#> [1] 0.83
 ```
 
 which we can compare to `R`’s built-in Binomial distribution function:
