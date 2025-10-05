@@ -84,7 +84,7 @@ print(mc_integral)
 ```
 
 ``` bg-info
-#> [1] 0.325
+#> [1] 0.349
 ```
 
 This is our estimate of the integral. We can compare this to the true value of the integral which we can calculate using the `pnorm` function in `R`. This is the probability of a Normal distribution falling between 1 and 3:
@@ -183,7 +183,7 @@ print(pr_greater_than_three)
 ```
 
 ``` bg-info
-#> [1] 0.87
+#> [1] 0.81
 ```
 
 which we can compare to `R`’s built-in Binomial distribution function:

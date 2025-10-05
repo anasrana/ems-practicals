@@ -19,7 +19,7 @@ sample(x, 10, replace = FALSE)
 ```
 
 ``` bg-info
-#>  [1]  2  8 10  1  9  1  1  7  5  4
+#>  [1] 4 3 8 9 1 5 1 2 4 1
 ```
 
 ```{.r .numberLines}
@@ -37,7 +37,7 @@ sample(x, 20, replace = TRUE)
 ```
 
 ``` bg-info
-#>  [1] 2 5 9 9 4 7 5 1 4 3 2 5 2 9 1 5 8 6 9 2
+#>  [1] 1 1 6 2 2 1 2 2 4 2 8 1 1 2 9 6 2 8 9 1
 ```
 
 <button class="button">
@@ -58,7 +58,7 @@ table(rolls_from_sample)
 ``` bg-info
 #> rolls_from_sample
 #>   1   2   3   4   5   6 
-#> 809 808 795 869 853 866
+#> 822 792 859 870 838 819
 ```
 
 
@@ -69,7 +69,7 @@ table(rolls_from_sample.int)
 ``` bg-info
 #> rolls_from_sample.int
 #>   1   2   3   4   5   6 
-#> 818 833 840 848 816 845
+#> 851 851 837 817 803 841
 ```
 
 Both gives a uniform distribution over the numbers 1-6. The function `sample.int` is a specialised version of sample for sampling integers. Many `R` libraries have specialised versions of more general functions to do specific tasks under certain conditions.

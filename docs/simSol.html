@@ -97,13 +97,13 @@
 <span id="cb311-2"><a href="simSol.html#cb311-2"></a></span>
 <span id="cb311-3"><a href="simSol.html#cb311-3"></a><span class="co"># Working example</span></span>
 <span id="cb311-4"><a href="simSol.html#cb311-4"></a><span class="fu">sample</span>(x, <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  [1]  2  8 10  1  9  1  1  7  5  4</code></pre>
+<pre class="bg-info"><code>#&gt;  [1] 4 3 8 9 1 5 1 2 4 1</code></pre>
 <div class="sourceCode" id="cb313"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb313-1"><a href="simSol.html#cb313-1"></a><span class="co"># This will cause an error</span></span>
 <span id="cb313-2"><a href="simSol.html#cb313-2"></a><span class="fu">sample</span>(x, <span class="dv">20</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>#&gt; Error in sample.int(length(x), size, replace, prob): cannot take a sample larger than the population when 'replace = FALSE'</code></pre>
 <div class="sourceCode" id="cb315"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb315-1"><a href="simSol.html#cb315-1"></a><span class="co"># Fix it</span></span>
 <span id="cb315-2"><a href="simSol.html#cb315-2"></a><span class="fu">sample</span>(x, <span class="dv">20</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  [1] 2 5 9 9 4 7 5 1 4 3 2 5 2 9 1 5 8 6 9 2</code></pre>
+<pre class="bg-info"><code>#&gt;  [1] 1 1 6 2 2 1 2 2 4 2 8 1 1 2 9 6 2 8 9 1</code></pre>
 <button class="button">
 <a href="simulating-random-numbers.html#sim-ex1">Back to exercise</a>
 </button>
@@ -118,11 +118,11 @@
 <span id="cb317-4"><a href="simSol.html#cb317-4"></a><span class="fu">table</span>(rolls_from_sample)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; rolls_from_sample
 #&gt;   1   2   3   4   5   6 
-#&gt; 809 808 795 869 853 866</code></pre>
+#&gt; 822 792 859 870 838 819</code></pre>
 <div class="sourceCode" id="cb319"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb319-1"><a href="simSol.html#cb319-1"></a><span class="fu">table</span>(rolls_from_sample.int)</span></code></pre></div>
 <pre class="bg-info"><code>#&gt; rolls_from_sample.int
 #&gt;   1   2   3   4   5   6 
-#&gt; 818 833 840 848 816 845</code></pre>
+#&gt; 851 851 837 817 803 841</code></pre>
 <p>Both gives a uniform distribution over the numbers 1-6. The function <code>sample.int</code> is a specialised version of sample for sampling integers. Many <code>R</code> libraries have specialised versions of more general functions to do specific tasks under certain conditions.</p>
 <button class="button">
 <a href="simulating-random-numbers.html#sim-ex2">Back to exercise</a>
