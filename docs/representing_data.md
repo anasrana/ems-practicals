@@ -42,8 +42,8 @@ print(z)
 ```
 
 ``` bg-info
-#> [1]  0.2991056 -0.3612928  0.7790015 -0.9822449  0.6990270
-#> [6]  0.8098074 -0.6893589
+#> [1] -1.06157021 -0.97747334 -0.87266754 -0.81620179
+#> [5]  1.72046812 -0.91936214  0.09784888
 ```
 
 When you are trying to implement any vector operations in R you will be using data and for manipulations. It is important that data is made up of numbers and not anything else, otherwise operations will not work. There is one way of checking if what we have created is a vector made up of numbers, we can use the function `class()`. If it only contains numbers you will get a response of `integer`, or `numeric`. We can check what it looks like for the vectors we have created.
@@ -178,8 +178,8 @@ x + z
 ```
 
 ``` bg-info
-#> [1] 1.29910556 1.63870716 3.77900149 0.01775511 2.69902698
-#> [6] 3.80980738 0.31064114
+#> [1] -0.06157021  1.02252666  2.12733246  0.18379821
+#> [5]  3.72046812  2.08063786  1.09784888
 ```
 
 We can add \(x\) and \(y\), only because one is a multiple of the other. The vector \(x\) has length 3 and the vector \(y\) has length 9. The addition is performed without error. You will find that the shorter vector is replicated to perform the addition and the new vector is the same length as the longer. The final part we tried is to add two vectors which are not multiples of each other. You will notice that the code will run and produce a result but you will get a warning message. This is among the reasons you want to be careful with warnings and checking each step of functions and code you write.
