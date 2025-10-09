@@ -180,14 +180,12 @@ lr_plot <- ggplot(sim_data, aes(x = x, y = y)) +
 ```
 
 ```
-#> Warning: Using `size` aesthetic for lines was
-#> deprecated in ggplot2 3.4.0.
+#> Warning: Using `size` aesthetic for lines was deprecated in
+#> ggplot2 3.4.0.
 #> ℹ Please use `linewidth` instead.
-#> This warning is displayed once every 8
-#> hours.
-#> Call
-#> `lifecycle::last_lifecycle_warnings()` to
-#> see where this warning was generated.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where
+#> this warning was generated.
 ```
 
 ```{.r .numberLines}
@@ -239,6 +237,25 @@ print(var(ls_residual))
 ```
 
 This is as expected since subtracting a good fit from the data leaves $\epsilon$ which has $0$ mean and $0.5$ variance.
+
+::: {.infobox}
+
+### Exercise I: Linear Regression Diagnostics Function {#LR-diag-fun}
+
+Now let us create a function that will take as input a vector of responses and a vector of covariates, fit a simple linear regression model, and output a list that contains the following:
+
+- estimated coefficients, as `coef`
+- residuals, as `resid`
+- fitted values, as `fitted`
+- the linear regression `lm` object, as `lm_obj`
+
+The function name should be `lr_diagnostics`.
+
+<button class="button">
+[Solution](#LR-sol0)
+</button>
+
+:::
 
 ### Maximum likelihood estimation
 
@@ -298,7 +315,133 @@ The estimated parameters using the maximum likelihood are also a very good estim
 
 Now investigate the quality of the predictions further by simulating more data sets and seeing how the variance affects the quality of the fit as indicated by the mean-squared error (mse).
 
-To start you will define some parameter for the simulations, the number of simulations to run for each variance, and the variance values to try.
+Let us break this task into multiple steps. First let us consider the problem we are trying to address and what we need to do:
+
+- We will simulate data sets with different variances
+- For each data set we will fit a linear regression model
+- We will compute the mean-squared error between the fitted values and the true values
+
+Based on this we can create functions to perform each task. Let us start with the function that will simulate the data. For the data simulation we need values for the parameters $(\beta_0, \beta_1, \sigma^2)$ and the number of data points $N$.
+
+
+```{.r .numberLines}
+simulate_data <- function(b0, b1, sigma2, N) {
+  # simulate the covariate
+  x <- rnorm(N, mean = 0, sd = 1)
+  # simulate the noise terms, rnorm requires the standard deviation
+  e <- rnorm(N, mean = 0, sd = sqrt(sigma2))
+  # compute (simulate) the response variable
+  y <- b0 + b1 * x + e
+
+  return(data.frame(x = x, y = y))
+}
+```
+
+This is a very basic function that we will only use internally. Therfore we are not adding any error checking or other niceties. The next function we need is one that will take a data frame with $x$ and $y$ and fit a linear regression model and return the `lm` object.
+
+
+```{.r .numberLines}
+fit_slm <- function(data) {
+  return(lm(y ~ x, data = data))
+}
+```
+
+This is a very simple function that just wraps the `lm()` function. In this very simple case it is not strictly necessary, but it makes the code more readable. We will see in the next practical why this is useful. The final function we need is one that will compute the mean-squared error between the fitted values and the true values.
+
+
+```{.r .numberLines}
+compute_mse <- function(lm_fit, b0, b1) {
+  # extract the fitted values
+  y_hat <- fitted(lm_fit)
+  # extract the x values from the model frame
+  x <- lm_fit$model$x
+  # compute the true y values
+  y_true <- b0 + b1 * x
+  # compute and return the mean-squared error
+  return(mean((y_hat - y_true)^2))
+}
+```
+
+Note, we didn't pass the data frame to this function, instead we extract the $x$ values from the `lm` object. This is a bit more robust as it ensures that we are using the same $x$ values as were used in the fit. We now have all the functions we need to perform the analysis. We will use a nested `for` loop to loop over different variances and for each variance we will repeat the simulation multiple times.
+
+Once you have created the functions above you should test them to ensure they work as expected. You can do this by simulating a small data set and running the functions in sequence.
+
+
+```{.r .numberLines}
+# test the functions
+test_data <- simulate_data(b0 = 10, b1 = -8, sigma2 = 0.5, N = 100)
+lm_fit <- fit_slm(test_data)
+mse <- compute_mse(lm_fit, b0 = 10, b1 = -8)
+print(mse)
+```
+
+``` bg-info
+#> [1] 0.01738038
+```
+
+Now that we have everything together we can run the analysis. We will try a range of variances and for each variance we will repeat the simulation 100 times. We will store the results in a matrix which we will convert to a data frame for plotting.
+
+Based on this we can can create a final function that will perform the analysis. This function will take as input the parameters $(\beta_0, \beta_1)$, a vector of variances to try, the number of data points $N$, and the number of simulations to run for each variance.
+
+
+```{.r .numberLines}
+analyze_variance_effect <- function(b0, b1, sigma_v, N, n_simulations) {
+  n_sigma <- length(sigma_v)
+
+  # Create a matrix to store results
+  mse_matrix <- matrix(0, nrow = n_simulations, ncol = n_sigma)
+
+  # name row and column
+  rownames(mse_matrix) <- c(1:n_simulations)
+  colnames(mse_matrix) <- sigma_v
+
+  # loop over variance
+  for (i in 1:n_sigma) {
+    sigma2 <- sigma_v[i]
+
+    # for each simulation
+    for (it in 1:n_simulations) {
+      # simulate the data
+      sim_data <- simulate_data(b0, b1, sigma2, N)
+      # fit the linear regression model
+      lm_fit <- fit_slm(sim_data)
+      # compute the mean squared error between the fit and the actual y's
+      mse_matrix[it, i] <- compute_mse(lm_fit, b0, b1)
+    }
+  }
+
+  return(mse_matrix)
+}
+```
+
+This function will return a matrix with the mean-squared errors for each simulation and variance. We can now set the parameters, call the functions and plot the results.
+
+
+```{.r .numberLines}
+# number of simulations for each variance level
+n_simulations <- 100
+# A vector of variance levels to try
+sigma_v <- c(0.1, 0.4, 1.0, 2.0, 4.0, 6.0, 8.0)
+# number of data points
+N <- 100
+# Set the parameters
+b0 <- 10 # regression coefficient for intercept
+b1 <- -8 # regression coefficient for slope
+
+# run the analysis
+mse_results <- analyze_variance_effect(b0, b1, sigma_v, N, n_simulations)
+print(mse_results[1:5, 1:3]) # print a subset of the results
+```
+
+``` bg-info
+#>            0.1         0.4           1
+#> 1 0.0018653072 0.001529142 0.022890396
+#> 2 0.0006060716 0.007175884 0.005308991
+#> 3 0.0022200508 0.001375822 0.005990769
+#> 4 0.0009563890 0.008649337 0.003157107
+#> 5 0.0029775013 0.007083853 0.003044801
+```
+
 
 
 ```{.r .numberLines}
@@ -372,7 +515,7 @@ You can see that the variances of the mse and the value of the mse go up with in
 What changes do you need to make to the above function to plot the accuracy of the estimated regression coefficients as a function of variance?
 
 ::: {.infobox}
-## Exercise I: Correlation {#LR-ex1}
+## Exercise II: Correlation {#LR-ex1}
 
 Read in the data in `stork.txt`, compute the correlation and comment on it.
 
@@ -385,7 +528,7 @@ The data represents `no of storks` (column 1) in Oldenburg Germany from $1930 - 
 
 ::: {.infobox}
 
-## Exercise II: Linear Regression {#LR-ex2}
+## Exercise III: Linear Regression {#LR-ex2}
 
 Fit a simple linear model to the two data sets supplied (`lr_data1.Rdata` and `lr_data2.Rdata`). In both files the $(x,y)$ data is saved in two vectors, $x$ and $y$.
 
