@@ -106,8 +106,8 @@
 <div class="sourceCode" id="cb83"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb83-1"><a href="representing-data-in-r.html#cb83-1"></a><span class="co"># Create z vector</span></span>
 <span id="cb83-2"><a href="representing-data-in-r.html#cb83-2"></a>z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">7</span>)</span>
 <span id="cb83-3"><a href="representing-data-in-r.html#cb83-3"></a><span class="fu">print</span>(z)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] -0.1990264 -0.3369894  0.3411694  1.6849279  1.4618826
-#&gt; [6]  1.0806195  0.1022796</code></pre>
+<pre class="bg-info"><code>#&gt; [1]  0.9649605 -1.1902850  0.6438017  1.0445011 -0.6284221
+#&gt; [6]  0.5402305 -2.3003522</code></pre>
 <p>When you are trying to implement any vector operations in R you will be using data and for manipulations. It is important that data is made up of numbers and not anything else, otherwise operations will not work. There is one way of checking if what we have created is a vector made up of numbers, we can use the function <code><a href="https://rdrr.io/r/base/class.html">class()</a></code>. If it only contains numbers you will get a response of <code>integer</code>, or <code>numeric</code>. We can check what it looks like for the vectors we have created.</p>
 <p><em>Note: We can nest functions in R, to run them. We make use of that here.</em></p>
 <div class="sourceCode" id="cb85"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb85-1"><a href="representing-data-in-r.html#cb85-1"></a><span class="co"># Check what each of the vectors is made of.</span></span>
@@ -163,8 +163,8 @@
 <span id="cb107-2"><a href="representing-data-in-r.html#cb107-2"></a>x <span class="sc">+</span> z</span></code></pre></div>
 <pre><code>#&gt; Warning in x + z: longer object length is not a multiple of
 #&gt; shorter object length</code></pre>
-<pre class="bg-info"><code>#&gt; [1] 0.8009736 1.6630106 3.3411694 2.6849279 3.4618826
-#&gt; [6] 4.0806195 1.1022796</code></pre>
+<pre class="bg-info"><code>#&gt; [1]  1.964960  0.809715  3.643802  2.044501  1.371578
+#&gt; [6]  3.540231 -1.300352</code></pre>
 <p>We can add <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, only because one is a multiple of the other. The vector <span class="math inline">\(x\)</span> has length 3 and the vector <span class="math inline">\(y\)</span> has length 9. The addition is performed without error. You will find that the shorter vector is replicated to perform the addition and the new vector is the same length as the longer. The final part we tried is to add two vectors which are not multiples of each other. You will notice that the code will run and produce a result but you will get a warning message. This is among the reasons you want to be careful with warnings and checking each step of functions and code you write.</p>
 </div>
 <div id="multiplication" class="section level3" number="8.2.2">
@@ -561,7 +561,7 @@ You don’t need to invert the matrices by hand but check they are an inverse.</
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-10-05.</p>
+    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2025-10-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

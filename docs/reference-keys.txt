@@ -69,6 +69,7 @@ data-1
 LR-sim
 fitting-simple-linear-regression-model
 least-squared-estimation
+LR-diag-fun
 maximum-likelihood-estimation
 effect-of-variance
 LR-ex1
@@ -141,4 +142,8 @@ example-usage-with-iris-dataset
 error-handling-examples
 function-features-summary
 solution-linear-regression-and-correlation
+example-usage-1
+function-features
 comparison-of-data
+key-observations
+extension-question
