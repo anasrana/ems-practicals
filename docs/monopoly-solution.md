@@ -73,7 +73,7 @@ positions <- monopoly_sim(100000) # simulate 100,000 turns
 hist(positions, breaks = seq(0, 40, len = 41), right = FALSE)
 ```
 
-<img src="monopoly-solution_files/figure-html/unnamed-chunk-3-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="monopoly-solution_files/figure-html/unnamed-chunk-3-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 Note, to ensure this code works it is important to try different values for the input argument `num_turns` to ensure the function behaves as expected.
 
@@ -131,7 +131,7 @@ positions1 <- monopoly_jail_sim()
 hist(positions1, breaks = seq(0, 40, len = 41), right = FALSE)
 ```
 
-<img src="monopoly-solution_files/figure-html/unnamed-chunk-5-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="monopoly-solution_files/figure-html/unnamed-chunk-5-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 ```{.r .numberLines}
 # simulate 1000 turns with default jail position
@@ -139,7 +139,7 @@ positions2 <- monopoly_jail_sim(1000)
 hist(positions2, breaks = seq(0, 40, len = 41), right = FALSE)
 ```
 
-<img src="monopoly-solution_files/figure-html/unnamed-chunk-5-2.png" width="95%" style="display: block; margin: auto;" />
+<img src="monopoly-solution_files/figure-html/unnamed-chunk-5-2.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 ```{.r .numberLines}
 # simulate 100000 turns with jail position at 5
@@ -147,7 +147,7 @@ positions3 <- monopoly_jail_sim(100000, jail_position = 5)
 hist(positions3, breaks = seq(0, 40, len = 41), right = FALSE)
 ```
 
-<img src="monopoly-solution_files/figure-html/unnamed-chunk-5-3.png" width="95%" style="display: block; margin: auto;" />
+<img src="monopoly-solution_files/figure-html/unnamed-chunk-5-3.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 <span style ="color: orange;">
   **Explain the results qualitatively.**
@@ -230,7 +230,7 @@ positions <- monopoly_double_sim(100000)
 hist(positions, breaks = seq(0, 40, len = 41), right = FALSE)
 ```
 
-<img src="monopoly-solution_files/figure-html/unnamed-chunk-6-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="monopoly-solution_files/figure-html/unnamed-chunk-6-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 Adding the rolling doubles feature doesn't seem to change much. We might expect this since rolling three doubles is a very unlikely event!
 
@@ -328,7 +328,7 @@ print(paste("Turns to buy all properties:", game_result$turns_to_buy_all))
 ```
 
 ``` bg-info
-#> [1] "Turns to buy all properties: 146"
+#> [1] "Turns to buy all properties: 113"
 ```
 
 ```{.r .numberLines}
@@ -360,7 +360,7 @@ hist(time_to_buy_all_properties, breaks = 20,
      xlab = "Number of Turns")
 ```
 
-<img src="monopoly-solution_files/figure-html/unnamed-chunk-7-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="monopoly-solution_files/figure-html/unnamed-chunk-7-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 This code simulates 1000 games of Monopoly and records the number of turns it takes to buy all properties. The histogram shows the distribution of the number of turns it takes to buy all properties.
 

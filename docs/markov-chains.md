@@ -1,6 +1,18 @@
 # Markov Chains
 
 
+```
+#> Warning: package 'tibble' was built under R version 4.5.2
+```
+
+```
+#> Warning: package 'ggplot2' was built under R version 4.5.2
+```
+
+```
+#> Warning: package 'ggdiagram' was built under R version
+#> 4.5.2
+```
 
 <!-- In this practical you will learn a number of techniques in R that you wie_r_c <- connect(
   from = s["Rainy"], to = s["Cloudy"],
@@ -29,7 +41,7 @@ A Markov Chain is defined by three properties:
 
 Consider the following example where we have two states describing the weather on any particular day: (i) Sunny and (ii) Rainy. Each arrow denotes the probability of going from one state to itself or another over the course of a day. For example, if it is currently sunny, the probability of it raining the next day is 0.6. Conversely, if it is raining, the probability that it will become sunny the next day is 0.7 and 0.3 that it will continue raining.
 
-<img src="markov-chains_files/figure-html/tstate-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="markov-chains_files/figure-html/tstate-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 The transition matrix can be written as the following in R:
 
@@ -67,7 +79,7 @@ print(weather_sequence)
 ```
 
 ``` bg-info
-#>  [1] 2 1 2 2 2 1 2 2 2 1 2 1 1 2 1 2 2 1 2 1 1 1 1 2 2 1 1 2
+#>  [1] 1 2 2 1 1 1 1 2 1 2 1 1 2 1 2 2 1 1 1 1 2 1 2 1 1 1 1 2
 #> [29] 1 2
 ```
 
@@ -76,7 +88,7 @@ print(weather_sequence)
 
 > Can you extend this example to a three-state model?
 
-<img src="markov-chains_files/figure-html/fstate-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="markov-chains_files/figure-html/fstate-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 Note, the diagram (intentionally) misses out the self-transitions. You should be able to infer this because the probabilities given would otherwise not add up to one!
 

@@ -122,9 +122,9 @@ out <- z_test(x, 0, 1) # null should not be rejected!
 ```
 
 ``` bg-info
-#>  z = -0.096 
-#>  one-tailed probability = 0.462 
-#>  two-tailed probability = 0.924
+#>  z = 0.588 
+#>  one-tailed probability = 0.278 
+#>  two-tailed probability = 0.556
 ```
 
 ```{.r .numberLines}
@@ -133,13 +133,13 @@ print(out)
 
 ``` bg-info
 #> $z
-#> [1] -0.096
+#> [1] 0.588
 #> 
 #> $one_p
-#> [1] 0.462
+#> [1] 0.278
 #> 
 #> $two_p
-#> [1] 0.924
+#> [1] 0.556
 ```
 
 ```{.r .numberLines}
@@ -148,9 +148,9 @@ out <- z_test(x, 0, 1) # null should be rejected!
 ```
 
 ``` bg-info
-#>  z = 4.015 
-#>  one-tailed probability = 0 
-#>  two-tailed probability = 0
+#>  z = 2.891 
+#>  one-tailed probability = 0.002 
+#>  two-tailed probability = 0.004
 ```
 
 ```{.r .numberLines}
@@ -159,13 +159,13 @@ print(out)
 
 ``` bg-info
 #> $z
-#> [1] 4.015
+#> [1] 2.891
 #> 
 #> $one_p
-#> [1] 0
+#> [1] 0.002
 #> 
 #> $two_p
-#> [1] 0
+#> [1] 0.004
 ```
 
 <button class="button">
@@ -446,7 +446,15 @@ library(vcdExtra)
 ```
 
 ```
+#> Warning: package 'vcdExtra' was built under R version 4.5.2
+```
+
+```
 #> Loading required package: vcd
+```
+
+```
+#> Warning: package 'vcd' was built under R version 4.5.2
 ```
 
 ```
@@ -455,6 +463,24 @@ library(vcdExtra)
 
 ```
 #> Loading required package: gnm
+```
+
+```
+#> Registered S3 methods overwritten by 'vcdExtra':
+#>   method      from
+#>   pairs.table vcd 
+#>   print.Kappa vcd
+```
+
+```
+#> 
+#> Attaching package: 'vcdExtra'
+```
+
+```
+#> The following objects are masked from 'package:vcd':
+#> 
+#>     pairs_diagonal_mosaic, woolf_test
 ```
 
 ```{.r .numberLines}
@@ -467,7 +493,13 @@ Now we can use the `fitdistr` function in the `MASS` package to estimate the MLE
 ```{.r .numberLines}
 # loading the MASS package
 library(MASS)
+```
 
+```
+#> Warning: package 'MASS' was built under R version 4.5.2
+```
+
+```{.r .numberLines}
 # fitting a Poisson distribution using maximum-likelihood
 lambda_hat <- fitdistr(samples$y, densfun = 'Poisson')
 ```

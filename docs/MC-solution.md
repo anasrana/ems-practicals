@@ -8,7 +8,7 @@ The three state Markov chain is more complex to draw. The diagram below shows th
 - Rainy -> Rainy = b
 - Cloudy -> Cloudy = c
 
-<img src="MC-solution_files/figure-html/fstate-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="MC-solution_files/figure-html/fstate-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 The next step is to set-up a transition matrix for the three-state model. The transition matrix is a square matrix where each row corresponds to a state and each column corresponds to the probability of transitioning to another state. The rows must sum to 1. The main thing to bear in mind is that the ordering of the states is arbitrary but you must be consistent. Here we will use the convention that State 1 is Sunny, State 2 is Rainy and State 3 is Cloudy.
 
@@ -60,8 +60,8 @@ print(weather_sequence)
 ```
 
 ``` bg-info
-#>  [1] 1 1 1 1 1 2 2 3 1 2 2 3 1 2 3 2 3 2 2 1 1 1 1 2 1 1 1 1
-#> [29] 2 3
+#>  [1] 1 1 1 1 1 1 1 1 1 1 1 3 1 1 3 2 1 1 3 3 1 1 1 1 1 2 1 1
+#> [29] 1 1
 ```
 
 This is simplest way to output the weather sequence. You could also use a `data.frame` to store the day and the weather state if you wanted to output the day and the weather state together. Even better would to create plot of the weather sequence over the 30 days or perform basic statistics on the weather sequence to output a useful summary of the weather sequence. This is left as an exercise for the reader, some methods we have already covered and we will learn more over the coming days.
@@ -149,8 +149,8 @@ print(weather_sequence)
 ```
 
 ``` bg-info
-#>  [1] 2 1 2 2 1 2 1 2 2 2 1 2 2 2 1 2 1 2 1 2 1 1 2 1 2 2 1 2
-#> [29] 2 2
+#>  [1] 2 1 1 2 1 1 2 2 1 1 1 1 1 1 2 2 1 2 1 2 1 2 1 2 2 1 1 2
+#> [29] 1 1
 ```
 
 ```{.r .numberLines}
@@ -175,8 +175,8 @@ print(weather_sequence)
 ```
 
 ``` bg-info
-#>  [1] 2 2 2 1 1 3 1 3 3 3 3 1 2 1 2 1 1 2 1 1 1 2 1 3 2 1 2 2
-#> [29] 1 3
+#>  [1] 1 1 2 2 3 2 1 3 3 2 1 3 1 2 1 2 2 3 1 3 3 2 1 2 1 2 1 2
+#> [29] 3 2
 ```
 
 ```{.r .numberLines}
@@ -201,8 +201,8 @@ print(weather_sequence)
 ```
 
 ``` bg-info
-#>  [1] 34 43 27 33 32 40 31 30 12  8 42  5  8 42 49 22 44 25
-#> [19] 22 16 39  9 11  2  5 34  9 31 20 16
+#>  [1] 21 49 21 37 34 43  6 17 10 29 42 34 25 21 28 32  4 39
+#> [19] 34 27 31  4 31 44 46 44 22  3 11 14
 ```
 
 ```{.r .numberLines}

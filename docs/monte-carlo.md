@@ -20,6 +20,14 @@ which we can visualise as follows:
 
 
 ```
+#> Warning: package 'ggplot2' was built under R version 4.5.2
+```
+
+```
+#> Warning: package 'dplyr' was built under R version 4.5.2
+```
+
+```
 #> 
 #> Attaching package: 'dplyr'
 ```
@@ -37,15 +45,24 @@ which we can visualise as follows:
 ```
 
 ```
-#> Warning: Using `size` aesthetic for lines was deprecated in
-#> ggplot2 3.4.0.
-#> ℹ Please use `linewidth` instead.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where
-#> this warning was generated.
+#> Warning: package 'hrbrthemes' was built under R version
+#> 4.5.2
 ```
 
-<img src="monte-carlo_files/figure-html/unnamed-chunk-1-1.png" width="95%" style="display: block; margin: auto;" />
+```
+#> Warning: package 'latex2exp' was built under R version
+#> 4.5.2
+```
+
+```
+#> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+#> ℹ Please use `linewidth` instead.
+#> This warning is displayed once per session.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#> generated.
+```
+
+<img src="monte-carlo_files/figure-html/unnamed-chunk-1-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 If you have not done calculus before - do not worry. We are going to write a Monte Carlo approach for estimating this integral which does not require any knowledge of calculus!
 
@@ -84,7 +101,7 @@ print(mc_integral)
 ```
 
 ``` bg-info
-#> [1] 0.343
+#> [1] 0.341
 ```
 
 This is our estimate of the integral. We can compare this to the true value of the integral which we can calculate using the `pnorm` function in `R`. This is the probability of a Normal distribution falling between 1 and 3:
@@ -103,7 +120,7 @@ Let's break down the above code, to understand what is happening. The `pnorm` gi
 
 We use `pnorm` with `q=1` and `q=3` plugging in the mean and standard deviation `pnorm(q=?, mean=1, sd=2)`. This produces the following integrals:
 
-<img src="monte-carlo_files/figure-html/unnamed-chunk-7-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="monte-carlo_files/figure-html/unnamed-chunk-7-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 Therefore the difference between these gives us the integral of interest between 1 and 3.
 
@@ -183,7 +200,7 @@ print(pr_greater_than_three)
 ```
 
 ``` bg-info
-#> [1] 0.85
+#> [1] 0.82
 ```
 
 which we can compare to `R`’s built-in Binomial distribution function:
@@ -219,7 +236,13 @@ Let us look at a more interesting problem after understanding how MC works and w
 
 Consider the following spinner. If the spinner is spun randomly then it has a probability 0.5 of landing on yellow and 0.25 of landing on red or blue respectively.
 
-<img src="monte-carlo_files/figure-html/unnamed-chunk-11-1.png" width="95%" style="display: block; margin: auto;" />
+
+```
+#> Warning: package 'ggdiagram' was built under R version
+#> 4.5.2
+```
+
+<img src="monte-carlo_files/figure-html/unnamed-chunk-11-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 If the rules of the game are such that landing on *yellow* you gain 1 point,* red* you lose 1 point and *blue* you gain 2 points. We can easily calculate the expected score.
 

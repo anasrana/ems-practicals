@@ -8,7 +8,7 @@ backup:
 	# sed -i 's/Chalkduster/Comic Sans MS/g' gh-pages/related-tools.html
 
 bs4:
-	Rscript -e 'library(bookdown); render_book()'
+	Rscript -e 'library(bookdown); bookdown::render_book()'
 	rm tikz*log
 
 clean:
@@ -18,6 +18,7 @@ clean:
 	 rm -f tikz*aux
 
 publish:
+	make bs4;\
 	cd docs;\
 	git add .;\
 	git commit -m '$(COMMIT)';\

@@ -111,7 +111,7 @@ plot(p_seq, neglogL_values, type = "l", xlab = "Probability of Heads (p)",
 points(mle_results$best_p, mle_results$best_neglogL, col = "red", pch = 0)
 ```
 
-<img src="mle_sol_files/figure-html/unnamed-chunk-3-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="mle_sol_files/figure-html/unnamed-chunk-3-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 <button class="button">
 [Back to exercise](#ex-mle)

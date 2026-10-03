@@ -17,6 +17,10 @@ First, create a new `R` script within Rstudio then we will start with some code 
 library(ggplot2)
 ```
 
+```
+#> Warning: package 'ggplot2' was built under R version 4.5.2
+```
+
 Use `install.packages("ggplot2")` in the console window if the package is not installed on your system. If you are running your code on BearPortal it should already be installed, only use this function if you are running this code on your own machine.
 
 Lets define the width of an interval, we will set this to 1 initially but we will change this later on:
@@ -78,7 +82,7 @@ print(interval)
 ```
 
 ``` bg-info
-#> [1] 2.312284 3.312284
+#> [1] 2.089409 3.089409
 ```
 ::: {.infobox}
 ## Exercise
@@ -178,7 +182,7 @@ plt <- plt + ylab("Probability that mu is contained")
 print(plt) # plot to screen
 ```
 
-<img src="confid-interval_files/figure-html/unnamed-chunk-14-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="confid-interval_files/figure-html/unnamed-chunk-14-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 Can you see that an interval width of \(0.6\) \((\bar{x} \pm 0.3)\) gives a confidence interval close to 90% probability of containing the population mean?
 

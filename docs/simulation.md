@@ -30,7 +30,7 @@ Lets plot a histogram of the values picked:
 hist_out <- hist(out, main = '', xlab = 'Values', ylab = 'Frequency')
 ```
 
-<img src="simulation_files/figure-html/unnamed-chunk-3-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="simulation_files/figure-html/unnamed-chunk-3-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 We picked each number with equal probability so the histogram shows each number is equally likely to have been chosen.
 

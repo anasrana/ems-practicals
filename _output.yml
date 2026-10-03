@@ -4,11 +4,7 @@ bookdown::bs4_book:
   theme:
     primary: "#fe7938"
     base_font:
-      google: Manrope
-    heading_font:
-      google:
-        family: Spectral
-        wght: 200
+      google: Palatino
     code_font:
       google:
         # arguments to sass::font_google()

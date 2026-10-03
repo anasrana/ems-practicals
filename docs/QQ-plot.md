@@ -87,7 +87,7 @@ tq_sn <- qnorm(eq, 0, 1)
 plot(tq, tq_sn)
 ```
 
-<img src="QQ-plot_files/figure-html/unnamed-chunk-4-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="QQ-plot_files/figure-html/unnamed-chunk-4-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 ```{.r .numberLines}
 print(tq)
@@ -142,15 +142,14 @@ ggplot(data = qq_df, aes(x = tq)) +
 ```
 
 ```
-#> Warning: Using `size` aesthetic for lines was deprecated in
-#> ggplot2 3.4.0.
+#> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
 #> ℹ Please use `linewidth` instead.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where
-#> this warning was generated.
+#> This warning is displayed once per session.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#> generated.
 ```
 
-<img src="QQ-plot_files/figure-html/unnamed-chunk-5-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="QQ-plot_files/figure-html/unnamed-chunk-5-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 You can see that there is a small difference between the two lines but it can be larger depending on the data.
 
@@ -174,7 +173,7 @@ ggplot(data = qq_df, aes(sample = x_sort)) +
   theme_bw()
 ```
 
-<img src="QQ-plot_files/figure-html/unnamed-chunk-6-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="QQ-plot_files/figure-html/unnamed-chunk-6-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 You can also use base R to create these plots using the functions `qqnorm` and `qqline`. Check the help functions for these before making use of them.
 
@@ -185,7 +184,7 @@ qqnorm(x_sort, frame = FALSE)
 qqline(x_sort, col = "blue", lwd = 2)
 ```
 
-<img src="QQ-plot_files/figure-html/unnamed-chunk-7-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="QQ-plot_files/figure-html/unnamed-chunk-7-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 We can see that all plots we have created above yield the same results. Both work but `ggplot` has more versatility. Let us look at that using the `mtcars` data.
 
@@ -232,7 +231,7 @@ ggplot(data = mtcars, aes(sample = mpg, color = cyl)) +
   theme_bw()
 ```
 
-<img src="QQ-plot_files/figure-html/unnamed-chunk-9-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="QQ-plot_files/figure-html/unnamed-chunk-9-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 You can see how useful this approach can be be and managed to create a lot of information in a few lines of code.
 
@@ -286,7 +285,7 @@ hist_comp(data_sample, title = "Gaussian Distribution",
 qq_comp(data_sample)
 ```
 
-<img src="QQ-plot_files/figure-html/unnamed-chunk-11-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="QQ-plot_files/figure-html/unnamed-chunk-11-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 Here we can see on the left the theoretical Gaussian distribution as the read curve. The histogram shows the sample with n = 10000. The same data is represented on the right which is a QQ plot. The normal distribution is along the diagonal blue line. We can see that this data lies mostly along the diagonal so matches the standard normal. There is some minor deviation on the edges of the distribution. Here there are minor deviation on the tails but only a handful of points out of the large sample.
 
@@ -311,7 +310,7 @@ hist_comp(nor_skew_left, title = "Skewed Left", xs = xs,
 qq_comp(nor_skew_left)
 ```
 
-<img src="QQ-plot_files/figure-html/unnamed-chunk-12-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="QQ-plot_files/figure-html/unnamed-chunk-12-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 If the data is left skewed as in this case, you can see that the histogram is shifted to the left compared to the standard normal distribution. You can see a proportion of the data on the left tail of the distribution. Now looking at the corresponding QQ plot we can see the first two quantiles are blow the theoretical (diagonal) line. The points above 0 are close to the diagonal but below 0 the points deviate from the diagonal. If you see such a QQ plot, the interpretation is that the data is left skewed.
 
@@ -336,7 +335,7 @@ hist_comp(nor_skew_right, title = "Skewed Right", xs = xs,
 qq_comp(nor_skew_right)
 ```
 
-<img src="QQ-plot_files/figure-html/unnamed-chunk-13-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="QQ-plot_files/figure-html/unnamed-chunk-13-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 Here we are looking at data that is skewed to the right of the standard normal. The histogram is shifted to the right of the standard normal (red line). On the QQ plot we now see a deviation from the diagonal for values larger than 0. Seeing such a QQ plot means you are looking right skewed data.
 </details>
@@ -356,7 +355,7 @@ hist_comp(nor_fat, title = "Fat Tails", xs = xs, norm_dens = norm_dens)
 qq_comp(nor_fat)
 ```
 
-<img src="QQ-plot_files/figure-html/unnamed-chunk-14-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="QQ-plot_files/figure-html/unnamed-chunk-14-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 Here we can see the histogram there is more data located both to the right and left of the standard normal distribution drawn as a red line. When we look at the QQ plot we see that the first quantiles are smaller than the corresponding theoretical values. For larger quantiles the values are larger than the theoretical values.
 
@@ -376,6 +375,6 @@ hist_comp(norm_thin, title = "Skewed Right", xs = xs,
 qq_comp(norm_thin)
 ```
 
-<img src="QQ-plot_files/figure-html/unnamed-chunk-15-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="QQ-plot_files/figure-html/unnamed-chunk-15-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 Here we can see that the histogram of the data indicating a distribution narrower than the standard normal distribution. Here it is a little tricker to see in the QQ plot but you should notice that the initial quartiles have values higher than the diagonal and the last quantiles have values smaller than the diagonal. This is the opposite behavior compared to the fat tailed distribution.

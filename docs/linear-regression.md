@@ -12,8 +12,19 @@ We will make use of the following packages `reshape2`, `ggplot2`, and `bbmle` pa
 
 ```{.r .numberLines}
 library(ggplot2)
+```
+
+```
+#> Warning: package 'ggplot2' was built under R version 4.5.2
+```
+
+```{.r .numberLines}
 library(reshape2)
 library(bbmle)
+```
+
+```
+#> Warning: package 'bbmle' was built under R version 4.5.2
 ```
 
 
@@ -84,7 +95,7 @@ ggplot(sim_data, aes(x = x, y = y)) +
   geom_point()
 ```
 
-<img src="linear-regression_files/figure-html/sim-data-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="linear-regression_files/figure-html/sim-data-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 We define the true data `y_true` to be the true linear relationship between the covariate and the response without the noise.
 
@@ -108,7 +119,7 @@ lr_plot <- ggplot(sim_data, aes(x = x, y = y)) +
 print(lr_plot)
 ```
 
-<img src="linear-regression_files/figure-html/scatter-true-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="linear-regression_files/figure-html/scatter-true-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 ## Fitting simple linear regression model
 
@@ -180,12 +191,11 @@ lr_plot <- ggplot(sim_data, aes(x = x, y = y)) +
 ```
 
 ```
-#> Warning: Using `size` aesthetic for lines was deprecated in
-#> ggplot2 3.4.0.
+#> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
 #> ℹ Please use `linewidth` instead.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where
-#> this warning was generated.
+#> This warning is displayed once per session.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#> generated.
 ```
 
 ```{.r .numberLines}
@@ -193,7 +203,7 @@ lr_plot <- ggplot(sim_data, aes(x = x, y = y)) +
   print(lr_plot)
 ```
 
-<img src="linear-regression_files/figure-html/lm-fit-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="linear-regression_files/figure-html/lm-fit-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 The estimated parameters and the plot shows a good correspondence between fitted regression parameters and the true relationship between $y$ and $x$. We can check this by plotting the residuals, this data is stored as the `residuals` parameter in the `ls_fit` object.
 
@@ -206,7 +216,7 @@ ls_residual <- residuals(ls_fit) # can also be accessed via ls_fit$residuals
 plot(ls_residual)
 ```
 
-<img src="linear-regression_files/figure-html/resid-scatter-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="linear-regression_files/figure-html/resid-scatter-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 A better way of summarising the data is to visualise them as a histogram:
 
@@ -215,7 +225,7 @@ A better way of summarising the data is to visualise them as a histogram:
 hist(ls_residual)
 ```
 
-<img src="linear-regression_files/figure-html/resid_hist-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="linear-regression_files/figure-html/resid_hist-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 We expect the mean and variance of the residuals to be close to the level used to generate the data.
 
@@ -442,52 +452,6 @@ print(mse_results[1:5, 1:3]) # print a subset of the results
 #> 5 0.0029775013 0.007083853 0.003044801
 ```
 
-
-
-```{.r .numberLines}
-# number of simulations for each noise level
-n_simulations <- 100
-
-# A vector of noise levels to try
-sigma_v <- c(0.1, 0.4, 1.0, 2.0, 4.0, 6.0, 8.0)
-n_sigma <- length(sigma_v)
-
-# Create a matrix to store results
-mse_matrix <- matrix(0, nrow = n_simulations, ncol = n_sigma)
-
-# name row and column
-rownames(mse_matrix) <- c(1:n_simulations)
-colnames(mse_matrix) <- sigma_v
-```
-
-Next we will write a nested `for` loop. The first loop will be over the variances and a second loop over the number of repeats. We will simulate the data, perform a fit with `lm()`. We can use the `fitted()` function on the resulting object to extract the fitted values $\hat{y}$ and use this to compute the mean-squared error from the true value $y$.
-
-
-```{.r .numberLines}
-# loop over variance
-for (i in 1:n_sigma) {
-  sigma2 <- sigma_v[i]
-
-  # for each simulation
-  for (it in 1:n_simulations) {
-
-    # Simulate the data
-    x <- rnorm(N, mean = 0, sd = 1)
-    e <- rnorm(N, mean = 0, sd = sqrt(sigma2))
-    y <- b0 + b1 * x + e
-
-    # set up a data frame and run lm()
-    sim_data <- data.frame(x = x, y = y)
-    lm_fit <- lm(y ~ x, data = sim_data)
-
-    # compute the mean squared error between the fit and the actual y's
-    y_hat <- fitted(lm_fit)
-    mse_matrix[it, i] <- mean((y_hat - y)^2)
-
-  }
-}
-```
-
 We created a matrix to store the mse values, but to plot them using `ggplot2` we have to convert them to a `data.frame`. This can be done using the `melt()` function form the `reshape2` library. We can compare the results using boxplots.
 
 
@@ -496,7 +460,7 @@ We created a matrix to store the mse values, but to plot them using `ggplot2` we
 library(reshape2)
 
 # convert the matrix into a data frame for ggplot2
-mse_df <- melt(mse_matrix)
+mse_df <- melt(mse_results)
 # rename the columns
 names(mse_df) <- c("Simulation", "variance", "MSE")
 
@@ -508,7 +472,7 @@ mse_plt <- ggplot(mse_df, aes(x = variance, y = MSE)) +
 print(mse_plt)
 ```
 
-<img src="linear-regression_files/figure-html/effect-plot-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="linear-regression_files/figure-html/effect-plot-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 You can see that the variances of the mse and the value of the mse go up with increasing variance in the simulation.
 
@@ -540,14 +504,14 @@ load("lr_data1.Rdata")
 plot(x, y)
 ```
 
-<img src="linear-regression_files/figure-html/ex-1-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="linear-regression_files/figure-html/ex-1-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 ```{.r .numberLines}
 load("lr_data2.Rdata")
 plot(x, y)
 ```
 
-<img src="linear-regression_files/figure-html/ex-1-2.png" width="95%" style="display: block; margin: auto;" />
+<img src="linear-regression_files/figure-html/ex-1-2.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 Fit the linear model and comment on the differences between the two data-sets you have used here.
 

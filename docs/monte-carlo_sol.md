@@ -67,7 +67,7 @@ cat("Mean errors:", accuracy)
 ```
 
 ``` bg-info
-#> Mean errors: 0.02265525 0.01025525 -0.003044746 0.0002552539 0.0001952539 0.0002152539
+#> Mean errors: -0.02534475 0.001655254 -0.001844746 0.003255254 0.0006952539 0.0007052539
 ```
 
 ```{.r .numberLines}
@@ -75,7 +75,7 @@ cat("Standard deviation of errors:", accuracy_sd)
 ```
 
 ``` bg-info
-#> Standard deviation of errors: 0.1611324 0.06312918 0.04758947 0.02771281 0.01900527 0.01613787
+#> Standard deviation of errors: 0.1535571 0.05842201 0.04885301 0.02973486 0.02045736 0.01452367
 ```
 
 Next, we will plot the results. Here we will make use of `ggplot2` a library to create nice plots without much effort. The input need to be a `data.frame` so we will need to create one based on the data.
@@ -84,7 +84,13 @@ Next, we will plot the results. Here we will make use of `ggplot2` a library to 
 ```{.r .numberLines}
 # load ggplot
 library(ggplot2)
+```
 
+```
+#> Warning: package 'ggplot2' was built under R version 4.5.2
+```
+
+```{.r .numberLines}
 # create a data frame for plotting
 df <- data.frame(sample_sizes, accuracy, accuracy_sd)
 
@@ -93,12 +99,12 @@ print(df)
 
 ``` bg-info
 #>   sample_sizes      accuracy accuracy_sd
-#> 1           10  0.0226552539  0.16113236
-#> 2           50  0.0102552539  0.06312918
-#> 3          100 -0.0030447461  0.04758947
-#> 4          250  0.0002552539  0.02771281
-#> 5          500  0.0001952539  0.01900527
-#> 6         1000  0.0002152539  0.01613787
+#> 1           10 -0.0253447461  0.15355715
+#> 2           50  0.0016552539  0.05842201
+#> 3          100 -0.0018447461  0.04885301
+#> 4          250  0.0032552539  0.02973486
+#> 5          500  0.0006952539  0.02045736
+#> 6         1000  0.0007052539  0.01452367
 ```
 
 ```{.r .numberLines}
@@ -115,7 +121,7 @@ ggplot(df, aes(x = sample_sizes, y = accuracy)) +
   xlab("Run")
 ```
 
-<img src="monte-carlo_sol_files/figure-html/unnamed-chunk-3-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="monte-carlo_sol_files/figure-html/unnamed-chunk-3-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 This shows that as the number of Monte Carlo samples is increased, the accuracy increases (i.e. the difference between the estimated integral value and real values converges to zero). In addition, the variability in the integral estimates across different simulation runs reduces.
 
@@ -151,7 +157,7 @@ print(expected_score)
 ```
 
 ``` bg-info
-#> [1] 15.69
+#> [1] 14.91
 ```
 <button class="button">
   [Back to Exercise](#mc-expectation-1)
@@ -188,14 +194,14 @@ print(mean(game_score))
 ```
 
 ``` bg-info
-#> [1] 9.351
+#> [1] 8.779
 ```
 
 ```{.r .numberLines}
 plot(game_score)
 ```
 
-<img src="monte-carlo_sol_files/figure-html/unnamed-chunk-5-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="monte-carlo_sol_files/figure-html/unnamed-chunk-5-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 ::: {.rmdnote}
 
@@ -300,10 +306,10 @@ Table: (\#tab:unnamed-chunk-7)Experimenting with different game parameters
 
 |Scenario                               | Expected_Score|
 |:--------------------------------------|--------------:|
-|Original Game                          |          9.461|
-|Higher chance of non-positive outcomes |          8.274|
-|Higher stakes                          |         19.534|
-|High reward for one outcome            |         18.444|
+|Original Game                          |          9.410|
+|Higher chance of non-positive outcomes |          7.999|
+|Higher stakes                          |         19.094|
+|High reward for one outcome            |         18.686|
 
 <button class="button">
   [Back to Exercise](#mc-expectation-2)

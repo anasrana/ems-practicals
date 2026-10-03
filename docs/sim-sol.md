@@ -19,7 +19,7 @@ sample(x, 10, replace = FALSE)
 ```
 
 ``` bg-info
-#>  [1]  4  1 10  1  5  5  1  3  8  2
+#>  [1]  8  9  7  4  2  1 10  3  1  1
 ```
 
 ```{.r .numberLines}
@@ -28,7 +28,8 @@ sample(x, 20, replace = FALSE)
 ```
 
 ```
-#> Error in sample.int(length(x), size, replace, prob): cannot take a sample larger than the population when 'replace = FALSE'
+#> Error in `sample.int()`:
+#> ! cannot take a sample larger than the population when 'replace = FALSE'
 ```
 
 ```{.r .numberLines}
@@ -37,8 +38,8 @@ sample(x, 20, replace = TRUE)
 ```
 
 ``` bg-info
-#>  [1]  1  4  4 10  8  4 10  3  1  1  6  6  1  1  6  4  5  4
-#> [19]  9  5
+#>  [1]  3  2  4  8  2  5  1  5  2  2 10  4  6  4  4  3  7  2
+#> [19]  1  2
 ```
 
 <button class="button">
@@ -59,7 +60,7 @@ table(rolls_from_sample)
 ``` bg-info
 #> rolls_from_sample
 #>   1   2   3   4   5   6 
-#> 797 809 803 863 881 847
+#> 843 818 817 866 809 847
 ```
 
 
@@ -70,7 +71,7 @@ table(rolls_from_sample.int)
 ``` bg-info
 #> rolls_from_sample.int
 #>   1   2   3   4   5   6 
-#> 848 829 818 839 828 838
+#> 896 828 817 821 807 831
 ```
 
 Both gives a uniform distribution over the numbers 1-6. The function `sample.int` is a specialised version of sample for sampling integers. Many `R` libraries have specialised versions of more general functions to do specific tasks under certain conditions.

@@ -64,7 +64,7 @@ By increasing the number of turns taken, what distribution does the set of simul
 hist(positions_visited, breaks = seq(0, 40, len = 41), right = FALSE)
 ```
 
-<img src="monopoly-simulation_files/figure-html/unnamed-chunk-2-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="monopoly-simulation_files/figure-html/unnamed-chunk-2-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 ::: {.infobox}
 
@@ -151,7 +151,7 @@ for (turn in 1:num_turns) {
 hist(positions_visited, breaks = seq(0, 40, len = 41), right = FALSE)
 ```
 
-<img src="monopoly-simulation_files/figure-html/unnamed-chunk-4-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="monopoly-simulation_files/figure-html/unnamed-chunk-4-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 Explain the results qualitatively.
 

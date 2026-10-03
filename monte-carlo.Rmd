@@ -18,20 +18,53 @@ Suppose we have an instance of a Normal distribution with a mean of 1 and a stan
 
 which we can visualise as follows:
 
-```{r, echo=FALSE, engine='tikz', out.width='90%', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', engine.opts = list(template = "latex/tikz2pdf.tex")}
+```{r}
+#| echo=FALSE,
+#| warnings=FALSE,
+#| fig.width=7,
+#| fig.height=2
 
-\begin{tikzpicture}
-\begin{axis}[domain=0:10, samples=100,
-axis lines*=left, xlabel=\(x\), ylabel=\(p(x)\), title={N$(1, 2)$},
-height=6cm, width=10cm,
-xtick={-5,  0, 1, 3, 5}, ytick=\empty,
-enlargelimits=false, clip=false, axis on top,
-grid = major]
-\addplot [fill=cyan!20, draw=none, domain=1:3] {gauss(1,2)} \closedcycle;
-\addplot [very thick,cyan!50!black, domain=-7:9] {gauss(1,2)};
-\end{axis}
-\end{tikzpicture}
+library(ggplot2)
+library(dplyr)
+library(hrbrthemes)
+library(latex2exp)
 
+# Create data for the normal distribution
+x_vals <- seq(-5, 7, length.out = 1000)
+y_vals <- dnorm(x_vals, mean = 1, sd = 2)
+
+# Create data frame for plotting
+df <- data.frame(x = x_vals, y = y_vals)
+
+# Create data for the highlighted area (between 1 and 3)
+highlight_x <- seq(1, 3, length.out = 100)
+highlight_y <- dnorm(highlight_x, mean = 1, sd = 2)
+highlight_df <- data.frame(x = highlight_x, y = highlight_y)
+
+# Create the plot
+ggplot() +
+  # Add the highlighted area
+  geom_ribbon(data = highlight_df,
+              aes(x = x, ymin = 0, ymax = y),
+              fill = "cyan", alpha = 0.3) +
+  # Add the main curve
+  geom_line(data = df,
+            aes(x = x, y = y),
+            color = "cyan4", size = 1.2) +
+  # Customize the plot
+  labs(x = TeX("$x$"),
+       y = TeX("$p(x)$"),
+       title = TeX("$N(1, 2)$")) +
+  scale_x_continuous(breaks = c(-5, 0, 1, 3, 5)) +
+  theme_minimal() +
+  theme(
+    panel.grid.major = element_line(color = "gray90"),
+    panel.grid.minor = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    plot.title = element_text(hjust = 0.5)
+  ) +
+  coord_cartesian(xlim = c(-5, 7), ylim = c(0, max(y_vals) * 1.1))
 ```
 
 If you have not done calculus before - do not worry. We are going to write a Monte Carlo approach for estimating this integral which does not require any knowledge of calculus!
@@ -75,43 +108,91 @@ print(mc_exact)
 
 Let's break down the above code, to understand what is happening. The `pnorm` gives the integral under the Normal distribution (in this case with mean 1 and standard deviation 2) from negative infinity up to the value specified by `q`.
 
-The first call to `pnorm(q=3, mean=1, sd=2)` gives us this integral:
+We use `pnorm` with `q=1` and `q=3` plugging in the mean and standard deviation `pnorm(q=?, mean=1, sd=2)`. This produces the following integrals:
 
-```{r, echo=FALSE, engine='tikz', out.width='90%', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', engine.opts = list(template = "latex/tikz2pdf.tex")}
+```{r}
+#| echo=FALSE,
+#| warnings=FALSE,
+#| fig.width=6,
+#| fig.height=1
 
-\begin{tikzpicture}
-\begin{axis}[domain=0:10, samples=100,
-axis lines*=left, xlabel=\(x\), ylabel=\(p(x)\), title={N$(1, 2)$},
-height=6cm, width=10cm,
-xtick={-5,  0, 3, 5}, ytick=\empty,
-enlargelimits=false, clip=false, axis on top,
-grid = major]
-\addplot [fill=cyan!20, draw=none, domain=-7:3] {gauss(1,2)} \closedcycle;
-\addplot [very thick,cyan!50!black, domain=-7:9] {gauss(1,2)};
-\end{axis}
-\end{tikzpicture}
+library(patchwork)
 
-```
+# Create data for the normal distribution
+x_vals <- seq(-5, 7, length.out = 1000)
+y_vals <- dnorm(x_vals, mean = 1, sd = 2)
 
-The second call to `pnorm(q=1, mean=1, sd=2)` gives us this integral:
+# Create data frame for plotting
+df <- data.frame(x = x_vals, y = y_vals)
 
-```{r, echo=FALSE, engine='tikz', out.width='90%', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', engine.opts = list(template = "latex/tikz2pdf.tex")}
+# Plot 1: Area from -infinity to 3
+highlight_x1 <- seq(-5, 3, length.out = 200)
+highlight_y1 <- dnorm(highlight_x1, mean = 1, sd = 2)
+highlight_df1 <- data.frame(x = highlight_x1, y = highlight_y1)
 
-\begin{tikzpicture}
-\begin{axis}[domain=0:10, samples=100,
-axis lines*=left, xlabel=\(x\), ylabel=\(p(x)\), title={N$(1, 2)$},
-height=6cm, width=10cm,
-xtick={-5,  0, 1, 5}, ytick=\empty,
-enlargelimits=false, clip=false, axis on top,
-grid = major]
-\addplot [fill=cyan!20, draw=none, domain=-7:1] {gauss(1,2)} \closedcycle;
-\addplot [very thick,cyan!50!black, domain=-7:9] {gauss(1,2)};
-\end{axis}
-\end{tikzpicture}
+plot1 <- ggplot() +
+  # Add the highlighted area
+  geom_ribbon(data = highlight_df1,
+              aes(x = x, ymin = 0, ymax = y),
+              fill = "cyan", alpha = 0.3) +
+  # Add the main curve
+  geom_line(data = df,
+            aes(x = x, y = y),
+            color = "cyan4", size = 1.2) +
+  # Customize the plot
+  labs(x = TeX("$x$"),
+       y = TeX("$p(x)$"),
+       title = TeX("$N(1, 2)$"),
+       subtitle = "pnorm(q = 3, mean = 1, sd = 2)") +
+  scale_x_continuous(breaks = c(-5, 0, 3, 5)) +
+  theme_minimal() +
+  theme(
+    panel.grid.major = element_line(color = "gray90"),
+    panel.grid.minor = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5, size = 10)
+  ) +
+  coord_cartesian(xlim = c(-5, 7), ylim = c(0, max(y_vals) * 1.1))
 
+# Plot 2: Area from -infinity to 1
+highlight_x2 <- seq(-5, 1, length.out = 200)
+highlight_y2 <- dnorm(highlight_x2, mean = 1, sd = 2)
+highlight_df2 <- data.frame(x = highlight_x2, y = highlight_y2)
+
+plot2 <- ggplot() +
+  # Add the highlighted area
+  geom_ribbon(data = highlight_df2,
+              aes(x = x, ymin = 0, ymax = y),
+              fill = "cyan", alpha = 0.3) +
+  # Add the main curve
+  geom_line(data = df,
+            aes(x = x, y = y),
+            color = "cyan4", size = 1.2) +
+  # Customize the plot
+  labs(x = TeX("$x$"),
+       y = TeX("$p(x)$"),
+       title = TeX("$N(1, 2)$"),
+       subtitle = "pnorm(q = 1, mean = 1, sd = 2)") +
+  scale_x_continuous(breaks = c(-5, 0, 1, 5)) +
+  theme_minimal() +
+  theme(
+    panel.grid.major = element_line(color = "gray90"),
+    panel.grid.minor = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5, size = 10)
+  ) +
+  coord_cartesian(xlim = c(-5, 7), ylim = c(0, max(y_vals) * 1.1))
+
+# Combine plots side by side
+plot1 + plot2
 ```
 
 Therefore the difference between these gives us the integral of interest between 1 and 3.
+
 
 ::: {.rmdnote }
 <center>
@@ -128,6 +209,8 @@ Let us now explore how the accuracy of the Monte Carlo estimate changes as the n
 
 1. Try increasing the number of simulations and see how the accuracy improves?
 2. Can you draw a graph of number of MC samples vs accuracy?
+
+Ensure you write functions to do this, and make use of loops to avoid repeating code.
 
 <details>
 
@@ -199,6 +282,7 @@ Let's expand this once again trying to see the impact of the number of simulatio
 1. Try increasing the number of simulations and see how the accuracy improves?
 2. Can you plot how the accuracy varies as a function of the number of simulations?
 
+Once again, make use of functions and loops to avoid repeating code.
 
 (Hint: see the previous section, the solution is very similar)
 
@@ -210,13 +294,37 @@ Let us look at a more interesting problem after understanding how MC works and w
 
 Consider the following spinner. If the spinner is spun randomly then it has a probability 0.5 of landing on yellow and 0.25 of landing on red or blue respectively.
 
-```{r, echo=FALSE, engine='tikz', out.width='20%', fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png', engine.opts = list(template = "latex/tikz2pdf.tex")}
+```{r}
+#| echo=FALSE,
+#| warnings=FALSE,
+#| fig.width=3,
+#| fig.height=3
 
- \begin{tikzpicture}
-    \pie[color={orange!50,blue!70,red!70}, sum=auto, before number=\myfrac, after number=\relax,text=white, font=\bfseries]
-{{1/2}/,{1/4}/,{1/4}/}
+library(ggdiagram)
+library(ggplot2)
 
-   \end{tikzpicture}
+# Create pie chart data
+pie_data <- data.frame(
+  category = c("Yellow", "Blue", "Red"),
+  value = c(0.5, 0.25, 0.25),
+  color = c("orange", "blue", "red")
+)
+
+# Create pie chart using ggplot2
+ggplot(pie_data, aes(x = "", y = value, fill = category)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar("y", start = 0) +
+  scale_fill_manual(values = c("Yellow" = "orange", "Blue" = "steelblue", "Red" = "red3")) +
+  theme_void() +
+  theme(
+    legend.position = "none",
+    plot.background = element_rect(fill = "transparent", color = NA),
+    panel.background = element_rect(fill = "transparent", color = NA)
+  ) +
+  # Add labels
+  geom_text(aes(label = c("1/2", "1/4", "1/4")),
+            position = position_stack(vjust = 0.5),
+            color = "white", fontface = "bold")
 ```
 
 If the rules of the game are such that landing on *yellow* you gain 1 point,* red* you lose 1 point and *blue* you gain 2 points. We can easily calculate the expected score.
@@ -273,19 +381,17 @@ To solve this with a Monte Carlo simulation you need to sample from the Spinner 
 </button>
 :::
 
-## Using Functions
+## MC - Functions
 
-We now move to another essential concept in programming - functions. You would have already encountered functions in `R` and other programming languages. Functions are a way to encapsulate code so that it can be reused. This is a key concept in programming and is used to make code more readable and maintainable.
+We have been using functions throughout your practical sessions. So we will look at them in a bit more detail here and build on what you have already learned.
 
-A function is a piece of code which is encapsulated so then we can refer to it repeatedly via the name of the function rather than repeatedly writing those lines of code. If you would like to learn more about functions in R, you can read [this](https://www.datacamp.com/community/tutorials/functions-in-r-a-tutorial) tutorial or the software carpentry [lesson](https://bham-carpentries.github.io/R-course-material/10-functions/index.html).
-
-Here is an example function we can write to simulate one game as indicated above and return whether the number of points is less than zero.
+When writing a potentially complex function, you should always start with the most basic building blocks. Here is an example function we can write to simulate one game as indicated above and return whether the number of points is less than zero.
 
 ```{r}
 # simulates a game of 20 spins
-play_game <- function(){
-    # picks a number from the list (1, -1, 2)
-    # with probability 50%, 25% and 25% twenty times
+play_game <- function() {
+  # picks a number from the list (1, -1, 2)
+  # with probability 50%, 25% and 25% twenty times
   results <- sample(c(1, -1, 2), 20, replace = TRUE, prob = c(0.5, 0.25, 0.25))
 
   # function returns whether the sum of all the spins is < 1
@@ -310,19 +416,25 @@ for (it in 1:runs) {
 We can then compute the probability that, after twenty spins, we will have less than zero points:
 
 ```{r}
-prob_less_than_zero <- sum(less_than_zero)/runs
+prob_less_than_zero <- sum(less_than_zero) / runs
 print(prob_less_than_zero)
 
 ```
 
 The probability is very low. This is not surprising since there is only a 25% chance of getting a point deduction on any spin and a 75% chance of gaining points. Try to increase the number of simulation runs to see if you can detect any games where you do find a negative score.
 
+*This is a very basic function and can be improved in many ways. For example, you could add parameters to the function to allow for different numbers of spins or different probabilities for each colour. You could also add error checking to ensure that the input parameters are valid.*
+
 ::: {.infobox}
 
 ## Exercise: MC Expectation 2 {#mc-expectation-2}
 
+In this exercise we will extend the above function to answer the following questions:
+
 1. Modify your code to allow you to calculate the expected number of points after 20 spins.
 2. Simulate a game in which you have a maximum of 20 spins but you go “bust” once you hit a negative score and take this into account when you compute the expected end of game score.
+3. Add options in the game to different probabilities for each colour and different point values for each colour. There should be default values for the original game.
+4. Experiment with different probabilities and point values to see how they affect the expected score. Create a table of results.
 
 <button class="button">
   [Show Solution](#solution-mc-expectation-2)

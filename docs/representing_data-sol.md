@@ -171,7 +171,8 @@ solve(A1)
 ```
 
 ```
-#> Error in solve.default(A1): Lapack routine dgesv: system is exactly singular: U[3,3] = 0
+#> Error in `solve.default()`:
+#> ! Lapack routine dgesv: system is exactly singular: U[3,3] = 0
 ```
 
 ```{.r .numberLines}

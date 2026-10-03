@@ -11,6 +11,9 @@ You can make use of the following as a point estimate of the sample variance:
 which can be calculated using the `sd` function in `R`, remember the relationship between the standard deviation and variance.
 
 
+```
+#> Warning: package 'ggplot2' was built under R version 4.5.2
+```
 
 ## Function Definitions
 
@@ -125,7 +128,7 @@ plt <- plt + ylab("Probability that sigma is contained")
 print(plt)
 ```
 
-<img src="ci_sol_files/figure-html/unnamed-chunk-3-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="ci_sol_files/figure-html/unnamed-chunk-3-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 ```{.r .numberLines}
 print(df)
@@ -133,16 +136,16 @@ print(df)
 
 ``` bg-info
 #>    interval_width probability_var_contained
-#> 1             0.1                     0.292
-#> 2             0.2                     0.559
-#> 3             0.3                     0.751
-#> 4             0.4                     0.856
-#> 5             0.5                     0.936
-#> 6             0.6                     0.974
-#> 7             0.7                     0.986
-#> 8             0.8                     0.998
+#> 1             0.1                     0.286
+#> 2             0.2                     0.536
+#> 3             0.3                     0.736
+#> 4             0.4                     0.863
+#> 5             0.5                     0.948
+#> 6             0.6                     0.986
+#> 7             0.7                     0.992
+#> 8             0.8                     0.999
 #> 9             0.9                     0.999
-#> 10            1.0                     0.999
+#> 10            1.0                     1.000
 ```
 
 ## Advanced Analysis with Accuracy Assessment
@@ -181,16 +184,16 @@ print(summary_df)
 
 ``` bg-info
 #>    interval_width mean_accuracy  sd_accuracy
-#> 1             0.1        0.3015 0.0112373386
-#> 2             0.2        0.5565 0.0206841324
-#> 3             0.3        0.7521 0.0147229979
-#> 4             0.4        0.8778 0.0092712219
-#> 5             0.5        0.9454 0.0055216745
-#> 6             0.6        0.9794 0.0045018515
-#> 7             0.7        0.9919 0.0023309512
-#> 8             0.8        0.9980 0.0013333333
+#> 1             0.1        0.2959 0.0141848902
+#> 2             0.2        0.5529 0.0178913387
+#> 3             0.3        0.7470 0.0153622915
+#> 4             0.4        0.8668 0.0133815794
+#> 5             0.5        0.9448 0.0058651513
+#> 6             0.6        0.9790 0.0034960295
+#> 7             0.7        0.9932 0.0028982753
+#> 8             0.8        0.9983 0.0013374935
 #> 9             0.9        0.9995 0.0007071068
-#> 10            1.0        0.9998 0.0004216370
+#> 10            1.0        1.0000 0.0000000000
 ```
 
 ```{.r .numberLines}
@@ -207,7 +210,7 @@ plt_accuracy <- plt_accuracy + ggtitle("Confidence Interval Accuracy with Variab
 print(plt_accuracy)
 ```
 
-<img src="ci_sol_files/figure-html/unnamed-chunk-4-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="ci_sol_files/figure-html/unnamed-chunk-4-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 ```
 
 <button class="button">

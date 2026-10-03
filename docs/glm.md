@@ -30,6 +30,13 @@ The first step is to load the data and check what the data looks like:
 
 ```{.r .numberLines}
 library(ggplot2) # for plots later
+```
+
+```
+#> Warning: package 'ggplot2' was built under R version 4.5.2
+```
+
+```{.r .numberLines}
 load("gwas-cc-ex1.Rdata")
 
 # how many individuals are there
@@ -121,7 +128,7 @@ ggplot(p_val_df, aes(x = idx, y = -log10(p_val))) +
     geom_point(size = 2.5, col = "dodgerblue1")
 ```
 
-<img src="glm_files/figure-html/plot-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="glm_files/figure-html/plot-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 This plot is knows as a *Manhattan* plot. One SNP (`i_p = 250`) will pop out as being highly associated with the disease process. Look at the genotype counts (or MAF) for this SNP in the cases and controls to see for yourself that there is large difference in the distribution of genotypes (or MAF).
 
@@ -139,7 +146,7 @@ ggplot(snp_procs, aes(x = genotype, y = counts_v, fill = type)) +
     geom_bar(stat = "identity", position = "dodge")
 ```
 
-<img src="glm_files/figure-html/snp-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="glm_files/figure-html/snp-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 ## GWAS and logistic regression
 
@@ -183,7 +190,7 @@ ggplot(p_val_df, aes(x = idx, y = -log10(p_val))) +
     labs(y = "-log10(adjusted p-value)")
 ```
 
-<img src="glm_files/figure-html/gwas2_plot-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="glm_files/figure-html/gwas2_plot-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 You should see a single SNP showing a strong association with disease status.
 
@@ -203,9 +210,21 @@ Let’s load some prerequisite R libraries and the data to produce some summary 
 ```{.r .numberLines}
 # required libraries
 library(MASS)
+```
+
+```
+#> Warning: package 'MASS' was built under R version 4.5.2
+```
+
+```{.r .numberLines}
 library(foreign)
+```
 
+```
+#> Warning: package 'foreign' was built under R version 4.5.2
+```
 
+```{.r .numberLines}
 load("nb_data.Rdata")
 
 # print summary statistics to Console
@@ -440,12 +459,11 @@ ggplot(new_data, aes(immunoscore, overexpressed_proteins)) +
 ```
 
 ```
-#> Warning: Using `size` aesthetic for lines was deprecated in
-#> ggplot2 3.4.0.
+#> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
 #> ℹ Please use `linewidth` instead.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where
-#> this warning was generated.
+#> This warning is displayed once per session.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#> generated.
 ```
 
-<img src="glm_files/figure-html/glm-plot-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="glm_files/figure-html/glm-plot-1.png" alt="" width="95%" style="display: block; margin: auto;" />

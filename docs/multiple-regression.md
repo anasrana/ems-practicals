@@ -134,6 +134,13 @@ Recall from the lecture that covariates don't need to be numerical but can also 
 
 ```{.r .numberLines}
 library(MASS)
+```
+
+```
+#> Warning: package 'MASS' was built under R version 4.5.2
+```
+
+```{.r .numberLines}
 data("birthwt")
 
 head(birthwt)
@@ -205,7 +212,7 @@ ggplot(birthwt, aes(x = mother_smokes, y = bwt_grams)) +
          y = "Birth-weight [grams]")
 ```
 
-<img src="multiple-regression_files/figure-html/bplt-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="multiple-regression_files/figure-html/bplt-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 
 ```{.r .numberLines}
@@ -213,7 +220,7 @@ ggplot(birthwt, aes(x = mother_age, y = bwt_grams, col = mother_smokes)) +
     geom_point()
 ```
 
-<img src="multiple-regression_files/figure-html/bwt_sct-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="multiple-regression_files/figure-html/bwt_sct-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 Now we perform linear regression using the categorical variable, it is no different than performing linear regression on numeric data. The difference is in interpretation.
 
@@ -272,7 +279,7 @@ ggplot(residuals_df, aes(x = resid)) +
     geom_histogram(bins = 10)
 ```
 
-<img src="multiple-regression_files/figure-html/bwt_resid-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="multiple-regression_files/figure-html/bwt_resid-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 Even if we consider that these residuals look like they are normally distributed we need to get better understanding of this we will use the Q-Q Plot. You can take a look at the wiki to get a better understanding ([Q–Q plot - Wikipedia](https://en.wikipedia.org/wiki/Q%E2%80%93Q_plot)). In simple terms if the residuals are normally distributed we expect them to be on the diagonal straight line on a Q-Q plot. The simplest way to get such a plot is using the `plot()` function and specifically for an `lm` object it has an option `which = ` that takes a numeric value depending on which plot you want to plot.
 
@@ -281,7 +288,7 @@ Even if we consider that these residuals look like they are normally distributed
 plot(bwt_fit, which = 2)
 ```
 
-<img src="multiple-regression_files/figure-html/qq-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="multiple-regression_files/figure-html/qq-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 As we can see in this example the residuals are very close to normal with some outliers especially towards larger values of the residual. This would indicate that the model as it stands does not fulfil that assumption fully but comes close.
 
@@ -315,7 +322,7 @@ ggplot(sim_df, aes(x = x, y = y)) +
     geom_point()
 ```
 
-<img src="multiple-regression_files/figure-html/sim-mr-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="multiple-regression_files/figure-html/sim-mr-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 Recall that in gradient descent we want to minimise the Mean Squared Error ($J(\beta)$) which is the cost function. The first step is to write this cost function in R. For simplicity we will use matrix multiplication, which in R is implemented as `%*%`. (*Note*, to get help on these function with special characters you can't simply run the command `?%*%` instead you have to put it in quotes `?"%*%"`.)
 
@@ -359,6 +366,13 @@ We created a list to store results `res` it is possible to combine all results i
 
 ```{.r .numberLines}
 library(dplyr)
+```
+
+```
+#> Warning: package 'dplyr' was built under R version 4.5.2
+```
+
+```{.r .numberLines}
 res_df <- bind_rows(res)
 tail(res_df)
 ```
@@ -384,7 +398,7 @@ ggplot(res_df, aes(x = itr, y = b1)) +
          title = "Visuaslisation of the cconvergence of the beta_1 parameter")
 ```
 
-<img src="multiple-regression_files/figure-html/vis_gd-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="multiple-regression_files/figure-html/vis_gd-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 ```{.r .numberLines}
 ggplot(res_df, aes(x = itr, y = cost)) +
@@ -394,7 +408,7 @@ ggplot(res_df, aes(x = itr, y = cost)) +
          title = "History of cost function at each iteration")
 ```
 
-<img src="multiple-regression_files/figure-html/vis_gd-2.png" width="95%" style="display: block; margin: auto;" />
+<img src="multiple-regression_files/figure-html/vis_gd-2.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 ```{.r .numberLines}
 ggplot(sim_df, aes(x = x, y = y)) +
@@ -406,14 +420,13 @@ ggplot(sim_df, aes(x = x, y = y)) +
 ```
 
 ```
-#> Warning: Using `size` aesthetic for lines was deprecated in
-#> ggplot2 3.4.0.
+#> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
 #> ℹ Please use `linewidth` instead.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where
-#> this warning was generated.
+#> This warning is displayed once per session.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#> generated.
 ```
 
-<img src="multiple-regression_files/figure-html/vis_gd-3.png" width="95%" style="display: block; margin: auto;" />
+<img src="multiple-regression_files/figure-html/vis_gd-3.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 Now compare these results to the ones obtained by fitting a linear model in R using the function `lm()`, how different are the results. Try to reproduce these plots with $\alpha =$ (0.02, 0.1, 0.5), and different number of iterations in the optimisation and compare the estimated $\hat{\beta}_0$, and $\hat{\beta}_1$ to the values you use during the simulation step. This will give you an idea how important the right choice of these two parameters is.

@@ -11,7 +11,7 @@ The option `replace=FALSE` activates sampling without replacement (i.e. the numb
 Let's try this out:
 
 ```{r, error = TRUE}
-x <- c( 1, 2, 2, 3, 4, 1, 6, 7, 8, 10, 5, 5, 1, 4, 9 )
+x <- c(1, 2, 2, 3, 4, 1, 6, 7, 8, 10, 5, 5, 1, 4, 9)
 
 # Working example
 sample(x, 10, replace = FALSE)
@@ -31,8 +31,8 @@ sample(x, 20, replace = TRUE)
 
 
 ```{r}
-rolls_from_sample = sample(c(1:6), size=5000, replace=TRUE)
-rolls_from_sample.int = sample(6, size=5000, replace=TRUE)
+rolls_from_sample <- sample(c(1:6), size = 5000, replace = TRUE)
+rolls_from_sample.int <- sample(6, size = 5000, replace = TRUE)
 
 table(rolls_from_sample)
 ```

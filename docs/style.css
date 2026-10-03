@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&family=Oxygen:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;700&display=swap');
+
+
 
 /* CSS Variables for Light/Dark Theme */
 :root {
@@ -47,9 +50,16 @@
 
 /* Apply theme variables to existing styles */
 body {
+  font-family: "Palatino", "Palatino Linotype", "Book Antiqua",
+      "Crimson Pro", "Noto Serif", "Liberation Serif", "DejaVu Serif", serif;
+  front-weight: 400;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar-book h1 {
+  font-family: 'Avenir Next', Avenir, sans-serif;
 }
 
 p.caption {
@@ -61,7 +71,7 @@ p code {
   font-family: 'Fira Code', 'Courier New', Courier, monospace;
   background-color: var(--code-bg);
   color: var(--code-text);
-  padding: 2px 4px;
+  padding: 1px 2px;
   border-radius: 3px;
 }
 /*____Code Chunks____*/
@@ -173,7 +183,7 @@ pre code {
   width: 50px;
   height: 50px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;

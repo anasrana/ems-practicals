@@ -168,6 +168,13 @@ The data represents `no of storks` (column 1) in Oldenburg Germany from $1930 - 
 
 ```{.r .numberLines}
 library(ggplot2)
+```
+
+```
+#> Warning: package 'ggplot2' was built under R version 4.5.2
+```
+
+```{.r .numberLines}
 library(reshape2)
 ```
 
@@ -184,7 +191,7 @@ ggplot(stork_dat, aes(x = no_storks, y = people)) +
   geom_point(size = 2)
 ```
 
-<img src="LR-solutions_files/figure-html/unnamed-chunk-6-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="LR-solutions_files/figure-html/unnamed-chunk-6-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 This is a plot of number of people in Oldenburg (Germany) against the number of storks. We can calculate the correlation in `R`
 
@@ -228,7 +235,7 @@ ggplot(sim_data1, aes(x = x, y = y)) +
   geom_point(data = sim_data2, color = "red", shape = 18)
 ```
 
-<img src="LR-solutions_files/figure-html/comp-scatter-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="LR-solutions_files/figure-html/comp-scatter-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 If we plot the data on top of each other, the first data set in black and the second one in red, we can see a small number of points are different between the two data sets.
 
@@ -292,13 +299,13 @@ From the summary data we can see a discrepancy between the two estimates in the 
 plot(residuals(lr_fit1))
 ```
 
-<img src="LR-solutions_files/figure-html/resid-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="LR-solutions_files/figure-html/resid-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 ```{.r .numberLines}
 plot(residuals(lr_fit2))
 ```
 
-<img src="LR-solutions_files/figure-html/resid-2.png" width="95%" style="display: block; margin: auto;" />
+<img src="LR-solutions_files/figure-html/resid-2.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 Here we can once again see the outliers in the second data set which affect the estimation. We now plot the histogram and boxplots for comparison:
 
@@ -307,19 +314,19 @@ Here we can once again see the outliers in the second data set which affect the 
 hist(residuals(lr_fit1))
 ```
 
-<img src="LR-solutions_files/figure-html/hist-resid-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="LR-solutions_files/figure-html/hist-resid-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 ```{.r .numberLines}
 hist(residuals(lr_fit2))
 ```
 
-<img src="LR-solutions_files/figure-html/hist-resid-2.png" width="95%" style="display: block; margin: auto;" />
+<img src="LR-solutions_files/figure-html/hist-resid-2.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 ```{.r .numberLines}
 boxplot(residuals(lr_fit2), residuals(lr_fit1))
 ```
 
-<img src="LR-solutions_files/figure-html/hist-resid-3.png" width="95%" style="display: block; margin: auto;" />
+<img src="LR-solutions_files/figure-html/hist-resid-3.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 Her we can see that the distribution of the residuals has significantly changed in data set 2.
 
@@ -432,7 +439,7 @@ mse_plt <- ggplot(mse_df, aes(x = Sample_Size, y = MSE)) +
 print(mse_plt)
 ```
 
-<img src="LR-solutions_files/figure-html/effect-plot-answ-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="LR-solutions_files/figure-html/effect-plot-answ-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 Let's also look at summary statistics:
 

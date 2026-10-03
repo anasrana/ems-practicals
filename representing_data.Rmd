@@ -311,9 +311,9 @@ x3 <- c(4, 1, 2, 0)
 # Another way to create matrices
 B1 <- cbind(v1, v3, v2)
 B2 <- rbind(v1, v2, v3)
-
 ```
 
+::: {.infobox}
 > Q2: Calculate the following matrices.
 >
 > - `A1 + A2`
@@ -335,3 +335,26 @@ B2 <- rbind(v1, v2, v3)
 <button class="button">
  [Solution](#representing_data-sol)
 </button>
+:::
+
+
+::: {.hardbox}
+
+## Exercise - Data Processing Function {#rep_data-ex-fun}
+
+Now we will create a function that will take a `data.frame`, extract a matrix and a vector, and perform a matrix multiplication. You can use the `iris` data set again. The function should take the following inputs:
+
+- `data`: a `data.frame` containing the numerical
+- `columns`: a vector of column indices to extract the matrix
+- `vector`: a numerical value indicateing which column to extract the vector
+- `n_rows`: a numerical value indicating how many rows to extract
+
+The function should then extract the matrix and vector, perform the multiplication, and return the result. Your function should also check that the inputs are valid and return an error message if they are not. The function should also print the dimensions of the matrix and vector before performing the multiplication.
+
+*Hint:* if you went through the CPD **Coding without Coding**, use the steps outlined there to create the function. Especially the process of breaking down the task into smaller steps and writing pseudocode first will help you.
+
+<button class="button">
+ [Solution](#rep_data-func-sol)
+</button>
+
+:::

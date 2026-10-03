@@ -86,7 +86,7 @@ plot(mu, neglogL, pch="-")
 points(out$par, out$value, col="red", pch=0)
 ```
 
-<img src="mle_files/figure-html/unnamed-chunk-9-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="mle_files/figure-html/unnamed-chunk-9-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 The plot shows that `optim` has found the `mu` which minimises the negative log-likelihood.
 
@@ -159,7 +159,7 @@ contour(sigma2, mu, neglogL2, nlevels = 50, xlab = "sigma2", ylab = "mu")
 points(out$par[2], out$par[1], col="red")
 ```
 
-<img src="mle_files/figure-html/unnamed-chunk-14-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="mle_files/figure-html/unnamed-chunk-14-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 Excellent! We have now found the maximum likelihood estimates for the unknown mean and variance for the Normal distribution that our data is assumed to be drawn from. Let’s compare our estimates against the sample mean and variance. First, the estimates:
 

@@ -1,4 +1,3 @@
-
 #  Solution: Markov Chains
 
 ## Three state Markov Chain {#mc-solution}

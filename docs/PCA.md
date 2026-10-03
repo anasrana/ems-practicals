@@ -34,6 +34,13 @@ There are many datasets built into `R`. Wed will look at the `mtcars` dataset. T
 
 ```{.r .numberLines}
 library(ggplot2)
+```
+
+```
+#> Warning: package 'ggplot2' was built under R version 4.5.2
+```
+
+```{.r .numberLines}
 head(mtcars)
 ```
 
@@ -112,7 +119,7 @@ labs(x = "PC1 60.08%",
 theme(legend.position = "bottom")
 ```
 
-<img src="PCA_files/figure-html/plot_2d-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="PCA_files/figure-html/plot_2d-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 Here we added a color based on the make of each car. We can observe which samples (or cars) cluster together. Have a look at these variables and decide why certain cars or models would cluster together.
 
@@ -133,7 +140,7 @@ Next we look at another representation of the data, the *biplot*. This is a comb
 biplot(cars_pca)
 ```
 
-<img src="PCA_files/figure-html/biplot-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="PCA_files/figure-html/biplot-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 We can see the original axis starting from the origin. Therefore we can make observations about the original variables (e.g. `cyl` and `mpg` contribute to PC1) and how the data points relates to these axes.
 
@@ -248,7 +255,7 @@ ggplot(var_exp[1:30, ], aes(x = pc, y = variance)) +
          y  = "Variance explained")
 ```
 
-<img src="PCA_files/figure-html/pca-scree-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="PCA_files/figure-html/pca-scree-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 We see that the first few principal components explain significant variance, but after about the PC10, there is very limited contribution. Next we will plot the data using the first two Principal components as before.
 
@@ -262,7 +269,7 @@ ggplot(sc_pca_df, aes(x = PC1, y = PC2, col = cell)) +
     theme(legend.position = "bottom")
 ```
 
-<img src="PCA_files/figure-html/sc-pca_plot-1.png" width="95%" style="display: block; margin: auto;" />
+<img src="PCA_files/figure-html/sc-pca_plot-1.png" alt="" width="95%" style="display: block; margin: auto;" />
 
 Why is it not useful to create biplot for this example?
 
