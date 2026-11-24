@@ -36,6 +36,37 @@ rmd_files:
     "intro.Rmd",
     "data.Rmd"
     ]
+  latex: [
+    "index.Rmd",
+
+    "simulation.Rmd",
+    "markov-chains.Rmd",
+    "monopoly-simulation.Rmd",
+    "monte-carlo.Rmd",
+    "mle.Rmd",
+    "confid-interval.Rmd",
+    "CompTesting.Rmd",
+
+    "representing_data.Rmd",
+    "PCA.Rmd",
+    "linear-regression.Rmd",
+    "multiple-regression.Rmd",
+    "QQ-plot.Rmd",
+    "glm.Rmd",
+
+    "sim-sol.Rmd",
+    "MC-solution.Rmd",
+    "monopoly-solution.Rmd",
+    "monte-carlo_sol.Rmd",
+    "mle_sol.Rmd",
+    "ci_sol.Rmd",
+    "comptest-sol.Rmd",
+    "representing_data-sol.Rmd",
+    "LR-solutions.Rmd",
+
+    "intro.Rmd",
+    "data.Rmd"
+    ]
 language:
   ui:
     chapter_name: "Chapter "

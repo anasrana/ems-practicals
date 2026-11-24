@@ -24,3 +24,7 @@ publish:
 	git commit -m '$(COMMIT)';\
 	git push
 	make clean
+
+pdf:
+	Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::pdf_book")'
+	rm -f tikz*log
