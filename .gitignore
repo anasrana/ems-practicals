@@ -88,3 +88,7 @@ vignettes/*.pdf
 
 # R testing files
 testing.R
+# Build caches and old bookdown output
+/_bookdown_files/
+/_book/
+/libs/
