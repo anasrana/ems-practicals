@@ -15,6 +15,46 @@ if quarto.doc.is_format("latex") then
   -- PDF: solution and back links become internal cross-references.
   local function label_of(target) return target:match("#([%w_-]+)$") end
   return {
+    -- hints become sidenotes, placed at the start of their exercise so they
+    -- sit beside it (at the end they can run off the page)
+    Div = function(div)
+      local function is_hint(b)
+        return b.t == "Div" and b.classes:includes("callout-tip")
+          and (b.attributes.title or ""):lower() == "hint"
+      end
+      local function as_sidenote(h)
+        -- code cannot go in a margin note in LaTeX: such hints stay in the text
+        local has_code = false
+        h:walk({ CodeBlock = function() has_code = true end })
+        if has_code then return nil end
+        local content = h.content
+        local first = content[1]
+        local label = pandoc.Emph({ pandoc.Str("Hint.") })
+        if first and (first.t == "Para" or first.t == "Plain") then
+          first.content:insert(1, pandoc.Space())
+          first.content:insert(1, label)
+        else
+          content:insert(1, pandoc.Para({ label }))
+        end
+        return pandoc.Div(content, pandoc.Attr("", { "column-margin" }))
+      end
+      if not div.identifier:match("^exr%-") then return nil end
+      local notes, rest = pandoc.List({}), pandoc.List({})
+      for _, b in ipairs(div.content) do
+        local note = is_hint(b) and as_sidenote(b)
+        if note then notes:insert(note) else rest:insert(b) end
+      end
+      if #notes == 0 then return nil end
+      -- after the exercise title (first heading), before the text
+      local out, placed = pandoc.List({}), false
+      for _, b in ipairs(rest) do
+        out:insert(b)
+        if not placed and b.t == "Header" then out:extend(notes); placed = true end
+      end
+      if not placed then out = notes .. rest end
+      div.content = out
+      return div
+    end,
     Span = function(span)
       local link
       span:walk({ Link = function(l) if not link then link = l end end })

@@ -90,7 +90,20 @@ format:
     toc: true
     toc-depth: 2
     number-sections: true
+    # Tufte-style page: narrow text column, notes and hints in the margin
+    reference-location: margin
+    citation-location: margin
+    # figure captions in the margin; table captions stay above the table
+    # (a margin caption on a long table makes LaTeX loop forever)
+    fig-cap-location: margin
+    tbl-cap-location: top
+    # callouts (notes, hints with code) as a thin rule, no box or icon
+    callout-appearance: minimal
+    callout-icon: false
     include-in-header: ems-preamble.tex
     filters:
-      - ems.lua
+      # before Quarto turns callouts into its own blocks, so hints can
+      # become sidenotes
+      - at: pre-ast
+        path: ems.lua
 

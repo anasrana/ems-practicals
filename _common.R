@@ -12,6 +12,24 @@ knitr::opts_chunk$set(
   dev.args = list(background = "transparent")  # figures sit on the page
 )
 
+# PDF: the text column is narrower (Tufte layout), so figures are smaller.
+# Drawn at a smaller size too, so text in the figures stays readable.
+if (knitr::is_latex_output()) {
+  # no fixed aspect ratio here: a chunk's own height is kept (scaled below)
+  knitr::opts_chunk$set(out.width = "80%", fig.width = 4.5, fig.height = 3.2, fig.asp = NULL)
+  # chunks that ask for a wide figure are capped at 5 inches (height scaled
+  # to match), so their text is not shrunk to nothing on the page
+  knitr::opts_hooks$set(fig.width = function(options) {
+    if (options$fig.width > 5) {
+      scale <- 5 / options$fig.width
+      options$fig.width <- 5
+      # keep at least 3 inches of height (base R plots need room for margins)
+      if (!is.null(options$fig.height)) options$fig.height <- max(3, options$fig.height * scale)
+    }
+    options
+  })
+}
+
 # Brand fonts for figures (desktop versions shipped with the brand extension).
 local({
   f <- "_extensions/anasrana/tufte-brand/fonts/"

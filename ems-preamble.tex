@@ -16,12 +16,39 @@
 \definecolor{tufte-muted}{HTML}{5E5E5A}
 \definecolor{tufte-rule}{HTML}{D8D8CF}
 
-% Headings: normal weight, chapter and section titles roman, lower levels italic.
+% Tufte-style headings: never bold; chapter titles roman, sections and
+% below italic; chapter numbers in muted small caps.
 \addtokomafont{disposition}{\rmfamily\mdseries}
 \addtokomafont{chapter}{\Huge}
-\addtokomafont{subsection}{\itshape}
+\addtokomafont{section}{\Large\itshape}
+\addtokomafont{subsection}{\large\itshape}
 \addtokomafont{subsubsection}{\itshape}
+\addtokomafont{paragraph}{\itshape}
 \addtokomafont{chapterprefix}{\scshape\color{tufte-muted}}
+\RedeclareSectionCommand[beforeskip=-3.5ex plus -1ex minus -.2ex, afterskip=1.5ex plus .2ex]{section}
+
+% Running heads in small caps, muted; no rules.
+\addtokomafont{pagehead}{\normalfont\scshape\color{tufte-muted}}
+\addtokomafont{pagenumber}{\normalfont\color{tufte-muted}}
+
+% Margin notes (hints, footnotes) in a smaller size, ragged.
+\AtBeginDocument{\providecommand{\marginfont}{}\renewcommand{\marginfont}{\footnotesize\raggedright}}
+
+% Code without a shaded box (Tufte style). The shaded box uses framed,
+% which loops forever with marginfix (loaded for the margin layout) when a
+% long code block breaks across pages. Code is indented and a little smaller.
+\AtBeginDocument{%
+  \renewenvironment{Shaded}{\par\smallskip}{\par\smallskip}%
+  \RecustomVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},xleftmargin=1.2em,fontsize=\small}%
+}
+
+% Callouts (minimal appearance): the brand's thin grey rule, not blue.
+\AtBeginDocument{%
+  \definecolor{quarto-callout-note-color-frame}{HTML}{D8D8CF}%
+  \definecolor{quarto-callout-tip-color-frame}{HTML}{D8D8CF}%
+  \definecolor{quarto-callout-note-color}{HTML}{5E5E5A}%
+  \definecolor{quarto-callout-tip-color}{HTML}{5E5E5A}%
+}
 
 % Links in the text colour, no boxes.
 \AtBeginDocument{\hypersetup{colorlinks=true, linkcolor=black, urlcolor=tufte-red, citecolor=black}}
