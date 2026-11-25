@@ -1,0 +1,71 @@
+project:
+  type: book
+  output-dir: docs
+  render:
+    - "*.qmd"
+  pre-render: _exercise-index.R
+
+book:
+  title: "Essentials of Mathematics and Statistics"
+  subtitle: "Computer practicals in R"
+  author: "Anas A Rana"
+  description: "The practical sessions for Essentials of Mathematics and Statistics, part of the MSc Bioinformatics at the University of Birmingham."
+  site-url: https://anasrana.github.io/ems-practicals/
+  repo-url: https://github.com/anasrana/ems-practicals
+  favicon: _extensions/anasrana/tufte-brand/logo/favicon.svg
+  search: true
+  chapters:
+    - index.qmd
+    - part: "Getting started"
+      chapters:
+        - start.qmd
+        - creating-functions-r.qmd
+    - part: "Probability in R"
+      chapters:
+        - simulating-random-numbers.qmd
+        - markov-chains.qmd
+        - a-monopoly-simulation.qmd
+        - monte-carlo-methods.qmd
+        - maximum-likelihood.qmd
+        - confidence-intervals.qmd
+        - computational-testing-techniques.qmd
+    - part: "Statistical modelling"
+      chapters:
+        - representing-data-in-r.qmd
+        - principal-component-analysis.qmd
+        - linear-regression.qmd
+        - multiple-regression.qmd
+        - qq-plot.qmd
+        - generalised-linear-models.qmd
+  appendices:
+    - part: "Solutions"
+      chapters:
+        - simSol.qmd
+        - solution-markov-chains.qmd
+        - monopolySol.qmd
+        - solution-monte-carlo.qmd
+        - sol-mle.qmd
+        - sol-ex-CI.qmd
+        - solution-computational-testing.qmd
+        - representing_data-sol.qmd
+        - solution-linear-regression-and-correlation.qmd
+    - data-sets.qmd
+
+crossref:
+  exr-title: "exercise"
+
+execute:
+  freeze: auto
+
+format:
+  tufte-brand-html:
+    page-layout: article
+    reference-location: margin
+    fig-cap-location: margin
+    toc: true
+    filters:
+      - at: post-render
+        path: ems.lua
+    theme:
+      light: [ems.scss]
+      dark: [ems.scss]

@@ -1,0 +1,17 @@
+{
+  "hash": "6f413fdb7d5c39be8ea096719d3ab1d3",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\nengine: knitr\n---\n\n# Data sets {#data-sets .unnumbered}\n\n\nFor some of the practical  sessions we will make use of pre-prepared data. You will find all data required for the second phase of the practicals in the data folder [here](https://github.com/anasrana/module1-practical_Bham/tree/master/data) and you can download [here](https://github.com/anasrana/ems-practicals/raw/main/data.zip).\n\nYou can download files individually from the website, or using bash commands by either going to the terminal tab on `RStudio` or by opening a dedicated terminal. You can either copy all data Navigate to the folder you want to download your data into, and use the following commands:\n\n## Data: Linear regression {#data-lr .unnumbered}\n\n\n\n::: {.cell}\n\n```{.bash .cell-code}\n# Stork download\nwget https://github.com/anasrana/ems-practicals/raw/main/data/stork.txt\n\n# lr_data1\nwget https://github.com/anasrana/ems-practicals/raw/main/data/lr_data1.Rdata\n\n# lr_data2\nwget https://github.com/anasrana/ems-practicals/raw/main/data/lr_data2.Rdata\n\n```\n:::\n\n\n[[simulating data for regression](linear-regression.qmd#LR-sim)]{.back-link}\n\n## Data: PCA {#data-pca .unnumbered}\n\n\n::: {.cell}\n\n```{.bash .cell-code}\n# Pollen2014 data\nwget https://github.com/anasrana/ems-practicals/raw/main/data/Pollen2014.txt\n\n# Supplementary Labels\nwget https://github.com/anasrana/ems-practicals/raw/main/data/SupplementaryLabels.txt\n```\n:::\n\n\n[[introduction](principal-component-analysis.qmd#pca-intro)]{.back-link}\n\n## Data: Generalised linear models {#data-glm .unnumbered}\n\n\n::: {.cell}\n\n```{.bash .cell-code}\n# gwas-cc-ex1.Rdata\nwget https://github.com/anasrana/ems-practicals/raw/main/data/gwas-cc-ex1.Rdata\n\n# gwas-cc-ex2.Rdata\nwget https://github.com/anasrana/ems-practicals/raw/main/data/gwas-cc-ex2.Rdata\n\n# nb_data.Rdata\nwget https://github.com/anasrana/ems-practicals/raw/main/data/nb_data.Rdata\n```\n:::\n\n\n[[detecting snp associations](generalised-linear-models.qmd#gwas)]{.back-link}\n",
+    "supporting": [
+      "data-sets_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

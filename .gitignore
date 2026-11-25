@@ -99,3 +99,10 @@ testing.R
 /design/
 /CLAUDE.md
 /.claude/
+
+/.quarto/
+**/*.quarto_ipynb
+
+# Generated at render time
+/_exercise-index.tsv
+/.quarto/

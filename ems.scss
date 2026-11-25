@@ -1,0 +1,105 @@
+/*-- scss:rules --*/
+// Book-specific rules for the EMS practicals, layered after the shared
+// tufte-brand stylesheet (so the $tufte-* variables are available).
+
+// ---- Exercises ---------------------------------------------------------
+// Quarto's numbered exercise blocks (::: {#exr-...}); ems.lua splits the
+// title into a small-caps label and an italic title line.
+div.theorem.exercise {
+  border-left: 1px solid $tufte-rule;
+  padding: .2rem 0 .2rem 1.1rem;
+  margin: 2.4rem 0;
+}
+div.theorem.exercise.challenge { border-left: 2px solid $tufte-red; }
+.exr-head { margin-bottom: .5rem; }
+.exr-head p { margin: 0; }
+.exr-label, .exr-challenge {
+  font-variant: small-caps; letter-spacing: .05em; font-size: .9em;
+}
+.exr-label { color: $tufte-red; }
+.exr-challenge { color: $tufte-muted; margin-left: .7em; }
+.exr-title { font-style: italic; font-size: 1.3em; line-height: 1.3; }
+
+// ---- Callouts: hints, notes --------------------------------------------
+// No coloured box or icon: a thin rule and a small-caps title.
+.callout {
+  border: none !important;
+  border-left: 1px solid $tufte-rule !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  margin: 1rem 0 !important;
+}
+.callout .callout-header {
+  background: transparent !important; border: none !important;
+  padding-left: .9rem !important;
+}
+.callout .callout-icon-container { display: none; }
+.callout .callout-title-container {
+  font-variant: small-caps; letter-spacing: .05em;
+  color: $tufte-muted; font-weight: 400;
+}
+.callout .callout-body-container { padding-left: .9rem; }
+
+// ---- Solution and back links (option I) ---------------------------------
+// At rest a filled red arrow box; on hover or focus it empties to an outline
+// and the arrow turns into the tadpole. Back links: a quiet grey box pointing
+// left whose arrow becomes a tadpole swimming back.
+$pt: .9em;
+$arrow-right: polygon(0 0, calc(100% - #{$pt}) 0, 100% 50%, calc(100% - #{$pt}) 100%, 0 100%);
+$arrow-left: polygon(#{$pt} 0, 100% 0, 100% 100%, #{$pt} 100%, 0 50%);
+
+.solink, .backlink { display: flex; margin: 1.1rem 0 .1rem; }
+.solink { justify-content: flex-end; }
+.backlink { justify-content: flex-start; }
+.solink a, .backlink a {
+  position: relative; isolation: isolate;
+  display: inline-flex; align-items: center; gap: .5em;
+  min-height: 44px; text-decoration: none;
+  font-variant: small-caps; letter-spacing: .05em; font-size: 1.05em;
+  transition: color .25s;
+}
+.solink a::before, .backlink a::before {
+  content: ""; position: absolute; inset: 1px; z-index: -1;
+  background: $tufte-paper; transition: opacity .25s;
+}
+.solink a {
+  padding: 0 calc(#{$pt} + .8em) 0 .9em;
+  background: $tufte-red; color: $tufte-paper;
+  clip-path: $arrow-right;
+}
+.solink a::before { clip-path: $arrow-right; opacity: 0; }
+.backlink a {
+  padding: 0 .9em 0 calc(#{$pt} + .8em);
+  background: $tufte-rule; color: $tufte-muted;
+  clip-path: $arrow-left;
+}
+.backlink a::before { clip-path: $arrow-left; }
+.backlink a:hover, .backlink a:focus-visible { color: $tufte-ink; }
+
+// arrow and tadpole share one slot
+.swap { position: relative; display: inline-block; width: 2.6em; height: 1.6em; }
+.swap > * { position: absolute; left: 0; top: 50%; transition: opacity .25s, transform .3s; }
+.swap .arr { font-variant: normal; font-size: 1.5em; line-height: 1; transform: translateY(-52%); }
+.swap svg { height: 2.1em; width: auto; color: $tufte-muted; opacity: 0; transform: translate(-10px, -50%); }
+.swap svg .accent { fill: $tufte-red; }
+.backlink .swap svg { transform: translate(10px, -50%) scaleX(-1); }
+
+.solink a:hover, .solink a:focus-visible { color: $tufte-red; }
+.solink a:hover::before, .solink a:focus-visible::before { opacity: 1; }
+.solink a:hover .arr, .solink a:focus-visible .arr { opacity: 0; transform: translate(10px, -52%); }
+.solink a:hover svg, .solink a:focus-visible svg { opacity: 1; transform: translate(0, -50%); }
+.backlink a:hover .arr, .backlink a:focus-visible .arr { opacity: 0; transform: translate(-10px, -52%); }
+.backlink a:hover svg, .backlink a:focus-visible svg { opacity: 1; transform: translate(0, -50%) scaleX(-1); }
+.solink a:focus-visible, .backlink a:focus-visible { outline: 2px solid $tufte-red; outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .solink a, .backlink a, .solink a::before, .backlink a::before, .swap > * { transition: none; }
+}
+
+// "download data" links: a quiet small-caps text link
+.datalink a {
+  font-variant: small-caps; letter-spacing: .05em;
+  color: $tufte-red; text-decoration: none;
+}
+.datalink a:hover { text-decoration: underline; }

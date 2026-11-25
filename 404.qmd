@@ -1,0 +1,6 @@
+---
+title: "Page not found"
+toc: false
+---
+
+The page you were looking for has moved or no longer exists. All the practical sessions are listed in the [contents](index.qmd); you can also use the search box.
