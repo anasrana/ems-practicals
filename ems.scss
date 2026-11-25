@@ -152,4 +152,10 @@ $arrow-left: polygon(#{$pt} 0, 100% 0, 100% 100%, #{$pt} 100%, 0 50%);
 // figures in the brand's dark stylesheet.
 @if lightness($tufte-paper) < 50% {
   .diagram img { filter: invert(1) hue-rotate(180deg); }
+  // Any other R figure without its own dark version (base R plots, ggplots
+  // printed with print()) is inverted the same way. Only images made by R
+  // chunks (figure-html/), so screenshots and photos are left alone.
+  img[src*="figure-html/"]:not(.light-content):not(.dark-content) {
+    filter: invert(1) hue-rotate(180deg);
+  }
 }

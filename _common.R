@@ -8,7 +8,8 @@ knitr::opts_chunk$set(
   out.width = "95%",
   fig.asp = .75,
   fig.align = "center",
-  dev = "ragg_png"
+  dev = "ragg_png",
+  dev.args = list(background = "transparent")  # figures sit on the page
 )
 
 # Brand fonts for figures (desktop versions shipped with the brand extension).
@@ -33,7 +34,7 @@ theme_ems <- function(mode = c("light", "dark"), base_size = 12) {
   ggplot2::theme_minimal(base_size = base_size, base_family = "ET Book") +
     ggplot2::theme(
       text = ggplot2::element_text(colour = pal[["ink"]]),
-      plot.background = ggplot2::element_rect(fill = pal[["paper"]], colour = NA),
+      plot.background = ggplot2::element_rect(fill = "transparent", colour = NA),
       panel.grid.minor = ggplot2::element_blank(),
       panel.grid.major.x = ggplot2::element_blank(),
       panel.grid.major.y = ggplot2::element_line(colour = pal[["rule"]], linewidth = 0.3),
