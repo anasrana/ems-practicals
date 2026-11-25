@@ -1,5 +1,7 @@
 % EMS practicals, PDF: brand touches on top of Quarto's scrbook template.
 \usepackage{booktabs}
+% long code lines wrap within the column (fvextra extends fancyvrb)
+\usepackage{fvextra}
 
 % Brand fonts: the desktop versions shipped with the brand extension.
 \usepackage{fontspec}
@@ -39,7 +41,7 @@
 % long code block breaks across pages. Code is indented and a little smaller.
 \AtBeginDocument{%
   \renewenvironment{Shaded}{\par\smallskip}{\par\smallskip}%
-  \RecustomVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},xleftmargin=1.2em,fontsize=\small}%
+  \RecustomVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},xleftmargin=1.2em,fontsize=\small,breaklines,breakanywhere}%
 }
 
 % Callouts (minimal appearance): the brand's thin grey rule, not blue.

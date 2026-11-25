@@ -38,13 +38,46 @@ if quarto.doc.is_format("latex") then
         end
         return pandoc.Div(content, pandoc.Attr("", { "column-margin" }))
       end
+      -- a hint with code stays in the text, as a plain "Hint." paragraph
+      -- (no box)
+      local function as_text_hint(h)
+        local content = h.content
+        local first = content[1]
+        local title = h.attributes.title or "hint"
+        title = title:sub(1, 1):upper() .. title:sub(2)
+        if not title:match("[%.!?]$") then title = title .. "." end
+        local label = pandoc.Emph({ pandoc.Str(title) })
+        if first and (first.t == "Para" or first.t == "Plain") then
+          first.content:insert(1, pandoc.Space())
+          first.content:insert(1, label)
+        else
+          content:insert(1, pandoc.Para({ label }))
+        end
+        return pandoc.Div(content)
+      end
       if not div.identifier:match("^exr%-") then return nil end
       local notes, rest = pandoc.List({}), pandoc.List({})
       for _, b in ipairs(div.content) do
-        local note = is_hint(b) and as_sidenote(b)
-        if note then notes:insert(note) else rest:insert(b) end
+        if is_hint(b) then
+          local note = as_sidenote(b)
+          if note then notes:insert(note) else rest:insert(as_text_hint(b)) end
+        elseif b.t == "Div" and b.classes:find_if(function(c) return c:match("^callout") end) then
+          -- other callouts in an exercise (e.g. "plot"): plain labelled text;
+          -- a boxed callout inside the kept-together block overlaps the text
+          rest:insert(as_text_hint(b))
+        else
+          rest:insert(b)
+        end
       end
-      if #notes == 0 then return nil end
+      -- keep each exercise on one page: wrap it in a minipage
+      local function keep_together(d)
+        return {
+          pandoc.RawBlock("latex", "\\par\\noindent\\begin{minipage}{\\linewidth}"),
+          d,
+          pandoc.RawBlock("latex", "\\end{minipage}\\par\\medskip"),
+        }
+      end
+      if #notes == 0 then div.content = rest; return keep_together(div) end
       -- after the exercise title (first heading), before the text
       local out, placed = pandoc.List({}), false
       for _, b in ipairs(rest) do
@@ -53,7 +86,7 @@ if quarto.doc.is_format("latex") then
       end
       if not placed then out = notes .. rest end
       div.content = out
-      return div
+      return keep_together(div)
     end,
     Span = function(span)
       local link
