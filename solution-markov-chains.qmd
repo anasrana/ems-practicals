@@ -24,12 +24,14 @@ The three state Markov chain is more complex to draw. The diagram below shows th
 ```{r fstate}
 #| echo=FALSE,
 #| warning=FALSE,
+#| out.width = '60%',
+#| dev.args = list(bg = 'transparent'),
 #| fig.bg = 'transparent'
 
 library(ggdiagram)
 library(ggplot2)
 # ===== CONFIGURATION VARIABLES =====
-my_font <- "Fira Code"
+my_font <- "ET Book"
 font_size <- 18
 label_font_size <- 20
 node_label_size <- 0.8 # Font size for node labels (Cloudy, Sunny, Rainy)
