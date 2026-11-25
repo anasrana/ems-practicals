@@ -14,6 +14,8 @@ book:
   repo-url: https://github.com/anasrana/ems-practicals
   favicon: _extensions/anasrana/tufte-brand/logo/favicon.svg
   search: true
+  output-file: ems-practicals
+  downloads: [pdf]
   sidebar:
     # link back to the homepage above the book title (decision 1A)
     header: |
@@ -79,3 +81,16 @@ format:
     theme:
       light: [ems.scss]
       dark: [ems.scss]
+  pdf:
+    from: markdown+tex_math_single_backslash
+    documentclass: scrbook
+    classoption: [oneside, open=any]
+    papersize: a4
+    pdf-engine: xelatex
+    toc: true
+    toc-depth: 2
+    number-sections: true
+    include-in-header: ems-preamble.tex
+    filters:
+      - ems.lua
+

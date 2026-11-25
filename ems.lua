@@ -11,6 +11,29 @@
 --      in the text column; without JavaScript it stays in Quarto's footer.
 --   5. A small frog + "Anas A Rana" link to the homepage at the top of each
 --      page, shown on phones only (ems.scss moves it above the title).
+if quarto.doc.is_format("latex") then
+  -- PDF: solution and back links become internal cross-references.
+  local function label_of(target) return target:match("#([%w_-]+)$") end
+  return {
+    Span = function(span)
+      local link
+      span:walk({ Link = function(l) if not link then link = l end end })
+      if not link then return nil end
+      local id = label_of(link.target)
+      if span.classes:includes("solution-link") and id then
+        return pandoc.RawInline("latex", "\\hfill\\hyperref[" .. id .. "]{\\textsc{solution} $\\rightarrow$}")
+      elseif span.classes:includes("back-link") and id then
+        if id:match("^exr%-") then
+          return pandoc.RawInline("latex", "\\hyperref[" .. id .. "]{$\\leftarrow$ \\textsc{back to exercise}~\\ref*{" .. id .. "}}")
+        end
+        return pandoc.RawInline("latex", "\\hyperref[" .. id .. "]{$\\leftarrow$ \\textsc{back to "
+          .. pandoc.utils.stringify(link.content) .. "}}")
+      elseif span.classes:includes("data-link") and id then
+        return pandoc.RawInline("latex", "\\hyperref[" .. id .. "]{\\textsc{download data} $\\rightarrow$}")
+      end
+    end
+  }
+end
 if not quarto.doc.is_format("html") then return {} end
 
 local tadpole

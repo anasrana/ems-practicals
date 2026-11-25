@@ -87,6 +87,10 @@ ems_dark_for <- function(p) {
 local({
   counter <- new.env()
   knit_print_ggplot <- function(x, options, ...) {
+    if (!knitr::is_html_output()) {  # PDF: one ordinary figure
+      print(x)
+      return(invisible(NULL))
+    }
     label <- options$label
     n <- (if (is.null(counter[[label]])) 0 else counter[[label]]) + 1
     counter[[label]] <- n

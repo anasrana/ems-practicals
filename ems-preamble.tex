@@ -1,0 +1,27 @@
+% EMS practicals, PDF: brand touches on top of Quarto's scrbook template.
+\usepackage{booktabs}
+
+% Brand fonts: the desktop versions shipped with the brand extension.
+\usepackage{fontspec}
+\setmainfont{et-book}[
+  Path = _extensions/anasrana/tufte-brand/fonts/et-book/,
+  Extension = .otf, UprightFont = *-roman, ItalicFont = *-italic,
+  BoldFont = *-bold, Numbers = OldStyle]
+\setmonofont{IBMPlexMono}[
+  Path = _extensions/anasrana/tufte-brand/fonts/ibm-plex-mono/,
+  Extension = .ttf, UprightFont = *-Regular, ItalicFont = *-Italic,
+  Scale = 0.85]
+\usepackage{xcolor}
+\definecolor{tufte-red}{HTML}{A51C1C}
+\definecolor{tufte-muted}{HTML}{5E5E5A}
+\definecolor{tufte-rule}{HTML}{D8D8CF}
+
+% Headings: normal weight, chapter and section titles roman, lower levels italic.
+\addtokomafont{disposition}{\rmfamily\mdseries}
+\addtokomafont{chapter}{\Huge}
+\addtokomafont{subsection}{\itshape}
+\addtokomafont{subsubsection}{\itshape}
+\addtokomafont{chapterprefix}{\scshape\color{tufte-muted}}
+
+% Links in the text colour, no boxes.
+\AtBeginDocument{\hypersetup{colorlinks=true, linkcolor=black, urlcolor=tufte-red, citecolor=black}}
