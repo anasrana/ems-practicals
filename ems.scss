@@ -140,3 +140,16 @@ $arrow-left: polygon(#{$pt} 0, 100% 0, 100% 100%, #{$pt} 100%, 0 50%);
 }
 .ems-colophon p { margin: 0; }
 .ems-colophon a { color: inherit; }
+
+// ---- Previous / next chapter links: small caps -------------------------
+.page-navigation .nav-page-text {
+  font-variant: small-caps; letter-spacing: .04em;
+}
+
+// ---- Diagrams in dark mode ---------------------------------------------
+// Diagrams drawn once in light colours (chunk option classes = 'diagram')
+// are inverted with the hue rotated back in the dark theme, like SVG
+// figures in the brand's dark stylesheet.
+@if lightness($tufte-paper) < 50% {
+  .diagram img { filter: invert(1) hue-rotate(180deg); }
+}

@@ -67,6 +67,8 @@ execute:
 
 format:
   tufte-brand-html:
+    # bookdown read \( \) and \[ \] as maths; keep that
+    from: markdown+tex_math_single_backslash
     page-layout: article
     reference-location: margin
     fig-cap-location: margin

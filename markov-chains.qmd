@@ -43,6 +43,7 @@ Consider the following example where we have two states describing the weather o
 
 ```{r tstate}
 #| echo=FALSE,
+#| classes = 'diagram',
 #| out.width = '60%',
 #| dev.args = list(bg = 'transparent')
 
@@ -169,6 +170,7 @@ print(weather_sequence)
 
 ```{r fstate}
 #| echo=FALSE,
+#| classes = 'diagram',
 #| warning=FALSE,
 #| out.width = '60%',
 #| dev.args = list(bg = 'transparent'),

@@ -23,6 +23,7 @@ The three state Markov chain is more complex to draw. The diagram below shows th
 
 ```{r fstate}
 #| echo=FALSE,
+#| classes = 'diagram',
 #| warning=FALSE,
 #| out.width = '60%',
 #| dev.args = list(bg = 'transparent'),
