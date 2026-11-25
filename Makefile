@@ -1,30 +1,34 @@
-COMMIT ?= $(shell bash -c 'read -p "Commit Message: " commit; echo $$commit')
+# EMS practicals: Quarto book. The site is served by GitHub Pages from docs/
+# on main, so publishing = render, commit docs/ (and _freeze/), push.
 
-backup:
-	# rm -rf docs/libs;\
-	# sed -i 's/pdf/gh-pages/g' _bookdown.yml;\
-	# sed -i 's/colorlinks: false/colorlinks: true/g' index.Rmd;\
-	Rscript -e 'library(bookdown); render_book()'
-	# sed -i 's/Chalkduster/Comic Sans MS/g' gh-pages/related-tools.html
+COMMIT ?= $(shell bash -c 'read -p "Commit message: " commit; echo $$commit')
 
-bs4:
-	Rscript -e 'library(bookdown); bookdown::render_book()'
-	rm tikz*log
+.PHONY: render html pdf refresh preview publish clean
 
-clean:
-	Rscript -e 'bookdown::clean_book()';\
-	rm -rf _bookdown_files
-	 rm -f tikz*log
-	 rm -f tikz*aux
+# website and PDF into docs/ (chapters re-run only if their .qmd changed)
+render:
+	quarto render
 
-publish:
-	make bs4;\
-	cd docs;\
-	git add .;\
-	git commit -m '$(COMMIT)';\
-	git push
-	make clean
+html:
+	quarto render --to html
 
 pdf:
-	Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::pdf_book")'
-	rm -f tikz*log
+	quarto render --to pdf
+
+# re-run every chapter, e.g. after changing _common.R or the R packages
+refresh:
+	rm -rf _freeze
+	quarto render
+
+# live preview while editing
+preview:
+	quarto preview
+
+# render, then commit and push the built site
+publish: render
+	git add docs _freeze
+	git commit -m '$(COMMIT)'
+	git push
+
+clean:
+	rm -rf .quarto
