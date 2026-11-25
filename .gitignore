@@ -92,3 +92,10 @@ testing.R
 /_bookdown_files/
 /_book/
 /libs/
+
+# Local only: todos, plans and Claude material (not on GitHub)
+/TODO
+/todo*.md
+/design/
+/CLAUDE.md
+/.claude/
