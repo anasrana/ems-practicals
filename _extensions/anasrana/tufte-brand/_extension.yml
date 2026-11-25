@@ -1,6 +1,6 @@
 title: Tufte brand
 author: Anas A Rana
-version: 0.1.0
+version: 0.2.0
 quarto-required: ">=1.11.0"
 contributes:
   # Sets `brand:` for the whole project, so _brand.yml (fonts, colours) applies
