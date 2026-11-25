@@ -51,7 +51,7 @@ my_font <- "ET Book"
 my_font_size <- 18
 my_point_size <- 2
 # my_colors <- viridis::viridis(2, begin = .25, end = .5)
-my_colors <- c("#440154FF", "#2C728EFF", "#5DC863FF")
+my_colors <- c("#440154FF", "#2C728EFF", "#1F8A50FF")  # darker green: visible on the light page
 
 
 # Define node style and large label style
@@ -90,8 +90,8 @@ sunny_node <- place(sunny_node, sunny_node@bounding_box, "left", sep = 0.5)
 rainy_node <- place(rainy_node, sunny_node@bounding_box, "right", sep = 3)
 
 # ---- cross edges (use your connect + on-path labels) ----
-lbl06 <- ob_label("0.6", angle = 0, position = 0.50, size = 18, color = my_colors[1])
-lbl07 <- ob_label("0.7", angle = 0, position = 0.50, size = 18, color = my_colors[2])
+lbl06 <- ob_label("0.6", angle = 0, position = 0.50, size = 27, color = my_colors[1])
+lbl07 <- ob_label("0.7", angle = 0, position = 0.50, size = 27, color = my_colors[2])
 
 e_sr <- connect(
   from = sunny_node, to = rainy_node,
@@ -106,13 +106,13 @@ e_rs <- connect(
 )
 e_ss <- connect(
   from = sunny_node, to = sunny_node,
-  label = ob_label("0.4", angle = 0, position = 0.50, size = 18, color = my_colors[3]),
+  label = ob_label("0.4", angle = 0, position = 0.50, size = 27, color = my_colors[3]),
   label_sloped = FALSE, resect = 2, color = my_colors[3],
   from_offset = ob_point(-2, 3), to_offset = ob_point(2, 3)
 )
 e_rr <- connect(
   from = rainy_node, to = rainy_node,
-  label = ob_label("0.3", angle = 0, position = 0.50, size = 18, color = my_colors[3]),
+  label = ob_label("0.3", angle = 0, position = 0.50, size = 27, color = my_colors[3]),
   label_sloped = FALSE, resect = 2, color = my_colors[3],
   from_offset = ob_point(-3, -2), to_offset = ob_point(3, -3)
 )
@@ -177,7 +177,7 @@ print(weather_sequence)
 # ===== CONFIGURATION VARIABLES =====
 my_font <- "ET Book"
 font_size <- 18
-label_font_size <- 20
+label_font_size <- 30
 node_label_size <- 0.8 # Font size for node labels (Cloudy, Sunny, Rainy)
 
 # Node configuration
@@ -186,6 +186,7 @@ node_separation <- 50
 
 # Get three viridis colors for the nodes
 node_colors <- viridis::viridis(3, begin = .25, end = .75)
+node_colors[3] <- "#1F8A50"  # darker than viridis green, visible on the light page
 cloudy_color <- node_colors[1]   # Purple-ish
 sunny_color <- node_colors[2]    # Teal-ish
 rainy_color <- node_colors[3]    # Yellow-ish
