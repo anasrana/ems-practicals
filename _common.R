@@ -53,7 +53,6 @@ ggplot2::theme_set(theme_ems())
 # Students running the same code get the normal light plot.
 ems_dark <- ggplot2::theme(
   text = ggplot2::element_text(colour = "#e6e6de"),
-  plot.background = ggplot2::element_rect(fill = "#151513", colour = NA),
   panel.grid.major = ggplot2::element_line(colour = "#3a3a36"),
   panel.grid.major.y = ggplot2::element_line(colour = "#3a3a36"),
   axis.text = ggplot2::element_text(colour = "#a3a39b"),
@@ -61,6 +60,14 @@ ems_dark <- ggplot2::theme(
   legend.text = ggplot2::element_text(colour = "#a3a39b"),
   strip.text = ggplot2::element_text(colour = "#e6e6de"),
   geom = ggplot2::element_geom(ink = "#e6e6de", paper = "#151513")
+)
+
+# Figures sit directly on the page: transparent plot and legend background
+# in both versions, whatever theme a chapter uses.
+ems_transparent <- ggplot2::theme(
+  plot.background = ggplot2::element_rect(fill = "transparent", colour = NA),
+  legend.background = ggplot2::element_rect(fill = "transparent", colour = NA),
+  legend.box.background = ggplot2::element_rect(fill = "transparent", colour = NA)
 )
 
 # Only recolour theme elements the plot actually shows (a plot that hides
@@ -87,8 +94,9 @@ local({
       print(plot)
       grDevices::dev.off()
     }
-    dark <- if (inherits(x, "patchwork")) x & ems_dark else x + ems_dark_for(x)
-    draw(paste0(stem, "-light.png"), x)
+    light <- if (inherits(x, "patchwork")) x & ems_transparent else x + ems_transparent
+    dark <- if (inherits(x, "patchwork")) x & ems_dark & ems_transparent else x + ems_dark_for(x) + ems_transparent
+    draw(paste0(stem, "-light.png"), light)
     draw(paste0(stem, "-dark.png"), dark)
     width <- if (is.null(options$out.width)) "" else paste0(' width="', options$out.width, '"')
     knitr::asis_output(paste0(
