@@ -10,7 +10,7 @@ render:
 	quarto render
 
 html:
-	quarto render --to html
+	quarto render --to tufte-brand-html
 
 pdf:
 	quarto render --to pdf

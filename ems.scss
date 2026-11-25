@@ -159,3 +159,23 @@ $arrow-left: polygon(#{$pt} 0, 100% 0, 100% 100%, #{$pt} 100%, 0 50%);
     filter: invert(1) hue-rotate(180deg);
   }
 }
+
+// ---- Phones: nothing wider than the screen ------------------------------
+@media (max-width: 991.98px) {
+  // breadcrumb trail in the top bar: one line, cut with an ellipsis
+  #quarto-header, .quarto-secondary-nav { max-width: 100vw; overflow: hidden; }
+  .quarto-secondary-nav .container-fluid { min-width: 0; max-width: 100%; }
+  .quarto-secondary-nav .breadcrumb-item { min-width: 0; }
+  .quarto-secondary-nav .quarto-page-breadcrumbs { min-width: 0; flex: 1 1 auto; overflow: hidden; }
+  .quarto-secondary-nav .breadcrumb { flex-wrap: nowrap; white-space: nowrap; overflow: hidden; }
+  .quarto-secondary-nav .breadcrumb-item { overflow: hidden; text-overflow: ellipsis; }
+  // Quarto's backdrop behind the phone menu can be wider than the screen
+  .quarto-sidebar-collapse-item { max-width: 100vw; }
+  // safety net: nothing makes the page scroll sideways (clip keeps the
+  // sticky top bar working, unlike hidden)
+  html, body { overflow-x: clip; }
+  // wide tables scroll inside their own box, like code blocks
+  main table, main table.table { display: block !important; max-width: 100%; overflow-x: auto; }
+  // long inline code may break rather than widen the page
+  p code, li code, td code { overflow-wrap: anywhere; word-break: break-word; }
+}
