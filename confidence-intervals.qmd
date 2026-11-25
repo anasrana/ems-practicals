@@ -1,5 +1,8 @@
 # Confidence Intervals
 
+[]{#confidence-intervals}
+
+
 ```{r}
 #| include: false
 source("_common.R")
@@ -76,6 +79,8 @@ Let’s look at this interval:
 print(interval)
 ```
 ::: {#exr-confidence-intervals-1}
+[]{#exercise}
+
 Does the confidence interval contain the true parameter?
 :::
 

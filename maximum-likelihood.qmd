@@ -1,5 +1,8 @@
 # Maximum Likelihood
 
+[]{#maximum-likelihood}
+
+
 ```{r}
 #| include: false
 source("_common.R")

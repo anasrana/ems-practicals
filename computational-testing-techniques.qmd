@@ -1,5 +1,8 @@
 # Computational Testing Techniques
 
+[]{#computational-testing-techniques}
+
+
 In this practical we will look at various hypothesis testing techniques in `R`. The main focus will be to implement what we learned in the lectures. Please make an attempt before looking at the models answers. The solutions are quite straightforward to implement in `R` and should not take too long to complete.
 
 ::: {#exr-ht-ex1}

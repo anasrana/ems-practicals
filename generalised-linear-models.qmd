@@ -1,5 +1,8 @@
 # Generalised Linear Models
 
+[]{#generalised-linear-models}
+
+
 ```{r}
 #| include: false
 source("_common.R")
@@ -20,6 +23,9 @@ The cases seem to have relatively more `A` alleles than the controls. This might
 This is the idea we will implement with data.
 
 ## Data
+
+
+[]{#data-2}
 
 For this practical we will use some preprepared data-files. You will find instructions on how to download files in the linke below:
 

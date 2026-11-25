@@ -5,6 +5,20 @@ aliases:
 
 # Solution: Confidence Interval {#sol-ex-CI}
 
+```{=html}
+<script>
+// The old site published the Computational Testing solutions on this page
+// (sol-ex-CI.html#ht-sol-ex2 etc.); send those links to their own page.
+document.addEventListener("DOMContentLoaded", function () {
+  var id = decodeURIComponent(location.hash.slice(1));
+  if (id && !document.getElementById(id)) {
+    location.replace("solution-computational-testing.html" + location.hash);
+  }
+});
+</script>
+```
+
+
 ```{r}
 #| include: false
 source("_common.R")

@@ -39,6 +39,9 @@ theme_anas <- theme_update(
 
 ## Multiple regression
 
+
+[]{#multiple-regression-1}
+
 For this part we will use the inbuilt `trees` dataset containing `Volume`, `Girth` and `Height` data for 31 trees.
 
 First we revisit linear regression on this example, recall the function to fit a linear model `lm()`. Consider `Volume` to be the response variable and `Girth` to be the covariate.

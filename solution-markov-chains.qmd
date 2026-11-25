@@ -5,6 +5,9 @@ aliases:
 
 #  Solution: Markov Chains
 
+[]{#solution-markov-chains}
+
+
 ```{r}
 #| include: false
 source("_common.R")

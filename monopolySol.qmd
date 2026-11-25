@@ -148,6 +148,9 @@ hist(positions3, breaks = seq(0, 40, len = 41), right = FALSE)
 
 ## Solution: Rolling three doubles {#3doubleMon-sol}
 
+[]{#id_3doubleMon-sol}
+
+
 
 [[exercise](a-monopoly-simulation.qmd#exr-repDoublesMon)]{.back-link}
 > You can also go to jail, if you roll three doubles (both dice having the same value) in a row. Update your code to allow for the possibility of going to Jail with three doubles. How does the distribution of board positions change?

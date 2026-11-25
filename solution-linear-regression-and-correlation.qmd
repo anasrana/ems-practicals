@@ -5,6 +5,9 @@ aliases:
 
 # Solution: Linear regression and Correlation
 
+[]{#solution-linear-regression-and-correlation}
+
+
 ```{r}
 #| include: false
 source("_common.R")
@@ -48,6 +51,9 @@ lr_diagnostics <- function(y, x) {
 ```
 
 ### Example usage:
+
+[]{#example-usage-1}
+
 
 Let's test the function with some simulated data:
 

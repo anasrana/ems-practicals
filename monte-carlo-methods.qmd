@@ -1,5 +1,8 @@
 # Monte Carlo Methods
 
+[]{#monte-carlo-methods}
+
+
 ```{r}
 #| include: false
 source("_common.R")
@@ -277,6 +280,9 @@ Not bad! **The Monte Carlo estimate is close to the true value.**
 
 ::: {#exr-monte-carlo-methods-2}
 ## MC Binomial
+
+[]{#problem-mc-binomial}
+
 
 Let's expand this once again trying to see the impact of the number of simulations on the accuracy of the estimate.
 

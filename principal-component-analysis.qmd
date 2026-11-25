@@ -1,5 +1,8 @@
 # Principal component analysis
 
+[]{#principal-component-analysis}
+
+
 ```{r}
 #| include: false
 source("_common.R")
@@ -105,6 +108,8 @@ We can see the original axis starting from the origin. Therefore we can make obs
 
 
 ::: {#exr-principal-component-analysis-1}
+[]{#exercise-i}
+
 Now try to perform a PCA on the `USArrests` data also build into `R`. Typing `?USArrests` will give you further information on the data. Perform the analysis on the subset `USArrests[, -3]` data.
 
 <font style="color:darkorange">

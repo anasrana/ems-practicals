@@ -1,5 +1,8 @@
 # A Monopoly simulation
 
+[]{#a-monopoly-simulation}
+
+
 ```{r}
 #| include: false
 source("_common.R")
@@ -71,6 +74,9 @@ hist(positions_visited, breaks = seq(0, 40, len = 41), right = FALSE)
 
 ::: {#exr-a-monopoly-simulation-1}
 ## Questions to consider
+
+[]{#questions-to-consider}
+
 
 
 -   What is the distribution of board positions during a long game?

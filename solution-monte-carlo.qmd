@@ -1,5 +1,8 @@
 #  Solution: Monte Carlo
 
+[]{#solution-monte-carlo}
+
+
 ```{r}
 #| include: false
 source("_common.R")

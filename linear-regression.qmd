@@ -1,5 +1,8 @@
 # Linear regression
 
+[]{#linear-regression}
+
+
 ```{r}
 #| include: false
 source("_common.R")
@@ -36,6 +39,9 @@ knitr::opts_chunk$set(dev = 'ragg_png',
 ```
 
 ## Data
+
+
+[]{#data-1}
 
 For this practical you will require three datasets, more information about downloading them [here](data-sets.qmd#data-sets).
 
