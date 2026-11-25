@@ -14,6 +14,14 @@ book:
   repo-url: https://github.com/anasrana/ems-practicals
   favicon: _extensions/anasrana/tufte-brand/logo/favicon.svg
   search: true
+  sidebar:
+    # link back to the homepage above the book title (decision 1A)
+    header: |
+      [![](_extensions/anasrana/tufte-brand/logo/logo.svg){.home-frog alt=""} Anas A Rana](https://anasrana.github.io/){.home-link}
+  page-footer:
+    left: |
+      Essentials of Mathematics and Statistics · [Anas A Rana](https://anasrana.github.io/) · University of Birmingham\
+      *Set in ET Book. Built with Quarto ([source](https://github.com/anasrana/ems-practicals)).*
   chapters:
     - index.qmd
     - part: "Getting started"

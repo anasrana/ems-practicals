@@ -103,3 +103,40 @@ $arrow-left: polygon(#{$pt} 0, 100% 0, 100% 100%, #{$pt} 100%, 0 50%);
   color: $tufte-red; text-decoration: none;
 }
 .datalink a:hover { text-decoration: underline; }
+
+// ---- Link back to the homepage -----------------------------------------
+// Desktop: frog + name above the book title in the sidebar.
+.quarto-sidebar-header .home-link {
+  display: inline-flex; align-items: center; gap: .4em;
+  color: $tufte-muted; text-decoration: none; font-size: .9rem;
+  margin-bottom: .6rem;
+}
+.quarto-sidebar-header .home-link:hover { color: $tufte-ink; }
+.quarto-sidebar-header .home-frog { height: .95em; width: auto; }
+// Phones: a small frog + name line above each page title (ems.lua puts it
+// first in the page body; on phones the main column is reordered so it sits
+// above the title block).
+.mobile-home { display: none; }
+@media (max-width: 991.98px) {
+  main.content { display: flex; flex-direction: column; }
+  main.content > * { width: 100%; }
+  .mobile-home { display: block; order: -1; margin: 0 0 .25rem; font-size: .9rem; }
+  .mobile-home a {
+    display: inline-flex; align-items: center; gap: .4em; min-height: 44px;
+    color: $tufte-muted; text-decoration: none;
+  }
+  .mobile-home svg { height: .95em; width: auto; }
+  .mobile-home svg .accent { fill: $tufte-red; }
+}
+.quarto-sidebar-header .sidebar-header-item p { margin: 0; }
+
+// ---- Colophon (decision 3A) --------------------------------------------
+// Below the prev/next links, in the text column: thin rule, then the
+// credit line and an italic colophon line.
+.ems-colophon {
+  margin: 1.5rem 0 2.5rem; padding-top: 1rem;
+  border-top: 1px solid $tufte-rule;
+  font-size: .85rem; line-height: 1.45; color: $tufte-muted;
+}
+.ems-colophon p { margin: 0; }
+.ems-colophon a { color: inherit; }

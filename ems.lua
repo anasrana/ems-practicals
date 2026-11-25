@@ -7,6 +7,10 @@
 --   3. [@exr-id]{.back-link} or [[text](page.qmd#id)]{.back-link}: grey
 --      "back to exercise 1.1" box pointing left.
 --   4. [[download data](data-sets.qmd#id)]{.data-link}: quiet text link.
+--   6. Moves the page footer (colophon) to just below the prev/next links,
+--      in the text column; without JavaScript it stays in Quarto's footer.
+--   5. A small frog + "Anas A Rana" link to the homepage at the top of each
+--      page, shown on phones only (ems.scss moves it above the title).
 if not quarto.doc.is_format("html") then return {} end
 
 local tadpole
@@ -25,6 +29,14 @@ end
 
 local function read_tadpole()
   local f = io.open(quarto.project.directory .. "/_extensions/anasrana/tufte-brand/logo/tadpole.svg")
+  if not f then return "" end
+  local svg = f:read("a"):gsub("%s+$", "")
+  f:close()
+  return (svg:gsub("<title>.-</title>", ""):gsub(' role="img"', ' aria-hidden="true" focusable="false"'))
+end
+
+local function read_frog()
+  local f = io.open(quarto.project.directory .. "/_extensions/anasrana/tufte-brand/logo/logo.svg")
   if not f then return "" end
   local svg = f:read("a"):gsub("%s+$", "")
   f:close()
@@ -102,5 +114,20 @@ function Pandoc(doc)
   read_index()
   doc.blocks = doc.blocks:walk({ Span = link_span })
   doc.blocks = doc.blocks:walk({ Div = exercise_title })
+  doc.blocks:insert(1, pandoc.RawBlock("html",
+    '<div class="mobile-home"><a href="https://anasrana.github.io/"><span class="home-frog">'
+    .. read_frog() .. "</span>Anas A Rana</a></div>"))
+  doc.blocks:insert(pandoc.RawBlock("html", [[<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var left = document.querySelector("footer.footer .nav-footer-left");
+  var nav = document.querySelector("nav.page-navigation");
+  if (!left || !nav) return;
+  var f = document.createElement("div");
+  f.className = "ems-colophon";
+  f.innerHTML = left.innerHTML;
+  nav.after(f);
+  document.querySelector("footer.footer").remove();
+});
+</script>]]))
   return doc
 end
