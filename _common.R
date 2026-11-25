@@ -54,8 +54,13 @@ ggplot2::theme_set(theme_ems())
 # Students running the same code get the normal light plot.
 ems_dark <- ggplot2::theme(
   text = ggplot2::element_text(colour = "#e6e6de"),
+  panel.grid = ggplot2::element_line(colour = "#3a3a36"),
   panel.grid.major = ggplot2::element_line(colour = "#3a3a36"),
+  panel.grid.major.x = ggplot2::element_line(colour = "#3a3a36"),
   panel.grid.major.y = ggplot2::element_line(colour = "#3a3a36"),
+  panel.grid.minor = ggplot2::element_line(colour = "#262623"),
+  panel.grid.minor.x = ggplot2::element_line(colour = "#262623"),
+  panel.grid.minor.y = ggplot2::element_line(colour = "#262623"),
   axis.text = ggplot2::element_text(colour = "#a3a39b"),
   axis.title = ggplot2::element_text(colour = "#a3a39b"),
   legend.text = ggplot2::element_text(colour = "#a3a39b"),

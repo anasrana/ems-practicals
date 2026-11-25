@@ -111,7 +111,7 @@ ggplot(data = qq_df, aes(x = tq)) +
   # We create the robust line in red
   geom_line(aes(y = qq_line), col = "red", size = 2) +
   # Change the plot theme to something easier to see
-  theme_bw() +
+  theme_minimal() +
   labs(
     x = "Theoretical Quantiles",
     y = "Sample Quantiles"
@@ -136,7 +136,7 @@ ggplot(data = qq_df, aes(sample = x_sort)) +
   # Create the line for comparison
   stat_qq_line(size = 2, col = "blue") +
   # Choosing a simpler theme
-  theme_bw()
+  theme_minimal()
 
 ```
 
@@ -171,7 +171,7 @@ ggplot(data = mtcars, aes(sample = mpg, color = cyl)) +
   # We now add the reference lines
   stat_qq_line(size = 1.5) +
   # We choose a theme that is easier to read
-  theme_bw()
+  theme_minimal()
 ```
 
 You can see how useful this approach can be be and managed to create a lot of information in a few lines of code.
