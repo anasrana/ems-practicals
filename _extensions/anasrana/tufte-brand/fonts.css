@@ -1,0 +1,36 @@
+/* Web fonts for the tufte-brand format. Paths are relative to this file. */
+@font-face {
+  font-family: "ET Book";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("fonts/et-book/et-book-roman.woff2") format("woff2");
+}
+@font-face {
+  font-family: "ET Book";
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: url("fonts/et-book/et-book-italic.woff2") format("woff2");
+}
+@font-face {
+  font-family: "ET Book";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("fonts/et-book/et-book-bold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("fonts/ibm-plex-mono/ibm-plex-mono-400-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: url("fonts/ibm-plex-mono/ibm-plex-mono-400-italic.woff2") format("woff2");
+}

@@ -35,28 +35,8 @@ color:
     dark: muted-dark
 
 typography:
-  fonts:
-    - family: ET Book
-      source: file
-      files:
-        - path: fonts/et-book/et-book-roman.woff2
-          weight: 400
-          style: normal
-        - path: fonts/et-book/et-book-italic.woff2
-          weight: 400
-          style: italic
-        - path: fonts/et-book/et-book-bold.woff2
-          weight: 700
-          style: normal
-    - family: IBM Plex Mono
-      source: file
-      files:
-        - path: fonts/ibm-plex-mono/ibm-plex-mono-400-normal.woff2
-          weight: 400
-          style: normal
-        - path: fonts/ibm-plex-mono/ibm-plex-mono-400-italic.woff2
-          weight: 400
-          style: italic
+  # Font files are declared in fonts.css: Quarto copies that stylesheet and the
+  # fonts it references into the site (brand `source: file` fonts are not).
   base:
     family: ET Book
     size: 1.0625rem  # 17px

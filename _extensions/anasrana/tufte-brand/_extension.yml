@@ -1,6 +1,6 @@
 title: Tufte brand
 author: Anas A Rana
-version: 0.2.0
+version: 0.2.1
 quarto-required: ">=1.11.0"
 contributes:
   # Sets `brand:` for the whole project, so _brand.yml (fonts, colours) applies
@@ -19,3 +19,6 @@ contributes:
       respect-user-color-scheme: true
       code-copy: false
       filters: [tufte.lua]
+      # Web fonts: a plain stylesheet, so Quarto copies it and the font files
+      # it references into the site at the same relative paths.
+      css: [fonts.css]

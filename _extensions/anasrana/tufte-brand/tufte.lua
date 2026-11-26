@@ -145,7 +145,7 @@ local function append_endmark(blocks)
       -- Margin content and Quarto's hidden metadata are not the end of the text.
     elseif b.t == "Div" and (b.identifier:match("^exr%-") or b.identifier:match("^sol%-")
         or b.classes:includes("theorem") or b.classes:includes("exercise")
-        or b.classes:includes("callout") or b.classes:find(function(c) return c:match("^callout") end)) then
+        or b.classes:includes("callout") or b.classes:find_if(function(c) return c:match("^callout") end)) then
       -- A page that ends with an exercise, solution or callout box gets no end
       -- mark: the tadpole belongs to the running text, not inside a box.
       return false
