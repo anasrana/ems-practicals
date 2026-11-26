@@ -1,992 +1,1338 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>F Solution: Confidence Interval | Essentials of Mathematics and Statistics</title>
-<meta name="author" content="Anas A Rana">
-<meta name="description" content="Can you devise a way to compute a confidence interval for the population standard deviation? You can make use of the following as a point estimate of the sample variance: \[  s^2 = \frac{1}{n -...">
-<meta name="generator" content="bookdown 0.48 with bs4_book()">
-<meta property="og:title" content="F Solution: Confidence Interval | Essentials of Mathematics and Statistics">
-<meta property="og:type" content="book">
-<meta property="og:description" content="Can you devise a way to compute a confidence interval for the population standard deviation? You can make use of the following as a point estimate of the sample variance: \[  s^2 = \frac{1}{n -...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="F Solution: Confidence Interval | Essentials of Mathematics and Statistics">
-<meta name="twitter:description" content="Can you devise a way to compute a confidence interval for the population standard deviation? You can make use of the following as a point estimate of the sample variance: \[  s^2 = \frac{1}{n -...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Palatino-0.4.10/font.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Fira%20Code:wght@100&amp;display=swap" rel="stylesheet">
-<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
-    
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  </style>
-<link rel="stylesheet" href="style.css">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="The practical sessions for Essentials of Mathematics and Statistics, part of the MSc Bioinformatics at the University of Birmingham.">
+
+<title>Appendix F — Solution: Confidence Interval – Essentials of Mathematics and Statistics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./solution-computational-testing.html" rel="next">
+<link href="./sol-mle.html" rel="prev">
+<link href="site_libs/quarto-contrib/quarto-project/anasrana/tufte-brand/logo/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-916e1d957aa2e2d21c4002595b1ed413.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-9f18ae6aabaf6c0e00f98c5a006862d7.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-916e1d957aa2e2d21c4002595b1ed413.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2af58e5f354677c1aa98ae231aa6e52d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-d0ec94b9ce42e636880269600be468a7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-2af58e5f354677c1aa98ae231aa6e52d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 </head>
-<body data-spy="scroll" data-target="#toc">
 
-<div class="container-fluid">
-<div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      refreshSafariScrollbar();
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="">Essentials of Mathematics and Statistics</a>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item">Appendices</li><li class="breadcrumb-item"><a href="./simSol.html">Solutions</a></li><li class="breadcrumb-item"><a href="./sol-ex-CI.html"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Solution: Confidence Interval</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
     </div>
-
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Introduction to the Practical</a></li>
-<li class="book-part">Probability in R</li>
-<li><a class="" href="simulating-random-numbers.html"><span class="header-section-number">1</span> Simulating random numbers</a></li>
-<li><a class="" href="markov-chains.html"><span class="header-section-number">2</span> Markov Chains</a></li>
-<li><a class="" href="a-monopoly-simulation.html"><span class="header-section-number">3</span> A Monopoly simulation</a></li>
-<li><a class="" href="monte-carlo-methods.html"><span class="header-section-number">4</span> Monte Carlo Methods</a></li>
-<li><a class="" href="maximum-likelihood.html"><span class="header-section-number">5</span> Maximum Likelihood</a></li>
-<li><a class="" href="confidence-intervals.html"><span class="header-section-number">6</span> Confidence Intervals</a></li>
-<li><a class="" href="computational-testing-techniques.html"><span class="header-section-number">7</span> Computational Testing Techniques</a></li>
-<li class="book-part">Statistical Modelling</li>
-<li><a class="" href="representing-data-in-r.html"><span class="header-section-number">8</span> Representing Data in R</a></li>
-<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">9</span> Principal component analysis</a></li>
-<li><a class="" href="linear-regression.html"><span class="header-section-number">10</span> Linear regression</a></li>
-<li><a class="" href="multiple-regression.html"><span class="header-section-number">11</span> Multiple regression</a></li>
-<li><a class="" href="qq-plot.html"><span class="header-section-number">12</span> QQ Plot - How To Use And Interpret</a></li>
-<li><a class="" href="generalised-linear-models.html"><span class="header-section-number">13</span> Generalised Linear Models</a></li>
-<li class="book-part">Solutions</li>
-<li><a class="" href="simSol.html"><span class="header-section-number">A</span> Solution: Simulations</a></li>
-<li><a class="" href="solution-markov-chains.html"><span class="header-section-number">B</span> Solution: Markov Chains</a></li>
-<li><a class="" href="monopolySol.html"><span class="header-section-number">C</span> Solution: Monopoly</a></li>
-<li><a class="" href="solution-monte-carlo.html"><span class="header-section-number">D</span> Solution: Monte Carlo</a></li>
-<li><a class="" href="sol-mle.html"><span class="header-section-number">E</span> Solution: Model Answers: MLE</a></li>
-<li><a class="active" href="sol-ex-CI.html"><span class="header-section-number">F</span> Solution: Confidence Interval</a></li>
-<li><a class="" href="representing_data-sol.html"><span class="header-section-number">G</span> Solution: Representing Data</a></li>
-<li><a class="" href="solution-linear-regression-and-correlation.html"><span class="header-section-number">H</span> Solution: Linear regression and Correlation</a></li>
-<li class="book-part">APPENDIX</li>
-<li><a class="" href="start.html">Getting started in R and Rstudio</a></li>
-<li><a class="" href="creating-functions-r.html">Creating functions R</a></li>
-<li><a class="" href="data-sets.html">Data sets</a></li>
-</ul>
-
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/anasrana/ems-practicals">View book source <i class="fab fa-github"></i></a></p>
-        </div>
-      </nav>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
+<p><a href="https://anasrana.github.io/" class="home-link"><img src="site_libs/quarto-contrib/quarto-project/anasrana/tufte-brand/logo/logo.svg" class="home-frog img-fluid" alt=""> Anas A Rana</a></p>
+</div></div>
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Essentials of Mathematics and Statistics</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/anasrana/ems-practicals" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./ems-practicals.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="sol-ex-CI" class="section level1" number="19">
-<h1>
-<span class="header-section-number">F</span> Solution: Confidence Interval<a class="anchor" aria-label="anchor" href="#sol-ex-CI"><i class="fas fa-link"></i></a>
-</h1>
-<blockquote>
-<p>Can you devise a way to compute a confidence interval for the population standard deviation?</p>
-</blockquote>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to the Practical</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Getting started</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./start.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting started in R and Rstudio</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./creating-functions-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Creating functions R</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">Probability in R</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./simulating-random-numbers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Simulating random numbers</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./markov-chains.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Markov Chains</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a-monopoly-simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A Monopoly simulation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./monte-carlo-methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./maximum-likelihood.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Maximum Likelihood</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./confidence-intervals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Confidence Intervals</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./computational-testing-techniques.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Computational Testing Techniques</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Statistical modelling</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./representing-data-in-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Representing Data in R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./principal-component-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Principal component analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./linear-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Linear regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multiple-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qq-plot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title"><span class="acronym">QQ</span> Plot - How To Use And Interpret</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./generalised-linear-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Generalised Linear Models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">Appendices</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">Solutions</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./simSol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Solution: Simulations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./solution-markov-chains.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Solution: Markov Chains</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./monopolySol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Solution: Monopoly</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./solution-monte-carlo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Solution: Monte Carlo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sol-mle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Solution: Model Answers: <span class="acronym">MLE</span></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sol-ex-CI.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Solution: Confidence Interval</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./solution-computational-testing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">Solution: Computational Testing</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./representing_data-sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">H</span>&nbsp; <span class="chapter-title">Solution: Representing Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./solution-linear-regression-and-correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">I</span>&nbsp; <span class="chapter-title">Solution: Linear regression and Correlation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-sets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data sets</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#function-definitions" id="toc-function-definitions" class="nav-link active" data-scroll-target="#function-definitions"><span class="header-section-number">F.1</span> Function Definitions</a></li>
+  <li><a href="#main-analysis" id="toc-main-analysis" class="nav-link" data-scroll-target="#main-analysis"><span class="header-section-number">F.2</span> Main Analysis</a></li>
+  <li><a href="#advanced-analysis-with-accuracy-assessment" id="toc-advanced-analysis-with-accuracy-assessment" class="nav-link" data-scroll-target="#advanced-analysis-with-accuracy-assessment"><span class="header-section-number">F.3</span> Advanced Analysis with Accuracy Assessment</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item">Appendices</li><li class="breadcrumb-item"><a href="./simSol.html">Solutions</a></li><li class="breadcrumb-item"><a href="./sol-ex-CI.html"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Solution: Confidence Interval</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sol-ex-CI" class="quarto-section-identifier">Appendix F — Solution: Confidence Interval</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="mobile-home"><a href="https://anasrana.github.io/"><span class="home-frog"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" viewbox="5 8.9 34.6 23.9"><path d="M20.4 32H12.5c-5 0-7.5-3-6-7 2.5-6 12-10.5 20-11.3.2-4.3 6-4.3 6.2-.2 2.4.3 4.8 2 5.8 4.2.3 2.3-1.6 4.4-4.6 5.4M10 24.5c4-4.5 11.5-4 12.5 0 .6 2.8-2.5 4.8-7 5"></path><circle cx="29.6" cy="12.2" r=".9" fill="currentColor" stroke="none"></circle><path class="accent" d="M20.5 31.9l.2-.3l.7-.3l.7-.7l4.6-6l.4-.1l.4 .1l.1 6.4l.1 .4l.4 .1l.3 0l.2 .2l-.2 .2l-1.2 0l-2 0l-.1-.3l1.1-.3l.2-.7l0-1.8l-1.2-.2l-1 0l-.3 .2l-1.3 1.7l-.2 .4l.3 .3l.3 0l.4 .1l-.2 .3l-2 0l-.7 0zm4.2-3.7l.7 .1l.8 0l.2-2.3l-1 1.1l-.7 1zm4 3.7l.2-.2l.5-.1l.5-.2l.3-.6l1-4.7l.1-.4l-.2-.4l-.5-.1l-.3-.2l.2-.3l3 0q1 0 1.6 .5q.6 .5 .6 1.3q0 .8 -.6 1.4q-.6 .6 -1.5 .8l.1 .3l.6 1.3l.4 .6l.5 .5l.9 .3l-.1 .4l-1.6-.2q-.5-.2 -1-.9l-.2-.4l-.2-.5l-.2-.4l-.4-.8l-.4-.1l-.3 0l-.5 1.8l-.1 .4l.2 .4l.6 .1q.3 0 .2 .3l-1.1 .1l-1.3 0l-.9 0zm3-3.7l0 .3l1-.1l.8-.4l.7-.7l.2-.9q0-.6 -.4-.9l-.8-.3l-.7 0l-.2 .2z" fill="#a51c1c" stroke="none"></path></svg></span>Anas A Rana</a></div>
+<script>
+// The old site published the Computational Testing solutions on this page
+// (sol-ex-CI.html#ht-sol-ex2 etc.); send those links to their own page.
+document.addEventListener("DOMContentLoaded", function () {
+  var id = decodeURIComponent(location.hash.slice(1));
+  if (id && !document.getElementById(id)) {
+    location.replace("solution-computational-testing.html" + location.hash);
+  }
+});
+</script>
+<p><span class="backlink"><a href="confidence-intervals.html#exr-ex-confidence-interval"><span class="swap"><span class="arr" aria-hidden="true">←</span><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" viewbox="0 0 56 40"><path d="M3 20.2h50" stroke-width=".8" opacity=".35"></path><path d="M4 19.7 7 25.2l3-8.4 3-.3 3 8 3-5 3-3.6 3 6.3 3-1.6 3-3.1 3 2.1 3 1.2 3-1.9 3 1.2 3 .1" stroke-width="1.1"></path><circle cx="49.5" cy="20.2" r="2.8" class="accent" fill="#a51c1c" stroke="none"></circle></svg></span><span>back to exercise 6.2</span></a></span> &gt; Can you devise a way to compute a confidence interval for the population standard deviation?</p>
 <p>You can make use of the following as a point estimate of the sample variance:</p>
 <p><span class="math display">\[
   s^2 = \frac{1}{n - 1}\sum_{i = 1}^n (x - \bar{x})^2
 \]</span></p>
 <p>which can be calculated using the <code>sd</code> function in <code>R</code>, remember the relationship between the standard deviation and variance.</p>
-<pre><code>#&gt; Warning: package 'ggplot2' was built under R version 4.5.2</code></pre>
-<div id="function-definitions" class="section level2" number="19.1">
-<h2>
-<span class="header-section-number">F.1</span> Function Definitions<a class="anchor" aria-label="anchor" href="#function-definitions"><i class="fas fa-link"></i></a>
-</h2>
+<section id="function-definitions" class="level2" data-number="F.1">
+<h2 data-number="F.1" class="anchored" data-anchor-id="function-definitions"><span class="header-section-number">F.1</span> Function Definitions</h2>
 <p>First, let’s define the functions that will be used for the confidence interval analysis:</p>
-<div class="sourceCode" id="cb412"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb412-1"><a href="sol-ex-CI.html#cb412-1"></a><span class="co"># Function to simulate confidence intervals for standard deviation</span></span>
-<span id="cb412-2"><a href="sol-ex-CI.html#cb412-2"></a>simulate_confidence_intervals <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
-<span id="cb412-3"><a href="sol-ex-CI.html#cb412-3"></a>    sample_size, n_repeats, interval_widths, <span class="at">population_mean =</span> <span class="fl">2.5</span>,</span>
-<span id="cb412-4"><a href="sol-ex-CI.html#cb412-4"></a>    <span class="at">population_sd =</span> <span class="fl">1.0</span>) {</span>
-<span id="cb412-5"><a href="sol-ex-CI.html#cb412-5"></a></span>
-<span id="cb412-6"><a href="sol-ex-CI.html#cb412-6"></a>  <span class="co"># Initialize storage for results</span></span>
-<span id="cb412-7"><a href="sol-ex-CI.html#cb412-7"></a>  n_interval_widths <span class="ot">&lt;-</span> <span class="fu">length</span>(interval_widths)</span>
-<span id="cb412-8"><a href="sol-ex-CI.html#cb412-8"></a>  sigma_contained <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_interval_widths)</span>
-<span id="cb412-9"><a href="sol-ex-CI.html#cb412-9"></a></span>
-<span id="cb412-10"><a href="sol-ex-CI.html#cb412-10"></a>  <span class="co"># Run Monte Carlo simulations</span></span>
-<span id="cb412-11"><a href="sol-ex-CI.html#cb412-11"></a>  <span class="cf">for</span> (replicate <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_repeats) {</span>
-<span id="cb412-12"><a href="sol-ex-CI.html#cb412-12"></a>    <span class="co"># Generate sample data</span></span>
-<span id="cb412-13"><a href="sol-ex-CI.html#cb412-13"></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(sample_size, <span class="at">mean =</span> population_mean, <span class="at">sd =</span> population_sd)</span>
-<span id="cb412-14"><a href="sol-ex-CI.html#cb412-14"></a></span>
-<span id="cb412-15"><a href="sol-ex-CI.html#cb412-15"></a>    <span class="co"># Compute sample standard deviation</span></span>
-<span id="cb412-16"><a href="sol-ex-CI.html#cb412-16"></a>    sample_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
-<span id="cb412-17"><a href="sol-ex-CI.html#cb412-17"></a></span>
-<span id="cb412-18"><a href="sol-ex-CI.html#cb412-18"></a>    <span class="co"># Test each interval width</span></span>
-<span id="cb412-19"><a href="sol-ex-CI.html#cb412-19"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_interval_widths) {</span>
-<span id="cb412-20"><a href="sol-ex-CI.html#cb412-20"></a>      <span class="co"># Check if interval contains the true standard deviation</span></span>
-<span id="cb412-21"><a href="sol-ex-CI.html#cb412-21"></a>      lower_bound <span class="ot">&lt;-</span> sample_sd <span class="sc">-</span> <span class="fl">0.5</span> <span class="sc">*</span> interval_widths[j]</span>
-<span id="cb412-22"><a href="sol-ex-CI.html#cb412-22"></a>      upper_bound <span class="ot">&lt;-</span> sample_sd <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> interval_widths[j]</span>
-<span id="cb412-23"><a href="sol-ex-CI.html#cb412-23"></a></span>
-<span id="cb412-24"><a href="sol-ex-CI.html#cb412-24"></a>      <span class="cf">if</span> ((population_sd <span class="sc">&gt;</span> lower_bound) <span class="sc">&amp;&amp;</span> (population_sd <span class="sc">&lt;</span> upper_bound)) {</span>
-<span id="cb412-25"><a href="sol-ex-CI.html#cb412-25"></a>        sigma_contained[j] <span class="ot">&lt;-</span> sigma_contained[j] <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb412-26"><a href="sol-ex-CI.html#cb412-26"></a>      }</span>
-<span id="cb412-27"><a href="sol-ex-CI.html#cb412-27"></a>    }</span>
-<span id="cb412-28"><a href="sol-ex-CI.html#cb412-28"></a>  }</span>
-<span id="cb412-29"><a href="sol-ex-CI.html#cb412-29"></a></span>
-<span id="cb412-30"><a href="sol-ex-CI.html#cb412-30"></a>  <span class="co"># Calculate probabilities</span></span>
-<span id="cb412-31"><a href="sol-ex-CI.html#cb412-31"></a>  probabilities <span class="ot">&lt;-</span> sigma_contained <span class="sc">/</span> n_repeats</span>
-<span id="cb412-32"><a href="sol-ex-CI.html#cb412-32"></a></span>
-<span id="cb412-33"><a href="sol-ex-CI.html#cb412-33"></a>  <span class="fu">return</span>(<span class="fu">list</span>(</span>
-<span id="cb412-34"><a href="sol-ex-CI.html#cb412-34"></a>    <span class="at">interval_widths =</span> interval_widths,</span>
-<span id="cb412-35"><a href="sol-ex-CI.html#cb412-35"></a>    <span class="at">probabilities =</span> probabilities,</span>
-<span id="cb412-36"><a href="sol-ex-CI.html#cb412-36"></a>    <span class="at">counts =</span> sigma_contained</span>
-<span id="cb412-37"><a href="sol-ex-CI.html#cb412-37"></a>  ))</span>
-<span id="cb412-38"><a href="sol-ex-CI.html#cb412-38"></a>}</span>
-<span id="cb412-39"><a href="sol-ex-CI.html#cb412-39"></a></span>
-<span id="cb412-40"><a href="sol-ex-CI.html#cb412-40"></a><span class="co"># Function to analyze confidence interval accuracy with multiple runs</span></span>
-<span id="cb412-41"><a href="sol-ex-CI.html#cb412-41"></a>analyze_ci_accuracy <span class="ot">&lt;-</span> <span class="cf">function</span>(sample_size, n_repeats, interval_widths,</span>
-<span id="cb412-42"><a href="sol-ex-CI.html#cb412-42"></a>                               <span class="at">n_runs =</span> <span class="dv">10</span>, <span class="at">population_mean =</span> <span class="fl">2.5</span>, <span class="at">population_sd =</span> <span class="fl">1.0</span>) {</span>
-<span id="cb412-43"><a href="sol-ex-CI.html#cb412-43"></a></span>
-<span id="cb412-44"><a href="sol-ex-CI.html#cb412-44"></a>  <span class="co"># Storage for results from multiple runs</span></span>
-<span id="cb412-45"><a href="sol-ex-CI.html#cb412-45"></a>  all_probabilities <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> n_runs, <span class="at">ncol =</span> <span class="fu">length</span>(interval_widths))</span>
-<span id="cb412-46"><a href="sol-ex-CI.html#cb412-46"></a></span>
-<span id="cb412-47"><a href="sol-ex-CI.html#cb412-47"></a>  <span class="co"># Run the simulation multiple times to assess variability</span></span>
-<span id="cb412-48"><a href="sol-ex-CI.html#cb412-48"></a>  <span class="cf">for</span> (run <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_runs) {</span>
-<span id="cb412-49"><a href="sol-ex-CI.html#cb412-49"></a>    result <span class="ot">&lt;-</span> <span class="fu">simulate_confidence_intervals</span>(sample_size, n_repeats, interval_widths,</span>
-<span id="cb412-50"><a href="sol-ex-CI.html#cb412-50"></a>                                          population_mean, population_sd)</span>
-<span id="cb412-51"><a href="sol-ex-CI.html#cb412-51"></a>    all_probabilities[run, ] <span class="ot">&lt;-</span> result<span class="sc">$</span>probabilities</span>
-<span id="cb412-52"><a href="sol-ex-CI.html#cb412-52"></a>  }</span>
-<span id="cb412-53"><a href="sol-ex-CI.html#cb412-53"></a></span>
-<span id="cb412-54"><a href="sol-ex-CI.html#cb412-54"></a>  <span class="co"># Calculate mean and standard deviation for each interval width</span></span>
-<span id="cb412-55"><a href="sol-ex-CI.html#cb412-55"></a>  mean_accuracy <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(all_probabilities)</span>
-<span id="cb412-56"><a href="sol-ex-CI.html#cb412-56"></a>  sd_accuracy <span class="ot">&lt;-</span> <span class="fu">apply</span>(all_probabilities, <span class="dv">2</span>, sd)</span>
-<span id="cb412-57"><a href="sol-ex-CI.html#cb412-57"></a></span>
-<span id="cb412-58"><a href="sol-ex-CI.html#cb412-58"></a>  <span class="fu">return</span>(<span class="fu">list</span>(</span>
-<span id="cb412-59"><a href="sol-ex-CI.html#cb412-59"></a>    <span class="at">interval_widths =</span> interval_widths,</span>
-<span id="cb412-60"><a href="sol-ex-CI.html#cb412-60"></a>    <span class="at">mean_accuracy =</span> mean_accuracy,</span>
-<span id="cb412-61"><a href="sol-ex-CI.html#cb412-61"></a>    <span class="at">sd_accuracy =</span> sd_accuracy,</span>
-<span id="cb412-62"><a href="sol-ex-CI.html#cb412-62"></a>    <span class="at">all_probabilities =</span> all_probabilities</span>
-<span id="cb412-63"><a href="sol-ex-CI.html#cb412-63"></a>  ))</span>
-<span id="cb412-64"><a href="sol-ex-CI.html#cb412-64"></a>}</span></code></pre></div>
+<div class="cell" data-layout-align="center">
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to simulate confidence intervals for standard deviation</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>simulate_confidence_intervals <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    sample_size, n_repeats, interval_widths, <span class="at">population_mean =</span> <span class="fl">2.5</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">population_sd =</span> <span class="fl">1.0</span>) {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Initialize storage for results</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  n_interval_widths <span class="ot">&lt;-</span> <span class="fu">length</span>(interval_widths)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  sigma_contained <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n_interval_widths)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Run Monte Carlo simulations</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (replicate <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_repeats) {</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate sample data</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(sample_size, <span class="at">mean =</span> population_mean, <span class="at">sd =</span> population_sd)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute sample standard deviation</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    sample_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Test each interval width</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_interval_widths) {</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Check if interval contains the true standard deviation</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>      lower_bound <span class="ot">&lt;-</span> sample_sd <span class="sc">-</span> <span class="fl">0.5</span> <span class="sc">*</span> interval_widths[j]</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>      upper_bound <span class="ot">&lt;-</span> sample_sd <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> interval_widths[j]</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> ((population_sd <span class="sc">&gt;</span> lower_bound) <span class="sc">&amp;&amp;</span> (population_sd <span class="sc">&lt;</span> upper_bound)) {</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        sigma_contained[j] <span class="ot">&lt;-</span> sigma_contained[j] <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate probabilities</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  probabilities <span class="ot">&lt;-</span> sigma_contained <span class="sc">/</span> n_repeats</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">interval_widths =</span> interval_widths,</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">probabilities =</span> probabilities,</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">counts =</span> sigma_contained</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to analyze confidence interval accuracy with multiple runs</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>analyze_ci_accuracy <span class="ot">&lt;-</span> <span class="cf">function</span>(sample_size, n_repeats, interval_widths,</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>                               <span class="at">n_runs =</span> <span class="dv">10</span>, <span class="at">population_mean =</span> <span class="fl">2.5</span>, <span class="at">population_sd =</span> <span class="fl">1.0</span>) {</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Storage for results from multiple runs</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  all_probabilities <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> n_runs, <span class="at">ncol =</span> <span class="fu">length</span>(interval_widths))</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Run the simulation multiple times to assess variability</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (run <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_runs) {</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    result <span class="ot">&lt;-</span> <span class="fu">simulate_confidence_intervals</span>(sample_size, n_repeats, interval_widths,</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>                                          population_mean, population_sd)</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    all_probabilities[run, ] <span class="ot">&lt;-</span> result<span class="sc">$</span>probabilities</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate mean and standard deviation for each interval width</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>  mean_accuracy <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(all_probabilities)</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>  sd_accuracy <span class="ot">&lt;-</span> <span class="fu">apply</span>(all_probabilities, <span class="dv">2</span>, sd)</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>    <span class="at">interval_widths =</span> interval_widths,</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_accuracy =</span> mean_accuracy,</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_accuracy =</span> sd_accuracy,</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">all_probabilities =</span> all_probabilities</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
-<div id="main-analysis" class="section level2" number="19.2">
-<h2>
-<span class="header-section-number">F.2</span> Main Analysis<a class="anchor" aria-label="anchor" href="#main-analysis"><i class="fas fa-link"></i></a>
-</h2>
+</div>
+</section>
+<section id="main-analysis" class="level2" data-number="F.2">
+<h2 data-number="F.2" class="anchored" data-anchor-id="main-analysis"><span class="header-section-number">F.2</span> Main Analysis</h2>
 <p>Now we’ll use these functions to perform the confidence interval analysis:</p>
-<div class="sourceCode" id="cb413"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb413-1"><a href="sol-ex-CI.html#cb413-1"></a><span class="do">## Define parameters</span></span>
-<span id="cb413-2"><a href="sol-ex-CI.html#cb413-2"></a>n <span class="ot">&lt;-</span> <span class="dv">30</span>                              <span class="co"># sample size</span></span>
-<span id="cb413-3"><a href="sol-ex-CI.html#cb413-3"></a>mu <span class="ot">&lt;-</span> <span class="fl">2.5</span>                           <span class="co"># population mean</span></span>
-<span id="cb413-4"><a href="sol-ex-CI.html#cb413-4"></a>sigma <span class="ot">&lt;-</span> <span class="fl">1.0</span>                        <span class="co"># population standard deviation</span></span>
-<span id="cb413-5"><a href="sol-ex-CI.html#cb413-5"></a>nreps <span class="ot">&lt;-</span> <span class="dv">1000</span>                       <span class="co"># number of Monte Carlo simulation runs</span></span>
-<span id="cb413-6"><a href="sol-ex-CI.html#cb413-6"></a>interval_width <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="fl">1.0</span>, <span class="fl">0.1</span>) <span class="co"># interval widths to test</span></span>
-<span id="cb413-7"><a href="sol-ex-CI.html#cb413-7"></a></span>
-<span id="cb413-8"><a href="sol-ex-CI.html#cb413-8"></a><span class="co"># Run the simulation</span></span>
-<span id="cb413-9"><a href="sol-ex-CI.html#cb413-9"></a>results <span class="ot">&lt;-</span> <span class="fu">simulate_confidence_intervals</span>(</span>
-<span id="cb413-10"><a href="sol-ex-CI.html#cb413-10"></a>  <span class="at">sample_size =</span> n,</span>
-<span id="cb413-11"><a href="sol-ex-CI.html#cb413-11"></a>  <span class="at">n_repeats =</span> nreps,</span>
-<span id="cb413-12"><a href="sol-ex-CI.html#cb413-12"></a>  <span class="at">interval_widths =</span> interval_width,</span>
-<span id="cb413-13"><a href="sol-ex-CI.html#cb413-13"></a>  <span class="at">population_mean =</span> mu,</span>
-<span id="cb413-14"><a href="sol-ex-CI.html#cb413-14"></a>  <span class="at">population_sd =</span> sigma</span>
-<span id="cb413-15"><a href="sol-ex-CI.html#cb413-15"></a>)</span>
-<span id="cb413-16"><a href="sol-ex-CI.html#cb413-16"></a></span>
-<span id="cb413-17"><a href="sol-ex-CI.html#cb413-17"></a>probability_var_contained <span class="ot">&lt;-</span> results<span class="sc">$</span>probabilities</span>
-<span id="cb413-18"><a href="sol-ex-CI.html#cb413-18"></a></span>
-<span id="cb413-19"><a href="sol-ex-CI.html#cb413-19"></a><span class="co"># create a data frame containing the variables we wish to plot</span></span>
-<span id="cb413-20"><a href="sol-ex-CI.html#cb413-20"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">interval_width =</span> results<span class="sc">$</span>interval_widths,</span>
-<span id="cb413-21"><a href="sol-ex-CI.html#cb413-21"></a>        <span class="at">probability_var_contained =</span> probability_var_contained)</span>
-<span id="cb413-22"><a href="sol-ex-CI.html#cb413-22"></a></span>
-<span id="cb413-23"><a href="sol-ex-CI.html#cb413-23"></a><span class="co"># initialise the ggplot</span></span>
-<span id="cb413-24"><a href="sol-ex-CI.html#cb413-24"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> interval_width, <span class="at">y =</span> probability_var_contained))</span>
-<span id="cb413-25"><a href="sol-ex-CI.html#cb413-25"></a><span class="co"># create a line plot</span></span>
-<span id="cb413-26"><a href="sol-ex-CI.html#cb413-26"></a>plt <span class="ot">&lt;-</span> plt <span class="sc">+</span> <span class="fu">geom_line</span>()</span>
-<span id="cb413-27"><a href="sol-ex-CI.html#cb413-27"></a><span class="co"># add a horizontal axis label</span></span>
-<span id="cb413-28"><a href="sol-ex-CI.html#cb413-28"></a>plt <span class="ot">&lt;-</span> plt <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Interval Width"</span>)</span>
-<span id="cb413-29"><a href="sol-ex-CI.html#cb413-29"></a><span class="co"># create a vertical axis label</span></span>
-<span id="cb413-30"><a href="sol-ex-CI.html#cb413-30"></a>plt <span class="ot">&lt;-</span> plt <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Probability that sigma is contained"</span>)</span>
-<span id="cb413-31"><a href="sol-ex-CI.html#cb413-31"></a></span>
-<span id="cb413-32"><a href="sol-ex-CI.html#cb413-32"></a><span class="co"># plot to screen</span></span>
-<span id="cb413-33"><a href="sol-ex-CI.html#cb413-33"></a><span class="fu">print</span>(plt)</span></code></pre></div>
-<div class="inline-figure"><img src="ci_sol_files/figure-html/unnamed-chunk-3-1.png" alt="" width="95%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb414"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb414-1"><a href="sol-ex-CI.html#cb414-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt;    interval_width probability_var_contained
-#&gt; 1             0.1                     0.312
-#&gt; 2             0.2                     0.551
-#&gt; 3             0.3                     0.747
-#&gt; 4             0.4                     0.878
-#&gt; 5             0.5                     0.941
-#&gt; 6             0.6                     0.982
-#&gt; 7             0.7                     0.995
-#&gt; 8             0.8                     0.999
+<div class="cell" data-layout-align="center">
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Define parameters</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">30</span>                              <span class="co"># sample size</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fl">2.5</span>                           <span class="co"># population mean</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fl">1.0</span>                        <span class="co"># population standard deviation</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>nreps <span class="ot">&lt;-</span> <span class="dv">1000</span>                       <span class="co"># number of Monte Carlo simulation runs</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>interval_width <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="fl">1.0</span>, <span class="fl">0.1</span>) <span class="co"># interval widths to test</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the simulation</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">simulate_confidence_intervals</span>(</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample_size =</span> n,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_repeats =</span> nreps,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">interval_widths =</span> interval_width,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">population_mean =</span> mu,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">population_sd =</span> sigma</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>probability_var_contained <span class="ot">&lt;-</span> results<span class="sc">$</span>probabilities</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># create a data frame containing the variables we wish to plot</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">interval_width =</span> results<span class="sc">$</span>interval_widths,</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">probability_var_contained =</span> probability_var_contained)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># initialise the ggplot</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> interval_width, <span class="at">y =</span> probability_var_contained))</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># create a line plot</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>plt <span class="ot">&lt;-</span> plt <span class="sc">+</span> <span class="fu">geom_line</span>()</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># add a horizontal axis label</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>plt <span class="ot">&lt;-</span> plt <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Interval Width"</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co"># create a vertical axis label</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>plt <span class="ot">&lt;-</span> plt <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Probability that sigma is contained"</span>)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="co"># plot to screen</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(plt)</span></code></pre></div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="sol-ex-CI_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:95.0%"></p>
+</figure>
+</div>
+</div>
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;    interval_width probability_var_contained
+#&gt; 1             0.1                     0.289
+#&gt; 2             0.2                     0.524
+#&gt; 3             0.3                     0.728
+#&gt; 4             0.4                     0.875
+#&gt; 5             0.5                     0.942
+#&gt; 6             0.6                     0.978
+#&gt; 7             0.7                     0.992
+#&gt; 8             0.8                     1.000
 #&gt; 9             0.9                     1.000
 #&gt; 10            1.0                     1.000</code></pre>
 </div>
-<div id="advanced-analysis-with-accuracy-assessment" class="section level2" number="19.3">
-<h2>
-<span class="header-section-number">F.3</span> Advanced Analysis with Accuracy Assessment<a class="anchor" aria-label="anchor" href="#advanced-analysis-with-accuracy-assessment"><i class="fas fa-link"></i></a>
-</h2>
+</div>
+</section>
+<section id="advanced-analysis-with-accuracy-assessment" class="level2" data-number="F.3">
+<h2 data-number="F.3" class="anchored" data-anchor-id="advanced-analysis-with-accuracy-assessment"><span class="header-section-number">F.3</span> Advanced Analysis with Accuracy Assessment</h2>
 <p>Let’s also analyze the variability in our confidence interval estimates:</p>
-<div class="sourceCode" id="cb416"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb416-1"><a href="sol-ex-CI.html#cb416-1"></a><span class="co"># Analyze accuracy with multiple runs</span></span>
-<span id="cb416-2"><a href="sol-ex-CI.html#cb416-2"></a>accuracy_results <span class="ot">&lt;-</span> <span class="fu">analyze_ci_accuracy</span>(</span>
-<span id="cb416-3"><a href="sol-ex-CI.html#cb416-3"></a>  <span class="at">sample_size =</span> n,</span>
-<span id="cb416-4"><a href="sol-ex-CI.html#cb416-4"></a>  <span class="at">n_repeats =</span> nreps,</span>
-<span id="cb416-5"><a href="sol-ex-CI.html#cb416-5"></a>  <span class="at">interval_widths =</span> interval_width,</span>
-<span id="cb416-6"><a href="sol-ex-CI.html#cb416-6"></a>  <span class="at">n_runs =</span> <span class="dv">10</span>,</span>
-<span id="cb416-7"><a href="sol-ex-CI.html#cb416-7"></a>  <span class="at">population_mean =</span> mu,</span>
-<span id="cb416-8"><a href="sol-ex-CI.html#cb416-8"></a>  <span class="at">population_sd =</span> sigma</span>
-<span id="cb416-9"><a href="sol-ex-CI.html#cb416-9"></a>)</span>
-<span id="cb416-10"><a href="sol-ex-CI.html#cb416-10"></a></span>
-<span id="cb416-11"><a href="sol-ex-CI.html#cb416-11"></a><span class="co"># Create summary table</span></span>
-<span id="cb416-12"><a href="sol-ex-CI.html#cb416-12"></a>summary_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb416-13"><a href="sol-ex-CI.html#cb416-13"></a>  <span class="at">interval_width =</span> accuracy_results<span class="sc">$</span>interval_widths,</span>
-<span id="cb416-14"><a href="sol-ex-CI.html#cb416-14"></a>  <span class="at">mean_accuracy =</span> accuracy_results<span class="sc">$</span>mean_accuracy,</span>
-<span id="cb416-15"><a href="sol-ex-CI.html#cb416-15"></a>  <span class="at">sd_accuracy =</span> accuracy_results<span class="sc">$</span>sd_accuracy</span>
-<span id="cb416-16"><a href="sol-ex-CI.html#cb416-16"></a>)</span>
-<span id="cb416-17"><a href="sol-ex-CI.html#cb416-17"></a></span>
-<span id="cb416-18"><a href="sol-ex-CI.html#cb416-18"></a><span class="fu">print</span>(<span class="st">"Summary of Confidence Interval Accuracy:"</span>)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] "Summary of Confidence Interval Accuracy:"</code></pre>
-<div class="sourceCode" id="cb418"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb418-1"><a href="sol-ex-CI.html#cb418-1"></a><span class="fu">print</span>(summary_df)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt;    interval_width mean_accuracy sd_accuracy
-#&gt; 1             0.1        0.2906 0.014698450
-#&gt; 2             0.2        0.5500 0.017339742
-#&gt; 3             0.3        0.7474 0.010319345
-#&gt; 4             0.4        0.8754 0.006979335
-#&gt; 5             0.5        0.9462 0.004366539
-#&gt; 6             0.6        0.9785 0.004169999
-#&gt; 7             0.7        0.9918 0.001475730
-#&gt; 8             0.8        0.9970 0.001885618
-#&gt; 9             0.9        0.9989 0.001197219
-#&gt; 10            1.0        0.9998 0.000421637</code></pre>
-<div class="sourceCode" id="cb420"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb420-1"><a href="sol-ex-CI.html#cb420-1"></a><span class="co"># Plot mean accuracy with error bars</span></span>
-<span id="cb420-2"><a href="sol-ex-CI.html#cb420-2"></a>plt_accuracy <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(summary_df, <span class="fu">aes</span>(<span class="at">x =</span> interval_width, <span class="at">y =</span> mean_accuracy))</span>
-<span id="cb420-3"><a href="sol-ex-CI.html#cb420-3"></a>plt_accuracy <span class="ot">&lt;-</span> plt_accuracy <span class="sc">+</span> <span class="fu">geom_line</span>()</span>
-<span id="cb420-4"><a href="sol-ex-CI.html#cb420-4"></a>plt_accuracy <span class="ot">&lt;-</span> plt_accuracy <span class="sc">+</span> <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_accuracy <span class="sc">-</span> sd_accuracy,</span>
-<span id="cb420-5"><a href="sol-ex-CI.html#cb420-5"></a>                                               <span class="at">ymax =</span> mean_accuracy <span class="sc">+</span> sd_accuracy),</span>
-<span id="cb420-6"><a href="sol-ex-CI.html#cb420-6"></a>                                           <span class="at">width =</span> <span class="fl">0.02</span>)</span>
-<span id="cb420-7"><a href="sol-ex-CI.html#cb420-7"></a>plt_accuracy <span class="ot">&lt;-</span> plt_accuracy <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Interval Width"</span>)</span>
-<span id="cb420-8"><a href="sol-ex-CI.html#cb420-8"></a>plt_accuracy <span class="ot">&lt;-</span> plt_accuracy <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Mean Probability (± SD)"</span>)</span>
-<span id="cb420-9"><a href="sol-ex-CI.html#cb420-9"></a>plt_accuracy <span class="ot">&lt;-</span> plt_accuracy <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Confidence Interval Accuracy with Variability"</span>)</span>
-<span id="cb420-10"><a href="sol-ex-CI.html#cb420-10"></a></span>
-<span id="cb420-11"><a href="sol-ex-CI.html#cb420-11"></a><span class="fu">print</span>(plt_accuracy)</span></code></pre></div>
-<div class="inline-figure"><img src="ci_sol_files/figure-html/unnamed-chunk-4-1.png" alt="" width="95%" style="display: block; margin: auto;"></div>
-<pre><code>
-&lt;button class="button"&gt;
-  [Return to Exercise](#ex-confidence-interval)
-&lt;/button&gt;
-
-&lt;!--chapter:end:ci_sol.Rmd--&gt;
-
-# Solution: Computational Testing
-
-## Solution: Exercise 1 {#ht-sol-ex1}
-
-The data is:
-
-
-```{.r .numberLines}
-x &lt;- c(263.9, 266.2, 266.3, 266.8, 265.0)</code></pre>
-<p>Now construct some summary statistics and define some given parameters:</p>
-<div class="sourceCode" id="cb422"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb422-1"><a href="sol-ex-CI.html#cb422-1"></a>x_bar <span class="ot">&lt;-</span> <span class="fu">mean</span>(x) <span class="co"># compute sample mean</span></span>
-<span id="cb422-2"><a href="sol-ex-CI.html#cb422-2"></a>sigma <span class="ot">&lt;-</span> <span class="fl">1.65</span> <span class="co"># population standard deviation is given</span></span>
-<span id="cb422-3"><a href="sol-ex-CI.html#cb422-3"></a>mu <span class="ot">&lt;-</span> <span class="dv">260</span> <span class="co"># population mean to be tested against</span></span>
-<span id="cb422-4"><a href="sol-ex-CI.html#cb422-4"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(x) <span class="co"># number of samples</span></span></code></pre></div>
-<p>Construct the z-statistic:</p>
-<div class="sourceCode" id="cb423"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb423-1"><a href="sol-ex-CI.html#cb423-1"></a>z <span class="ot">&lt;-</span> (x_bar <span class="sc">-</span> mu) <span class="sc">/</span> (sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
-<span id="cb423-2"><a href="sol-ex-CI.html#cb423-2"></a><span class="fu">print</span>(z)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 7.643287</code></pre>
-<p>Check if the z-statistic is in the critical range. First, work out what the z-value at the edge of the critical region is:</p>
-<div class="sourceCode" id="cb425"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb425-1"><a href="sol-ex-CI.html#cb425-1"></a>z_threshold <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.01</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb425-2"><a href="sol-ex-CI.html#cb425-2"></a><span class="fu">print</span>(z_threshold)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 2.326348</code></pre>
-<p>Thus, the z-statistic is much greater than the threshold and there is evidence to suggest the cartons are overfilled.</p>
-<button class="button">
-<a href="computational-testing-techniques.html#ht-ex1">Back to exercise</a>
-</button>
+<div class="cell" data-layout-align="center">
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Analyze accuracy with multiple runs</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>accuracy_results <span class="ot">&lt;-</span> <span class="fu">analyze_ci_accuracy</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample_size =</span> n,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_repeats =</span> nreps,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">interval_widths =</span> interval_width,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_runs =</span> <span class="dv">10</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">population_mean =</span> mu,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">population_sd =</span> sigma</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create summary table</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>summary_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">interval_width =</span> accuracy_results<span class="sc">$</span>interval_widths,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean_accuracy =</span> accuracy_results<span class="sc">$</span>mean_accuracy,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd_accuracy =</span> accuracy_results<span class="sc">$</span>sd_accuracy</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Summary of Confidence Interval Accuracy:"</span>)</span></code></pre></div>
 </div>
-<div id="ht-sol-ex2" class="section level2" number="19.4">
-<h2>
-<span class="header-section-number">F.4</span> Solution: Exercise 2<a class="anchor" aria-label="anchor" href="#ht-sol-ex2"><i class="fas fa-link"></i></a>
-</h2>
-<p>Parameters given by the problem:</p>
-<div class="sourceCode" id="cb427"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb427-1"><a href="sol-ex-CI.html#cb427-1"></a>x_bar <span class="ot">&lt;-</span> <span class="fl">103.11</span></span>
-<span id="cb427-2"><a href="sol-ex-CI.html#cb427-2"></a>s <span class="ot">&lt;-</span> <span class="fl">53.5</span></span>
-<span id="cb427-3"><a href="sol-ex-CI.html#cb427-3"></a>mu <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb427-4"><a href="sol-ex-CI.html#cb427-4"></a>n <span class="ot">&lt;-</span> <span class="dv">45</span></span></code></pre></div>
-<p>Compute the z-statistic assuming large sample assumptions apply:</p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb428-1"><a href="sol-ex-CI.html#cb428-1"></a>z <span class="ot">&lt;-</span> ( x_bar <span class="sc">-</span> mu )<span class="sc">/</span>(s<span class="sc">/</span><span class="fu">sqrt</span>(n))</span>
-<span id="cb428-2"><a href="sol-ex-CI.html#cb428-2"></a><span class="fu">print</span>(z)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 0.3899535</code></pre>
-<p>Now, work out the thresholds of the critical regions:</p>
-<div class="sourceCode" id="cb430"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb430-1"><a href="sol-ex-CI.html#cb430-1"></a>z_upper <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.025</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb430-2"><a href="sol-ex-CI.html#cb430-2"></a><span class="fu">print</span>(z_upper)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 1.959964</code></pre>
-<div class="sourceCode" id="cb432"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb432-1"><a href="sol-ex-CI.html#cb432-1"></a>z_lower <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fl">0.025</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb432-2"><a href="sol-ex-CI.html#cb432-2"></a><span class="fu">print</span>(z_lower)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] -1.959964</code></pre>
-<p>The z-statistic is outside the critical regions and therefore we do not reject the null hypothesis.</p>
-<button class="button">
-<a href="computational-testing-techniques.html#ht-ex2">Back to exercise</a>
-</button>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] "Summary of Confidence Interval Accuracy:"</code></pre>
 </div>
-<div id="ht-sol-ex3" class="section level2" number="19.5">
-<h2>
-<span class="header-section-number">F.5</span> Solution: Exercise 3<a class="anchor" aria-label="anchor" href="#ht-sol-ex3"><i class="fas fa-link"></i></a>
-</h2>
-<div class="sourceCode" id="cb434"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb434-1"><a href="sol-ex-CI.html#cb434-1"></a>z_test <span class="ot">&lt;-</span> <span class="cf">function</span>(x, mu, popvar){</span>
-<span id="cb434-2"><a href="sol-ex-CI.html#cb434-2"></a></span>
-<span id="cb434-3"><a href="sol-ex-CI.html#cb434-3"></a>  one_tail_p <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb434-4"><a href="sol-ex-CI.html#cb434-4"></a></span>
-<span id="cb434-5"><a href="sol-ex-CI.html#cb434-5"></a>  z_score <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">mean</span>(x) <span class="sc">-</span> mu) <span class="sc">/</span> (popvar <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">length</span>(x))), <span class="dv">3</span>)</span>
-<span id="cb434-6"><a href="sol-ex-CI.html#cb434-6"></a></span>
-<span id="cb434-7"><a href="sol-ex-CI.html#cb434-7"></a>  one_tail_p <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">pnorm</span>(<span class="fu">abs</span>(z_score),<span class="at">lower.tail =</span> <span class="cn">FALSE</span>), <span class="dv">3</span>)</span>
-<span id="cb434-8"><a href="sol-ex-CI.html#cb434-8"></a></span>
-<span id="cb434-9"><a href="sol-ex-CI.html#cb434-9"></a>  <span class="fu">cat</span>(<span class="st">" z ="</span>, z_score, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb434-10"><a href="sol-ex-CI.html#cb434-10"></a>    <span class="st">"one-tailed probability ="</span>, one_tail_p, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb434-11"><a href="sol-ex-CI.html#cb434-11"></a>    <span class="st">"two-tailed probability ="</span>, <span class="dv">2</span> <span class="sc">*</span> one_tail_p)</span>
-<span id="cb434-12"><a href="sol-ex-CI.html#cb434-12"></a></span>
-<span id="cb434-13"><a href="sol-ex-CI.html#cb434-13"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">z =</span> z_score, <span class="at">one_p =</span> one_tail_p, <span class="at">two_p =</span> <span class="dv">2</span> <span class="sc">*</span> one_tail_p))</span>
-<span id="cb434-14"><a href="sol-ex-CI.html#cb434-14"></a>}</span>
-<span id="cb434-15"><a href="sol-ex-CI.html#cb434-15"></a></span>
-<span id="cb434-16"><a href="sol-ex-CI.html#cb434-16"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># generate some artificial data from a N(0, 1)</span></span>
-<span id="cb434-17"><a href="sol-ex-CI.html#cb434-17"></a>out <span class="ot">&lt;-</span> <span class="fu">z_test</span>(x, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># null should not be rejected!</span></span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  z = -0.001 
-#&gt;  one-tailed probability = 0.5 
-#&gt;  two-tailed probability = 1</code></pre>
-<div class="sourceCode" id="cb436"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb436-1"><a href="sol-ex-CI.html#cb436-1"></a><span class="fu">print</span>(out)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; $z
-#&gt; [1] -0.001
-#&gt; 
-#&gt; $one_p
-#&gt; [1] 0.5
-#&gt; 
-#&gt; $two_p
-#&gt; [1] 1</code></pre>
-<div class="sourceCode" id="cb438"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb438-1"><a href="sol-ex-CI.html#cb438-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># generate some artificial data from a N(1, 1)</span></span>
-<span id="cb438-2"><a href="sol-ex-CI.html#cb438-2"></a>out <span class="ot">&lt;-</span> <span class="fu">z_test</span>(x, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># null should be rejected!</span></span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  z = 2.621 
-#&gt;  one-tailed probability = 0.004 
-#&gt;  two-tailed probability = 0.008</code></pre>
-<div class="sourceCode" id="cb440"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb440-1"><a href="sol-ex-CI.html#cb440-1"></a><span class="fu">print</span>(out)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; $z
-#&gt; [1] 2.621
-#&gt; 
-#&gt; $one_p
-#&gt; [1] 0.004
-#&gt; 
-#&gt; $two_p
-#&gt; [1] 0.008</code></pre>
-<button class="button">
-<a href="computational-testing-techniques.html#ht-ex3">Back to exercise</a>
-</button>
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(summary_df)</span></code></pre></div>
 </div>
-<div id="ht-sol-ex4" class="section level2" number="19.6">
-<h2>
-<span class="header-section-number">F.6</span> Solution: Exercise 4<a class="anchor" aria-label="anchor" href="#ht-sol-ex4"><i class="fas fa-link"></i></a>
-</h2>
-<p>Define some parameters</p>
-<div class="sourceCode" id="cb442"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb442-1"><a href="sol-ex-CI.html#cb442-1"></a>mu <span class="ot">&lt;-</span> <span class="fl">5.4</span></span>
-<span id="cb442-2"><a href="sol-ex-CI.html#cb442-2"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb442-3"><a href="sol-ex-CI.html#cb442-3"></a>x_bar <span class="ot">&lt;-</span> <span class="fl">5.64</span></span>
-<span id="cb442-4"><a href="sol-ex-CI.html#cb442-4"></a>s2 <span class="ot">&lt;-</span> <span class="fl">0.05</span></span></code></pre></div>
-<p>Compute the t-statistic:</p>
-<div class="sourceCode" id="cb443"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb443-1"><a href="sol-ex-CI.html#cb443-1"></a>t <span class="ot">&lt;-</span> (x_bar <span class="sc">-</span> mu) <span class="sc">/</span> <span class="fu">sqrt</span>(s2 <span class="sc">/</span> n)</span>
-<span id="cb443-2"><a href="sol-ex-CI.html#cb443-2"></a><span class="fu">print</span>(t)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 2.4</code></pre>
-<p>Work out the thresholds of the critical regions:</p>
-<div class="sourceCode" id="cb445"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb445-1"><a href="sol-ex-CI.html#cb445-1"></a>t_upper <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.025</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb445-2"><a href="sol-ex-CI.html#cb445-2"></a><span class="fu">print</span>(t_upper)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 2.776445</code></pre>
-<div class="sourceCode" id="cb447"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb447-1"><a href="sol-ex-CI.html#cb447-1"></a>t_lower <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.025</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb447-2"><a href="sol-ex-CI.html#cb447-2"></a><span class="fu">print</span>(t_lower)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] -2.776445</code></pre>
-<p>The t-statistic is outside of the critical regions so we do not reject the null hypothesis.</p>
-<button class="button">
-<a href="computational-testing-techniques.html#ht-ex4">Back to exercise</a>
-</button>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;    interval_width mean_accuracy  sd_accuracy
+#&gt; 1             0.1        0.2934 0.0188573593
+#&gt; 2             0.2        0.5540 0.0167332005
+#&gt; 3             0.3        0.7423 0.0133170734
+#&gt; 4             0.4        0.8691 0.0086596125
+#&gt; 5             0.5        0.9475 0.0062760568
+#&gt; 6             0.6        0.9795 0.0055025247
+#&gt; 7             0.7        0.9934 0.0035023801
+#&gt; 8             0.8        0.9981 0.0011972190
+#&gt; 9             0.9        0.9997 0.0004830459
+#&gt; 10            1.0        1.0000 0.0000000000</code></pre>
 </div>
-<div id="ht-sol-ex5" class="section level2" number="19.7">
-<h2>
-<span class="header-section-number">F.7</span> Solution: Exercise 5<a class="anchor" aria-label="anchor" href="#ht-sol-ex5"><i class="fas fa-link"></i></a>
-</h2>
-<p>Define the parameters:</p>
-<div class="sourceCode" id="cb449"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb449-1"><a href="sol-ex-CI.html#cb449-1"></a>x_bar_a <span class="ot">&lt;-</span> <span class="dv">88</span></span>
-<span id="cb449-2"><a href="sol-ex-CI.html#cb449-2"></a>s2_a <span class="ot">&lt;-</span> <span class="fl">4.5</span></span>
-<span id="cb449-3"><a href="sol-ex-CI.html#cb449-3"></a>n_a <span class="ot">&lt;-</span> <span class="dv">72</span></span>
-<span id="cb449-4"><a href="sol-ex-CI.html#cb449-4"></a>x_bar_b <span class="ot">&lt;-</span> <span class="dv">79</span></span>
-<span id="cb449-5"><a href="sol-ex-CI.html#cb449-5"></a>s2_b <span class="ot">&lt;-</span> <span class="fl">4.2</span></span>
-<span id="cb449-6"><a href="sol-ex-CI.html#cb449-6"></a>n_b <span class="ot">&lt;-</span> <span class="dv">48</span></span>
-<span id="cb449-7"><a href="sol-ex-CI.html#cb449-7"></a>mu_a <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb449-8"><a href="sol-ex-CI.html#cb449-8"></a>mu_b <span class="ot">&lt;-</span> <span class="dv">0</span></span></code></pre></div>
-<p>Compute the z-statistic:</p>
-<div class="sourceCode" id="cb450"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb450-1"><a href="sol-ex-CI.html#cb450-1"></a>z <span class="ot">&lt;-</span> ((x_bar_a <span class="sc">-</span> x_bar_b) <span class="sc">-</span> (mu_a <span class="sc">-</span> mu_b)) <span class="sc">/</span> <span class="fu">sqrt</span>(s2_a <span class="sc">/</span> n_a <span class="sc">+</span> s2_b <span class="sc">/</span> n_b)</span>
-<span id="cb450-2"><a href="sol-ex-CI.html#cb450-2"></a><span class="fu">print</span>(z)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 23.2379</code></pre>
-<p>Work out for the 5% significance level, the critical values:</p>
-<div class="sourceCode" id="cb452"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb452-1"><a href="sol-ex-CI.html#cb452-1"></a>z_upper <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb452-2"><a href="sol-ex-CI.html#cb452-2"></a><span class="fu">print</span>(z_upper)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 1.644854</code></pre>
-<p>There is evidence to support the claim that process <span class="math inline">\(A\)</span> yields higher pressurisation.</p>
-<button class="button">
-<a href="computational-testing-techniques.html#ht-ex5">Back to exercise</a>
-</button>
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot mean accuracy with error bars</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>plt_accuracy <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(summary_df, <span class="fu">aes</span>(<span class="at">x =</span> interval_width, <span class="at">y =</span> mean_accuracy))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plt_accuracy <span class="ot">&lt;-</span> plt_accuracy <span class="sc">+</span> <span class="fu">geom_line</span>()</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>plt_accuracy <span class="ot">&lt;-</span> plt_accuracy <span class="sc">+</span> <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_accuracy <span class="sc">-</span> sd_accuracy,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">ymax =</span> mean_accuracy <span class="sc">+</span> sd_accuracy),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">width =</span> <span class="fl">0.02</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>plt_accuracy <span class="ot">&lt;-</span> plt_accuracy <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Interval Width"</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>plt_accuracy <span class="ot">&lt;-</span> plt_accuracy <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Mean Probability (± SD)"</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>plt_accuracy <span class="ot">&lt;-</span> plt_accuracy <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Confidence Interval Accuracy with Variability"</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(plt_accuracy)</span></code></pre></div>
 </div>
-<div id="ht-sol-ex6" class="section level2" number="19.8">
-<h2>
-<span class="header-section-number">F.8</span> Solution: Exercise 6<a class="anchor" aria-label="anchor" href="#ht-sol-ex6"><i class="fas fa-link"></i></a>
-</h2>
-<div class="sourceCode" id="cb454"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb454-1"><a href="sol-ex-CI.html#cb454-1"></a><span class="co"># Data vectors</span></span>
-<span id="cb454-2"><a href="sol-ex-CI.html#cb454-2"></a>x_A <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">91.50</span>, <span class="fl">94.18</span>, <span class="fl">92.18</span>, <span class="fl">95.39</span>, <span class="fl">91.79</span>, <span class="fl">89.07</span>, <span class="fl">94.72</span>, <span class="fl">89.21</span>)</span>
-<span id="cb454-3"><a href="sol-ex-CI.html#cb454-3"></a>x_B <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">89.19</span>, <span class="fl">90.95</span>, <span class="fl">90.46</span>, <span class="fl">93.21</span>, <span class="fl">97.19</span>, <span class="fl">97.04</span>, <span class="fl">91.07</span>, <span class="fl">92.75</span>)</span>
-<span id="cb454-4"><a href="sol-ex-CI.html#cb454-4"></a></span>
-<span id="cb454-5"><a href="sol-ex-CI.html#cb454-5"></a><span class="co"># parameters based on data</span></span>
-<span id="cb454-6"><a href="sol-ex-CI.html#cb454-6"></a>x_bar_A <span class="ot">&lt;-</span> <span class="fu">mean</span>(x_A)</span>
-<span id="cb454-7"><a href="sol-ex-CI.html#cb454-7"></a>s2_A <span class="ot">&lt;-</span> <span class="fu">var</span>(x_A)</span>
-<span id="cb454-8"><a href="sol-ex-CI.html#cb454-8"></a>n_A <span class="ot">&lt;-</span> <span class="fu">length</span>(x_A)</span>
-<span id="cb454-9"><a href="sol-ex-CI.html#cb454-9"></a>x_bar_B <span class="ot">&lt;-</span> <span class="fu">mean</span>(x_B)</span>
-<span id="cb454-10"><a href="sol-ex-CI.html#cb454-10"></a>s2_B <span class="ot">&lt;-</span> <span class="fu">var</span>(x_B)</span>
-<span id="cb454-11"><a href="sol-ex-CI.html#cb454-11"></a>n_B <span class="ot">&lt;-</span> <span class="fu">length</span>(x_B)</span></code></pre></div>
-<p>Compute the pooled variance estimator:</p>
-<div class="sourceCode" id="cb455"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb455-1"><a href="sol-ex-CI.html#cb455-1"></a>s2_p <span class="ot">&lt;-</span> ((n_A <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> s2_A <span class="sc">+</span> (n_B <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> s2_B) <span class="sc">/</span> (n_A <span class="sc">+</span> n_B <span class="sc">-</span> <span class="dv">2</span>)</span>
-<span id="cb455-2"><a href="sol-ex-CI.html#cb455-2"></a><span class="fu">print</span>(s2_p)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 7.294654</code></pre>
-<p>Compute the t-statistic:</p>
-<div class="sourceCode" id="cb457"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb457-1"><a href="sol-ex-CI.html#cb457-1"></a>t <span class="ot">=</span> ( x_bar_A <span class="sc">-</span> x_bar_B ) <span class="sc">/</span> <span class="fu">sqrt</span>( s2_p<span class="sc">*</span>(<span class="dv">1</span><span class="sc">/</span>n_A <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>n_B) )</span>
-<span id="cb457-2"><a href="sol-ex-CI.html#cb457-2"></a><span class="fu">print</span>(t)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] -0.3535909</code></pre>
-<p>Work out the critical values:</p>
-<div class="sourceCode" id="cb459"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb459-1"><a href="sol-ex-CI.html#cb459-1"></a>t_upper <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.025</span>, <span class="at">df =</span> n_A <span class="sc">+</span> n_B <span class="sc">-</span> <span class="dv">2</span>)</span>
-<span id="cb459-2"><a href="sol-ex-CI.html#cb459-2"></a><span class="fu">print</span>(t_upper)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 2.144787</code></pre>
-<div class="sourceCode" id="cb461"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb461-1"><a href="sol-ex-CI.html#cb461-1"></a>t_lower <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.025</span>, <span class="at">df =</span> n_A <span class="sc">+</span> n_B <span class="sc">-</span> <span class="dv">2</span>)</span>
-<span id="cb461-2"><a href="sol-ex-CI.html#cb461-2"></a><span class="fu">print</span>(t_lower)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] -2.144787</code></pre>
-<p>Since <span class="math inline">\(|t|&lt;2.14\)</span> we have no evidence to reject the null hypothesis that the mean yields are equal.</p>
-<p>Now, let us use the built-in <code>t.test</code> command:</p>
-<div class="sourceCode" id="cb463"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb463-1"><a href="sol-ex-CI.html#cb463-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">t.test</span>(<span class="at">x =</span> x_A, <span class="at">y =</span> x_B, <span class="at">paired =</span> <span class="cn">FALSE</span>, <span class="at">var.equal =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb463-2"><a href="sol-ex-CI.html#cb463-2"></a>    <span class="at">conf.level =</span> <span class="fl">0.95</span>, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
-<span id="cb463-3"><a href="sol-ex-CI.html#cb463-3"></a>  <span class="fu">print</span>(out)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; 
-#&gt;  Two Sample t-test
-#&gt; 
-#&gt; data:  x_A and x_B
-#&gt; t = -0.35359, df = 14, p-value = 0.7289
-#&gt; alternative hypothesis: true difference in means is not equal to 0
-#&gt; 95 percent confidence interval:
-#&gt;  -3.373886  2.418886
-#&gt; sample estimates:
-#&gt; mean of x mean of y 
-#&gt;   92.2550   92.7325</code></pre>
-<p>The options <code>paired=FALSE</code> means this is an unpaired t-test, <code>var.equal=TRUE</code> forces the estimated variances to be the same (i.e. we are using a pooled variance estimator) and we are testing at 95% confidence level with an alternative hypothesis that the true difference in means is non-zero.</p>
-<p>The p-value for the t-test is between 0 and 1. In this case, the value is around 0.72 which means the hypothesis should not be reject.</p>
-<button class="button">
-<a href="computational-testing-techniques.html#ht-ex6">Back to exercise</a>
-</button>
-</div>
-<div id="ht-sol-ex7" class="section level2" number="19.9">
-<h2>
-<span class="header-section-number">F.9</span> Solution: Exercise 7<a class="anchor" aria-label="anchor" href="#ht-sol-ex7"><i class="fas fa-link"></i></a>
-</h2>
-<p>Define parameters:</p>
-<div class="sourceCode" id="cb465"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb465-1"><a href="sol-ex-CI.html#cb465-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">36</span>, <span class="dv">31</span>)</span>
-<span id="cb465-2"><a href="sol-ex-CI.html#cb465-2"></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>, <span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>, <span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>)</span>
-<span id="cb465-3"><a href="sol-ex-CI.html#cb465-3"></a>n <span class="ot">&lt;-</span> <span class="fu">sum</span>(x)</span>
-<span id="cb465-4"><a href="sol-ex-CI.html#cb465-4"></a>K <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span></code></pre></div>
-<p>Compute the expected counts:</p>
-<div class="sourceCode" id="cb466"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb466-1"><a href="sol-ex-CI.html#cb466-1"></a>Ex <span class="ot">=</span> p<span class="sc">*</span>n</span></code></pre></div>
-<p>Compute the chi-squared statistic:</p>
-<div class="sourceCode" id="cb467"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb467-1"><a href="sol-ex-CI.html#cb467-1"></a>chi2 <span class="ot">&lt;-</span> <span class="fu">sum</span>((x <span class="sc">-</span> Ex)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> Ex)</span>
-<span id="cb467-2"><a href="sol-ex-CI.html#cb467-2"></a><span class="fu">print</span>(chi2)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 2.866667</code></pre>
-<p>Compute the critical value form the chi-squared distribution:</p>
-<div class="sourceCode" id="cb469"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb469-1"><a href="sol-ex-CI.html#cb469-1"></a>chi_upper <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span>, <span class="at">df =</span> K<span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb469-2"><a href="sol-ex-CI.html#cb469-2"></a><span class="fu">print</span>(chi_upper)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 5.991465</code></pre>
-<p>Thus there is no evidence to reject the null hypothesis. The data provides no reason to suggest a preference for a particular door.</p>
-<p>Now, we could have done this in <code>R</code>:</p>
-<div class="sourceCode" id="cb471"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb471-1"><a href="sol-ex-CI.html#cb471-1"></a>out <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(x, <span class="at">p =</span> <span class="fu">c</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>, <span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>, <span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>))</span>
-<span id="cb471-2"><a href="sol-ex-CI.html#cb471-2"></a><span class="fu">print</span>(out)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; 
-#&gt;  Chi-squared test for given probabilities
-#&gt; 
-#&gt; data:  x
-#&gt; X-squared = 2.8667, df = 2, p-value = 0.2385</code></pre>
-<button class="button">
-<a href="computational-testing-techniques.html#ht-ex7">Back to exercise</a>
-</button>
-</div>
-<div id="ht-sol-ex8" class="section level2" number="19.10">
-<h2>
-<span class="header-section-number">F.10</span> Solution: Exercise 8<a class="anchor" aria-label="anchor" href="#ht-sol-ex8"><i class="fas fa-link"></i></a>
-</h2>
-<div class="sourceCode" id="cb473"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb473-1"><a href="sol-ex-CI.html#cb473-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span> )</span>
-<span id="cb473-2"><a href="sol-ex-CI.html#cb473-2"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">32</span>, <span class="dv">12</span>, <span class="dv">6</span> )</span></code></pre></div>
-<p>You will need the <code>vcdExtra</code> package to use the <code>expand.dft</code> command. If you are using BearPortal you don’t need to install it, but if you are running the practical on your own computer you will need to install the package <code>install.packages("vcdExtra")</code>.</p>
-<p>Now before we can use the <code>expand.dft()</code> function we need to load the package containing this function. The <code>expand.dft</code> command allows one to convert the frequency table into a vector of samples:</p>
-<div class="sourceCode" id="cb474"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb474-1"><a href="sol-ex-CI.html#cb474-1"></a><span class="fu">library</span>(vcdExtra)</span></code></pre></div>
-<pre><code>#&gt; Warning: package 'vcdExtra' was built under R version 4.5.2</code></pre>
-<pre><code>#&gt; Loading required package: vcd</code></pre>
-<pre><code>#&gt; Warning: package 'vcd' was built under R version 4.5.2</code></pre>
-<pre><code>#&gt; Loading required package: grid</code></pre>
-<pre><code>#&gt; Loading required package: gnm</code></pre>
-<pre><code>#&gt; Registered S3 methods overwritten by 'vcdExtra':
-#&gt;   method      from
-#&gt;   pairs.table vcd 
-#&gt;   print.Kappa vcd</code></pre>
-<pre><code>#&gt; 
-#&gt; Attaching package: 'vcdExtra'</code></pre>
-<pre><code>#&gt; The following objects are masked from 'package:vcd':
-#&gt; 
-#&gt;     pairs_diagonal_mosaic, woolf_test</code></pre>
-<div class="sourceCode" id="cb483"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb483-1"><a href="sol-ex-CI.html#cb483-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">expand.dft</span>(<span class="fu">data.frame</span>(y,<span class="at">Frequency =</span> x), <span class="at">freq =</span> <span class="st">"Frequency"</span>)</span></code></pre></div>
-<p>Now we can use the <code>fitdistr</code> function in the <code>MASS</code> package to estimate the MLE of the Poisson distribution</p>
-<div class="sourceCode" id="cb484"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb484-1"><a href="sol-ex-CI.html#cb484-1"></a><span class="co"># loading the MASS package</span></span>
-<span id="cb484-2"><a href="sol-ex-CI.html#cb484-2"></a><span class="fu">library</span>(MASS)</span></code></pre></div>
-<pre><code>#&gt; Warning: package 'MASS' was built under R version 4.5.2</code></pre>
-<div class="sourceCode" id="cb486"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb486-1"><a href="sol-ex-CI.html#cb486-1"></a><span class="co"># fitting a Poisson distribution using maximum-likelihood</span></span>
-<span id="cb486-2"><a href="sol-ex-CI.html#cb486-2"></a>lambda_hat <span class="ot">&lt;-</span> <span class="fu">fitdistr</span>(samples<span class="sc">$</span>y, <span class="at">densfun =</span> <span class="st">'Poisson'</span>)</span></code></pre></div>
-<p>Let just solve this directly using R built in function. First compute the expected probabilities under the Poisson distribution using <code>dpois</code> to compute the Poisson pdf:</p>
-<div class="sourceCode" id="cb487"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb487-1"><a href="sol-ex-CI.html#cb487-1"></a>pr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb487-2"><a href="sol-ex-CI.html#cb487-2"></a>pr[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">dpois</span>(<span class="dv">0</span>, <span class="at">lambda =</span> lambda_hat<span class="sc">$</span>estimate)</span>
-<span id="cb487-3"><a href="sol-ex-CI.html#cb487-3"></a>pr[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fu">dpois</span>(<span class="dv">1</span>, <span class="at">lambda =</span> lambda_hat<span class="sc">$</span>estimate)</span>
-<span id="cb487-4"><a href="sol-ex-CI.html#cb487-4"></a>pr[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">sum</span>(pr[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span></code></pre></div>
-<p>Then apply <code>chisq.test</code>:</p>
-<div class="sourceCode" id="cb488"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb488-1"><a href="sol-ex-CI.html#cb488-1"></a>out <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(x, <span class="at">p =</span> pr)</span></code></pre></div>
-<pre><code>#&gt; Warning in chisq.test(x, p = pr): Chi-squared approximation
-#&gt; may be incorrect</code></pre>
-<div class="sourceCode" id="cb490"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb490-1"><a href="sol-ex-CI.html#cb490-1"></a><span class="fu">print</span>(out)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; 
-#&gt;  Chi-squared test for given probabilities
-#&gt; 
-#&gt; data:  x
-#&gt; X-squared = 1.3447, df = 2, p-value = 0.5105</code></pre>
-<p>Actually, in this case the answer is wrong(!), we need to apply an additional loss of degree of freedom to account for the use of the MLE. However, we can re-use values already computed by <code>chisq.test</code>:</p>
-<div class="sourceCode" id="cb492"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb492-1"><a href="sol-ex-CI.html#cb492-1"></a>chi2 <span class="ot">&lt;-</span> out<span class="sc">$</span>statistic</span>
-<span id="cb492-2"><a href="sol-ex-CI.html#cb492-2"></a><span class="fu">print</span>(chi2)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; X-squared 
-#&gt;   1.34466</code></pre>
-<div class="sourceCode" id="cb494"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb494-1"><a href="sol-ex-CI.html#cb494-1"></a>chi2_lower <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.01</span>, <span class="at">df =</span> <span class="dv">1</span>)</span>
-<span id="cb494-2"><a href="sol-ex-CI.html#cb494-2"></a><span class="fu">print</span>(chi2_lower)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 6.634897</code></pre>
-<p>Hence, there is no evidence to reject the null hypothesis. There is no reason to suppose that the Poisson distribution is not a plausible model for the number of accidents per week at this junction.</p>
-<button class="button">
-<a href="computational-testing-techniques.html#ht-ex8">Back to exercise</a>
-</button>
-</div>
-<div id="ht-sol-universal" class="section level2" number="19.11">
-<h2>
-<span class="header-section-number">F.11</span> Universal Hypothesis Testing Function<a class="anchor" aria-label="anchor" href="#ht-sol-universal"><i class="fas fa-link"></i></a>
-</h2>
-<p>Here’s a comprehensive function that can handle multiple types of hypothesis tests. This is a basic implementation and can be extended further based on specific requirements. There are many edge cases and additional features that could be added, but this should serve as a solid starting point. This is not the only way to implement such a function, but it covers the main types of tests:</p>
-<div class="sourceCode" id="cb496"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb496-1"><a href="sol-ex-CI.html#cb496-1"></a><span class="co"># Universal hypothesis testing function</span></span>
-<span id="cb496-2"><a href="sol-ex-CI.html#cb496-2"></a>hypothesis_test <span class="ot">&lt;-</span> <span class="cf">function</span>(test_type, <span class="at">data =</span> <span class="cn">NULL</span>, ..., <span class="at">alpha =</span> <span class="fl">0.05</span>) {</span>
-<span id="cb496-3"><a href="sol-ex-CI.html#cb496-3"></a></span>
-<span id="cb496-4"><a href="sol-ex-CI.html#cb496-4"></a>  <span class="co"># Initialize result list</span></span>
-<span id="cb496-5"><a href="sol-ex-CI.html#cb496-5"></a>  result <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb496-6"><a href="sol-ex-CI.html#cb496-6"></a></span>
-<span id="cb496-7"><a href="sol-ex-CI.html#cb496-7"></a>  <span class="cf">if</span> (test_type <span class="sc">==</span> <span class="st">"z_test"</span>) {</span>
-<span id="cb496-8"><a href="sol-ex-CI.html#cb496-8"></a>    <span class="co"># Z-test (one-sample or two-sample)</span></span>
-<span id="cb496-9"><a href="sol-ex-CI.html#cb496-9"></a>    args <span class="ot">&lt;-</span> <span class="fu">list</span>(...)</span>
-<span id="cb496-10"><a href="sol-ex-CI.html#cb496-10"></a></span>
-<span id="cb496-11"><a href="sol-ex-CI.html#cb496-11"></a>    <span class="cf">if</span> (<span class="fu">length</span>(args<span class="sc">$</span>mu0) <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;&amp;</span> <span class="fu">length</span>(args<span class="sc">$</span>sigma) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb496-12"><a href="sol-ex-CI.html#cb496-12"></a>      <span class="co"># One-sample z-test</span></span>
-<span id="cb496-13"><a href="sol-ex-CI.html#cb496-13"></a>      x <span class="ot">&lt;-</span> data</span>
-<span id="cb496-14"><a href="sol-ex-CI.html#cb496-14"></a>      mu0 <span class="ot">&lt;-</span> args<span class="sc">$</span>mu0</span>
-<span id="cb496-15"><a href="sol-ex-CI.html#cb496-15"></a>      sigma <span class="ot">&lt;-</span> args<span class="sc">$</span>sigma</span>
-<span id="cb496-16"><a href="sol-ex-CI.html#cb496-16"></a>      alternative <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.null</span>(args<span class="sc">$</span>alternative), <span class="st">"two.sided"</span>, args<span class="sc">$</span>alternative)</span>
-<span id="cb496-17"><a href="sol-ex-CI.html#cb496-17"></a></span>
-<span id="cb496-18"><a href="sol-ex-CI.html#cb496-18"></a>      n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
-<span id="cb496-19"><a href="sol-ex-CI.html#cb496-19"></a>      xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
-<span id="cb496-20"><a href="sol-ex-CI.html#cb496-20"></a>      z_stat <span class="ot">&lt;-</span> (xbar <span class="sc">-</span> mu0) <span class="sc">/</span> (sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
-<span id="cb496-21"><a href="sol-ex-CI.html#cb496-21"></a></span>
-<span id="cb496-22"><a href="sol-ex-CI.html#cb496-22"></a>      <span class="co"># Calculate p-value based on alternative hypothesis</span></span>
-<span id="cb496-23"><a href="sol-ex-CI.html#cb496-23"></a>      <span class="cf">if</span> (alternative <span class="sc">==</span> <span class="st">"two.sided"</span>) {</span>
-<span id="cb496-24"><a href="sol-ex-CI.html#cb496-24"></a>        p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fu">abs</span>(z_stat)))</span>
-<span id="cb496-25"><a href="sol-ex-CI.html#cb496-25"></a>        h0 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"H0: μ ="</span>, mu0)</span>
-<span id="cb496-26"><a href="sol-ex-CI.html#cb496-26"></a>        h1 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"H1: μ ≠"</span>, mu0)</span>
-<span id="cb496-27"><a href="sol-ex-CI.html#cb496-27"></a>      } <span class="cf">else</span> <span class="cf">if</span> (alternative <span class="sc">==</span> <span class="st">"greater"</span>) {</span>
-<span id="cb496-28"><a href="sol-ex-CI.html#cb496-28"></a>        p_value <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(z_stat)</span>
-<span id="cb496-29"><a href="sol-ex-CI.html#cb496-29"></a>        h0 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"H0: μ ≤"</span>, mu0)</span>
-<span id="cb496-30"><a href="sol-ex-CI.html#cb496-30"></a>        h1 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"H1: μ &gt;"</span>, mu0)</span>
-<span id="cb496-31"><a href="sol-ex-CI.html#cb496-31"></a>      } <span class="cf">else</span> <span class="cf">if</span> (alternative <span class="sc">==</span> <span class="st">"less"</span>) {</span>
-<span id="cb496-32"><a href="sol-ex-CI.html#cb496-32"></a>        p_value <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(z_stat)</span>
-<span id="cb496-33"><a href="sol-ex-CI.html#cb496-33"></a>        h0 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"H0: μ ≥"</span>, mu0)</span>
-<span id="cb496-34"><a href="sol-ex-CI.html#cb496-34"></a>        h1 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"H1: μ &lt;"</span>, mu0)</span>
-<span id="cb496-35"><a href="sol-ex-CI.html#cb496-35"></a>      }</span>
-<span id="cb496-36"><a href="sol-ex-CI.html#cb496-36"></a></span>
-<span id="cb496-37"><a href="sol-ex-CI.html#cb496-37"></a>      result <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb496-38"><a href="sol-ex-CI.html#cb496-38"></a>        <span class="at">test_name =</span> <span class="st">"One-sample Z-test"</span>,</span>
-<span id="cb496-39"><a href="sol-ex-CI.html#cb496-39"></a>        <span class="at">null_hypothesis =</span> h0,</span>
-<span id="cb496-40"><a href="sol-ex-CI.html#cb496-40"></a>        <span class="at">alternative_hypothesis =</span> h1,</span>
-<span id="cb496-41"><a href="sol-ex-CI.html#cb496-41"></a>        <span class="at">test_statistic =</span> z_stat,</span>
-<span id="cb496-42"><a href="sol-ex-CI.html#cb496-42"></a>        <span class="at">p_value =</span> p_value,</span>
-<span id="cb496-43"><a href="sol-ex-CI.html#cb496-43"></a>        <span class="at">alpha =</span> alpha,</span>
-<span id="cb496-44"><a href="sol-ex-CI.html#cb496-44"></a>        <span class="at">conclusion =</span> <span class="fu">ifelse</span>(p_value <span class="sc">&lt;</span> alpha, <span class="st">"Reject H0"</span>, <span class="st">"Fail to reject H0"</span>),</span>
-<span id="cb496-45"><a href="sol-ex-CI.html#cb496-45"></a>        <span class="at">sample_mean =</span> xbar,</span>
-<span id="cb496-46"><a href="sol-ex-CI.html#cb496-46"></a>        <span class="at">sample_size =</span> n</span>
-<span id="cb496-47"><a href="sol-ex-CI.html#cb496-47"></a>      )</span>
-<span id="cb496-48"><a href="sol-ex-CI.html#cb496-48"></a>    }</span>
-<span id="cb496-49"><a href="sol-ex-CI.html#cb496-49"></a></span>
-<span id="cb496-50"><a href="sol-ex-CI.html#cb496-50"></a>  } <span class="cf">else</span> <span class="cf">if</span> (test_type <span class="sc">==</span> <span class="st">"t_test"</span>) {</span>
-<span id="cb496-51"><a href="sol-ex-CI.html#cb496-51"></a>    <span class="co"># T-test (one-sample, two-sample, or paired)</span></span>
-<span id="cb496-52"><a href="sol-ex-CI.html#cb496-52"></a>    args <span class="ot">&lt;-</span> <span class="fu">list</span>(...)</span>
-<span id="cb496-53"><a href="sol-ex-CI.html#cb496-53"></a></span>
-<span id="cb496-54"><a href="sol-ex-CI.html#cb496-54"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(args<span class="sc">$</span>y)) {</span>
-<span id="cb496-55"><a href="sol-ex-CI.html#cb496-55"></a>      <span class="co"># Two-sample t-test</span></span>
-<span id="cb496-56"><a href="sol-ex-CI.html#cb496-56"></a>      x <span class="ot">&lt;-</span> data</span>
-<span id="cb496-57"><a href="sol-ex-CI.html#cb496-57"></a>      y <span class="ot">&lt;-</span> args<span class="sc">$</span>y</span>
-<span id="cb496-58"><a href="sol-ex-CI.html#cb496-58"></a>      alternative <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.null</span>(args<span class="sc">$</span>alternative), <span class="st">"two.sided"</span>, args<span class="sc">$</span>alternative)</span>
-<span id="cb496-59"><a href="sol-ex-CI.html#cb496-59"></a>      paired <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.null</span>(args<span class="sc">$</span>paired), <span class="cn">FALSE</span>, args<span class="sc">$</span>paired)</span>
-<span id="cb496-60"><a href="sol-ex-CI.html#cb496-60"></a></span>
-<span id="cb496-61"><a href="sol-ex-CI.html#cb496-61"></a>      <span class="cf">if</span> (paired) {</span>
-<span id="cb496-62"><a href="sol-ex-CI.html#cb496-62"></a>        <span class="co"># Paired t-test</span></span>
-<span id="cb496-63"><a href="sol-ex-CI.html#cb496-63"></a>        diff <span class="ot">&lt;-</span> x <span class="sc">-</span> y</span>
-<span id="cb496-64"><a href="sol-ex-CI.html#cb496-64"></a>        n <span class="ot">&lt;-</span> <span class="fu">length</span>(diff)</span>
-<span id="cb496-65"><a href="sol-ex-CI.html#cb496-65"></a>        mean_diff <span class="ot">&lt;-</span> <span class="fu">mean</span>(diff)</span>
-<span id="cb496-66"><a href="sol-ex-CI.html#cb496-66"></a>        sd_diff <span class="ot">&lt;-</span> <span class="fu">sd</span>(diff)</span>
-<span id="cb496-67"><a href="sol-ex-CI.html#cb496-67"></a>        t_stat <span class="ot">&lt;-</span> mean_diff <span class="sc">/</span> (sd_diff <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
-<span id="cb496-68"><a href="sol-ex-CI.html#cb496-68"></a>        df <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb496-69"><a href="sol-ex-CI.html#cb496-69"></a></span>
-<span id="cb496-70"><a href="sol-ex-CI.html#cb496-70"></a>        <span class="cf">if</span> (alternative <span class="sc">==</span> <span class="st">"two.sided"</span>) {</span>
-<span id="cb496-71"><a href="sol-ex-CI.html#cb496-71"></a>          p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(<span class="fu">abs</span>(t_stat), df))</span>
-<span id="cb496-72"><a href="sol-ex-CI.html#cb496-72"></a>          h0 <span class="ot">&lt;-</span> <span class="st">"H0: μd = 0"</span></span>
-<span id="cb496-73"><a href="sol-ex-CI.html#cb496-73"></a>          h1 <span class="ot">&lt;-</span> <span class="st">"H1: μd ≠ 0"</span></span>
-<span id="cb496-74"><a href="sol-ex-CI.html#cb496-74"></a>        } <span class="cf">else</span> <span class="cf">if</span> (alternative <span class="sc">==</span> <span class="st">"greater"</span>) {</span>
-<span id="cb496-75"><a href="sol-ex-CI.html#cb496-75"></a>          p_value <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(t_stat, df)</span>
-<span id="cb496-76"><a href="sol-ex-CI.html#cb496-76"></a>          h0 <span class="ot">&lt;-</span> <span class="st">"H0: μd ≤ 0"</span></span>
-<span id="cb496-77"><a href="sol-ex-CI.html#cb496-77"></a>          h1 <span class="ot">&lt;-</span> <span class="st">"H1: μd &gt; 0"</span></span>
-<span id="cb496-78"><a href="sol-ex-CI.html#cb496-78"></a>        } <span class="cf">else</span> <span class="cf">if</span> (alternative <span class="sc">==</span> <span class="st">"less"</span>) {</span>
-<span id="cb496-79"><a href="sol-ex-CI.html#cb496-79"></a>          p_value <span class="ot">&lt;-</span> <span class="fu">pt</span>(t_stat, df)</span>
-<span id="cb496-80"><a href="sol-ex-CI.html#cb496-80"></a>          h0 <span class="ot">&lt;-</span> <span class="st">"H0: μd ≥ 0"</span></span>
-<span id="cb496-81"><a href="sol-ex-CI.html#cb496-81"></a>          h1 <span class="ot">&lt;-</span> <span class="st">"H1: μd &lt; 0"</span></span>
-<span id="cb496-82"><a href="sol-ex-CI.html#cb496-82"></a>        }</span>
-<span id="cb496-83"><a href="sol-ex-CI.html#cb496-83"></a></span>
-<span id="cb496-84"><a href="sol-ex-CI.html#cb496-84"></a>        result <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb496-85"><a href="sol-ex-CI.html#cb496-85"></a>          <span class="at">test_name =</span> <span class="st">"Paired t-test"</span>,</span>
-<span id="cb496-86"><a href="sol-ex-CI.html#cb496-86"></a>          <span class="at">null_hypothesis =</span> h0,</span>
-<span id="cb496-87"><a href="sol-ex-CI.html#cb496-87"></a>          <span class="at">alternative_hypothesis =</span> h1,</span>
-<span id="cb496-88"><a href="sol-ex-CI.html#cb496-88"></a>          <span class="at">test_statistic =</span> t_stat,</span>
-<span id="cb496-89"><a href="sol-ex-CI.html#cb496-89"></a>          <span class="at">degrees_of_freedom =</span> df,</span>
-<span id="cb496-90"><a href="sol-ex-CI.html#cb496-90"></a>          <span class="at">p_value =</span> p_value,</span>
-<span id="cb496-91"><a href="sol-ex-CI.html#cb496-91"></a>          <span class="at">alpha =</span> alpha,</span>
-<span id="cb496-92"><a href="sol-ex-CI.html#cb496-92"></a>          <span class="at">conclusion =</span> <span class="fu">ifelse</span>(p_value <span class="sc">&lt;</span> alpha, <span class="st">"Reject H0"</span>, <span class="st">"Fail to reject H0"</span>),</span>
-<span id="cb496-93"><a href="sol-ex-CI.html#cb496-93"></a>          <span class="at">mean_difference =</span> mean_diff</span>
-<span id="cb496-94"><a href="sol-ex-CI.html#cb496-94"></a>        )</span>
-<span id="cb496-95"><a href="sol-ex-CI.html#cb496-95"></a></span>
-<span id="cb496-96"><a href="sol-ex-CI.html#cb496-96"></a>      } <span class="cf">else</span> {</span>
-<span id="cb496-97"><a href="sol-ex-CI.html#cb496-97"></a>        <span class="co"># Two-sample t-test (assuming equal variances)</span></span>
-<span id="cb496-98"><a href="sol-ex-CI.html#cb496-98"></a>        n1 <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
-<span id="cb496-99"><a href="sol-ex-CI.html#cb496-99"></a>        n2 <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
-<span id="cb496-100"><a href="sol-ex-CI.html#cb496-100"></a>        mean1 <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
-<span id="cb496-101"><a href="sol-ex-CI.html#cb496-101"></a>        mean2 <span class="ot">&lt;-</span> <span class="fu">mean</span>(y)</span>
-<span id="cb496-102"><a href="sol-ex-CI.html#cb496-102"></a>        var1 <span class="ot">&lt;-</span> <span class="fu">var</span>(x)</span>
-<span id="cb496-103"><a href="sol-ex-CI.html#cb496-103"></a>        var2 <span class="ot">&lt;-</span> <span class="fu">var</span>(y)</span>
-<span id="cb496-104"><a href="sol-ex-CI.html#cb496-104"></a></span>
-<span id="cb496-105"><a href="sol-ex-CI.html#cb496-105"></a>        <span class="co"># Pooled variance</span></span>
-<span id="cb496-106"><a href="sol-ex-CI.html#cb496-106"></a>        pooled_var <span class="ot">&lt;-</span> ((n1 <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> var1 <span class="sc">+</span> (n2 <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> var2) <span class="sc">/</span> (n1 <span class="sc">+</span> n2 <span class="sc">-</span> <span class="dv">2</span>)</span>
-<span id="cb496-107"><a href="sol-ex-CI.html#cb496-107"></a>        se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(pooled_var <span class="sc">*</span> (<span class="dv">1</span><span class="sc">/</span>n1 <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>n2))</span>
-<span id="cb496-108"><a href="sol-ex-CI.html#cb496-108"></a>        t_stat <span class="ot">&lt;-</span> (mean1 <span class="sc">-</span> mean2) <span class="sc">/</span> se</span>
-<span id="cb496-109"><a href="sol-ex-CI.html#cb496-109"></a>        df <span class="ot">&lt;-</span> n1 <span class="sc">+</span> n2 <span class="sc">-</span> <span class="dv">2</span></span>
-<span id="cb496-110"><a href="sol-ex-CI.html#cb496-110"></a></span>
-<span id="cb496-111"><a href="sol-ex-CI.html#cb496-111"></a>        <span class="cf">if</span> (alternative <span class="sc">==</span> <span class="st">"two.sided"</span>) {</span>
-<span id="cb496-112"><a href="sol-ex-CI.html#cb496-112"></a>          p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(<span class="fu">abs</span>(t_stat), df))</span>
-<span id="cb496-113"><a href="sol-ex-CI.html#cb496-113"></a>          h0 <span class="ot">&lt;-</span> <span class="st">"H0: μ1 = μ2"</span></span>
-<span id="cb496-114"><a href="sol-ex-CI.html#cb496-114"></a>          h1 <span class="ot">&lt;-</span> <span class="st">"H1: μ1 ≠ μ2"</span></span>
-<span id="cb496-115"><a href="sol-ex-CI.html#cb496-115"></a>        } <span class="cf">else</span> <span class="cf">if</span> (alternative <span class="sc">==</span> <span class="st">"greater"</span>) {</span>
-<span id="cb496-116"><a href="sol-ex-CI.html#cb496-116"></a>          p_value <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(t_stat, df)</span>
-<span id="cb496-117"><a href="sol-ex-CI.html#cb496-117"></a>          h0 <span class="ot">&lt;-</span> <span class="st">"H0: μ1 ≤ μ2"</span></span>
-<span id="cb496-118"><a href="sol-ex-CI.html#cb496-118"></a>          h1 <span class="ot">&lt;-</span> <span class="st">"H1: μ1 &gt; μ2"</span></span>
-<span id="cb496-119"><a href="sol-ex-CI.html#cb496-119"></a>        } <span class="cf">else</span> <span class="cf">if</span> (alternative <span class="sc">==</span> <span class="st">"less"</span>) {</span>
-<span id="cb496-120"><a href="sol-ex-CI.html#cb496-120"></a>          p_value <span class="ot">&lt;-</span> <span class="fu">pt</span>(t_stat, df)</span>
-<span id="cb496-121"><a href="sol-ex-CI.html#cb496-121"></a>          h0 <span class="ot">&lt;-</span> <span class="st">"H0: μ1 ≥ μ2"</span></span>
-<span id="cb496-122"><a href="sol-ex-CI.html#cb496-122"></a>          h1 <span class="ot">&lt;-</span> <span class="st">"H1: μ1 &lt; μ2"</span></span>
-<span id="cb496-123"><a href="sol-ex-CI.html#cb496-123"></a>        }</span>
-<span id="cb496-124"><a href="sol-ex-CI.html#cb496-124"></a></span>
-<span id="cb496-125"><a href="sol-ex-CI.html#cb496-125"></a>        result <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb496-126"><a href="sol-ex-CI.html#cb496-126"></a>          <span class="at">test_name =</span> <span class="st">"Two-sample t-test"</span>,</span>
-<span id="cb496-127"><a href="sol-ex-CI.html#cb496-127"></a>          <span class="at">null_hypothesis =</span> h0,</span>
-<span id="cb496-128"><a href="sol-ex-CI.html#cb496-128"></a>          <span class="at">alternative_hypothesis =</span> h1,</span>
-<span id="cb496-129"><a href="sol-ex-CI.html#cb496-129"></a>          <span class="at">test_statistic =</span> t_stat,</span>
-<span id="cb496-130"><a href="sol-ex-CI.html#cb496-130"></a>          <span class="at">degrees_of_freedom =</span> df,</span>
-<span id="cb496-131"><a href="sol-ex-CI.html#cb496-131"></a>          <span class="at">p_value =</span> p_value,</span>
-<span id="cb496-132"><a href="sol-ex-CI.html#cb496-132"></a>          <span class="at">alpha =</span> alpha,</span>
-<span id="cb496-133"><a href="sol-ex-CI.html#cb496-133"></a>          <span class="at">conclusion =</span> <span class="fu">ifelse</span>(p_value <span class="sc">&lt;</span> alpha, <span class="st">"Reject H0"</span>, <span class="st">"Fail to reject H0"</span>),</span>
-<span id="cb496-134"><a href="sol-ex-CI.html#cb496-134"></a>          <span class="at">sample1_mean =</span> mean1,</span>
-<span id="cb496-135"><a href="sol-ex-CI.html#cb496-135"></a>          <span class="at">sample2_mean =</span> mean2</span>
-<span id="cb496-136"><a href="sol-ex-CI.html#cb496-136"></a>        )</span>
-<span id="cb496-137"><a href="sol-ex-CI.html#cb496-137"></a>      }</span>
-<span id="cb496-138"><a href="sol-ex-CI.html#cb496-138"></a></span>
-<span id="cb496-139"><a href="sol-ex-CI.html#cb496-139"></a>    } <span class="cf">else</span> {</span>
-<span id="cb496-140"><a href="sol-ex-CI.html#cb496-140"></a>      <span class="co"># One-sample t-test</span></span>
-<span id="cb496-141"><a href="sol-ex-CI.html#cb496-141"></a>      x <span class="ot">&lt;-</span> data</span>
-<span id="cb496-142"><a href="sol-ex-CI.html#cb496-142"></a>      mu0 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.null</span>(args<span class="sc">$</span>mu0), <span class="dv">0</span>, args<span class="sc">$</span>mu0)</span>
-<span id="cb496-143"><a href="sol-ex-CI.html#cb496-143"></a>      alternative <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.null</span>(args<span class="sc">$</span>alternative), <span class="st">"two.sided"</span>, args<span class="sc">$</span>alternative)</span>
-<span id="cb496-144"><a href="sol-ex-CI.html#cb496-144"></a></span>
-<span id="cb496-145"><a href="sol-ex-CI.html#cb496-145"></a>      n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
-<span id="cb496-146"><a href="sol-ex-CI.html#cb496-146"></a>      xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
-<span id="cb496-147"><a href="sol-ex-CI.html#cb496-147"></a>      s <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
-<span id="cb496-148"><a href="sol-ex-CI.html#cb496-148"></a>      t_stat <span class="ot">&lt;-</span> (xbar <span class="sc">-</span> mu0) <span class="sc">/</span> (s <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
-<span id="cb496-149"><a href="sol-ex-CI.html#cb496-149"></a>      df <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb496-150"><a href="sol-ex-CI.html#cb496-150"></a></span>
-<span id="cb496-151"><a href="sol-ex-CI.html#cb496-151"></a>      <span class="cf">if</span> (alternative <span class="sc">==</span> <span class="st">"two.sided"</span>) {</span>
-<span id="cb496-152"><a href="sol-ex-CI.html#cb496-152"></a>        p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(<span class="fu">abs</span>(t_stat), df))</span>
-<span id="cb496-153"><a href="sol-ex-CI.html#cb496-153"></a>        h0 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"H0: μ ="</span>, mu0)</span>
-<span id="cb496-154"><a href="sol-ex-CI.html#cb496-154"></a>        h1 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"H1: μ ≠"</span>, mu0)</span>
-<span id="cb496-155"><a href="sol-ex-CI.html#cb496-155"></a>      } <span class="cf">else</span> <span class="cf">if</span> (alternative <span class="sc">==</span> <span class="st">"greater"</span>) {</span>
-<span id="cb496-156"><a href="sol-ex-CI.html#cb496-156"></a>        p_value <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(t_stat, df)</span>
-<span id="cb496-157"><a href="sol-ex-CI.html#cb496-157"></a>        h0 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"H0: μ ≤"</span>, mu0)</span>
-<span id="cb496-158"><a href="sol-ex-CI.html#cb496-158"></a>        h1 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"H1: μ &gt;"</span>, mu0)</span>
-<span id="cb496-159"><a href="sol-ex-CI.html#cb496-159"></a>      } <span class="cf">else</span> <span class="cf">if</span> (alternative <span class="sc">==</span> <span class="st">"less"</span>) {</span>
-<span id="cb496-160"><a href="sol-ex-CI.html#cb496-160"></a>        p_value <span class="ot">&lt;-</span> <span class="fu">pt</span>(t_stat, df)</span>
-<span id="cb496-161"><a href="sol-ex-CI.html#cb496-161"></a>        h0 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"H0: μ ≥"</span>, mu0)</span>
-<span id="cb496-162"><a href="sol-ex-CI.html#cb496-162"></a>        h1 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"H1: μ &lt;"</span>, mu0)</span>
-<span id="cb496-163"><a href="sol-ex-CI.html#cb496-163"></a>      }</span>
-<span id="cb496-164"><a href="sol-ex-CI.html#cb496-164"></a></span>
-<span id="cb496-165"><a href="sol-ex-CI.html#cb496-165"></a>      result <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb496-166"><a href="sol-ex-CI.html#cb496-166"></a>        <span class="at">test_name =</span> <span class="st">"One-sample t-test"</span>,</span>
-<span id="cb496-167"><a href="sol-ex-CI.html#cb496-167"></a>        <span class="at">null_hypothesis =</span> h0,</span>
-<span id="cb496-168"><a href="sol-ex-CI.html#cb496-168"></a>        <span class="at">alternative_hypothesis =</span> h1,</span>
-<span id="cb496-169"><a href="sol-ex-CI.html#cb496-169"></a>        <span class="at">test_statistic =</span> t_stat,</span>
-<span id="cb496-170"><a href="sol-ex-CI.html#cb496-170"></a>        <span class="at">degrees_of_freedom =</span> df,</span>
-<span id="cb496-171"><a href="sol-ex-CI.html#cb496-171"></a>        <span class="at">p_value =</span> p_value,</span>
-<span id="cb496-172"><a href="sol-ex-CI.html#cb496-172"></a>        <span class="at">alpha =</span> alpha,</span>
-<span id="cb496-173"><a href="sol-ex-CI.html#cb496-173"></a>        <span class="at">conclusion =</span> <span class="fu">ifelse</span>(p_value <span class="sc">&lt;</span> alpha, <span class="st">"Reject H0"</span>, <span class="st">"Fail to reject H0"</span>),</span>
-<span id="cb496-174"><a href="sol-ex-CI.html#cb496-174"></a>        <span class="at">sample_mean =</span> xbar,</span>
-<span id="cb496-175"><a href="sol-ex-CI.html#cb496-175"></a>        <span class="at">sample_size =</span> n</span>
-<span id="cb496-176"><a href="sol-ex-CI.html#cb496-176"></a>      )</span>
-<span id="cb496-177"><a href="sol-ex-CI.html#cb496-177"></a>    }</span>
-<span id="cb496-178"><a href="sol-ex-CI.html#cb496-178"></a></span>
-<span id="cb496-179"><a href="sol-ex-CI.html#cb496-179"></a>  } <span class="cf">else</span> <span class="cf">if</span> (test_type <span class="sc">==</span> <span class="st">"chi_squared_test"</span>) {</span>
-<span id="cb496-180"><a href="sol-ex-CI.html#cb496-180"></a>    <span class="co"># Chi-squared test (goodness of fit or independence)</span></span>
-<span id="cb496-181"><a href="sol-ex-CI.html#cb496-181"></a>    args <span class="ot">&lt;-</span> <span class="fu">list</span>(...)</span>
-<span id="cb496-182"><a href="sol-ex-CI.html#cb496-182"></a></span>
-<span id="cb496-183"><a href="sol-ex-CI.html#cb496-183"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(args<span class="sc">$</span>expected)) {</span>
-<span id="cb496-184"><a href="sol-ex-CI.html#cb496-184"></a>      <span class="co"># Goodness of fit test</span></span>
-<span id="cb496-185"><a href="sol-ex-CI.html#cb496-185"></a>      observed <span class="ot">&lt;-</span> data</span>
-<span id="cb496-186"><a href="sol-ex-CI.html#cb496-186"></a>      expected <span class="ot">&lt;-</span> args<span class="sc">$</span>expected</span>
-<span id="cb496-187"><a href="sol-ex-CI.html#cb496-187"></a></span>
-<span id="cb496-188"><a href="sol-ex-CI.html#cb496-188"></a>      chi_stat <span class="ot">&lt;-</span> <span class="fu">sum</span>((observed <span class="sc">-</span> expected)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> expected)</span>
-<span id="cb496-189"><a href="sol-ex-CI.html#cb496-189"></a>      df <span class="ot">&lt;-</span> <span class="fu">length</span>(observed) <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb496-190"><a href="sol-ex-CI.html#cb496-190"></a>      p_value <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(chi_stat, df)</span>
-<span id="cb496-191"><a href="sol-ex-CI.html#cb496-191"></a></span>
-<span id="cb496-192"><a href="sol-ex-CI.html#cb496-192"></a>      result <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb496-193"><a href="sol-ex-CI.html#cb496-193"></a>        <span class="at">test_name =</span> <span class="st">"Chi-squared goodness of fit test"</span>,</span>
-<span id="cb496-194"><a href="sol-ex-CI.html#cb496-194"></a>        <span class="at">null_hypothesis =</span> <span class="st">"H0: Data follows the specified distribution"</span>,</span>
-<span id="cb496-195"><a href="sol-ex-CI.html#cb496-195"></a>        <span class="at">alternative_hypothesis =</span> <span class="st">"H1: Data does not follow the specified distribution"</span>,</span>
-<span id="cb496-196"><a href="sol-ex-CI.html#cb496-196"></a>        <span class="at">test_statistic =</span> chi_stat,</span>
-<span id="cb496-197"><a href="sol-ex-CI.html#cb496-197"></a>        <span class="at">degrees_of_freedom =</span> df,</span>
-<span id="cb496-198"><a href="sol-ex-CI.html#cb496-198"></a>        <span class="at">p_value =</span> p_value,</span>
-<span id="cb496-199"><a href="sol-ex-CI.html#cb496-199"></a>        <span class="at">alpha =</span> alpha,</span>
-<span id="cb496-200"><a href="sol-ex-CI.html#cb496-200"></a>        <span class="at">conclusion =</span> <span class="fu">ifelse</span>(p_value <span class="sc">&lt;</span> alpha, <span class="st">"Reject H0"</span>, <span class="st">"Fail to reject H0"</span>),</span>
-<span id="cb496-201"><a href="sol-ex-CI.html#cb496-201"></a>        <span class="at">observed =</span> observed,</span>
-<span id="cb496-202"><a href="sol-ex-CI.html#cb496-202"></a>        <span class="at">expected =</span> expected</span>
-<span id="cb496-203"><a href="sol-ex-CI.html#cb496-203"></a>      )</span>
-<span id="cb496-204"><a href="sol-ex-CI.html#cb496-204"></a></span>
-<span id="cb496-205"><a href="sol-ex-CI.html#cb496-205"></a>    } <span class="cf">else</span> {</span>
-<span id="cb496-206"><a href="sol-ex-CI.html#cb496-206"></a>      <span class="co"># Test of independence (contingency table)</span></span>
-<span id="cb496-207"><a href="sol-ex-CI.html#cb496-207"></a>      contingency_table <span class="ot">&lt;-</span> data</span>
-<span id="cb496-208"><a href="sol-ex-CI.html#cb496-208"></a></span>
-<span id="cb496-209"><a href="sol-ex-CI.html#cb496-209"></a>      <span class="co"># Calculate expected frequencies</span></span>
-<span id="cb496-210"><a href="sol-ex-CI.html#cb496-210"></a>      row_totals <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(contingency_table)</span>
-<span id="cb496-211"><a href="sol-ex-CI.html#cb496-211"></a>      col_totals <span class="ot">&lt;-</span> <span class="fu">colSums</span>(contingency_table)</span>
-<span id="cb496-212"><a href="sol-ex-CI.html#cb496-212"></a>      total <span class="ot">&lt;-</span> <span class="fu">sum</span>(contingency_table)</span>
-<span id="cb496-213"><a href="sol-ex-CI.html#cb496-213"></a></span>
-<span id="cb496-214"><a href="sol-ex-CI.html#cb496-214"></a>      expected <span class="ot">&lt;-</span> <span class="fu">outer</span>(row_totals, col_totals) <span class="sc">/</span> total</span>
-<span id="cb496-215"><a href="sol-ex-CI.html#cb496-215"></a></span>
-<span id="cb496-216"><a href="sol-ex-CI.html#cb496-216"></a>      chi_stat <span class="ot">&lt;-</span> <span class="fu">sum</span>((contingency_table <span class="sc">-</span> expected)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> expected)</span>
-<span id="cb496-217"><a href="sol-ex-CI.html#cb496-217"></a>      df <span class="ot">&lt;-</span> (<span class="fu">nrow</span>(contingency_table) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> (<span class="fu">ncol</span>(contingency_table) <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb496-218"><a href="sol-ex-CI.html#cb496-218"></a>      p_value <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(chi_stat, df)</span>
-<span id="cb496-219"><a href="sol-ex-CI.html#cb496-219"></a></span>
-<span id="cb496-220"><a href="sol-ex-CI.html#cb496-220"></a>      result <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb496-221"><a href="sol-ex-CI.html#cb496-221"></a>        <span class="at">test_name =</span> <span class="st">"Chi-squared test of independence"</span>,</span>
-<span id="cb496-222"><a href="sol-ex-CI.html#cb496-222"></a>        <span class="at">null_hypothesis =</span> <span class="st">"H0: Variables are independent"</span>,</span>
-<span id="cb496-223"><a href="sol-ex-CI.html#cb496-223"></a>        <span class="at">alternative_hypothesis =</span> <span class="st">"H1: Variables are not independent"</span>,</span>
-<span id="cb496-224"><a href="sol-ex-CI.html#cb496-224"></a>        <span class="at">test_statistic =</span> chi_stat,</span>
-<span id="cb496-225"><a href="sol-ex-CI.html#cb496-225"></a>        <span class="at">degrees_of_freedom =</span> df,</span>
-<span id="cb496-226"><a href="sol-ex-CI.html#cb496-226"></a>        <span class="at">p_value =</span> p_value,</span>
-<span id="cb496-227"><a href="sol-ex-CI.html#cb496-227"></a>        <span class="at">alpha =</span> alpha,</span>
-<span id="cb496-228"><a href="sol-ex-CI.html#cb496-228"></a>        <span class="at">conclusion =</span> <span class="fu">ifelse</span>(p_value <span class="sc">&lt;</span> alpha, <span class="st">"Reject H0"</span>, <span class="st">"Fail to reject H0"</span>),</span>
-<span id="cb496-229"><a href="sol-ex-CI.html#cb496-229"></a>        <span class="at">observed =</span> contingency_table,</span>
-<span id="cb496-230"><a href="sol-ex-CI.html#cb496-230"></a>        <span class="at">expected =</span> expected</span>
-<span id="cb496-231"><a href="sol-ex-CI.html#cb496-231"></a>      )</span>
-<span id="cb496-232"><a href="sol-ex-CI.html#cb496-232"></a>    }</span>
-<span id="cb496-233"><a href="sol-ex-CI.html#cb496-233"></a>  }</span>
-<span id="cb496-234"><a href="sol-ex-CI.html#cb496-234"></a></span>
-<span id="cb496-235"><a href="sol-ex-CI.html#cb496-235"></a>  <span class="fu">class</span>(result) <span class="ot">&lt;-</span> <span class="st">"hypothesis_test"</span></span>
-<span id="cb496-236"><a href="sol-ex-CI.html#cb496-236"></a>  <span class="fu">return</span>(result)</span>
-<span id="cb496-237"><a href="sol-ex-CI.html#cb496-237"></a>}</span>
-<span id="cb496-238"><a href="sol-ex-CI.html#cb496-238"></a></span>
-<span id="cb496-239"><a href="sol-ex-CI.html#cb496-239"></a><span class="co"># Print method for hypothesis_test objects</span></span>
-<span id="cb496-240"><a href="sol-ex-CI.html#cb496-240"></a>print.hypothesis_test <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb496-241"><a href="sol-ex-CI.html#cb496-241"></a>  <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, x<span class="sc">$</span>test_name, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb496-242"><a href="sol-ex-CI.html#cb496-242"></a>  <span class="fu">cat</span>(<span class="fu">rep</span>(<span class="st">"="</span>, <span class="fu">nchar</span>(x<span class="sc">$</span>test_name) <span class="sc">+</span> <span class="dv">2</span>), <span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span>
-<span id="cb496-243"><a href="sol-ex-CI.html#cb496-243"></a></span>
-<span id="cb496-244"><a href="sol-ex-CI.html#cb496-244"></a>  <span class="fu">cat</span>(<span class="st">"Hypotheses:</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb496-245"><a href="sol-ex-CI.html#cb496-245"></a>  <span class="fu">cat</span>(<span class="st">"  "</span>, x<span class="sc">$</span>null_hypothesis, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb496-246"><a href="sol-ex-CI.html#cb496-246"></a>  <span class="fu">cat</span>(<span class="st">"  "</span>, x<span class="sc">$</span>alternative_hypothesis, <span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
-<span id="cb496-247"><a href="sol-ex-CI.html#cb496-247"></a></span>
-<span id="cb496-248"><a href="sol-ex-CI.html#cb496-248"></a>  <span class="fu">cat</span>(<span class="st">"Test Statistics:</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb496-249"><a href="sol-ex-CI.html#cb496-249"></a>  <span class="fu">cat</span>(<span class="st">"  Test statistic:"</span>, <span class="fu">round</span>(x<span class="sc">$</span>test_statistic, <span class="dv">4</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb496-250"><a href="sol-ex-CI.html#cb496-250"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(x<span class="sc">$</span>degrees_of_freedom)) {</span>
-<span id="cb496-251"><a href="sol-ex-CI.html#cb496-251"></a>    <span class="fu">cat</span>(<span class="st">"  Degrees of freedom:"</span>, x<span class="sc">$</span>degrees_of_freedom, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb496-252"><a href="sol-ex-CI.html#cb496-252"></a>  }</span>
-<span id="cb496-253"><a href="sol-ex-CI.html#cb496-253"></a>  <span class="fu">cat</span>(<span class="st">"  P-value:"</span>, <span class="fu">round</span>(x<span class="sc">$</span>p_value, <span class="dv">6</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb496-254"><a href="sol-ex-CI.html#cb496-254"></a>  <span class="fu">cat</span>(<span class="st">"  Significance level (α):"</span>, x<span class="sc">$</span>alpha, <span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
-<span id="cb496-255"><a href="sol-ex-CI.html#cb496-255"></a></span>
-<span id="cb496-256"><a href="sol-ex-CI.html#cb496-256"></a>  <span class="fu">cat</span>(<span class="st">"Conclusion:</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb496-257"><a href="sol-ex-CI.html#cb496-257"></a>  <span class="fu">cat</span>(<span class="st">"  "</span>, x<span class="sc">$</span>conclusion, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb496-258"><a href="sol-ex-CI.html#cb496-258"></a>  <span class="cf">if</span> (x<span class="sc">$</span>p_value <span class="sc">&lt;</span> x<span class="sc">$</span>alpha) {</span>
-<span id="cb496-259"><a href="sol-ex-CI.html#cb496-259"></a>    <span class="fu">cat</span>(<span class="st">"  There is sufficient evidence to reject the null hypothesis.</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb496-260"><a href="sol-ex-CI.html#cb496-260"></a>  } <span class="cf">else</span> {</span>
-<span id="cb496-261"><a href="sol-ex-CI.html#cb496-261"></a>    <span class="fu">cat</span>(<span class="st">"  There is insufficient evidence to reject the null hypothesis.</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb496-262"><a href="sol-ex-CI.html#cb496-262"></a>  }</span>
-<span id="cb496-263"><a href="sol-ex-CI.html#cb496-263"></a>}</span></code></pre></div>
-</div>
-<div id="example-usage" class="section level2" number="19.12">
-<h2>
-<span class="header-section-number">F.12</span> Example Usage<a class="anchor" aria-label="anchor" href="#example-usage"><i class="fas fa-link"></i></a>
-</h2>
-<p>Here are examples of how to use the universal hypothesis testing function:</p>
-<div class="sourceCode" id="cb497"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb497-1"><a href="sol-ex-CI.html#cb497-1"></a><span class="co"># Example 1: One-sample z-test (Exercise 1 data)</span></span>
-<span id="cb497-2"><a href="sol-ex-CI.html#cb497-2"></a>milk_data <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">263.9</span>, <span class="fl">266.2</span>, <span class="fl">266.3</span>, <span class="fl">266.8</span>, <span class="fl">265.0</span>)</span>
-<span id="cb497-3"><a href="sol-ex-CI.html#cb497-3"></a>z_result <span class="ot">&lt;-</span> <span class="fu">hypothesis_test</span>(<span class="st">"z_test"</span>, <span class="at">data =</span> milk_data, <span class="at">mu0 =</span> <span class="dv">260</span>, <span class="at">sigma =</span> <span class="fl">1.65</span>,</span>
-<span id="cb497-4"><a href="sol-ex-CI.html#cb497-4"></a>                           <span class="at">alternative =</span> <span class="st">"greater"</span>, <span class="at">alpha =</span> <span class="fl">0.01</span>)</span>
-<span id="cb497-5"><a href="sol-ex-CI.html#cb497-5"></a><span class="fu">print</span>(z_result)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; 
-#&gt;  One-sample Z-test 
-#&gt; ===================
-#&gt; 
-#&gt; Hypotheses:
-#&gt;    H0: μ ≤ 260 
-#&gt;    H1: μ &gt; 260 
-#&gt; 
-#&gt; Test Statistics:
-#&gt;   Test statistic: 7.6433 
-#&gt;   P-value: 0 
-#&gt;   Significance level (α): 0.01 
-#&gt; 
-#&gt; Conclusion:
-#&gt;    Reject H0 
-#&gt;   There is sufficient evidence to reject the null hypothesis.</code></pre>
-<div class="sourceCode" id="cb499"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb499-1"><a href="sol-ex-CI.html#cb499-1"></a><span class="co"># Example 2: One-sample t-test (Exercise 4 data)</span></span>
-<span id="cb499-2"><a href="sol-ex-CI.html#cb499-2"></a><span class="co"># Simulating data with mean 5.64 and variance 0.05</span></span>
-<span id="cb499-3"><a href="sol-ex-CI.html#cb499-3"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb499-4"><a href="sol-ex-CI.html#cb499-4"></a>process_data <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="fl">5.64</span>, <span class="at">sd =</span> <span class="fu">sqrt</span>(<span class="fl">0.05</span>))</span>
-<span id="cb499-5"><a href="sol-ex-CI.html#cb499-5"></a>t_result <span class="ot">&lt;-</span> <span class="fu">hypothesis_test</span>(<span class="st">"t_test"</span>, <span class="at">data =</span> process_data, <span class="at">mu0 =</span> <span class="fl">5.4</span>,</span>
-<span id="cb499-6"><a href="sol-ex-CI.html#cb499-6"></a>                           <span class="at">alternative =</span> <span class="st">"two.sided"</span>, <span class="at">alpha =</span> <span class="fl">0.05</span>)</span>
-<span id="cb499-7"><a href="sol-ex-CI.html#cb499-7"></a><span class="fu">print</span>(t_result)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; 
-#&gt;  One-sample t-test 
-#&gt; ===================
-#&gt; 
-#&gt; Hypotheses:
-#&gt;    H0: μ = 5.4 
-#&gt;    H1: μ ≠ 5.4 
-#&gt; 
-#&gt; Test Statistics:
-#&gt;   Test statistic: 3.4929 
-#&gt;   Degrees of freedom: 4 
-#&gt;   P-value: 0.025056 
-#&gt;   Significance level (α): 0.05 
-#&gt; 
-#&gt; Conclusion:
-#&gt;    Reject H0 
-#&gt;   There is sufficient evidence to reject the null hypothesis.</code></pre>
-<div class="sourceCode" id="cb501"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb501-1"><a href="sol-ex-CI.html#cb501-1"></a><span class="co"># Example 3: Chi-squared goodness of fit test (Exercise 7 data)</span></span>
-<span id="cb501-2"><a href="sol-ex-CI.html#cb501-2"></a>door_counts <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">36</span>, <span class="dv">31</span>)</span>
-<span id="cb501-3"><a href="sol-ex-CI.html#cb501-3"></a>expected_counts <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">30</span>, <span class="dv">3</span>)  <span class="co"># Equal preference expected</span></span>
-<span id="cb501-4"><a href="sol-ex-CI.html#cb501-4"></a>chi_result <span class="ot">&lt;-</span> <span class="fu">hypothesis_test</span>(<span class="st">"chi_squared_test"</span>, <span class="at">data =</span> door_counts,</span>
-<span id="cb501-5"><a href="sol-ex-CI.html#cb501-5"></a>                             <span class="at">expected =</span> expected_counts, <span class="at">alpha =</span> <span class="fl">0.05</span>)</span>
-<span id="cb501-6"><a href="sol-ex-CI.html#cb501-6"></a><span class="fu">print</span>(chi_result)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; 
-#&gt;  Chi-squared goodness of fit test 
-#&gt; ==================================
-#&gt; 
-#&gt; Hypotheses:
-#&gt;    H0: Data follows the specified distribution 
-#&gt;    H1: Data does not follow the specified distribution 
-#&gt; 
-#&gt; Test Statistics:
-#&gt;   Test statistic: 2.8667 
-#&gt;   Degrees of freedom: 2 
-#&gt;   P-value: 0.238513 
-#&gt;   Significance level (α): 0.05 
-#&gt; 
-#&gt; Conclusion:
-#&gt;    Fail to reject H0 
-#&gt;   There is insufficient evidence to reject the null hypothesis.</code></pre>
-<button class="button">
-<a href="computational-testing-techniques.html#ht-universal">Back to exercise</a>
-</button>
-
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="sol-ex-CI_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:95.0%"></p>
+</figure>
 </div>
 </div>
-  <div class="chapter-nav">
-<div class="prev"><a href="sol-mle.html"><span class="header-section-number">E</span> Solution: Model Answers: MLE</a></div>
-<div class="next"><a href="representing_data-sol.html"><span class="header-section-number">G</span> Solution: Representing Data</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#sol-ex-CI"><span class="header-section-number">F</span> Solution: Confidence Interval</a></li>
-<li><a class="nav-link" href="#function-definitions"><span class="header-section-number">F.1</span> Function Definitions</a></li>
-<li><a class="nav-link" href="#main-analysis"><span class="header-section-number">F.2</span> Main Analysis</a></li>
-<li><a class="nav-link" href="#advanced-analysis-with-accuracy-assessment"><span class="header-section-number">F.3</span> Advanced Analysis with Accuracy Assessment</a></li>
-<li><a class="nav-link" href="#ht-sol-ex2"><span class="header-section-number">F.4</span> Solution: Exercise 2</a></li>
-<li><a class="nav-link" href="#ht-sol-ex3"><span class="header-section-number">F.5</span> Solution: Exercise 3</a></li>
-<li><a class="nav-link" href="#ht-sol-ex4"><span class="header-section-number">F.6</span> Solution: Exercise 4</a></li>
-<li><a class="nav-link" href="#ht-sol-ex5"><span class="header-section-number">F.7</span> Solution: Exercise 5</a></li>
-<li><a class="nav-link" href="#ht-sol-ex6"><span class="header-section-number">F.8</span> Solution: Exercise 6</a></li>
-<li><a class="nav-link" href="#ht-sol-ex7"><span class="header-section-number">F.9</span> Solution: Exercise 7</a></li>
-<li><a class="nav-link" href="#ht-sol-ex8"><span class="header-section-number">F.10</span> Solution: Exercise 8</a></li>
-<li><a class="nav-link" href="#ht-sol-universal"><span class="header-section-number">F.11</span> Universal Hypothesis Testing Function</a></li>
-<li><a class="nav-link" href="#example-usage"><span class="header-section-number">F.12</span> Example Usage</a></li>
-</ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/anasrana/ems-practicals/blob/master/comptest-sol.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/anasrana/ems-practicals/edit/master/comptest-sol.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
 </div>
-    </nav>
-</div>
+<p>```</p>
+<p><span class="backlink"><a href="confidence-intervals.html#exr-ex-confidence-interval"><span class="swap"><span class="arr" aria-hidden="true">←</span><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" viewbox="0 0 56 40"><path d="M3 20.2h50" stroke-width=".8" opacity=".35"></path><path d="M4 19.7 7 25.2l3-8.4 3-.3 3 8 3-5 3-3.6 3 6.3 3-1.6 3-3.1 3 2.1 3 1.2 3-1.9 3 1.2 3 .1" stroke-width="1.1"></path><circle cx="49.5" cy="20.2" r="2.8" class="accent" fill="#a51c1c" stroke="none"></circle></svg></span><span>back to exercise 6.2</span></a></span><span class="endmark"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" viewbox="0 0 56 40"><path d="M3 20.2h50" stroke-width=".8" opacity=".35"></path><path d="M4 19.7 7 25.2l3-8.4 3-.3 3 8 3-5 3-3.6 3 6.3 3-1.6 3-3.1 3 2.1 3 1.2 3-1.9 3 1.2 3 .1" stroke-width="1.1"></path><circle cx="49.5" cy="20.2" r="2.8" class="accent" fill="#a51c1c" stroke="none"></circle></svg></span></p>
 
-</div>
-</div> <!-- .container -->
 
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2026-10-03.</p>
-  </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
-</div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
-}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var left = document.querySelector("footer.footer .nav-footer-left");
+  var nav = document.querySelector("nav.page-navigation");
+  if (!left || !nav) return;
+  var f = document.createElement("div");
+  f.className = "ems-colophon";
+  f.innerHTML = left.innerHTML;
+  nav.after(f);
+  document.querySelector("footer.footer").remove();
+});
 </script>
-</body>
-</html>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/anasrana\.github\.io\/ems-practicals\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./sol-mle.html" class="pagination-link" aria-label="Solution: Model Answers: MLE">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Solution: Model Answers: <span class="acronym">MLE</span></span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./solution-computational-testing.html" class="pagination-link" aria-label="Solution: Computational Testing">
+        <span class="nav-page-text"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">Solution: Computational Testing</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Essentials of Mathematics and Statistics · <a href="https://anasrana.github.io/">Anas A Rana</a> · University of Birmingham<br>
+<em>Set in ET Book. Built with Quarto (<a href="https://github.com/anasrana/ems-practicals">source</a>).</em></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -1,12 +1,18 @@
-<!doctype html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="utf-8">
-<title>Moved: Multiple regression</title>
-<link rel="canonical" href="multiple-regression.html">
-<meta name="robots" content="noindex">
-<meta http-equiv="refresh" content="0; url=multiple-regression.html">
-<script>location.replace("multiple-regression.html" + location.hash);</script>
+  <title>Redirect</title>
+  <script type="text/javascript">
+    var redirects = {"":"multiple-regression.html"};
+    var hash = window.location.hash.startsWith('#') ? window.location.hash.slice(1) : window.location.hash;
+    var redirect = redirects[hash] || redirects[""] || "/";
+    window.document.title = 'Redirect to  ' +  redirect;
+    if (!redirects[hash]) {
+      redirect = redirect + window.location.hash;
+    }
+    redirect = redirect + window.location.search;
+    window.location.replace(redirect);
+  </script>
 </head>
-<body><p>This page has moved to <a href="multiple-regression.html">Multiple regression</a>.</p></body>
+<body>
+</body>
 </html>

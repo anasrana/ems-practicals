@@ -1,290 +1,1312 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>B Solution: Markov Chains | Essentials of Mathematics and Statistics</title>
-<meta name="author" content="Anas A Rana">
-<meta name="description" content="B.1 Three state Markov Chain The three state Markov chain is more complex to draw. The diagram below shows the states and the transition probabilities. The self-loop probabilities need to be...">
-<meta name="generator" content="bookdown 0.48 with bs4_book()">
-<meta property="og:title" content="B Solution: Markov Chains | Essentials of Mathematics and Statistics">
-<meta property="og:type" content="book">
-<meta property="og:description" content="B.1 Three state Markov Chain The three state Markov chain is more complex to draw. The diagram below shows the states and the transition probabilities. The self-loop probabilities need to be...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="B Solution: Markov Chains | Essentials of Mathematics and Statistics">
-<meta name="twitter:description" content="B.1 Three state Markov Chain The three state Markov chain is more complex to draw. The diagram below shows the states and the transition probabilities. The self-loop probabilities need to be...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Palatino-0.4.10/font.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Fira%20Code:wght@100&amp;display=swap" rel="stylesheet">
-<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
-    
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  </style>
-<link rel="stylesheet" href="style.css">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="The practical sessions for Essentials of Mathematics and Statistics, part of the MSc Bioinformatics at the University of Birmingham.">
+
+<title>Appendix B — Solution: Markov Chains – Essentials of Mathematics and Statistics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./monopolySol.html" rel="next">
+<link href="./simSol.html" rel="prev">
+<link href="site_libs/quarto-contrib/quarto-project/anasrana/tufte-brand/logo/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-916e1d957aa2e2d21c4002595b1ed413.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-9f18ae6aabaf6c0e00f98c5a006862d7.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-916e1d957aa2e2d21c4002595b1ed413.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2af58e5f354677c1aa98ae231aa6e52d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-d0ec94b9ce42e636880269600be468a7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-2af58e5f354677c1aa98ae231aa6e52d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 </head>
-<body data-spy="scroll" data-target="#toc">
 
-<div class="container-fluid">
-<div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      refreshSafariScrollbar();
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="">Essentials of Mathematics and Statistics</a>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item">Appendices</li><li class="breadcrumb-item"><a href="./simSol.html">Solutions</a></li><li class="breadcrumb-item"><a href="./solution-markov-chains.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Solution: Markov Chains</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
     </div>
-
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Introduction to the Practical</a></li>
-<li class="book-part">Probability in R</li>
-<li><a class="" href="simulating-random-numbers.html"><span class="header-section-number">1</span> Simulating random numbers</a></li>
-<li><a class="" href="markov-chains.html"><span class="header-section-number">2</span> Markov Chains</a></li>
-<li><a class="" href="a-monopoly-simulation.html"><span class="header-section-number">3</span> A Monopoly simulation</a></li>
-<li><a class="" href="monte-carlo-methods.html"><span class="header-section-number">4</span> Monte Carlo Methods</a></li>
-<li><a class="" href="maximum-likelihood.html"><span class="header-section-number">5</span> Maximum Likelihood</a></li>
-<li><a class="" href="confidence-intervals.html"><span class="header-section-number">6</span> Confidence Intervals</a></li>
-<li><a class="" href="computational-testing-techniques.html"><span class="header-section-number">7</span> Computational Testing Techniques</a></li>
-<li class="book-part">Statistical Modelling</li>
-<li><a class="" href="representing-data-in-r.html"><span class="header-section-number">8</span> Representing Data in R</a></li>
-<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">9</span> Principal component analysis</a></li>
-<li><a class="" href="linear-regression.html"><span class="header-section-number">10</span> Linear regression</a></li>
-<li><a class="" href="multiple-regression.html"><span class="header-section-number">11</span> Multiple regression</a></li>
-<li><a class="" href="qq-plot.html"><span class="header-section-number">12</span> QQ Plot - How To Use And Interpret</a></li>
-<li><a class="" href="generalised-linear-models.html"><span class="header-section-number">13</span> Generalised Linear Models</a></li>
-<li class="book-part">Solutions</li>
-<li><a class="" href="simSol.html"><span class="header-section-number">A</span> Solution: Simulations</a></li>
-<li><a class="active" href="solution-markov-chains.html"><span class="header-section-number">B</span> Solution: Markov Chains</a></li>
-<li><a class="" href="monopolySol.html"><span class="header-section-number">C</span> Solution: Monopoly</a></li>
-<li><a class="" href="solution-monte-carlo.html"><span class="header-section-number">D</span> Solution: Monte Carlo</a></li>
-<li><a class="" href="sol-mle.html"><span class="header-section-number">E</span> Solution: Model Answers: MLE</a></li>
-<li><a class="" href="sol-ex-CI.html"><span class="header-section-number">F</span> Solution: Confidence Interval</a></li>
-<li><a class="" href="representing_data-sol.html"><span class="header-section-number">G</span> Solution: Representing Data</a></li>
-<li><a class="" href="solution-linear-regression-and-correlation.html"><span class="header-section-number">H</span> Solution: Linear regression and Correlation</a></li>
-<li class="book-part">APPENDIX</li>
-<li><a class="" href="start.html">Getting started in R and Rstudio</a></li>
-<li><a class="" href="creating-functions-r.html">Creating functions R</a></li>
-<li><a class="" href="data-sets.html">Data sets</a></li>
-</ul>
-
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/anasrana/ems-practicals">View book source <i class="fab fa-github"></i></a></p>
-        </div>
-      </nav>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
+<p><a href="https://anasrana.github.io/" class="home-link"><img src="site_libs/quarto-contrib/quarto-project/anasrana/tufte-brand/logo/logo.svg" class="home-frog img-fluid" alt=""> Anas A Rana</a></p>
+</div></div>
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Essentials of Mathematics and Statistics</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/anasrana/ems-practicals" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./ems-practicals.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="solution-markov-chains" class="section level1" number="15">
-<h1>
-<span class="header-section-number">B</span> Solution: Markov Chains<a class="anchor" aria-label="anchor" href="#solution-markov-chains"><i class="fas fa-link"></i></a>
-</h1>
-<div id="mc-solution" class="section level2" number="15.1">
-<h2>
-<span class="header-section-number">B.1</span> Three state Markov Chain<a class="anchor" aria-label="anchor" href="#mc-solution"><i class="fas fa-link"></i></a>
-</h2>
-<p>The three state Markov chain is more complex to draw. The diagram below shows the states and the transition probabilities. The self-loop probabilities need to be calculated. Let’s label the edges with missing values as follows:</p>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to the Practical</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Getting started</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./start.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting started in R and Rstudio</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./creating-functions-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Creating functions R</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">Probability in R</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./simulating-random-numbers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Simulating random numbers</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./markov-chains.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Markov Chains</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a-monopoly-simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A Monopoly simulation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./monte-carlo-methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./maximum-likelihood.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Maximum Likelihood</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./confidence-intervals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Confidence Intervals</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./computational-testing-techniques.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Computational Testing Techniques</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Statistical modelling</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./representing-data-in-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Representing Data in R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./principal-component-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Principal component analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./linear-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Linear regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multiple-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qq-plot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title"><span class="acronym">QQ</span> Plot - How To Use And Interpret</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./generalised-linear-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Generalised Linear Models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">Appendices</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">Solutions</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./simSol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Solution: Simulations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./solution-markov-chains.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Solution: Markov Chains</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./monopolySol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Solution: Monopoly</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./solution-monte-carlo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Solution: Monte Carlo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sol-mle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Solution: Model Answers: <span class="acronym">MLE</span></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sol-ex-CI.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Solution: Confidence Interval</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./solution-computational-testing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">Solution: Computational Testing</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./representing_data-sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">H</span>&nbsp; <span class="chapter-title">Solution: Representing Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./solution-linear-regression-and-correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">I</span>&nbsp; <span class="chapter-title">Solution: Linear regression and Correlation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-sets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data sets</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#mc-solution" id="toc-mc-solution" class="nav-link active" data-scroll-target="#mc-solution"><span class="header-section-number">B.1</span> Three state Markov Chain</a></li>
+  <li><a href="#mc-fn-solution" id="toc-mc-fn-solution" class="nav-link" data-scroll-target="#mc-fn-solution"><span class="header-section-number">B.2</span> Solution: <span class="acronym">MC</span> Function</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item">Appendices</li><li class="breadcrumb-item"><a href="./simSol.html">Solutions</a></li><li class="breadcrumb-item"><a href="./solution-markov-chains.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Solution: Markov Chains</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Appendix B — Solution: Markov Chains</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="mobile-home"><a href="https://anasrana.github.io/"><span class="home-frog"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" viewbox="5 8.9 34.6 23.9"><path d="M20.4 32H12.5c-5 0-7.5-3-6-7 2.5-6 12-10.5 20-11.3.2-4.3 6-4.3 6.2-.2 2.4.3 4.8 2 5.8 4.2.3 2.3-1.6 4.4-4.6 5.4M10 24.5c4-4.5 11.5-4 12.5 0 .6 2.8-2.5 4.8-7 5"></path><circle cx="29.6" cy="12.2" r=".9" fill="currentColor" stroke="none"></circle><path class="accent" d="M20.5 31.9l.2-.3l.7-.3l.7-.7l4.6-6l.4-.1l.4 .1l.1 6.4l.1 .4l.4 .1l.3 0l.2 .2l-.2 .2l-1.2 0l-2 0l-.1-.3l1.1-.3l.2-.7l0-1.8l-1.2-.2l-1 0l-.3 .2l-1.3 1.7l-.2 .4l.3 .3l.3 0l.4 .1l-.2 .3l-2 0l-.7 0zm4.2-3.7l.7 .1l.8 0l.2-2.3l-1 1.1l-.7 1zm4 3.7l.2-.2l.5-.1l.5-.2l.3-.6l1-4.7l.1-.4l-.2-.4l-.5-.1l-.3-.2l.2-.3l3 0q1 0 1.6 .5q.6 .5 .6 1.3q0 .8 -.6 1.4q-.6 .6 -1.5 .8l.1 .3l.6 1.3l.4 .6l.5 .5l.9 .3l-.1 .4l-1.6-.2q-.5-.2 -1-.9l-.2-.4l-.2-.5l-.2-.4l-.4-.8l-.4-.1l-.3 0l-.5 1.8l-.1 .4l.2 .4l.6 .1q.3 0 .2 .3l-1.1 .1l-1.3 0l-.9 0zm3-3.7l0 .3l1-.1l.8-.4l.7-.7l.2-.9q0-.6 -.4-.9l-.8-.3l-.7 0l-.2 .2z" fill="#a51c1c" stroke="none"></path></svg></span>Anas A Rana</a></div>
+<p><span id="solution-markov-chains"></span></p>
+<section id="mc-solution" class="level2" data-number="B.1">
+<h2 data-number="B.1" class="anchored" data-anchor-id="mc-solution"><span class="header-section-number">B.1</span> Three state Markov Chain</h2>
+<p><span class="backlink"><a href="markov-chains.html#exr-mc-exercise"><span class="swap"><span class="arr" aria-hidden="true">←</span><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" viewbox="0 0 56 40"><path d="M3 20.2h50" stroke-width=".8" opacity=".35"></path><path d="M4 19.7 7 25.2l3-8.4 3-.3 3 8 3-5 3-3.6 3 6.3 3-1.6 3-3.1 3 2.1 3 1.2 3-1.9 3 1.2 3 .1" stroke-width="1.1"></path><circle cx="49.5" cy="20.2" r="2.8" class="accent" fill="#a51c1c" stroke="none"></circle></svg></span><span>back to exercise 2.1</span></a></span> The three state Markov chain is more complex to draw. The diagram below shows the states and the transition probabilities. The self-loop probabilities need to be calculated. Let’s label the edges with missing values as follows:</p>
 <ul>
 <li>Sunny -&gt; Sunny = a</li>
 <li>Rainy -&gt; Rainy = b</li>
 <li>Cloudy -&gt; Cloudy = c</li>
 </ul>
-<div class="inline-figure"><img src="MC-solution_files/figure-html/fstate-1.png" alt="" width="95%" style="display: block; margin: auto;"></div>
+<div class="cell diagram" data-layout-align="center" data-fig.bg="transparent">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="solution-markov-chains_files/figure-html/fstate-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>The next step is to set-up a transition matrix for the three-state model. The transition matrix is a square matrix where each row corresponds to a state and each column corresponds to the probability of transitioning to another state. The rows must sum to 1. The main thing to bear in mind is that the ordering of the states is arbitrary but you must be consistent. Here we will use the convention that State 1 is Sunny, State 2 is Rainy and State 3 is Cloudy.</p>
 <p>The way we work out the values for a, b, and c is that the emission probabilities from each state must sum to 1. So we can work out the values as follows:</p>
 <ul>
-<li>For Sunny: <span class="math inline">\(a + 0.2 + 0.1 = 1 \Rightarrow a = 0.7\)</span>
-</li>
-<li>For Rainy: <span class="math inline">\(0.3 + b + 0.4 = 1 \Rightarrow b = 0.3\)</span>
-</li>
-<li>For Cloudy: <span class="math inline">\(0.6 + 0.2 + c = 1 \Rightarrow c = 0.2\)</span>
-</li>
+<li>For Sunny: <span class="math inline">\(a + 0.2 + 0.1 = 1 \Rightarrow a = 0.7\)</span></li>
+<li>For Rainy: <span class="math inline">\(0.3 + b + 0.4 = 1 \Rightarrow b = 0.3\)</span></li>
+<li>For Cloudy: <span class="math inline">\(0.6 + 0.2 + c = 1 \Rightarrow c = 0.2\)</span></li>
 </ul>
-<div class="sourceCode" id="cb351"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb351-1"><a href="solution-markov-chains.html#cb351-1"></a>transitionMatrix <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">0.7</span>, <span class="fl">0.2</span>, <span class="fl">0.1</span>,</span>
-<span id="cb351-2"><a href="solution-markov-chains.html#cb351-2"></a>                            <span class="fl">0.3</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>,</span>
-<span id="cb351-3"><a href="solution-markov-chains.html#cb351-3"></a>                            <span class="fl">0.6</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>), <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">3</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
-<span id="cb351-4"><a href="solution-markov-chains.html#cb351-4"></a></span>
-<span id="cb351-5"><a href="solution-markov-chains.html#cb351-5"></a><span class="co"># Check matrix set-up correctly</span></span>
-<span id="cb351-6"><a href="solution-markov-chains.html#cb351-6"></a><span class="fu">print</span>(transitionMatrix)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt;      [,1] [,2] [,3]
+<div class="cell" data-layout-align="center">
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>transitionMatrix <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">0.7</span>, <span class="fl">0.2</span>, <span class="fl">0.1</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                            <span class="fl">0.3</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                            <span class="fl">0.6</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>), <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">3</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Check matrix set-up correctly</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(transitionMatrix)</span></code></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;      [,1] [,2] [,3]
 #&gt; [1,]  0.7  0.2  0.1
 #&gt; [2,]  0.3  0.3  0.4
 #&gt; [3,]  0.6  0.2  0.2</code></pre>
+</div>
+</div>
 <p><strong><em>Note:</em></strong></p>
 <ul>
 <li>Always output the matrix to check it is set up correctly.</li>
 <li>Check the row sums are equal to 1. If not, you have made a mistake.</li>
 </ul>
 <p>Remember the ordering of the states is arbitrary but here we have used the convention that State 1 is Sunny, State 2 is Rainy and State 3 is Cloudy which means the probabilities are completed in that order in the transition matrix. We just need to be consistent.</p>
-<div class="sourceCode" id="cb353"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb353-1"><a href="solution-markov-chains.html#cb353-1"></a>state <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># initial state - it is [1] sunny, [2] rainy and [3] cloudy</span></span>
-<span id="cb353-2"><a href="solution-markov-chains.html#cb353-2"></a>weather_sequence <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">30</span>) <span class="co"># vector to store simulated values</span></span>
-<span id="cb353-3"><a href="solution-markov-chains.html#cb353-3"></a></span>
-<span id="cb353-4"><a href="solution-markov-chains.html#cb353-4"></a><span class="co"># simulate for 30 days</span></span>
-<span id="cb353-5"><a href="solution-markov-chains.html#cb353-5"></a><span class="cf">for</span> (day <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>) {</span>
-<span id="cb353-6"><a href="solution-markov-chains.html#cb353-6"></a>  pr <span class="ot">&lt;-</span> transitionMatrix[state, ] <span class="co"># select the row of transition probabilities</span></span>
-<span id="cb353-7"><a href="solution-markov-chains.html#cb353-7"></a></span>
-<span id="cb353-8"><a href="solution-markov-chains.html#cb353-8"></a>  <span class="co"># sample [1-3] based on the probs pr</span></span>
-<span id="cb353-9"><a href="solution-markov-chains.html#cb353-9"></a>  state <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> pr)</span>
-<span id="cb353-10"><a href="solution-markov-chains.html#cb353-10"></a>  weather_sequence[day] <span class="ot">&lt;-</span> state <span class="co"># store the sampled state</span></span>
-<span id="cb353-11"><a href="solution-markov-chains.html#cb353-11"></a>}</span>
-<span id="cb353-12"><a href="solution-markov-chains.html#cb353-12"></a><span class="fu">print</span>(weather_sequence)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  [1] 3 2 3 2 1 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 3 3 1 1 1 1
-#&gt; [29] 1 1</code></pre>
-<p>This is simplest way to output the weather sequence. You could also use a <code>data.frame</code> to store the day and the weather state if you wanted to output the day and the weather state together. Even better would to create plot of the weather sequence over the 30 days or perform basic statistics on the weather sequence to output a useful summary of the weather sequence. This is left as an exercise for the reader, some methods we have already covered and we will learn more over the coming days.</p>
-<button class="button">
-<a href="markov-chains.html#mc-exercise">Back to exercise</a>
-</button>
+<div class="cell" data-layout-align="center">
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>state <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># initial state - it is [1] sunny, [2] rainy and [3] cloudy</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>weather_sequence <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">30</span>) <span class="co"># vector to store simulated values</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate for 30 days</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (day <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>) {</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  pr <span class="ot">&lt;-</span> transitionMatrix[state, ] <span class="co"># select the row of transition probabilities</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sample [1-3] based on the probs pr</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  state <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> pr)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  weather_sequence[day] <span class="ot">&lt;-</span> state <span class="co"># store the sampled state</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(weather_sequence)</span></code></pre></div>
 </div>
-<div id="mc-fn-solution" class="section level2" number="15.2">
-<h2>
-<span class="header-section-number">B.2</span> Solution: MC Function<a class="anchor" aria-label="anchor" href="#mc-fn-solution"><i class="fas fa-link"></i></a>
-</h2>
-<p>The first thing we will do when we want to write a function like this is to write the basic part of the function.</p>
-<div class="sourceCode" id="cb355"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb355-1"><a href="solution-markov-chains.html#cb355-1"></a><span class="co"># Function with just simple structure</span></span>
-<span id="cb355-2"><a href="solution-markov-chains.html#cb355-2"></a>run_markov_chain <span class="ot">&lt;-</span> <span class="cf">function</span>(transitionMatrix, initialState, numSteps) {</span>
-<span id="cb355-3"><a href="solution-markov-chains.html#cb355-3"></a>  state <span class="ot">&lt;-</span> initialState</span>
-<span id="cb355-4"><a href="solution-markov-chains.html#cb355-4"></a>  output_vec <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, numSteps) <span class="co"># vector to store simulated values</span></span>
-<span id="cb355-5"><a href="solution-markov-chains.html#cb355-5"></a></span>
-<span id="cb355-6"><a href="solution-markov-chains.html#cb355-6"></a>  <span class="fu">return</span>(output_vec)</span>
-<span id="cb355-7"><a href="solution-markov-chains.html#cb355-7"></a>}</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;  [1] 1 2 3 3 1 2 1 1 3 3 1 2 3 1 1 3 1 1 1 3 2 3 1 1 3 1 2 2
+#&gt; [29] 3 1</code></pre>
+</div>
+</div>
+<p>This is simplest way to output the weather sequence. You could also use a <code>data.frame</code> to store the day and the weather state if you wanted to output the day and the weather state together. Even better would to create plot of the weather sequence over the 30 days or perform basic statistics on the weather sequence to output a useful summary of the weather sequence. This is left as an exercise for the reader, some methods we have already covered and we will learn more over the coming days.</p>
+<p><span class="backlink"><a href="markov-chains.html#exr-mc-exercise"><span class="swap"><span class="arr" aria-hidden="true">←</span><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" viewbox="0 0 56 40"><path d="M3 20.2h50" stroke-width=".8" opacity=".35"></path><path d="M4 19.7 7 25.2l3-8.4 3-.3 3 8 3-5 3-3.6 3 6.3 3-1.6 3-3.1 3 2.1 3 1.2 3-1.9 3 1.2 3 .1" stroke-width="1.1"></path><circle cx="49.5" cy="20.2" r="2.8" class="accent" fill="#a51c1c" stroke="none"></circle></svg></span><span>back to exercise 2.1</span></a></span></p>
+</section>
+<section id="mc-fn-solution" class="level2" data-number="B.2">
+<h2 data-number="B.2" class="anchored" data-anchor-id="mc-fn-solution"><span class="header-section-number">B.2</span> Solution: <span class="acronym">MC</span> Function</h2>
+<p><span class="backlink"><a href="markov-chains.html#exr-mc-function"><span class="swap"><span class="arr" aria-hidden="true">←</span><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" viewbox="0 0 56 40"><path d="M3 20.2h50" stroke-width=".8" opacity=".35"></path><path d="M4 19.7 7 25.2l3-8.4 3-.3 3 8 3-5 3-3.6 3 6.3 3-1.6 3-3.1 3 2.1 3 1.2 3-1.9 3 1.2 3 .1" stroke-width="1.1"></path><circle cx="49.5" cy="20.2" r="2.8" class="accent" fill="#a51c1c" stroke="none"></circle></svg></span><span>back to exercise 2.2</span></a></span> The first thing we will do when we want to write a function like this is to write the basic part of the function.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function with just simple structure</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>run_markov_chain <span class="ot">&lt;-</span> <span class="cf">function</span>(transitionMatrix, initialState, numSteps) {</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  state <span class="ot">&lt;-</span> initialState</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  output_vec <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, numSteps) <span class="co"># vector to store simulated values</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output_vec)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+</div>
 <p>This function has the basic components required, it takes three arguments and returns a vector of simulated values. Let’s test if it works:</p>
-<div class="sourceCode" id="cb356"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb356-1"><a href="solution-markov-chains.html#cb356-1"></a><span class="co"># Test the function with the two-state model</span></span>
-<span id="cb356-2"><a href="solution-markov-chains.html#cb356-2"></a>transitionMatrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.3</span>), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
-<span id="cb356-3"><a href="solution-markov-chains.html#cb356-3"></a>initialState <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb356-4"><a href="solution-markov-chains.html#cb356-4"></a>numSteps <span class="ot">&lt;-</span> <span class="dv">30</span></span>
-<span id="cb356-5"><a href="solution-markov-chains.html#cb356-5"></a>weather_sequence <span class="ot">&lt;-</span> <span class="fu">run_markov_chain</span>(transitionMatrix, initialState, numSteps)</span>
-<span id="cb356-6"><a href="solution-markov-chains.html#cb356-6"></a><span class="fu">print</span>(weather_sequence)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+<div class="cell" data-layout-align="center">
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the function with the two-state model</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>transitionMatrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.3</span>), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>initialState <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>numSteps <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>weather_sequence <span class="ot">&lt;-</span> <span class="fu">run_markov_chain</span>(transitionMatrix, initialState, numSteps)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(weather_sequence)</span></code></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;  [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 #&gt; [29] 0 0</code></pre>
-<div class="sourceCode" id="cb358"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb358-1"><a href="solution-markov-chains.html#cb358-1"></a><span class="fu">print</span>(<span class="fu">length</span>(weather_sequence))</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 30</code></pre>
+</div>
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">length</span>(weather_sequence))</span></code></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] 30</code></pre>
+</div>
+</div>
 <p>What we have tested here is that the function works for the two-state model and produces a vector of simulated states of the correct length. At this stage of the function that is sufficient as it doesn’t do much else.</p>
 <p>Next, we need to add the code to actually run the markov chain simulation. This is just the code we wrote above but with a few small changes to make it work in the function.</p>
-<div class="sourceCode" id="cb360"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb360-1"><a href="solution-markov-chains.html#cb360-1"></a><span class="co"># Function to run a Markov chain simulation</span></span>
-<span id="cb360-2"><a href="solution-markov-chains.html#cb360-2"></a><span class="co"># input: transitionMatrix, initialState, numSteps</span></span>
-<span id="cb360-3"><a href="solution-markov-chains.html#cb360-3"></a><span class="co"># output: a vector of simulated states</span></span>
-<span id="cb360-4"><a href="solution-markov-chains.html#cb360-4"></a>run_markov_chain <span class="ot">&lt;-</span> <span class="cf">function</span>(transitionMatrix, initialState, numSteps) {</span>
-<span id="cb360-5"><a href="solution-markov-chains.html#cb360-5"></a>  state <span class="ot">&lt;-</span> initialState</span>
-<span id="cb360-6"><a href="solution-markov-chains.html#cb360-6"></a>  weather_sequence <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, numSteps) <span class="co"># vector to store simulated values</span></span>
-<span id="cb360-7"><a href="solution-markov-chains.html#cb360-7"></a>  <span class="cf">for</span> (day <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>numSteps) { <span class="co"># simulate for numSteps days</span></span>
-<span id="cb360-8"><a href="solution-markov-chains.html#cb360-8"></a>    pr <span class="ot">&lt;-</span> transitionMatrix[state, ] <span class="co"># select the row of transition probabilities</span></span>
-<span id="cb360-9"><a href="solution-markov-chains.html#cb360-9"></a></span>
-<span id="cb360-10"><a href="solution-markov-chains.html#cb360-10"></a>    <span class="co"># sample [1] or [2] based on the probs pr</span></span>
-<span id="cb360-11"><a href="solution-markov-chains.html#cb360-11"></a>    state <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">seq_along</span>(pr), <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> pr)</span>
-<span id="cb360-12"><a href="solution-markov-chains.html#cb360-12"></a>    weather_sequence[day] <span class="ot">&lt;-</span> state <span class="co"># store the sampled state</span></span>
-<span id="cb360-13"><a href="solution-markov-chains.html#cb360-13"></a>  }</span>
-<span id="cb360-14"><a href="solution-markov-chains.html#cb360-14"></a></span>
-<span id="cb360-15"><a href="solution-markov-chains.html#cb360-15"></a>  <span class="fu">return</span>(weather_sequence)</span>
-<span id="cb360-16"><a href="solution-markov-chains.html#cb360-16"></a>}</span></code></pre></div>
+<div class="cell" data-layout-align="center">
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to run a Markov chain simulation</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># input: transitionMatrix, initialState, numSteps</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># output: a vector of simulated states</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>run_markov_chain <span class="ot">&lt;-</span> <span class="cf">function</span>(transitionMatrix, initialState, numSteps) {</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  state <span class="ot">&lt;-</span> initialState</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  weather_sequence <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, numSteps) <span class="co"># vector to store simulated values</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (day <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>numSteps) { <span class="co"># simulate for numSteps days</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    pr <span class="ot">&lt;-</span> transitionMatrix[state, ] <span class="co"># select the row of transition probabilities</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sample [1] or [2] based on the probs pr</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    state <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">seq_along</span>(pr), <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> pr)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    weather_sequence[day] <span class="ot">&lt;-</span> state <span class="co"># store the sampled state</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(weather_sequence)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+</div>
 <p>Now we have the function we need to check if the function is working as intended. The first thing to try is the two-state weather model we have already used.</p>
-<div class="sourceCode" id="cb361"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb361-1"><a href="solution-markov-chains.html#cb361-1"></a><span class="co"># Test the function with the two-state model</span></span>
-<span id="cb361-2"><a href="solution-markov-chains.html#cb361-2"></a>transitionMatrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.3</span>), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
-<span id="cb361-3"><a href="solution-markov-chains.html#cb361-3"></a>initialState <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb361-4"><a href="solution-markov-chains.html#cb361-4"></a>numSteps <span class="ot">&lt;-</span> <span class="dv">30</span></span>
-<span id="cb361-5"><a href="solution-markov-chains.html#cb361-5"></a>weather_sequence <span class="ot">&lt;-</span> <span class="fu">run_markov_chain</span>(transitionMatrix, initialState, numSteps)</span>
-<span id="cb361-6"><a href="solution-markov-chains.html#cb361-6"></a><span class="fu">print</span>(weather_sequence)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  [1] 1 2 1 2 1 2 1 1 1 1 2 2 1 2 1 1 1 2 2 1 1 2 1 1 2 1 1 2
-#&gt; [29] 2 1</code></pre>
-<div class="sourceCode" id="cb363"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb363-1"><a href="solution-markov-chains.html#cb363-1"></a><span class="fu">print</span>(<span class="fu">length</span>(weather_sequence))</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 30</code></pre>
+<div class="cell" data-layout-align="center">
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the function with the two-state model</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>transitionMatrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.3</span>), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>initialState <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>numSteps <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>weather_sequence <span class="ot">&lt;-</span> <span class="fu">run_markov_chain</span>(transitionMatrix, initialState, numSteps)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(weather_sequence)</span></code></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;  [1] 2 2 1 1 2 1 1 2 2 2 2 2 1 1 1 1 2 2 2 2 1 1 1 1 2 1 2 2
+#&gt; [29] 1 2</code></pre>
+</div>
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">length</span>(weather_sequence))</span></code></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] 30</code></pre>
+</div>
+</div>
 <p>It is always a good idea to test the function with different inputs. So next we will try the three-state weather model.</p>
-<div class="sourceCode" id="cb365"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb365-1"><a href="solution-markov-chains.html#cb365-1"></a><span class="co"># Test the function with the three-state model</span></span>
-<span id="cb365-2"><a href="solution-markov-chains.html#cb365-2"></a>transitionMatrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
-<span id="cb365-3"><a href="solution-markov-chains.html#cb365-3"></a>  <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.3</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>), <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">3</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
-<span id="cb365-4"><a href="solution-markov-chains.html#cb365-4"></a>initialState <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb365-5"><a href="solution-markov-chains.html#cb365-5"></a>numSteps <span class="ot">&lt;-</span> <span class="dv">30</span></span>
-<span id="cb365-6"><a href="solution-markov-chains.html#cb365-6"></a>weather_sequence <span class="ot">&lt;-</span> <span class="fu">run_markov_chain</span>(transitionMatrix, initialState, numSteps)</span>
-<span id="cb365-7"><a href="solution-markov-chains.html#cb365-7"></a><span class="fu">print</span>(weather_sequence)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  [1] 2 2 1 2 2 1 1 2 2 2 3 3 2 3 1 1 3 1 2 1 1 1 1 2 2 1 1 3
-#&gt; [29] 2 2</code></pre>
-<div class="sourceCode" id="cb367"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb367-1"><a href="solution-markov-chains.html#cb367-1"></a><span class="fu">print</span>(<span class="fu">length</span>(weather_sequence))</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 30</code></pre>
+<div class="cell" data-layout-align="center">
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the function with the three-state model</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>transitionMatrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.3</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.4</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>), <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">3</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>initialState <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>numSteps <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>weather_sequence <span class="ot">&lt;-</span> <span class="fu">run_markov_chain</span>(transitionMatrix, initialState, numSteps)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(weather_sequence)</span></code></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;  [1] 1 3 2 2 2 1 2 2 2 1 2 1 1 3 1 1 2 2 2 2 1 1 2 1 1 2 3 1
+#&gt; [29] 3 3</code></pre>
+</div>
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">length</span>(weather_sequence))</span></code></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] 30</code></pre>
+</div>
+</div>
 <p>This works as expected and produces a vector of simulated states for the three-state model. We can further change the initial state, for 50 states and analyze the output or visualize it as needed.</p>
-<div class="sourceCode" id="cb369"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb369-1"><a href="solution-markov-chains.html#cb369-1"></a><span class="co"># Test the function with a 50-state model</span></span>
-<span id="cb369-2"><a href="solution-markov-chains.html#cb369-2"></a>transitionMatrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="dv">2500</span>), <span class="at">nrow=</span><span class="dv">50</span>, <span class="at">ncol=</span><span class="dv">50</span>)</span>
-<span id="cb369-3"><a href="solution-markov-chains.html#cb369-3"></a>transitionMatrix <span class="ot">&lt;-</span> transitionMatrix <span class="sc">/</span> <span class="fu">rowSums</span>(transitionMatrix) <span class="co"># normalize rows</span></span>
-<span id="cb369-4"><a href="solution-markov-chains.html#cb369-4"></a>initialState <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb369-5"><a href="solution-markov-chains.html#cb369-5"></a>numSteps <span class="ot">&lt;-</span> <span class="dv">30</span></span>
-<span id="cb369-6"><a href="solution-markov-chains.html#cb369-6"></a>weather_sequence <span class="ot">&lt;-</span> <span class="fu">run_markov_chain</span>(transitionMatrix, initialState, numSteps)</span>
-<span id="cb369-7"><a href="solution-markov-chains.html#cb369-7"></a><span class="fu">print</span>(weather_sequence)</span></code></pre></div>
-<pre class="bg-info"><code>#&gt;  [1] 31 33 48 36 36  1 21 45 37 49 49 17  3 42 20 12 41  7
-#&gt; [19] 38  9 38 49 50 44 19 38  1 19  1 13</code></pre>
-<div class="sourceCode" id="cb371"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb371-1"><a href="solution-markov-chains.html#cb371-1"></a><span class="fu">print</span>(<span class="fu">length</span>(weather_sequence))</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] 30</code></pre>
-<button class="button">
-<a href="markov-chains.html#mc-function">Back to exercise</a>
-</button>
-
+<div class="cell" data-layout-align="center">
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the function with a 50-state model</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>transitionMatrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="dv">2500</span>), <span class="at">nrow=</span><span class="dv">50</span>, <span class="at">ncol=</span><span class="dv">50</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>transitionMatrix <span class="ot">&lt;-</span> transitionMatrix <span class="sc">/</span> <span class="fu">rowSums</span>(transitionMatrix) <span class="co"># normalize rows</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>initialState <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>numSteps <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>weather_sequence <span class="ot">&lt;-</span> <span class="fu">run_markov_chain</span>(transitionMatrix, initialState, numSteps)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(weather_sequence)</span></code></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt;  [1] 41 31 14 25  5 21  3 27 20 46 47 36  9 10 15 18 14 39
+#&gt; [19] 39  4  4 36 17 41 50 17 12  6  1 37</code></pre>
+</div>
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">length</span>(weather_sequence))</span></code></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] 30</code></pre>
 </div>
 </div>
-  <div class="chapter-nav">
-<div class="prev"><a href="simSol.html"><span class="header-section-number">A</span> Solution: Simulations</a></div>
-<div class="next"><a href="monopolySol.html"><span class="header-section-number">C</span> Solution: Monopoly</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#solution-markov-chains"><span class="header-section-number">B</span> Solution: Markov Chains</a></li>
-<li><a class="nav-link" href="#mc-solution"><span class="header-section-number">B.1</span> Three state Markov Chain</a></li>
-<li><a class="nav-link" href="#mc-fn-solution"><span class="header-section-number">B.2</span> Solution: MC Function</a></li>
-</ul>
+<p><span class="backlink"><a href="markov-chains.html#exr-mc-function"><span class="swap"><span class="arr" aria-hidden="true">←</span><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" viewbox="0 0 56 40"><path d="M3 20.2h50" stroke-width=".8" opacity=".35"></path><path d="M4 19.7 7 25.2l3-8.4 3-.3 3 8 3-5 3-3.6 3 6.3 3-1.6 3-3.1 3 2.1 3 1.2 3-1.9 3 1.2 3 .1" stroke-width="1.1"></path><circle cx="49.5" cy="20.2" r="2.8" class="accent" fill="#a51c1c" stroke="none"></circle></svg></span><span>back to exercise 2.2</span></a></span><span class="endmark"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" viewbox="0 0 56 40"><path d="M3 20.2h50" stroke-width=".8" opacity=".35"></path><path d="M4 19.7 7 25.2l3-8.4 3-.3 3 8 3-5 3-3.6 3 6.3 3-1.6 3-3.1 3 2.1 3 1.2 3-1.9 3 1.2 3 .1" stroke-width="1.1"></path><circle cx="49.5" cy="20.2" r="2.8" class="accent" fill="#a51c1c" stroke="none"></circle></svg></span></p>
 
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/anasrana/ems-practicals/blob/master/MC-solution.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/anasrana/ems-practicals/edit/master/MC-solution.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
-</div>
-    </nav>
-</div>
 
-</div>
-</div> <!-- .container -->
-
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2026-10-03.</p>
-  </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
-</div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
-}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var left = document.querySelector("footer.footer .nav-footer-left");
+  var nav = document.querySelector("nav.page-navigation");
+  if (!left || !nav) return;
+  var f = document.createElement("div");
+  f.className = "ems-colophon";
+  f.innerHTML = left.innerHTML;
+  nav.after(f);
+  document.querySelector("footer.footer").remove();
+});
 </script>
-</body>
-</html>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/anasrana\.github\.io\/ems-practicals\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./simSol.html" class="pagination-link" aria-label="Solution: Simulations">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Solution: Simulations</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./monopolySol.html" class="pagination-link" aria-label="Solution: Monopoly">
+        <span class="nav-page-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Solution: Monopoly</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Essentials of Mathematics and Statistics · <a href="https://anasrana.github.io/">Anas A Rana</a> · University of Birmingham<br>
+<em>Set in ET Book. Built with Quarto (<a href="https://github.com/anasrana/ems-practicals">source</a>).</em></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

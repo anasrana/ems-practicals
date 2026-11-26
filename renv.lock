@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.6.0",
+    "Version": "4.6.2",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -117,16 +117,16 @@
     },
     "Matrix": {
       "Package": "Matrix",
-      "Version": "1.7-5",
+      "Version": "1.7-6",
       "Source": "Repository",
       "VersionNote": "do also bump src/version.h, inst/include/Matrix/version.h",
-      "Date": "2026-03-20",
+      "Date": "2026-07-24",
       "Priority": "recommended",
       "Title": "Sparse and Dense Matrix Classes and Methods",
       "Description": "A rich hierarchy of sparse and dense matrix classes, including general, symmetric, triangular, and diagonal matrices with numeric, logical, or pattern entries.  Efficient methods for operating on such matrices, often wrapping the 'BLAS', 'LAPACK', and 'SuiteSparse' libraries.",
       "License": "GPL (>= 2) | file LICENCE",
-      "URL": "https://Matrix.R-forge.R-project.org",
-      "BugReports": "https://R-forge.R-project.org/tracker/?atid=294&group_id=61",
+      "URL": "https://codeberg.org/jaganmn/Matrix",
+      "BugReports": "https://codeberg.org/jaganmn/Matrix/issues",
       "Contact": "Matrix-authors@R-project.org",
       "Authors@R": "c(person(\"Douglas\", \"Bates\", role = \"aut\", comment = c(ORCID = \"0000-0001-8316-9503\")), person(\"Martin\", \"Maechler\", role = c(\"aut\", \"cre\"), email = \"mmaechler+Matrix@gmail.com\", comment = c(ORCID = \"0000-0002-8685-9910\")), person(\"Mikael\", \"Jagan\", role = \"aut\", comment = c(ORCID = \"0000-0002-3542-2938\")), person(\"Timothy A.\", \"Davis\", role = \"ctb\", comment = c(ORCID = \"0000-0001-7614-6899\", \"SuiteSparse libraries\", \"collaborators listed in dir(system.file(\\\"doc\\\", \\\"SuiteSparse\\\", package=\\\"Matrix\\\"), pattern=\\\"License\\\", full.names=TRUE, recursive=TRUE)\")), person(\"George\", \"Karypis\", role = \"ctb\", comment = c(ORCID = \"0000-0003-2753-1437\", \"METIS library\", \"Copyright: Regents of the University of Minnesota\")), person(\"Jason\", \"Riedy\", role = \"ctb\", comment = c(ORCID = \"0000-0002-4345-4200\", \"GNU Octave's condest() and onenormest()\", \"Copyright: Regents of the University of California\")), person(\"Jens\", \"Oehlschlägel\", role = \"ctb\", comment = \"initial nearPD()\"), person(\"R Core Team\", role = \"ctb\", comment = c(ROR = \"02zz1nj61\", \"base R's matrix implementation\")))",
       "Depends": [
@@ -1877,7 +1877,7 @@
     },
     "geomtextpath": {
       "Package": "geomtextpath",
-      "Version": "0.2.0",
+      "Version": "0.2.1",
       "Source": "Repository",
       "Type": "Package",
       "Title": "Curved Text in 'ggplot2'",
@@ -1889,18 +1889,17 @@
       "BugReports": "https://github.com/AllanCameron/geomtextpath/issues",
       "Encoding": "UTF-8",
       "Depends": [
-        "ggplot2 (>= 3.5.2)",
+        "ggplot2 (>= 4.0.0)",
         "R (>= 3.6.0)"
       ],
       "Imports": [
         "grid",
         "scales",
-        "systemfonts",
+        "systemfonts (>= 1.3.0)",
         "rlang",
         "textshaping (>= 0.4.0)",
         "vctrs"
       ],
-      "RoxygenNote": "7.3.2",
       "Suggests": [
         "testthat (>= 3.0.0)",
         "covr",
@@ -1915,6 +1914,7 @@
       "Config/testthat/edition": "3",
       "VignetteBuilder": "knitr",
       "Collate": "'borrowed_gridtext.R' 'coord_curvedpolar.R' 'data.R' 'text_params.R' 'geom_textpath.R' 'geom_labelpath.R' 'geom_textsegment.R' 'geom_textabline.R' 'geom_textcontour.R' 'geom_textcurve.R' 'geom_textdensity.R' 'utils.R' 'geom_textdensity2d.R' 'geom_texthline.R' 'geom_textsf.R' 'geom_textsmooth.R' 'geom_textvline.R' 'geomtextpath-package.R' 'grob_labelpath.R' 'grob_textpath.R' 'guide_axis_textpath.R' 'onload.R' 'path_handling.R' 'scales.R' 'sf_helpers.R' 'smoothing.R' 'text_helpers.R' 'text_placement.R' 'trig_helpers.R'",
+      "Config/roxygen2/version": "8.1.1",
       "NeedsCompilation": "no",
       "Author": "Allan Cameron [aut, cre], Teun van den Brand [aut] (ORCID: <https://orcid.org/0000-0002-9335-7468>)",
       "Maintainer": "Allan Cameron <Allan.Cameron@nhs.scot>",
@@ -2032,7 +2032,7 @@
     },
     "ggforce": {
       "Package": "ggforce",
-      "Version": "0.5.0",
+      "Version": "0.6.0",
       "Source": "Repository",
       "Type": "Package",
       "Title": "Accelerating 'ggplot2'",
@@ -2063,9 +2063,8 @@
         "lifecycle",
         "cli",
         "vctrs",
-        "systemfonts"
+        "marquee"
       ],
-      "RoxygenNote": "7.3.2",
       "LinkingTo": [
         "cpp11"
       ],
@@ -2075,9 +2074,13 @@
         "latex2exp",
         "reshape2",
         "units (>= 0.8.0)",
-        "covr"
+        "covr",
+        "testthat (>= 3.0.0)"
       ],
+      "Config/testthat/edition": "3",
       "Collate": "'aaa.R' 'shape.R' 'arc_bar.R' 'arc.R' 'autodensity.R' 'autohistogram.R' 'autopoint.R' 'bezier.R' 'bspline.R' 'bspline_closed.R' 'circle.R' 'concaveman.R' 'cpp11.R' 'diagonal.R' 'diagonal_wide.R' 'ellipse.R' 'errorbar.R' 'facet_grid_paginate.R' 'facet_matrix.R' 'facet_row.R' 'facet_stereo.R' 'facet_wrap_paginate.R' 'facet_zoom.R' 'ggforce-package.R' 'ggproto-classes.R' 'interpolate.R' 'labeller.R' 'link.R' 'mark_circle.R' 'mark_ellipse.R' 'mark_hull.R' 'mark_label.R' 'mark_rect.R' 'parallel_sets.R' 'position-jitternormal.R' 'position_auto.R' 'position_floatstack.R' 'regon.R' 'scale-depth.R' 'scale-unit.R' 'sina.R' 'spiro.R' 'themes.R' 'trans.R' 'trans_linear.R' 'utilities.R' 'voronoi.R' 'zzz.R'",
+      "Config/build/compilation-database": "true",
+      "Config/roxygen2/version": "8.1.1",
       "NeedsCompilation": "yes",
       "Author": "Thomas Lin Pedersen [cre, aut] (ORCID: <https://orcid.org/0000-0002-5147-4711>), RStudio [cph]",
       "Repository": "CRAN"
@@ -3225,9 +3228,9 @@
     },
     "lattice": {
       "Package": "lattice",
-      "Version": "0.22-9",
+      "Version": "0.23-1",
       "Source": "Repository",
-      "Date": "2026-02-03",
+      "Date": "2026-08-08",
       "Priority": "recommended",
       "Title": "Trellis Graphics for R",
       "Authors@R": "c(person(\"Deepayan\", \"Sarkar\", role = c(\"aut\", \"cre\"), email = \"deepayan.sarkar@r-project.org\", comment = c(ORCID = \"0000-0003-4107-1553\")), person(\"Felix\", \"Andrews\", role = \"ctb\"), person(\"Kevin\", \"Wright\", role = \"ctb\", comment = \"documentation\"), person(\"Neil\", \"Klepeis\", role = \"ctb\"), person(\"Johan\", \"Larsson\", role = \"ctb\", comment = \"miscellaneous improvements\"), person(\"Zhijian (Jason)\", \"Wen\", role = \"cph\", comment = \"filled contour code\"), person(\"Paul\", \"Murrell\", role = \"ctb\", email = \"paul@stat.auckland.ac.nz\"), person(\"Stefan\", \"Eng\", role = \"ctb\", comment = \"violin plot improvements\"), person(\"Achim\", \"Zeileis\", role = \"ctb\", comment = \"modern colors\"), person(\"Alexandre\", \"Courtiol\", role = \"ctb\", comment = \"generics for larrows, lpolygon, lrect and lsegments\") )",
@@ -3558,6 +3561,60 @@
       "Maintainer": "Yihui Xie <xie@yihui.name>",
       "Repository": "CRAN"
     },
+    "marquee": {
+      "Package": "marquee",
+      "Version": "1.3.0",
+      "Source": "Repository",
+      "Title": "Markdown Parser and Renderer for R Graphics",
+      "Authors@R": "c( person(\"Thomas Lin\", \"Pedersen\", , \"thomas.pedersen@posit.co\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0002-5147-4711\")), person(\"Martin\", \"Mitáš\", role = \"aut\", comment = \"Author of MD4C\"), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\"), comment = c(ROR = \"03wc8by49\")) )",
+      "Description": "Provides the mean to parse and render markdown text with grid along with facilities to define the styling of the text.",
+      "License": "MIT + file LICENSE",
+      "URL": "https://marquee.r-lib.org, https://github.com/r-lib/marquee",
+      "BugReports": "https://github.com/r-lib/marquee/issues",
+      "Depends": [
+        "R (>= 4.1)"
+      ],
+      "Imports": [
+        "cli",
+        "glue",
+        "grDevices",
+        "grid",
+        "jpeg",
+        "lifecycle",
+        "png",
+        "rlang (>= 1.1.0)",
+        "S7",
+        "systemfonts (>= 1.2.0)",
+        "textshaping (>= 1.0.0)",
+        "utils",
+        "vctrs"
+      ],
+      "Suggests": [
+        "ggplot2",
+        "gt",
+        "gtable",
+        "knitr",
+        "patchwork",
+        "ragg",
+        "rmarkdown",
+        "rsvg",
+        "testthat (>= 3.0.0)"
+      ],
+      "LinkingTo": [
+        "cpp11"
+      ],
+      "VignetteBuilder": "knitr",
+      "Config/build/compilation-database": "true",
+      "Config/Needs/website": "tidyverse/tidytemplate",
+      "Config/testthat/edition": "3",
+      "Config/usethis/last-upkeep": "2025-04-23",
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.3.3",
+      "NeedsCompilation": "yes",
+      "Author": "Thomas Lin Pedersen [aut, cre] (ORCID: <https://orcid.org/0000-0002-5147-4711>), Martin Mitáš [aut] (Author of MD4C), Posit Software, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>)",
+      "Maintainer": "Thomas Lin Pedersen <thomas.pedersen@posit.co>",
+      "Repository": "CRAN"
+    },
     "memoise": {
       "Package": "memoise",
       "Version": "2.0.1",
@@ -3695,10 +3752,10 @@
     },
     "nnet": {
       "Package": "nnet",
-      "Version": "7.3-20",
+      "Version": "7.3-21",
       "Source": "Repository",
       "Priority": "recommended",
-      "Date": "2025-01-01",
+      "Date": "2026-08-01",
       "Depends": [
         "R (>= 3.0.0)",
         "stats",
@@ -5665,7 +5722,7 @@
     },
     "tinytex": {
       "Package": "tinytex",
-      "Version": "0.61",
+      "Version": "0.62",
       "Source": "Repository",
       "Type": "Package",
       "Title": "Helper Functions to Install and Maintain TeX Live, and Compile LaTeX Documents",

@@ -1,477 +1,1465 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>C Solution: Monopoly | Essentials of Mathematics and Statistics</title>
-<meta name="author" content="Anas A Rana">
-<meta name="description" content="C.1 Solution: Monopoly Function monopoly_sim &lt;- function(num_turns) {  current_board_position &lt;- 0 # start on the GO space  go_to_jail_position &lt;- 30 # the go to jail space  jail_position &lt;- 10 #...">
-<meta name="generator" content="bookdown 0.48 with bs4_book()">
-<meta property="og:title" content="C Solution: Monopoly | Essentials of Mathematics and Statistics">
-<meta property="og:type" content="book">
-<meta property="og:description" content="C.1 Solution: Monopoly Function monopoly_sim &lt;- function(num_turns) {  current_board_position &lt;- 0 # start on the GO space  go_to_jail_position &lt;- 30 # the go to jail space  jail_position &lt;- 10 #...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C Solution: Monopoly | Essentials of Mathematics and Statistics">
-<meta name="twitter:description" content="C.1 Solution: Monopoly Function monopoly_sim &lt;- function(num_turns) {  current_board_position &lt;- 0 # start on the GO space  go_to_jail_position &lt;- 30 # the go to jail space  jail_position &lt;- 10 #...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Palatino-0.4.10/font.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Fira%20Code:wght@100&amp;display=swap" rel="stylesheet">
-<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
-    
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  </style>
-<link rel="stylesheet" href="style.css">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="The practical sessions for Essentials of Mathematics and Statistics, part of the MSc Bioinformatics at the University of Birmingham.">
+
+<title>Appendix C — Solution: Monopoly – Essentials of Mathematics and Statistics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./solution-monte-carlo.html" rel="next">
+<link href="./solution-markov-chains.html" rel="prev">
+<link href="site_libs/quarto-contrib/quarto-project/anasrana/tufte-brand/logo/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-916e1d957aa2e2d21c4002595b1ed413.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-9f18ae6aabaf6c0e00f98c5a006862d7.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-916e1d957aa2e2d21c4002595b1ed413.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2af58e5f354677c1aa98ae231aa6e52d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-d0ec94b9ce42e636880269600be468a7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-2af58e5f354677c1aa98ae231aa6e52d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
 </head>
-<body data-spy="scroll" data-target="#toc">
 
-<div class="container-fluid">
-<div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      refreshSafariScrollbar();
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="">Essentials of Mathematics and Statistics</a>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item">Appendices</li><li class="breadcrumb-item"><a href="./simSol.html">Solutions</a></li><li class="breadcrumb-item"><a href="./monopolySol.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Solution: Monopoly</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
     </div>
-
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Introduction to the Practical</a></li>
-<li class="book-part">Probability in R</li>
-<li><a class="" href="simulating-random-numbers.html"><span class="header-section-number">1</span> Simulating random numbers</a></li>
-<li><a class="" href="markov-chains.html"><span class="header-section-number">2</span> Markov Chains</a></li>
-<li><a class="" href="a-monopoly-simulation.html"><span class="header-section-number">3</span> A Monopoly simulation</a></li>
-<li><a class="" href="monte-carlo-methods.html"><span class="header-section-number">4</span> Monte Carlo Methods</a></li>
-<li><a class="" href="maximum-likelihood.html"><span class="header-section-number">5</span> Maximum Likelihood</a></li>
-<li><a class="" href="confidence-intervals.html"><span class="header-section-number">6</span> Confidence Intervals</a></li>
-<li><a class="" href="computational-testing-techniques.html"><span class="header-section-number">7</span> Computational Testing Techniques</a></li>
-<li class="book-part">Statistical Modelling</li>
-<li><a class="" href="representing-data-in-r.html"><span class="header-section-number">8</span> Representing Data in R</a></li>
-<li><a class="" href="principal-component-analysis.html"><span class="header-section-number">9</span> Principal component analysis</a></li>
-<li><a class="" href="linear-regression.html"><span class="header-section-number">10</span> Linear regression</a></li>
-<li><a class="" href="multiple-regression.html"><span class="header-section-number">11</span> Multiple regression</a></li>
-<li><a class="" href="qq-plot.html"><span class="header-section-number">12</span> QQ Plot - How To Use And Interpret</a></li>
-<li><a class="" href="generalised-linear-models.html"><span class="header-section-number">13</span> Generalised Linear Models</a></li>
-<li class="book-part">Solutions</li>
-<li><a class="" href="simSol.html"><span class="header-section-number">A</span> Solution: Simulations</a></li>
-<li><a class="" href="solution-markov-chains.html"><span class="header-section-number">B</span> Solution: Markov Chains</a></li>
-<li><a class="active" href="monopolySol.html"><span class="header-section-number">C</span> Solution: Monopoly</a></li>
-<li><a class="" href="solution-monte-carlo.html"><span class="header-section-number">D</span> Solution: Monte Carlo</a></li>
-<li><a class="" href="sol-mle.html"><span class="header-section-number">E</span> Solution: Model Answers: MLE</a></li>
-<li><a class="" href="sol-ex-CI.html"><span class="header-section-number">F</span> Solution: Confidence Interval</a></li>
-<li><a class="" href="representing_data-sol.html"><span class="header-section-number">G</span> Solution: Representing Data</a></li>
-<li><a class="" href="solution-linear-regression-and-correlation.html"><span class="header-section-number">H</span> Solution: Linear regression and Correlation</a></li>
-<li class="book-part">APPENDIX</li>
-<li><a class="" href="start.html">Getting started in R and Rstudio</a></li>
-<li><a class="" href="creating-functions-r.html">Creating functions R</a></li>
-<li><a class="" href="data-sets.html">Data sets</a></li>
-</ul>
-
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/anasrana/ems-practicals">View book source <i class="fab fa-github"></i></a></p>
-        </div>
-      </nav>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
+<p><a href="https://anasrana.github.io/" class="home-link"><img src="site_libs/quarto-contrib/quarto-project/anasrana/tufte-brand/logo/logo.svg" class="home-frog img-fluid" alt=""> Anas A Rana</a></p>
+</div></div>
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Essentials of Mathematics and Statistics</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/anasrana/ems-practicals" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./ems-practicals.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="monopolySol" class="section level1" number="16">
-<h1>
-<span class="header-section-number">C</span> Solution: Monopoly<a class="anchor" aria-label="anchor" href="#monopolySol"><i class="fas fa-link"></i></a>
-</h1>
-<div id="monopolyFun-sol" class="section level2" number="16.1">
-<h2>
-<span class="header-section-number">C.1</span> Solution: Monopoly Function<a class="anchor" aria-label="anchor" href="#monopolyFun-sol"><i class="fas fa-link"></i></a>
-</h2>
-<div class="sourceCode" id="cb373"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb373-1"><a href="monopolySol.html#cb373-1"></a>monopoly_sim <span class="ot">&lt;-</span> <span class="cf">function</span>(num_turns) {</span>
-<span id="cb373-2"><a href="monopolySol.html#cb373-2"></a></span>
-<span id="cb373-3"><a href="monopolySol.html#cb373-3"></a>  current_board_position <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># start on the GO space</span></span>
-<span id="cb373-4"><a href="monopolySol.html#cb373-4"></a>  go_to_jail_position <span class="ot">&lt;-</span> <span class="dv">30</span> <span class="co"># the go to jail space</span></span>
-<span id="cb373-5"><a href="monopolySol.html#cb373-5"></a>  jail_position <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># jail space</span></span>
-<span id="cb373-6"><a href="monopolySol.html#cb373-6"></a></span>
-<span id="cb373-7"><a href="monopolySol.html#cb373-7"></a>  positions_visited <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, num_turns)</span>
-<span id="cb373-8"><a href="monopolySol.html#cb373-8"></a></span>
-<span id="cb373-9"><a href="monopolySol.html#cb373-9"></a>  <span class="co"># use a for loop to simulate a number of turns</span></span>
-<span id="cb373-10"><a href="monopolySol.html#cb373-10"></a>  <span class="cf">for</span> (turn <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>num_turns) {</span>
-<span id="cb373-11"><a href="monopolySol.html#cb373-11"></a></span>
-<span id="cb373-12"><a href="monopolySol.html#cb373-12"></a>    <span class="co"># roll two dice</span></span>
-<span id="cb373-13"><a href="monopolySol.html#cb373-13"></a>    die_values <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="dv">2</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb373-14"><a href="monopolySol.html#cb373-14"></a></span>
-<span id="cb373-15"><a href="monopolySol.html#cb373-15"></a>    <span class="co"># move player position</span></span>
-<span id="cb373-16"><a href="monopolySol.html#cb373-16"></a></span>
-<span id="cb373-17"><a href="monopolySol.html#cb373-17"></a>    <span class="co"># number of positions to move</span></span>
-<span id="cb373-18"><a href="monopolySol.html#cb373-18"></a>    plus_move <span class="ot">&lt;-</span> <span class="fu">sum</span>(die_values)</span>
-<span id="cb373-19"><a href="monopolySol.html#cb373-19"></a></span>
-<span id="cb373-20"><a href="monopolySol.html#cb373-20"></a>    <span class="co"># compute new board position</span></span>
-<span id="cb373-21"><a href="monopolySol.html#cb373-21"></a>    new_board_position <span class="ot">&lt;-</span> current_board_position <span class="sc">+</span> plus_move</span>
-<span id="cb373-22"><a href="monopolySol.html#cb373-22"></a></span>
-<span id="cb373-23"><a href="monopolySol.html#cb373-23"></a>    <span class="co"># if land on GO TO JAIL square, then go backwards to the JAIL square</span></span>
-<span id="cb373-24"><a href="monopolySol.html#cb373-24"></a>    <span class="cf">if</span> (new_board_position <span class="sc">==</span> go_to_jail_position) {</span>
-<span id="cb373-25"><a href="monopolySol.html#cb373-25"></a>      new_board_position <span class="ot">&lt;-</span> jail_position</span>
-<span id="cb373-26"><a href="monopolySol.html#cb373-26"></a>    }</span>
-<span id="cb373-27"><a href="monopolySol.html#cb373-27"></a></span>
-<span id="cb373-28"><a href="monopolySol.html#cb373-28"></a>    <span class="co"># update board position (this corrects for the fact the board is circular)</span></span>
-<span id="cb373-29"><a href="monopolySol.html#cb373-29"></a>    current_board_position <span class="ot">&lt;-</span> (new_board_position <span class="sc">%%</span> <span class="dv">40</span>)</span>
-<span id="cb373-30"><a href="monopolySol.html#cb373-30"></a></span>
-<span id="cb373-31"><a href="monopolySol.html#cb373-31"></a>    <span class="co"># store position visited</span></span>
-<span id="cb373-32"><a href="monopolySol.html#cb373-32"></a>    positions_visited[turn] <span class="ot">&lt;-</span> current_board_position</span>
-<span id="cb373-33"><a href="monopolySol.html#cb373-33"></a></span>
-<span id="cb373-34"><a href="monopolySol.html#cb373-34"></a>  }</span>
-<span id="cb373-35"><a href="monopolySol.html#cb373-35"></a></span>
-<span id="cb373-36"><a href="monopolySol.html#cb373-36"></a>  <span class="fu">return</span>(positions_visited)</span>
-<span id="cb373-37"><a href="monopolySol.html#cb373-37"></a></span>
-<span id="cb373-38"><a href="monopolySol.html#cb373-38"></a>}</span></code></pre></div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to the Practical</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Getting started</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./start.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting started in R and Rstudio</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./creating-functions-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Creating functions R</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">Probability in R</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./simulating-random-numbers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Simulating random numbers</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./markov-chains.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Markov Chains</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./a-monopoly-simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A Monopoly simulation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./monte-carlo-methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Monte Carlo Methods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./maximum-likelihood.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Maximum Likelihood</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./confidence-intervals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Confidence Intervals</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./computational-testing-techniques.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Computational Testing Techniques</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Statistical modelling</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./representing-data-in-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Representing Data in R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./principal-component-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Principal component analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./linear-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Linear regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multiple-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qq-plot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title"><span class="acronym">QQ</span> Plot - How To Use And Interpret</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./generalised-linear-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Generalised Linear Models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">Appendices</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">Solutions</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./simSol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Solution: Simulations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./solution-markov-chains.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Solution: Markov Chains</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./monopolySol.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Solution: Monopoly</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./solution-monte-carlo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Solution: Monte Carlo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sol-mle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Solution: Model Answers: <span class="acronym">MLE</span></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sol-ex-CI.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Solution: Confidence Interval</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./solution-computational-testing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">Solution: Computational Testing</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./representing_data-sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">H</span>&nbsp; <span class="chapter-title">Solution: Representing Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./solution-linear-regression-and-correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">I</span>&nbsp; <span class="chapter-title">Solution: Linear regression and Correlation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-sets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data sets</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#monopolyFun-sol" id="toc-monopolyFun-sol" class="nav-link active" data-scroll-target="#monopolyFun-sol"><span class="header-section-number">C.1</span> Solution: Monopoly Function</a></li>
+  <li><a href="#goJailMon-sol" id="toc-goJailMon-sol" class="nav-link" data-scroll-target="#goJailMon-sol"><span class="header-section-number">C.2</span> Going to Jail - function</a></li>
+  <li><a href="#3doubleMon-sol" id="toc-3doubleMon-sol" class="nav-link" data-scroll-target="#3doubleMon-sol"><span class="header-section-number">C.3</span> Solution: Rolling three doubles</a></li>
+  <li><a href="#monopolyExtSol" id="toc-monopolyExtSol" class="nav-link" data-scroll-target="#monopolyExtSol"><span class="header-section-number">C.4</span> Solution: Monopoly Extension</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item">Appendices</li><li class="breadcrumb-item"><a href="./simSol.html">Solutions</a></li><li class="breadcrumb-item"><a href="./monopolySol.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Solution: Monopoly</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="monopolySol" class="quarto-section-identifier">Appendix C — Solution: Monopoly</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="mobile-home"><a href="https://anasrana.github.io/"><span class="home-frog"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" viewbox="5 8.9 34.6 23.9"><path d="M20.4 32H12.5c-5 0-7.5-3-6-7 2.5-6 12-10.5 20-11.3.2-4.3 6-4.3 6.2-.2 2.4.3 4.8 2 5.8 4.2.3 2.3-1.6 4.4-4.6 5.4M10 24.5c4-4.5 11.5-4 12.5 0 .6 2.8-2.5 4.8-7 5"></path><circle cx="29.6" cy="12.2" r=".9" fill="currentColor" stroke="none"></circle><path class="accent" d="M20.5 31.9l.2-.3l.7-.3l.7-.7l4.6-6l.4-.1l.4 .1l.1 6.4l.1 .4l.4 .1l.3 0l.2 .2l-.2 .2l-1.2 0l-2 0l-.1-.3l1.1-.3l.2-.7l0-1.8l-1.2-.2l-1 0l-.3 .2l-1.3 1.7l-.2 .4l.3 .3l.3 0l.4 .1l-.2 .3l-2 0l-.7 0zm4.2-3.7l.7 .1l.8 0l.2-2.3l-1 1.1l-.7 1zm4 3.7l.2-.2l.5-.1l.5-.2l.3-.6l1-4.7l.1-.4l-.2-.4l-.5-.1l-.3-.2l.2-.3l3 0q1 0 1.6 .5q.6 .5 .6 1.3q0 .8 -.6 1.4q-.6 .6 -1.5 .8l.1 .3l.6 1.3l.4 .6l.5 .5l.9 .3l-.1 .4l-1.6-.2q-.5-.2 -1-.9l-.2-.4l-.2-.5l-.2-.4l-.4-.8l-.4-.1l-.3 0l-.5 1.8l-.1 .4l.2 .4l.6 .1q.3 0 .2 .3l-1.1 .1l-1.3 0l-.9 0zm3-3.7l0 .3l1-.1l.8-.4l.7-.7l.2-.9q0-.6 -.4-.9l-.8-.3l-.7 0l-.2 .2z" fill="#a51c1c" stroke="none"></path></svg></span>Anas A Rana</a></div>
+<section id="monopolyFun-sol" class="level2" data-number="C.1">
+<h2 data-number="C.1" class="anchored" data-anchor-id="monopolyFun-sol"><span class="header-section-number">C.1</span> Solution: Monopoly Function</h2>
+<p><span class="backlink"><a href="a-monopoly-simulation.html#exr-monopolyFunc"><span class="swap"><span class="arr" aria-hidden="true">←</span><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" viewbox="0 0 56 40"><path d="M3 20.2h50" stroke-width=".8" opacity=".35"></path><path d="M4 19.7 7 25.2l3-8.4 3-.3 3 8 3-5 3-3.6 3 6.3 3-1.6 3-3.1 3 2.1 3 1.2 3-1.9 3 1.2 3 .1" stroke-width="1.1"></path><circle cx="49.5" cy="20.2" r="2.8" class="accent" fill="#a51c1c" stroke="none"></circle></svg></span><span>back to exercise 3.2</span></a></span></p>
+<div class="cell" data-layout-align="center">
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>monopoly_sim <span class="ot">&lt;-</span> <span class="cf">function</span>(num_turns) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  current_board_position <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># start on the GO space</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  go_to_jail_position <span class="ot">&lt;-</span> <span class="dv">30</span> <span class="co"># the go to jail space</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  jail_position <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># jail space</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  positions_visited <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, num_turns)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># use a for loop to simulate a number of turns</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (turn <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>num_turns) {</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># roll two dice</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    die_values <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="dv">2</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># move player position</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># number of positions to move</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    plus_move <span class="ot">&lt;-</span> <span class="fu">sum</span>(die_values)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># compute new board position</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    new_board_position <span class="ot">&lt;-</span> current_board_position <span class="sc">+</span> plus_move</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># if land on GO TO JAIL square, then go backwards to the JAIL square</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (new_board_position <span class="sc">==</span> go_to_jail_position) {</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>      new_board_position <span class="ot">&lt;-</span> jail_position</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># update board position (this corrects for the fact the board is circular)</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    current_board_position <span class="ot">&lt;-</span> (new_board_position <span class="sc">%%</span> <span class="dv">40</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># store position visited</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    positions_visited[turn] <span class="ot">&lt;-</span> current_board_position</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(positions_visited)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+</div>
 <p>If you are using an <code>Rmarkdown</code> file it is better to put the function in a script file and then source the file. This way you can reuse the function in multiple files.</p>
 <p><strong>Best practices for organizing R code:</strong></p>
 <ul>
-<li>
-<strong>Create a separate R script</strong>: Save your function as <code>monopoly_functions.R</code> in the same directory</li>
-<li>
-<strong>Source the file</strong>: Use <code>source("monopoly_functions.R")</code> at the top of your Rmarkdown document</li>
-<li>
-<strong>Alternative</strong>: Use <code>source(here::here("monopoly_functions.R"))</code> for more robust file paths</li>
+<li><strong>Create a separate R script</strong>: Save your function as <code>monopoly_functions.R</code> in the same directory</li>
+<li><strong>Source the file</strong>: Use <code>source("monopoly_functions.R")</code> at the top of your Rmarkdown document</li>
+<li><strong>Alternative</strong>: Use <code>source(here::here("monopoly_functions.R"))</code> for more robust file paths</li>
 </ul>
 <p><strong>Useful resources:</strong></p>
 <ul>
-<li>
-<a href="https://r4ds.had.co.nz/functions.html">R for Data Science - Functions chapter</a> - Clear explanations with examples</li>
-<li>
-<a href="https://adv-r.hadley.nz/functions.html">Advanced R - Functions</a> - More detailed coverage for advanced users</li>
-<li>
-<a href="https://support.posit.co/hc/en-us/articles/200526207-Using-Projects-in-the-RStudio-IDE">Posit Support - Using R Scripts</a> - Managing R files and projects</li>
+<li><a href="https://r4ds.had.co.nz/functions.html">R for Data Science - Functions chapter</a> - Clear explanations with examples</li>
+<li><a href="https://adv-r.hadley.nz/functions.html">Advanced R - Functions</a> - More detailed coverage for advanced users</li>
+<li><a href="https://support.posit.co/hc/en-us/articles/200526207-Using-Projects-in-the-RStudio-IDE">Posit Support - Using R Scripts</a> - Managing R files and projects</li>
 </ul>
 <p>If you have followed these steps, you would now have a working function that simulates a game of Monopoly for a specified number of turns and returns the positions visited during the game. To run it for a specific number of turns, you first need to source the file containing the function:</p>
-<div class="sourceCode" id="cb374"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb374-1"><a href="monopolySol.html#cb374-1"></a><span class="fu">source</span>(<span class="st">"monopoly_functions.R"</span>) <span class="co"># or use here::here for robust paths</span></span></code></pre></div>
+<div class="cell" data-layout-align="center">
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"monopoly_functions.R"</span>) <span class="co"># or use here::here for robust paths</span></span></code></pre></div>
+</div>
+</div>
 <p>Only once you have sourced the file can you call the function, for example:</p>
-<div class="sourceCode" id="cb375"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb375-1"><a href="monopolySol.html#cb375-1"></a>positions <span class="ot">&lt;-</span> <span class="fu">monopoly_sim</span>(<span class="dv">100000</span>) <span class="co"># simulate 100,000 turns</span></span>
-<span id="cb375-2"><a href="monopolySol.html#cb375-2"></a><span class="fu">hist</span>(positions, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">40</span>, <span class="at">len =</span> <span class="dv">41</span>), <span class="at">right =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<div class="inline-figure"><img src="monopoly-solution_files/figure-html/unnamed-chunk-3-1.png" alt="" width="95%" style="display: block; margin: auto;"></div>
+<div class="cell" data-layout-align="center">
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>positions <span class="ot">&lt;-</span> <span class="fu">monopoly_sim</span>(<span class="dv">100000</span>) <span class="co"># simulate 100,000 turns</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(positions, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">40</span>, <span class="at">len =</span> <span class="dv">41</span>), <span class="at">right =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="monopolySol_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:95.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>Note, to ensure this code works it is important to try different values for the input argument <code>num_turns</code> to ensure the function behaves as expected.</p>
-<button class="button">
-<a href="a-monopoly-simulation.html#monopolyFunc">Back to exercise</a>
-</button>
+<p><span class="backlink"><a href="a-monopoly-simulation.html#exr-monopolyFunc"><span class="swap"><span class="arr" aria-hidden="true">←</span><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" viewbox="0 0 56 40"><path d="M3 20.2h50" stroke-width=".8" opacity=".35"></path><path d="M4 19.7 7 25.2l3-8.4 3-.3 3 8 3-5 3-3.6 3 6.3 3-1.6 3-3.1 3 2.1 3 1.2 3-1.9 3 1.2 3 .1" stroke-width="1.1"></path><circle cx="49.5" cy="20.2" r="2.8" class="accent" fill="#a51c1c" stroke="none"></circle></svg></span><span>back to exercise 3.2</span></a></span></p>
+</section>
+<section id="goJailMon-sol" class="level2" data-number="C.2">
+<h2 data-number="C.2" class="anchored" data-anchor-id="goJailMon-sol"><span class="header-section-number">C.2</span> Going to Jail - function</h2>
+<p><span class="backlink"><a href="a-monopoly-simulation.html#exr-goJailMon"><span class="swap"><span class="arr" aria-hidden="true">←</span><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" viewbox="0 0 56 40"><path d="M3 20.2h50" stroke-width=".8" opacity=".35"></path><path d="M4 19.7 7 25.2l3-8.4 3-.3 3 8 3-5 3-3.6 3 6.3 3-1.6 3-3.1 3 2.1 3 1.2 3-1.9 3 1.2 3 .1" stroke-width="1.1"></path><circle cx="49.5" cy="20.2" r="2.8" class="accent" fill="#a51c1c" stroke="none"></circle></svg></span><span>back to exercise 3.3</span></a></span></p>
+<div class="cell" data-layout-align="center">
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>monopoly_jail_sim <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">num_turns =</span> <span class="dv">100</span>, <span class="at">jail_position =</span> <span class="dv">10</span>) {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  current_board_position <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># start on the GO space</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  go_to_jail_position <span class="ot">&lt;-</span> <span class="dv">30</span> <span class="co"># the go to jail space</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  positions_visited <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, num_turns)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># use a for loop to simulate a number of turns</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (turn <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>num_turns) {</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># roll two dice</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    die_values <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="dv">2</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># move player position</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># number of positions to move</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    plus_move <span class="ot">&lt;-</span> <span class="fu">sum</span>(die_values)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># compute new board position</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    new_board_position <span class="ot">&lt;-</span> current_board_position <span class="sc">+</span> plus_move</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># if land on GO TO JAIL square, then go backwards to the JAIL square</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (new_board_position <span class="sc">==</span> go_to_jail_position) {</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>      new_board_position <span class="ot">&lt;-</span> jail_position</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># update board position (this corrects for the fact the board is circular)</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    current_board_position <span class="ot">&lt;-</span> (new_board_position <span class="sc">%%</span> <span class="dv">40</span>)</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># store position visited</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    positions_visited[turn] <span class="ot">&lt;-</span> current_board_position</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(positions_visited)</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
-<div id="goJailMon-sol" class="section level2" number="16.2">
-<h2>
-<span class="header-section-number">C.2</span> Going to Jail - function<a class="anchor" aria-label="anchor" href="#goJailMon-sol"><i class="fas fa-link"></i></a>
-</h2>
-<div class="sourceCode" id="cb376"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb376-1"><a href="monopolySol.html#cb376-1"></a>monopoly_jail_sim <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">num_turns =</span> <span class="dv">100</span>, <span class="at">jail_position =</span> <span class="dv">10</span>) {</span>
-<span id="cb376-2"><a href="monopolySol.html#cb376-2"></a>  current_board_position <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># start on the GO space</span></span>
-<span id="cb376-3"><a href="monopolySol.html#cb376-3"></a>  go_to_jail_position <span class="ot">&lt;-</span> <span class="dv">30</span> <span class="co"># the go to jail space</span></span>
-<span id="cb376-4"><a href="monopolySol.html#cb376-4"></a></span>
-<span id="cb376-5"><a href="monopolySol.html#cb376-5"></a>  positions_visited <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, num_turns)</span>
-<span id="cb376-6"><a href="monopolySol.html#cb376-6"></a></span>
-<span id="cb376-7"><a href="monopolySol.html#cb376-7"></a>  <span class="co"># use a for loop to simulate a number of turns</span></span>
-<span id="cb376-8"><a href="monopolySol.html#cb376-8"></a>  <span class="cf">for</span> (turn <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>num_turns) {</span>
-<span id="cb376-9"><a href="monopolySol.html#cb376-9"></a></span>
-<span id="cb376-10"><a href="monopolySol.html#cb376-10"></a>    <span class="co"># roll two dice</span></span>
-<span id="cb376-11"><a href="monopolySol.html#cb376-11"></a>    die_values <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="dv">2</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb376-12"><a href="monopolySol.html#cb376-12"></a></span>
-<span id="cb376-13"><a href="monopolySol.html#cb376-13"></a>    <span class="co"># move player position</span></span>
-<span id="cb376-14"><a href="monopolySol.html#cb376-14"></a></span>
-<span id="cb376-15"><a href="monopolySol.html#cb376-15"></a>    <span class="co"># number of positions to move</span></span>
-<span id="cb376-16"><a href="monopolySol.html#cb376-16"></a>    plus_move <span class="ot">&lt;-</span> <span class="fu">sum</span>(die_values)</span>
-<span id="cb376-17"><a href="monopolySol.html#cb376-17"></a></span>
-<span id="cb376-18"><a href="monopolySol.html#cb376-18"></a>    <span class="co"># compute new board position</span></span>
-<span id="cb376-19"><a href="monopolySol.html#cb376-19"></a>    new_board_position <span class="ot">&lt;-</span> current_board_position <span class="sc">+</span> plus_move</span>
-<span id="cb376-20"><a href="monopolySol.html#cb376-20"></a></span>
-<span id="cb376-21"><a href="monopolySol.html#cb376-21"></a>    <span class="co"># if land on GO TO JAIL square, then go backwards to the JAIL square</span></span>
-<span id="cb376-22"><a href="monopolySol.html#cb376-22"></a>    <span class="cf">if</span> (new_board_position <span class="sc">==</span> go_to_jail_position) {</span>
-<span id="cb376-23"><a href="monopolySol.html#cb376-23"></a>      new_board_position <span class="ot">&lt;-</span> jail_position</span>
-<span id="cb376-24"><a href="monopolySol.html#cb376-24"></a>    }</span>
-<span id="cb376-25"><a href="monopolySol.html#cb376-25"></a></span>
-<span id="cb376-26"><a href="monopolySol.html#cb376-26"></a>    <span class="co"># update board position (this corrects for the fact the board is circular)</span></span>
-<span id="cb376-27"><a href="monopolySol.html#cb376-27"></a>    current_board_position <span class="ot">&lt;-</span> (new_board_position <span class="sc">%%</span> <span class="dv">40</span>)</span>
-<span id="cb376-28"><a href="monopolySol.html#cb376-28"></a></span>
-<span id="cb376-29"><a href="monopolySol.html#cb376-29"></a>    <span class="co"># store position visited</span></span>
-<span id="cb376-30"><a href="monopolySol.html#cb376-30"></a>    positions_visited[turn] <span class="ot">&lt;-</span> current_board_position</span>
-<span id="cb376-31"><a href="monopolySol.html#cb376-31"></a></span>
-<span id="cb376-32"><a href="monopolySol.html#cb376-32"></a>  }</span>
-<span id="cb376-33"><a href="monopolySol.html#cb376-33"></a></span>
-<span id="cb376-34"><a href="monopolySol.html#cb376-34"></a>  <span class="fu">return</span>(positions_visited)</span>
-<span id="cb376-35"><a href="monopolySol.html#cb376-35"></a>}</span></code></pre></div>
+</div>
 <p>You can see that be adding the <code>jail_position</code> argument with a default value of 10, the function is more flexible. You can now call the function with just the number of turns, or specify a different jail position if needed. We have also added default value for <code>num_turns</code> to 100, so if you call the function without any arguments it will simulate 100 turns by default. Let us run the function without any arguments, and by choosing a different jail position, and different number of turns:</p>
-<div class="sourceCode" id="cb377"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb377-1"><a href="monopolySol.html#cb377-1"></a><span class="co"># simulate 100 turns with default jail position</span></span>
-<span id="cb377-2"><a href="monopolySol.html#cb377-2"></a>positions1 <span class="ot">&lt;-</span> <span class="fu">monopoly_jail_sim</span>()</span>
-<span id="cb377-3"><a href="monopolySol.html#cb377-3"></a><span class="fu">hist</span>(positions1, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">40</span>, <span class="at">len =</span> <span class="dv">41</span>), <span class="at">right =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<div class="inline-figure"><img src="monopoly-solution_files/figure-html/unnamed-chunk-5-1.png" alt="" width="95%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb378"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb378-1"><a href="monopolySol.html#cb378-1"></a><span class="co"># simulate 1000 turns with default jail position</span></span>
-<span id="cb378-2"><a href="monopolySol.html#cb378-2"></a>positions2 <span class="ot">&lt;-</span> <span class="fu">monopoly_jail_sim</span>(<span class="dv">1000</span>)</span>
-<span id="cb378-3"><a href="monopolySol.html#cb378-3"></a><span class="fu">hist</span>(positions2, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">40</span>, <span class="at">len =</span> <span class="dv">41</span>), <span class="at">right =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<div class="inline-figure"><img src="monopoly-solution_files/figure-html/unnamed-chunk-5-2.png" alt="" width="95%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb379"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb379-1"><a href="monopolySol.html#cb379-1"></a><span class="co"># simulate 100000 turns with jail position at 5</span></span>
-<span id="cb379-2"><a href="monopolySol.html#cb379-2"></a>positions3 <span class="ot">&lt;-</span> <span class="fu">monopoly_jail_sim</span>(<span class="dv">100000</span>, <span class="at">jail_position =</span> <span class="dv">5</span>)</span>
-<span id="cb379-3"><a href="monopolySol.html#cb379-3"></a><span class="fu">hist</span>(positions3, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">40</span>, <span class="at">len =</span> <span class="dv">41</span>), <span class="at">right =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<div class="inline-figure"><img src="monopoly-solution_files/figure-html/unnamed-chunk-5-3.png" alt="" width="95%" style="display: block; margin: auto;"></div>
-<p><span style="color: orange;">
-<strong>Explain the results qualitatively.</strong>
-</span></p>
-<button class="button">
-<a href="a-monopoly-simulation.html#goJailMon">Back to exercise</a>
-</button>
+<div class="cell" data-layout-align="center">
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate 100 turns with default jail position</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>positions1 <span class="ot">&lt;-</span> <span class="fu">monopoly_jail_sim</span>()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(positions1, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">40</span>, <span class="at">len =</span> <span class="dv">41</span>), <span class="at">right =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 </div>
-<div id="id_3doubleMon-sol" class="section level2" number="16.3">
-<h2>
-<span class="header-section-number">C.3</span> Solution: Rolling three doubles<a class="anchor" aria-label="anchor" href="#id_3doubleMon-sol"><i class="fas fa-link"></i></a>
-</h2>
-<blockquote>
-<p>You can also go to jail, if you roll three doubles (both dice having the same value) in a row. Update your code to allow for the possibility of going to Jail with three doubles. How does the distribution of board positions change?</p>
-</blockquote>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="monopolySol_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:95.0%"></p>
+</figure>
+</div>
+</div>
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate 1000 turns with default jail position</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>positions2 <span class="ot">&lt;-</span> <span class="fu">monopoly_jail_sim</span>(<span class="dv">1000</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(positions2, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">40</span>, <span class="at">len =</span> <span class="dv">41</span>), <span class="at">right =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="monopolySol_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:95.0%"></p>
+</figure>
+</div>
+</div>
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate 100000 turns with jail position at 5</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>positions3 <span class="ot">&lt;-</span> <span class="fu">monopoly_jail_sim</span>(<span class="dv">100000</span>, <span class="at">jail_position =</span> <span class="dv">5</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(positions3, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">40</span>, <span class="at">len =</span> <span class="dv">41</span>), <span class="at">right =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="monopolySol_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:95.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span style="color: orange;"> <strong>Explain the results qualitatively.</strong> </span></p>
+<p><span class="backlink"><a href="a-monopoly-simulation.html#exr-goJailMon"><span class="swap"><span class="arr" aria-hidden="true">←</span><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" viewbox="0 0 56 40"><path d="M3 20.2h50" stroke-width=".8" opacity=".35"></path><path d="M4 19.7 7 25.2l3-8.4 3-.3 3 8 3-5 3-3.6 3 6.3 3-1.6 3-3.1 3 2.1 3 1.2 3-1.9 3 1.2 3 .1" stroke-width="1.1"></path><circle cx="49.5" cy="20.2" r="2.8" class="accent" fill="#a51c1c" stroke="none"></circle></svg></span><span>back to exercise 3.3</span></a></span></p>
+</section>
+<section id="3doubleMon-sol" class="level2" data-number="C.3">
+<h2 data-number="C.3" class="anchored" data-anchor-id="3doubleMon-sol"><span class="header-section-number">C.3</span> Solution: Rolling three doubles</h2>
+<p><span id="id_3doubleMon-sol"></span></p>
+<p><span class="backlink"><a href="a-monopoly-simulation.html#exr-repDoublesMon"><span class="swap"><span class="arr" aria-hidden="true">←</span><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" viewbox="0 0 56 40"><path d="M3 20.2h50" stroke-width=".8" opacity=".35"></path><path d="M4 19.7 7 25.2l3-8.4 3-.3 3 8 3-5 3-3.6 3 6.3 3-1.6 3-3.1 3 2.1 3 1.2 3-1.9 3 1.2 3 .1" stroke-width="1.1"></path><circle cx="49.5" cy="20.2" r="2.8" class="accent" fill="#a51c1c" stroke="none"></circle></svg></span><span>back to exercise 3.4</span></a></span> &gt; You can also go to jail, if you roll three doubles (both dice having the same value) in a row. Update your code to allow for the possibility of going to Jail with three doubles. How does the distribution of board positions change?</p>
 <p>The best process is to add the new feature to the existing code. This way we can compare the results with and without the new feature.</p>
-<div class="sourceCode" id="cb380"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb380-1"><a href="monopolySol.html#cb380-1"></a>monopoly_double_sim <span class="ot">&lt;-</span> <span class="cf">function</span>(num_turns, <span class="at">jail_position =</span> <span class="dv">10</span>) {</span>
-<span id="cb380-2"><a href="monopolySol.html#cb380-2"></a></span>
-<span id="cb380-3"><a href="monopolySol.html#cb380-3"></a>  current_board_position <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># start on the GO space</span></span>
-<span id="cb380-4"><a href="monopolySol.html#cb380-4"></a>  go_to_jail_position <span class="ot">&lt;-</span> <span class="dv">30</span> <span class="co"># the go to jail space</span></span>
-<span id="cb380-5"><a href="monopolySol.html#cb380-5"></a></span>
-<span id="cb380-6"><a href="monopolySol.html#cb380-6"></a>  positions_visited <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, num_turns)</span>
-<span id="cb380-7"><a href="monopolySol.html#cb380-7"></a></span>
-<span id="cb380-8"><a href="monopolySol.html#cb380-8"></a>  <span class="co"># use a for loop to simulate a number of turns</span></span>
-<span id="cb380-9"><a href="monopolySol.html#cb380-9"></a>  <span class="cf">for</span> (turn <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>num_turns) {</span>
-<span id="cb380-10"><a href="monopolySol.html#cb380-10"></a></span>
-<span id="cb380-11"><a href="monopolySol.html#cb380-11"></a>    <span class="co"># set double counter to zero</span></span>
-<span id="cb380-12"><a href="monopolySol.html#cb380-12"></a>    double_counter <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb380-13"><a href="monopolySol.html#cb380-13"></a></span>
-<span id="cb380-14"><a href="monopolySol.html#cb380-14"></a>    <span class="co"># roll (max) three times</span></span>
-<span id="cb380-15"><a href="monopolySol.html#cb380-15"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
-<span id="cb380-16"><a href="monopolySol.html#cb380-16"></a></span>
-<span id="cb380-17"><a href="monopolySol.html#cb380-17"></a>      <span class="co"># roll two dice</span></span>
-<span id="cb380-18"><a href="monopolySol.html#cb380-18"></a>      die_values <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="dv">2</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb380-19"><a href="monopolySol.html#cb380-19"></a></span>
-<span id="cb380-20"><a href="monopolySol.html#cb380-20"></a>      <span class="co"># if we have rolled a double for the third time, we proceed straight to jail</span></span>
-<span id="cb380-21"><a href="monopolySol.html#cb380-21"></a>      <span class="cf">if</span> ((die_values[<span class="dv">1</span>] <span class="sc">==</span> die_values[<span class="dv">2</span>]) <span class="sc">&amp;&amp;</span> (double_counter <span class="sc">==</span> <span class="dv">2</span>)) {</span>
-<span id="cb380-22"><a href="monopolySol.html#cb380-22"></a>        current_board_position <span class="ot">&lt;-</span> jail_position</span>
-<span id="cb380-23"><a href="monopolySol.html#cb380-23"></a>        <span class="cf">break</span></span>
-<span id="cb380-24"><a href="monopolySol.html#cb380-24"></a>      }</span>
-<span id="cb380-25"><a href="monopolySol.html#cb380-25"></a></span>
-<span id="cb380-26"><a href="monopolySol.html#cb380-26"></a>      <span class="co"># otherwise</span></span>
-<span id="cb380-27"><a href="monopolySol.html#cb380-27"></a></span>
-<span id="cb380-28"><a href="monopolySol.html#cb380-28"></a>      <span class="co"># move player position</span></span>
-<span id="cb380-29"><a href="monopolySol.html#cb380-29"></a></span>
-<span id="cb380-30"><a href="monopolySol.html#cb380-30"></a>      <span class="co"># number of positions to move</span></span>
-<span id="cb380-31"><a href="monopolySol.html#cb380-31"></a>      plus_move <span class="ot">&lt;-</span> <span class="fu">sum</span>(die_values)</span>
-<span id="cb380-32"><a href="monopolySol.html#cb380-32"></a></span>
-<span id="cb380-33"><a href="monopolySol.html#cb380-33"></a>      <span class="co"># compute new board position</span></span>
-<span id="cb380-34"><a href="monopolySol.html#cb380-34"></a>      new_board_position <span class="ot">&lt;-</span> current_board_position <span class="sc">+</span> plus_move</span>
-<span id="cb380-35"><a href="monopolySol.html#cb380-35"></a></span>
-<span id="cb380-36"><a href="monopolySol.html#cb380-36"></a>      <span class="co"># if land on GO TO JAIL square, then go backwards to the JAIL square</span></span>
-<span id="cb380-37"><a href="monopolySol.html#cb380-37"></a>      <span class="cf">if</span> (new_board_position <span class="sc">==</span> go_to_jail_position) {</span>
-<span id="cb380-38"><a href="monopolySol.html#cb380-38"></a>        new_board_position <span class="ot">&lt;-</span> jail_position</span>
-<span id="cb380-39"><a href="monopolySol.html#cb380-39"></a>      }</span>
-<span id="cb380-40"><a href="monopolySol.html#cb380-40"></a></span>
-<span id="cb380-41"><a href="monopolySol.html#cb380-41"></a>      <span class="co"># update board position (this corrects for the fact the board is circular)</span></span>
-<span id="cb380-42"><a href="monopolySol.html#cb380-42"></a>      current_board_position <span class="ot">&lt;-</span> (new_board_position <span class="sc">%%</span> <span class="dv">40</span>)</span>
-<span id="cb380-43"><a href="monopolySol.html#cb380-43"></a></span>
-<span id="cb380-44"><a href="monopolySol.html#cb380-44"></a>      <span class="co"># break out of loop if we roll a non-double</span></span>
-<span id="cb380-45"><a href="monopolySol.html#cb380-45"></a>      <span class="cf">if</span> (die_values[<span class="dv">1</span>] <span class="sc">!=</span> die_values[<span class="dv">2</span>]) {</span>
-<span id="cb380-46"><a href="monopolySol.html#cb380-46"></a>        <span class="cf">break</span></span>
-<span id="cb380-47"><a href="monopolySol.html#cb380-47"></a>      } <span class="cf">else</span> { <span class="co"># increment double counter</span></span>
-<span id="cb380-48"><a href="monopolySol.html#cb380-48"></a>        double_counter <span class="ot">&lt;-</span> double_counter <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb380-49"><a href="monopolySol.html#cb380-49"></a>      }</span>
-<span id="cb380-50"><a href="monopolySol.html#cb380-50"></a></span>
-<span id="cb380-51"><a href="monopolySol.html#cb380-51"></a>    }</span>
-<span id="cb380-52"><a href="monopolySol.html#cb380-52"></a></span>
-<span id="cb380-53"><a href="monopolySol.html#cb380-53"></a>    <span class="co"># store final position visited</span></span>
-<span id="cb380-54"><a href="monopolySol.html#cb380-54"></a>    positions_visited[turn] <span class="ot">&lt;-</span> current_board_position</span>
-<span id="cb380-55"><a href="monopolySol.html#cb380-55"></a></span>
-<span id="cb380-56"><a href="monopolySol.html#cb380-56"></a>  }</span>
-<span id="cb380-57"><a href="monopolySol.html#cb380-57"></a></span>
-<span id="cb380-58"><a href="monopolySol.html#cb380-58"></a>  <span class="fu">return</span>(positions_visited)</span>
-<span id="cb380-59"><a href="monopolySol.html#cb380-59"></a>}</span>
-<span id="cb380-60"><a href="monopolySol.html#cb380-60"></a></span>
-<span id="cb380-61"><a href="monopolySol.html#cb380-61"></a><span class="co"># Example usage:</span></span>
-<span id="cb380-62"><a href="monopolySol.html#cb380-62"></a>positions <span class="ot">&lt;-</span> <span class="fu">monopoly_double_sim</span>(<span class="dv">100000</span>)</span>
-<span id="cb380-63"><a href="monopolySol.html#cb380-63"></a><span class="fu">hist</span>(positions, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">40</span>, <span class="at">len =</span> <span class="dv">41</span>), <span class="at">right =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<div class="inline-figure"><img src="monopoly-solution_files/figure-html/unnamed-chunk-6-1.png" alt="" width="95%" style="display: block; margin: auto;"></div>
+<div class="cell" data-layout-align="center">
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>monopoly_double_sim <span class="ot">&lt;-</span> <span class="cf">function</span>(num_turns, <span class="at">jail_position =</span> <span class="dv">10</span>) {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  current_board_position <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># start on the GO space</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  go_to_jail_position <span class="ot">&lt;-</span> <span class="dv">30</span> <span class="co"># the go to jail space</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  positions_visited <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, num_turns)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># use a for loop to simulate a number of turns</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (turn <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>num_turns) {</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># set double counter to zero</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    double_counter <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># roll (max) three times</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>      <span class="co"># roll two dice</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>      die_values <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="dv">2</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>      <span class="co"># if we have rolled a double for the third time, we proceed straight to jail</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> ((die_values[<span class="dv">1</span>] <span class="sc">==</span> die_values[<span class="dv">2</span>]) <span class="sc">&amp;&amp;</span> (double_counter <span class="sc">==</span> <span class="dv">2</span>)) {</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>        current_board_position <span class="ot">&lt;-</span> jail_position</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>      <span class="co"># otherwise</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>      <span class="co"># move player position</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>      <span class="co"># number of positions to move</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>      plus_move <span class="ot">&lt;-</span> <span class="fu">sum</span>(die_values)</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>      <span class="co"># compute new board position</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>      new_board_position <span class="ot">&lt;-</span> current_board_position <span class="sc">+</span> plus_move</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>      <span class="co"># if land on GO TO JAIL square, then go backwards to the JAIL square</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (new_board_position <span class="sc">==</span> go_to_jail_position) {</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>        new_board_position <span class="ot">&lt;-</span> jail_position</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>      <span class="co"># update board position (this corrects for the fact the board is circular)</span></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>      current_board_position <span class="ot">&lt;-</span> (new_board_position <span class="sc">%%</span> <span class="dv">40</span>)</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>      <span class="co"># break out of loop if we roll a non-double</span></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (die_values[<span class="dv">1</span>] <span class="sc">!=</span> die_values[<span class="dv">2</span>]) {</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">else</span> { <span class="co"># increment double counter</span></span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>        double_counter <span class="ot">&lt;-</span> double_counter <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>    <span class="co"># store final position visited</span></span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>    positions_visited[turn] <span class="ot">&lt;-</span> current_board_position</span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(positions_visited)</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage:</span></span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>positions <span class="ot">&lt;-</span> <span class="fu">monopoly_double_sim</span>(<span class="dv">100000</span>)</span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(positions, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">40</span>, <span class="at">len =</span> <span class="dv">41</span>), <span class="at">right =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="monopolySol_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:95.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>Adding the rolling doubles feature doesn’t seem to change much. We might expect this since rolling three doubles is a very unlikely event!</p>
 <p><em>Note, here we have created the function within the solution for clarity, but in practice, you would define this function in your script file as described earlier. Make sure you do that, you can also have multiple functions in one file, try that!</em></p>
-<button class="button">
-<a href="a-monopoly-simulation.html#repDoublesMon">Back to exercise</a>
-</button>
+<p><span class="backlink"><a href="a-monopoly-simulation.html#exr-repDoublesMon"><span class="swap"><span class="arr" aria-hidden="true">←</span><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" viewbox="0 0 56 40"><path d="M3 20.2h50" stroke-width=".8" opacity=".35"></path><path d="M4 19.7 7 25.2l3-8.4 3-.3 3 8 3-5 3-3.6 3 6.3 3-1.6 3-3.1 3 2.1 3 1.2 3-1.9 3 1.2 3 .1" stroke-width="1.1"></path><circle cx="49.5" cy="20.2" r="2.8" class="accent" fill="#a51c1c" stroke="none"></circle></svg></span><span>back to exercise 3.4</span></a></span></p>
+</section>
+<section id="monopolyExtSol" class="level2" data-number="C.4">
+<h2 data-number="C.4" class="anchored" data-anchor-id="monopolyExtSol"><span class="header-section-number">C.4</span> Solution: Monopoly Extension</h2>
+<p><span class="backlink"><a href="a-monopoly-simulation.html#exr-monopolyExt"><span class="swap"><span class="arr" aria-hidden="true">←</span><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" viewbox="0 0 56 40"><path d="M3 20.2h50" stroke-width=".8" opacity=".35"></path><path d="M4 19.7 7 25.2l3-8.4 3-.3 3 8 3-5 3-3.6 3 6.3 3-1.6 3-3.1 3 2.1 3 1.2 3-1.9 3 1.2 3 .1" stroke-width="1.1"></path><circle cx="49.5" cy="20.2" r="2.8" class="accent" fill="#a51c1c" stroke="none"></circle></svg></span><span>back to exercise 3.5</span></a></span> For example, the following simple extension of the previous example adds some features to record properties being purchased. This simulation is constructed based on the assumption that a players always buys any free property that land on.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>monopoly_ext_sim <span class="ot">&lt;-</span> <span class="cf">function</span>(num_turns, <span class="at">jail_position =</span> <span class="dv">10</span>) {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  current_board_position <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># start on the GO space</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  go_to_jail_position <span class="ot">&lt;-</span> <span class="dv">30</span> <span class="co"># the go to jail space</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># vector of squares containing properties</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  properties_that_can_be_bought <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">15</span>, <span class="dv">16</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="dv">18</span>, <span class="dv">19</span>, <span class="dv">21</span>, <span class="dv">23</span>, <span class="dv">24</span>, <span class="dv">25</span>, <span class="dv">26</span>, <span class="dv">27</span>, <span class="dv">28</span>, <span class="dv">29</span>, <span class="dv">31</span>, <span class="dv">32</span>, <span class="dv">34</span>, <span class="dv">35</span>, <span class="dv">37</span>, <span class="dv">39</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  positions_visited <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, num_turns)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  positions_purchased <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">40</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  properties_bought <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, num_turns)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># use a for loop to simulate a number of turns</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (turn <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>num_turns) {</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># roll two dice</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    die_values <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="dv">2</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># move player position</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># number of positions to move</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    plus_move <span class="ot">&lt;-</span> <span class="fu">sum</span>(die_values)</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># compute new board position</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    new_board_position <span class="ot">&lt;-</span> current_board_position <span class="sc">+</span> plus_move</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># if land on GO TO JAIL square, then go backwards to the JAIL square</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (new_board_position <span class="sc">==</span> go_to_jail_position) {</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>      new_board_position <span class="ot">&lt;-</span> jail_position</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># update board position (corrects for circular board)</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>    current_board_position <span class="ot">&lt;-</span> (new_board_position <span class="sc">%%</span> <span class="dv">40</span>)</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    <span class="co"># if we land on a square that can be purchased and which has not been</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    <span class="co"># purchased (note R uses 1-indexing for arrays)</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (positions_purchased[current_board_position <span class="sc">+</span> <span class="dv">1</span>] <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (current_board_position <span class="sc">%in%</span> properties_that_can_be_bought) {</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>        positions_purchased[current_board_position <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># store position visited</span></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>    positions_visited[turn] <span class="ot">&lt;-</span> current_board_position</span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>    <span class="co"># store number of properties bought</span></span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>    properties_bought[turn] <span class="ot">&lt;-</span> <span class="fu">sum</span>(positions_purchased)</span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>    <span class="co"># check if all properties are bought</span></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (properties_bought[turn] <span class="sc">==</span> <span class="fu">length</span>(properties_that_can_be_bought)) {</span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>      <span class="co"># truncate vectors to actual length used</span></span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>      positions_visited <span class="ot">&lt;-</span> positions_visited[<span class="dv">1</span><span class="sc">:</span>turn]</span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>      properties_bought <span class="ot">&lt;-</span> properties_bought[<span class="dv">1</span><span class="sc">:</span>turn]</span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>      <span class="cf">break</span></span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return a list with multiple pieces of information</span></span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(</span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">positions_visited =</span> positions_visited,</span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>    <span class="at">properties_bought_timeline =</span> properties_bought,</span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>    <span class="at">positions_purchased =</span> positions_purchased,</span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">turns_to_buy_all =</span> <span class="fu">ifelse</span>(</span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>      <span class="fu">max</span>(properties_bought) <span class="sc">==</span> <span class="fu">length</span>(properties_that_can_be_bought),</span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a>      <span class="fu">length</span>(positions_visited), <span class="cn">NA</span></span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_properties =</span> <span class="fu">length</span>(properties_that_can_be_bought),</span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">properties_available =</span> properties_that_can_be_bought</span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage for a single game:</span></span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a>game_result <span class="ot">&lt;-</span> <span class="fu">monopoly_ext_sim</span>(<span class="dv">1000</span>)</span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Turns to buy all properties:"</span>, game_result<span class="sc">$</span>turns_to_buy_all))</span></code></pre></div>
 </div>
-<div id="monopolyExtSol" class="section level2" number="16.4">
-<h2>
-<span class="header-section-number">C.4</span> Solution: Monopoly Extension<a class="anchor" aria-label="anchor" href="#monopolyExtSol"><i class="fas fa-link"></i></a>
-</h2>
-<p>For example, the following simple extension of the previous example adds some features to record properties being purchased. This simulation is constructed based on the assumption that a players always buys any free property that land on.</p>
-<div class="sourceCode" id="cb381"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb381-1"><a href="monopolySol.html#cb381-1"></a>monopoly_ext_sim <span class="ot">&lt;-</span> <span class="cf">function</span>(num_turns, <span class="at">jail_position =</span> <span class="dv">10</span>) {</span>
-<span id="cb381-2"><a href="monopolySol.html#cb381-2"></a></span>
-<span id="cb381-3"><a href="monopolySol.html#cb381-3"></a>  current_board_position <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># start on the GO space</span></span>
-<span id="cb381-4"><a href="monopolySol.html#cb381-4"></a>  go_to_jail_position <span class="ot">&lt;-</span> <span class="dv">30</span> <span class="co"># the go to jail space</span></span>
-<span id="cb381-5"><a href="monopolySol.html#cb381-5"></a></span>
-<span id="cb381-6"><a href="monopolySol.html#cb381-6"></a>  <span class="co"># vector of squares containing properties</span></span>
-<span id="cb381-7"><a href="monopolySol.html#cb381-7"></a>  properties_that_can_be_bought <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb381-8"><a href="monopolySol.html#cb381-8"></a>    <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">15</span>, <span class="dv">16</span>,</span>
-<span id="cb381-9"><a href="monopolySol.html#cb381-9"></a>    <span class="dv">18</span>, <span class="dv">19</span>, <span class="dv">21</span>, <span class="dv">23</span>, <span class="dv">24</span>, <span class="dv">25</span>, <span class="dv">26</span>, <span class="dv">27</span>, <span class="dv">28</span>, <span class="dv">29</span>, <span class="dv">31</span>, <span class="dv">32</span>, <span class="dv">34</span>, <span class="dv">35</span>, <span class="dv">37</span>, <span class="dv">39</span></span>
-<span id="cb381-10"><a href="monopolySol.html#cb381-10"></a>  )</span>
-<span id="cb381-11"><a href="monopolySol.html#cb381-11"></a></span>
-<span id="cb381-12"><a href="monopolySol.html#cb381-12"></a>  positions_visited <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, num_turns)</span>
-<span id="cb381-13"><a href="monopolySol.html#cb381-13"></a>  positions_purchased <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">40</span>)</span>
-<span id="cb381-14"><a href="monopolySol.html#cb381-14"></a>  properties_bought <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, num_turns)</span>
-<span id="cb381-15"><a href="monopolySol.html#cb381-15"></a></span>
-<span id="cb381-16"><a href="monopolySol.html#cb381-16"></a>  <span class="co"># use a for loop to simulate a number of turns</span></span>
-<span id="cb381-17"><a href="monopolySol.html#cb381-17"></a>  <span class="cf">for</span> (turn <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>num_turns) {</span>
-<span id="cb381-18"><a href="monopolySol.html#cb381-18"></a></span>
-<span id="cb381-19"><a href="monopolySol.html#cb381-19"></a>    <span class="co"># roll two dice</span></span>
-<span id="cb381-20"><a href="monopolySol.html#cb381-20"></a>    die_values <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>), <span class="dv">2</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb381-21"><a href="monopolySol.html#cb381-21"></a></span>
-<span id="cb381-22"><a href="monopolySol.html#cb381-22"></a>    <span class="co"># move player position</span></span>
-<span id="cb381-23"><a href="monopolySol.html#cb381-23"></a></span>
-<span id="cb381-24"><a href="monopolySol.html#cb381-24"></a>    <span class="co"># number of positions to move</span></span>
-<span id="cb381-25"><a href="monopolySol.html#cb381-25"></a>    plus_move <span class="ot">&lt;-</span> <span class="fu">sum</span>(die_values)</span>
-<span id="cb381-26"><a href="monopolySol.html#cb381-26"></a></span>
-<span id="cb381-27"><a href="monopolySol.html#cb381-27"></a>    <span class="co"># compute new board position</span></span>
-<span id="cb381-28"><a href="monopolySol.html#cb381-28"></a>    new_board_position <span class="ot">&lt;-</span> current_board_position <span class="sc">+</span> plus_move</span>
-<span id="cb381-29"><a href="monopolySol.html#cb381-29"></a></span>
-<span id="cb381-30"><a href="monopolySol.html#cb381-30"></a>    <span class="co"># if land on GO TO JAIL square, then go backwards to the JAIL square</span></span>
-<span id="cb381-31"><a href="monopolySol.html#cb381-31"></a>    <span class="cf">if</span> (new_board_position <span class="sc">==</span> go_to_jail_position) {</span>
-<span id="cb381-32"><a href="monopolySol.html#cb381-32"></a>      new_board_position <span class="ot">&lt;-</span> jail_position</span>
-<span id="cb381-33"><a href="monopolySol.html#cb381-33"></a>    }</span>
-<span id="cb381-34"><a href="monopolySol.html#cb381-34"></a></span>
-<span id="cb381-35"><a href="monopolySol.html#cb381-35"></a>    <span class="co"># update board position (corrects for circular board)</span></span>
-<span id="cb381-36"><a href="monopolySol.html#cb381-36"></a>    current_board_position <span class="ot">&lt;-</span> (new_board_position <span class="sc">%%</span> <span class="dv">40</span>)</span>
-<span id="cb381-37"><a href="monopolySol.html#cb381-37"></a></span>
-<span id="cb381-38"><a href="monopolySol.html#cb381-38"></a>    <span class="co"># if we land on a square that can be purchased and which has not been</span></span>
-<span id="cb381-39"><a href="monopolySol.html#cb381-39"></a>    <span class="co"># purchased (note R uses 1-indexing for arrays)</span></span>
-<span id="cb381-40"><a href="monopolySol.html#cb381-40"></a>    <span class="cf">if</span> (positions_purchased[current_board_position <span class="sc">+</span> <span class="dv">1</span>] <span class="sc">==</span> <span class="dv">0</span>) {</span>
-<span id="cb381-41"><a href="monopolySol.html#cb381-41"></a>      <span class="cf">if</span> (current_board_position <span class="sc">%in%</span> properties_that_can_be_bought) {</span>
-<span id="cb381-42"><a href="monopolySol.html#cb381-42"></a>        positions_purchased[current_board_position <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb381-43"><a href="monopolySol.html#cb381-43"></a>      }</span>
-<span id="cb381-44"><a href="monopolySol.html#cb381-44"></a>    }</span>
-<span id="cb381-45"><a href="monopolySol.html#cb381-45"></a></span>
-<span id="cb381-46"><a href="monopolySol.html#cb381-46"></a>    <span class="co"># store position visited</span></span>
-<span id="cb381-47"><a href="monopolySol.html#cb381-47"></a>    positions_visited[turn] <span class="ot">&lt;-</span> current_board_position</span>
-<span id="cb381-48"><a href="monopolySol.html#cb381-48"></a></span>
-<span id="cb381-49"><a href="monopolySol.html#cb381-49"></a>    <span class="co"># store number of properties bought</span></span>
-<span id="cb381-50"><a href="monopolySol.html#cb381-50"></a>    properties_bought[turn] <span class="ot">&lt;-</span> <span class="fu">sum</span>(positions_purchased)</span>
-<span id="cb381-51"><a href="monopolySol.html#cb381-51"></a></span>
-<span id="cb381-52"><a href="monopolySol.html#cb381-52"></a>    <span class="co"># check if all properties are bought</span></span>
-<span id="cb381-53"><a href="monopolySol.html#cb381-53"></a>    <span class="cf">if</span> (properties_bought[turn] <span class="sc">==</span> <span class="fu">length</span>(properties_that_can_be_bought)) {</span>
-<span id="cb381-54"><a href="monopolySol.html#cb381-54"></a>      <span class="co"># truncate vectors to actual length used</span></span>
-<span id="cb381-55"><a href="monopolySol.html#cb381-55"></a>      positions_visited <span class="ot">&lt;-</span> positions_visited[<span class="dv">1</span><span class="sc">:</span>turn]</span>
-<span id="cb381-56"><a href="monopolySol.html#cb381-56"></a>      properties_bought <span class="ot">&lt;-</span> properties_bought[<span class="dv">1</span><span class="sc">:</span>turn]</span>
-<span id="cb381-57"><a href="monopolySol.html#cb381-57"></a>      <span class="cf">break</span></span>
-<span id="cb381-58"><a href="monopolySol.html#cb381-58"></a>    }</span>
-<span id="cb381-59"><a href="monopolySol.html#cb381-59"></a></span>
-<span id="cb381-60"><a href="monopolySol.html#cb381-60"></a>  }</span>
-<span id="cb381-61"><a href="monopolySol.html#cb381-61"></a></span>
-<span id="cb381-62"><a href="monopolySol.html#cb381-62"></a>  <span class="co"># return a list with multiple pieces of information</span></span>
-<span id="cb381-63"><a href="monopolySol.html#cb381-63"></a>  <span class="fu">return</span>(<span class="fu">list</span>(</span>
-<span id="cb381-64"><a href="monopolySol.html#cb381-64"></a>    <span class="at">positions_visited =</span> positions_visited,</span>
-<span id="cb381-65"><a href="monopolySol.html#cb381-65"></a>    <span class="at">properties_bought_timeline =</span> properties_bought,</span>
-<span id="cb381-66"><a href="monopolySol.html#cb381-66"></a>    <span class="at">positions_purchased =</span> positions_purchased,</span>
-<span id="cb381-67"><a href="monopolySol.html#cb381-67"></a>    <span class="at">turns_to_buy_all =</span> <span class="fu">ifelse</span>(</span>
-<span id="cb381-68"><a href="monopolySol.html#cb381-68"></a>      <span class="fu">max</span>(properties_bought) <span class="sc">==</span> <span class="fu">length</span>(properties_that_can_be_bought),</span>
-<span id="cb381-69"><a href="monopolySol.html#cb381-69"></a>      <span class="fu">length</span>(positions_visited), <span class="cn">NA</span></span>
-<span id="cb381-70"><a href="monopolySol.html#cb381-70"></a>    ),</span>
-<span id="cb381-71"><a href="monopolySol.html#cb381-71"></a>    <span class="at">total_properties =</span> <span class="fu">length</span>(properties_that_can_be_bought),</span>
-<span id="cb381-72"><a href="monopolySol.html#cb381-72"></a>    <span class="at">properties_available =</span> properties_that_can_be_bought</span>
-<span id="cb381-73"><a href="monopolySol.html#cb381-73"></a>  ))</span>
-<span id="cb381-74"><a href="monopolySol.html#cb381-74"></a>}</span>
-<span id="cb381-75"><a href="monopolySol.html#cb381-75"></a></span>
-<span id="cb381-76"><a href="monopolySol.html#cb381-76"></a><span class="co"># Example usage for a single game:</span></span>
-<span id="cb381-77"><a href="monopolySol.html#cb381-77"></a>game_result <span class="ot">&lt;-</span> <span class="fu">monopoly_ext_sim</span>(<span class="dv">1000</span>)</span>
-<span id="cb381-78"><a href="monopolySol.html#cb381-78"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Turns to buy all properties:"</span>, game_result<span class="sc">$</span>turns_to_buy_all))</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] "Turns to buy all properties: 167"</code></pre>
-<div class="sourceCode" id="cb383"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb383-1"><a href="monopolySol.html#cb383-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Total properties bought:"</span>,</span>
-<span id="cb383-2"><a href="monopolySol.html#cb383-2"></a>            <span class="fu">max</span>(game_result<span class="sc">$</span>properties_bought_timeline)))</span></code></pre></div>
-<pre class="bg-info"><code>#&gt; [1] "Total properties bought: 28"</code></pre>
-<div class="sourceCode" id="cb385"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb385-1"><a href="monopolySol.html#cb385-1"></a><span class="co"># Example usage for multiple games to analyze distribution:</span></span>
-<span id="cb385-2"><a href="monopolySol.html#cb385-2"></a>num_games <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb385-3"><a href="monopolySol.html#cb385-3"></a>time_to_buy_all_properties <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, num_games)</span>
-<span id="cb385-4"><a href="monopolySol.html#cb385-4"></a></span>
-<span id="cb385-5"><a href="monopolySol.html#cb385-5"></a><span class="cf">for</span> (game <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>num_games) {</span>
-<span id="cb385-6"><a href="monopolySol.html#cb385-6"></a>  result <span class="ot">&lt;-</span> <span class="fu">monopoly_ext_sim</span>(<span class="dv">1000</span>)</span>
-<span id="cb385-7"><a href="monopolySol.html#cb385-7"></a>  time_to_buy_all_properties[game] <span class="ot">&lt;-</span> result<span class="sc">$</span>turns_to_buy_all</span>
-<span id="cb385-8"><a href="monopolySol.html#cb385-8"></a>}</span>
-<span id="cb385-9"><a href="monopolySol.html#cb385-9"></a></span>
-<span id="cb385-10"><a href="monopolySol.html#cb385-10"></a><span class="co"># Remove NA values (games where not all properties were bought)</span></span>
-<span id="cb385-11"><a href="monopolySol.html#cb385-11"></a>time_to_buy_all_properties <span class="ot">&lt;-</span> time_to_buy_all_properties[</span>
-<span id="cb385-12"><a href="monopolySol.html#cb385-12"></a>  <span class="sc">!</span><span class="fu">is.na</span>(time_to_buy_all_properties)</span>
-<span id="cb385-13"><a href="monopolySol.html#cb385-13"></a>]</span>
-<span id="cb385-14"><a href="monopolySol.html#cb385-14"></a></span>
-<span id="cb385-15"><a href="monopolySol.html#cb385-15"></a><span class="fu">hist</span>(time_to_buy_all_properties, <span class="at">breaks =</span> <span class="dv">20</span>,</span>
-<span id="cb385-16"><a href="monopolySol.html#cb385-16"></a>     <span class="at">main =</span> <span class="st">"Distribution of Turns to Buy All Properties"</span>,</span>
-<span id="cb385-17"><a href="monopolySol.html#cb385-17"></a>     <span class="at">xlab =</span> <span class="st">"Number of Turns"</span>)</span></code></pre></div>
-<div class="inline-figure"><img src="monopoly-solution_files/figure-html/unnamed-chunk-7-1.png" alt="" width="95%" style="display: block; margin: auto;"></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] "Turns to buy all properties: 254"</code></pre>
+</div>
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Total properties bought:"</span>,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">max</span>(game_result<span class="sc">$</span>properties_bought_timeline)))</span></code></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] "Total properties bought: 28"</code></pre>
+</div>
+<div class="code-lang" data-lang="R">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage for multiple games to analyze distribution:</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>num_games <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>time_to_buy_all_properties <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, num_games)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (game <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>num_games) {</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  result <span class="ot">&lt;-</span> <span class="fu">monopoly_ext_sim</span>(<span class="dv">1000</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  time_to_buy_all_properties[game] <span class="ot">&lt;-</span> result<span class="sc">$</span>turns_to_buy_all</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove NA values (games where not all properties were bought)</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>time_to_buy_all_properties <span class="ot">&lt;-</span> time_to_buy_all_properties[</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span><span class="fu">is.na</span>(time_to_buy_all_properties)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(time_to_buy_all_properties, <span class="at">breaks =</span> <span class="dv">20</span>,</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Distribution of Turns to Buy All Properties"</span>,</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Number of Turns"</span>)</span></code></pre></div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="monopolySol_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:95.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>This code simulates 1000 games of Monopoly and records the number of turns it takes to buy all properties. The histogram shows the distribution of the number of turns it takes to buy all properties.</p>
 <p>What is the distribution of the number of turns it takes to buy all properties?</p>
 <p>Would it be possible to extend this simulation to include more features of the game?</p>
-<button class="button">
-<a href="a-monopoly-simulation.html#monopolyExt">Back to exercise</a>
-</button>
+<p><span class="backlink"><a href="a-monopoly-simulation.html#exr-monopolyExt"><span class="swap"><span class="arr" aria-hidden="true">←</span><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" viewbox="0 0 56 40"><path d="M3 20.2h50" stroke-width=".8" opacity=".35"></path><path d="M4 19.7 7 25.2l3-8.4 3-.3 3 8 3-5 3-3.6 3 6.3 3-1.6 3-3.1 3 2.1 3 1.2 3-1.9 3 1.2 3 .1" stroke-width="1.1"></path><circle cx="49.5" cy="20.2" r="2.8" class="accent" fill="#a51c1c" stroke="none"></circle></svg></span><span>back to exercise 3.5</span></a></span><span class="endmark"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" viewbox="0 0 56 40"><path d="M3 20.2h50" stroke-width=".8" opacity=".35"></path><path d="M4 19.7 7 25.2l3-8.4 3-.3 3 8 3-5 3-3.6 3 6.3 3-1.6 3-3.1 3 2.1 3 1.2 3-1.9 3 1.2 3 .1" stroke-width="1.1"></path><circle cx="49.5" cy="20.2" r="2.8" class="accent" fill="#a51c1c" stroke="none"></circle></svg></span></p>
 
-</div>
-</div>
-  <div class="chapter-nav">
-<div class="prev"><a href="solution-markov-chains.html"><span class="header-section-number">B</span> Solution: Markov Chains</a></div>
-<div class="next"><a href="solution-monte-carlo.html"><span class="header-section-number">D</span> Solution: Monte Carlo</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#monopolySol"><span class="header-section-number">C</span> Solution: Monopoly</a></li>
-<li><a class="nav-link" href="#monopolyFun-sol"><span class="header-section-number">C.1</span> Solution: Monopoly Function</a></li>
-<li><a class="nav-link" href="#goJailMon-sol"><span class="header-section-number">C.2</span> Going to Jail - function</a></li>
-<li><a class="nav-link" href="#id_3doubleMon-sol"><span class="header-section-number">C.3</span> Solution: Rolling three doubles</a></li>
-<li><a class="nav-link" href="#monopolyExtSol"><span class="header-section-number">C.4</span> Solution: Monopoly Extension</a></li>
-</ul>
 
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/anasrana/ems-practicals/blob/master/monopoly-solution.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/anasrana/ems-practicals/edit/master/monopoly-solution.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
-</div>
-    </nav>
-</div>
-
-</div>
-</div> <!-- .container -->
-
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Essentials of Mathematics and Statistics</strong>" was written by Anas A Rana. It was last built on 2026-10-03.</p>
-  </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
-</div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
-}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var left = document.querySelector("footer.footer .nav-footer-left");
+  var nav = document.querySelector("nav.page-navigation");
+  if (!left || !nav) return;
+  var f = document.createElement("div");
+  f.className = "ems-colophon";
+  f.innerHTML = left.innerHTML;
+  nav.after(f);
+  document.querySelector("footer.footer").remove();
+});
 </script>
-</body>
-</html>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/anasrana\.github\.io\/ems-practicals\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./solution-markov-chains.html" class="pagination-link" aria-label="Solution: Markov Chains">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Solution: Markov Chains</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./solution-monte-carlo.html" class="pagination-link" aria-label="Solution: Monte Carlo">
+        <span class="nav-page-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Solution: Monte Carlo</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Essentials of Mathematics and Statistics · <a href="https://anasrana.github.io/">Anas A Rana</a> · University of Birmingham<br>
+<em>Set in ET Book. Built with Quarto (<a href="https://github.com/anasrana/ems-practicals">source</a>).</em></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
