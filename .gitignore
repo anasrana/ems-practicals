@@ -106,3 +106,4 @@ testing.R
 # Generated at render time
 /_exercise-index.tsv
 /.quarto/
+/*_files/
